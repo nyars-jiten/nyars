@@ -33,7 +33,7 @@ export default {
             this.$store.commit('updateTextEntry', e)
         },
         useNTemplate() {
-            let text = "[word][writing][tag=Kinf][/tag][/writing][reading][tag=Rinf][/tag][/reading][/word][pos=n][m]новое значение[/m][note][/note][m=eng]new value[/m][note=eng][/note][/pos]";
+            let text = "[word][writing]—[tag=Kinf][/tag][/writing][reading]—[tag=Rinf][/tag][/reading][/word][pos=n][m]новое значение[/m][note][/note][m=eng]new value[/m][note=eng][/note][/pos]";
             this.$store.commit('updateTextEntry', text);
         }
     },
