@@ -93,7 +93,7 @@ export default {
             if (this.selectAllElements) {
               this.corpusSelected = []
             } else {
-              this.corpusSelected = this.activeCorpuses
+              this.corpusSelected = this.activeCorpuses.map(x => x.val)
             }
           })
         },
