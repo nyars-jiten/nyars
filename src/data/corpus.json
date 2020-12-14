@@ -1,0 +1,60 @@
+{
+    "corpusList": {
+        "main": {
+            "icon": "",
+            "description": "общий"
+        },
+        "buddhism": {
+            "icon": "mdi-buddhism",
+            "description": "словарь буддизма"
+        },
+        "auto": {
+            "icon": "mdi-car-outline",
+            "description": "автомобильный словарь"
+        },
+        "biology": {
+            "icon": "mdi-paw",
+            "description": "биологический словарь"
+        },
+        "chemistry": {
+            "icon": "mdi-flask",
+            "description": "химический словарь"
+        },
+        "physics": {
+            "icon": "mdi-react",
+            "description": "физический словарь"
+        },
+        "psych": {
+            "icon": "mdi-brain",
+            "description": "словарь по психологии, психиатрии"
+        },
+        "medicine": {
+            "icon": "mdi-plus-circle-outline",
+            "description": "медицинский словарь"
+        },
+        "naturalscience": {
+            "icon": "mdi-earth",
+            "description": "естественнонаучный словарь"
+        },
+        "tech": {
+            "icon": "mdi-cog-outline",
+            "description": "технический словарь"
+        },
+        "kotowaza": {
+            "icon": "mdi-translate",
+            "description": "словарь пословиц, поговорок, идиом"
+        },
+        "comp": {
+            "icon": "mdi-memory",
+            "description": "компьютерный/телекоммуникационный словарь"
+        },
+        "law": {
+            "icon": "mdi-gavel",
+            "description": "юридический словарь"
+        },
+        "finc": {
+            "icon": "mdi-currency-cny",
+            "description": "финансовый словарь"
+        }
+    }
+}

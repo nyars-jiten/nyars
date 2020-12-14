@@ -1,0 +1,88 @@
+{
+  "menuList": [
+    {
+      "category": "",
+      "rights": 0,
+      "links": [
+        {
+          "title": "Главная",
+          "icon": "mdi-home-outline",
+          "rights": 0,
+          "action": {"name": "navigate", "params": {"path": "/"}}
+        },
+        {
+          "title": "Багтрекер",
+          "icon": "mdi-space-invaders",
+          "rights": 0,
+          "action": {"name": "navigate", "params": {"path": "https://github.com/nyars-jiten/nyars/issues", "external": true}}
+        },
+        {
+          "title": "Выход",
+          "icon": "mdi-exit-run",
+          "rights": 1,
+          "action": {"name": "logout", "params": {}}
+        }
+      ]
+    },
+    {
+      "category": "ЯПОНСКО-РУССКИЙ СЛОВАРЬ",
+      "rights": 0,
+      "links": [
+        {
+          "title": "Теги",
+          "icon": "mdi-tag-multiple-outline",
+          "rights": 3,
+          "action": {"name": "navigate", "params": {"path": "/tags"}}
+        },
+        {
+          "title": "Тематики",
+          "icon": "mdi-widgets-outline",
+          "rights": 0,
+          "action": {"name": "navigate", "params": {"path": "/subjects"}}
+        },
+        {
+          "title": "Добавить статью",
+          "icon": "mdi-shape-square-rounded-plus",
+          "rights": 1,
+          "action": {"name": "navigate", "params": {"path": "/jp/new"}}
+        },
+        {
+          "title": "Случайная статья",
+          "icon": "mdi-cube-scan",
+          "rights": 1,
+          "action": {"name": "navigate", "params": {"path": "/jp/rnd"}}
+        }
+      ]
+    },
+    {
+      "category": "РУССКО-ЯПОНСКИЙ СЛОВАРЬ",
+      "rights": 4,
+      "links": [
+        {
+          "title": "Добавить статью",
+          "icon": "mdi-shape-square-rounded-plus",
+          "rights": 4,
+          "action": {"name": "navigate", "params": {"path": "/"}}
+        }
+      ]
+    },
+    {
+      "category": "СЛОВАРЬ КАНДЗИ",
+      "rights": 4,
+      "links": [
+        {
+          "title": "Радикалы",
+          "icon": "mdi-select-compare",
+          "rights": 4,
+          "action": {"name": "navigate", "params": {"path": "/"}}
+        },
+        {
+          "title": "Добавить статью",
+          "icon": "mdi-shape-square-rounded-plus",
+          "rights": 4,
+          "action": {"name": "navigate", "params": {"path": "/"}}
+        }
+      ]
+    }
+  ]
+}
