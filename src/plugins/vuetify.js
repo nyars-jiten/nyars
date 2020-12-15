@@ -13,7 +13,7 @@ export default new Vuetify({
             light: {
                 secondary: colors.grey.lighten4,
 
-                'text-decoration-color': colors.red,
+                'text-decoration-color': '#8f8f8f',
 
                 'edit-status-new-color': colors.red,
                 'edit-status-declined-color': colors.red,
