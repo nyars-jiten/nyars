@@ -1,7 +1,7 @@
 <template>
   <div class="editor-dialog">
     <v-dialog :value="dialogModel(5)" @input="updateModel" max-width="700px">
-      <v-card>
+      <v-card class="">
         <v-card-title>
           <span class="headline">Заметка</span>
         </v-card-title>

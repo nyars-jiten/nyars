@@ -123,14 +123,14 @@ export default {
 .entry-text-md {
     display: inline-block;
     a {
-        // color: #1976d2 !important;
+        color: var(--jap-entry-view-entry-text-md-color-base) !important;
     }
 }
 
 .lang-sep {
     grid-column: 1/-1;
     border: unset;
-    // border-bottom: 1px solid hsla(0,0%,56.1%,.34);
+    border-bottom: 1px solid var(--jap-entry-view-lang-sep-color-base);
     margin: 0 30px;
 }
 
@@ -145,8 +145,8 @@ export default {
 }
 
 .example {
-    // color: #797979;
-    // border-left: 3px solid #b6b6b6;
+    color: var(--jap-entry-view-example-color-base);
+    border-left: 3px solid var(--jap-entry-view-example-border-color-base);
     padding-left: 5px;
     margin-bottom: 6px;
     margin-top: 6px;
@@ -159,7 +159,7 @@ export default {
 
 .lang {
     font-style: italic;
-    // color: #3d4445;
+    color: var(--jap-entry-view-lang-color-base);
 }
 
 .lang-mean {
@@ -172,7 +172,7 @@ export default {
 
 .pos-list {
     display: block;
-    // border-bottom: 1px solid #282d2e;
+    border-bottom: 1px solid var(--jap-entry-view-pos-list-color-base);
     padding: 6px;
 }
 
@@ -188,7 +188,6 @@ export default {
 }
 
 .jap-view {
-    // color: rgb(0, 0, 0);
     width: 100%;
     padding: 0 16px 16px;
 }
@@ -205,12 +204,12 @@ export default {
 
 .word-writings {
     &::after {
-        // color: rgba(143, 143, 143);
+        color: var(--text-decoration-color-base);
         content: "】";
     }
 
     &::before {
-        // color: rgba(143, 143, 143);
+        color: var(--text-decoration-color-base);
         content: "【";
     }
 }
@@ -220,7 +219,7 @@ export default {
 .pos {
   &:not(:last-child) {
     &::after {
-    //   color: rgba(143, 143, 143);
+      color: var(--text-decoration-color-base);
     //   white-space: pre;
       content: "・";
     }
