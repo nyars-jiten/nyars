@@ -4,7 +4,7 @@
       v-model="dialog"
       max-width="400"
     >
-      <v-card>
+      <v-card class="">
         <v-card-title class="headline">
           {{ authmode ? 'Войти' : 'Регистрация' }}
         </v-card-title>
@@ -200,7 +200,7 @@ export default {
 
 .click-here {
   cursor: pointer;
-  // color: #2196f3;
+  color: var(--v-menu-click-here-base);
 }
 
 .discord-wrapper {
@@ -209,13 +209,13 @@ export default {
   margin-top: 24px;
   display: grid;
   justify-content: center;
-  // border: 1px solid #8c9eff;
+  border: 1px solid var(--v-menu-discord-wrapper-base);
 
   color: inherit;
 
   &:hover {
-    color: var(--link-color);
-    // box-shadow: 0 0 10px #8c9eff;
+    color: var(--link-color-base);
+    box-shadow: 0 0 10px var(--v-menu-discord-wrapper-base);
   }
 
   .discord {

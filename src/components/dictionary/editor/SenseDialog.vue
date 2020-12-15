@@ -1,7 +1,7 @@
 <template>
   <div class="editor-dialog">
     <v-dialog :value="dialogModel(4)" @input="updateModel" max-width="700px">
-      <v-card v-if="sense">
+      <v-card class="" v-if="sense">
         <v-card-text>
           <v-container>
             <v-row>

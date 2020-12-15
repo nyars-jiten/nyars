@@ -122,12 +122,12 @@ export default {
 
 .entry-text-md {
     a {
-        // color: #1976d2 !important;
+        color: var(--v-search-result-item--entry-text-md-color-base) !important;
     }
 }
 
 .nonreviewed {
-    // border-left: 2px solid #fb8c00;
+    border-left: 2px solid var(--v-search-result-item--nonreviewed-color-base);
 }
 
 .search-item {
@@ -152,8 +152,8 @@ export default {
 }
 
 .example {
-    // color: #797979;
-    // border-left: 3px solid #b6b6b6;
+    color: var(--v-search-result-item-example-color-base);
+    border-left: 3px solid var(--v-search-result-item-example-border-color-base);
     padding-left: 5px;
     margin-bottom: 6px;
     margin-top: 6px;
@@ -166,7 +166,7 @@ export default {
 
 .lang {
     font-style: italic;
-    // color: #3d4445;
+    color: var(--v-search-result-item-lang-color-base);
 }
 
 .lang-mean {
@@ -179,7 +179,7 @@ export default {
 
 .pos-list {
     // display: block;
-    // border-bottom: 1px solid #282d2e;
+    border-bottom: 1px solid var(--v-search-result-item-pos-list-color-base);
     // padding: 6px;
     padding-left: 30px;
 }
@@ -206,7 +206,6 @@ export default {
 }
 
 .jap-view {
-    // color: rgb(0, 0, 0);
     width: 100%;
     padding: 0 16px 16px;
 }
@@ -223,12 +222,12 @@ export default {
 
 .word-writings {
     &::after {
-        // color: rgba(143, 143, 143);
+        color: var(--text-decoration-color-base);
         content: "】";
     }
 
     &::before {
-        // color: rgba(143, 143, 143);
+        color: var(--text-decoration-color-base);
         content: "【";
     }
 }
@@ -242,7 +241,7 @@ export default {
 .pos {
   &:not(:last-child) {
     &::after {
-    //   color: rgba(143, 143, 143);
+      color: var(--text-decoration-color-base);
     //   white-space: pre;
       content: "・";
     }

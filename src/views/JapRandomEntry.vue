@@ -3,7 +3,7 @@
       <v-container fluid>
       <v-row>
         <v-col cols="12" md="12" sm="12" xs="12">
-          <v-card elevation="2" outlined tile>
+          <v-card class="" elevation="2" outlined tile>
             <v-card-title>
               Случайная статья
             </v-card-title>

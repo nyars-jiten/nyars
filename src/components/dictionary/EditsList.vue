@@ -1,7 +1,8 @@
 <template>
 <div class="edits-list">
-  <v-expansion-panels accordion flat tile v-model="panelIndexLocal" :key="getPanelKey">
-    <v-expansion-panel v-for="edit in lastEdits" :key="edit.id">
+  <v-expansion-panels v-model="panelIndexLocal" :key="getPanelKey"  accordion flat tile>
+    <!-- class="" -->
+    <v-expansion-panel class="" v-for="edit in lastEdits" :key="edit.id">
       <v-expansion-panel-header
         hide-actions
         v-bind:class="computeEditClass(edit.status)"
@@ -252,6 +253,7 @@ a.titles-link {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
+
   &:hover {
     // color: rgba(77, 77, 77, 0.7);
   }
@@ -280,12 +282,12 @@ a.titles-link {
 
 .new {
   display: inline;
-  // color: darken(rgb(34, 179, 29), 5%);
+  color: var(--v-edit-new-color-base)
 }
 
 .removed {
   display: inline;
-  // color: rgb(226, 32, 32);
+  color: var(--v-edit-removed-color-base)
 }
 
 // .subheader {
@@ -298,7 +300,7 @@ a.titles-link {
 
 .dict-type,
 .edit-type {
-  // color: #8f8f8f;
+  color: var(--v-edit-list-type-color-base);
   font-style: italic;
 }
 
@@ -315,20 +317,20 @@ a.titles-link {
 }
 
 .edit-status-type-new {
-  // color: rgb(29 179 54 / 70%);
+  color: var(--v-edit-status-type-new-color-base);
 }
 
 .edit-status-type-edit {
-  // color: rgb(29 144 179 / 70%);
+  color: var(--v-edit-status-type-edit-color-base);
 }
 
 .edit-status-type-delete {
-  // color: rgb(179 29 29 / 70%);
+  color: var(--v-edit-status-type-delete-color-base);
 }
 
 .separator {
   content: "・";
-  // color: rgb(143, 143, 143);
+  color: var(--v-edit-separator-color-base);
   margin: 0px 10px;
 }
 
@@ -344,42 +346,42 @@ a.titles-link {
 }
 
 .edit-status-new {
-  // border-left: 2px solid rgb(29 144 179 / 60%);
+  border-left: 2px solid var(--v-edit-status-new-color-base);
 }
 
 .edit-status-declined {
-  // border-left: 2px solid rgb(179 29 29 / 60%);
+  border-left: 2px solid var(--v-edit-status-declined-color-base)
 }
 
 .edit-status-accepted {
-  // border-left: 2px solid rgb(29 179 54 / 60%);
+  border-left: 2px solid var(--v-edit-status-accepted-color-base)
 }
 
 .edit-status-autoaccepted {
-  // border-left: 2px solid rgb(179 179 179 / 60%);
+  border-left: 2px solid var(--v-edit-status-autoaccepted-color-base)
 }
 
 .edit-status-reverted {
-  // border-left: 2px solid rgb(170 29 179 / 60%);
+  border-left: 2px solid var(--v-edit-status-reverted-color-base)
 }
 
 .edit-status-approve-new {
-  // color: rgb(29 144 179 / 60%);
+  color: var(--v-edit-status-approve-new-color-base)
 }
 
 .edit-status-approve-declined {
-  // color: rgb(179 29 29 / 60%);
+  color: var(--v-edit-status-approve-declined-color-base)
 }
 
 .edit-status-approve-accepted {
-  // color: rgb(29 179 54 / 60%);
+  color: var(--v-edit-status-approve-accepted-color-base)
 }
 
 .edit-status-approve-autoaccepted {
-  // color: rgb(179 179 179 / 60%);
+  color: var(--v-edit-status-approve-autoaccepted-color-base)
 }
 
 .edit-status-approve-reverted {
-  // color: rgb(170 29 179 / 60%);
+  color: var(--v-edit-status-approve-reverted-color-base)
 }
 </style>

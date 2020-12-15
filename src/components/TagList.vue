@@ -19,7 +19,7 @@
                 Создать
               </v-btn>
             </template>
-            <v-card>
+            <v-card class="">
               <v-card-title>
                 <span class="headline">{{ formTitle }}</span>
               </v-card-title>
@@ -67,7 +67,7 @@
             </v-card>
           </v-dialog>
           <v-dialog v-model="dialogDelete" max-width="500px">
-            <v-card>
+            <v-card class="">
               <v-card-title class="headline"
                 >Вы уверены, что хотите удалить тег?</v-card-title
               >

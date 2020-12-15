@@ -1,6 +1,6 @@
 <template>
   <div class="subject-block">
-    <v-card elevation="2" outlined tile>
+    <v-card class="" elevation="2" outlined tile>
       <v-card-title>{{title}}</v-card-title>
       <v-card-text class="subject-body">
         <v-simple-table>

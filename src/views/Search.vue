@@ -3,7 +3,7 @@
     <v-container fluid>
       <v-row no-gutters>
         <v-col cols="12" md="12">
-          <v-card class="mx-auto" tile>
+          <v-card class=" mx-auto" tile>
             <!-- {{ request }} -->
             <v-card-title>Результат поиска</v-card-title>
 
