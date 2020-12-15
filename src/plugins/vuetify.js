@@ -41,11 +41,11 @@ export default new Vuetify({
                 'inline-tag-shorttagfld-color': '#4f9a29',
                 'inline-tag-shorttaginf-color': '#9c2292',
 
-                'jap-entry-view-entry-text-md-color': colors.red,
-                'jap-entry-view-lang-sep-color': colors.red,
-                'jap-entry-view-example-color': colors.red,
-                'jap-entry-view-example-border-color': colors.red,
-                'jap-entry-view-lang-color': colors.red,
+                'jap-entry-view-entry-text-md-color': '#1976d2',
+                'jap-entry-view-lang-sep-color': '#8f8f8f',
+                'jap-entry-view-example-color': '#797979',
+                'jap-entry-view-example-border-color': '#b6b6b6',
+                'jap-entry-view-lang-color': '#3d4445',
                 'jap-entry-view-pos-list-color': colors.red,
 
                 'menu-click-here': colors.red,
