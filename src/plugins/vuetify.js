@@ -56,11 +56,11 @@ export default new Vuetify({
                 'jap-entry-edit-lang-color': '#3d4445',
                 'jap-entry-edit-pos-color': '#282d2e',
 
-                'search-result-item-entry-text-md-color': colors.red,
-                'search-result-item-nonreviewed-color': colors.red,
-                'search-result-item-example-color': colors.red,
-                'search-result-item-example-border-color': colors.red,
-                'search-result-item-lang-color': colors.red,
+                'search-result-item-entry-text-md-color': '#1976d2',
+                'search-result-item-nonreviewed-color': '#fb8c00',
+                'search-result-item-example-color': '#797979',
+                'search-result-item-example-border-color': '#b6b6b6',
+                'search-result-item-lang-color': '#3d4445',
                 'search-result-item-pos-list-color': colors.red,
             },
             dark: {
