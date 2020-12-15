@@ -114,6 +114,7 @@
           </div>
         </v-list-item-group>
       </v-list>
+      <v-switch v-model="$vuetify.theme.dark" inset label="Тёмная тема" ></v-switch>
     </v-navigation-drawer>
 
     <v-app-bar app absolute color="white">
