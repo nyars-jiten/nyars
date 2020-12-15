@@ -31,9 +31,9 @@ export default new Vuetify({
 
                 'edit-list-type-color': '#8f8f8f',
 
-                'edit-status-type-new-color': colors.red,
-                'edit-status-type-edit-color': colors.red,
-                'edit-status-type-delete-color': colors.red,
+                'edit-status-type-new-color': '#1db336',
+                'edit-status-type-edit-color': '#1d90b3',
+                'edit-status-type-delete-color': '#b31d1d',
 
                 'edit-separator-color': colors.red,
 
