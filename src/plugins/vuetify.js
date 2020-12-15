@@ -37,16 +37,16 @@ export default new Vuetify({
 
                 'edit-separator-color': '#8f8f8f',
 
-                'inline-tag-full-tags-color': colors.red,
-                'inline-tag-shorttagfld-color': colors.red,
-                'inline-tag-shorttaginf-color': colors.red,
+                'inline-tag-full-tags-color': '#797979',
+                'inline-tag-shorttagfld-color': '#4f9a29',
+                'inline-tag-shorttaginf-color': '#9c2292',
 
+                'jap-entry-view-entry-text-md-color': colors.red,
                 'jap-entry-view-lang-sep-color': colors.red,
                 'jap-entry-view-example-color': colors.red,
                 'jap-entry-view-example-border-color': colors.red,
                 'jap-entry-view-lang-color': colors.red,
                 'jap-entry-view-pos-list-color': colors.red,
-                'jap-entry-view-entry-text-md-color': colors.red,
 
                 'menu-click-here': colors.red,
                 'menu-discord-wrapper': colors.red,
