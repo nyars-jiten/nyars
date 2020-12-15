@@ -123,14 +123,14 @@ export default {
 .entry-text-md {
     display: inline-block;
     a {
-        color: #1976d2 !important;
+        // color: #1976d2 !important;
     }
 }
 
 .lang-sep {
     grid-column: 1/-1;
     border: unset;
-    border-bottom: 1px solid hsla(0,0%,56.1%,.34);
+    // border-bottom: 1px solid hsla(0,0%,56.1%,.34);
     margin: 0 30px;
 }
 
@@ -145,8 +145,8 @@ export default {
 }
 
 .example {
-    color: #797979;
-    border-left: 3px solid #b6b6b6;
+    // color: #797979;
+    // border-left: 3px solid #b6b6b6;
     padding-left: 5px;
     margin-bottom: 6px;
     margin-top: 6px;
@@ -159,7 +159,7 @@ export default {
 
 .lang {
     font-style: italic;
-    color: #3d4445;
+    // color: #3d4445;
 }
 
 .lang-mean {
@@ -172,7 +172,7 @@ export default {
 
 .pos-list {
     display: block;
-    border-bottom: 1px solid #282d2e;
+    // border-bottom: 1px solid #282d2e;
     padding: 6px;
 }
 
@@ -188,7 +188,7 @@ export default {
 }
 
 .jap-view {
-    color: rgb(0, 0, 0);
+    // color: rgb(0, 0, 0);
     width: 100%;
     padding: 0 16px 16px;
 }
@@ -205,12 +205,12 @@ export default {
 
 .word-writings {
     &::after {
-        color: rgba(143, 143, 143);
+        // color: rgba(143, 143, 143);
         content: "】";
     }
 
     &::before {
-        color: rgba(143, 143, 143);
+        // color: rgba(143, 143, 143);
         content: "【";
     }
 }
@@ -220,7 +220,7 @@ export default {
 .pos {
   &:not(:last-child) {
     &::after {
-      color: rgba(143, 143, 143);
+    //   color: rgba(143, 143, 143);
     //   white-space: pre;
       content: "・";
     }

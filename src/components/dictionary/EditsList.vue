@@ -245,7 +245,7 @@ export default {
 <style lang="scss">
 
  .titles {
-    color: rgba(0,0,0,.7);
+    // color: rgba(0,0,0,.7);
  }
 
 a.titles-link {
@@ -253,7 +253,7 @@ a.titles-link {
   color: inherit;
   cursor: pointer;
   &:hover {
-    color: rgba(77, 77, 77, 0.7);
+    // color: rgba(77, 77, 77, 0.7);
   }
  }
 
@@ -280,12 +280,12 @@ a.titles-link {
 
 .new {
   display: inline;
-  color: darken(rgb(34, 179, 29), 5%);
+  // color: darken(rgb(34, 179, 29), 5%);
 }
 
 .removed {
   display: inline;
-  color: rgb(226, 32, 32);
+  // color: rgb(226, 32, 32);
 }
 
 // .subheader {
@@ -298,7 +298,7 @@ a.titles-link {
 
 .dict-type,
 .edit-type {
-  color: #8f8f8f;
+  // color: #8f8f8f;
   font-style: italic;
 }
 
@@ -315,20 +315,20 @@ a.titles-link {
 }
 
 .edit-status-type-new {
-  color: rgb(29 179 54 / 70%);
+  // color: rgb(29 179 54 / 70%);
 }
 
 .edit-status-type-edit {
-  color: rgb(29 144 179 / 70%);
+  // color: rgb(29 144 179 / 70%);
 }
 
 .edit-status-type-delete {
-  color: rgb(179 29 29 / 70%);
+  // color: rgb(179 29 29 / 70%);
 }
 
 .separator {
   content: "・";
-  color: rgb(143, 143, 143);
+  // color: rgb(143, 143, 143);
   margin: 0px 10px;
 }
 
@@ -344,42 +344,42 @@ a.titles-link {
 }
 
 .edit-status-new {
-  border-left: 2px solid rgb(29 144 179 / 60%);
+  // border-left: 2px solid rgb(29 144 179 / 60%);
 }
 
 .edit-status-declined {
-  border-left: 2px solid rgb(179 29 29 / 60%);
+  // border-left: 2px solid rgb(179 29 29 / 60%);
 }
 
 .edit-status-accepted {
-  border-left: 2px solid rgb(29 179 54 / 60%);
+  // border-left: 2px solid rgb(29 179 54 / 60%);
 }
 
 .edit-status-autoaccepted {
-  border-left: 2px solid rgb(179 179 179 / 60%);
+  // border-left: 2px solid rgb(179 179 179 / 60%);
 }
 
 .edit-status-reverted {
-  border-left: 2px solid rgb(170 29 179 / 60%);
+  // border-left: 2px solid rgb(170 29 179 / 60%);
 }
 
 .edit-status-approve-new {
-  color: rgb(29 144 179 / 60%);
+  // color: rgb(29 144 179 / 60%);
 }
 
 .edit-status-approve-declined {
-  color: rgb(179 29 29 / 60%);
+  // color: rgb(179 29 29 / 60%);
 }
 
 .edit-status-approve-accepted {
-  color: rgb(29 179 54 / 60%);
+  // color: rgb(29 179 54 / 60%);
 }
 
 .edit-status-approve-autoaccepted {
-  color: rgb(179 179 179 / 60%);
+  // color: rgb(179 179 179 / 60%);
 }
 
 .edit-status-approve-reverted {
-  color: rgb(170 29 179 / 60%);
+  // color: rgb(170 29 179 / 60%);
 }
 </style>
