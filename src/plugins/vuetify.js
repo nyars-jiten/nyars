@@ -51,10 +51,10 @@ export default new Vuetify({
                 'menu-click-here': '#2196f3',
                 'menu-discord-wrapper': '#8c9eff',
 
-                'jap-entry-edit-example-color': colors.red,
-                'jap-entry-edit-example-border-color': colors.red,
-                'jap-entry-edit-lang-color': colors.red,
-                'jap-entry-edit-pos-color': colors.red,
+                'jap-entry-edit-example-color': '#797979',
+                'jap-entry-edit-example-border-color': '#b6b6b6',
+                'jap-entry-edit-lang-color': '#3d4445',
+                'jap-entry-edit-pos-color': '#282d2e',
 
                 'search-result-item-entry-text-md-color': colors.red,
                 'search-result-item-nonreviewed-color': colors.red,
