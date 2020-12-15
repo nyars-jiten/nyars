@@ -35,9 +35,9 @@ export default new Vuetify({
                 'edit-status-type-edit-color': '#1d90b3',
                 'edit-status-type-delete-color': '#b31d1d',
 
-                'edit-separator-color': colors.red,
+                'edit-separator-color': '#8f8f8f',
 
-                'inline-tag-tags-color': colors.red,
+                'inline-tag-full-tags-color': colors.red,
                 'inline-tag-shorttagfld-color': colors.red,
                 'inline-tag-shorttaginf-color': colors.red,
 
