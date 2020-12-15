@@ -26,8 +26,10 @@ export default new Vuetify({
                 'edit-status-approve-autoaccepted-color': '#b3b3b3',
                 'edit-status-approve-reverted-color': '#aa1db3',
 
-                'edit-new-color': colors.red,
-                'edit-removed-color': colors.red,
+                'edit-new-color': '#22b31d',
+                'edit-removed-color': '#e22020',
+
+                'edit-list-type-color': '#8f8f8f',
 
                 'edit-status-type-new-color': colors.red,
                 'edit-status-type-edit-color': colors.red,
@@ -48,8 +50,6 @@ export default new Vuetify({
 
                 'menu-click-here': colors.red,
                 'menu-discord-wrapper': colors.red,
-
-                'edit-list-type-color': colors.red,
 
                 'jap-entry-edit-example-color': colors.red,
                 'jap-entry-edit-example-border-color': colors.red,
