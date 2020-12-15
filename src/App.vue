@@ -3,7 +3,7 @@
     <Menu />
 
     <!-- Sizes your content based upon application components -->
-    <v-main class="grey lighten-2">
+    <v-main class="gray">
       <!-- Provides the application the proper gutter -->
       <router-view />
       <Alert />
@@ -16,10 +16,11 @@
 
 <script>
 import Menu from "@/components/Menu";
-import Alert from "@/components/Alert"
+import Alert from "@/components/Alert";
 export default {
   components: {
-    Menu, Alert
+    Menu,
+    Alert,
   },
 };
 </script>
@@ -29,21 +30,21 @@ export default {
 
 #app {
   // font-family: Avenir, Helvetica, Arial, sans-serif;
-  font-family: 'Rubik', "Noto Sans JP", HanaMinA, HanaMinB, Helvetica, Arial, sans-serif;
+  font-family: "Rubik", "Noto Sans JP", HanaMinA, HanaMinB, Helvetica, Arial,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   // text-align: center;
-  color: #2c3e50;
+  // color: #2c3e50;
+
   a {
     text-decoration: none; /* Убираем подчеркивание у ссылок */
-    color: rgba(0,0,0,.87);
+    // color: rgba(0, 0, 0, 0.87);
     &:hover {
-      color: rgba(77, 77, 77, 0.7);
+      // color: rgba(77, 77, 77, 0.7);
     }
+  }
 }
-}
-
-
 
 // #nav {
 //   padding: 30px;

@@ -122,12 +122,12 @@ export default {
 
 .entry-text-md {
     a {
-        color: #1976d2 !important;
+        // color: #1976d2 !important;
     }
 }
 
 .nonreviewed {
-    border-left: 2px solid #fb8c00;
+    // border-left: 2px solid #fb8c00;
 }
 
 .search-item {
@@ -152,8 +152,8 @@ export default {
 }
 
 .example {
-    color: #797979;
-    border-left: 3px solid #b6b6b6;
+    // color: #797979;
+    // border-left: 3px solid #b6b6b6;
     padding-left: 5px;
     margin-bottom: 6px;
     margin-top: 6px;
@@ -166,7 +166,7 @@ export default {
 
 .lang {
     font-style: italic;
-    color: #3d4445;
+    // color: #3d4445;
 }
 
 .lang-mean {
@@ -206,7 +206,7 @@ export default {
 }
 
 .jap-view {
-    color: rgb(0, 0, 0);
+    // color: rgb(0, 0, 0);
     width: 100%;
     padding: 0 16px 16px;
 }
@@ -223,12 +223,12 @@ export default {
 
 .word-writings {
     &::after {
-        color: rgba(143, 143, 143);
+        // color: rgba(143, 143, 143);
         content: "】";
     }
 
     &::before {
-        color: rgba(143, 143, 143);
+        // color: rgba(143, 143, 143);
         content: "【";
     }
 }
@@ -242,7 +242,7 @@ export default {
 .pos {
   &:not(:last-child) {
     &::after {
-      color: rgba(143, 143, 143);
+    //   color: rgba(143, 143, 143);
     //   white-space: pre;
       content: "・";
     }

@@ -199,7 +199,7 @@ export default {
 
 .click-here {
   cursor: pointer;
-  color: #2196f3;
+  // color: #2196f3;
 }
 
 .discord-wrapper {
@@ -208,13 +208,13 @@ export default {
   margin-top: 24px;
   display: grid;
   justify-content: center;
-  border: 1px solid #8c9eff;
+  // border: 1px solid #8c9eff;
 
   color: inherit;
 
   &:hover {
     color: var(--link-color);
-    box-shadow: 0 0 10px #8c9eff;
+    // box-shadow: 0 0 10px #8c9eff;
   }
 
   .discord {
