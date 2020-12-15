@@ -46,7 +46,7 @@ export default new Vuetify({
                 'jap-entry-view-example-color': '#797979',
                 'jap-entry-view-example-border-color': '#b6b6b6',
                 'jap-entry-view-lang-color': '#3d4445',
-                'jap-entry-view-pos-list-color': colors.red,
+                'jap-entry-view-pos-list-color': '#282d2e',
 
                 'menu-click-here': colors.red,
                 'menu-discord-wrapper': colors.red,
