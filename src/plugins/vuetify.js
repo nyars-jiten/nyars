@@ -48,8 +48,8 @@ export default new Vuetify({
                 'jap-entry-view-lang-color': '#3d4445',
                 'jap-entry-view-pos-list-color': '#282d2e',
 
-                'menu-click-here': colors.red,
-                'menu-discord-wrapper': colors.red,
+                'menu-click-here': '#2196f3',
+                'menu-discord-wrapper': '#8c9eff',
 
                 'jap-entry-edit-example-color': colors.red,
                 'jap-entry-edit-example-border-color': colors.red,
