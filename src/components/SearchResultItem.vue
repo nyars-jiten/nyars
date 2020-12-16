@@ -122,12 +122,12 @@ export default {
 
 .entry-text-md {
     a {
-        color: var(--v-search-result-item--entry-text-md-color-base) !important;
+        color: var(--v-search-result-item-entry-text-md-color-base) !important;
     }
 }
 
 .nonreviewed {
-    border-left: 2px solid var(--v-search-result-item--nonreviewed-color-base);
+    border-left: 2px solid var(--v-search-result-item-nonreviewed-color-base);
 }
 
 .search-item {

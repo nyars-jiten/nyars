@@ -76,12 +76,12 @@ export default {
 
 .full-tags {
     font-style: italic;
-    color: var(--v-inline-tab-tags-color-base);
+    color: var(--v-inline-tag-full-tags-color-base);
 }
 
 .shorttagfld {
     font-style: italic;
-    color: var(--v-inline-tab-shorttagfld-color-base);
+    color: var(--v-inline-tag-shorttagfld-color-base);
     padding-right: 4px;
 }
 
@@ -89,7 +89,7 @@ export default {
     font-style: italic;
     font-size: 70%;
     vertical-align: super;
-    color: var(--v-inline-tab-shorttaginf-color-base);
+    color: var(--v-inline-tag-shorttaginf-color-base);
 }
 
 </style>
