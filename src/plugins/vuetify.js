@@ -13,6 +13,7 @@ export default new Vuetify({
             light: {
                 secondary: colors.grey.lighten4,
 
+                'anchor': '#8c9eff',
                 'text-decoration-color': '#8f8f8f',
 
                 'edit-status-new-color': '#1d90b3',
@@ -64,6 +65,7 @@ export default new Vuetify({
                 'search-result-item-pos-list-color': '#282d2e',
             },
             dark: {
+                'anchor': '#8c9eff',
                 'text-decoration-color': '#4b4b4b',
 
                 'edit-status-new-color': '#1d90ca',

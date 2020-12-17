@@ -214,7 +214,7 @@ export default {
   color: inherit;
 
   &:hover {
-    color: var(--link-color-base);
+    // color: var(--v-link-color-base);
     box-shadow: 0 0 10px var(--v-menu-discord-wrapper-base);
   }
 
