@@ -121,7 +121,8 @@ export default {
 <style lang="scss">
 
 .entry-text-md {
-    display: inline-block;
+    display: inline;
+
     a {
         color: var(--jap-entry-view-entry-text-md-color-base) !important;
     }
