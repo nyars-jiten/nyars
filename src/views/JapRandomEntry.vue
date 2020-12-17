@@ -9,9 +9,16 @@
             </v-card-title>
             <v-card-text>
               <v-checkbox
+                class="checkbox-line-element"
                 v-model="selected"
                 label="Без русского перевода"
                 value="!rus"
+                ></v-checkbox>
+              <v-checkbox
+                class="checkbox-line-element"
+                v-model="selected"
+                label="С русским переводом"
+                value="rus"
                 ></v-checkbox>
                 <v-checkbox
                 v-model="selected"
@@ -131,3 +138,10 @@ export default {
     components: { SearchResultItem }
 }
 </script>
+
+<style lang="scss">
+.checkbox-line-element {
+  display: inline-block;
+  margin-right: 20px;
+}
+</style>
