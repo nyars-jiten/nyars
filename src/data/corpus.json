@@ -16,13 +16,9 @@
             "icon": "mdi-paw",
             "description": "биологический словарь"
         },
-        "chemistry": {
-            "icon": "mdi-flask",
-            "description": "химический словарь"
-        },
         "physics": {
             "icon": "mdi-react",
-            "description": "физический словарь"
+            "description": "физико-химический словарь"
         },
         "psych": {
             "icon": "mdi-brain",
@@ -39,10 +35,6 @@
         "tech": {
             "icon": "mdi-cog-outline",
             "description": "технический словарь"
-        },
-        "kotowaza": {
-            "icon": "mdi-translate",
-            "description": "словарь пословиц, поговорок, идиом"
         },
         "comp": {
             "icon": "mdi-memory",
