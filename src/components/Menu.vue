@@ -117,7 +117,7 @@
       <v-switch v-model="$vuetify.theme.dark" inset label="Тёмная тема" ></v-switch>
     </v-navigation-drawer>
 
-    <v-app-bar app absolute color="white">
+    <v-app-bar app absolute>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
         <v-row>
