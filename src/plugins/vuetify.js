@@ -113,7 +113,7 @@ export default new Vuetify({
                 'search-result-item-nonreviewed-color': '#fb8c00',
                 'search-result-item-example-color': '#797979',
                 'search-result-item-example-border-color': '#b6b6b6',
-                'search-result-item-lang-color': '#3d4445',
+                'search-result-item-lang-color': '#686d6e',
 
                 'search-result-item-pos-list-color': '#565959',
             }
