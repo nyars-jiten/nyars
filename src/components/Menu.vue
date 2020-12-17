@@ -1,9 +1,6 @@
 <template>
   <div>
-    <v-dialog
-      v-model="dialog"
-      max-width="400"
-    >
+    <v-dialog v-model="dialog" max-width="400">
       <v-card class="">
         <v-card-title class="headline">
           {{ authmode ? 'Войти' : 'Регистрация' }}
@@ -94,7 +91,7 @@
 
       <v-divider></v-divider>
 
-      <v-list nav >
+      <v-list nav>
         <v-list-item-group color="primary" v-model="selection">
           <div v-for="category in menu" :key="category.id">
             <v-subheader v-if="category.category.length > 0 && userRoleId >= category.rights">{{
@@ -112,9 +109,11 @@
                 </v-list-item>
             </div>
           </div>
+
         </v-list-item-group>
       </v-list>
-      <v-switch v-model="$vuetify.theme.dark" inset label="Тёмная тема" ></v-switch>
+
+      <v-switch class="button-dark-theme" v-model="$vuetify.theme.dark" inset label="Тёмная тема" ></v-switch>
     </v-navigation-drawer>
 
     <v-app-bar app absolute>
@@ -227,4 +226,9 @@ export default {
   }
 }
 
+.button-dark-theme {
+  position: absolute;
+  bottom: 0;
+  padding: 8px 16px;
+}
 </style>
