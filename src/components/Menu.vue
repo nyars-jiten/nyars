@@ -117,7 +117,7 @@
       <v-switch v-model="$vuetify.theme.dark" inset label="Тёмная тема" ></v-switch>
     </v-navigation-drawer>
 
-    <v-app-bar app absolute color="white">
+    <v-app-bar app absolute>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
         <v-row>
@@ -214,7 +214,7 @@ export default {
   color: inherit;
 
   &:hover {
-    color: var(--link-color-base);
+    // color: var(--v-link-color-base);
     box-shadow: 0 0 10px var(--v-menu-discord-wrapper-base);
   }
 
