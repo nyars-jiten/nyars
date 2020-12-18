@@ -18,9 +18,7 @@
             Отмена
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="createLang">
-            ОК
-          </v-btn>
+          <v-btn color="blue darken-1" text @click="createLang"> ОК </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -32,12 +30,18 @@ import { mapGetters } from "vuex";
 export default {
   data: () => ({
     selectedLang: "",
-    allowedLangs: ['rus', 'eng', 'lat', 'jap']
+    allowedLangs: ["rus", "eng", "lat", "jap"],
   }),
   methods: {
     createLang() {
-      if (this.allowedLangs.includes(this.selectedLang) && this.nokoriLangs.length > 0) {
-        this.$store.commit("editorAddLang", { lang: this.selectedLang, posIndex: this.dialogIndex(2) });
+      if (
+        this.allowedLangs.includes(this.selectedLang) &&
+        this.nokoriLangs.length > 0
+      ) {
+        this.$store.commit("editorAddLang", {
+          lang: this.selectedLang,
+          posIndex: this.dialogIndex(2),
+        });
         this.selectedLang = "";
       }
       this.updateModel();
@@ -55,7 +59,7 @@ export default {
       "dialogIndex",
       "getSubjectTags",
     ]),
-    nokoriLangs: function() {
+    nokoriLangs: function () {
       const exists = this.existingLangs(this.dialogIndex(2));
       return this.allowedLangs.filter((lang) => !exists.includes(lang));
     },

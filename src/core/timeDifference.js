@@ -1,13 +1,13 @@
 function formatDate(date) {
   var d = new Date(date),
-      month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear();
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
 
   if (month.length < 2)
-      month = '0' + month;
+    month = '0' + month;
   if (day.length < 2)
-      day = '0' + day;
+    day = '0' + day;
 
   return [day, month, year].join('.');
 }
@@ -24,19 +24,19 @@ function timeDifference(current, previous) {
 
   if (elapsed < msPerMinute) {
     var num = Math.round(elapsed / 1000);
-    return  `${num} ${declOfNum(num, ["секунду", "секунды", "секунд"])} назад`;
+    return `${num} ${declOfNum(num, ["секунду", "секунды", "секунд"])} назад`;
 
   } else if (elapsed < msPerHour) {
     num = Math.round(elapsed / msPerMinute);
-    return  `${num} ${declOfNum(num, ["минуту", "минуты", "минут"])} назад`;
+    return `${num} ${declOfNum(num, ["минуту", "минуты", "минут"])} назад`;
 
   } else if (elapsed < msPerDay) {
     num = Math.round(elapsed / msPerHour);
-    return  `${num} ${declOfNum(num, ["час", "часа", "часов"])} назад`;
+    return `${num} ${declOfNum(num, ["час", "часа", "часов"])} назад`;
 
   } else if (elapsed < msPerMonth) {
     num = Math.round(elapsed / msPerDay);
-    return  `${num} ${declOfNum(num, ["день", "дня", "дней"])} назад`;
+    return `${num} ${declOfNum(num, ["день", "дня", "дней"])} назад`;
 
   } else {
     const date = new Date(previous);
