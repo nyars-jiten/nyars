@@ -3,7 +3,7 @@
     <v-dialog :value="dialogModel(1)" @input="updateModel" max-width="700px">
       <v-card class="">
         <v-card-title>
-            <span class="headline">Часть речи</span>
+          <span class="headline">Часть речи</span>
         </v-card-title>
         <v-card-text>
           <v-container v-if="currentEntry.entry.meanings[currIndex]">
@@ -26,9 +26,7 @@
             Удалить блок
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="updateModel">
-            ОК
-          </v-btn>
+          <v-btn color="blue darken-1" text @click="updateModel"> ОК </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -39,11 +37,13 @@
 import { mapGetters } from "vuex";
 export default {
   data: () => ({
-      selectedPos: []
+    selectedPos: [],
   }),
   methods: {
     removeCurrent() {
-      this.$store.commit("editorRemovePosBlock", { index: this.dialogIndex(1) });
+      this.$store.commit("editorRemovePosBlock", {
+        index: this.dialogIndex(1),
+      });
       this.$store.commit("resetDial");
     },
     updateModel() {
@@ -57,35 +57,35 @@ export default {
       "dialogIndex",
       "getSubjectTags",
     ]),
-    selectedTags: function() {
-        if (this.currIndex < 0) return [];
-        if (!this.currentEntry.entry.meanings[this.currIndex]) return [];
-        return this.currentEntry.entry.meanings[this.currIndex].pos;
+    selectedTags: function () {
+      if (this.currIndex < 0) return [];
+      if (!this.currentEntry.entry.meanings[this.currIndex]) return [];
+      return this.currentEntry.entry.meanings[this.currIndex].pos;
     },
-    tagList: function() {
-      return this.getSubjectTags('Pos');
+    tagList: function () {
+      return this.getSubjectTags("Pos");
     },
-    currentObj: function() {
+    currentObj: function () {
       const dst = this.dialogIndex(1);
       return this.currentEntry.entry.meanings[dst].pos;
     },
-    currModel: function() {
+    currModel: function () {
       if (!this.dialogModel) return false;
       return this.dialogModel[1];
     },
-    currIndex: function() {
+    currIndex: function () {
       return this.dialogIndex(1);
     },
   },
   watch: {
-      selectedTags() {
-          this.selectedPos = this.selectedTags;
-      },
-      selectedPos () {
-        if (this.currIndex > -1) {
-          this.currentEntry.entry.meanings[this.currIndex].pos = this.selectedPos;
-        }
+    selectedTags() {
+      this.selectedPos = this.selectedTags;
+    },
+    selectedPos() {
+      if (this.currIndex > -1) {
+        this.currentEntry.entry.meanings[this.currIndex].pos = this.selectedPos;
       }
-  }
+    },
+  },
 };
 </script>

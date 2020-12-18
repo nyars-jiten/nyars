@@ -32,7 +32,7 @@ export default {
       return sc.scriptConvert(raw);
     },
     convertSc(raw) {
-      var converted = raw.map(function(reading) {
+      const converted = raw.map(function (reading) {
         return sc.scriptConvert(reading);
       });
       return converted.join("・");

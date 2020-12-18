@@ -7,7 +7,7 @@
         </v-icon>
       </template>
       <span>
-          {{ tooltip }}
+        {{ tooltip }}
       </span>
     </v-tooltip>
   </div>
@@ -18,7 +18,7 @@ export default {
   props: {
     tooltip: String,
     color: String,
-    icon: String
-  }
-}
+    icon: String,
+  },
+};
 </script>

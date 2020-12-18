@@ -2,7 +2,7 @@
   <div class="tags-list">
     <v-data-table
       :headers="headers"
-      :items='currentTags'
+      :items="currentTags"
       sort-by="rus"
       class="elevation-1"
       disable-pagination
@@ -15,7 +15,14 @@
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
-              <v-btn color="primary" outlined dark class="mb-2" v-bind="attrs" v-on="on">
+              <v-btn
+                color="primary"
+                outlined
+                dark
+                class="mb-2"
+                v-bind="attrs"
+                v-on="on"
+              >
                 Создать
               </v-btn>
             </template>
@@ -86,9 +93,7 @@
         </v-toolbar>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
-        <v-icon small class="mr-2" @click="editItem(item)">
-          mdi-pencil
-        </v-icon>
+        <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
         <!-- <v-icon small @click="deleteItem(item)">
           mdi-delete
         </v-icon> -->
@@ -104,7 +109,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { sendPostRequest } from '@/core/apiRequests.js';
+import { sendPostRequest } from "@/core/apiRequests.js";
 export default {
   data: () => ({
     dialog: false,
@@ -114,7 +119,7 @@ export default {
       { text: "rus", value: "rus" },
       { text: "engShort", value: "engShort" },
       { text: "eng", value: "eng" },
-      { text: 'Действия', value: 'actions', sortable: false },
+      { text: "Действия", value: "actions", sortable: false },
     ],
     currentTags: [],
     editedIndex: -1,
@@ -123,31 +128,31 @@ export default {
       rusShort: "",
       eng: "",
       engShort: "",
-      category: ""
+      category: "",
     },
     defaultItem: {
       rus: "",
       rusShort: "",
       eng: "",
       engShort: "",
-      category: ""
+      category: "",
     },
   }),
-  created: function() {
-      this.currentTags = this.getSubjectTags(this.tagSubject);
+  created: function () {
+    this.currentTags = this.getSubjectTags(this.tagSubject);
   },
   computed: {
     formTitle() {
       return this.editedIndex === -1 ? "Создать" : "Отредактировать";
     },
     tagsFiltered() {
-        return this.getSubjectTags(this.tagSubject);
+      return this.getSubjectTags(this.tagSubject);
     },
     ...mapGetters(["getSubjectTags"]),
   },
   watch: {
     tagsFiltered() {
-        this.currentTags = this.getSubjectTags(this.tagSubject);
+      this.currentTags = this.getSubjectTags(this.tagSubject);
     },
     dialog(val) {
       val || this.close();
@@ -158,7 +163,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['newAlert']),
+    ...mapActions(["newAlert"]),
     editItem(item) {
       this.editedIndex = this.currentTags.indexOf(item);
       this.editedItem = Object.assign({}, item);
@@ -195,16 +200,21 @@ export default {
     async save() {
       this.editedItem.category = this.tagSubject;
       if (this.editedIndex > -1) {
-        const resp = await sendPostRequest('dictionary/jap/tags/' + this.editedItem.id, this.editedItem);
+        const resp = await sendPostRequest(
+          "dictionary/jap/tags/" + this.editedItem.id,
+          this.editedItem
+        );
         if (resp.status == 200) {
-            this.newAlert({ msg: 'Изменения тега сохранены', type: 'success'});
+          this.newAlert({ msg: "Изменения тега сохранены", type: "success" });
         }
         Object.assign(this.currentTags[this.editedIndex], this.editedItem);
-
       } else {
-        const resp = await sendPostRequest('dictionary/jap/tags/', this.editedItem);
+        const resp = await sendPostRequest(
+          "dictionary/jap/tags/",
+          this.editedItem
+        );
         if (resp.status == 200) {
-            this.newAlert({ msg: 'Тег добавлен', type: 'success'});
+          this.newAlert({ msg: "Тег добавлен", type: "success" });
         }
 
         this.currentTags.push(this.editedItem);
@@ -222,6 +232,6 @@ export default {
 
 <style lang="scss">
 .tags-list {
-    padding: 10px;
+  padding: 10px;
 }
 </style>

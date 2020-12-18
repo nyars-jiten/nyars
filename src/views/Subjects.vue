@@ -3,10 +3,10 @@
     <v-container fluid>
       <v-row no-gutters>
         <v-col cols="12" md="3" sm="12">
-          <SubjectList :subjects="getFldSubjects" title="Тематики"/>
+          <SubjectList :subjects="getFldSubjects" title="Тематики" />
         </v-col>
         <v-col cols="12" md="3" sm="12">
-          <SubjectList :subjects="getDialSubjects" title="Диалекты"/>
+          <SubjectList :subjects="getDialSubjects" title="Диалекты" />
         </v-col>
       </v-row>
     </v-container>
@@ -15,16 +15,16 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import SubjectList from '@/components/SubjectList.vue';
+import SubjectList from "@/components/SubjectList.vue";
 
 export default {
   computed: {
     ...mapGetters(["getSubjects"]),
     getFldSubjects() {
-      return this.getSubjects('Fld');
+      return this.getSubjects("Fld");
     },
     getDialSubjects() {
-      return this.getSubjects('Dial');
+      return this.getSubjects("Dial");
     },
   },
   methods: mapActions(["fetchSubjects"]),
@@ -32,7 +32,7 @@ export default {
     this.fetchSubjects();
   },
   components: {
-    SubjectList
+    SubjectList,
   },
 };
 </script>

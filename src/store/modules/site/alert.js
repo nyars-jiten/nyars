@@ -1,11 +1,11 @@
 export default {
     actions: {
-        newAlert(ctx, {msg,type}) {
-            ctx.commit('setAlert', {msg,type});
+        newAlert(ctx, { msg, type }) {
+            ctx.commit('setAlert', { msg, type });
         }
     },
     mutations: {
-        setAlert(state, {msg,type}) {
+        setAlert(state, { msg, type }) {
             let time = Date.now() / 1000;
             state.alerts.push({ msg, type, time });
         },
@@ -15,7 +15,7 @@ export default {
     },
     getters: {
         activeAlerts(state) {
-            return state.alerts
+            return state.alerts;
         }
     },
-}
+};

@@ -1,7 +1,7 @@
 <template>
   <div class="subject-block">
     <v-card class="" elevation="2" outlined tile>
-      <v-card-title>{{title}}</v-card-title>
+      <v-card-title>{{ title }}</v-card-title>
       <v-card-text class="subject-body">
         <v-simple-table>
           <template v-slot:default>
@@ -16,7 +16,11 @@
               </tr>
             </thead> -->
             <tbody>
-              <tr v-for="subject in subjects" :key="subject.id" @click="subjLink(subject.tag)">
+              <tr
+                v-for="subject in subjects"
+                :key="subject.id"
+                @click="subjLink(subject.tag)"
+              >
                 <!-- <td>{{ subject }}</td> -->
                 <!-- <router-link :to="subjLink(subject.tag)"></router-link> -->
                 <td class="subj-title">{{ subject.tag.rus }}</td>
@@ -32,23 +36,25 @@
 
 <script>
 export default {
-    methods: {
-        subjLink(tag) {
-            this.$router.push({ path: '/search', query: { r: `#${tag.engShort}`}}).catch(()=>{});
-        }
+  methods: {
+    subjLink(tag) {
+      this.$router
+        .push({ path: "/search", query: { r: `#${tag.engShort}` } })
+        .catch(() => {});
     },
-    props: {
-        subjects: Array,
-        title: String
-    }
-}
+  },
+  props: {
+    subjects: Array,
+    title: String,
+  },
+};
 </script>
 
 <style lang="scss">
 .subj-title {
-    &::first-letter {
-        text-transform: capitalize;
-    }
+  &::first-letter {
+    text-transform: capitalize;
+  }
 }
 
 .subject-body {

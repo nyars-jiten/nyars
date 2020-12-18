@@ -4,27 +4,27 @@ export default {
     actions: {
         async getCurrentUser(ctx) {
             axios
-            .get(process.env.VUE_APP_API + 'users/current', {withCredentials: true})
-            .then(response => (ctx.commit('updateCurrentUser', response.data)))
-            .catch(error => {
-                console.log(error);
-            });
+                .get(process.env.VUE_APP_API + 'users/current', { withCredentials: true })
+                .then(response => (ctx.commit('updateCurrentUser', response.data)))
+                .catch(error => {
+                    console.log(error);
+                });
         },
         async logOut(ctx) {
             axios
-            .get(process.env.VUE_APP_API + 'users/signOut', {withCredentials: true})
-            .then(() => (ctx.commit('clearCurrentUser')))
-            .catch(error => {
-                console.log(error);
-            });
+                .get(process.env.VUE_APP_API + 'users/signOut', { withCredentials: true })
+                .then(() => (ctx.commit('clearCurrentUser')))
+                .catch(error => {
+                    console.log(error);
+                });
         }
     },
     mutations: {
         updateCurrentUser(state, currentUser) {
-            state.currentUser = currentUser
+            state.currentUser = currentUser;
         },
         clearCurrentUser(state) {
-            state.currentUser = {}
+            state.currentUser = {};
         },
     },
     state: {
@@ -32,7 +32,7 @@ export default {
     },
     getters: {
         currentUser(state) {
-            return state.currentUser
+            return state.currentUser;
         },
         userRoleId(state) {
             // if (!state.currentUser.role) return 0;
@@ -48,4 +48,4 @@ export default {
             }
         }
     },
-}
+};

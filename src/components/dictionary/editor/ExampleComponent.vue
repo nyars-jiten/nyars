@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
       example: this.exampleRaw,
     };

@@ -8,19 +8,33 @@
           "title": "Главная",
           "icon": "mdi-home-outline",
           "rights": 0,
-          "action": {"name": "navigate", "params": {"path": "/"}}
+          "action": {
+            "name": "navigate",
+            "params": {
+              "path": "/"
+            }
+          }
         },
         {
           "title": "Багтрекер",
           "icon": "mdi-space-invaders",
           "rights": 0,
-          "action": {"name": "navigate", "params": {"path": "https://github.com/nyars-jiten/nyars/issues", "external": true}}
+          "action": {
+            "name": "navigate",
+            "params": {
+              "path": "https://github.com/nyars-jiten/nyars/issues",
+              "external": true
+            }
+          }
         },
         {
           "title": "Выход",
           "icon": "mdi-exit-run",
           "rights": 1,
-          "action": {"name": "logout", "params": {}}
+          "action": {
+            "name": "logout",
+            "params": {}
+          }
         }
       ]
     },
@@ -32,25 +46,45 @@
           "title": "Теги",
           "icon": "mdi-tag-multiple-outline",
           "rights": 3,
-          "action": {"name": "navigate", "params": {"path": "/tags"}}
+          "action": {
+            "name": "navigate",
+            "params": {
+              "path": "/tags"
+            }
+          }
         },
         {
           "title": "Тематики",
           "icon": "mdi-widgets-outline",
           "rights": 0,
-          "action": {"name": "navigate", "params": {"path": "/subjects"}}
+          "action": {
+            "name": "navigate",
+            "params": {
+              "path": "/subjects"
+            }
+          }
         },
         {
           "title": "Добавить статью",
           "icon": "mdi-shape-square-rounded-plus",
           "rights": 1,
-          "action": {"name": "navigate", "params": {"path": "/jp/new"}}
+          "action": {
+            "name": "navigate",
+            "params": {
+              "path": "/jp/new"
+            }
+          }
         },
         {
           "title": "Случайная статья",
           "icon": "mdi-cube-scan",
           "rights": 1,
-          "action": {"name": "navigate", "params": {"path": "/jp/rnd"}}
+          "action": {
+            "name": "navigate",
+            "params": {
+              "path": "/jp/rnd"
+            }
+          }
         }
       ]
     },
@@ -62,7 +96,12 @@
           "title": "Добавить статью",
           "icon": "mdi-shape-square-rounded-plus",
           "rights": 4,
-          "action": {"name": "navigate", "params": {"path": "/"}}
+          "action": {
+            "name": "navigate",
+            "params": {
+              "path": "/"
+            }
+          }
         }
       ]
     },
@@ -74,13 +113,23 @@
           "title": "Радикалы",
           "icon": "mdi-select-compare",
           "rights": 4,
-          "action": {"name": "navigate", "params": {"path": "/"}}
+          "action": {
+            "name": "navigate",
+            "params": {
+              "path": "/"
+            }
+          }
         },
         {
           "title": "Добавить статью",
           "icon": "mdi-shape-square-rounded-plus",
           "rights": 4,
-          "action": {"name": "navigate", "params": {"path": "/"}}
+          "action": {
+            "name": "navigate",
+            "params": {
+              "path": "/"
+            }
+          }
         }
       ]
     }
