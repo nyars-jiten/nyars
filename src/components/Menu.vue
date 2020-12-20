@@ -113,7 +113,7 @@
         </v-list-item-group>
       </v-list>
 
-      <v-switch class="button-dark-theme" v-model="$vuetify.theme.dark" inset label="Тёмная тема" ></v-switch>
+      <v-switch class="button-dark-theme" v-model="darkMode" inset label="Тёмная тема" ></v-switch>
     </v-navigation-drawer>
 
     <v-app-bar app absolute>
@@ -131,14 +131,15 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 import menuData from '@/data/menu.json';
 import SearchBar from '@/components/SearchBar.vue';
 import { sendPostRequest } from '@/core/apiRequests.js';
 
 export default {
-  computed: mapGetters(["currentUser", "userRoleId"]),
+  computed: mapGetters(["currentUser", "userRoleId", "darkModeState"]),
   methods: {
+    ...mapMutations(["changeDarkMode"]),
     ...mapActions(["getCurrentUser", "logOut"]),
     clear() { this.selection = null; },
     async auth() {
@@ -175,8 +176,16 @@ export default {
         this[functionObj.name]({ external: isMiddleMouseButton, ...functionObj.params })
     },
   },
+  watch: {
+    darkMode() {
+      this.changeDarkMode(this.darkMode);
+      this.$vuetify.theme.dark = this.darkMode;
+    }
+  },
   components: { SearchBar },
   async mounted() {
+    this.$vuetify.theme.dark = this.darkModeState;
+    this.darkMode = this.darkModeState;
     this.getCurrentUser();
   },
   data: () => ({
@@ -186,7 +195,8 @@ export default {
     menu: menuData.menuList,
     login: "",
     password: "",
-    authmode: true
+    authmode: true,
+    darkMode: false,
   }),
 };
 </script>

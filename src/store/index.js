@@ -5,6 +5,8 @@ import user from './modules/site/user'
 import alert from './modules/site/alert'
 import statistics from './modules/site/statistics'
 import entry from './modules/dictionary/entry'
+import createPersistedState from 'vuex-persistedstate';
+
 
 Vue.use(Vuex)
 
@@ -15,5 +17,10 @@ export default new Vuex.Store({
         alert,
         entry,
         statistics
-    }
+    },
+    plugins: [
+        createPersistedState({
+            paths: ['user.darkMode'],
+        }),
+    ],
 })

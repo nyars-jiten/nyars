@@ -26,11 +26,18 @@ export default {
         clearCurrentUser(state) {
             state.currentUser = {}
         },
+        changeDarkMode(state, mode) {
+            state.darkMode = mode
+        }
     },
     state: {
         currentUser: [],
+        darkMode: false,
     },
     getters: {
+        darkModeState(state) {
+            return state.darkMode
+        },
         currentUser(state) {
             return state.currentUser
         },
