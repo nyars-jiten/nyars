@@ -50,6 +50,11 @@ const routes = [
     component: () => import('@/views/UserPage.vue'),
   },
   {
+    path: '/r/edit',
+    name: 'readme-edit',
+    component: () => import('@/views/About/EditsReadme.vue'),
+  },
+  {
     path: '/search',
     name: 'search',
     component: () => import('@/views/Search.vue'),

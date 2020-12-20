@@ -3,6 +3,12 @@
     <v-row>
       <v-col cols="12" md="8" sm="12">
         <v-card elevation="2" outlined tile>
+          <v-card-title>Добро пожаловать</v-card-title>
+          <v-card-text>
+              <Readme />
+          </v-card-text>
+        </v-card>
+        <v-card elevation="2" outlined tile>
           <v-card-title>Активность</v-card-title>
           <v-card-text>
             <template>
@@ -44,6 +50,7 @@
 import { mapGetters, mapActions } from "vuex";
 import EditsList from '@/components/dictionary/EditsList.vue';
 import Statistics from '@/components/Statistics.vue';
+import Readme from '@/components/readme/Readme.vue';
 import StatisticsSite from '@/components/StatisticsSite.vue';
 import sc from "@/core/scriptConverter.js"
 export default {
@@ -70,7 +77,7 @@ export default {
     this.getLastEdits();
   },
   components: {
-    EditsList, Statistics, StatisticsSite
+    EditsList, Statistics, StatisticsSite, Readme
   },
 };
 </script>

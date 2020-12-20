@@ -46,7 +46,7 @@
         },
         "finc": {
             "icon": "mdi-currency-cny",
-            "description": "финансовый словарь"
+            "description": "финансовый/экономический словарь"
         }
     }
 }
