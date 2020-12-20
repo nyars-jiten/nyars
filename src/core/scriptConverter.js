@@ -98,7 +98,7 @@ function scriptConvert(raw) {
       ) {
         result += transaltionList[0];
       } else if (excludedStrs.indexOf(chunk) != -1) {
-          //
+        //
       } else {
         result += chunk;
       }

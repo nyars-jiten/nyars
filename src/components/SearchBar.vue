@@ -36,13 +36,15 @@ export default {
     ...mapActions(["startSearch"]),
     search() {
       this.startSearch({ request: this.request, page: 1 });
-      this.$router.push({ path: '/search', query: { r: this.request }}).catch(()=>{ });
+      this.$router
+        .push({ path: "/search", query: { r: this.request } })
+        .catch(() => {});
     },
   },
   watch: {
     currentSearchRequest() {
-      this.request = this.currentSearchRequest
-    }
+      this.request = this.currentSearchRequest;
+    },
   },
   computed: {
     ...mapGetters(["currentLoadingState", "currentSearchRequest"]),

@@ -1,6 +1,6 @@
 const axios = require('axios');
 import Vue from 'vue';
-import {sendPostRequest} from '@/core/apiRequests.js';
+import { sendPostRequest } from '@/core/apiRequests.js';
 
 export default {
     actions: {
@@ -10,84 +10,84 @@ export default {
             ctx.commit('updateSearchState', {});
             const encodedreq = request.replace('#', '%23');
             axios
-            .get(process.env.VUE_APP_API + 'search/jap?r=' + encodedreq + '&p=' + (page - 1))
-            .then(response => (ctx.commit('updateSearchState', response.data)))
-            .catch(error => {
-                console.log(error);
-            })
-            .then(() => {
-                ctx.commit('updateLoadingState', false);
-            });
+                .get(process.env.VUE_APP_API + 'search/jap?r=' + encodedreq + '&p=' + (page - 1))
+                .then(response => (ctx.commit('updateSearchState', response.data)))
+                .catch(error => {
+                    console.log(error);
+                })
+                .then(() => {
+                    ctx.commit('updateLoadingState', false);
+                });
         },
-        async startRandomSearch(ctx, paramsList ) {
+        async startRandomSearch(ctx, paramsList) {
             ctx.commit('updateLoadingState', true);
             ctx.commit('updateRndSearchState', {});
             axios
-            .post(process.env.VUE_APP_API + 'dictionary/jap/entry/random', paramsList)
-            .then(response => (ctx.commit('updateRndSearchState', response.data)))
-            .catch(error => {
-                console.log(error);
-            })
-            .then(() => {
-                ctx.commit('updateLoadingState', false);
-            });
+                .post(process.env.VUE_APP_API + 'dictionary/jap/entry/random', paramsList)
+                .then(response => (ctx.commit('updateRndSearchState', response.data)))
+                .catch(error => {
+                    console.log(error);
+                })
+                .then(() => {
+                    ctx.commit('updateLoadingState', false);
+                });
         },
         async startDublicatesSearch(ctx) {
             ctx.commit('updateLoadingState', true);
             ctx.commit('updateRndSearchState', {});
-            const currentEntry = { japEntry: ctx.state.currentEntry.entry }
+            const currentEntry = { japEntry: ctx.state.currentEntry.entry };
             axios
-            .post(process.env.VUE_APP_API + 'search/search-jap-doubles', currentEntry)
-            .then(response => (ctx.commit('updateDublesSearchState', response.data)))
-            .catch(error => {
-                console.log(error);
-            })
-            .then(() => {
-                ctx.commit('updateLoadingState', false);
-            });
+                .post(process.env.VUE_APP_API + 'search/search-jap-doubles', currentEntry)
+                .then(response => (ctx.commit('updateDublesSearchState', response.data)))
+                .catch(error => {
+                    console.log(error);
+                })
+                .then(() => {
+                    ctx.commit('updateLoadingState', false);
+                });
         },
         async getCurrentEntry(ctx, wid) {
             ctx.commit('updateCurrentEntry', {});
             axios
-            .get(process.env.VUE_APP_API + 'dictionary/jap/entries/' + wid)
-            .then(response => (ctx.commit('updateCurrentEntry', response.data)))
-            .catch(error => {
-                console.log(error);
-            });
+                .get(process.env.VUE_APP_API + 'dictionary/jap/entries/' + wid)
+                .then(response => (ctx.commit('updateCurrentEntry', response.data)))
+                .catch(error => {
+                    console.log(error);
+                });
         },
         async getCurrentEditEntry(ctx, id) {
             // ctx.commit('updateCurrentEditEntry', {});
             axios
-            .get(process.env.VUE_APP_API + 'dictionary/jap/get-editdata/' + id)
-            .then(response => (ctx.commit('updateCurrentEditEntry', response.data)))
-            .catch(error => {
-                console.log(error);
-            });
+                .get(process.env.VUE_APP_API + 'dictionary/jap/get-editdata/' + id)
+                .then(response => (ctx.commit('updateCurrentEditEntry', response.data)))
+                .catch(error => {
+                    console.log(error);
+                });
         },
         async fetchTags(ctx) {
             axios
-            .get(process.env.VUE_APP_API + 'dictionary/jap/tags')
-            .then(response => (ctx.commit('updateTags', response.data)))
-            .catch(error => {
-                console.log(error);
-            });
+                .get(process.env.VUE_APP_API + 'dictionary/jap/tags')
+                .then(response => (ctx.commit('updateTags', response.data)))
+                .catch(error => {
+                    console.log(error);
+                });
         },
         async fetchSubjects(ctx) {
             axios
-            .get(process.env.VUE_APP_API + 'dictionary/jap/subjects')
-            .then(response => (ctx.commit('updateSubjects', response.data)))
-            .catch(error => {
-                console.log(error);
-            });
+                .get(process.env.VUE_APP_API + 'dictionary/jap/subjects')
+                .then(response => (ctx.commit('updateSubjects', response.data)))
+                .catch(error => {
+                    console.log(error);
+                });
         },
         async getCurrentSounds(ctx, wid) {
             ctx.commit('updateCurrentSounds', []);
             axios
-            .get(process.env.VUE_APP_API + 'dictionary/jap/vcrequest/' + wid)
-            .then(response => (ctx.commit('updateCurrentSounds', response.data)))
-            .catch(error => {
-                console.log(error);
-            });
+                .get(process.env.VUE_APP_API + 'dictionary/jap/vcrequest/' + wid)
+                .then(response => (ctx.commit('updateCurrentSounds', response.data)))
+                .catch(error => {
+                    console.log(error);
+                });
         },
         async getEntryText(ctx) {
             const resp = await sendPostRequest('dictionary/jap/serialize', ctx.state.currentEntry.entry);
@@ -106,43 +106,43 @@ export default {
     },
     mutations: {
         updateCurrentSearchRequest(state, request) {
-            state.searchRequest = request
+            state.searchRequest = request;
         },
         updateCurrentEditEntry(state, entry) {
-            state.currentEntry = { entry: entry.result.japEntry }
+            state.currentEntry = { entry: entry.result.japEntry };
         },
         updateLoadingState(state, status) {
-            state.searchLoading = status
+            state.searchLoading = status;
         },
         updateTextEntry(state, entry) {
-            state.currentTextEntry = entry
+            state.currentTextEntry = entry;
         },
         serializeTextEntry(state, entry) {
-            state.currentEntry.entry = entry
+            state.currentEntry.entry = entry;
         },
         updateSearchState(state, searchResult) {
-            state.searchResult = searchResult
+            state.searchResult = searchResult;
         },
         updateRndSearchState(state, searchResult) {
-            state.searchRndResult = searchResult
+            state.searchRndResult = searchResult;
         },
         updateDublesSearchState(state, searchResult) {
-            state.searchDblResult = searchResult
+            state.searchDblResult = searchResult;
         },
         updateCurrentEntry(state, currentEntry) {
-            state.currentEntry = currentEntry
+            state.currentEntry = currentEntry;
         },
         updateTags(state, tags) {
-            state.tags = tags
+            state.tags = tags;
         },
         updateSubjects(state, subjects) {
-            state.subjects = subjects
+            state.subjects = subjects;
         },
         updateCurrentSounds(state, currentSounds) {
-            state.currentSounds = currentSounds
+            state.currentSounds = currentSounds;
         },
         addNewWord(state) {
-            const emptyWord = {writings: [], readings: []};
+            const emptyWord = { writings: [], readings: [] };
             state.currentEntry.entry.words.push(emptyWord);
         },
         updateEditorDialState(state, { dialog, index }) {
@@ -153,7 +153,7 @@ export default {
         editorUpdateNote(state, { index, note }) {
             state.currentEntry.entry.meanings[index[0]].langMeanings[index[1]].note = note;
         },
-        editorRemoveSense(state, {index}) {
+        editorRemoveSense(state, { index }) {
             state.currentEntry.entry.meanings[index[0]].langMeanings[index[1]].senses.splice(index[2], 1);
         },
         editorRemoveWord(state, { index }) {
@@ -162,66 +162,66 @@ export default {
         editorRemovePosBlock(state, { index }) {
             state.currentEntry.entry.meanings.splice(index, 1);
         },
-        editorRemoveLang(state, {posIndex, lmIndex}) {
+        editorRemoveLang(state, { posIndex, lmIndex }) {
             state.currentEntry.entry.meanings[posIndex].langMeanings.splice(lmIndex, 1);
         },
         editorAddSense(state, { posIndex, lmIndex }) {
             //tags value examples
-            const emptySense = { tags: [], value: "новое значение", examples: []};
+            const emptySense = { tags: [], value: "новое значение", examples: [] };
             state.currentEntry.entry.meanings[posIndex].langMeanings[lmIndex].senses.push(emptySense);
         },
-        editorAddLang(state, {lang, posIndex}) {
-            const emptySense = { tags: [], value: "новое значение", examples: []};
-            const newLang = {lang, senses: [emptySense], note: ""};
+        editorAddLang(state, { lang, posIndex }) {
+            const emptySense = { tags: [], value: "новое значение", examples: [] };
+            const newLang = { lang, senses: [emptySense], note: "" };
             state.currentEntry.entry.meanings[posIndex].langMeanings.push(newLang);
         },
         editorAddPos(state) {
-            const emptyPos = { pos: ['unc'], langMeanings: []};
+            const emptyPos = { pos: ['unc'], langMeanings: [] };
             state.currentEntry.entry.meanings.push(emptyPos);
         },
         resetDial(state) {
-            state.dialogIndex = [-1, -1, -1, [-1,-1,-1], [-1, -1]];
+            state.dialogIndex = [-1, -1, -1, [-1, -1, -1], [-1, -1]];
             state.dialogModel = [false, false, false, false, false];
         }
     },
     state: {
-        currentEntry: { type: Object, default: {}},
+        currentEntry: { type: Object, default: {} },
         currentTextEntry: String,
         currentSounds: Array,
         tags: Array,
         subjects: Array,
         // word, pos, lang, sense, note
-        dialogIndex: [-1, -1, -1, [-1,-1,-1], [-1, -1]],
+        dialogIndex: [-1, -1, -1, [-1, -1, -1], [-1, -1]],
         dialogModel: [false, false, false, false, false],
         searchResult: Object,
         searchRndResult: Object,
-        searchDblResult: { type: Array, default: []},
+        searchDblResult: { type: Array, default: [] },
         searchLoading: false,
         searchRequest: String,
         // currentEditEntry: Object
     },
     getters: {
         currentTextEntry(state) {
-            return state.currentTextEntry
+            return state.currentTextEntry;
         },
         currentRandomSearchResult(state) {
-            return state.searchRndResult
+            return state.searchRndResult;
         },
         currentDoublesSearchResult(state) {
             if (state.searchDblResult.length === undefined) return state.searchDblResult;
-            return state.searchDblResult.filter(x => x.id != state.currentEntry.id)
+            return state.searchDblResult.filter(x => x.id != state.currentEntry.id);
         },
         currentSearchRequest(state) {
-            return state.searchRequest
+            return state.searchRequest;
         },
         currentSearchResult(state) {
-            return state.searchResult
+            return state.searchResult;
         },
         currentLoadingState(state) {
-            return state.searchLoading
+            return state.searchLoading;
         },
         currentEntry(state) {
-            return state.currentEntry
+            return state.currentEntry;
         },
         // currentEditEntry(state) {
         //     return state.currentEditEntry
@@ -237,7 +237,7 @@ export default {
             if (typeof state.currentEntry.entry.meanings[index] === 'undefined') return [];
             return state.currentEntry.entry.meanings[index].langMeanings.map(lm => lm.lang);
         },
-        dialogIndex: state => (dial) =>  {
+        dialogIndex: state => (dial) => {
             if (!state.dialogIndex) return false;
             return state.dialogIndex[dial];
         },
@@ -246,10 +246,10 @@ export default {
             return state.dialogModel[dial];
         },
         currentSounds(state) {
-            return state.currentSounds
+            return state.currentSounds;
         },
         getTags(state) {
-            return state.tags
+            return state.tags;
         },
         getSubjectTags: state => (subject) => {
             if (state.tags.constructor.name != "Array" || !subject) return [];
@@ -260,7 +260,7 @@ export default {
             return state.subjects.filter(tag => tag.tag.category == subject);
         },
         getTag: state => (tag, lang) => {
-            let defaultRes = {short: tag, full: "—"};
+            let defaultRes = { short: tag, full: "—" };
             if (state.tags.constructor.name != "Array") return defaultRes;
             let fRes = state.tags.find((curTag) => curTag.engShort == tag);
             if (!fRes) return defaultRes;
@@ -280,4 +280,4 @@ export default {
             return defaultRes;
         },
     },
-}
+};

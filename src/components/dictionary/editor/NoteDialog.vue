@@ -7,14 +7,17 @@
         </v-card-title>
         <v-card-text>
           <v-textarea
-          label="Заметка"
-          id="note-area"
-          v-model="note"
-          @input="updateNote"
-          auto-grow
-          counter
+            label="Заметка"
+            id="note-area"
+            v-model="note"
+            @input="updateNote"
+            auto-grow
+            counter
           ></v-textarea>
-          <BBCodePanel textAreaId="note-area" @changed="(...args) => updateWithNewValue(args[0])" />
+          <BBCodePanel
+            textAreaId="note-area"
+            @changed="(...args) => updateWithNewValue(args[0])"
+          />
         </v-card-text>
 
         <v-card-actions>
@@ -22,9 +25,7 @@
             Удалить
           </v-btn> -->
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="updateModel">
-            ОК
-          </v-btn>
+          <v-btn color="blue darken-1" text @click="updateModel"> ОК </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -33,35 +34,38 @@
 
 <script>
 import { mapGetters } from "vuex";
-import BBCodePanel from '@/components/dictionary/editor/BBCodePanel.vue';
+import BBCodePanel from "@/components/dictionary/editor/BBCodePanel.vue";
 export default {
   data: () => ({
     note: "",
   }),
   methods: {
-    updateModel() { //editorUpdateNote
+    updateModel() {
+      //editorUpdateNote
       this.note = "";
       this.$store.commit("resetDial");
     },
     updateNote() {
-      this.$store.commit("editorUpdateNote", { index: this.dialogIndex(5), note: this.note });
+      this.$store.commit("editorUpdateNote", {
+        index: this.dialogIndex(5),
+        note: this.note,
+      });
     },
     updateWithNewValue(newVal) {
-      this.$store.commit("editorUpdateNote", { index: this.dialogIndex(5), note: newVal });
-    }
+      this.$store.commit("editorUpdateNote", {
+        index: this.dialogIndex(5),
+        note: newVal,
+      });
+    },
   },
   computed: {
-    ...mapGetters([
-      "currentNote",
-      "dialogModel",
-      "dialogIndex",
-    ])
+    ...mapGetters(["currentNote", "dialogModel", "dialogIndex"]),
   },
   watch: {
-      currentNote() {
-          this.note = this.currentNote;
-      },
+    currentNote() {
+      this.note = this.currentNote;
+    },
   },
-  components: { BBCodePanel }
+  components: { BBCodePanel },
 };
 </script>
