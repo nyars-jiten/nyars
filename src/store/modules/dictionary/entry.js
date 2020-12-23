@@ -89,6 +89,15 @@ export default {
                     console.log(error);
                 });
         },
+        async getCurrentImages(ctx, wid) {
+            ctx.commit('updateCurrentImages', []);
+            axios
+                .get(process.env.VUE_APP_API + 'kotoba/entry-images?dict=0&id=' + wid)
+                .then(response => (ctx.commit('updateCurrentImages', response.data)))
+                .catch(error => {
+                    console.log(error);
+                });
+        },
         async getEntryText(ctx) {
             const resp = await sendPostRequest('dictionary/jap/serialize', ctx.state.currentEntry.entry);
             ctx.commit('updateTextEntry', resp.data.body);
@@ -110,6 +119,10 @@ export default {
         },
         updateCurrentEditEntry(state, entry) {
             state.currentEntry = { entry: entry.result.japEntry };
+            state.currentImages = entry.result.images;
+        },
+        updateCurrentImages(state, images) {
+            state.currentImages = images;
         },
         updateLoadingState(state, status) {
             state.searchLoading = status;
@@ -181,7 +194,7 @@ export default {
         },
         resetDial(state) {
             state.dialogIndex = [-1, -1, -1, [-1, -1, -1], [-1, -1]];
-            state.dialogModel = [false, false, false, false, false];
+            state.dialogModel = [false, false, false, false, false, false];
         }
     },
     state: {
@@ -192,12 +205,13 @@ export default {
         subjects: Array,
         // word, pos, lang, sense, note
         dialogIndex: [-1, -1, -1, [-1, -1, -1], [-1, -1]],
-        dialogModel: [false, false, false, false, false],
+        dialogModel: [false, false, false, false, false, false],
         searchResult: Object,
         searchRndResult: Object,
         searchDblResult: { type: Array, default: [] },
         searchLoading: false,
         searchRequest: String,
+        currentImages: Array,
         // currentEditEntry: Object
     },
     getters: {
@@ -206,6 +220,9 @@ export default {
         },
         currentRandomSearchResult(state) {
             return state.searchRndResult;
+        },
+        currentImages(state) {
+            return state.currentImages;
         },
         currentDoublesSearchResult(state) {
             if (state.searchDblResult.length === undefined) return state.searchDblResult;

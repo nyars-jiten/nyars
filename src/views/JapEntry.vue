@@ -112,6 +112,9 @@
             </v-card-actions>
           </v-card>
         </v-col>
+        <v-col cols="12" md="12" sm="12" xs="12">
+          <GalleryComponent :editMode="editMode" />
+        </v-col>
       </v-row>
     </v-container>
   </div>
@@ -121,6 +124,7 @@
 import { mapGetters, mapActions } from "vuex";
 import corpusList from "@/data/corpus.json";
 import JapEntryView from "@/components/dictionary/JapEntryView.vue";
+import GalleryComponent from "@/components/dictionary/GalleryComponent.vue";
 import JapEntryEdit from "@/components/dictionary/JapEntryEdit.vue";
 import JapEntryTextEditor from "@/components/dictionary/JapEntryTextEditor.vue";
 import DictionaryIcon from "@/components/dictionary/DictionaryIcon.vue";
@@ -141,7 +145,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["currentEntry", "userRoleId"]),
+    ...mapGetters(["currentEntry", "currentImages", "userRoleId"]),
     currentWid() {
       return this.$route.params.wid;
     },
@@ -160,6 +164,7 @@ export default {
       "getCurrentEntry",
       "fetchTags",
       "getCurrentSounds",
+      "getCurrentImages",
       "newAlert",
       "deserializeEntry",
     ]),
@@ -190,7 +195,7 @@ export default {
       }
     },
     async saveEdit() {
-      const newEntry = { japEntry: this.currentEntry.entry };
+      const newEntry = { japEntry: this.currentEntry.entry, images: this.currentImages };
       if (this.currentWid) {
         const resp = await sendPostRequest(
           "dictionary/jap/entries/" + this.currentWid,
@@ -225,6 +230,7 @@ export default {
       } else {
         this.getCurrentEntry(this.currentWid);
         this.getCurrentSounds(this.currentWid);
+        this.getCurrentImages(this.currentWid);
         this.editMode = false;
       }
     },
@@ -244,6 +250,7 @@ export default {
     JapEntryTextEditor,
     DictionaryIcon,
     DuplicatesChecker,
+    GalleryComponent
   },
 };
 </script>

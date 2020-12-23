@@ -64,6 +64,9 @@
             </v-card-actions>
           </v-card>
         </v-col>
+        <v-col cols="12" md="12" sm="12" xs="12">
+          <GalleryComponent :editMode="editMode" />
+        </v-col>
       </v-row>
     </v-container>
   </div>
@@ -71,18 +74,19 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import GalleryComponent from "@/components/dictionary/GalleryComponent.vue";
 import JapEntryEdit from "@/components/dictionary/JapEntryEdit.vue";
 import JapEntryTextEditor from "@/components/dictionary/JapEntryTextEditor.vue";
 import { sendPostRequest } from "@/core/apiRequests.js";
 export default {
   data() {
     return {
-      editMode: false,
+      editMode: true,
       textMode: false,
     };
   },
   computed: {
-    ...mapGetters(["userRoleId", "currentEntry"]),
+    ...mapGetters(["userRoleId", "currentEntry", "currentImages"]),
     currentId() {
       return this.$route.params.id;
     },
@@ -120,7 +124,7 @@ export default {
       }
     },
     async saveEdit() {
-      const newEntry = { japEntry: this.currentEntry.entry };
+      const newEntry = { japEntry: this.currentEntry.entry, images: this.currentImages };
       const resp = await sendPostRequest(
         `dictionary/jap/save-editdata/${this.currentId}`,
         newEntry
@@ -137,11 +141,11 @@ export default {
       } else {
         this.$router.push({ path: "/" }).catch(() => {});
       }
-      this.editMode = false;
+      // this.editMode = false;
     },
     updatePage() {
       this.getCurrentEditEntry(this.currentId);
-      this.editMode = false;
+      // this.editMode = false;
     },
   },
   watch: {
@@ -156,6 +160,7 @@ export default {
   components: {
     JapEntryEdit,
     JapEntryTextEditor,
+    GalleryComponent
   },
 };
 </script>
