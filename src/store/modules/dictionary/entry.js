@@ -33,8 +33,9 @@ export default {
                 });
         },
         async startDublicatesSearch(ctx) {
+            if (!ctx.state.currentEntry.entry) return;
             ctx.commit('updateLoadingState', true);
-            ctx.commit('updateRndSearchState', {});
+            ctx.commit('updateDublesSearchState', {});
             const currentEntry = { japEntry: ctx.state.currentEntry.entry };
             axios
                 .post(process.env.VUE_APP_API + 'search/search-jap-doubles', currentEntry)
@@ -59,7 +60,10 @@ export default {
             // ctx.commit('updateCurrentEditEntry', {});
             axios
                 .get(process.env.VUE_APP_API + 'dictionary/jap/get-editdata/' + id)
-                .then(response => (ctx.commit('updateCurrentEditEntry', response.data)))
+                .then(response => {
+                    ctx.commit('updateCurrentEditEntry', response.data);
+                    ctx.dispatch('startDublicatesSearch');
+                })
                 .catch(error => {
                     console.log(error);
                 });
@@ -120,9 +124,13 @@ export default {
         updateCurrentEditEntry(state, entry) {
             state.currentEntry = { entry: entry.result.japEntry };
             state.currentImages = entry.result.images;
+            state.editComment = entry.result.comment ? entry.result.comment : "" ;
         },
         updateCurrentImages(state, images) {
             state.currentImages = images;
+        },
+        updateEditComment(state, comment) {
+            state.editComment = comment;
         },
         updateLoadingState(state, status) {
             state.searchLoading = status;
@@ -212,6 +220,7 @@ export default {
         searchLoading: false,
         searchRequest: String,
         currentImages: Array,
+        editComment: "",
         // currentEditEntry: Object
     },
     getters: {
@@ -223,6 +232,9 @@ export default {
         },
         currentImages(state) {
             return state.currentImages;
+        },
+        currentEditComment(state) {
+            return state.editComment;
         },
         currentDoublesSearchResult(state) {
             if (state.searchDblResult.length === undefined) return state.searchDblResult;

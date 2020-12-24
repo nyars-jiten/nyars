@@ -380,7 +380,7 @@ export default {
 
 .jap-view {
   width: 100%;
-  padding: 0 16px 16px;
+  padding-bottom: 20px;
 }
 
 .word-writings,
