@@ -63,9 +63,10 @@
           </div>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <v-row no-gutters justify="space-between">
+          <v-row no-gutters justify="space-between" v-if="checkForNewPanel(edit.id)">
+            Обоснование: {{editCompare[edit.id].comment}}
             <v-col md="11">
-              <div class="diff" v-if="checkForNewPanel(edit.id)">
+              <div class="diff">
                 <div class="side">
                   <template
                     v-for="(source, sourceIndex) of editCompare[edit.id].source"
