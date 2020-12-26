@@ -8,7 +8,6 @@
               {{ currentUser.username }}
             </v-card-title>
             <v-card-text>
-              <img :src="'/upload/avatars/' + currentUser.avatar" alt="" />
               <v-img
                 :lazy-src="avatarLink(currentUser.avatar)"
                 max-height="150"
