@@ -10,7 +10,7 @@ export default {
             ctx.commit('updateSearchState', {});
             const encodedreq = request.replace('#', '%23');
             axios
-                .get(process.env.VUE_APP_API + 'search/jap?r=' + encodedreq + '&p=' + (page - 1))
+                .get(process.env.VUE_APP_API + 'search/jap?r=' + encodedreq + '&p=' + (page - 1) + '&exact=' + ctx.state.exactSearch)
                 .then(response => (ctx.commit('updateSearchState', response.data)))
                 .catch(error => {
                     console.log(error);
@@ -153,6 +153,9 @@ export default {
         updateCurrentEntry(state, currentEntry) {
             state.currentEntry = currentEntry;
         },
+        updateExactSearchState(state, exactSearch) {
+            state.exactSearch = exactSearch;
+        },
         updateTags(state, tags) {
             state.tags = tags;
         },
@@ -221,6 +224,7 @@ export default {
         searchRequest: String,
         currentImages: Array,
         editComment: "",
+        exactSearch: Boolean,
         // currentEditEntry: Object
     },
     getters: {

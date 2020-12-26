@@ -1,17 +1,5 @@
 <template>
   <div class="search-line">
-    <!-- <v-autocomplete
-        v-model="select"
-        :loading="loading"
-        :items="items"
-        :search-input.sync="search"
-        cache-items
-        class="mx-4"
-        flat
-        hide-no-data
-        hide-details
-        label="Search"
-      ></v-autocomplete> -->
     <v-text-field
       v-model="request"
       :loading="currentLoadingState"
@@ -22,6 +10,10 @@
       flat
       hide-details
     ></v-text-field>
+    <v-checkbox
+      v-model="exactSearchState"
+      label="Точное соответствие"
+    ></v-checkbox>
   </div>
 </template>
 
@@ -46,8 +38,19 @@ export default {
       this.request = this.currentSearchRequest;
     },
   },
+  mounted() {
+    this.$store.commit('updateExactSearchState', false);
+  },
   computed: {
     ...mapGetters(["currentLoadingState", "currentSearchRequest"]),
+    exactSearchState: {
+      get() {
+        return this.$store.state.entry.exactSearch;
+      },
+      set(value) {
+        this.$store.commit('updateExactSearchState', value);
+      }
+    },
   },
 };
 </script>
