@@ -182,16 +182,12 @@ export default {
 <style lang="scss">
 .entry-text-md {
   display: inline;
-
-  a {
-    color: var(--jap-entry-view-entry-text-md-color-base) !important;
-  }
 }
 
 .lang-sep {
   grid-column: 1/-1;
   border: unset;
-  border-bottom: 1px solid var(--jap-entry-view-lang-sep-color-base);
+  border-bottom: 1px solid var(--v-jap-entry-view-lang-sep-color-base);
   margin: 0 30px;
 }
 
@@ -206,8 +202,8 @@ export default {
 }
 
 .example {
-  color: var(--jap-entry-view-example-color-base) !important;
-  border-left: 3px solid var(--jap-entry-view-example-border-color-base) !important;
+  color: var(--v-jap-entry-view-example-color-base) !important;
+  border-left: 3px solid var(--v-jap-entry-view-example-border-color-base) !important;
   padding-left: 5px;
   margin-bottom: 6px;
   margin-top: 6px;
@@ -216,11 +212,12 @@ export default {
 .sense {
   padding: 0;
   margin: 0;
+  color: var(--v-jap-entry-view-entry-sense-color-base) !important;
 }
 
 .lang {
   font-style: italic;
-  color: var(--jap-entry-view-lang-color-base) !important;
+  color: var(--v-jap-entry-view-lang-color-base) !important;
 }
 
 .lang-mean {
@@ -233,7 +230,7 @@ export default {
 
 .pos-list {
   display: block;
-  border-bottom: 1px solid var(--jap-entry-view-pos-list-color-base);
+  border-bottom: 1px solid var(--v-jap-entry-view-pos-list-color-base);
   padding: 6px;
 }
 
@@ -265,12 +262,12 @@ export default {
 
 .word-writings {
   &::after {
-    color: var(--text-decoration-color-base);
+    color: var(--v-text-decoration-color-base);
     content: "】";
   }
 
   &::before {
-    color: var(--text-decoration-color-base);
+    color: var(--v-text-decoration-color-base);
     content: "【";
   }
 }
@@ -280,7 +277,7 @@ export default {
 .pos {
   &:not(:last-child) {
     &::after {
-      color: var(--text-decoration-color-base);
+      color: var(--v-text-decoration-color-base);
       //   white-space: pre;
       content: "・";
     }

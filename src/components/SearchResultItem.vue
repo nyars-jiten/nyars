@@ -290,12 +290,12 @@ export default {
 
 .word-writings {
   &::after {
-    color: var(--text-decoration-color-base);
+    color: var(--v-text-decoration-color-base);
     content: "】";
   }
 
   &::before {
-    color: var(--text-decoration-color-base);
+    color: var(--v-text-decoration-color-base);
     content: "【";
   }
 }
@@ -310,7 +310,7 @@ export default {
 .pos {
   &:not(:last-child) {
     &::after {
-      color: var(--text-decoration-color-base);
+      color: var(--v-text-decoration-color-base);
       //   white-space: pre;
       content: "・";
     }
