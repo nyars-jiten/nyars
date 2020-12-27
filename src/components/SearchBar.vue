@@ -1,5 +1,11 @@
 <template>
   <div class="search-line">
+    <v-checkbox
+      class="options"
+      v-model="exactSearchState"
+      label="Точное соответствие"
+    />
+
     <v-text-field
       v-model="request"
       :loading="currentLoadingState"
@@ -9,11 +15,7 @@
       class="mx-4"
       flat
       hide-details
-    ></v-text-field>
-    <v-checkbox
-      v-model="exactSearchState"
-      label="Точное соответствие"
-    ></v-checkbox>
+    />
   </div>
 </template>
 
@@ -39,7 +41,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.commit('updateExactSearchState', false);
+    this.$store.commit("updateExactSearchState", false);
   },
   computed: {
     ...mapGetters(["currentLoadingState", "currentSearchRequest"]),
@@ -48,9 +50,28 @@ export default {
         return this.$store.state.entry.exactSearch;
       },
       set(value) {
-        this.$store.commit('updateExactSearchState', value);
-      }
+        this.$store.commit("updateExactSearchState", value);
+      },
     },
   },
 };
 </script>
+
+<style lang="scss">
+.search-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.options {
+  .v-input__control,
+  .v-input__slot {
+    margin: unset !important;
+  }
+
+  .v-messages {
+    display: none !important;
+  }
+}
+</style>
