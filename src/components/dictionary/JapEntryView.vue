@@ -206,8 +206,8 @@ export default {
 }
 
 .example {
-  color: var(--jap-entry-view-example-color-base);
-  border-left: 3px solid var(--jap-entry-view-example-border-color-base);
+  color: var(--jap-entry-view-example-color-base) !important;
+  border-left: 3px solid var(--jap-entry-view-example-border-color-base) !important;
   padding-left: 5px;
   margin-bottom: 6px;
   margin-top: 6px;
@@ -220,7 +220,7 @@ export default {
 
 .lang {
   font-style: italic;
-  color: var(--jap-entry-view-lang-color-base);
+  color: var(--jap-entry-view-lang-color-base) !important;
 }
 
 .lang-mean {
