@@ -1,55 +1,63 @@
 <template>
   <div class="jap-view">
     <v-container v-if="entry.entry">
-      <div class="words-header">
-        <div class="word" v-for="word in entry.entry.words" :key="word.id">
-          <div class="word-writings" v-if="word.writings.length > 0">
+      <div class="entry-header">
+        <div class="entry-sound">
+          <template v-if="currentSounds.length > 0">
             <div
-              class="writing"
-              v-for="writing in word.writings"
-              :key="writing.id"
+              class="sound"
+              v-for="currentSound in currentSounds"
+              :key="currentSound"
             >
-              {{ writing.value }}
-              <InlineTag
-                v-if="writing.tag"
-                v-bind:tags="writing.tag.values"
-                :short="true"
-                :lang="'rus'"
-                :inf="true"
-              />
+              <v-btn
+                icon
+                small
+                color="grey"
+                v-on:click="playAudio(currentSound)"
+              >
+                <v-icon>mdi-play-outline</v-icon>
+              </v-btn>
+              <span class="duration"></span>
             </div>
-          </div>
-          <div class="word-readings">
-            <div
-              class="reading"
-              v-for="reading in word.readings"
-              :key="reading.id"
-            >
-              {{ convertR(reading.value) }}
-              <InlineTag
-                v-if="reading.tag"
-                v-bind:tags="reading.tag.values"
-                :short="true"
-                :lang="'rus'"
-                :inf="true"
-              />
+          </template>
+        </div>
+
+        <div class="words-header">
+          <div class="word" v-for="word in entry.entry.words" :key="word.id">
+            <div class="word-writings" v-if="word.writings.length > 0">
+              <div
+                class="writing"
+                v-for="writing in word.writings"
+                :key="writing.id"
+              >
+                {{ writing.value }}
+                <InlineTag
+                  v-if="writing.tag"
+                  v-bind:tags="writing.tag.values"
+                  :short="true"
+                  :lang="'rus'"
+                  :inf="true"
+                />
+              </div>
+            </div>
+            <div class="word-readings">
+              <div
+                class="reading"
+                v-for="reading in word.readings"
+                :key="reading.id"
+              >
+                {{ convertR(reading.value) }}
+                <InlineTag
+                  v-if="reading.tag"
+                  v-bind:tags="reading.tag.values"
+                  :short="true"
+                  :lang="'rus'"
+                  :inf="true"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="entry-sound">
-        <template v-if="currentSounds.length > 0">
-          <div
-            class="sound"
-            v-for="currentSound in currentSounds"
-            :key="currentSound"
-          >
-            <v-btn icon small color="grey" v-on:click="playAudio(currentSound)">
-              <v-icon>mdi-play-outline</v-icon>
-            </v-btn>
-            <span class="duration"></span>
-          </div>
-        </template>
       </div>
 
       <div class="meaning-block">
@@ -180,6 +188,12 @@ export default {
 </script>
 
 <style lang="scss">
+.entry-header {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  align-items: center;
+}
+
 .entry-text-md {
   display: inline;
 
@@ -258,6 +272,7 @@ export default {
 .writing {
   font-size: 22px;
   display: inline-block;
+
   .reading {
     font-size: 85%;
   }
