@@ -98,7 +98,7 @@ export default new Vuetify({
                 'jap-entry-view-lang-sep-color': '#8f8f8f',
                 'jap-entry-view-example-color': '#797979',
                 'jap-entry-view-example-border-color': '#b6b6b6',
-                'jap-entry-view-lang-color': '#3d4445',
+                'jap-entry-view-lang-color': '#ff0000',
                 'jap-entry-view-pos-list-color': '#282d2e',
 
                 'menu-click-here': '#2196f3',
