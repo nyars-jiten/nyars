@@ -60,6 +60,7 @@
                       v-if="!textMode"
                     />
                     <JapEntryTextEditor v-else />
+                    <EditComment />
                     <DuplicatesChecker />
                   </div>
                 </v-row>
@@ -129,6 +130,7 @@ import JapEntryEdit from "@/components/dictionary/JapEntryEdit.vue";
 import JapEntryTextEditor from "@/components/dictionary/JapEntryTextEditor.vue";
 import DictionaryIcon from "@/components/dictionary/DictionaryIcon.vue";
 import DuplicatesChecker from "@/components/dictionary/editor/DuplicatesChecker.vue";
+import EditComment from "@/components/dictionary/editor/EditComment.vue";
 import { sendPostRequest, sendDeleteRequest } from "@/core/apiRequests.js";
 export default {
   data() {
@@ -145,7 +147,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["currentEntry", "currentImages", "userRoleId"]),
+    ...mapGetters(["currentEntry", "currentImages", "currentEditComment", "userRoleId"]),
     currentWid() {
       return this.$route.params.wid;
     },
@@ -195,7 +197,7 @@ export default {
       }
     },
     async saveEdit() {
-      const newEntry = { japEntry: this.currentEntry.entry, images: this.currentImages };
+      const newEntry = { japEntry: this.currentEntry.entry, images: this.currentImages, comment: this.currentEditComment };
       if (this.currentWid) {
         const resp = await sendPostRequest(
           "dictionary/jap/entries/" + this.currentWid,
@@ -250,7 +252,8 @@ export default {
     JapEntryTextEditor,
     DictionaryIcon,
     DuplicatesChecker,
-    GalleryComponent
+    GalleryComponent,
+    EditComment
   },
 };
 </script>
@@ -271,5 +274,6 @@ export default {
 .view-content,
 .edit-content {
   width: 100%;
+  padding-left: 20px;
 }
 </style>

@@ -8,7 +8,6 @@
               {{ currentUser.username }}
             </v-card-title>
             <v-card-text>
-              <img :src="'/upload/avatars/' + currentUser.avatar" alt="" />
               <v-img
                 :lazy-src="avatarLink(currentUser.avatar)"
                 max-height="150"
@@ -19,7 +18,7 @@
                 label="Аватарка"
                 placeholder="Выбрать аватарку"
                 show-size
-                accept="image/png, image/jpeg, image/bmp"
+                accept="image/png, image/jpeg"
                 truncate-length="25"
                 prepend-icon="mdi-file-image-outline"
                 v-model="file"
