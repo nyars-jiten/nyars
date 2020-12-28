@@ -1,11 +1,5 @@
 <template>
   <div class="search-line">
-    <v-checkbox
-      class="options"
-      v-model="exactSearchState"
-      label="Точное соответствие"
-    />
-
     <v-text-field
       v-model="request"
       :loading="currentLoadingState"
@@ -15,6 +9,12 @@
       class="mx-4"
       flat
       hide-details
+    />
+
+    <v-checkbox
+      class="options"
+      v-model="exactSearchState"
+      label="Точное соответствие"
     />
   </div>
 </template>
