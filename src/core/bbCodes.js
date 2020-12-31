@@ -8,7 +8,8 @@ function bbCodesProcess(rawText) {
     .replace(/\[ref=([a-zA-Z\d]{4,7})\](.*?)\[\/ref\]/gim, "<a href='/jp/$1'>$2</a>")
     .replace(/\[sub\](.*?)\[\/sub\]/gim, "<sub>$1</sub>")
     .replace(/\[sup\](.*?)\[\/sup\]/gim, "<sup>$1</sup>")
-    .replace(/{~(.*?)}/gim, "<em><strong>～$1</strong></em>"); // {～する}
+    .replace(/{~(.*?)}/gim, "<em><strong>～$1</strong></em>") // {～する}
+    .replace(/{\.\.\.(.*?)~(.*?)}/gim, "<em><strong>…$1～$2</strong></em>"); // {～する}
 
   const clean = sanitizeHtml(htmlText.trim(), {
     allowedTags: ["em", "a", "sub", "sup", "strong"],
