@@ -23,7 +23,7 @@
                 <DictionaryIcon
                   color="warning"
                   icon="mdi-alert-outline"
-                  tooltip="Статья не проверялась пользователями после автоматической обработки, поэтому возможны ошибки."
+                  tooltip="Неотредактированная статья"
                 />
               </div>
               <div
@@ -34,7 +34,7 @@
                 <DictionaryIcon
                   color="grey"
                   icon="mdi-check-circle-outline"
-                  tooltip="Отметить статью как (не)отредактированную"
+                  tooltip="Отметить статью как [не]отредактированную"
                 />
               </div>
             </v-card-title>
