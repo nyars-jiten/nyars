@@ -143,6 +143,7 @@ export default {
           meanings: [{ pos: ["unc"], langMeanings: [] }],
         },
       },
+      emptyImage: [],
       corpus: corpusList.corpusList,
     };
   },
@@ -213,6 +214,7 @@ export default {
         if (resp.status == 200) {
           this.newAlert({ msg: "Правка отправлена", type: "success" });
           this.$store.commit("updateCurrentEntry", this.emptyEntry);
+          this.$store.commit("updateCurrentImages", this.emptyImage);
           this.$router.push({ path: "/" }).catch(() => {});
         }
       }
@@ -228,6 +230,7 @@ export default {
     updatePage() {
       if (!this.currentWid) {
         this.$store.commit("updateCurrentEntry", this.emptyEntry);
+        this.$store.commit("updateCurrentImages", this.emptyImage);
         this.editMode = true;
       } else {
         this.getCurrentEntry(this.currentWid);
