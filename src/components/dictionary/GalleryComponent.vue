@@ -2,7 +2,7 @@
   <div class="gallery">
     <div class="gallery-popup">
       <v-dialog v-model="imagePopup" max-width="600px"
-        ><v-img :src="imagePopupSrc" aspect-ratio="1" class="gallery-img">
+        ><v-img :src="imagePopupSrc" class="gallery-img">
           <template v-slot:placeholder>
             <v-row class="fill-height ma-0" align="center" justify="center">
               <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
@@ -18,7 +18,7 @@
         <v-container fluid>
           <v-row>
             <v-col cols="12" md="2" sm="4" xs="6" v-for="(img, imgId) in currentImages" :key="imgId">
-              <v-img :src="img.link" aspect-ratio="1" class="gallery-img" @click="showPopup(img.link)">
+              <v-img :src="img.link" class="gallery-img" @click="showPopup(img.link)">
                 <template v-slot:placeholder>
                   <v-row class="fill-height ma-0" align="center" justify="center">
                     <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
