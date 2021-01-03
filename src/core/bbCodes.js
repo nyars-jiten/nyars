@@ -9,7 +9,7 @@ function bbCodesProcess(rawText) {
     .replace(/\[sub\](.*?)\[\/sub\]/gim, "<sub>$1</sub>")
     .replace(/\[sup\](.*?)\[\/sup\]/gim, "<sup>$1</sup>")
     .replace(/{~(.*?)}/gim, "<em><strong>～$1</strong></em>") // {～する}
-    .replace(/{\.\.\.(.*?)~(.*?)}/gim, "<em><strong>…$1～$2</strong></em>"); // {～する}
+    .replace(/{\.\.\.(.*?)~(.*?)}/gim, "<em><strong>…$1～$2</strong></em>"); // {…to～shite}
 
   const clean = sanitizeHtml(htmlText.trim(), {
     allowedTags: ["em", "a", "sub", "sup", "strong"],

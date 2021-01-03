@@ -7,7 +7,7 @@
       </tr>
       <tr>
         <td>Проверено</td>
-        <td>{{ this.resultStats.japRev }}</td>
+        <td>{{ this.resultStats.japRev }} ({{ quality() }} %)</td>
       </tr>
     </v-simple-table>
   </div>
@@ -19,6 +19,9 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   methods: {
     ...mapActions(["getLastStats"]),
+    quality() {
+      return (this.resultStats.japRev / this.resultStats.jap * 100).toFixed(3) ;
+    }
   },
   computed: {
     ...mapGetters(["lastSiteStats"]),
