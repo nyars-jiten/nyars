@@ -17,6 +17,14 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
+        },
+        getDownloads(ctx) {
+            axios
+                .get(process.env.VUE_APP_API + 'users/downloads', { withCredentials: true })
+                .then(response => (ctx.commit('updateCurrentDownloads', response.data)))
+                .catch(error => {
+                    console.log(error);
+                });
         }
     },
     mutations: {
@@ -28,15 +36,22 @@ export default {
         },
         changeDarkMode(state, mode) {
             state.darkMode = mode
+        },
+        updateCurrentDownloads(state, dls) {
+            state.downloads = dls
         }
     },
     state: {
         currentUser: [],
         darkMode: false,
+        downloads: []
     },
     getters: {
+        currentDownloads(state) {
+            return state.downloads;
+        },
         darkModeState(state) {
-            return state.darkMode
+            return state.darkMode;
         },
         currentUser(state) {
             return state.currentUser;
