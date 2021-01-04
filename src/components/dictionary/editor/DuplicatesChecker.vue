@@ -39,7 +39,7 @@ export default {
   font-size: 120%;
   padding-left: 20px;
   margin-top: 20px;
-  color: black;
+  // color: black;
 }
 .divider-hr {
   color: grey;
