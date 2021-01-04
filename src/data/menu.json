@@ -28,6 +28,17 @@
           }
         },
         {
+          "title": "Скачать",
+          "icon": "mdi-download",
+          "rights": 1,
+          "action": {
+            "name": "navigate",
+            "params": {
+              "path": "/download"
+            }
+          }
+        },
+        {
           "title": "Выход",
           "icon": "mdi-exit-run",
           "rights": 1,

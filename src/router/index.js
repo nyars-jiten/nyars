@@ -55,6 +55,11 @@ const routes = [
     component: () => import('@/views/About/EditsReadme.vue'),
   },
   {
+    path: '/download',
+    name: 'download',
+    component: () => import('@/views/Downloads.vue'),
+  },
+  {
     path: '/search',
     name: 'search',
     component: () => import('@/views/Search.vue'),
