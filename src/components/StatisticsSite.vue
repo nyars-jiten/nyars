@@ -7,7 +7,7 @@
       </tr>
       <tr>
         <td>Проверено</td>
-        <td>{{ this.resultStats.japRev }} ({{ quality() }} %)</td>
+        <td>{{ this.resultStats.japRev }} ({{ quality() }}%)</td>
       </tr>
     </v-simple-table>
   </div>

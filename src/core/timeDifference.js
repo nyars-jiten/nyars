@@ -1,8 +1,8 @@
 function formatDate(date) {
-  var d = new Date(date),
-    month = '' + (d.getMonth() + 1),
-    day = '' + d.getDate(),
-    year = d.getFullYear();
+  const d = new Date(date);
+  let month = '' + (d.getMonth() + 1);
+  let day = '' + d.getDate();
+  let year = d.getFullYear();
 
   if (month.length < 2)
     month = '0' + month;
@@ -13,29 +13,33 @@ function formatDate(date) {
 }
 
 function timeDifference(current, previous) {
-  var msPerMinute = 60 * 1000;
-  var msPerHour = msPerMinute * 60;
-  var msPerDay = msPerHour * 24;
-  var msPerMonth = msPerDay * 7;
-  // var msPerMonth = msPerDay * 30;
-  // var msPerYear = msPerDay * 365;
+  const msPerNow = 1000;
+  const msPerMinute = msPerNow * 60;
+  const msPerHour = msPerMinute * 60;
+  const msPerDay = msPerHour * 24;
+  const msPerMonth = msPerDay * 7;
+  // const msPerMonth = msPerDay * 30;
+  // const msPerYear = msPerDay * 365;
 
-  var elapsed = current - previous;
+  const elapsed = current - previous;
 
-  if (elapsed < msPerMinute) {
-    var num = Math.round(elapsed / 1000);
+  if (elapsed < msPerNow) {
+    return `только что`;
+
+  } else if (elapsed < msPerMinute) {
+    const num = Math.round(elapsed / 1000);
     return `${num} ${declOfNum(num, ["секунду", "секунды", "секунд"])} назад`;
 
   } else if (elapsed < msPerHour) {
-    num = Math.round(elapsed / msPerMinute);
+    const num = Math.round(elapsed / msPerMinute);
     return `${num} ${declOfNum(num, ["минуту", "минуты", "минут"])} назад`;
 
   } else if (elapsed < msPerDay) {
-    num = Math.round(elapsed / msPerHour);
+    const num = Math.round(elapsed / msPerHour);
     return `${num} ${declOfNum(num, ["час", "часа", "часов"])} назад`;
 
   } else if (elapsed < msPerMonth) {
-    num = Math.round(elapsed / msPerDay);
+    const num = Math.round(elapsed / msPerDay);
     return `${num} ${declOfNum(num, ["день", "дня", "дней"])} назад`;
 
   } else {
@@ -55,7 +59,7 @@ function timeDifference(current, previous) {
 
 // declOfNum(num, ['секунду', 'секунды', 'секунд'])
 function declOfNum(number, titles) {
-  var cases = [2, 0, 1, 1, 1, 2];
+  const cases = [2, 0, 1, 1, 1, 2];
   return titles[
     number % 100 > 4 && number % 100 < 20
       ? 2
