@@ -63,6 +63,18 @@
           </div>
         </router-link>
       </div>
+      <div class="common-tags">
+        <div class="c-tag" v-for="tag in actualTags" :key="tag.id">
+          <v-chip
+            class="ma-1"
+            :color="tag.color"
+            small
+            outlined
+          >
+            {{tag.text}}
+          </v-chip>
+        </div>
+      </div>
       <div class="meaning-block">
         <div
           class="pos-meaning"
@@ -130,6 +142,7 @@
 
 <script>
 import sc from "@/core/scriptConverter.js";
+import commonTags from "@/data/commonTags.json";
 import corpusList from "@/data/corpus.json";
 import InlineTag from "@/components/dictionary/InlineTag.vue";
 import bb from "@/core/bbCodes.js";
@@ -140,6 +153,7 @@ export default {
   data() {
     return {
       corpus: corpusList.corpusList,
+      tags: commonTags,
     };
   },
   methods: {
@@ -177,6 +191,13 @@ export default {
       }
     },
   },
+  computed: {
+    actualTags() {
+      return this.entry.entry.tags.map(
+        (key) => this.tags[key]
+      );
+    }
+  },
   props: {
     entry: Object,
   },
@@ -188,6 +209,10 @@ export default {
 </script>
 
 <style lang="scss">
+.common-tags, .c-tag {
+  display: inline;
+}
+
 .entry-text-md {
   a {
     color: var(--v-search-result-item-entry-text-md-color-base) !important;
