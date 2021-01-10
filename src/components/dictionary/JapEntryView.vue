@@ -290,6 +290,10 @@ export default {
   padding: 0 16px 16px;
 }
 
+.words-header {
+  color: var(--v-jap-entry-view-words-header-color-base);
+}
+
 .word-writings,
 .word-readings,
 .writing {

@@ -42,6 +42,7 @@ export default new Vuetify({
                 'inline-tag-shorttagfld-color': '#4f9a29',
                 'inline-tag-shorttaginf-color': '#9c2292',
 
+                'jap-entry-view-words-header-color': '#000',
                 'jap-entry-view-entry-sense-color': '#000',
                 'jap-entry-view-lang-sep-color': '#8f8f8f',
                 'jap-entry-view-example-color': '#797979',
@@ -104,6 +105,7 @@ export default new Vuetify({
                 'inline-tag-shorttagfld-color': '#4f9a29',
                 'inline-tag-shorttaginf-color': '#9c2292',
 
+                'jap-entry-view-words-header-color': '#fff',
                 'jap-entry-view-entry-sense-color': '#f1f1f1',
                 'jap-entry-view-lang-sep-color': '#8f8f8f',
                 'jap-entry-view-example-color': '#797979',
