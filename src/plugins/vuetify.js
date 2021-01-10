@@ -63,6 +63,13 @@ export default new Vuetify({
                 'search-result-item-example-border-color': '#b6b6b6',
                 'search-result-item-lang-color': '#3d4445',
                 'search-result-item-pos-list-color': '#282d2e',
+
+                'common-tag-jlpt-n1': '#ea2a92',
+                'common-tag-jlpt-n2': '#f99717',
+                'common-tag-jlpt-n3': '#84bf26',
+                'common-tag-jlpt-n4': '#459f94',
+                'common-tag-jlpt-n5': '#3273bb',
+                'common-tag-common': colors.grey,
             },
             dark: {
                 'anchor': '#8c9eff',
@@ -116,6 +123,13 @@ export default new Vuetify({
                 'search-result-item-lang-color': '#686d6e',
 
                 'search-result-item-pos-list-color': '#565959',
+
+                'common-tag-jlpt-n1': '#ea2a92',
+                'common-tag-jlpt-n2': '#f99717',
+                'common-tag-jlpt-n3': '#84bf26',
+                'common-tag-jlpt-n4': '#459f94',
+                'common-tag-jlpt-n5': '#3273bb',
+                'common-tag-common': colors.grey,
             }
         }
     },

@@ -1,26 +1,26 @@
 {
     "common": {
-        "color": "",
+        "color": "common-tag-common",
         "text": "common"
     },
     "jlpt-n5": {
-        "color": "",
+        "color": "common-tag-jlpt-n5",
         "text": "JLPT N5"
     },
     "jlpt-n4": {
-        "color": "",
+        "color": "common-tag-jlpt-n4",
         "text": "JLPT N4"
     },
     "jlpt-n3": {
-        "color": "",
+        "color": "common-tag-jlpt-n3",
         "text": "JLPT N3"
     },
     "jlpt-n2": {
-        "color": "",
+        "color": "common-tag-jlpt-n2",
         "text": "JLPT N2"
     },
     "jlpt-n1": {
-        "color": "",
+        "color": "common-tag-jlpt-n1",
         "text": "JLPT N1"
     }
 }

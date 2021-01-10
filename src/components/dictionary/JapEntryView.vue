@@ -37,6 +37,20 @@
           </div>
         </div>
       </div>
+
+      <div class="common-tags">
+        <div class="c-tag" v-for="tag in actualTags" :key="tag.id">
+          <v-chip
+            class="ma-1"
+            :color="tag.color"
+            small
+            outlined
+          >
+            {{tag.text}}
+          </v-chip>
+        </div>
+      </div>
+
       <div class="entry-sound">
         <template v-if="currentSounds.length > 0">
           <div
@@ -129,9 +143,20 @@
 import sc from "@/core/scriptConverter.js";
 import bb from "@/core/bbCodes.js";
 import InlineTag from "@/components/dictionary/InlineTag.vue";
+import commonTags from "@/data/commonTags.json";
 import { mapGetters } from "vuex";
 export default {
-  computed: mapGetters(["currentSounds"]),
+  data: () => ({
+    tags: commonTags,
+  }),
+  computed:  {
+    ...mapGetters(["currentSounds"]),
+    actualTags() {
+      return this.entry.entry.tags.map(
+        (key) => this.tags[key]
+      );
+    }
+  },
   methods: {
     convertBB(sense) {
       return bb.bbCodesProcess(sense);
@@ -180,7 +205,7 @@ export default {
 </script>
 
 <style lang="scss">
-.entry-text-md {
+.entry-text-md, .common-tags, .c-tag {
   display: inline;
 }
 

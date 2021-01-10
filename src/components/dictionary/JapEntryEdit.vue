@@ -196,7 +196,7 @@
         class="writing-input"
         label="Теги"
         multiple
-        chips
+        small-chips
         deletable-chips
         item-text="descr"
         item-value="val"
