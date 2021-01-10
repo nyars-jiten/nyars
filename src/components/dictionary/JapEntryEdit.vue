@@ -191,6 +191,18 @@
           >
         </div>
       </div>
+
+      <v-autocomplete
+        class="writing-input"
+        label="Теги"
+        multiple
+        chips
+        deletable-chips
+        item-text="descr"
+        item-value="val"
+        :items="tagList"
+        v-model="entry.entry.tags"
+      ></v-autocomplete>
     </v-container>
   </div>
 </template>
@@ -198,6 +210,7 @@
 <script>
 import sc from "@/core/scriptConverter.js";
 import bb from "@/core/bbCodes.js";
+import commonTags from "@/data/commonTags.json";
 import InlineTag from "@/components/dictionary/InlineTag.vue";
 import WordDialog from "@/components/dictionary/editor/WordDialog.vue";
 import SenseDialog from "@/components/dictionary/editor/SenseDialog.vue";
@@ -210,6 +223,7 @@ export default {
     // dialogs: [false],
     // dialogIndex: -1
     allowedLangs: ["rus", "eng", "lat", "jap"],
+    tags: commonTags,
   }),
   computed: {
     ...mapGetters(["currentSounds", "existingLangs"]),
@@ -217,6 +231,11 @@ export default {
       const exists = this.existingLangs(this.dialogIndex(2));
       return this.allowedLangs.filter((lang) => !exists.includes(lang));
     },
+    tagList() {
+      return Object.keys(this.tags).map(
+        (key) => new Object({ descr: this.tags[key].text, val: key })
+      );
+    }
   },
   methods: {
     ...mapMutations([

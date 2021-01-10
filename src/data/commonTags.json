@@ -1,0 +1,26 @@
+{
+    "common": {
+        "color": "",
+        "text": "common"
+    },
+    "jlpt-n5": {
+        "color": "",
+        "text": "JLPT N5"
+    },
+    "jlpt-n4": {
+        "color": "",
+        "text": "JLPT N4"
+    },
+    "jlpt-n3": {
+        "color": "",
+        "text": "JLPT N3"
+    },
+    "jlpt-n2": {
+        "color": "",
+        "text": "JLPT N2"
+    },
+    "jlpt-n1": {
+        "color": "",
+        "text": "JLPT N1"
+    }
+}
