@@ -13,12 +13,12 @@
         </v-tooltip>
       </div>
       <div class="full-tags" v-else>
-        (
-        <span class="full-tag" v-for="(tag, tagId) in tags" :key="tagId">
-          {{ searchTag(tag).full }}
-          <span v-if="tagId + 1 < tags.length">, </span>
-        </span>
-        )
+        (<!--
+        --><span class="full-tag" v-for="(tag, tagId) in tags" :key="tagId"><!--
+          -->{{ searchTag(tag).full }}<!--
+          --><span v-if="tagId + 1 < tags.length">, </span><!--
+        --></span><!--
+        -->)
       </div>
     </div>
   </div>
@@ -79,6 +79,7 @@ export default {
 .tags-wrap,
 .shorttagfld,
 .shorttaginf {
+  white-space: nowrap;
   display: inline;
 }
 
