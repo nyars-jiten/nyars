@@ -86,40 +86,46 @@
               <div class="lang">{{ getRusLang(lm.lang) }}</div>
               <div class="senses">
                 <div
-                  class="sense"
+                  class="sense sense-grid"
                   v-for="(sense, senseIndex) in lm.senses"
                   :key="senseIndex"
                 >
-                  <template v-if="lm.senses.length > 1">
-                    {{ 1 + senseIndex }}&#41;
-                  </template>
+                  <div class="sense-num">
+                    <template v-if="lm.senses.length > 1">
+                      {{ 1 + senseIndex }}&#41;
+                    </template>
+                  </div>
 
-                  <InlineTag
-                    v-bind:tags="filterTags(sense.tags, ['Fld'])"
-                    v-bind:short="true"
-                    v-bind:lang="lm.lang"
-                  />
+                  <div class="sense-text">
+                    <InlineTag
+                      v-bind:tags="filterTags(sense.tags, ['Fld'])"
+                      v-bind:short="true"
+                      v-bind:lang="lm.lang"
+                    />
 
-                  <!-- {{ convertBB(sense.value) }} -->
-                  <span
-                    class="entry-text-md"
-                    v-html="convertBB(sense.value)"
-                  ></span>
-                  <InlineTag
-                    v-bind:tags="filterTags(sense.tags, ['Dial', 'Misc'])"
-                    v-bind:lang="lm.lang"
-                  />
+                    <!-- {{ convertBB(sense.value) }} -->
+                    <span
+                      class="entry-text-md"
+                      v-html="convertBB(sense.value)"
+                      style="white-space: pre-wrap"
+                    />
+                    <InlineTag
+                      v-bind:tags="filterTags(sense.tags, ['Dial', 'Misc'])"
+                      v-bind:lang="lm.lang"
+                    />
 
-                  <div class="examples-block">
-                    <div
-                      class="example"
-                      v-for="example in sense.examples"
-                      :key="example.id"
-                    >
-                      <span>{{ example.value }} </span>
-                      <span></span>
-                      <span>{{ example.translation }}</span>
+                    <div class="examples-block">
+                      <div
+                        class="example"
+                        v-for="example in sense.examples"
+                        :key="example.id"
+                      >
+                        <span>{{ example.value }} </span>
+                        <span></span>
+                        <span>{{ example.translation }}</span>
+                      </div>
                     </div>
+
                   </div>
                 </div>
                 <div class="note" style="white-space: pre-wrap" v-if="lm.note">
@@ -214,6 +220,12 @@ export default {
   border: unset;
   border-bottom: 1px solid var(--v-jap-entry-view-lang-sep-color-base);
   margin: 0 30px;
+}
+
+.sense-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 5px;
 }
 
 .note {

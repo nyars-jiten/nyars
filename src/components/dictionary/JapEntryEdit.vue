@@ -86,41 +86,46 @@
               </div>
               <div class="senses">
                 <div
-                  class="sense"
+                  class="sense sense-grid"
                   v-for="(sense, senseIndex) in lm.senses"
                   :key="senseIndex"
                 >
-                  <v-btn
-                    icon
-                    x-small
-                    @click="openDialog(4, [posIndex, lmIndex, senseIndex])"
-                    color="primary"
-                    ><v-icon>mdi-pencil</v-icon></v-btn
-                  >
-                  <template v-if="lm.senses.length > 1">
-                    {{ 1 + senseIndex }}&#41;
-                  </template>
-                  <InlineTag
-                    v-bind:tags="filterTags(sense.tags, ['Fld'])"
-                    v-bind:short="true"
-                    v-bind:lang="lm.lang"
-                  />
-                  <!-- {{ sense.value }} -->
-                  <span class="entry-text-md" v-html="convertBB(sense.value)" />
-                  <InlineTag
-                    v-bind:tags="filterTags(sense.tags, ['Dial', 'Misc'])"
-                    v-bind:lang="lm.lang"
-                  />
-
-                  <div class="examples-block">
-                    <div
-                      class="example"
-                      v-for="example in sense.examples"
-                      :key="example.id"
+                  <div class="sense-num">
+                    <v-btn
+                      icon
+                      x-small
+                      @click="openDialog(4, [posIndex, lmIndex, senseIndex])"
+                      color="primary"
+                      ><v-icon>mdi-pencil</v-icon></v-btn
                     >
-                      <span>{{ example.value }} </span>
-                      <span></span>
-                      <span>{{ example.translation }}</span>
+                    <template v-if="lm.senses.length > 1">
+                      {{ 1 + senseIndex }}&#41;
+                    </template>
+                  </div>
+
+                  <div class="sense-text">
+                    <InlineTag
+                      v-bind:tags="filterTags(sense.tags, ['Fld'])"
+                      v-bind:short="true"
+                      v-bind:lang="lm.lang"
+                    />
+                    <!-- {{ sense.value }} -->
+                    <div class="entry-text-md" v-html="convertBB(sense.value)" style="white-space: pre-wrap" align="left" />
+                    <InlineTag
+                      v-bind:tags="filterTags(sense.tags, ['Dial', 'Misc'])"
+                      v-bind:lang="lm.lang"
+                    />
+
+                    <div class="examples-block">
+                      <div
+                        class="example"
+                        v-for="example in sense.examples"
+                        :key="example.id"
+                      >
+                        <span>{{ example.value }} </span>
+                        <span></span>
+                        <span>{{ example.translation }}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -342,6 +347,12 @@ export default {
   border: unset;
   border-bottom: 1px solid hsla(0, 0%, 56.1%, 0.34);
   margin: 0 30px;
+}
+
+.sense-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 5px;
 }
 
 .note {
