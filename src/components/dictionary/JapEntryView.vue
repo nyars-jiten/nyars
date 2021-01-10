@@ -51,6 +51,8 @@
         </div>
       </div>
 
+      <PitchAccent :raw="entry.entry.pitchAccent" v-if="entry.entry.pitchAccent.length > 0" />
+
       <div class="entry-sound">
         <template v-if="currentSounds.length > 0">
           <div
@@ -149,6 +151,7 @@
 import sc from "@/core/scriptConverter.js";
 import bb from "@/core/bbCodes.js";
 import InlineTag from "@/components/dictionary/InlineTag.vue";
+import PitchAccent from "@/components/dictionary/PitchAccent.vue";
 import commonTags from "@/data/commonTags.json";
 import { mapGetters } from "vuex";
 export default {
@@ -205,7 +208,7 @@ export default {
     entry: Object,
   },
   components: {
-    InlineTag,
+    InlineTag,PitchAccent
   },
 };
 </script>

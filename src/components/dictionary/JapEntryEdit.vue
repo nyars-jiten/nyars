@@ -208,6 +208,7 @@
         :items="tagList"
         v-model="entry.entry.tags"
       ></v-autocomplete>
+      <v-textarea label="Питч-акцент" v-model="entry.entry.pitchAccent" auto-grow rows="1"></v-textarea>
     </v-container>
   </div>
 </template>

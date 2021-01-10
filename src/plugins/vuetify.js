@@ -70,6 +70,9 @@ export default new Vuetify({
                 'common-tag-jlpt-n4': '#459f94',
                 'common-tag-jlpt-n5': '#3273bb',
                 'common-tag-common': colors.grey,
+
+                'svg-secondary': '#ffffff',
+                'svg-primary': '#000000',
             },
             dark: {
                 'anchor': '#8c9eff',
@@ -130,6 +133,9 @@ export default new Vuetify({
                 'common-tag-jlpt-n4': '#459f94',
                 'common-tag-jlpt-n5': '#3273bb',
                 'common-tag-common': colors.grey,
+
+                'svg-secondary': '#000000',
+                'svg-primary': '#ffffff',
             }
         }
     },
