@@ -325,6 +325,10 @@ export default {
   }
 }
 
+.titles-link {
+  color: unset !important;
+}
+
 .reading,
 .words-header {
   display: inline;
