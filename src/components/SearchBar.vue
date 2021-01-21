@@ -1,21 +1,39 @@
 <template>
   <div class="search-line">
-    <v-text-field
-      v-model="request"
-      :loading="currentLoadingState"
-      placeholder="Поиск"
-      autocomplete="off"
-      @keydown.enter.prevent="search"
-      class="mx-4"
-      flat
-      hide-details
-    />
+    <v-container fluid>
+      <v-row>
+        <v-col
+          cols="12"
+          md="10"
+          sm="6"
+        >
+          <form action="/search" method="GET">
+            <v-text-field
+              v-model="request"
+              :loading="currentLoadingState"
+              placeholder="Поиск"
+              autocomplete="off"
+              @keydown.enter.prevent="search"
+              class="mx-4"
+              flat
+              hide-details
+            />
+          </form>
+        </v-col>
 
-    <v-checkbox
-      class="options"
-      v-model="exactSearchState"
-      label="Точное соответствие"
-    />
+        <v-col
+          cols="12"
+          sm="6"
+          md="2"
+        >
+          <v-checkbox
+            class="options"
+            v-model="exactSearchState"
+            label="Точное соответствие"
+          />
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
