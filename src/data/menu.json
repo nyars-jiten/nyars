@@ -39,6 +39,17 @@
           }
         },
         {
+          "title": "Оцифровка",
+          "icon": "mdi-data-matrix-scan",
+          "rights": 4,
+          "action": {
+            "name": "navigate",
+            "params": {
+              "path": "/ocr"
+            }
+          }
+        },
+        {
           "title": "Выход",
           "icon": "mdi-exit-run",
           "rights": 1,
@@ -89,7 +100,7 @@
         {
           "title": "Случайная статья",
           "icon": "mdi-cube-scan",
-          "rights": 1,
+          "rights": 4,
           "action": {
             "name": "navigate",
             "params": {

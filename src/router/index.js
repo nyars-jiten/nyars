@@ -60,6 +60,11 @@ const routes = [
     component: () => import('@/views/Downloads.vue'),
   },
   {
+    path: '/ocr',
+    name: 'ocr',
+    component: () => import('@/views/OCR.vue'),
+  },
+  {
     path: '/search',
     name: 'search',
     component: () => import('@/views/Search.vue'),
