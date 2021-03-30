@@ -4,7 +4,7 @@ import store from '@/store/index';
 export async function sendGetRequest(url) {
   let response = {};
   await axios
-    .get(process.env.VUE_APP_API + url)
+    .get(process.env.VUE_APP_API + url, { withCredentials: true })
     .then((r) => (response = r))
     .catch((error) => {
       this.$store.actions.newAlert(error, "error");

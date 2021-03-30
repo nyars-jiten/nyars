@@ -1,10 +1,11 @@
 const axios = require('axios');
+axios.defaults.withCredentials = true;
 
 export default {
     actions: {
         async getCurrentUser(ctx) {
             axios
-                .get(process.env.VUE_APP_API + 'users/current', { withCredentials: true })
+                .get(process.env.VUE_APP_API + 'users/current')
                 .then(response => (ctx.commit('updateCurrentUser', response.data)))
                 .catch(error => {
                     console.log(error);
@@ -12,7 +13,7 @@ export default {
         },
         async logOut(ctx) {
             axios
-                .get(process.env.VUE_APP_API + 'users/signOut', { withCredentials: true })
+                .get(process.env.VUE_APP_API + 'users/signOut')
                 .then(() => (ctx.commit('clearCurrentUser')))
                 .catch(error => {
                     console.log(error);
@@ -20,7 +21,7 @@ export default {
         },
         getDownloads(ctx) {
             axios
-                .get(process.env.VUE_APP_API + 'users/downloads', { withCredentials: true })
+                .get(process.env.VUE_APP_API + 'users/downloads')
                 .then(response => (ctx.commit('updateCurrentDownloads', response.data)))
                 .catch(error => {
                     console.log(error);

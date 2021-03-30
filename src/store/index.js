@@ -5,6 +5,7 @@ import user from './modules/site/user'
 import alert from './modules/site/alert'
 import statistics from './modules/site/statistics'
 import entry from './modules/dictionary/entry'
+import ocr from './modules/dictionary/ocr'
 import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
@@ -15,7 +16,8 @@ export default new Vuex.Store({
         user,
         alert,
         entry,
-        statistics
+        statistics,
+        ocr
     },
     plugins: [
         createPersistedState({

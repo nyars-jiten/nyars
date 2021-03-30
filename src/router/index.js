@@ -60,9 +60,19 @@ const routes = [
     component: () => import('@/views/Downloads.vue'),
   },
   {
+    path: '/ocr/:bookid/page/:pageid',
+    name: 'ocr-page',
+    component: () => import('@/views/OCR/Page.vue'),
+  },
+  {
+    path: '/ocr/:bookid',
+    name: 'ocr-book',
+    component: () => import('@/views/OCR/PagesList.vue'),
+  },
+  {
     path: '/ocr',
-    name: 'ocr',
-    component: () => import('@/views/OCR.vue'),
+    name: 'ocr-main',
+    component: () => import('@/views/OCR/BooksList.vue'),
   },
   {
     path: '/search',
