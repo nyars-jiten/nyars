@@ -7,6 +7,7 @@
     <span class="bb-btn" @click="processbb('[sup]', '[/sup]')">[sup]</span>
     <span class="bb-btn" @click="processbb('{~', '}')">{~}</span>
     <span class="bb-btn" @click="processbb('«', '»')">« »</span>
+    <span class="bb-btn" @click="processbb('[\']', '[/\']')">[']</span>
   </div>
 </template>
 
