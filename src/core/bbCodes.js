@@ -9,15 +9,23 @@ function bbCodesProcess(rawText) {
     .replace(/\[sub\](.*?)\[\/sub\]/gim, "<sub>$1</sub>")
     .replace(/\[sup\](.*?)\[\/sup\]/gim, "<sup>$1</sup>")
     .replace(/{~(.*?)}/gim, "<em><strong>～$1</strong></em>") // {～する}
-    .replace(/{\.\.\.(.*?)~(.*?)}/gim, "<em><strong>…$1～$2</strong></em>"); // {…to～shite}
+    .replace(/{\.\.\.(.*?)~(.*?)}/gim, "<em><strong>…$1～$2</strong></em>") // {…to～shite}
+    .replace(/(.\u0301)/gim, "<span style=\"font-family: 'Noto Sans',Arial;\">$1</span>")
+    .replace(/\['\](.*?)\[\/'\]/gim, "<span style=\"font-family: 'Noto Sans',Arial;\">$1&#x301;</span>");
 
+    // return htmlText;
   const clean = sanitizeHtml(htmlText.trim(), {
-    allowedTags: ["em", "a", "sub", "sup", "strong"],
+    allowedTags: ["em", "a", "sub", "sup", "strong", "span"],
     allowedAttributes: {
-      a: ["href"],
+      a: ["href"], span: ["style"]
     },
+    allowedStyles: {
+      '*': {
+        'font-family': [/^[\s\S]*$/]
+      }
+    }
   });
-  return sanitizeHtml(clean);
+  return clean;
 }
 
 export default { bbCodesProcess };
