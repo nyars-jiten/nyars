@@ -122,7 +122,7 @@
                         v-for="example in sense.examples"
                         :key="example.id"
                       >
-                        <span>{{ example.value }} </span>
+                        <span v-html="exBbCodes(example.value)"></span>
                         <span></span>
                         <span>{{ example.translation }}</span>
                       </div>
@@ -215,7 +215,7 @@
 
 <script>
 import sc from "@/core/scriptConverter.js";
-import bb from "@/core/bbCodes.js";
+import { bbCodesProcess, examplesBbCodesProcess }  from "@/core/bbCodes.js";
 import commonTags from "@/data/commonTags.json";
 import InlineTag from "@/components/dictionary/InlineTag.vue";
 import WordDialog from "@/components/dictionary/editor/WordDialog.vue";
@@ -252,6 +252,9 @@ export default {
       "editorAddLang",
     ]),
     ...mapActions(["startDublicatesSearch"]),
+    exBbCodes(text){
+      return examplesBbCodesProcess(text);
+    },
     removeFromLM: function (posIndex, lmIndex) {
       this.$store.commit("editorRemoveLang", { posIndex, lmIndex });
     },
@@ -265,7 +268,7 @@ export default {
     //     return this.nokoriLangsComp.includes(lang)
     // },
     convertBB(sense) {
-      return bb.bbCodesProcess(sense);
+      return bbCodesProcess(sense);
     },
     nokoriLangs: function (index) {
       const exists = this.existingLangs(index);

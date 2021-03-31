@@ -145,7 +145,7 @@ import sc from "@/core/scriptConverter.js";
 import commonTags from "@/data/commonTags.json";
 import corpusList from "@/data/corpus.json";
 import InlineTag from "@/components/dictionary/InlineTag.vue";
-import bb from "@/core/bbCodes.js";
+import { bbCodesProcess } from "@/core/bbCodes.js";
 import DictionaryIcon from "@/components/dictionary/DictionaryIcon.vue";
 // import { mapGetters } from "vuex";
 
@@ -158,7 +158,7 @@ export default {
   },
   methods: {
     convertBB(sense) {
-      return bb.bbCodesProcess(sense);
+      return bbCodesProcess(sense);
     },
     filterTags(tags, type) {
       let filtered = tags.filter((tagObj) => type.includes(tagObj.type));

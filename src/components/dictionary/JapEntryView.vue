@@ -122,7 +122,7 @@
                         v-for="example in sense.examples"
                         :key="example.id"
                       >
-                        <span>{{ example.value }} </span>
+                        <span v-html="exBbCodes(example.value)"></span>
                         <span></span>
                         <span>{{ example.translation }}</span>
                       </div>
@@ -149,7 +149,7 @@
 
 <script>
 import sc from "@/core/scriptConverter.js";
-import bb from "@/core/bbCodes.js";
+import { bbCodesProcess, examplesBbCodesProcess }  from "@/core/bbCodes.js";
 import InlineTag from "@/components/dictionary/InlineTag.vue";
 import PitchAccent from "@/components/dictionary/PitchAccent.vue";
 import commonTags from "@/data/commonTags.json";
@@ -168,7 +168,10 @@ export default {
   },
   methods: {
     convertBB(sense) {
-      return bb.bbCodesProcess(sense);
+      return bbCodesProcess(sense);
+    },
+    exBbCodes(text){
+      return examplesBbCodesProcess(text);
     },
     playAudio(audioLink) {
       const audio = new Audio(
