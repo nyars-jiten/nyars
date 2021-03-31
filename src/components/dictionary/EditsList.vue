@@ -107,7 +107,7 @@
                   fab
                   x-small
                   color="green"
-                  v-if="userRoleId >= 2"
+                  v-if="userHasRights(4)"
                   v-on:click="acceptEdit(edit.id)"
                 >
                   <v-icon>mdi-check</v-icon>
@@ -118,7 +118,7 @@
                   fab
                   x-small
                   color="red"
-                  v-if="userRoleId >= 2"
+                  v-if="userHasRights(4)"
                   v-on:click="declineEdit(edit.id)"
                 >
                   <v-icon>mdi-close</v-icon>
@@ -151,7 +151,7 @@ import EditTitle from "@/components/dictionary/EditTitleComponent.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["editCompare", "userRoleId", "currentUser"]),
+    ...mapGetters(["editCompare", "currentUser", "userHasRights"]),
     checkForNewPanel() {
       return (editId) => {
         return Object.prototype.hasOwnProperty.call(this.editCompare, editId);
@@ -174,8 +174,8 @@ export default {
     },
     canUserEdit(edit) {
       return (
-        this.userRoleId >= 2 ||
-        (this.userRoleId == 1 && edit.author.id == this.currentUser.id)
+        this.userHasRights(4) ||
+        (edit.author.id == this.currentUser.id)
       );
     },
     openEditEditor(editId) {

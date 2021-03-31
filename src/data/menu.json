@@ -42,6 +42,7 @@
           "title": "Оцифровка",
           "icon": "mdi-data-matrix-scan",
           "rights": 1,
+          "access": 3,
           "action": {
             "name": "navigate",
             "params": {
@@ -67,7 +68,8 @@
         {
           "title": "Теги",
           "icon": "mdi-tag-multiple-outline",
-          "rights": 3,
+          "rights": 1,
+          "access": 5,
           "action": {
             "name": "navigate",
             "params": {

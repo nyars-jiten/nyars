@@ -111,7 +111,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["page"]),
+    ...mapGetters(["page", "userHasRights"]),
     currentBookid() {
       return this.$route.params.bookid;
     },
@@ -123,6 +123,7 @@ export default {
     }
   },
   async mounted() {
+    if (!this.userHasRights(3)) this.$router.push({ path: '/' }).catch(() => {});
     this.getPage({ bookid: this.currentBookid, pageid: this.currentPageid });
   },
   data: () => ({

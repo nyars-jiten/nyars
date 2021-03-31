@@ -32,17 +32,6 @@
                 </v-row>
               </v-col>
               <v-col cols="12" md="6">
-                <!-- <v-select
-                            class="writing-input"
-                            :menu-props="{ maxHeight: '400' }"
-                            label="Теги"
-                            multiple
-                            small-chips
-                            item-text="rus"
-                            item-value="engShort"
-                            :items="tagList('Kinf')"
-                            :value="writingTagsComp[writingIndex]"
-                            ></v-select> -->
                 <TagSelector
                   :initSelected="validateTag(writing)"
                   :type="'Kinf'"

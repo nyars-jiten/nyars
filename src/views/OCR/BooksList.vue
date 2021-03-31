@@ -37,9 +37,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["booksList"]),
+    ...mapGetters(["booksList", "userHasRights"]),
   },
   async mounted() {
+    if (!this.userHasRights(3)) this.$router.push({ path: '/' }).catch(() => {});
     this.getBooksList();
   },
 };

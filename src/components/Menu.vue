@@ -106,7 +106,7 @@
               @click="clear"
             >
               <v-list-item
-                v-if="userRoleId >= link.rights"
+                v-if="linkHasRights(link)"
                 @click.middle="handleFunctionCall(link.action, true)"
                 @click="handleFunctionCall(link.action)"
               >
@@ -149,12 +149,19 @@ import SearchBar from '@/components/SearchBar.vue';
 import { sendPostRequest } from '@/core/apiRequests.js';
 
 export default {
-  computed: mapGetters(["currentUser", "userRoleId", "darkModeState"]),
+  computed: mapGetters(["currentUser", "userRoleId", "darkModeState", "userHasRights"]),
   methods: {
     ...mapMutations(["changeDarkMode"]),
     ...mapActions(["getCurrentUser", "logOut"]),
     clear() {
       this.selection = null;
+    },
+    linkHasRights(link) {
+      let accessRights = true;
+      if(typeof(link.access) != "undefined" && link.access !== null) {
+        accessRights = this.userHasRights(link.access);
+      }
+      return this.userRoleId >= link.rights && accessRights;
     },
     async auth() {
       const request = { username: this.login, password: this.password };

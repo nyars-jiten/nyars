@@ -28,7 +28,7 @@
               </div>
               <div
                 class="icon-wrapper"
-                v-if="!editMode && userRoleId >= 2"
+                v-if="!editMode && userHasRights(2)"
                 @click="changeStatus"
               >
                 <DictionaryIcon
@@ -148,7 +148,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["currentEntry", "currentImages", "currentEditComment", "userRoleId"]),
+    ...mapGetters(["currentEntry", "currentImages", "currentEditComment", "userRoleId", "userHasRights"]),
     currentWid() {
       return this.$route.params.wid;
     },

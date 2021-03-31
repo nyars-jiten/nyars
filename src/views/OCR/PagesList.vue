@@ -47,12 +47,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["pagesList"]),
+    ...mapGetters(["pagesList", "userHasRights"]),
     currentBookid() {
       return this.$route.params.bookid;
     },
   },
   async mounted() {
+    if (!this.userHasRights(3)) this.$router.push({ path: '/' }).catch(() => {});
     this.getPagesList(this.currentBookid);
   },
 };

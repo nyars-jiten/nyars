@@ -36,20 +36,6 @@
                     >Текстовый редактор</v-btn
                   >
                 </div>
-                <!-- <div class="edit-action pl-2" v-if="userRoleId >= 2">
-                    <v-btn color="red" dark outlined @click.stop="declineEdit"
-                      >Отклонить</v-btn
-                    >
-                  </div>
-                  <div class="edit-action pl-2" v-if="userRoleId >= 2">
-                    <v-btn
-                      color="green"
-                      dark
-                      outlined
-                      @click.stop="acceptEdit"
-                      >Принять</v-btn
-                    >
-                  </div> -->
               </div>
               <div class="text-mode-actions" v-else>
                 <div class="edit-action pl-2">
@@ -90,7 +76,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["userRoleId", "currentEntry", "currentImages", "currentEditComment"]),
+    ...mapGetters(["currentEntry", "currentImages", "currentEditComment"]),
     currentId() {
       return this.$route.params.id;
     },
