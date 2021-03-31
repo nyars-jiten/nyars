@@ -254,6 +254,12 @@ export default {
 };
 </script>
 
+<style>
+.v-text-field {
+  padding: 0 !important;
+}
+</style>
+
 <style lang="scss" scoped>
 .dial-btn {
   padding-bottom: 30px;
