@@ -58,7 +58,7 @@ export default {
             return state.currentUser;
         },
         userHasRights: state => (rightsId) => {
-            // if (state.currentUser.role === 'Admin') return true;
+            if (state.currentUser.role === 'Admin') return true;
             const rights = state.currentUser.access.toString(2).padEnd(20,"0")
             return rights[rightsId] === '1';
         },
