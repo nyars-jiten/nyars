@@ -102,7 +102,7 @@
         {
           "title": "Случайная статья",
           "icon": "mdi-cube-scan",
-          "rights": 3,
+          "rights": 4,
           "action": {
             "name": "navigate",
             "params": {
