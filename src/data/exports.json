@@ -1,6 +1,10 @@
 {
     "main_clear": {
-        "title": "Основная версия, .txt/.zip (только отредактированные статьи)",
+        "title": "Основная версия, .txt/.zip",
+        "icon": ""
+    },
+    "yomichan": {
+        "title": "Yomichan, .zip",
         "icon": ""
     }
 }
