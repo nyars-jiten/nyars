@@ -95,29 +95,32 @@
               </v-list-item>
             </div>
           </div>
-
-          <div>
-            <v-subheader></v-subheader>
-
-            <div class="menu-element-list">
-              <v-list-item>
-                <v-list-item-icon>
-                  <v-icon v-text="'mdi-weather-night'"></v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title
-                    v-text="darkMode ? 'Светлая тема' : 'Тёмная тема'"
-                    class="menu-element-text"
-                    @click="darkMode = !darkMode"
-                  ></v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </div>
-          </div>
         </v-list-item-group>
       </v-list>
 
       <div class="bootom-menu-block">
+        <v-list nav>
+          <v-list-item-group color="primary" v-model="selection">
+            <div>
+              <v-subheader></v-subheader>
+
+              <div class="menu-element-list">
+                <v-list-item>
+                  <v-list-item-icon>
+                    <v-icon v-text="'mdi-weather-night'"></v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title
+                      v-text="darkMode ? 'Светлая тема' : 'Тёмная тема'"
+                      class="menu-element-text"
+                      @click="darkMode = !darkMode"
+                    ></v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </div>
+            </div>
+          </v-list-item-group>
+        </v-list>
         <v-divider class="user-profile-divider"></v-divider>
         <!-- <template v-slot:prepend> -->
         <div class="user-profile">
@@ -309,34 +312,35 @@ export default {
   margin-right: auto;
   margin-top: 20px;
   margin-bottom: 10px;
-  // position: relative;
-  // object-position: 50% 50%;
+  // opacity: 1 !important;
 }
 
-// .menu-logo-wrapper {
-//   background-size: 100%;
-//   background-image: url("~@/assets/menu-logo-back.png");
-//   background-repeat: no-repeat;
-//   background-blend-mode: lighten;
-//   // background-position: 50% 50%;
-//   // background-size: 200px 200px;
-//   // background-attachment: fixed;
-//   background-position: center;
-// }
+.v-navigation-drawer__content::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  background-color: var(--v-menu-logo-back-base);
+  opacity: 0.95;
+}
+
+.titles-link {
+  z-index: 1;
+}
 
 .v-navigation-drawer__content {
+  position: relative;
   background-size: 100%;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.98) 0 100%),
-    url("~@/assets/menu-logo-back.png");
+  // background-color: rgba(var(--v-menu-logo-back-base), 1);
+  // $c: var(--v-menu-logo-back-base);
+  // $g: linear-gradient(to right, $c 0 100%);
+  // $g,
+  background-image: url("~@/assets/menu-logo-back.png");
   background-repeat: no-repeat;
-  background-blend-mode: lighten;
-  // background-position: 120% -34%;
+  // background-blend-mode: lighten;
   background-position-x: 120px;
-  // background-position-y: -34%;
   background-position-y: -140px;
-  // background-size: 200px 200px;
-  // background-attachment: fixed;
-  // background-position: center;
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
@@ -346,10 +350,7 @@ export default {
 }
 
 .bootom-menu-block {
-  // position: fixed;
-  // bottom: 0;
   width: 100%;
-  // background-color: white;
 }
 
 // .user-profile {
