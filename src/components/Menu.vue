@@ -55,40 +55,12 @@
       </v-card>
     </v-dialog>
     <v-navigation-drawer app v-model="drawer">
-      <template v-slot:prepend>
-        <div class="authorized" v-if="currentUser.username">
-          <router-link :to="{ name: 'user' }">
-            <v-list-item two-line>
-              <v-list-item-avatar>
-                <img :src="avatarLink(currentUser.avatar)" />
-              </v-list-item-avatar>
-
-              <v-list-item-content>
-                <v-list-item-title>{{
-                  currentUser.username
-                }}</v-list-item-title>
-                <v-list-item-subtitle>{{
-                  currentUser.role
-                }}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </router-link>
+      <router-link class="titles-link" :to="{name: 'Home'}" >
+        <div class="menu-logo-wrapper">
+          <img class="menu-logo" src="menu-logo.png" />
         </div>
-        <div class="unauthorized" v-else>
-          <v-list-item two-line>
-            <v-list-item-content>
-              <v-list-item-title>unauthorized</v-list-item-title>
-              <v-list-item-subtitle>—</v-list-item-subtitle>
-              <v-btn color="primary" dark outlined @click.stop="dialog = true"
-                >Авторизоваться
-              </v-btn>
-            </v-list-item-content>
-          </v-list-item>
-        </div>
-      </template>
-
-      <v-divider></v-divider>
-
+      </router-link>
+      <!-- <v-img class="menu-logo" src="menu-logo.png" /> -->
       <v-list nav>
         <v-list-item-group color="primary" v-model="selection">
           <div v-for="category in menu" :key="category.id">
@@ -121,11 +93,71 @@
                 </v-list-item-content>
               </v-list-item>
             </div>
+
           </div>
+
+          <div>
+            <v-subheader></v-subheader>
+
+            <div
+              class="menu-element-list "
+            >
+              <v-list-item>
+                <v-list-item-icon>
+                  <v-icon v-text="'mdi-weather-night'"></v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title
+                    v-text="darkMode ? 'Светлая тема' : 'Тёмная тема'"
+                    class="menu-element-text"
+                    @click="darkMode = !darkMode"
+                  ></v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </div>
+
+          </div>
+
         </v-list-item-group>
       </v-list>
 
-      <!-- <v-switch class="button-dark-theme" v-model="darkMode" inset label="Тёмная тема" ></v-switch> -->
+      <div class="bootom-menu-block">
+      <v-divider class="user-profile-divider"></v-divider>
+      <!-- <template v-slot:prepend> -->
+        <div class="user-profile">
+          <div class="authorized" v-if="currentUser.username">
+            <router-link :to="{ name: 'user' }">
+              <v-list-item two-line>
+                <v-list-item-avatar>
+                  <img :src="avatarLink(currentUser.avatar)" />
+                </v-list-item-avatar>
+
+                <v-list-item-content>
+                  <v-list-item-title>{{
+                    currentUser.username
+                  }}</v-list-item-title>
+                  <v-list-item-subtitle>{{
+                    currentUser.role
+                  }}</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </router-link>
+          </div>
+          <div class="unauthorized" v-else>
+            <v-list-item two-line>
+              <v-list-item-content>
+                <v-list-item-title>unauthorized</v-list-item-title>
+                <v-list-item-subtitle>—</v-list-item-subtitle>
+                <v-btn color="primary" dark outlined @click.stop="dialog = true"
+                  >Авторизоваться
+                </v-btn>
+              </v-list-item-content>
+            </v-list-item>
+          </div>
+        </div>
+      <!-- </template> -->
+      </div>
+
     </v-navigation-drawer>
 
     <v-app-bar app absolute>
@@ -258,9 +290,39 @@ export default {
   }
 }
 
-.button-dark-theme {
-  position: absolute;
-  bottom: 0;
-  padding: 8px 16px;
+.menu-logo {
+  width: 80%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  // position: relative;
+  // object-position: 50% 50%;
 }
+
+.v-navigation-drawer {
+  background-size: 100% 100%;
+  background-image: url('~@/assets/menu-logo-back.png');
+  background-repeat: no-repeat;
+  background-blend-mode: lighten;
+  // background-position: 50% 50%;
+  // background-size: 200px 200px;
+  // background-attachment: fixed;
+  background-position: center;
+}
+
+.bootom-menu-block {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  // background-color: white;
+}
+
+// .user-profile {
+//   position: fixed;
+//   bottom: 0;
+//   // padding: 8px 16px;
+// }
 </style>
