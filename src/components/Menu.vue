@@ -95,29 +95,32 @@
               </v-list-item>
             </div>
           </div>
-
-          <div>
-            <v-subheader></v-subheader>
-
-            <div class="menu-element-list">
-              <v-list-item>
-                <v-list-item-icon>
-                  <v-icon v-text="'mdi-weather-night'"></v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title
-                    v-text="darkMode ? 'Светлая тема' : 'Тёмная тема'"
-                    class="menu-element-text"
-                    @click="darkMode = !darkMode"
-                  ></v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </div>
-          </div>
         </v-list-item-group>
       </v-list>
 
       <div class="bootom-menu-block">
+        <v-list nav>
+          <v-list-item-group color="primary" v-model="selection">
+            <div>
+              <v-subheader></v-subheader>
+
+              <div class="menu-element-list">
+                <v-list-item>
+                  <v-list-item-icon>
+                    <v-icon v-text="'mdi-weather-night'"></v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title
+                      v-text="darkMode ? 'Светлая тема' : 'Тёмная тема'"
+                      class="menu-element-text"
+                      @click="darkMode = !darkMode"
+                    ></v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </div>
+            </div>
+          </v-list-item-group>
+        </v-list>
         <v-divider class="user-profile-divider"></v-divider>
         <!-- <template v-slot:prepend> -->
         <div class="user-profile">
@@ -330,13 +333,8 @@ export default {
     url("~@/assets/menu-logo-back.png");
   background-repeat: no-repeat;
   background-blend-mode: lighten;
-  // background-position: 120% -34%;
   background-position-x: 120px;
-  // background-position-y: -34%;
   background-position-y: -140px;
-  // background-size: 200px 200px;
-  // background-attachment: fixed;
-  // background-position: center;
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
@@ -346,10 +344,7 @@ export default {
 }
 
 .bootom-menu-block {
-  // position: fixed;
-  // bottom: 0;
   width: 100%;
-  // background-color: white;
 }
 
 // .user-profile {
