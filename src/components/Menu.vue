@@ -293,17 +293,6 @@ export default {
   }
 }
 
-.menu-logo-wrapper {
-  // position: relative;
-  // overflow: hidden;
-}
-
-// .menu-logo-back {
-//   top: 0;
-//   position: absolute;
-//   background-color: red;
-// }
-
 .menu-logo {
   width: 80%;
   height: auto;
@@ -312,27 +301,33 @@ export default {
   margin-right: auto;
   margin-top: 20px;
   margin-bottom: 10px;
-  // position: relative;
-  // object-position: 50% 50%;
+  // opacity: 1 !important;
 }
 
-// .menu-logo-wrapper {
-//   background-size: 100%;
-//   background-image: url("~@/assets/menu-logo-back.png");
-//   background-repeat: no-repeat;
-//   background-blend-mode: lighten;
-//   // background-position: 50% 50%;
-//   // background-size: 200px 200px;
-//   // background-attachment: fixed;
-//   background-position: center;
-// }
+.v-navigation-drawer__content::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  background-color: var(--v-menu-logo-back-base);
+  opacity: 0.95;
+}
+
+.titles-link {
+  z-index: 1;
+}
 
 .v-navigation-drawer__content {
+  position: relative;
   background-size: 100%;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.98) 0 100%),
-    url("~@/assets/menu-logo-back.png");
+  // background-color: rgba(var(--v-menu-logo-back-base), 1);
+  // $c: var(--v-menu-logo-back-base);
+  // $g: linear-gradient(to right, $c 0 100%);
+  // $g,
+  background-image: url("~@/assets/menu-logo-back.png");
   background-repeat: no-repeat;
-  background-blend-mode: lighten;
+  // background-blend-mode: lighten;
   background-position-x: 120px;
   background-position-y: -140px;
   display: grid;
