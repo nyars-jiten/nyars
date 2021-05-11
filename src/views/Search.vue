@@ -15,7 +15,12 @@
                 currentSearchResult.result.length == 0
               "
             >
-              <p>Ничего не найдено</p>
+              <div v-if="currentLoadingState">
+                <v-icon>mdi-spin mdi-loading</v-icon>
+              </div>
+              <div v-else>
+                <p>Ничего не найдено</p>
+              </div>
             </v-card-text>
             <v-list-item
               class="res-item"
@@ -81,7 +86,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["currentSearchResult"]),
+    ...mapGetters(["currentSearchResult", "currentLoadingState"]),
   },
   props: {
     request: String,
