@@ -293,6 +293,17 @@ export default {
   }
 }
 
+.menu-logo-wrapper {
+  // position: relative;
+  // overflow: hidden;
+}
+
+// .menu-logo-back {
+//   top: 0;
+//   position: absolute;
+//   background-color: red;
+// }
+
 .menu-logo {
   width: 80%;
   height: auto;
