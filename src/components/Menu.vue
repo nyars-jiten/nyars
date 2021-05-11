@@ -55,9 +55,10 @@
       </v-card>
     </v-dialog>
     <v-navigation-drawer app v-model="drawer">
-      <router-link class="titles-link" :to="{name: 'Home'}" >
+      <router-link class="titles-link" :to="{ name: 'Home' }">
         <div class="menu-logo-wrapper">
-          <img class="menu-logo" src="menu-logo.png" />
+          <!-- <img class="menu-logo-back" src="@/assets/menu-logo-back.png" /> -->
+          <img class="menu-logo" src="@/assets/menu-logo.png" />
         </div>
       </router-link>
       <!-- <v-img class="menu-logo" src="menu-logo.png" /> -->
@@ -93,15 +94,12 @@
                 </v-list-item-content>
               </v-list-item>
             </div>
-
           </div>
 
           <div>
             <v-subheader></v-subheader>
 
-            <div
-              class="menu-element-list "
-            >
+            <div class="menu-element-list">
               <v-list-item>
                 <v-list-item-icon>
                   <v-icon v-text="'mdi-weather-night'"></v-icon>
@@ -115,15 +113,13 @@
                 </v-list-item-content>
               </v-list-item>
             </div>
-
           </div>
-
         </v-list-item-group>
       </v-list>
 
       <div class="bootom-menu-block">
-      <v-divider class="user-profile-divider"></v-divider>
-      <!-- <template v-slot:prepend> -->
+        <v-divider class="user-profile-divider"></v-divider>
+        <!-- <template v-slot:prepend> -->
         <div class="user-profile">
           <div class="authorized" v-if="currentUser.username">
             <router-link :to="{ name: 'user' }">
@@ -155,9 +151,8 @@
             </v-list-item>
           </div>
         </div>
-      <!-- </template> -->
+        <!-- </template> -->
       </div>
-
     </v-navigation-drawer>
 
     <v-app-bar app absolute>
@@ -176,12 +171,17 @@
 
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
-import menuData from '@/data/menu.json';
-import SearchBar from '@/components/SearchBar.vue';
-import { sendPostRequest } from '@/core/apiRequests.js';
+import menuData from "@/data/menu.json";
+import SearchBar from "@/components/SearchBar.vue";
+import { sendPostRequest } from "@/core/apiRequests.js";
 
 export default {
-  computed: mapGetters(["currentUser", "userRoleId", "darkModeState", "userHasRights"]),
+  computed: mapGetters([
+    "currentUser",
+    "userRoleId",
+    "darkModeState",
+    "userHasRights",
+  ]),
   methods: {
     ...mapMutations(["changeDarkMode"]),
     ...mapActions(["getCurrentUser", "logOut"]),
@@ -190,7 +190,7 @@ export default {
     },
     linkHasRights(link) {
       let accessRights = true;
-      if(typeof(link.access) != "undefined" && link.access !== null) {
+      if (typeof link.access != "undefined" && link.access !== null) {
         accessRights = this.userHasRights(link.access);
       }
       return this.userRoleId >= link.rights && accessRights;
@@ -235,7 +235,7 @@ export default {
     darkMode() {
       this.changeDarkMode(this.darkMode);
       this.$vuetify.theme.dark = this.darkMode;
-    }
+    },
   },
   components: { SearchBar },
   async mounted() {
@@ -290,6 +290,17 @@ export default {
   }
 }
 
+.menu-logo-wrapper {
+  // position: relative;
+  // overflow: hidden;
+}
+
+// .menu-logo-back {
+//   top: 0;
+//   position: absolute;
+//   background-color: red;
+// }
+
 .menu-logo {
   width: 80%;
   height: auto;
@@ -302,20 +313,41 @@ export default {
   // object-position: 50% 50%;
 }
 
-.v-navigation-drawer {
-  background-size: 100% 100%;
-  background-image: url('~@/assets/menu-logo-back.png');
+// .menu-logo-wrapper {
+//   background-size: 100%;
+//   background-image: url("~@/assets/menu-logo-back.png");
+//   background-repeat: no-repeat;
+//   background-blend-mode: lighten;
+//   // background-position: 50% 50%;
+//   // background-size: 200px 200px;
+//   // background-attachment: fixed;
+//   background-position: center;
+// }
+
+.v-navigation-drawer__content {
+  background-size: 100%;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.98) 0 100%),
+    url("~@/assets/menu-logo-back.png");
   background-repeat: no-repeat;
   background-blend-mode: lighten;
-  // background-position: 50% 50%;
+  // background-position: 120% -34%;
+  background-position-x: 120px;
+  // background-position-y: -34%;
+  background-position-y: -140px;
   // background-size: 200px 200px;
   // background-attachment: fixed;
-  background-position: center;
+  // background-position: center;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.v-list {
+  background: none !important;
 }
 
 .bootom-menu-block {
-  position: fixed;
-  bottom: 0;
+  // position: fixed;
+  // bottom: 0;
   width: 100%;
   // background-color: white;
 }
