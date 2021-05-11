@@ -125,7 +125,7 @@
         </v-list-item-group>
       </v-list>
 
-      <v-switch class="button-dark-theme" v-model="darkMode" inset label="Тёмная тема" ></v-switch>
+      <!-- <v-switch class="button-dark-theme" v-model="darkMode" inset label="Тёмная тема" ></v-switch> -->
     </v-navigation-drawer>
 
     <v-app-bar app absolute>
