@@ -124,7 +124,7 @@
                       >
                         <span v-html="exBbCodes(example.value)"></span>
                         <span></span>
-                        <span>{{ example.translation }}</span>
+                        <span class="example-translation">{{ example.translation }}</span>
                       </div>
                     </div>
                   </div>
@@ -415,6 +415,10 @@ export default {
 .jap-view {
   width: 100%;
   padding-bottom: 20px;
+}
+
+.example-translation {
+  padding-left: 5px;
 }
 
 .word-writings,

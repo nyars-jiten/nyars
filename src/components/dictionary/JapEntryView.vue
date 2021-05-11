@@ -124,7 +124,7 @@
                       >
                         <span v-html="exBbCodes(example.value)"></span>
                         <span></span>
-                        <span>{{ example.translation }}</span>
+                        <span class="example-translation">{{ example.translation }}</span>
                       </div>
                     </div>
 
@@ -317,6 +317,10 @@ export default {
     color: var(--v-text-decoration-color-base);
     content: "【";
   }
+}
+
+.example-translation {
+  padding-left: 5px;
 }
 
 .writing,
