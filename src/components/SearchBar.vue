@@ -13,7 +13,9 @@
               :loading="currentLoadingState"
               placeholder="Поиск"
               autocomplete="off"
+              append-icon="mdi-magnify"
               @keydown.enter.prevent="search"
+              @click:append="search"
               class="mx-4"
               flat
               hide-details
