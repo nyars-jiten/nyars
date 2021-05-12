@@ -36,14 +36,11 @@
               <div class="text-center" v-if="currentSearchResult.info && currentSearchResult.info.count > 20">
                   <v-container>
                     <v-row justify="center">
-                      <v-col cols="8">
-                        <v-container class="max-width">
-                          <v-pagination
-                              v-model="page"
-                              :length="Math.ceil(currentSearchResult.info.count / 20)"
-                            ></v-pagination>
-                        </v-container>
-                      </v-col>
+                      <v-pagination
+                        v-model="page"
+                        total-visible="11"
+                        :length="Math.ceil(currentSearchResult.info.count / 20)"
+                      ></v-pagination>
                     </v-row>
                   </v-container>
                 </div>
