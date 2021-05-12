@@ -6,7 +6,6 @@
           <v-card class="mx-auto" tile>
             <!-- {{ request }} -->
             <v-card-title>Результат поиска</v-card-title>
-
             <!-- <v-list-item link class="res-item" v-for="entry in currentSearchResult.result" :key="entry.id" :to="`/jp/${entry.wid}`"> -->
             <v-card-text
               class="no-results"
@@ -31,29 +30,23 @@
                 <SearchResultItem :entry="entry" />
               </div>
             </v-list-item>
-            <!-- <v-list-item v-else :key="item.text" link>
-              <v-list-item v-else :key="item.text" :to="item.link" link>
 
-
-              <v-list-item v-for="(child, i) in item.children" :key="i" link>
-              <v-list-item v-for="(child, i) in item.children" :key="i" :to="child.link" link> -->
-            <!-- <v-list-item-content>
-                <v-list-item-title>Two-line item</v-list-item-title>
-                <v-list-item-subtitle>Secondary text</v-list-item-subtitle>
-              </v-list-item-content> -->
-            <v-card-actions>
-              <v-btn
-                v-if="
-                  currentSearchResult.result &&
-                  currentSearchResult.result.length == 20
-                "
-                color="primary"
-                dark
-                outlined
-                @click="search()"
-                >Следующая страница</v-btn
-              >
-            </v-card-actions>
+            <!-- <v-card-actions>
+            </v-card-actions> -->
+              <div class="text-center" v-if="currentSearchResult.info && currentSearchResult.info.count > 20">
+                  <v-container>
+                    <v-row justify="center">
+                      <v-col cols="8">
+                        <v-container class="max-width">
+                          <v-pagination
+                              v-model="page"
+                              :length="Math.ceil(currentSearchResult.info.count / 20)"
+                            ></v-pagination>
+                        </v-container>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </div>
           </v-card>
         </v-col>
       </v-row>
@@ -77,12 +70,17 @@ export default {
   methods: {
     ...mapActions(["startSearch", "fetchTags"]),
     search() {
-      this.searchPageOffset++;
+      // this.page++;
       window.scrollTo(0, 0);
       this.startSearch({
         request: this.request,
-        page: this.page + this.searchPageOffset,
+        page: this.page,
       });
+    },
+  },
+  watch: {
+    page() {
+      this.search();
     },
   },
   computed: {
