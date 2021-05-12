@@ -7,7 +7,7 @@
         {
           "title": "Главная",
           "icon": "mdi-home-outline",
-          "rights": 4,
+          "rights": 0,
           "action": {
             "name": "navigate",
             "params": {

@@ -62,8 +62,9 @@
         </div>
       </router-link>
       <!-- <v-img class="menu-logo" src="menu-logo.png" /> -->
-      <v-list nav>
-        <v-list-item-group color="primary" v-model="selection">
+      <v-list flat nav>
+        <v-list-item-group active-class="primary">
+        <!-- <div class="list-item-group-wr" color="primary"> -->
           <div v-for="category in menu" :key="category.id">
             <v-subheader
               v-if="
@@ -76,7 +77,6 @@
               class="menu-element-list"
               v-for="(link, i) in category.links"
               :key="i"
-              @click="clear"
             >
               <v-list-item
                 v-if="linkHasRights(link)"
@@ -95,17 +95,16 @@
               </v-list-item>
             </div>
           </div>
+        <!-- </div> -->
         </v-list-item-group>
       </v-list>
 
       <div class="bootom-menu-block">
-        <v-list nav>
-          <v-list-item-group color="primary" v-model="selection">
+        <v-list nav flat>
+          <!-- <v-list-item-group color="primary"> -->
             <div>
-              <v-subheader></v-subheader>
-
               <div class="menu-element-list">
-                <v-list-item>
+                <v-list-item @click="darkMode = !darkMode">
                   <v-list-item-icon>
                     <v-icon v-text="'mdi-weather-night'"></v-icon>
                   </v-list-item-icon>
@@ -113,13 +112,12 @@
                     <v-list-item-title
                       v-text="darkMode ? 'Светлая тема' : 'Тёмная тема'"
                       class="menu-element-text"
-                      @click="darkMode = !darkMode"
                     ></v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               </div>
             </div>
-          </v-list-item-group>
+          <!-- </v-list-item-group> -->
         </v-list>
         <v-divider class="user-profile-divider"></v-divider>
         <!-- <template v-slot:prepend> -->
@@ -188,9 +186,6 @@ export default {
   methods: {
     ...mapMutations(["changeDarkMode"]),
     ...mapActions(["getCurrentUser", "logOut"]),
-    clear() {
-      this.selection = null;
-    },
     linkHasRights(link) {
       let accessRights = true;
       if (typeof link.access != "undefined" && link.access !== null) {
@@ -248,7 +243,6 @@ export default {
   },
   data: () => ({
     drawer: true,
-    selection: null,
     dialog: false,
     menu: menuData.menuList,
     login: "",
@@ -293,10 +287,18 @@ export default {
   }
 }
 
-.menu-logo-wrapper {
-  // position: relative;
-  // overflow: hidden;
-}
+// .menu-logo-wrapper {
+//   // position: relative;
+//   // overflow: hidden;
+// }
+
+// .list-item-group-wr {
+//   color: primary;
+// }
+
+// .subheader-text {
+//   color: var(--v-text-decoration-color);
+// }
 
 // .menu-logo-back {
 //   top: 0;
