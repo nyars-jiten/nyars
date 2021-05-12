@@ -353,8 +353,17 @@ export default {
   margin: 0 30px;
 }
 
+.sense-text, .sense-num {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.sense-num {
+  margin-right: 5px;
+}
+
 .sense-grid {
-  display: grid;
+  // display: grid;
   grid-template-columns: auto 1fr;
   gap: 5px;
 }

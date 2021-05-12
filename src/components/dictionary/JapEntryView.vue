@@ -228,8 +228,13 @@ export default {
   margin: 0 30px;
 }
 
+.sense-text, .sense-num {
+  display: inline-block;
+  vertical-align: top;
+}
+
 .sense-grid {
-  display: grid;
+  // display: grid;
   grid-template-columns: auto 1fr;
   gap: 5px;
 }
