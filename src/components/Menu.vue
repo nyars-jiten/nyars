@@ -54,6 +54,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
     <v-navigation-drawer app v-model="drawer">
       <router-link class="titles-link" :to="{ name: 'Home' }">
         <div class="menu-logo-wrapper">
@@ -62,8 +63,8 @@
         </div>
       </router-link>
       <!-- <v-img class="menu-logo" src="menu-logo.png" /> -->
-      <v-list flat nav>
-        <v-list-item-group active-class="primary">
+      <v-list flat nav class="menu-list">
+        <v-list-item-group active-class="item-group-active">
         <!-- <div class="list-item-group-wr" color="primary"> -->
           <div v-for="category in menu" :key="category.id">
             <v-subheader
@@ -100,7 +101,7 @@
       </v-list>
 
       <div class="bootom-menu-block">
-        <v-list nav flat>
+        <v-list nav flat class="menu-list">
           <!-- <v-list-item-group color="primary"> -->
             <div>
               <div class="menu-element-list">
@@ -287,25 +288,6 @@ export default {
   }
 }
 
-// .menu-logo-wrapper {
-//   // position: relative;
-//   // overflow: hidden;
-// }
-
-// .list-item-group-wr {
-//   color: primary;
-// }
-
-// .subheader-text {
-//   color: var(--v-text-decoration-color);
-// }
-
-// .menu-logo-back {
-//   top: 0;
-//   position: absolute;
-//   background-color: red;
-// }
-
 .menu-logo {
   width: 80%;
   height: auto;
@@ -347,17 +329,11 @@ export default {
   grid-template-rows: auto 1fr auto;
 }
 
-.v-list {
+.menu-list {
   background: none !important;
 }
 
 .bootom-menu-block {
   width: 100%;
 }
-
-// .user-profile {
-//   position: fixed;
-//   bottom: 0;
-//   // padding: 8px 16px;
-// }
 </style>
