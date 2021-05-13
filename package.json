@@ -13,6 +13,7 @@
     "core-js": "^3.9.1",
     "sanitize-html": "^2.3.3",
     "vue": "^2.6.11",
+    "vue-meta": "^2.4.0",
     "vue-router": "^3.5.1",
     "vuetify": "^2.4.8",
     "vuex": "^3.6.2",
