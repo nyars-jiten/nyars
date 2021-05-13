@@ -42,7 +42,7 @@
               <template>
                 <v-row>
                   <div class="view-content" v-if="!editMode">
-                    <JapEntryView v-bind:entry="currentEntry" />
+                    <JapEntryView :entry="currentEntry" />
                     <v-spacer></v-spacer>
                     <div class="pl-4 pb-2" v-if="userRoleId >= 1">
                       <v-btn
@@ -56,7 +56,7 @@
                   </div>
                   <div class="edit-content" v-else>
                     <JapEntryEdit
-                      v-bind:entry="currentEntry"
+                      :entry="currentEntry"
                       v-if="!textMode"
                     />
                     <JapEntryTextEditor v-else />
@@ -161,6 +161,18 @@ export default {
       return this.corpus[theme];
       // this.corpus
     },
+    currentTitle() {
+      if (!this.currentEntry.entry) return '';
+
+      var titles = [];
+      this.currentEntry.entry.words.forEach(function(item) {
+        titles = titles.concat(item.writings.map(function(w) {
+          return w.value;
+        }));
+      });
+      let uniqueTitles = [...new Set(titles)]
+      return uniqueTitles.join('・');
+    },
   },
   methods: {
     ...mapActions([
@@ -258,6 +270,22 @@ export default {
     GalleryComponent,
     EditComment
   },
+  metaInfo() {
+    return {
+      title: this.currentTitle + ' — НЯРС',
+      meta: [{
+          property: 'og:title',
+          content: `${this.currentTitle}`,
+          vmid: 'og:title'
+        },
+        {
+          property: 'og:description',
+          content: `Японско-русский словарь | НЯРС`,
+          vmid: 'og:description'
+        }
+      ]
+    }
+  }
 };
 </script>
 

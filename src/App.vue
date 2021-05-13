@@ -17,6 +17,11 @@ export default {
     Menu,
     Alert,
   },
+  metaInfo: {
+      title: 'НЯРС — Новый Японско-Русский Словарь',
+      // all titles will be injected into this template
+      titleTemplate: '%s' // | НЯРС
+    }
 };
 </script>
 

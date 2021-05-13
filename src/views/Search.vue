@@ -92,5 +92,21 @@ export default {
     this.fetchTags();
   },
   components: { SearchResultItem },
+  metaInfo() {
+    return {
+      title: this.request + ' — поиск в НЯРСе',
+      meta: [{
+          property: 'og:title',
+          content: `«${this.request}» — поиск`,
+          vmid: 'og:title'
+        },
+        {
+          property: 'og:description',
+          content: `Японско-русский словарь | НЯРС`,
+          vmid: 'og:description'
+        }
+      ]
+    }
+  }
 };
 </script>
