@@ -13,9 +13,11 @@
               :loading="currentLoadingState"
               placeholder="Поиск"
               autocomplete="off"
-              append-icon="mdi-magnify"
+              append-icon="mdi-draw"
+              append-outer-icon="mdi-magnify"
               @keydown.enter.prevent="search"
-              @click:append="search"
+              @click:append="showDrawInput"
+              @click:append-outer="search"
               class="mx-4"
               flat
               hide-details
@@ -49,11 +51,18 @@ export default {
   methods: {
     ...mapActions(["startSearch"]),
     search() {
+      this.$emit("startSearch");
       this.startSearch({ request: this.request, page: 1 });
       this.$router
         .push({ path: "/search", query: { r: this.request } })
         .catch(() => {});
     },
+    showDrawInput() {
+      this.$emit("showDrawInput");
+    },
+    addChar(char) {
+      this.request += char;
+    }
   },
   watch: {
     currentSearchRequest() {
@@ -62,6 +71,9 @@ export default {
   },
   mounted() {
     this.$store.commit("updateExactSearchState", false);
+    this.$root.$on('addSearchStr', (value) => {
+      this.addChar(value)
+    });
   },
   computed: {
     ...mapGetters(["currentLoadingState", "currentSearchRequest"]),

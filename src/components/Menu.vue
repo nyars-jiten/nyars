@@ -157,14 +157,18 @@
       </div>
     </v-navigation-drawer>
 
-    <v-app-bar app absolute>
+    <v-app-bar app absolute extension-height="450">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-row>
         <v-col cols="12" md="12">
-          <SearchBar />
+          <SearchBar @showDrawInput="drawInput = !drawInput" @startSearch="drawInput = false" />
         </v-col>
       </v-row>
+
+      <template v-slot:extension v-if="drawInput">
+        <HandwritingInput />
+      </template>
 
       <v-spacer></v-spacer>
     </v-app-bar>
@@ -176,6 +180,7 @@ import { mapGetters, mapActions, mapMutations } from "vuex";
 import menuData from "@/data/menu.json";
 import SearchBar from "@/components/SearchBar.vue";
 import { sendPostRequest } from "@/core/apiRequests.js";
+import HandwritingInput from '@/components/search/HandwritingInput.vue';
 
 export default {
   computed: mapGetters([
@@ -236,7 +241,7 @@ export default {
       this.$vuetify.theme.dark = this.darkMode;
     },
   },
-  components: { SearchBar },
+  components: { SearchBar, HandwritingInput },
   async mounted() {
     this.$vuetify.theme.dark = this.darkModeState;
     this.darkMode = this.darkModeState;
@@ -250,6 +255,7 @@ export default {
     password: "",
     authmode: true,
     darkMode: false,
+    drawInput: false,
   }),
 };
 </script>
