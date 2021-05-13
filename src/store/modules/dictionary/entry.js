@@ -127,7 +127,8 @@ export default {
             state.editComment = entry.result.comment ? entry.result.comment : "" ;
         },
         updateCurrentImages(state, images) {
-            state.currentImages = images;
+            if (!images) state.currentImages = [];
+            else state.currentImages = images;
         },
         updateEditComment(state, comment) {
             state.editComment = comment;
