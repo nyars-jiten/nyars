@@ -6,7 +6,7 @@
       <!-- </v-col> -->
       <!-- <v-col cols="12" md="8"> -->
         <div class="control-block">
-          <v-btn elevation="2" @click="send">Send</v-btn>
+          <!-- <v-btn elevation="2" @click="send">Send</v-btn> -->
           <div class="control-buttons">
             <v-btn class="ma-2" outlined @click="undo">Отмена <v-icon right dark>mdi-undo</v-icon></v-btn>
             <!-- <v-btn class="ma-2" outlined @click="redo">Повтор <v-icon right dark>mdi-redo</v-icon></v-btn> -->

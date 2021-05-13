@@ -131,7 +131,7 @@ import JapEntryTextEditor from "@/components/dictionary/JapEntryTextEditor.vue";
 import DictionaryIcon from "@/components/dictionary/DictionaryIcon.vue";
 import DuplicatesChecker from "@/components/dictionary/editor/DuplicatesChecker.vue";
 import EditComment from "@/components/dictionary/editor/EditComment.vue";
-import { sendPostRequest, sendDeleteRequest } from "@/core/apiRequests.js";
+import { sendPostRequest } from "@/core/apiRequests.js";
 export default {
   data() {
     return {
@@ -202,8 +202,10 @@ export default {
       this.textMode = true;
     },
     async removeEdit() {
-      const resp = await sendDeleteRequest(
-        "dictionary/jap/entries/" + this.currentWid
+      const newEntry = { comment: this.currentEditComment };
+      const resp = await sendPostRequest(
+        "dictionary/jap/entries/delete/" + this.currentWid,
+        newEntry
       );
       if (resp.status == 200 && resp.data.id !== 0) {
         this.newAlert({ msg: "Статья предложена к удалению", type: "success" });
