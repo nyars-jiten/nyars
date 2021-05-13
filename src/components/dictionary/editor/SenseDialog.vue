@@ -47,7 +47,7 @@
                 cols="12"
                 md="12"
                 v-for="(example, exampleId) in sense.examples"
-                :key="example.id"
+                :key="example.value + example.translation"
               >
                 <v-row>
                   <v-col cols="12" md="1">
