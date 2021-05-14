@@ -13,11 +13,11 @@
               :loading="currentLoadingState"
               placeholder="Поиск"
               autocomplete="off"
-              append-icon="mdi-draw"
-              append-outer-icon="mdi-magnify"
+              append-outer-icon="mdi-draw"
+              append-icon="mdi-magnify"
               @keydown.enter.prevent="search"
-              @click:append="showDrawInput"
-              @click:append-outer="search"
+              @click:append-outer="showDrawInput"
+              @click:append="search"
               class="mx-4"
               flat
               hide-details
