@@ -113,9 +113,7 @@ export default {
   methods: {
     ...mapActions(["getUserProfile", "updateUserRights"]),
     avatarLink(img) {
-      console.log(img);
-      return 'https://nyars.org/upload/avatars/bd008f72-a4de-4fb3-b1e3-edd775f445f3.png';
-      // return `${process.env.VUE_APP_BASE}upload/avatars/${img}`;
+      return `${process.env.VUE_APP_BASE}upload/avatars/${img}`;
     },
     hasRights(num) {
       return this.selectedUserRights[num] == 1;
@@ -159,6 +157,11 @@ export default {
         console.log("Error: ", error);
       };
     },
+  },
+  watch: {
+    $route(to) {
+      this.getUserProfile(to.params.username);
+    }
   },
   async mounted() {
     this.getUserProfile(this.currentUsername);

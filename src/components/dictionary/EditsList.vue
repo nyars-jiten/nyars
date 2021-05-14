@@ -296,8 +296,9 @@ export default {
 
 a.titles-link {
   text-decoration: none;
-  color: inherit;
+  // color: inherit;
   cursor: pointer;
+  color: unset !important;
 
   &:hover {
     // color: rgba(77, 77, 77, 0.7);

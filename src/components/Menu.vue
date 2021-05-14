@@ -107,7 +107,8 @@
               <div class="menu-element-list">
                 <v-list-item @click="darkMode = !darkMode">
                   <v-list-item-icon>
-                    <v-icon v-text="'mdi-weather-night'"></v-icon>
+                    <v-icon v-if="darkMode">mdi-weather-sunny</v-icon>
+                    <v-icon v-else>mdi-weather-night</v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
                     <v-list-item-title
