@@ -5,16 +5,6 @@
       <v-card-text class="subject-body">
         <v-simple-table>
           <template v-slot:default>
-            <!-- <thead>
-              <tr>
-                <th class="text-left">
-                  Name
-                </th>
-                <th class="text-left">
-                  Calories
-                </th>
-              </tr>
-            </thead> -->
             <tbody>
               <tr
                 v-for="subject in subjects"

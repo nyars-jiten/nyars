@@ -47,7 +47,7 @@ const routes = [
     component: () => import('@/views/Subjects.vue'),
   },
   {
-    path: '/user',
+    path: '/u/:username',
     name: 'user',
     component: () => import('@/views/UserPage.vue'),
   },

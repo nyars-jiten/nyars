@@ -124,7 +124,7 @@
         <!-- <template v-slot:prepend> -->
         <div class="user-profile">
           <div class="authorized" v-if="currentUser.username">
-            <router-link :to="{ name: 'user' }">
+            <router-link :to="{ name: 'user', params: { username: currentUser.username } }">
               <v-list-item two-line>
                 <v-list-item-avatar>
                   <img :src="avatarLink(currentUser.avatar)" />
