@@ -208,7 +208,16 @@
         :items="tagList"
         v-model="entry.entry.tags"
       ></v-autocomplete>
-      <v-textarea label="Питч-акцент" v-model="entry.entry.pitchAccent" auto-grow rows="1"></v-textarea>
+      <v-row>
+        <v-col cols="12" md="8">
+          <v-textarea label="Питч-акцент" v-model="entry.entry.pitchAccent" auto-grow rows="1"></v-textarea>
+        </v-col>
+        <v-col cols="12" md="4">
+          <div class="templates">
+            Шаблоны: <span class="template-button" @click="useNTemplate">N</span>
+          </div>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
@@ -230,6 +239,17 @@ export default {
     // dialogIndex: -1
     allowedLangs: ["rus", "eng", "lat", "jap"],
     tags: commonTags,
+    templateEntryN: {
+      entry: {
+        "words":[{"writings":[{"value":"—","tag":{"type":"Kinf","values":[]}}],
+        "readings":[{"value":"—","tag":{"type":"Rinf","values":[]}}]}],
+        "meanings":[{"pos":["n"],
+        "langMeanings":[
+          {"lang":"rus","senses":[{"tags":[],"value":"новое значение","examples":[]}],"note":""},
+          {"lang":"eng","senses":[{"tags":[],"value":"новое значение","examples":[]}],"note":""}
+        ]}]
+      },
+    },
   }),
   computed: {
     ...mapGetters(["currentSounds", "existingLangs"]),
@@ -254,6 +274,10 @@ export default {
     ...mapActions(["startDublicatesSearch"]),
     exBbCodes(text){
       return examplesBbCodesProcess(text);
+    },
+    useNTemplate() {
+      // console.log(this.templateEntryN);
+      this.entry = this.templateEntryN;
     },
     removeFromLM: function (posIndex, lmIndex) {
       this.$store.commit("editorRemoveLang", { posIndex, lmIndex });
@@ -330,6 +354,14 @@ export default {
 <style lang="scss">
 .new-pos-btn {
   border-top: 1px solid black;
+}
+
+.templates {
+  padding-top: 10px;
+}
+
+.template-button {
+  cursor: pointer;
 }
 
 .lang-btn {

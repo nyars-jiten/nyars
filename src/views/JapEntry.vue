@@ -74,7 +74,7 @@
                       >Сохранить</v-btn
                     >
                   </div>
-                  <div class="edit-action pl-2">
+                  <!-- <div class="edit-action pl-2">
                     <v-btn
                       color="primary"
                       dark
@@ -82,7 +82,7 @@
                       @click.stop="changeToTextMode"
                       >Текстовый редактор</v-btn
                     >
-                  </div>
+                  </div> -->
                   <div class="edit-action pl-2">
                     <v-btn
                       color="primary"
