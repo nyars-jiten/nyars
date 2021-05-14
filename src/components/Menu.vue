@@ -244,10 +244,15 @@ export default {
     },
   },
   components: { SearchBar, HandwritingInput },
-  async mounted() {
+  mounted() {
     this.$vuetify.theme.dark = this.darkModeState;
     this.darkMode = this.darkModeState;
     this.getCurrentUser();
+  },
+  beforeUpdate() {
+    // костыль, чтобы тема прогрузилась окончательно
+    this.$vuetify.theme.dark = this.darkModeState;
+    this.darkMode = this.darkModeState;
   },
   data: () => ({
     drawer: true,

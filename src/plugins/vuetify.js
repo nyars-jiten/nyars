@@ -7,8 +7,14 @@ Vue.use(Vuetify);
 
 export default new Vuetify({
   theme: {
-    options: { customProperties: true },
-    dark: false,
+    options: {
+      customProperties: true,
+      // themeCache: {
+      //   get: key => localStorage.getItem(key),
+      //   set: (key, value) => localStorage.setItem(key, value),
+      // },
+    },
+    dark: true,
     themes: {
       light: {
         secondary: colors.grey.lighten4,
@@ -78,6 +84,7 @@ export default new Vuetify({
         "svg-primary": "#000000"
       },
       dark: {
+        secondary: colors.grey.darken3,
         anchor: "#8c9eff",
         "text-decoration-color": "#4b4b4b",
         "main-text": "#FFFFFF",

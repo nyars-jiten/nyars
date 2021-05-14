@@ -39,9 +39,9 @@ $body-font-family: "Rubik", "Noto Sans JP", HanaMinA, HanaMinB, Helvetica, Arial
   a {
     text-decoration: none; /* Убираем подчеркивание у ссылок */
     // color: rgba(0, 0, 0, 0.87);
-    &:hover {
-      // color: rgba(77, 77, 77, 0.7);
-    }
+    // &:hover {
+    //   // color: rgba(77, 77, 77, 0.7);
+    // }
   }
 }
 </style>
