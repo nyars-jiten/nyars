@@ -59,7 +59,8 @@
       <router-link class="titles-link" :to="{ name: 'Home' }">
         <div class="menu-logo-wrapper">
           <!-- <img class="menu-logo-back" src="@/assets/menu-logo-back.png" /> -->
-          <img class="menu-logo" src="@/assets/menu-logo.png" />
+          <img v-if="darkMode" class="menu-logo" src="@/assets/menu-logo-night.png" />
+          <img v-else class="menu-logo" src="@/assets/menu-logo-light.png" />
         </div>
       </router-link>
       <!-- <v-img class="menu-logo" src="menu-logo.png" /> -->
@@ -296,42 +297,42 @@ export default {
 }
 
 .menu-logo {
-  width: 80%;
+  width: 100%;
   height: auto;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  // margin-left: auto;
+  // margin-right: auto;
+  // margin-top: 20px;
+  // margin-bottom: 10px;
   // opacity: 1 !important;
-}
-
-.v-navigation-drawer__content::before {
-  content: "";
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  background-color: var(--v-menu-logo-back-base);
-  opacity: 0.95;
 }
 
 .titles-link {
   z-index: 1;
 }
 
+// .v-navigation-drawer__content::before {
+//   content: "";
+//   width: 100%;
+//   height: 100%;
+//   position: absolute;
+//   left: 0;
+//   background-color: var(--v-menu-logo-back-base);
+//   opacity: 0.95;
+// }
+
 .v-navigation-drawer__content {
   position: relative;
-  background-size: 100%;
+  // background-size: 100%;
   // background-color: rgba(var(--v-menu-logo-back-base), 1);
   // $c: var(--v-menu-logo-back-base);
   // $g: linear-gradient(to right, $c 0 100%);
   // $g,
-  background-image: url("~@/assets/menu-logo-back.png");
-  background-repeat: no-repeat;
+  // background-image: url("~@/assets/menu-logo-back.png");
+  // background-repeat: no-repeat;
   // background-blend-mode: lighten;
-  background-position-x: 120px;
-  background-position-y: -140px;
+  // background-position-x: 120px;
+  // background-position-y: -140px;
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
