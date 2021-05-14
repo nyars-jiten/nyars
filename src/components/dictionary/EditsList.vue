@@ -57,7 +57,9 @@
                 <v-avatar size="22px" class="avatar">
                   <img :src="avatarLink(edit.author.avatar)" />
                 </v-avatar>
-                <span class="author-name">{{ edit.author.username }}</span>
+                <router-link :to="{ name: 'user', params: { username: edit.author.username } }">
+                  <span class="author-name">{{ edit.author.username }}</span>
+                </router-link>
               </v-row>
             </div>
           </div>
@@ -376,6 +378,10 @@ a.titles-link {
   content: "・";
   color: var(--v-edit-separator-color-base);
   margin: 0px 10px;
+}
+
+.author-name {
+  color: var(--v-main-text-base);
 }
 
 .edit-id,

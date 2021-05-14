@@ -60,7 +60,9 @@
           </v-avatar>
         </td>
         <td class="stats-username">
-          <span>{{ user.username }}</span>
+          <router-link :to="{ name: 'user', params: { username: user.username } }">
+            <span class="stats-username-str">{{ user.username }}</span>
+          </router-link>
         </td>
         <td align="center">{{ user.userRating.weekRating }}</td>
         <td align="center">{{ user.userRating.summary.week.japNew }}</td>
@@ -125,6 +127,10 @@ export default {
 .user-stats-table {
   font-size: 120%;
   width: 100%;
+}
+
+.stats-username-str {
+  color: var(--v-main-text-base);
 }
 
 .user-stats-table tr td + td {

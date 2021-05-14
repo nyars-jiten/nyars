@@ -12,6 +12,7 @@ export default new Vuetify({
     themes: {
       light: {
         secondary: colors.grey.lighten4,
+        "main-text": "#8f8f8f",
 
         anchor: "#8c9eff",
         "text-decoration-color": "#8f8f8f",
@@ -79,6 +80,7 @@ export default new Vuetify({
       dark: {
         anchor: "#8c9eff",
         "text-decoration-color": "#4b4b4b",
+        "main-text": "#FFFFFF",
 
         "edit-status-new-color": "#1d90ca",
         "edit-status-declined-color": "#bf1d1d",
