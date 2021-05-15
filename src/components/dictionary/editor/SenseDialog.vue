@@ -162,7 +162,7 @@ export default {
       this.sense.examples.push({ value: "", translation: "" });
     },
     addReference() {
-      this.sense.references.push({ target: "", translation: "", referenceType: 1 });
+      this.sense.references.push({ target: "", translation: "", referenceType: 0 });
     },
     addLoanSource() {
       this.sense.loanSource = { lang: "", word: ""};

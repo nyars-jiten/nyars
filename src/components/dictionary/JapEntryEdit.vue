@@ -270,8 +270,8 @@ export default {
         "readings":[{"value":"—","tag":{"type":"Rinf","values":[]}}]}],
         "meanings":[{"pos":["n"],
         "langMeanings":[
-          {"lang":"rus","senses":[{"tags":[],"value":"новое значение","examples":[]}],"note":""},
-          {"lang":"eng","senses":[{"tags":[],"value":"новое значение","examples":[]}],"note":""}
+          {"lang":"rus","senses":[{"tags":[],"value":"новое значение","examples":[],"references":[],"loanSource":null}],"note":""},
+          {"lang":"eng","senses":[{"tags":[],"value":"новое значение","examples":[],"references":[],"loanSource":null}],"note":""}
         ]}]
       },
     },
@@ -304,8 +304,7 @@ export default {
       return this.refType[value].translation[lang] + ' ';
     },
     useNTemplate() {
-      // console.log(this.templateEntryN);
-      this.entry = this.templateEntryN;
+      this.$store.commit("serializeTextEntry", this.templateEntryN.entry);
     },
     removeFromLM: function (posIndex, lmIndex) {
       this.$store.commit("editorRemoveLang", { posIndex, lmIndex });

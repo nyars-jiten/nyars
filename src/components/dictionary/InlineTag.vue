@@ -1,7 +1,7 @@
 <template>
   <div class="tag-inline">
-    <div class="tags-wrap" v-if="tags.length > 0 || (loanSource && loanSource.word)">
-      <span class="loan"> ({{loanSource.lang}} {{loanSource.word}})</span>
+    <span class="loan" v-if="loanSource && loanSource.word"> ({{loanSource.lang}} {{loanSource.word}})</span>
+    <div class="tags-wrap" v-if="tags.length > 0">
       <div :class="{ shorttagfld: !inf, shorttaginf: inf }" v-if="short">
         <v-tooltip top v-for="(tag, tagId) in tags" :key="tagId">
           <template v-slot:activator="{ on, attrs }">
