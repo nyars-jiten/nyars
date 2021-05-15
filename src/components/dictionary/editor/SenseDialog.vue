@@ -43,29 +43,79 @@
                   @changeTags="(...args) => updateTags('Dial', ...args)"
                 />
               </v-col>
-              <v-col
-                cols="12"
-                md="12"
-                v-for="(example, exampleId) in sense.examples"
-                :key="example.value + example.translation"
-              >
-                <v-row>
-                  <v-col cols="12" md="1">
-                    <v-btn
-                      icon
-                      x-small
-                      @click="removeExample(exampleId)"
-                      color="red"
-                      ><v-icon>mdi-close</v-icon></v-btn
-                    > </v-col
-                  ><v-col cols="12" md="11">
-                    <ExampleComponent :exampleRaw="example" />
-                  </v-col>
-                </v-row>
+              <v-col cols="12" md="12">
+                <div class="tabs-wrapper">
+                  <div class="tabs">
+                    <v-tabs v-model="tabs">
+                      <v-tab href="#addition-1">Примеры</v-tab>
+                      <v-tab href="#addition-2">Ссылки</v-tab>
+                      <v-tab href="#addition-3">Заимствование</v-tab>
+                    </v-tabs>
+                  </div>
+                  <v-tabs-items v-model="tabs">
+                    <v-tab-item value="addition-1">
+                      <v-col
+                        cols="12"
+                        md="12"
+                        v-for="(example, exampleId) in sense.examples"
+                        :key="sense.examples.length * exampleId"
+                      >
+                        <v-row>
+                          <v-col cols="12" md="1">
+                            <v-btn
+                              icon
+                              x-small
+                              @click="removeExample(exampleId)"
+                              color="red"
+                              ><v-icon>mdi-close</v-icon>
+                            </v-btn>
+                          </v-col>
+                          <v-col cols="12" md="11">
+                            <ExampleComponent :exampleRaw="example" />
+                          </v-col>
+                        </v-row>
+                      </v-col>
+                      <v-btn color="blue darken-1" outlined @click="addExample">
+                        Добавить пример
+                      </v-btn>
+                    </v-tab-item>
+                    <v-tab-item value="addition-2">
+                      <v-col
+                        cols="12"
+                        md="12"
+                        v-for="(ref, refId) in sense.references"
+                        :key="sense.references.length * refId"
+                      >
+                        <v-row>
+                          <v-col cols="12" md="1">
+                            <v-btn
+                              icon
+                              x-small
+                              @click="removeRef(refId)"
+                              color="red"
+                              ><v-icon>mdi-close</v-icon>
+                            </v-btn>
+                          </v-col>
+                          <v-col cols="12" md="11">
+                            <ReferenceComponent :refRaw="ref" />
+                          </v-col>
+                        </v-row>
+                      </v-col>
+                      <v-btn color="blue darken-1" outlined @click="addReference">
+                        Добавить ссылку
+                      </v-btn>
+                    </v-tab-item>
+                    <v-tab-item value="addition-3">
+                      <div class="loan-source" v-if="sense.loanSource">
+                        <LoanSourceComponent :sourceRaw="sense.loanSource" />
+                      </div>
+                      <v-btn v-else color="blue darken-1" outlined @click="addLoanSource">
+                        Указать источник заимствования
+                      </v-btn>
+                    </v-tab-item>
+                  </v-tabs-items>
+                </div>
               </v-col>
-              <v-btn color="blue darken-1" outlined @click="addExample">
-                Добавить пример
-              </v-btn>
             </v-row>
           </v-container>
         </v-card-text>
@@ -86,11 +136,15 @@
 import { mapGetters } from "vuex";
 import TagSelector from "@/components/dictionary/editor/TagSelector.vue";
 import ExampleComponent from "@/components/dictionary/editor/ExampleComponent.vue";
+import ReferenceComponent from "@/components/dictionary/editor/ReferenceComponent.vue";
+import LoanSourceComponent from "@/components/dictionary/editor/LoanSourceComponent.vue";
 import BBCodePanel from "@/components/dictionary/editor/BBCodePanel.vue";
+
 export default {
   data: function () {
     return {
       sense: {},
+      tabs: null,
     };
   },
   methods: {
@@ -101,8 +155,17 @@ export default {
     removeExample(index) {
       this.sense.examples.splice(index, 1);
     },
+    removeRef(refId){
+      this.sense.references.splice(refId, 1);
+    },
     addExample() {
       this.sense.examples.push({ value: "", translation: "" });
+    },
+    addReference() {
+      this.sense.references.push({ target: "", translation: "", referenceType: 1 });
+    },
+    addLoanSource() {
+      this.sense.loanSource = { lang: "", word: ""};
     },
     updateModel() {
       this.selectedLang = "";
@@ -138,6 +201,18 @@ export default {
       this.sense = this.currentObj;
     },
   },
-  components: { TagSelector, ExampleComponent, BBCodePanel },
+  components: {
+    TagSelector,
+    ExampleComponent,
+    BBCodePanel,
+    ReferenceComponent,
+    LoanSourceComponent
+  },
 };
 </script>
+
+<style lang="scss">
+.tabs {
+  margin: 20px;
+}
+</style>

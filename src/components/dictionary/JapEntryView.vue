@@ -114,7 +114,30 @@
                     <InlineTag
                       v-bind:tags="filterTags(sense.tags, ['Dial', 'Misc'])"
                       v-bind:lang="lm.lang"
+                      :loanSource="sense.loanSource"
                     />
+
+                    <div class="references-block">
+                      <div
+                        class="reference"
+                        v-for="ref in sense.references"
+                        :key="ref.id"
+                      >
+                        <span>⇒
+                          <span class="ref-type">{{ getReferenceType(ref.referenceType, lm.lang) }}</span>
+                          <router-link
+                            class="entry-reference-link"
+                            :to="{ name: 'view-jp', params: { wid: ref.target } }"
+                            v-if="ref.target.length >= 4"
+                          >{{ ref.value }}</router-link>
+                          <router-link
+                            class="entry-reference-link"
+                            :to="{ name: 'search', query: { r: ref.value } }"
+                            v-else
+                          >{{ ref.value }}</router-link>
+                        </span>
+                      </div>
+                    </div>
 
                     <div class="examples-block">
                       <div
@@ -127,7 +150,6 @@
                         <span class="example-translation">{{ example.translation }}</span>
                       </div>
                     </div>
-
                   </div>
                 </div>
                 <div class="note" style="white-space: pre-wrap" v-if="lm.note">
@@ -150,6 +172,7 @@
 <script>
 import sc from "@/core/scriptConverter.js";
 import { bbCodesProcess, examplesBbCodesProcess }  from "@/core/bbCodes.js";
+import referenceTypes from "@/data/referenceTypes.json";
 import InlineTag from "@/components/dictionary/InlineTag.vue";
 import PitchAccent from "@/components/dictionary/PitchAccent.vue";
 import commonTags from "@/data/commonTags.json";
@@ -157,6 +180,7 @@ import { mapGetters } from "vuex";
 export default {
   data: () => ({
     tags: commonTags,
+    refType: referenceTypes
   }),
   computed:  {
     ...mapGetters(["currentSounds"]),
@@ -169,6 +193,9 @@ export default {
   methods: {
     convertBB(sense) {
       return bbCodesProcess(sense);
+    },
+    getReferenceType(value, lang) {
+      return this.refType[value].translation[lang] + ' ';
     },
     exBbCodes(text){
       return examplesBbCodesProcess(text);
@@ -219,6 +246,11 @@ export default {
 <style lang="scss">
 .entry-text-md, .common-tags, .c-tag {
   display: inline;
+}
+
+.references-block {
+  padding-left: 10px;
+  font-style: italic;
 }
 
 .lang-sep {

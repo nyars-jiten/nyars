@@ -1,6 +1,7 @@
 <template>
   <div class="tag-inline">
-    <div class="tags-wrap" v-if="tags.length > 0">
+    <div class="tags-wrap" v-if="tags.length > 0 || (loanSource && loanSource.word)">
+      <span class="loan"> ({{loanSource.lang}} {{loanSource.word}})</span>
       <div :class="{ shorttagfld: !inf, shorttaginf: inf }" v-if="short">
         <v-tooltip top v-for="(tag, tagId) in tags" :key="tagId">
           <template v-slot:activator="{ on, attrs }">
@@ -14,7 +15,7 @@
       </div>
       <div class="full-tags" v-else>
         (<!--
-        --><span class="full-tag" v-for="(tag, tagId) in tags" :key="tagId"><!--
+          --><span class="full-tag" v-for="(tag, tagId) in tags" :key="tagId"><!--
           -->{{ searchTag(tag).full }}<!--
           --><span v-if="tagId + 1 < tags.length">, </span><!--
         --></span><!--
@@ -55,6 +56,7 @@ export default {
     tags: Array,
     type: Object,
     lang: String,
+    loanSource: Object,
     inf: {
       type: Boolean,
       default: false,
@@ -83,7 +85,7 @@ export default {
   display: inline;
 }
 
-.full-tags {
+.full-tags, .loan {
   font-style: italic;
   color: var(--v-inline-tag-full-tags-color-base);
 }

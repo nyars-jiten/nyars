@@ -114,7 +114,30 @@
                     <InlineTag
                       v-bind:tags="filterTags(sense.tags, ['Dial', 'Misc'])"
                       v-bind:lang="lm.lang"
+                      :loanSource="sense.loanSource"
                     />
+
+                    <div class="references-block">
+                      <div
+                        class="reference"
+                        v-for="ref in sense.references"
+                        :key="ref.id"
+                      >
+                        <span>⇒
+                          <span class="ref-type">{{ getReferenceType(ref.referenceType, lm.lang) }}</span>
+                          <router-link
+                            class="entry-reference-link"
+                            :to="{ name: 'view-jp', params: { wid: ref.target } }"
+                            v-if="ref.target.length >= 4"
+                          >{{ ref.value }}</router-link>
+                          <router-link
+                            class="entry-reference-link"
+                            :to="{ name: 'search', query: { r: ref.value } }"
+                            v-else
+                          >{{ ref.value }}</router-link>
+                        </span>
+                      </div>
+                    </div>
 
                     <div class="examples-block">
                       <div
@@ -228,6 +251,7 @@ import { bbCodesProcess, examplesBbCodesProcess }  from "@/core/bbCodes.js";
 import commonTags from "@/data/commonTags.json";
 import InlineTag from "@/components/dictionary/InlineTag.vue";
 import WordDialog from "@/components/dictionary/editor/WordDialog.vue";
+import referenceTypes from "@/data/referenceTypes.json";
 import SenseDialog from "@/components/dictionary/editor/SenseDialog.vue";
 import PosDialog from "@/components/dictionary/editor/PosDialog.vue";
 import NoteDialog from "@/components/dictionary/editor/NoteDialog.vue";
@@ -239,6 +263,7 @@ export default {
     // dialogIndex: -1
     allowedLangs: ["rus", "eng", "lat", "jap"],
     tags: commonTags,
+    refType: referenceTypes,
     templateEntryN: {
       entry: {
         "words":[{"writings":[{"value":"—","tag":{"type":"Kinf","values":[]}}],
@@ -274,6 +299,9 @@ export default {
     ...mapActions(["startDublicatesSearch"]),
     exBbCodes(text){
       return examplesBbCodesProcess(text);
+    },
+    getReferenceType(value, lang) {
+      return this.refType[value].translation[lang] + ' ';
     },
     useNTemplate() {
       // console.log(this.templateEntryN);
@@ -354,6 +382,11 @@ export default {
 <style lang="scss">
 .new-pos-btn {
   border-top: 1px solid black;
+}
+
+.references-block {
+  padding-left: 10px;
+  font-style: italic;
 }
 
 .templates {
