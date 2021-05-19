@@ -6,9 +6,11 @@ export default {
     actions: {
         async startSearch(ctx, { request, page, subSearch }) {
             ctx.commit('updateLoadingState', true);
-            ctx.commit('updateCurrentSearchRequest', request);
             ctx.commit('updateSearchState', {});
-            if (!subSearch) ctx.commit('updateParserState', []);
+            if (!subSearch)  {
+                ctx.commit('updateParserState', []);
+                ctx.commit('updateCurrentSearchRequest', request);
+            }
             const encodedreq = request.replace('#', '%23');
             axios
                 .get(process.env.VUE_APP_API + 'search/jap?r=' +
