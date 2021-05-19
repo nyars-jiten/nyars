@@ -26,12 +26,19 @@
 
 <script>
 import handwriting from '@/assets/js/handwriting.canvas.js'
+import { mapGetters } from "vuex";
 
 export default {
   data: () => ({
     canvas: null,
     result: []
   }),
+  computed: mapGetters(["darkModeState"]),
+  watch: {
+    darkModeState() {
+      this.updateCanvasColor();
+    },
+  },
   methods: {
       undo() {
           this.canvas.undo();
@@ -51,10 +58,14 @@ export default {
       addChar(char) {
         this.$root.$emit('addSearchStr', char);
         this.erase();
+      },
+      updateCanvasColor() {
+        document.getElementById('canvas').getContext('2d').strokeStyle = (this.darkModeState ? 'white' : 'black');
       }
   },
   mounted() {
     this.canvas = new handwriting.Canvas(document.getElementById('canvas'), 3);
+    this.updateCanvasColor();
     this.canvas.setCallBack((data, err) => {
       if (err) throw err;
       else this.result = data;
