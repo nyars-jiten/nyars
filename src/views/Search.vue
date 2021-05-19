@@ -6,6 +6,18 @@
           <v-card class="mx-auto" tile>
             <!-- {{ request }} -->
             <v-card-title>Результат поиска</v-card-title>
+            <!-- {{ currentSearchResult.info.parsedGrammar }} -->
+            <div class="parser-info" v-if="currentParsedGrammar.length > 0">
+              <div class="parser-info-lemma clickable"
+                v-for="(gram, lemmaId) in currentParsedGrammar"
+                :key="lemmaId"
+                @click="subSearch(lemmaId)"
+                :class="{selected: currentLemma == lemmaId}"
+              >
+                <!-- {{gram.word}} | {{gram.ruby}} -->
+                <span>{{gram.word}}</span>
+              </div>
+            </div>
             <!-- <v-list-item link class="res-item" v-for="entry in currentSearchResult.result" :key="entry.id" :to="`/jp/${entry.wid}`"> -->
             <v-card-text
               class="no-results"
@@ -63,6 +75,7 @@ export default {
   // }
   data: () => ({
     searchPageOffset: 0,
+    currentLemma: 0,
   }),
   methods: {
     ...mapActions(["startSearch", "fetchTags"]),
@@ -74,6 +87,15 @@ export default {
         page: this.page,
       });
     },
+    subSearch(lemmaId) {
+      const word = this.currentParsedGrammar[lemmaId].lemma;
+      this.currentLemma = lemmaId;
+      this.startSearch({
+        request: word,
+        page: 1,
+        subSearch: true
+      });
+    },
   },
   watch: {
     page() {
@@ -81,7 +103,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["currentSearchResult", "currentLoadingState"]),
+    ...mapGetters(["currentSearchResult", "currentLoadingState", "currentParsedGrammar"]),
   },
   props: {
     request: String,
@@ -110,3 +132,31 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.parser-info-lemma {
+  display: inline;
+  margin: 3px;
+}
+
+.parser-info {
+  margin: 0px 20px 30px 20px;
+  font-size: 150%;
+
+  .clickable {
+    border-bottom: 1px solid var(--v-search-result-parser-secondary-base);
+    cursor: pointer;
+  }
+
+  .selected {
+    border-width: 2px;
+    font-weight: bold;
+    color: var(--v-search-result-parser-primary-base);
+    border-bottom-color: var(--v-search-result-parser-primary-base);
+  }
+
+  div:not(.selected) {
+    color: var(--v-search-result-parser-secondary-base);
+  }
+}
+</style>

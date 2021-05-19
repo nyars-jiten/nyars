@@ -4,14 +4,22 @@ import { sendPostRequest } from '@/core/apiRequests.js';
 
 export default {
     actions: {
-        async startSearch(ctx, { request, page }) {
+        async startSearch(ctx, { request, page, subSearch }) {
             ctx.commit('updateLoadingState', true);
             ctx.commit('updateCurrentSearchRequest', request);
             ctx.commit('updateSearchState', {});
+            if (!subSearch) ctx.commit('updateParserState', []);
             const encodedreq = request.replace('#', '%23');
             axios
-                .get(process.env.VUE_APP_API + 'search/jap?r=' + encodedreq + '&p=' + (page - 1) + '&exact=' + ctx.state.exactSearch)
-                .then(response => (ctx.commit('updateSearchState', response.data)))
+                .get(process.env.VUE_APP_API + 'search/jap?r=' +
+                encodedreq +
+                '&p=' + (page - 1) +
+                '&exact=' + ctx.state.exactSearch)
+                .then(response => {
+                    ctx.commit('updateSearchState', response.data);
+                    if (!subSearch)
+                        ctx.commit('updateParserState', response.data.info.parsedGrammar);
+                })
                 .catch(error => {
                     console.log(error);
                 })
@@ -145,6 +153,9 @@ export default {
         updateSearchState(state, searchResult) {
             state.searchResult = searchResult;
         },
+        updateParserState(state, parsedGrammar) {
+            state.parsedGrammar = parsedGrammar;
+        },
         updateRndSearchState(state, searchResult) {
             state.searchRndResult = searchResult;
         },
@@ -219,6 +230,7 @@ export default {
         dialogIndex: [-1, -1, -1, [-1, -1, -1], [-1, -1]],
         dialogModel: [false, false, false, false, false, false],
         searchResult: Object,
+        parsedGrammar: Array,
         searchRndResult: Object,
         searchDblResult: { type: Array, default: [] },
         searchLoading: false,
@@ -250,6 +262,9 @@ export default {
         },
         currentSearchResult(state) {
             return state.searchResult;
+        },
+        currentParsedGrammar(state) {
+            return state.parsedGrammar;
         },
         currentLoadingState(state) {
             return state.searchLoading;

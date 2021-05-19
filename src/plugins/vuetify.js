@@ -73,6 +73,9 @@ export default new Vuetify({
         "search-result-item-lang-color": "#3d4445",
         "search-result-item-pos-list-color": "#282d2e",
 
+        "search-result-parser-primary": "#000000",
+        "search-result-parser-secondary": "#797979",
+
         "common-tag-jlpt-n1": "#ea2a92",
         "common-tag-jlpt-n2": "#f99717",
         "common-tag-jlpt-n3": "#84bf26",
@@ -139,6 +142,9 @@ export default new Vuetify({
         "search-result-item-lang-color": "#686d6e",
 
         "search-result-item-pos-list-color": "#565959",
+
+        "search-result-parser-primary": "#ffffff",
+        "search-result-parser-secondary": "#a7a7a7",
 
         "common-tag-jlpt-n1": "#ea2a92",
         "common-tag-jlpt-n2": "#f99717",
