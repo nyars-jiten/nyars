@@ -26,6 +26,9 @@
                 <!-- {{gram.word}} | {{gram.ruby}} -->
               </div>
             </div>
+            <span class="parser-disclaimer">
+              Парсер запущен в тестовом режиме, возможна некорректная работа
+            </span>
             <!-- <v-list-item link class="res-item" v-for="entry in currentSearchResult.result" :key="entry.id" :to="`/jp/${entry.wid}`"> -->
             <v-card-text
               class="no-results"
@@ -164,8 +167,14 @@ export default {
   border-bottom-color: var(--v-search-result-parser-primary-base);
 }
 
+.parser-disclaimer {
+  margin: 0px 20px 0px 20px;
+  color: var(--v-search-result-parser-secondary-base);
+  font-size: 80%;
+}
+
 .parser-info {
-  margin: 0px 20px 30px 20px;
+  margin: 0px 20px 0px 20px;
   font-size: 150%;
 }
 </style>
