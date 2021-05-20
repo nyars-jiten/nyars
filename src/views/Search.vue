@@ -27,7 +27,7 @@
               </div>
             </div>
             <span class="parser-disclaimer">
-              Парсер запущен в тестовом режиме, возможна некорректная работа
+              Парсер запущен в тестовом режиме, могут быть ошибки и неточности. О багах пишите нам в <a href="https://discord.gg/u7H5nsPWVB" target="_blank">дискорд</a>.
             </span>
             <!-- <v-list-item link class="res-item" v-for="entry in currentSearchResult.result" :key="entry.id" :to="`/jp/${entry.wid}`"> -->
             <v-card-text
