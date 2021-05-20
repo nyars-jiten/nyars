@@ -20,7 +20,7 @@ export default {
                 .then(response => {
                     ctx.commit('updateSearchState', response.data);
                     if (!subSearch)
-                        ctx.commit('updateParserState', response.data.info.parsedGrammar);
+                        ctx.commit('updateParserState', response.data.info);
                 })
                 .catch(error => {
                     console.log(error);
@@ -232,7 +232,7 @@ export default {
         dialogIndex: [-1, -1, -1, [-1, -1, -1], [-1, -1]],
         dialogModel: [false, false, false, false, false, false],
         searchResult: Object,
-        parsedGrammar: Array,
+        parsedGrammar: Object,
         searchRndResult: Object,
         searchDblResult: { type: Array, default: [] },
         searchLoading: false,

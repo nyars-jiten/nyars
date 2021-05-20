@@ -7,16 +7,16 @@
             <!-- {{ request }} -->
             <v-card-title>Результат поиска</v-card-title>
             <!-- {{ currentSearchResult.info.parsedGrammar }} -->
-            <div class="parser-info" v-if="currentParsedGrammar.length > 0">
+            <div class="parser-info" v-if="currentParsedGrammar.parsedGrammar.length > 0">
               <div class="parser-info-lemma"
-                v-for="(gram, lemmaId) in currentParsedGrammar"
+                v-for="(gram, lemmaId) in currentParsedGrammar.parsedGrammar"
                 :key="lemmaId"
               >
                 <div
                   v-if="!gram.notFound"
                   @click="subSearch(lemmaId)"
                   class="found-lemma clickable"
-                  :class="{selected: currentLemma == lemmaId}"
+                  :class="{selected: currentParsedGrammar.selectedLemma == lemmaId}"
                 >
                   <span>{{gram.word}}</span>
                 </div>
@@ -83,7 +83,7 @@ export default {
   // }
   data: () => ({
     searchPageOffset: 0,
-    currentLemma: 0//this.currentSearchResult.info.selectedLemma
+    // currentLemma: 0//this.currentSearchResult.info.selectedLemma
   }),
   methods: {
     ...mapActions(["startSearch", "fetchTags"]),
@@ -96,8 +96,8 @@ export default {
       });
     },
     subSearch(lemmaId) {
-      const word = this.currentParsedGrammar[lemmaId].lemma;
-      this.currentLemma = lemmaId;
+      const word = this.currentParsedGrammar.parsedGrammar[lemmaId].lemma;
+      this.currentParsedGrammar.selectedLemma = lemmaId;
       this.startSearch({
         request: word,
         page: 1,
