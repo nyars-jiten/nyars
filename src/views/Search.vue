@@ -8,14 +8,22 @@
             <v-card-title>Результат поиска</v-card-title>
             <!-- {{ currentSearchResult.info.parsedGrammar }} -->
             <div class="parser-info" v-if="currentParsedGrammar.length > 0">
-              <div class="parser-info-lemma clickable"
+              <div class="parser-info-lemma"
                 v-for="(gram, lemmaId) in currentParsedGrammar"
                 :key="lemmaId"
-                @click="subSearch(lemmaId)"
-                :class="{selected: currentLemma == lemmaId}"
               >
+                <div
+                  v-if="!gram.notFound"
+                  @click="subSearch(lemmaId)"
+                  class="found-lemma clickable"
+                  :class="{selected: currentLemma == lemmaId}"
+                >
+                  <span>{{gram.word}}</span>
+                </div>
+                <div v-else class="not-found-lemma">
+                  <span>{{gram.word}}</span>
+                </div>
                 <!-- {{gram.word}} | {{gram.ruby}} -->
-                <span>{{gram.word}}</span>
               </div>
             </div>
             <!-- <v-list-item link class="res-item" v-for="entry in currentSearchResult.result" :key="entry.id" :to="`/jp/${entry.wid}`"> -->
@@ -75,7 +83,7 @@ export default {
   // }
   data: () => ({
     searchPageOffset: 0,
-    currentLemma: 0,
+    currentLemma: 0//this.currentSearchResult.info.selectedLemma
   }),
   methods: {
     ...mapActions(["startSearch", "fetchTags"]),
@@ -137,26 +145,27 @@ export default {
 .parser-info-lemma {
   display: inline;
   margin: 3px;
+  color: var(--v-search-result-parser-secondary-base);
+}
+
+.found-lemma, .not-found-lemma {
+  display: inline;
+}
+
+.clickable {
+  border-bottom: 1px solid var(--v-search-result-parser-secondary-base);
+  cursor: pointer;
+  }
+
+.selected {
+  border-width: 2px;
+  font-weight: bold;
+  color: var(--v-search-result-parser-primary-base);
+  border-bottom-color: var(--v-search-result-parser-primary-base);
 }
 
 .parser-info {
   margin: 0px 20px 30px 20px;
   font-size: 150%;
-
-  .clickable {
-    border-bottom: 1px solid var(--v-search-result-parser-secondary-base);
-    cursor: pointer;
-  }
-
-  .selected {
-    border-width: 2px;
-    font-weight: bold;
-    color: var(--v-search-result-parser-primary-base);
-    border-bottom-color: var(--v-search-result-parser-primary-base);
-  }
-
-  div:not(.selected) {
-    color: var(--v-search-result-parser-secondary-base);
-  }
 }
 </style>
