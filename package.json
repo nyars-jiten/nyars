@@ -9,29 +9,29 @@
     "build-prod": "vue-cli-service build --dest \"/var/www/static\""
   },
   "dependencies": {
-    "axios": "^0.21.1",
-    "core-js": "^3.9.1",
-    "sanitize-html": "^2.3.3",
-    "vue": "^2.6.11",
+    "axios": "^0.21.4",
+    "core-js": "^3.18.0",
+    "sanitize-html": "^2.5.1",
+    "vue": "^2.6.14",
     "vue-meta": "^2.4.0",
-    "vue-router": "^3.5.1",
-    "vuetify": "^2.5.0",
+    "vue-router": "^3.5.2",
+    "vuetify": "^2.5.8",
     "vuex": "^3.6.2",
-    "vuex-persistedstate": "^4.0.0-beta.3"
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.5.12",
-    "@vue/cli-plugin-eslint": "^3.1.1",
-    "@vue/cli-plugin-router": "^4.5.12",
-    "@vue/cli-service": "^3.12.1",
+    "@vue/cli-plugin-babel": "^4.5.13",
+    "@vue/cli-plugin-eslint": "^4.5.13",
+    "@vue/cli-plugin-router": "^4.5.13",
+    "@vue/cli-service": "^4.5.13",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
-    "sass": "^1.32.8",
+    "sass": "^1.42.1",
     "sass-loader": "^8.0.0",
-    "vue-cli-plugin-vuetify": "^2.0.9",
-    "vue-template-compiler": "^2.6.11",
-    "vuetify-loader": "^1.7.2"
+    "vue-cli-plugin-vuetify": "^2.4.2",
+    "vue-template-compiler": "^2.6.14",
+    "vuetify-loader": "^1.7.3"
   },
   "eslintConfig": {
     "root": true,
