@@ -120,7 +120,7 @@
                   fab
                   x-small
                   color="red"
-                  v-if="userHasRights(4)"
+                  v-if="canUserEdit(edit)"
                   v-on:click="declineEdit(edit.id)"
                 >
                   <v-icon>mdi-close</v-icon>
