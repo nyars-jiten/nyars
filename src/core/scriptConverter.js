@@ -89,6 +89,8 @@ function scriptConvert(raw) {
             transaltionList = hirList;
             break;
         }
+      } else if (i + 2 < raw.length && chunk[0] == raw[i + 2] && raw[i + 1] == '!') {
+        result += transaltionList[0];
       } else if (i + 1 < raw.length && chunk == "\\") {
         i++;
         result += notChanged[i];
