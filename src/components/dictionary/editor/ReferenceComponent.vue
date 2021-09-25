@@ -13,12 +13,14 @@
       <v-col cols="12" md="6">
         <v-text-field
           label="Слово"
+          autocomplete="off"
           v-model="ref.value"
         ></v-text-field>
       </v-col>
       <v-col cols="12" md="3">
         <v-text-field
           label="ID статьи"
+          autocomplete="off"
           v-model="ref.target"
         ></v-text-field>
       </v-col>
