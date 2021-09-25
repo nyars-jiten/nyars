@@ -205,11 +205,11 @@ export default {
         },
         editorAddSense(state, { posIndex, lmIndex }) {
             //tags value examples
-            const emptySense = { tags: [], value: "новое значение", examples: [] };
+            const emptySense = { tags: [], value: "новое значение", examples: [], references: [], loanSource: null };
             state.currentEntry.entry.meanings[posIndex].langMeanings[lmIndex].senses.push(emptySense);
         },
         editorAddLang(state, { lang, posIndex }) {
-            const emptySense = { tags: [], value: "новое значение", examples: [] };
+            const emptySense = { tags: [], value: "новое значение", examples: [], references: [], loanSource: null };
             const newLang = { lang, senses: [emptySense], note: "" };
             state.currentEntry.entry.meanings[posIndex].langMeanings.push(newLang);
         },

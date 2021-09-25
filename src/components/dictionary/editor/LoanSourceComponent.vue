@@ -12,6 +12,7 @@
         <v-text-field
           label="Исходное слово"
           v-model="source.word"
+          autocomplete="off"
           counter
         ></v-text-field>
       </v-col>
