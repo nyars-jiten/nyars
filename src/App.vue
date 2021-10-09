@@ -2,7 +2,7 @@
   <v-app>
     <Menu />
 
-    <v-main class="secondary">
+    <v-main>
       <router-view />
       <Alert />
     </v-main>
@@ -18,10 +18,14 @@ export default {
     Alert,
   },
   metaInfo: {
-      title: 'НЯРС — Новый Японско-Русский Словарь',
-      // all titles will be injected into this template
-      titleTemplate: '%s' // | НЯРС
-    }
+    title: 'НЯРС — Новый Японско-Русский Словарь',
+    // all titles will be injected into this template
+    titleTemplate: '%s' // | НЯРС
+  },
+  created () {
+    const isDarkTheme = this.$store.state.user.darkMode;
+    this.$vuetify.theme.dark = isDarkTheme;
+  }
 };
 </script>
 
@@ -43,5 +47,13 @@ $body-font-family: "Rubik", "Noto Sans JP", HanaMinA, HanaMinB, Helvetica, Arial
     //   // color: rgba(77, 77, 77, 0.7);
     // }
   }
+}
+
+.theme--dark .v-main {
+  background-color: #424242;
+}
+
+.theme--light .v-main {
+  background-color: #f5f5f5;
 }
 </style>

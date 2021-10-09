@@ -54,11 +54,11 @@ export default {
         clearCurrentUser(state) {
             state.currentUser = {};
         },
-        changeDarkMode(state, mode) {
-            state.darkMode = mode
+        updateDarkMode(state, isDarkMode) {
+            state.darkMode = isDarkMode;
         },
         updateCurrentDownloads(state, dls) {
-            state.downloads = dls
+            state.downloads = dls;
         }
     },
     state: {

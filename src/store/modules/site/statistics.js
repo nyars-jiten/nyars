@@ -25,7 +25,7 @@ export default {
         },
         updateUserStats(state, stats) {
             state.userStats = stats;
-        }
+        },
     },
     state: {
         stats: Array,

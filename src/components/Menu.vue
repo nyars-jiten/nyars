@@ -59,8 +59,8 @@
       <router-link class="titles-link" :to="{ name: 'Home' }">
         <div class="menu-logo-wrapper">
           <!-- <img class="menu-logo-back" src="@/assets/menu-logo-back.png" /> -->
-          <img v-if="darkMode" class="menu-logo" src="@/assets/menu-logo-night.png" />
-          <img v-else class="menu-logo" src="@/assets/menu-logo-light.png" />
+          <img v-show="darkModeState" class="menu-logo" src="@/assets/menu-logo-night.png" />
+          <img v-show="!darkModeState" class="menu-logo" src="@/assets/menu-logo-light.png" />
         </div>
       </router-link>
       <!-- <v-img class="menu-logo" src="menu-logo.png" /> -->
@@ -106,14 +106,14 @@
           <!-- <v-list-item-group color="primary"> -->
             <div>
               <div class="menu-element-list">
-                <v-list-item @click="darkMode = !darkMode">
+                <v-list-item @click="switchTheme()">
                   <v-list-item-icon>
-                    <v-icon v-if="darkMode">mdi-weather-sunny</v-icon>
+                    <v-icon v-if="darkModeState">mdi-weather-sunny</v-icon>
                     <v-icon v-else>mdi-weather-night</v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
                     <v-list-item-title
-                      v-text="darkMode ? 'Светлая тема' : 'Тёмная тема'"
+                      v-text="darkModeState ? 'Светлая тема' : 'Тёмная тема'"
                       class="menu-element-text"
                     ></v-list-item-title>
                   </v-list-item-content>
@@ -178,22 +178,26 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import menuData from "@/data/menu.json";
 import SearchBar from "@/components/SearchBar.vue";
 import { sendPostRequest } from "@/core/apiRequests.js";
-import HandwritingInput from '@/components/search/HandwritingInput.vue';
+import HandwritingInput from "@/components/search/HandwritingInput.vue";
 
 export default {
-  computed: mapGetters([
-    "currentUser",
-    "userRoleId",
-    "darkModeState",
-    "userHasRights",
-  ]),
+  computed: {
+    ...mapGetters([
+      "darkModeState",
+      "currentUser",
+      "userRoleId",
+      "userHasRights",
+    ])
+  },
   methods: {
-    ...mapMutations(["changeDarkMode"]),
-    ...mapActions(["getCurrentUser", "logOut"]),
+    ...mapActions([
+      "getCurrentUser",
+      "logOut"
+    ]),
     linkHasRights(link) {
       let accessRights = true;
       if (typeof link.access != "undefined" && link.access !== null) {
@@ -224,6 +228,12 @@ export default {
         this.$router.push({ path: params.path }).catch(() => {});
       }
     },
+    switchTheme () {
+      const newDarkModeState = !this.darkModeState
+
+      this.$store.commit('updateDarkMode', newDarkModeState);
+      this.$vuetify.theme.dark = newDarkModeState;
+    },
     avatarLink(img) {
       return `${process.env.VUE_APP_BASE}upload/avatars/${img}`;
     },
@@ -237,22 +247,9 @@ export default {
       });
     },
   },
-  watch: {
-    darkMode() {
-      this.changeDarkMode(this.darkMode);
-      this.$vuetify.theme.dark = this.darkMode;
-    },
-  },
   components: { SearchBar, HandwritingInput },
   mounted() {
-    this.$vuetify.theme.dark = this.darkModeState;
-    this.darkMode = this.darkModeState;
     this.getCurrentUser();
-  },
-  beforeUpdate() {
-    // костыль, чтобы тема прогрузилась окончательно
-    this.$vuetify.theme.dark = this.darkModeState;
-    this.darkMode = this.darkModeState;
   },
   data: () => ({
     drawer: true,
@@ -261,7 +258,6 @@ export default {
     login: "",
     password: "",
     authmode: true,
-    darkMode: false,
     drawInput: false,
   }),
 };
