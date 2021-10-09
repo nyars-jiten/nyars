@@ -26,6 +26,9 @@
                 <!-- {{gram.word}} | {{gram.ruby}} -->
               </div>
             </div>
+            <div class="parser-disclaimer" v-if="this.currentParsedGrammar.selectedLemma > -1 && currentGrammar.grammar.length > 0">
+              {{currentGrammar.word}} ← {{currentGrammar.lemma}} + {{currentGrammar.grammar}}
+            </div>
             <span class="parser-disclaimer">
               Парсер запущен в тестовом режиме, могут быть ошибки и неточности. О багах пишите нам в <a href="https://discord.gg/u7H5nsPWVB" target="_blank">дискорд</a>.
             </span>
@@ -80,10 +83,10 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   // computed: {
-  //     request() {
-  //         return this.$route.params.search;
-  //     }
-  // }
+  //     // request() {
+  //     //     return this.$route.params.search;
+  //     // }
+  // },
   data: () => ({
     searchPageOffset: 0,
     // currentLemma: 0//this.currentSearchResult.info.selectedLemma
@@ -115,6 +118,9 @@ export default {
   },
   computed: {
     ...mapGetters(["currentSearchResult", "currentLoadingState", "currentParsedGrammar"]),
+    currentGrammar() {
+      return this.currentParsedGrammar.parsedGrammar[this.currentParsedGrammar.selectedLemma];
+    }
   },
   props: {
     request: String,
