@@ -3,8 +3,8 @@
     <v-dialog :value="dialogModel(0)" @input="updateModel" max-width="700px">
       <v-card class="">
         <!-- <v-card-title>
-                <span class="headline">{{ formTitle }}</span>
-              </v-card-title> -->
+          <span class="headline">Написание/чтение</span>
+        </v-card-title> -->
         <v-card-text>
           <v-container v-if="currentObj">
             <!-- {{currentObj}} -->
@@ -254,19 +254,17 @@ export default {
 };
 </script>
 
-<style>
-.v-text-field {
-  padding: 0 !important;
-}
-</style>
-
 <style lang="scss" scoped>
+// .v-text-field {
+//   padding: 0 !important;
+// }
+
 .dial-btn {
   padding-bottom: 30px;
 }
 
-.writing-dial,
-.writing-input {
-  display: inline;
-}
+// .writing-dial,
+// .writing-input {
+//   display: inline;
+// }
 </style>
