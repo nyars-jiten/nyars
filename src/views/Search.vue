@@ -184,7 +184,7 @@ export default {
 }
 
 .parser-disclaimer {
-  margin: 0px 20px 0px 20px;
+  margin: 5px 20px 0px 20px;
   color: var(--v-search-result-parser-secondary-base);
   font-size: 80%;
 }
