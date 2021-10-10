@@ -41,7 +41,7 @@
         {
           "title": "Оцифровка",
           "icon": "mdi-data-matrix-scan",
-          "rights": 1,
+          "rights": 4,
           "access": 3,
           "action": {
             "name": "navigate",
@@ -80,7 +80,7 @@
         {
           "title": "Тематики",
           "icon": "mdi-widgets-outline",
-          "rights": 0,
+          "rights": 3,
           "action": {
             "name": "navigate",
             "params": {
