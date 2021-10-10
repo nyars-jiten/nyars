@@ -114,7 +114,7 @@
                     <InlineTag
                       v-bind:tags="filterTags(sense.tags, ['Dial', 'Misc'])"
                       v-bind:lang="lm.lang"
-                      :loanSource="sense.loanSource"
+                      :loanSources="sense.loanSources"
                     />
 
                     <div class="references-block">

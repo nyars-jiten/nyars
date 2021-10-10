@@ -17,9 +17,6 @@
         ></v-text-field>
       </v-col>
     </v-row>
-    <p>
-      Код языка указывается в соответствии со стандартом <a href="https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D0%B4%D1%8B_%D1%8F%D0%B7%D1%8B%D0%BA%D0%BE%D0%B2#%D0%9A%D0%BE%D0%B4%D1%8B_%D1%8F%D0%B7%D1%8B%D0%BA%D0%BE%D0%B2_%D0%BF%D0%BE_ISO_639_%D0%B8_%D0%93%D0%9E%D0%A1%D0%A2_7.75-97" target="_blank">ISO 639-3</a>
-    </p>
   </div>
 </template>
 

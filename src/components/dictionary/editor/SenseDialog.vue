@@ -106,11 +106,32 @@
                       </v-btn>
                     </v-tab-item>
                     <v-tab-item value="addition-3">
-                      <div class="loan-source" v-if="sense.loanSource">
-                        <LoanSourceComponent :sourceRaw="sense.loanSource" />
-                      </div>
-                      <v-btn v-else color="blue darken-1" outlined @click="addLoanSource">
-                        Указать источник заимствования
+                      <v-col
+                        cols="12"
+                        md="12"
+                        v-for="(lsource, lsId) in sense.loanSources"
+                        :key="sense.loanSources.length * lsId"
+                      >
+                        <v-row>
+                          <v-col cols="12" md="1">
+                            <v-btn
+                              icon
+                              x-small
+                              @click="removeLSource(lsId)"
+                              color="red"
+                              ><v-icon>mdi-close</v-icon>
+                            </v-btn>
+                          </v-col>
+                          <v-col cols="12" md="11">
+                            <LoanSourceComponent :sourceRaw="lsource" />
+                          </v-col>
+                        </v-row>
+                      </v-col>
+                      <p>
+                        Код языка указывается в соответствии со стандартом <a href="https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D0%B4%D1%8B_%D1%8F%D0%B7%D1%8B%D0%BA%D0%BE%D0%B2#%D0%9A%D0%BE%D0%B4%D1%8B_%D1%8F%D0%B7%D1%8B%D0%BA%D0%BE%D0%B2_%D0%BF%D0%BE_ISO_639_%D0%B8_%D0%93%D0%9E%D0%A1%D0%A2_7.75-97" target="_blank">ISO 639-3</a>
+                      </p>
+                      <v-btn color="blue darken-1" outlined @click="addLoanSource">
+                        Добавить источник заимствования
                       </v-btn>
                     </v-tab-item>
                   </v-tabs-items>
@@ -158,6 +179,9 @@ export default {
     removeRef(refId){
       this.sense.references.splice(refId, 1);
     },
+    removeLSource(lsId){
+      this.sense.loanSources.splice(lsId, 1);
+    },
     addExample() {
       this.sense.examples.push({ value: "", translation: "" });
     },
@@ -165,7 +189,8 @@ export default {
       this.sense.references.push({ target: "", translation: "", referenceType: 0 });
     },
     addLoanSource() {
-      this.sense.loanSource = { lang: "", word: ""};
+      if (this.sense.loanSources == null) this.sense.loanSources = [];
+      this.sense.loanSources.push({ lang: "", word: ""});
     },
     updateModel() {
       this.selectedLang = "";

@@ -1,6 +1,6 @@
 <template>
   <div class="tag-inline">
-    <span class="loan" v-if="loanSource && loanSource.word"> ({{loanSource.lang}} {{loanSource.word}})</span>
+    <span class="loan" v-if="loanSources && loanSources.length > 0"> ({{formLSource()}})</span>
     <div class="tags-wrap" v-if="tags.length > 0">
       <div :class="{ shorttagfld: !inf, shorttaginf: inf }" v-if="short">
         <v-tooltip top v-for="(tag, tagId) in tags" :key="tagId">
@@ -41,6 +41,11 @@ export default {
       }
       return this.searchTags[this.lang][tag];
     },
+    formLSource() {
+      return this.loanSources.map(function(lsrc) {
+        return lsrc.lang + '. ' + lsrc.word;
+      }).join(', ');
+    }
   },
   computed: {
     count() {
@@ -56,7 +61,7 @@ export default {
     tags: Array,
     type: Object,
     lang: String,
-    loanSource: Object,
+    loanSources: Array,
     inf: {
       type: Boolean,
       default: false,

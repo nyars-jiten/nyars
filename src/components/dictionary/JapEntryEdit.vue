@@ -114,7 +114,7 @@
                     <InlineTag
                       v-bind:tags="filterTags(sense.tags, ['Dial', 'Misc'])"
                       v-bind:lang="lm.lang"
-                      :loanSource="sense.loanSource"
+                      :loanSources="sense.loanSources"
                     />
 
                     <div class="references-block">
@@ -270,8 +270,8 @@ export default {
         "readings":[{"value":"—","tag":{"type":"Rinf","values":[]}}]}],
         "meanings":[{"pos":["n"],
         "langMeanings":[
-          {"lang":"rus","senses":[{"tags":[],"value":"новое значение","examples":[],"references":[],"loanSource":null}],"note":""},
-          {"lang":"eng","senses":[{"tags":[],"value":"новое значение","examples":[],"references":[],"loanSource":null}],"note":""}
+          {"lang":"rus","senses":[{"tags":[],"value":"новое значение","examples":[],"references":[],"loanSources":[]}],"note":""},
+          {"lang":"eng","senses":[{"tags":[],"value":"новое значение","examples":[],"references":[],"loanSources":[]}],"note":""}
         ]}]
       },
     },
