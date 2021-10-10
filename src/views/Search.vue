@@ -7,14 +7,14 @@
             <!-- {{ request }} -->
             <v-card-title>Результат поиска</v-card-title>
             <!-- {{ currentSearchResult.info.parsedGrammar }} -->
-            <div class="parser-info" v-if="currentParsedGrammar.parsedGrammar.length > 0">
+            <div class="parser-info" v-if="currentParsedGrammar.parsedGrammar && currentParsedGrammar.parsedGrammar.length > 0">
               <div class="parser-info-lemma"
                 v-for="(gram, lemmaId) in currentParsedGrammar.parsedGrammar"
                 :key="lemmaId"
               >
                 <div
                   v-if="!gram.notFound"
-                  @click="subSearch(lemmaId)"
+                  @click="changeLemma(lemmaId)"
                   class="found-lemma clickable"
                   :class="{selected: currentParsedGrammar.selectedLemma == lemmaId}"
                 >
@@ -64,6 +64,7 @@
                     <v-row justify="center">
                       <v-pagination
                         v-model="page"
+                        @input="changePage"
                         total-visible="11"
                         :length="Math.ceil(currentSearchResult.info.count / 20)"
                       ></v-pagination>
@@ -89,33 +90,43 @@ export default {
   // },
   data: () => ({
     searchPageOffset: 0,
+    page: 1,
     // currentLemma: 0//this.currentSearchResult.info.selectedLemma
   }),
   methods: {
     ...mapActions(["startSearch", "fetchTags"]),
-    search() {
-      // this.page++;
+    // search() {
+    //   // this.page++;
+    //   window.scrollTo(0, 0);
+    //   this.startSearch({
+    //     request: this.request,
+    //     page: this.page,
+    //   });
+    // },
+    changeLemma(lemmaId) {
+      this.page = 1;
+      this.subSearch(lemmaId);
+    },
+    changePage() {
       window.scrollTo(0, 0);
-      this.startSearch({
-        request: this.request,
-        page: this.page,
-      });
+      const lemmaId = this.currentParsedGrammar.selectedLemma;
+      this.subSearch(lemmaId);
     },
     subSearch(lemmaId) {
       const word = this.currentParsedGrammar.parsedGrammar[lemmaId].lemma;
       this.currentParsedGrammar.selectedLemma = lemmaId;
       this.startSearch({
         request: word,
-        page: 1,
+        page: this.page,
         subSearch: true
       });
     },
   },
-  watch: {
-    page() {
-      this.search();
-    },
-  },
+  // watch: {
+  //   page() {
+  //     this.search();
+  //   },
+  // },
   computed: {
     ...mapGetters(["currentSearchResult", "currentLoadingState", "currentParsedGrammar"]),
     currentGrammar() {
@@ -124,7 +135,6 @@ export default {
   },
   props: {
     request: String,
-    page: Number,
   },
   async mounted() {
     this.startSearch({ request: this.request, page: this.page });
