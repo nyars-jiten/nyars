@@ -26,12 +26,14 @@
                 <!-- {{gram.word}} | {{gram.ruby}} -->
               </div>
             </div>
-            <div class="parser-disclaimer" v-if="this.currentParsedGrammar.selectedLemma > -1 && currentGrammar.grammar.length > 0">
-              {{currentGrammar.word}} ← {{currentGrammar.lemma}} + {{currentGrammar.grammar}}
+            <div class="disclamer-block" v-if="this.currentParsedGrammar.parsedGrammar.length > 0">
+              <div class="parser-disclaimer" v-if="this.currentParsedGrammar.selectedLemma > -1 && currentGrammar.grammar.length > 0">
+                {{currentGrammar.word}} ← {{currentGrammar.lemma}} + {{currentGrammar.grammar}}
+              </div>
+              <span class="parser-disclaimer">
+                Парсер запущен в тестовом режиме, могут быть ошибки и неточности. О багах пишите нам в <a href="https://discord.gg/u7H5nsPWVB" target="_blank">дискорд</a>.
+              </span>
             </div>
-            <span class="parser-disclaimer">
-              Парсер запущен в тестовом режиме, могут быть ошибки и неточности. О багах пишите нам в <a href="https://discord.gg/u7H5nsPWVB" target="_blank">дискорд</a>.
-            </span>
             <!-- <v-list-item link class="res-item" v-for="entry in currentSearchResult.result" :key="entry.id" :to="`/jp/${entry.wid}`"> -->
             <v-card-text
               class="no-results"
