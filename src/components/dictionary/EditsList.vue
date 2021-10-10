@@ -383,6 +383,7 @@ a.titles-link {
 
 .author-name {
   color: var(--v-main-text-base);
+  // color: #8f8f8f;
 }
 
 .edit-id,

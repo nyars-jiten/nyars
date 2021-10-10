@@ -25,6 +25,9 @@ export default {
   created () {
     const isDarkTheme = this.$store.state.user.darkMode;
     this.$vuetify.theme.dark = isDarkTheme;
+  },
+  mounted () {
+    this.$meta().refresh();
   }
 };
 </script>
@@ -49,11 +52,11 @@ $body-font-family: "Rubik", "Noto Sans JP", HanaMinA, HanaMinB, Helvetica, Arial
   }
 }
 
-.theme--dark .v-main {
-  background-color: #424242;
-}
+// .theme--dark .v-main {
+//   background-color: #424242;
+// }
 
-.theme--light .v-main {
-  background-color: #f5f5f5;
-}
+// .theme--light .v-main {
+//   background-color: #f5f5f5;
+// }
 </style>

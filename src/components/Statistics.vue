@@ -131,6 +131,7 @@ export default {
 
 .stats-username-str {
   color: var(--v-main-text-base);
+  // color: #8f8f8f;
 }
 
 .user-stats-table tr td + td {

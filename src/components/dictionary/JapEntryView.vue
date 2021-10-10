@@ -293,11 +293,13 @@ export default {
   padding: 0;
   margin: 0;
   color: var(--v-jap-entry-view-entry-sense-color-base) !important;
+  // color: #000;
 }
 
 .lang {
   font-style: italic;
   color: var(--v-jap-entry-view-lang-color-base) !important;
+  // color: #000;
 }
 
 .lang-mean {
