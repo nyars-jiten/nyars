@@ -26,7 +26,7 @@
                 <!-- {{gram.word}} | {{gram.ruby}} -->
               </div>
             </div>
-            <div class="disclamer-block" v-if="this.currentParsedGrammar.parsedGrammar.length > 0">
+            <div class="disclamer-block" v-if="currentParsedGrammar.parsedGrammar && this.currentParsedGrammar.parsedGrammar.length > 0">
               <div class="parser-disclaimer" v-if="this.currentParsedGrammar.selectedLemma > -1 && currentGrammar.grammar.length > 0">
                 {{currentGrammar.word}} ← {{currentGrammar.lemma}} + {{currentGrammar.grammar}}
               </div>
