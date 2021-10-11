@@ -5,6 +5,7 @@ export function bbCodesProcess(rawText) {
     .replace(/\[i\](.*?)\[\/i\]/gim, "<em>$1</em>")
     .replace(/\[p\](.*?)\[\/p\]/gim, "<em>$1</em>")
     .replace(/\\([\n,;])/, "$1")
+    .replace('⌈', '')
     .replace(/\[ref=?\](.*?)\[\/ref\]/gim, "<a href='/search?r=$1'>$1</a>")
     .replace(/\[ref=([a-zA-Z\d]{4,7})\](.*?)\[\/ref\]/gim, "<a href='/jp/$1'>$2</a>")
     .replace(/\[sub\](.*?)\[\/sub\]/gim, "<sub>$1</sub>")
