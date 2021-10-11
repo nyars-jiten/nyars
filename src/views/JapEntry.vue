@@ -123,6 +123,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import sc from "@/core/scriptConverter.js";
 import corpusList from "@/data/corpus.json";
 import JapEntryView from "@/components/dictionary/JapEntryView.vue";
 import GalleryComponent from "@/components/dictionary/GalleryComponent.vue";
@@ -163,15 +164,22 @@ export default {
     },
     currentTitle() {
       if (!this.currentEntry.entry) return '';
+      function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+      }
 
       var titles = [];
+      var readings = [];
       this.currentEntry.entry.words.forEach(function(item) {
         titles = titles.concat(item.writings.map(function(w) {
           return w.value;
         }));
+        readings = readings.concat(item.readings.map(function(w) {
+          return sc.scriptConvert(w.value);
+        }));
       });
-      let uniqueTitles = [...new Set(titles)]
-      return uniqueTitles.join('・');
+      // let uniqueTitles = [...new Set(titles), ...new Set(readings)]
+      return titles.concat(readings).filter(onlyUnique).join('・');
     },
   },
   methods: {
