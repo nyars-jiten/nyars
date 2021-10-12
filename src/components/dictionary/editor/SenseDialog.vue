@@ -58,7 +58,7 @@
                         cols="12"
                         md="12"
                         v-for="(example, exampleId) in sense.examples"
-                        :key="sense.examples.length * exampleId"
+                        :key="hashData(example) + exampleId"
                       >
                         <v-row>
                           <v-col cols="12" md="1">
@@ -84,7 +84,7 @@
                         cols="12"
                         md="12"
                         v-for="(ref, refId) in sense.references"
-                        :key="sense.references.length * refId"
+                        :key="hashData(ref) + refId"
                       >
                         <v-row>
                           <v-col cols="12" md="1">
@@ -110,7 +110,7 @@
                         cols="12"
                         md="12"
                         v-for="(lsource, lsId) in sense.loanSources"
-                        :key="sense.loanSources.length * lsId"
+                        :key="hashData(lsource) + lsId"
                       >
                         <v-row>
                           <v-col cols="12" md="1">
@@ -172,6 +172,9 @@ export default {
     removeCurrentSense() {
       this.$store.commit("editorRemoveSense", { index: this.dialogIndex(4) });
       this.updateModel();
+    },
+    hashData(data) {
+      return JSON.stringify(data);
     },
     removeExample(index) {
       this.sense.examples.splice(index, 1);
