@@ -93,6 +93,7 @@ export default {
   data: () => ({
     searchPageOffset: 0,
     page: 1,
+    // page: this.selectedPage,
     // currentLemma: 0//this.currentSearchResult.info.selectedLemma
   }),
   methods: {
@@ -115,8 +116,12 @@ export default {
       this.subSearch(lemmaId);
     },
     subSearch(lemmaId) {
-      const word = this.currentParsedGrammar.parsedGrammar[lemmaId].lemma;
+      const word = lemmaId > -1 ? this.currentParsedGrammar.parsedGrammar[lemmaId].lemma : this.currentParsedGrammar.request;
       this.currentParsedGrammar.selectedLemma = lemmaId;
+      // this.$router.replace({ name: "user-view", params: {id:"123"}, query: {q1: "q1"} })
+      this.$router
+        .replace({ path: "/search", query: { r: this.request, page: this.page } })
+        .catch(() => {});
       this.startSearch({
         request: word,
         page: this.page,
@@ -135,8 +140,10 @@ export default {
       return this.currentParsedGrammar.parsedGrammar[this.currentParsedGrammar.selectedLemma];
     }
   },
-  props: {
-    request: String,
+  props: ['request', 'selectedPage'],
+  beforeUpdate() {
+    // console.log(this.selectedPage)
+    this.page = parseInt(this.selectedPage)
   },
   async mounted() {
     this.startSearch({ request: this.request, page: this.page });

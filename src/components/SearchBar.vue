@@ -54,7 +54,7 @@ export default {
       this.$emit("startSearch");
       this.startSearch({ request: this.request, page: 1 });
       this.$router
-        .push({ path: "/search", query: { r: this.request } })
+        .push({ path: "/search", query: { r: this.request, page: 1 } })
         .catch(() => {});
     },
     showDrawInput() {
