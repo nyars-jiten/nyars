@@ -54,79 +54,85 @@
                   </div>
                   <v-tabs-items v-model="tabs">
                     <v-tab-item value="addition-1">
-                      <v-col
-                        cols="12"
-                        md="12"
-                        v-for="(example, exampleId) in sense.examples"
-                        :key="hashData(example) + exampleId"
-                      >
-                        <v-row>
-                          <v-col cols="12" md="1">
-                            <v-btn
-                              icon
-                              x-small
-                              @click="removeExample(exampleId)"
-                              color="red"
-                              ><v-icon>mdi-close</v-icon>
-                            </v-btn>
-                          </v-col>
-                          <v-col cols="12" md="11">
-                            <ExampleComponent :exampleRaw="example" />
-                          </v-col>
-                        </v-row>
-                      </v-col>
+                      <div class="exmplaes-wrapper" v-if="sense.examples" :key="sense.examples.length">
+                        <v-col
+                          cols="12"
+                          md="12"
+                          v-for="(example, exampleId) in sense.examples"
+                          :key="exampleId"
+                        >
+                          <v-row>
+                            <v-col cols="12" md="1">
+                              <v-btn
+                                icon
+                                x-small
+                                @click="removeExample(exampleId)"
+                                color="red"
+                                ><v-icon>mdi-close</v-icon>
+                              </v-btn>
+                            </v-col>
+                            <v-col cols="12" md="11">
+                              <ExampleComponent :exampleRaw="example" />
+                            </v-col>
+                          </v-row>
+                        </v-col>
+                      </div>
                       <v-btn color="blue darken-1" outlined @click="addExample">
                         Добавить пример
                       </v-btn>
                     </v-tab-item>
                     <v-tab-item value="addition-2">
-                      <v-col
-                        cols="12"
-                        md="12"
-                        v-for="(ref, refId) in sense.references"
-                        :key="hashData(ref) + refId"
-                      >
-                        <v-row>
-                          <v-col cols="12" md="1">
-                            <v-btn
-                              icon
-                              x-small
-                              @click="removeRef(refId)"
-                              color="red"
-                              ><v-icon>mdi-close</v-icon>
-                            </v-btn>
-                          </v-col>
-                          <v-col cols="12" md="11">
-                            <ReferenceComponent :refRaw="ref" />
-                          </v-col>
-                        </v-row>
-                      </v-col>
+                      <div class="ref-wrapper" v-if="sense.references" :key="sense.references.length">
+                        <v-col
+                          cols="12"
+                          md="12"
+                          v-for="(ref, refId) in sense.references"
+                          :key="refId"
+                        >
+                          <v-row>
+                            <v-col cols="12" md="1">
+                              <v-btn
+                                icon
+                                x-small
+                                @click="removeRef(refId)"
+                                color="red"
+                                ><v-icon>mdi-close</v-icon>
+                              </v-btn>
+                            </v-col>
+                            <v-col cols="12" md="11">
+                              <ReferenceComponent :refRaw="ref" />
+                            </v-col>
+                          </v-row>
+                        </v-col>
+                      </div>
                       <v-btn color="blue darken-1" outlined @click="addReference">
                         Добавить ссылку
                       </v-btn>
                     </v-tab-item>
                     <v-tab-item value="addition-3">
-                      <v-col
-                        cols="12"
-                        md="12"
-                        v-for="(lsource, lsId) in sense.loanSources"
-                        :key="hashData(lsource) + lsId"
-                      >
-                        <v-row>
-                          <v-col cols="12" md="1">
-                            <v-btn
-                              icon
-                              x-small
-                              @click="removeLSource(lsId)"
-                              color="red"
-                              ><v-icon>mdi-close</v-icon>
-                            </v-btn>
-                          </v-col>
-                          <v-col cols="12" md="11">
-                            <LoanSourceComponent :sourceRaw="lsource" />
-                          </v-col>
-                        </v-row>
-                      </v-col>
+                      <div class="ls-wrapper" v-if="sense.loanSources" :key="sense.loanSources.length">
+                        <v-col
+                          cols="12"
+                          md="12"
+                          v-for="(lsource, lsId) in sense.loanSources"
+                          :key="lsId"
+                        >
+                          <v-row>
+                            <v-col cols="12" md="1">
+                              <v-btn
+                                icon
+                                x-small
+                                @click="removeLSource(lsId)"
+                                color="red"
+                                ><v-icon>mdi-close</v-icon>
+                              </v-btn>
+                            </v-col>
+                            <v-col cols="12" md="11">
+                              <LoanSourceComponent :sourceRaw="lsource" />
+                            </v-col>
+                          </v-row>
+                        </v-col>
+                      </div>
                       <p>
                         Код языка указывается в соответствии со стандартом <a href="https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D0%B4%D1%8B_%D1%8F%D0%B7%D1%8B%D0%BA%D0%BE%D0%B2#%D0%9A%D0%BE%D0%B4%D1%8B_%D1%8F%D0%B7%D1%8B%D0%BA%D0%BE%D0%B2_%D0%BF%D0%BE_ISO_639_%D0%B8_%D0%93%D0%9E%D0%A1%D0%A2_7.75-97" target="_blank">ISO 639-3</a>
                       </p>
@@ -172,9 +178,6 @@ export default {
     removeCurrentSense() {
       this.$store.commit("editorRemoveSense", { index: this.dialogIndex(4) });
       this.updateModel();
-    },
-    hashData(data) {
-      return JSON.stringify(data);
     },
     removeExample(index) {
       this.sense.examples.splice(index, 1);
