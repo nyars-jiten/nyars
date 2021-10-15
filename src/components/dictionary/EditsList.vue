@@ -20,7 +20,7 @@
               <router-link
                 class="titles-link"
                 :to="{ name: 'view-jp', params: { wid: edit.identifier } }"
-                v-if="edit.identifier && !(edit.type == 2 && edit.status == 2)"
+                v-if="edit.identifier && !(edit.type == 3 && (edit.status == 4 || edit.status == 3))"
               >
                 <EditTitle v-bind:edit="edit" />
               </router-link>
