@@ -25,7 +25,7 @@
           </form>
         </v-col>
 
-        <v-col
+        <!-- <v-col
           cols="12"
           sm="6"
           md="2"
@@ -35,7 +35,7 @@
             v-model="exactSearchState"
             label="Точное соответствие"
           />
-        </v-col>
+        </v-col> -->
       </v-row>
     </v-container>
   </div>
