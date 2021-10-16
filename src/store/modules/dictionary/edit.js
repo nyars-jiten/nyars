@@ -24,6 +24,9 @@ export default {
         updateLastEdits(state, lastEdits) {
             state.lastEdits = lastEdits;
         },
+        clearEditCompare(state) {
+            state.editCompare = [];
+        },
         updateEditCompare(state, { editCompare, id }) {
             Vue.set(state.editCompare, id, editCompare);
         }

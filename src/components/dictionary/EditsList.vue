@@ -65,7 +65,7 @@
           </div>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <v-row no-gutters justify="space-between" v-if="checkForNewPanel(edit.id)">
+          <v-row no-gutters justify="space-between" v-if="editCompare[edit.id]">
             Обоснование: {{editCompare[edit.id].comment}}
             <v-col md="11">
               <div class="diff">
@@ -154,13 +154,9 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   computed: {
     ...mapGetters(["editCompare", "currentUser", "userHasRights"]),
-    checkForNewPanel() {
-      return (editId) => {
-        return Object.prototype.hasOwnProperty.call(this.editCompare, editId);
-      };
-    },
     getPanelKey() {
-      return this.lastEdits.length > 0 ? this.lastEdits[0].id : 0;
+      const key = this.lastEdits.length > 0 ? this.lastEdits.at(-1).id : 0;
+      return key;
     },
   },
   methods: {
@@ -274,6 +270,7 @@ export default {
   },
   async mounted() {
     this.getLastEdits();
+    this.$store.commit('clearEditCompare');
   },
   watch: {
     panelIndexLocal: function () {
