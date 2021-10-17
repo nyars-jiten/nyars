@@ -18,23 +18,24 @@
               </div>
               <div
                 class="icon-wrapper"
-                v-if="!editMode && !currentEntry.isReviewed"
+                @click="changeStatus(1)"
+                v-if="!editMode && (!currentEntry.isReviewed || userHasRights(2))"
               >
                 <DictionaryIcon
-                  color="warning"
+                  :color="currentEntry.isReviewed ? 'grey' : 'warning'"
                   icon="mdi-alert-outline"
                   tooltip="Неотредактированная статья"
                 />
               </div>
               <div
                 class="icon-wrapper"
-                v-if="!editMode && userHasRights(2)"
-                @click="changeStatus"
+                @click="changeStatus(2)"
+                v-if="!editMode && (currentEntry.isUnconfirmed || userHasRights(2))"
               >
                 <DictionaryIcon
-                  color="grey"
-                  icon="mdi-check-circle-outline"
-                  tooltip="Отметить статью как [не]отредактированную"
+                  :color="currentEntry.isUnconfirmed ? 'red' : 'grey'"
+                  icon="mdi-magnify-scan"
+                  tooltip="Статья не подтверждается источниками"
                 />
               </div>
             </v-card-title>
@@ -195,9 +196,10 @@ export default {
       this.deserializeEntry();
       this.textMode = false;
     },
-    async changeStatus() {
+    async changeStatus(type) {
+      if (!this.userHasRights(2)) return;
       const resp = await sendPostRequest(
-        "dictionary/jap/entry/change-status/" + this.currentWid,
+        "dictionary/jap/entry/change-status/" + this.currentWid + `?type=${type}`,
         {}
       );
       if (resp.status == 200 && resp.data.id !== 0) {
