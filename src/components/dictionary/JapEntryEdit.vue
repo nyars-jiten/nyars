@@ -128,7 +128,7 @@
                           <router-link
                             class="entry-reference-link"
                             :to="{ name: 'view-jp', params: { wid: ref.target } }"
-                            v-if="ref.target.length >= 4"
+                            v-if="ref.target && ref.target.length >= 4"
                           >{{ ref.value }}</router-link>
                           <router-link
                             class="entry-reference-link"
