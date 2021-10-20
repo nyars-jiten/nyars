@@ -26,7 +26,7 @@ export default {
     return {
       source: this.sourceRaw,
       // langs: ['англ.','голл.','исп.','итал.','нем.','португ.','санскр.','рус.','фр.'],
-      langs: ['eng','nld','spa','ita','deu','por','san','rus','fra']
+      langs: ['eng','wasei','deu','spa','por','zho','ita','nld','san','rus','fra']
     };
   },
   props: {
