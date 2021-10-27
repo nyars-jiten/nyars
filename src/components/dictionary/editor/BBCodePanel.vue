@@ -18,6 +18,8 @@ export default {
   methods: {
     processbb(openTag, closedTag) {
       const txtarea = document.getElementById(this.textAreaId);
+      // const txtarea = document.activeElement;
+      // console.log(txtarea);
       txtarea.focus();
       const start = txtarea.selectionStart;
       const finish = txtarea.selectionEnd;

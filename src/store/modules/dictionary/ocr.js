@@ -22,7 +22,10 @@ export default {
         async getPage(ctx, { bookid, pageid }) {
             axios
                 .get(process.env.VUE_APP_API + `ocr/books/${bookid}/pages/${pageid}`, { withCredentials: true })
-                .then(response => (ctx.commit('updatePage', response.data)))
+                .then(response => {
+                    ctx.commit('updatePage', response.data);
+                    ctx.dispatch('startOCRSearch', {request: response.data.word});
+                })
                 .catch(error => {
                     console.log(error);
                 });

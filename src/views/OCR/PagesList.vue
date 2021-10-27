@@ -9,9 +9,9 @@
             </v-card-title>
             <v-card-text>
 
-              <div class="page-line" v-for="page in pagesList.ocrPages" :key="page.id">
-                    <router-link :to="'/ocr/'+pagesList.id+'/page/'+page.id">
-                        <span :class="statusClass(page.status)">стр. {{page.title}} </span>
+              <div class="page-line" v-for="page in pagesList" :key="page.id">
+                    <router-link :to="'/ocr/'+page.ocrBook.id+'/page/'+page.id">
+                        <span :class="statusClass(page.status)">[{{page.innerIndex}}] {{page.word}}</span>
                         <span class="user ma-2" v-if="page.user">
                           <v-avatar size="20px" class="avatar">
                             <img :src="avatarLink(page.user.avatar)" />

@@ -29,6 +29,25 @@ export default {
                     ctx.commit('updateLoadingState', false);
                 });
         },
+        async startOCRSearch(ctx, { request }) {
+            ctx.commit('updateLoadingState', true);
+            ctx.commit('updateSearchState', {});
+            const encodedreq = request.replace('#', '%23');
+            axios
+                .get(process.env.VUE_APP_API + 'search/jap?r=' +
+                encodedreq +
+                '&p=0' +
+                '&exact=false&hasParser=false')
+                .then(response => {
+                    ctx.commit('updateSearchState', response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+                .then(() => {
+                    ctx.commit('updateLoadingState', false);
+                });
+        },
         async startRandomSearch(ctx, paramsList) {
             ctx.commit('updateLoadingState', true);
             ctx.commit('updateRndSearchState', {});

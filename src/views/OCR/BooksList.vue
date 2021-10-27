@@ -32,8 +32,8 @@ export default {
   methods: {
     ...mapActions(["getBooksList"]),
     getPercent(book) {
-      // if (book.totalPages === 0) return 100;
-      return book.completedPages/book.totalPages * 100;
+      if (book.totalPages === 0) return 0;
+      return (book.completedPages/book.totalPages * 100).toFixed(2);
     }
   },
   computed: {

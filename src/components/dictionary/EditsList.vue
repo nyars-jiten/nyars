@@ -230,6 +230,8 @@ export default {
       switch (type) {
         case 0:
           return "яп-ру";
+        case 4:
+          return "яп-ру (авто)";
         default:
           return "—";
       }
