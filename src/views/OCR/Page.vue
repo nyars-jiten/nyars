@@ -166,9 +166,7 @@ export default {
       return 'не назначено';
     },
     getImageLink(prefix, file) {
-      console.log(prefix, file);
-      return 'https://nyars.org/upload/ocr/entries/DIEM/0008_1.png';
-      // return process.env.VUE_APP_BASE + 'upload/ocr/entries/' + prefix + '/' + file;
+      return process.env.VUE_APP_BASE + 'upload/ocr/entries/' + prefix + '/' + file;
     },
     getStatus(status) {
       switch (status) {
