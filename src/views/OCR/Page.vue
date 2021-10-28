@@ -166,7 +166,7 @@ export default {
       return 'не назначено';
     },
     getImageLink(prefix, file) {
-      return process.env.VUE_APP_API + 'ocr/entries/' + prefix + '/' + file;
+      return process.env.VUE_APP_BASE + 'upload/ocr/entries/' + prefix + '/' + file;
     },
     getStatus(status) {
       switch (status) {
