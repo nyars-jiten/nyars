@@ -75,7 +75,7 @@
                   mdi-spin mdi-loading
                 </v-icon>
               </div>
-              <v-img :src="getImageLink(page.ocrBook.prefix, page.file)" max-width="60%"></v-img>
+              <v-img :src="getImageLink(page.ocrBook.prefix, page.file)" contain max-width="60%"></v-img>
               <div class="switch-page">
                 <v-btn
                     outlined
@@ -166,7 +166,9 @@ export default {
       return 'не назначено';
     },
     getImageLink(prefix, file) {
-      return process.env.VUE_APP_BASE + 'upload/ocr/entries/' + prefix + '/' + file;
+      console.log(prefix, file);
+      return 'https://nyars.org/upload/ocr/entries/DIEM/0008_1.png';
+      // return process.env.VUE_APP_BASE + 'upload/ocr/entries/' + prefix + '/' + file;
     },
     getStatus(status) {
       switch (status) {
