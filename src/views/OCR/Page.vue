@@ -5,7 +5,8 @@
         <v-col cols="12" md="12" v-if="this.userHasRights(3)">
           <v-card class="mx-auto" tile v-if="page.ocrBook != null">
             <v-card-title>
-                <router-link :to="'/ocr/'+page.ocrBook.id">← {{ page.ocrBook.title }}</router-link>
+                <!-- <router-link :to="'/ocr/'+page.ocrBook.id">← {{ page.ocrBook.title }}</router-link> -->
+                {{ page.ocrBook.title }}
             </v-card-title>
             <v-card-text>
 
@@ -38,6 +39,19 @@
                   <v-col cols="12" sm="6" md="3">
                     <v-textarea rows="1" v-model="page.meaningRu" @click="setFocusedField('Ru')" id="Ru" auto-grow label="Ru"></v-textarea>
                   </v-col>
+                  <v-col cols="12" sm="4" md="3">
+                    <v-autocomplete
+                      :menu-props="{ maxHeight: '400' }"
+                      label="Тематика"
+                      multiple
+                      small-chips
+                      deletable-chips
+                      item-text="rus"
+                      item-value="engShort"
+                      :items="tagList"
+                      v-model="page.selectedTags"
+                    ></v-autocomplete>
+                  </v-col>
                 </v-row>
                 <v-row>
                   <BBCodePanel
@@ -67,6 +81,7 @@
                     <!-- :disabled="page.status != 0" -->
                 <v-btn
                     outlined
+                    :disabled="page.status != 0"
                     class="ma-2"
                     color="light-blue"
                     @click="processPage('auto')"
@@ -114,7 +129,7 @@ import BBCodePanel from "@/components/dictionary/editor/BBCodePanel.vue";
 
 export default {
   methods: {
-    ...mapActions(["getPage", "startOCRSearch"]),
+    ...mapActions(["getPage", "startOCRSearch", 'fetchTags']),
     async getNextPage() {
         const resp = await sendGetRequest('ocr/books/' + this.currentBookid + '/page/' + this.currentPageid + '/next');
         this.$router.push({ path: '/ocr/'+resp.data.ocrBook.id+'/page/'+resp.data.id }).catch(()=>{});
@@ -193,9 +208,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["page", "userHasRights", "currentSearchResult"]),
+    ...mapGetters(["page", "userHasRights", "currentSearchResult", 'getSubjectTags']),
     currentBookid() {
       return this.$route.params.bookid;
+    },
+    tagList() {
+      return this.getSubjectTags('Fld');
     },
     currentPageid() {
       return this.$route.params.pageid;
@@ -218,6 +236,7 @@ export default {
   },
   async mounted() {
     // if (!this.userHasRights(3)) this.$router.push({ path: '/' }).catch(() => {});
+    this.fetchTags();
     this.getPage({ bookid: this.currentBookid, pageid: this.currentPageid });
   },
   data: () => ({
