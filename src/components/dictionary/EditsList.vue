@@ -65,11 +65,17 @@
           </div>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
+          <div class="difference-block">
           <v-row no-gutters justify="space-between" v-if="editCompare[edit.id]">
-            Обоснование: {{editCompare[edit.id].comment}}
-            <v-col md="11">
-              <div class="diff">
-                <div class="side">
+            <v-col cols="12" md="10" sm="12">
+              <v-row>
+                <v-col cols="12" md="10">
+                  <div class="comment-line" style="overflow-wrap: break-word; width: 100%; overflow:hidden;">
+                    Обоснование: {{editCompare[edit.id].comment}}
+                  </div>
+                </v-col>
+                <v-col cols="12" md="5" sm="12">
+                  <div class="side">
                   <template
                     v-for="(source, sourceIndex) of editCompare[edit.id].source"
                   >
@@ -83,8 +89,12 @@
                     <template v-else>{{ source.value }}</template>
                   </template>
                 </div>
-                <div class="arrow">⟶</div>
-                <div class="side">
+                </v-col>
+                <v-col cols="12" md="1" sm="12">
+                  <div class="arrow">⟶</div>
+                </v-col>
+                <v-col cols="12" md="5" sm="12">
+                  <div class="side">
                   <template
                     v-for="(result, resultIndex) of editCompare[edit.id].result"
                   >
@@ -98,10 +108,11 @@
                     <template v-else>{{ result.value }}</template>
                   </template>
                 </div>
-              </div>
-            </v-col>
+                </v-col>
+              </v-row>
+              </v-col>
             <!-- <v-spacer></v-spacer> -->
-            <v-col md="1" v-if="edit.status == 1">
+            <v-col cols="12" md="2" sm="12" v-if="edit.status == 1">
               <div class="btns">
                 <v-btn
                   class="ma-2"
@@ -138,7 +149,8 @@
                 </v-btn>
               </div>
             </v-col>
-          </v-row>
+            </v-row>
+          </div>
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
@@ -305,15 +317,16 @@ a.titles-link {
 }
 
 .title-wrap,
-.title {
+.title,
+.edits-list {
   display: inline-block;
 }
 
-.diff {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 6vw;
-}
+// .diff {
+//   display: grid;
+//   grid-template-columns: 1fr auto 1fr;
+//   gap: 6vw;
+// }
 
 .side {
   overflow: hidden;

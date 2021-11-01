@@ -11,11 +11,11 @@
         <v-card elevation="2" outlined tile>
           <v-card-title>Активность</v-card-title>
           <v-card-text>
-            <template>
+            <div class="diff-wrapper">
               <v-row justify="center">
                 <EditsList v-bind:lastEdits="lastEdits" />
               </v-row>
-            </template>
+            </div>
           </v-card-text>
         </v-card>
       </v-col>
