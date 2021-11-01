@@ -90,7 +90,8 @@
                   mdi-spin mdi-loading
                 </v-icon>
               </div>
-              <img :src="getImageLink(page.ocrBook.prefix, page.file)" />
+
+              <img :src="getImageLink(page.ocrBook.prefix, page.file)" style="max-width: 60%;" />
               <div class="switch-page">
                 <v-btn
                     outlined
