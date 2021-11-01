@@ -90,17 +90,22 @@
                   mdi-spin mdi-loading
                 </v-icon>
               </div>
-              <v-img :src="getImageLink(page.ocrBook.prefix, page.file)" contain max-width="60%"></v-img>
+              <img :src="getImageLink(page.ocrBook.prefix, page.file)" />
               <div class="switch-page">
                 <v-btn
                     outlined
                     class="ma-2"
-                    @click="getRandPage"
-                >Случайная →</v-btn>
+                    @click="getOtherPage('prev')"
+                >← Предыдущая</v-btn>
                 <v-btn
                     outlined
                     class="ma-2"
-                    @click="getNextPage"
+                    @click="getOtherPage('rand')"
+                >← Случайная →</v-btn>
+                <v-btn
+                    outlined
+                    class="ma-2"
+                    @click="getOtherPage('next')"
                 >Следующая →</v-btn>
                 </div>
                 <v-list-item
@@ -130,11 +135,6 @@ import BBCodePanel from "@/components/dictionary/editor/BBCodePanel.vue";
 export default {
   methods: {
     ...mapActions(["getPage", "startOCRSearch", 'fetchTags']),
-    async getNextPage() {
-        const resp = await sendGetRequest('ocr/books/' + this.currentBookid + '/page/' + this.currentPageid + '/next');
-        this.$router.push({ path: '/ocr/'+resp.data.ocrBook.id+'/page/'+resp.data.id }).catch(()=>{});
-        this.getPage({ bookid: this.currentBookid, pageid: this.currentPageid });
-    },
     updateWithNewValue(newValue) {
       switch (this.focusedField) {
         case 'word':
@@ -160,8 +160,8 @@ export default {
     setFocusedField(field) {
       this.focusedField = field
     },
-    async getRandPage() {
-        const resp = await sendGetRequest('ocr/books/' + this.currentBookid + '/page/' + this.currentPageid + '/rand');
+    async getOtherPage(type) {
+        const resp = await sendGetRequest('ocr/books/' + this.currentBookid + '/page/' + this.currentPageid + '/' + type);
         this.$router.push({ path: '/ocr/'+resp.data.ocrBook.id+'/page/'+resp.data.id }).catch(()=>{});
         await this.getPage({ bookid: this.currentBookid, pageid: this.currentPageid });
     },
