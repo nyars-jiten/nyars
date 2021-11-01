@@ -64,15 +64,15 @@
             </div>
           </div>
         </v-expansion-panel-header>
-        <v-expansion-panel-content>
+        <v-expansion-panel-content style="line-break: anywhere">
           <div class="difference-block">
           <v-row no-gutters justify="space-between" v-if="editCompare[edit.id]">
             <v-col cols="12" md="10" sm="12">
               <v-row>
                 <v-col cols="12" md="10">
-                  <div class="comment-line" style="overflow-wrap: break-word; width: 100%; overflow:hidden;">
+                  <span class="comment-line" style="overflow-wrap: break-word; width: 100%; overflow:hidden;">
                     Обоснование: {{editCompare[edit.id].comment}}
-                  </div>
+                  </span>
                 </v-col>
                 <v-col cols="12" md="5" sm="12">
                   <div class="side">
@@ -84,8 +84,7 @@
                         class="removed"
                         :key="sourceIndex"
                         v-text="source.value"
-                      />
-                    </template>
+                      /></template>
                     <template v-else>{{ source.value }}</template>
                   </template>
                 </div>
