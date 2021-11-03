@@ -9,6 +9,7 @@
     <span class="bb-btn" @click="processbb('«', '»')">« »</span>
     <span class="bb-btn" @click="processbb('[\']', '[/\']')">[']</span>
     <span class="bb-btn" @click="processbb('⌈', '')">⌈</span>
+    <span v-if="hasToLower" class="bb-btn" @click="toLower()">[↓]</span>
   </div>
 </template>
 
@@ -37,12 +38,30 @@ export default {
       // txtarea.value=newText;
       this.$emit("changed", newText);
     },
+    toLower() {
+      const txtarea = document.getElementById(this.textAreaId);
+      txtarea.focus();
+      const start = txtarea.selectionStart;
+      const finish = txtarea.selectionEnd;
+      const allText = txtarea.value;
+      const sel = allText.substring(start, finish);
+      const newText =
+        allText.substring(0, start) +
+        sel.toLowerCase() +
+        allText.substring(finish, allText.length);
+
+      txtarea.setSelectionRange(start, sel.length);
+
+      // txtarea.value=newText;
+      this.$emit("changed", newText);
+    }
   },
   computed: {
     ...mapGetters(["currentEntry"]),
   },
   props: {
     textAreaId: String,
+    hasToLower: Boolean,
   },
 };
 </script>

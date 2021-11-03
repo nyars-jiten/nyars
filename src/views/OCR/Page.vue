@@ -86,8 +86,9 @@
                 </v-row>
                 <v-row>
                   <BBCodePanel
-                    :textAreaId="focusedField"
-                    @changed="(...args) => updateWithNewValue(args[0])"
+                    :textAreaId='focusedField'
+                    :hasToLower='true'
+                    @changed='(...args) => updateWithNewValue(args[0])'
                   />
                 </v-row>
                 <v-row>
