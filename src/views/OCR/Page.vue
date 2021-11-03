@@ -98,12 +98,12 @@
                 </v-row>
               </div>
               <div class="page-control">
-                <v-btn
+                <!-- <v-btn
                     outlined
                     class="ma-2"
                     color="warning"
                     @click="processPage('skip')"
-                >Skip</v-btn>
+                >Skip</v-btn> -->
                 <v-btn
                     outlined
                     class="ma-2"
