@@ -28,16 +28,47 @@
                 ></v-textarea>
                 <v-row>
                   <v-col cols="12" sm="4" md="3">
-                    <v-textarea rows="1" v-model="page.word" @input="startSearch" @click="setFocusedField('word')" id="word" label="word"></v-textarea>
+                    <v-textarea
+                      rows="1"
+                      v-model="page.word"
+                      @input="startSearch"
+                      @click="setFocusedField('word')"
+                      id="word"
+                      label="word"
+                    />
                   </v-col>
                   <v-col cols="12" sm="8" md="3">
-                    <v-textarea rows="1" v-model="page.reading" append-icon="mdi-refresh-auto" @click:append="predictReading" @click="setFocusedField('reading')" id="reading" label="reading"></v-textarea>
+                    <v-textarea
+                      rows="1"
+                      v-model="page.reading"
+                      append-icon="mdi-refresh-auto"
+                      @click:append="predictReading"
+                      @click="setFocusedField('reading')"
+                      id="reading"
+                      label="reading"
+                    />
                   </v-col>
                   <v-col cols="12" sm="6" md="3">
-                    <v-textarea rows="1" v-model="page.meaningEng" @click="setFocusedField('Eng')" id="Eng" auto-grow label="Eng"></v-textarea>
+                    <v-textarea
+                      rows="1"
+                      v-model="page.meaningEng"
+                      @click="setFocusedField('Eng')"
+                      id="Eng"
+                      auto-grow
+                      label="Eng"
+                    />
                   </v-col>
                   <v-col cols="12" sm="6" md="3">
-                    <v-textarea rows="1" v-model="page.meaningRu" @click="setFocusedField('Ru')" id="Ru" auto-grow label="Ru"></v-textarea>
+                    <v-textarea
+                      rows="1"
+                      v-model="page.meaningRu"
+                      append-icon="mdi-code-tags"
+                      @click="setFocusedField('Ru')"
+                      @click:append="convertBracesRu()"
+                      id="Ru"
+                      auto-grow
+                      label="Ru"
+                    />
                   </v-col>
                   <v-col cols="12" sm="4" md="3">
                     <v-autocomplete
@@ -156,6 +187,37 @@ export default {
 
         default:
           break;
+      }
+    },
+    convertBracesRu() {
+      let result = '';
+      this.page.meaningRu.split('').forEach(letter => {
+        result += this.processBrace(letter);
+      });
+      this.page.meaningRu = result;
+    },
+    processBrace(char) {
+      switch (char) {
+        case '(':
+          return '[';
+
+        case ')':
+          return ']';
+
+        case '[':
+          return '(';
+
+        case ']':
+          return ')';
+
+        case '{':
+          return '(';
+
+        case '}':
+          return ')';
+
+        default:
+          return char;
       }
     },
     setFocusedField(field) {
