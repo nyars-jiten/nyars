@@ -12,11 +12,21 @@
     <v-simple-table class="stats-table" v-if="resultStats">
       <tr>
         <td>Новые статьи</td>
-        <td>{{ resultStats.editsStats.japNew }}</td>
+        <td>
+          {{ resultStats.editsStats.japNew }}
+          <span v-if="userHasRights(-1)">
+             / {{resultStats.editsStats.japNewAuto}} (авто)
+          </span>
+        </td>
       </tr>
       <tr>
         <td>Исправления</td>
-        <td>{{ resultStats.editsStats.japEdit }}</td>
+        <td>
+          {{ resultStats.editsStats.japEdit }}
+          <span v-if="userHasRights(-1)">
+            / {{resultStats.editsStats.japEditAuto}} (авто)
+          </span>
+        </td>
       </tr>
     </v-simple-table>
     <v-divider class="divider-stats"></v-divider>
@@ -84,7 +94,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["lastSiteStats", "lastUserStats"]),
+    ...mapGetters(["lastSiteStats", "lastUserStats", "userHasRights"]),
     sourceStats() {
       return this.lastSiteStats[0];
     },
