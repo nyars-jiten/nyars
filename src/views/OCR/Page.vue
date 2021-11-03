@@ -13,7 +13,7 @@
               <!-- <p>Ничего не найдено</p> -->
               <!-- {{page}} -->
               <div class="page-title">
-                Title: {{page.word}}<br>
+                Info: <span v-html="bookDescription"></span><br>
                 Status: <span :class="statusClass">{{getStatus(page.status)}}</span><br>
                 User: {{getUser(page.user)}}<br>
                 Page: <a v-for="pageImg in page.images" :key="pageImg.id" target="_blank" :href="pageImg.url">[{{pageImg.id}}]</a>
@@ -212,6 +212,11 @@ export default {
     ...mapGetters(["page", "userHasRights", "currentSearchResult", 'getSubjectTags']),
     currentBookid() {
       return this.$route.params.bookid;
+    },
+    bookDescription() {
+      const description = this.page.ocrBook.description;
+      if (!description) return "";
+      return description.replace(/\[ref=(.+?)\](.*?)\[\/ref\]/gim, '<a target="_blank" href="$1">$2</a>');
     },
     tagList() {
       return this.getSubjectTags('Fld');
