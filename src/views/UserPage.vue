@@ -1,9 +1,9 @@
 <template>
   <div class="user-page">
-    <v-container fluid v-if="userProfile.username">
+    <v-container fluid v-if="userProfile">
       <v-row>
         <v-col cols="12" md="4" sm="12" xs="12">
-          <v-card class="" elevation="2" outlined tile>
+          <v-card elevation="2" outlined tile>
             <v-card-title>
               {{ userProfile.username }}
             </v-card-title>
@@ -54,7 +54,7 @@
           </v-card>
         </v-col>
         <v-col cols="12" md="8" sm="12" xs="12">
-          <v-card class="" elevation="2" outlined tile>
+          <v-card elevation="2" outlined tile>
             <v-card-title>
               Статистика
             </v-card-title>
@@ -65,6 +65,16 @@
                 hide-default-footer
               ></v-data-table>
             </template>
+          </v-card>
+        </v-col>
+        <v-col cols="12" md="8" sm="12" xs="12">
+          <v-card elevation="2" outlined tile>
+            <v-card-title>Последние правки</v-card-title>
+            <div class="diff-wrapper ma-4">
+              <v-row justify="center">
+                <EditsList v-if="userProfileEdits" v-bind:lastEdits="userProfileEdits" />
+              </v-row>
+            </div>
           </v-card>
         </v-col>
       </v-row>
@@ -79,6 +89,7 @@
 import { mapActions, mapGetters } from "vuex";
 import { sendPostRequest } from "@/core/apiRequests.js";
 import accessRights from "@/data/accessRights.json";
+import EditsList from '@/components/dictionary/EditsList.vue';
 
 export default {
   data() {
@@ -93,7 +104,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["userProfile", "currentUser", "selectedUserRights"]),
+    ...mapGetters(["userProfile", "currentUser", "selectedUserRights", 'userProfileEdits']),
     currentUsername() {
       return this.$route.params.username;
     },
@@ -119,6 +130,7 @@ export default {
       return resItems;
     },
     metaTitle() {
+      if (!this.userProfile) return '';
       return this.userProfile.username + ' — профиль пользователя';
     },
   },
@@ -185,6 +197,9 @@ export default {
   },
   async mounted() {
     this.getUserProfile(this.currentUsername);
+  },
+  components: {
+    EditsList
   },
   metaInfo() {
     return {

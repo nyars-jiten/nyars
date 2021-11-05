@@ -75,13 +75,16 @@ export default {
             return state.darkMode;
         },
         userProfile(state) {
-            return state.userProfile;
+            return state.userProfile.user;
+        },
+        userProfileEdits(state) {
+            return state.userProfile.edits;
         },
         currentUser(state) {
             return state.currentUser;
         },
         selectedUserRights(state) {
-            const rights = state.userProfile.access.toString(2).padStart(20,"0");
+            const rights = state.userProfile.user.access.toString(2).padStart(20,"0");
             return rights;
         },
         userHasRights: state => (rightsId) => {

@@ -321,6 +321,10 @@ a.titles-link {
   display: inline-block;
 }
 
+.edits-list {
+  width: 100%;
+}
+
 // .diff {
 //   display: grid;
 //   grid-template-columns: 1fr auto 1fr;
