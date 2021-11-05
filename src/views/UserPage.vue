@@ -60,7 +60,7 @@
             </v-card-title>
             <template>
               <v-data-table
-                :headers="headers"
+                :headers="actualHeaders"
                 :items="resultItems"
                 hide-default-footer
               ></v-data-table>
@@ -86,8 +86,8 @@ export default {
       file: undefined,
       headers: [
         {text: "", value: "type"},
-        {text: "ЯП-новые", value: "japNew"},
-        {text: "ЯП-прав.", value: "japEdit"},
+        // {text: "ЯП-новые", value: "japNew"},
+        {text: "ЯП (нов./исправ.)", value: "japNewEdit"},
       ],
       rights: accessRights
     };
@@ -97,6 +97,12 @@ export default {
     currentUsername() {
       return this.$route.params.username;
     },
+    actualHeaders() {
+      let headers = [...this.headers];
+      if (this.userProfilehasRights(3)) headers.push({text: "АвтоЯП (нов./исправ.)", value: "japAuto"});
+      if (this.userProfilehasRights(4)) headers.push({text: "Проверки", value: "approved"});
+      return headers;
+    },
     resultItems() {
       var resItems = [];
       if (!this.userProfile.userRating) return resItems;
@@ -104,6 +110,12 @@ export default {
         value.type = this.getTypeTitle(key);
         resItems.push(value);
       }
+      resItems = resItems.map(function(rating) {
+        rating.japNewEdit = rating.japNew + ' / ' + rating.japEdit;
+        //они перепутаны местами!
+        rating.japAuto = rating.japEditAuto + ' / ' + rating.japNewAuto;
+        return rating;
+      });
       return resItems;
     },
     metaTitle() {
@@ -120,6 +132,14 @@ export default {
     },
     async changeAccessRight(rightId) {
       await this.updateUserRights({userId: this.userProfile.id, accessId: rightId});
+    },
+    userProfilehasRights(rightsId) {
+        if (this.userProfile.role === 'Admin') return true;
+        if(typeof(this.userProfile.access) != "undefined" && this.userProfile.access !== null) {
+            const rights = this.userProfile.access.toString(2).padStart(20,"0")
+            return rights[rightsId] === '1';
+        }
+        return false;
     },
     getTypeTitle(type) {
       switch(type) {

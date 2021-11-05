@@ -15,7 +15,7 @@
         <td>
           {{ resultStats.editsStats.japNew }}
           <span v-if="userHasRights(-1)">
-             / {{resultStats.editsStats.japNewAuto}} (авто)
+             / {{resultStats.editsStats.japEditAuto}} (авто)
           </span>
         </td>
       </tr>
@@ -24,7 +24,7 @@
         <td>
           {{ resultStats.editsStats.japEdit }}
           <span v-if="userHasRights(-1)">
-            / {{resultStats.editsStats.japEditAuto}} (авто)
+            / {{resultStats.editsStats.japNewAuto}} (авто)
           </span>
         </td>
       </tr>
