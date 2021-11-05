@@ -1,4 +1,5 @@
 <template>
+  <v-col cols="12" md="12" sm="12" xs="12" v-if="editMode || currentImages.length > 0">
   <div class="gallery">
     <div class="gallery-popup">
       <v-dialog v-model="imagePopup" max-width="600px"
@@ -10,7 +11,7 @@
           </template>
         </v-img></v-dialog>
     </div>
-    <v-card class="" elevation="2" outlined tile v-if="editMode || currentImages.length > 0">
+    <v-card class="" elevation="2" outlined tile>
       <v-card-title>Галерея</v-card-title>
       <!-- {{ currentImages }} -->
 
@@ -42,6 +43,7 @@
       </div>
     </v-card>
   </div>
+  </v-col>
 </template>
 
 <script>

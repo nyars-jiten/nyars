@@ -114,9 +114,8 @@
             </v-card-actions>
           </v-card>
         </v-col>
-        <v-col cols="12" md="12" sm="12" xs="12">
-          <GalleryComponent :editMode="editMode" />
-        </v-col>
+        <GalleryComponent :editMode="editMode" />
+        <ReferencesList v-if="currentEntry.references" :references="currentEntry.references" />
       </v-row>
     </v-container>
   </div>
@@ -128,6 +127,7 @@ import sc from "@/core/scriptConverter.js";
 import corpusList from "@/data/corpus.json";
 import JapEntryView from "@/components/dictionary/JapEntryView.vue";
 import GalleryComponent from "@/components/dictionary/GalleryComponent.vue";
+import ReferencesList from "@/components/dictionary/ReferencesList.vue";
 import JapEntryEdit from "@/components/dictionary/JapEntryEdit.vue";
 import JapEntryTextEditor from "@/components/dictionary/JapEntryTextEditor.vue";
 import DictionaryIcon from "@/components/dictionary/DictionaryIcon.vue";
@@ -282,7 +282,8 @@ export default {
     DictionaryIcon,
     DuplicatesChecker,
     GalleryComponent,
-    EditComment
+    EditComment,
+    ReferencesList
   },
   metaInfo() {
     return {
