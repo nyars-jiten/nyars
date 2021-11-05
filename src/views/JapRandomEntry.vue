@@ -6,7 +6,7 @@
           <v-card class="" elevation="2" outlined tile>
             <v-card-title> Случайная статья </v-card-title>
             <v-card-text>
-              <v-checkbox
+              <!-- <v-checkbox
                 class="checkbox-line-element"
                 v-model="selected"
                 label="Без русского перевода"
@@ -27,33 +27,62 @@
                 v-model="selected"
                 label="Неотредактированная"
                 value="!rev"
-              ></v-checkbox>
-              <template>
-                <v-container fluid>
+              ></v-checkbox> -->
+              <v-row>
+                <v-col cols="12" md="4" sm="12" >
                   <v-select
-                    v-model="corpusSelected"
-                    :items="activeCorpuses"
-                    label="—"
-                    item-text="descr"
-                    item-value="val"
-                    multiple
-                  >
-                    <template v-slot:prepend-item>
-                      <v-list-item ripple @click="toggle">
-                        <v-list-item-action>
-                          <v-icon>
-                            {{ icon }}
-                          </v-icon>
-                        </v-list-item-action>
-                        <v-list-item-content>
-                          <v-list-item-title> Выбрать все </v-list-item-title>
-                        </v-list-item-content>
-                      </v-list-item>
-                      <v-divider class="mt-2"></v-divider>
-                    </template>
-                  </v-select>
-                </v-container>
-              </template>
+                    :items="ruSenseItems"
+                    label="Русское значение"
+                    v-model="ruSenseValue"
+                    item-text="value"
+                    item-value="key"
+                    clearable
+                    outlined
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" md="4" sm="12" >
+                  <v-select
+                    :items="engSenseItems"
+                    label="Английское значение"
+                    v-model="engSenseValue"
+                    item-text="value"
+                    item-value="key"
+                    clearable
+                    outlined
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" md="4" sm="12" >
+                  <v-select
+                    :items="jpnSenseItems"
+                    label="Японское значение"
+                    v-model="jpnSenseValue"
+                    item-text="value"
+                    item-value="key"
+                    clearable
+                    outlined
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" md="6" sm="12" >
+                  <v-select
+                    :items="statusItems"
+                    label="Статус"
+                    v-model="statusValue"
+                    item-text="value"
+                    item-value="key"
+                    clearable
+                    outlined
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" md="6" sm="12" >
+                  <v-select
+                    :items="commonTags"
+                    label="Тег"
+                    v-model="tagsValue"
+                    clearable
+                    outlined
+                  ></v-select>
+                </v-col>
+              </v-row>
               <div class="pl-4 pb-2">
                 <v-btn color="primary" dark outlined @click.stop="search"
                   >Обновить</v-btn
@@ -77,24 +106,30 @@
 </template>
 
 <script>
-import corpusList from "@/data/corpus.json";
+import commonTagsImported from "@/data/commonTags.json";
 import SearchResultItem from "@/components/SearchResultItem.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
     return {
-      selected: ["!rev"],
-      corpusSelected: ["main"],
-      corpus: corpusList.corpusList,
+      ruSenseItems: [{'key':'!rus','value':'не содержит'},{'key':'rus','value':'содержит'}],
+      engSenseItems: [{'key':'!eng','value':'не содержит'},{'key':'eng','value':'содержит'}],
+      jpnSenseItems: [{'key':'!jap','value':'не содержит'},{'key':'jap','value':'содержит'}],
+      statusItems: [{'key':'!rev','value':'не отредактировано'},{'key':'rev','value':'отредактировано'}],
+      ruSenseValue: 'rus',
+      engSenseValue: '',
+      jpnSenseValue: '',
+      statusValue: '!rev',
+      tagsValue: '',
+      tags: commonTagsImported,
     };
   },
   methods: {
     ...mapActions(["startRandomSearch", "fetchTags"]),
     search() {
       this.startRandomSearch({
-        selected: this.selected,
-        corpus: this.corpusSelected,
+        selected: [this.ruSenseValue,this.engSenseValue,this.jpnSenseValue,this.statusValue,this.tagsValue],
       });
     },
     toggle() {
@@ -114,23 +149,21 @@ export default {
         (key) => new Object({ descr: this.corpus[key].description, val: key })
       );
     },
+    commonTags() {
+      return Object.keys(this.tags);
+    },
     selectAllElements() {
       return this.corpusSelected.length === this.activeCorpuses.length;
     },
     selectSomeElements() {
       return this.corpusSelected.length > 0 && !this.selectAllElements;
     },
-    icon() {
-      if (this.selectAllElements) return "mdi-close-box";
-      if (this.selectSomeElements) return "mdi-minus-box";
-      return "mdi-checkbox-blank-outline";
-    },
   },
   watch: {
     selected() {
       this.search();
     },
-    corpusSelected() {
+    tagsSelected() {
       // console.log(this.corpusSelected)
       this.search();
     },
