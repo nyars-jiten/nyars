@@ -132,40 +132,11 @@ export default {
         selected: [this.ruSenseValue,this.engSenseValue,this.jpnSenseValue,this.statusValue,this.tagsValue],
       });
     },
-    toggle() {
-      this.$nextTick(() => {
-        if (this.selectAllElements) {
-          this.corpusSelected = [];
-        } else {
-          this.corpusSelected = this.activeCorpuses.map((x) => x.val);
-        }
-      });
-    },
   },
   computed: {
     ...mapGetters(["currentRandomSearchResult"]),
-    activeCorpuses() {
-      return Object.keys(this.corpus).map(
-        (key) => new Object({ descr: this.corpus[key].description, val: key })
-      );
-    },
     commonTags() {
       return Object.keys(this.tags);
-    },
-    selectAllElements() {
-      return this.corpusSelected.length === this.activeCorpuses.length;
-    },
-    selectSomeElements() {
-      return this.corpusSelected.length > 0 && !this.selectAllElements;
-    },
-  },
-  watch: {
-    selected() {
-      this.search();
-    },
-    tagsSelected() {
-      // console.log(this.corpusSelected)
-      this.search();
     },
   },
   async mounted() {
