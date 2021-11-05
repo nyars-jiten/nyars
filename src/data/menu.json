@@ -41,7 +41,7 @@
         {
           "title": "Оцифровка",
           "icon": "mdi-data-matrix-scan",
-          "rights": 3,
+          "rights": 1,
           "access": 3,
           "action": {
             "name": "navigate",

@@ -1,6 +1,6 @@
 <template>
   <div class="search-result">
-    <v-container fluid>
+    <v-container fluid v-if="userHasRights(3)">
       <v-row no-gutters>
         <v-col cols="12" md="12">
           <v-card class="mx-auto" tile>
@@ -89,7 +89,6 @@ export default {
     ...mapGetters(["booksList", "userHasRights"]),
   },
   async mounted() {
-    if (!this.userHasRights(3)) this.$router.push({ path: '/' }).catch(() => {});
     this.getBooksList();
   },
   data: () => ({
