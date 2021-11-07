@@ -5,16 +5,21 @@
         <div class="pitch-word" :key="`${pitchId}-${renderId}`">
           <div class="pitch-render">
             <div class="pitch-render-word">
-              <span class="pitch-word-char" v-for="char in render.word"
+              <span class="pitch-word-mora" v-for="char in render.word"
                 :key="char.id"
                 :data-pitch="char.pitch"
                 :data-pitch-next="char.nextPitch"
+                :data-pitch-devoice="char.devoice"
+                :data-pitch-nasal="char.nasal"
                 >
-              {{char.char}}
+                <span class="pitch-word-char" v-text="char.char" />
+                <span class="pitch-word-devoice" v-if="char.devoice" />
+                <span class="pitch-word-nasal" v-if="char.nasal" text="ﾟ" />
+                <span class="pitch-word-line" />
               </span>
               <sup class="pitch-num">{{render.num}}</sup>
             </div>
-            <svg height="40px" :width="(pitch.word.length + 1) * 15" xmlns="http://www.w3.org/2000/svg" v-html="render.svg" />
+            <svg height="40px" :width="getSvgWidth(pitch.word)" xmlns="http://www.w3.org/2000/svg" v-html="render.svg" />
           </div>
         </div>
       </template>
@@ -28,6 +33,13 @@ export default {
   data: () => ({
     pitches: [],
   }),
+  methods: {
+    getSvgWidth(word) {
+      const moraRx = /[^()'][ャュョゃゅょぁぃぅぇぉゎァィゥェォヮ]?/g
+      const len = ((word || '').match(moraRx) || []).length;
+      return (len + 1) * 15;
+    }
+  },
   async mounted() {
     const resp = await sendGetRequest("dictionary/jap/get-pitch?request=" + this.raw);
     if (resp.status == 200) {
@@ -45,6 +57,53 @@ export default {
 //   -webkit-filter: invert(100%);
 //   filter: invert(100%);
 // }
+
+.pitch-word-mora {
+  display: inline-block;
+  position: relative;
+}
+
+.pitch-word-mora[data-pitch='high']>.pitch-word-line {
+    content: "";
+    display: block;
+    user-select: none;
+    pointer-events: none;
+    position: absolute;
+    top: 0.1em;
+    left: 0;
+    right: 0;
+    height: 0;
+    border-top-width: 0.1em;
+    border-top-style: solid;
+}
+
+.pitch-word-mora[data-pitch='high'][data-pitch-next='low']>.pitch-word-line {
+    right: -0.1em;
+    height: 0.4em;
+    border-right-width: 0.1em;
+    border-right-style: solid;
+}
+
+.pitch-word-mora[data-pitch='high'][data-pitch-next='low'] {
+    padding-right: 0.1em;
+    margin-right: 0.1em;
+}
+
+.pitch-word-devoice::before {
+    content: "◌";
+    position: absolute;
+    font-size: 130%;
+    left: 85%;
+    color: var(--v-pitch-meta-base);
+}
+
+.pitch-word-nasal::after {
+    content: "ﾟ";
+    display: inline-block;
+    position: absolute;
+    left: 80%;
+    color: var(--v-pitch-meta-base);
+}
 
 .svg-stroke-primary {
   stroke: var(--v-svg-primary-base);
@@ -86,36 +145,5 @@ export default {
 
 .pitch-word {
   display: inline-block;
-}
-
-.pitch-word-char {
-  display: inline-block;
-  position: relative;
-}
-
-.pitch-word-char[data-pitch='high']::before {
-    content: "";
-    display: block;
-    user-select: none;
-    pointer-events: none;
-    position: absolute;
-    top: 0.1em;
-    left: 0;
-    right: 0;
-    height: 0;
-    border-top-width: 0.1em;
-    border-top-style: solid;
-}
-
-.pitch-word-char[data-pitch='high'][data-pitch-next='low']::before {
-    right: -0.1em;
-    height: 0.4em;
-    border-right-width: 0.1em;
-    border-right-style: solid;
-}
-
-.pitch-word-char[data-pitch='high'][data-pitch-next='low'] {
-    padding-right: 0.1em;
-    margin-right: 0.1em;
 }
 </style>

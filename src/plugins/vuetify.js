@@ -84,7 +84,9 @@ export default new Vuetify({
         "common-tag-common": colors.grey,
 
         "svg-secondary": "#ffffff",
-        "svg-primary": "#000000"
+        "svg-primary": "#000000",
+
+        "pitch-meta": colors.red.darken3,
       },
       dark: {
         secondary: colors.grey.darken3,
@@ -154,7 +156,9 @@ export default new Vuetify({
         "common-tag-common": colors.grey,
 
         "svg-secondary": "#000000",
-        "svg-primary": "#ffffff"
+        "svg-primary": "#ffffff",
+
+        "pitch-meta": colors.red.darken2,
       }
     }
   }

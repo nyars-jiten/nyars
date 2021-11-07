@@ -5,7 +5,7 @@
         <v-col
           cols="12"
           md="10"
-          sm="6"
+          sm="12"
         >
           <form action="/search" method="GET">
             <v-text-field
