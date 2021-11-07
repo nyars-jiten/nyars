@@ -93,7 +93,7 @@ export default {
     content: "◌";
     position: absolute;
     font-size: 130%;
-    left: 85%;
+    transform: translate(-90%, -5%);
     color: var(--v-pitch-meta-base);
 }
 
