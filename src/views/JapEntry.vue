@@ -38,6 +38,26 @@
                   tooltip="Статья не подтверждается источниками"
                 />
               </div>
+              <div class="new-entry-buttons" v-if="editMode">
+                <v-btn
+                  color="teal lighten-1"
+                  class="mr-2"
+                  dark
+                  small
+                  outlined
+                  @click="changeDict('examples')"
+                  v-text="currentWid ? 'Перенести в примеры' : 'Новый пример'"
+                />
+                <v-btn
+                  color="teal lighten-1"
+                  class="mr-2"
+                  dark
+                  small
+                  outlined
+                  @click="changeDict('names')"
+                  v-text="currentWid ? 'Перенести в словарь имён' : 'Новое имя'"
+                />
+              </div>
             </v-card-title>
             <v-card-text>
               <template>
@@ -56,11 +76,7 @@
                     </div>
                   </div>
                   <div class="edit-content" v-else>
-                    <JapEntryEdit
-                      :entry="currentEntry"
-                      v-if="!textMode"
-                    />
-                    <JapEntryTextEditor v-else />
+                    <JapEntryEdit :entry="currentEntry" />
                     <EditComment />
                     <DuplicatesChecker />
                   </div>
@@ -75,15 +91,6 @@
                       >Сохранить</v-btn
                     >
                   </div>
-                  <!-- <div class="edit-action pl-2">
-                    <v-btn
-                      color="primary"
-                      dark
-                      outlined
-                      @click.stop="changeToTextMode"
-                      >Текстовый редактор</v-btn
-                    >
-                  </div> -->
                   <div class="edit-action pl-2">
                     <v-btn
                       color="primary"
@@ -96,17 +103,6 @@
                   <div class="edit-action pl-2">
                     <v-btn color="red" dark outlined @click.stop="removeEdit"
                       >Удалить</v-btn
-                    >
-                  </div>
-                </div>
-                <div class="text-mode-actions" v-else>
-                  <div class="edit-action pl-2">
-                    <v-btn
-                      color="primary"
-                      dark
-                      outlined
-                      @click.stop="changeToVisualMode"
-                      >Вернуться в визуальный редактор</v-btn
                     >
                   </div>
                 </div>
@@ -129,7 +125,6 @@ import JapEntryView from "@/components/dictionary/JapEntryView.vue";
 import GalleryComponent from "@/components/dictionary/GalleryComponent.vue";
 import ReferencesList from "@/components/dictionary/ReferencesList.vue";
 import JapEntryEdit from "@/components/dictionary/JapEntryEdit.vue";
-import JapEntryTextEditor from "@/components/dictionary/JapEntryTextEditor.vue";
 import DictionaryIcon from "@/components/dictionary/DictionaryIcon.vue";
 import DuplicatesChecker from "@/components/dictionary/editor/DuplicatesChecker.vue";
 import EditComment from "@/components/dictionary/editor/EditComment.vue";
@@ -192,6 +187,9 @@ export default {
       "newAlert",
       "deserializeEntry",
     ]),
+    changeDict(dict) {
+      if (dict == 'examples') this.$router.push({ path: "/examples/new" }).catch(() => {});
+    },
     changeToVisualMode() {
       this.deserializeEntry();
       this.textMode = false;
@@ -254,6 +252,7 @@ export default {
       this.editMode = false;
     },
     updatePage() {
+      this.$store.commit("updateEditComment", '');
       if (!this.currentWid) {
         this.$store.commit("updateCurrentEntry", this.emptyEntry);
         this.$store.commit("updateCurrentImages", this.emptyImage);
@@ -278,7 +277,6 @@ export default {
   components: {
     JapEntryView,
     JapEntryEdit,
-    JapEntryTextEditor,
     DictionaryIcon,
     DuplicatesChecker,
     GalleryComponent,

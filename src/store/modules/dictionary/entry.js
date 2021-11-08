@@ -91,7 +91,7 @@ export default {
                 .get(process.env.VUE_APP_API + 'dictionary/jap/get-editdata/' + id)
                 .then(response => {
                     ctx.commit('updateCurrentEditEntry', response.data);
-                    ctx.dispatch('startDublicatesSearch');
+                    // ctx.dispatch('startDublicatesSearch');
                 })
                 .catch(error => {
                     console.log(error);

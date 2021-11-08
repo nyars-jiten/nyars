@@ -1,26 +1,27 @@
 <template>
   <div class="edit-comment">
-    <v-textarea label="Обоснование / Источники" v-model="comment" auto-grow rows="1"></v-textarea>
+    <v-textarea
+      label="Обоснование / Источники"
+      :value="currentEditComment"
+      @input="updateEditComment"
+      auto-grow
+      rows="1"
+    />
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 export default {
-  data: () => ({
-    comment: "",
-  }),
+  methods: {
+    updateEditComment(text) {
+      console.log(text);
+      this.$store.commit("updateEditComment", text);
+    }
+  },
   computed: {
     ...mapGetters(["currentEditComment"])
   },
-  watch: {
-    comment() {
-      this.$store.commit("updateEditComment", this.comment);
-    }
-  },
-  mounted() {
-    this.comment = this.currentEditComment;
-  }
 };
 </script>
 

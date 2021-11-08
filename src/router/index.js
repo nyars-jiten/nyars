@@ -37,6 +37,11 @@ const routes = [
     component: () => import('@/views/JapEntry.vue'),
   },
   {
+    path: '/examples/new',
+    name: 'create-example',
+    component: () => import('@/components/dictionary/other/ExampleEntry.vue'),
+  },
+  {
     path: '/tags',
     name: 'tags',
     component: () => import('@/views/Tags.vue'),

@@ -9,11 +9,7 @@
               <template>
                 <v-row>
                   <div class="edit-content">
-                    <JapEntryEdit
-                      v-bind:entry="currentEntry"
-                      v-if="!textMode"
-                    />
-                    <JapEntryTextEditor v-else />
+                    <JapEntryEdit v-bind:entry="currentEntry" />
                     <EditComment />
                     <!-- <DuplicatesChecker /> -->
                   </div>
@@ -21,31 +17,10 @@
               </template>
             </v-card-text>
             <v-card-actions>
-              <div class="visual-mode" v-if="!textMode">
+              <div class="visual-mode">
                 <div class="edit-action pr-2 pl-4">
                   <v-btn color="primary" dark outlined @click.stop="saveEdit">
                     Сохранить
-                  </v-btn>
-                </div>
-                <div class="edit-action pl-2">
-                  <v-btn
-                    color="primary"
-                    dark
-                    outlined
-                    @click.stop="changeToTextMode"
-                    >Текстовый редактор</v-btn
-                  >
-                </div>
-              </div>
-              <div class="text-mode-actions" v-else>
-                <div class="edit-action pl-2">
-                  <v-btn
-                    color="primary"
-                    dark
-                    outlined
-                    @click.stop="changeToVisualMode"
-                  >
-                    Вернуться в визуальный редактор
                   </v-btn>
                 </div>
               </div>
@@ -64,7 +39,6 @@
 import { mapActions, mapGetters } from "vuex";
 import GalleryComponent from "@/components/dictionary/GalleryComponent.vue";
 import JapEntryEdit from "@/components/dictionary/JapEntryEdit.vue";
-import JapEntryTextEditor from "@/components/dictionary/JapEntryTextEditor.vue";
 // import DuplicatesChecker from "@/components/dictionary/editor/DuplicatesChecker.vue";
 import EditComment from "@/components/dictionary/editor/EditComment.vue";
 import { sendPostRequest } from "@/core/apiRequests.js";
@@ -72,7 +46,6 @@ export default {
   data() {
     return {
       editMode: true,
-      textMode: false,
     };
   },
   computed: {
@@ -149,7 +122,6 @@ export default {
   },
   components: {
     JapEntryEdit,
-    JapEntryTextEditor,
     GalleryComponent,
     // DuplicatesChecker,
     EditComment
