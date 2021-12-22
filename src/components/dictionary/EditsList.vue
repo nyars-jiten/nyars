@@ -7,7 +7,6 @@
       flat
       tile
     >
-      <!-- class="" -->
       <v-expansion-panel class="" v-for="edit in lastEdits" :key="edit.id">
         <v-expansion-panel-header
           hide-actions
@@ -19,7 +18,7 @@
             <v-row no-gutters align="center">
               <router-link
                 class="titles-link"
-                :to="{ name: 'view-jp', params: { wid: edit.identifier } }"
+                :to="{ name: 'dict-entry', params: { id: edit.identifier, type: getDictTypeIdent(edit.dictionary) } }"
                 v-if="edit.identifier && !(edit.type == 3 && (edit.status == 4 || edit.status == 3))"
               >
                 <EditTitle v-bind:edit="edit" />
@@ -162,6 +161,9 @@ import { sendPostRequest } from "@/core/apiRequests.js";
 import tdif from "@/core/timeDifference.js";
 import EditTitle from "@/components/dictionary/EditTitleComponent.vue";
 import { mapGetters, mapActions } from "vuex";
+
+import dictTypesData from "@/data/dictionaryTypes.json";
+
 export default {
   computed: {
     ...mapGetters(["editCompare", "currentUser", "userHasRights"]),
@@ -238,14 +240,10 @@ export default {
       }
     },
     getDictType(type) {
-      switch (type) {
-        case 0:
-          return "яп-ру";
-        case 4:
-          return "яп-ру (авто)";
-        default:
-          return "—";
-      }
+      return this.dictTypes[type].ru;
+    },
+    getDictTypeIdent(type) {
+      return this.dictTypes[type].identifier;
     },
     getEditType(type) {
       switch (type) {
@@ -276,6 +274,7 @@ export default {
   data() {
     return {
       panelIndexLocal: -9,
+      dictTypes: dictTypesData
     };
   },
   props: {

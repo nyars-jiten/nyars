@@ -11,35 +11,20 @@ const routes = [
     name: 'Home',
     component: () => import('@/views/Home.vue'),
   },
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   component: () => import('@/views/About.vue')
-  // },
-  {
-    path: '/jp/new',
-    name: 'create-jp',
-    component: () => import('@/views/JapEntry.vue'),
-  },
   {
     path: '/jp/rnd',
     name: 'random-jp',
     component: () => import('@/views/JapRandomEntry.vue'),
   },
   {
+    path: '/dict/:type/:id',
+    name: 'dict-entry',
+    component: () => import('@/views/DictionaryEntry.vue'),
+  },
+  {
     path: '/jp/edt/:id',
     name: 'edit-jp',
     component: () => import('@/views/JapEditPage.vue'),
-  },
-  {
-    path: '/jp/:wid',
-    name: 'view-jp',
-    component: () => import('@/views/JapEntry.vue'),
-  },
-  {
-    path: '/examples/new',
-    name: 'create-example',
-    component: () => import('@/components/dictionary/other/ExampleEntry.vue'),
   },
   {
     path: '/tags',

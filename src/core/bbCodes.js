@@ -7,7 +7,7 @@ export function bbCodesProcess(rawText) {
     .replace(/\\([\n,;])/, "$1")
     .replace('⌈', '')
     .replace(/\[ref=?\](.*?)\[\/ref\]/gim, "<a href='/search?r=$1'>$1</a>")
-    .replace(/\[ref=([a-zA-Z\d]{4,7})\](.*?)\[\/ref\]/gim, "<a href='/jp/$1'>$2</a>")
+    .replace(/\[ref=([a-zA-Z\d]{4,7})\](.*?)\[\/ref\]/gim, "<a href='/dict/jp/$1'>$2</a>")
     .replace(/\[sub\](.*?)\[\/sub\]/gim, "<sub>$1</sub>")
     .replace(/\[sup\](.*?)\[\/sup\]/gim, "<sup>$1</sup>")
     .replace(/{~(.*?)}/gim, "<em><strong>～$1</strong></em>") // {～する}

@@ -13,7 +13,7 @@
                 <span class="ref-word" v-for="ref in refs" :key="ref.id">
                   <router-link
                     class="titles-link"
-                    :to="{ name: 'view-jp', params: { wid: ref.source.wid } }"
+                    :to="{ name: 'dict-entry', params: { id: ref.source.wid, type: 'jp' } }"
                   >
                     {{getHeader(ref.source.entry)}}
                   </router-link>

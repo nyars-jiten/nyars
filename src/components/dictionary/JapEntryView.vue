@@ -1,6 +1,7 @@
 <template>
   <div class="jap-view">
-    <v-container v-if="entry.entry">
+    <!-- <v-container v-if="entry.entry"> -->
+    <div v-if="entry.entry">
       <div class="words-header">
         <div class="word" v-for="word in entry.entry.words" :key="word.id">
           <div class="word-writings" v-if="word.writings.length > 0">
@@ -51,7 +52,7 @@
         </div>
       </div>
 
-      <PitchAccent :raw="entry.entry.pitchAccent" v-if="entry.entry.pitchAccent.length > 0" />
+      <PitchAccent :raw="entry.entry.pitchAccent" v-if="entry.entry.pitchAccent && entry.entry.pitchAccent.length > 0" />
 
       <div class="entry-sound">
         <template v-if="currentSounds.length > 0">
@@ -127,7 +128,7 @@
                           <span class="ref-type">{{ getReferenceType(ref.referenceType, lm.lang) }}</span>
                           <router-link
                             class="entry-reference-link"
-                            :to="{ name: 'view-jp', params: { wid: ref.target } }"
+                            :to="{ name: 'dict-entry', params: { id: ref.target, type: 'jp' } }"
                             v-if="ref.target && ref.target.length >= 4"
                           >{{ ref.value }}</router-link>
                           <router-link
@@ -165,7 +166,8 @@
           </div>
         </div>
       </div>
-    </v-container>
+    </div>
+    <!-- </v-container> -->
   </div>
 </template>
 
@@ -185,6 +187,7 @@ export default {
   computed:  {
     ...mapGetters(["currentSounds"]),
     actualTags() {
+      if (!this.entry.entry.tags) return [];
       return this.entry.entry.tags.map(
         (key) => this.tags[key]
       );
@@ -327,10 +330,10 @@ export default {
   margin-bottom: 3px;
 }
 
-.jap-view {
-  width: 100%;
-  padding: 0 16px 16px;
-}
+// .jap-view {
+//   width: 100%;
+//   padding: 0 16px 16px;
+// }
 
 .words-header {
   color: var(--v-jap-entry-view-words-header-color-base);

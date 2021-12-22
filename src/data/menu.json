@@ -95,7 +95,7 @@
           "action": {
             "name": "navigate",
             "params": {
-              "path": "/jp/new"
+              "path": "/dict/jp/new"
             }
           }
         },

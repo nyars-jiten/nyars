@@ -1,0 +1,26 @@
+[
+  {
+    "ru": "яп-ру",
+    "identifier": "jp"
+  },
+  {
+    "ru": "ру-яп",
+    "identifier": "ru"
+  },
+  {
+    "ru": "кандзи",
+    "identifier": "kanji"
+  },
+  {
+    "ru": "имя",
+    "identifier": "name"
+  },
+  {
+    "ru": "яп-ру (авто)",
+    "identifier": "jp"
+  },
+  {
+    "ru": "пример",
+    "identifier": "example"
+  }
+]

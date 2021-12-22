@@ -127,7 +127,7 @@
                           <span class="ref-type">{{ getReferenceType(ref.referenceType, lm.lang) }}</span>
                           <router-link
                             class="entry-reference-link"
-                            :to="{ name: 'view-jp', params: { wid: ref.target } }"
+                            :to="{ name: 'dict-entry', params: { id: ref.target, type: 'jp' } }"
                             v-if="ref.target && ref.target.length >= 4"
                           >{{ ref.value }}</router-link>
                           <router-link

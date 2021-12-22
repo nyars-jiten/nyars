@@ -76,10 +76,10 @@ export default {
                     ctx.commit('updateLoadingState', false);
                 });
         },
-        async getCurrentEntry(ctx, wid) {
+        async getCurrentEntry(ctx, route) {
             ctx.commit('updateCurrentEntry', {});
             axios
-                .get(process.env.VUE_APP_API + 'dictionary/jap/entries/' + wid)
+                .get(process.env.VUE_APP_API + route)//'dictionary/jap/entries/' + wid
                 .then(response => (ctx.commit('updateCurrentEntry', response.data)))
                 .catch(error => {
                     console.log(error);

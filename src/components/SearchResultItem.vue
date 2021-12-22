@@ -5,7 +5,7 @@
       <div class="words-header">
         <router-link
           class="titles-link"
-          :to="{ name: 'view-jp', params: { wid: entry.wid } }"
+          :to="{ name: 'dict-entry', params: { id: entry.wid, type: 'jp' } }"
         >
           <div
             class="word"
