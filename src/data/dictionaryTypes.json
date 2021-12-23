@@ -1,26 +1,32 @@
 [
   {
     "ru": "яп-ру",
+    "title": "Японско-русская статья",
     "identifier": "jp"
   },
   {
     "ru": "ру-яп",
+    "title": "Русско-японская статья",
     "identifier": "ru"
   },
   {
     "ru": "кандзи",
+    "title": "Словарь иероглифов",
     "identifier": "kanji"
   },
   {
     "ru": "имя",
+    "title": "Словарь имён",
     "identifier": "name"
   },
   {
     "ru": "яп-ру (авто)",
+    "title": "Японско-русская статья",
     "identifier": "jp"
   },
   {
     "ru": "пример",
+    "title": "Словарь примеров",
     "identifier": "example"
   }
 ]

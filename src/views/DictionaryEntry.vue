@@ -23,7 +23,7 @@
                   dark
                   small
                   outlined
-                  @click="changeDict('names')"
+                  @click="changeDict('name')"
                   v-text="isNew ? 'Новое имя' : 'Перенести в словарь имён'"
                 />
               </div>
@@ -36,6 +36,7 @@
                       <v-container>
                         <JapEntryView v-if="isDictType('jp')" :entry='currentEntry' />
                         <ExampleEntryView v-if="isDictType('example')" :entry='currentEntry' />
+                        <NameEntryView v-if="isDictType('name')" :entry='currentEntry' />
                       </v-container>
                     </div>
                     <v-spacer />
@@ -50,6 +51,7 @@
                         <DuplicatesChecker />
                       </div>
                       <ExampleEntryEdit v-if="isDictType('example')" :entry='currentEntry' />
+                      <NameEntryEdit v-if="isDictType('name')" :entry='currentEntry' />
                       <EditComment />
                     </v-container>
                   </div>
@@ -84,11 +86,14 @@
 import { mapGetters, mapActions } from "vuex";
 import { sendPostRequest, sendDeleteRequest } from "@/core/apiRequests.js";
 import sc from "@/core/scriptConverter.js";
+import dictTypesData from "@/data/dictionaryTypes.json";
 
 import JapEntryView from "@/components/dictionary/JapEntryView.vue";
 import JapEntryEdit from "@/components/dictionary/JapEntryEdit.vue";
 import ExampleEntryEdit from "@/components/dictionary/other/ExampleEntryEdit.vue";
 import ExampleEntryView from "@/components/dictionary/other/ExampleEntryView.vue";
+import NameEntryEdit from "@/components/dictionary/name/NameEntryEdit.vue";
+import NameEntryView from "@/components/dictionary/name/NameEntryView.vue";
 
 import StatusIcons from "@/components/dictionary/StatusIcons.vue";
 import GalleryComponent from "@/components/dictionary/GalleryComponent.vue";
@@ -100,7 +105,7 @@ export default {
   data() {
     return {
       editMode: false,
-      titles: { jp: "Японско-русская статья", name: "Словарь имён", example: "Словарь примеров" },
+      dictTypes: dictTypesData,
       emptyJpEntry: {
         entry: {
           words: [{ writings: [], readings: [] }],
@@ -120,13 +125,13 @@ export default {
       return this.$route.params.type;
     },
     isNew() {
-      return this.currentId === "new";
+      return this.currentId === 'new';
     },
     cardTitle() {
-      return this.titles[this.dictType];
+      return this.dictTypes.filter(dict => dict.identifier === this.dictType)[0].title;
     },
     currentTitle() {
-      if (!this.currentEntry.entry) return "";
+      if (!this.currentEntry.entry) return '';
       function onlyUnique(value, index, self) {
         return self.indexOf(value) === index;
       }
@@ -180,7 +185,7 @@ export default {
         //rusEntry
         //kanjiEntry
         exampleEntry: this.isDictType('example') ? this.currentEntry : null,
-        //nameEntry?
+        nameEntry: this.isDictType('name') ? this.currentEntry : null,
         images: this.currentImages,
         comment: this.currentEditComment
       };
@@ -224,10 +229,18 @@ export default {
         this.getCurrentEntry('dictionary/examples/entries/' + this.currentId);
       }
     },
+    updateNameEntry() {
+      if (this.isNew) {
+        this.$store.commit("updateCurrentEntry", this.emptyEntry);
+      } else {
+        this.getCurrentEntry('dictionary/names/entries/' + this.currentId);
+      }
+    },
     updatePage() {
       this.$store.commit('updateEditComment', '');
       if (this.isDictType('jp')) this.updateJpEntry();
       if (this.isDictType('example')) this.updateExampleEntry();
+      if (this.isDictType('name')) this.updateNameEntry();
 
       this.editMode = this.isNew;
     }
@@ -248,7 +261,8 @@ export default {
     EditComment,
     ReferencesList,
     StatusIcons,
-    ExampleEntryEdit, ExampleEntryView
+    ExampleEntryView, ExampleEntryEdit,
+    NameEntryView, NameEntryEdit
   },
   metaInfo() {
     return {
