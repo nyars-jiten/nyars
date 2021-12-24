@@ -85,73 +85,82 @@
                 {{ getRusLang(lm.lang) }}
               </div>
               <div class="senses">
-                <div
-                  class="sense sense-grid"
-                  v-for="(sense, senseIndex) in lm.senses"
-                  :key="senseIndex"
+                <draggable
+                  v-model="lm.senses"
+                  group="senses"
+                  handle=".handle"
+                  @start="drag=true"
+                  @end="drag=false"
                 >
-                  <div class="sense-num">
-                    <v-btn
-                      icon
-                      x-small
-                      @click="openDialog(4, [posIndex, lmIndex, senseIndex])"
-                      color="primary"
-                      ><v-icon>mdi-pencil</v-icon></v-btn
-                    >
-                    <template v-if="lm.senses.length > 1">
-                      {{ 1 + senseIndex }}&#41;
-                    </template>
-                  </div>
-
-                  <div class="sense-text">
-                    <InlineTag
-                      v-bind:tags="filterTags(sense.tags, ['Fld'])"
-                      v-bind:short="true"
-                      v-bind:lang="lm.lang"
-                    />
-                    <!-- {{ sense.value }} -->
-                    <div class="entry-text-md" v-html="convertBB(sense.value)" style="white-space: pre-wrap" align="left" />
-                    <InlineTag
-                      v-bind:tags="filterTags(sense.tags, ['Dial', 'Misc'])"
-                      v-bind:lang="lm.lang"
-                      :loanSources="sense.loanSources"
-                    />
-
-                    <div class="references-block">
-                      <div
-                        class="reference"
-                        v-for="ref in sense.references"
-                        :key="ref.id"
-                      >
-                        <span>⇒
-                          <span class="ref-type">{{ getReferenceType(ref.referenceType, lm.lang) }}</span>
-                          <router-link
-                            class="entry-reference-link"
-                            :to="{ name: 'dict-entry', params: { id: ref.target, type: 'jp' } }"
-                            v-if="ref.target && ref.target.length >= 4"
-                          >{{ ref.value }}</router-link>
-                          <router-link
-                            class="entry-reference-link"
-                            :to="{ name: 'search', query: { r: ref.value } }"
-                            v-else
-                          >{{ ref.value }}</router-link>
-                        </span>
-                      </div>
+                  <div
+                    class="sense sense-grid"
+                    v-for="(sense, senseIndex) in lm.senses"
+                    :key="sense.id"
+                  >
+                    <div class="sense-num">
+                        <v-btn
+                          icon
+                          x-small
+                          @click="openDialog(4, [posIndex, lmIndex, senseIndex])"
+                          color="primary"
+                          ><v-icon>mdi-pencil</v-icon></v-btn
+                        >
+                        <v-icon class="handle">mdi-drag</v-icon>
+                        <template v-if="lm.senses.length > 1">
+                          {{ 1 + senseIndex }}&#41;
+                        </template>
                     </div>
 
-                    <div class="examples-block">
-                      <div
-                        class="example"
-                        v-for="example in sense.examples"
-                        :key="example.id"
-                      >
-                        <span v-html="exBbCodes(example.value)"></span>
-                        <span></span>
-                        <span class="example-translation">{{ example.translation }}</span>
-                      </div>
+                    <div class="sense-text">
+                        <InlineTag
+                          v-bind:tags="filterTags(sense.tags, ['Fld'])"
+                          v-bind:short="true"
+                          v-bind:lang="lm.lang"
+                        />
+                        <!-- {{ sense.value }} -->
+                        <div class="entry-text-md" v-html="convertBB(sense.value)" style="white-space: pre-wrap" align="left" />
+                        <InlineTag
+                          v-bind:tags="filterTags(sense.tags, ['Dial', 'Misc'])"
+                          v-bind:lang="lm.lang"
+                          :loanSources="sense.loanSources"
+                        />
+
+                        <div class="references-block">
+                          <div
+                            class="reference"
+                            v-for="ref in sense.references"
+                            :key="ref.id"
+                          >
+                            <span>⇒
+                              <span class="ref-type">{{ getReferenceType(ref.referenceType, lm.lang) }}</span>
+                              <router-link
+                                class="entry-reference-link"
+                                :to="{ name: 'dict-entry', params: { id: ref.target, type: 'jp' } }"
+                                v-if="ref.target && ref.target.length >= 4"
+                              >{{ ref.value }}</router-link>
+                              <router-link
+                                class="entry-reference-link"
+                                :to="{ name: 'search', query: { r: ref.value } }"
+                                v-else
+                              >{{ ref.value }}</router-link>
+                            </span>
+                          </div>
+                        </div>
+
+                        <div class="examples-block">
+                          <div
+                            class="example"
+                            v-for="example in sense.examples"
+                            :key="example.id"
+                          >
+                            <span v-html="exBbCodes(example.value)"></span>
+                            <span></span>
+                            <span class="example-translation">{{ example.translation }}</span>
+                          </div>
+                        </div>
                     </div>
                   </div>
-                </div>
+                </draggable>
                 <v-btn
                   text
                   x-small
@@ -247,6 +256,7 @@
 
 <script>
 import sc from "@/core/scriptConverter.js";
+import draggable from 'vuedraggable'
 import { bbCodesProcess, examplesBbCodesProcess }  from "@/core/bbCodes.js";
 import commonTags from "@/data/commonTags.json";
 import InlineTag from "@/components/dictionary/InlineTag.vue";
@@ -374,11 +384,17 @@ export default {
     NoteDialog,
     PosDialog,
     SenseDialog,
+    draggable
   },
 };
 </script>
 
 <style lang="scss">
+.handle {
+  color: var(--v-text-decoration-color-base);
+  cursor: move;
+}
+
 .new-pos-btn {
   border-top: 1px solid black;
 }
