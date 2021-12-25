@@ -54,7 +54,7 @@
         >
       </div>
 
-      <div class="meaning-block">
+      <div class="meaning-block" v-if="!entry.entry.externalEntry">
         <div
           class="pos-meaning"
           v-for="(pos, posIndex) in entry.entry.meanings"
@@ -228,6 +228,17 @@
           >
         </div>
       </div>
+      <div v-else>
+        <span class="external-entry-msg">
+          В связанных статьях значения берутся из основной статьи.<br>
+          Для редактирования значений необходимо отвязать статью или отредактировать <router-link
+            class="entry-reference-link"
+            :to="{ name: 'dict-entry', params: { id: entry.entry.externalEntry, type: 'jp' } }"
+            target='_blank'
+            v-text="'основную'"
+          />.
+        </span>
+      </div>
 
       <v-autocomplete
         class="writing-input"
@@ -242,11 +253,31 @@
       ></v-autocomplete>
       <v-row>
         <v-col cols="12" md="8">
-          <v-textarea label="Питч-акцент" v-model="entry.entry.pitchAccent" auto-grow rows="1"></v-textarea>
+          <v-textarea label="Питч-акцент" v-model="entry.entry.pitchAccent" auto-grow rows="1" />
         </v-col>
         <v-col cols="12" md="4">
           <div class="templates">
             Шаблоны: <span class="template-button" @click="useNTemplate">N</span>
+          </div>
+        </v-col>
+        <v-col cols="12" md="12">
+          <div class="external-entry">
+            <span>Внешняя статья: </span>
+            <div class="external-entry-block" v-if="entry.entry.externalEntry" >
+              <router-link
+                class="entry-reference-link"
+                :to="{ name: 'dict-entry', params: { id: entry.entry.externalEntry, type: 'jp' } }"
+                target='_blank'
+                v-text="entry.entry.externalEntry"
+              />
+              <v-btn color="primary" class="ma-2" dark small outlined @click="extEntryRmLink" v-text="'Отвязать'" />
+            </div>
+            <div class="external-entry-block" v-else>
+              <v-textarea class="external-wid-input ma-2" label="ID" v-model="externalEntryWid" auto-grow rows="1" />
+              <v-btn color="primary" class="ma-2" dark small outlined @click="extEntryLink" v-text="'Привязать'" />
+              <v-btn color="primary" class="mr-2" dark small outlined @click="extEntryCopy" v-text="'Скопировать'" />
+              <!-- <v-btn color="primary" class="mr-2" dark small outlined v-text="'Скопировать со ссылкой'" /> -->
+            </div>
           </div>
         </v-col>
       </v-row>
@@ -256,6 +287,7 @@
 
 <script>
 import sc from "@/core/scriptConverter.js";
+import Vue from 'vue';
 import draggable from 'vuedraggable'
 import { bbCodesProcess, examplesBbCodesProcess }  from "@/core/bbCodes.js";
 import commonTags from "@/data/commonTags.json";
@@ -267,6 +299,7 @@ import PosDialog from "@/components/dictionary/editor/PosDialog.vue";
 import NoteDialog from "@/components/dictionary/editor/NoteDialog.vue";
 // import LangDialog from '@/components/dictionary/editor/LangDialog.vue';
 import { mapGetters, mapMutations, mapActions } from "vuex";
+import { sendGetRequest } from '@/core/apiRequests.js';
 export default {
   data: () => ({
     // dialogs: [false],
@@ -274,6 +307,7 @@ export default {
     allowedLangs: ["rus", "eng", "lat", "jap"],
     tags: commonTags,
     refType: referenceTypes,
+    externalEntryWid: '',
     templateEntryN: {
       entry: {
         "words":[{"writings":[{"value":"—","tag":{"type":"Kinf","values":[]}}],
@@ -322,6 +356,21 @@ export default {
     createLang(lang, posIndex) {
       if (this.allowedLangs.includes(lang) && this.nokoriLangs.length > 0) {
         this.$store.commit("editorAddLang", { lang: lang, posIndex: posIndex });
+      }
+    },
+    extEntryLink() {
+      this.entry.entry.externalEntry = this.externalEntryWid;
+      Vue.set(this.entry, 'entry.externalEntry', this.externalEntryWid);
+      console.log(this.entry.entry.externalEntry);
+    },
+    extEntryRmLink() {
+      this.externalEntryWid = '';
+      this.extEntryLink();
+    },
+    async extEntryCopy() {
+      const resp = await sendGetRequest("dictionary/jap/get-external-entry?wid=" + this.externalEntryWid);
+      if (resp.status == 200) {
+        this.entry.entry.meanings = resp.data.meanings;
       }
     },
     // notExistingLang(lang, posIndex) {
@@ -390,6 +439,20 @@ export default {
 </script>
 
 <style lang="scss">
+.external-wid-input {
+  width: 60px;
+}
+
+.external-entry,
+.external-entry-msg {
+  font-size: 120%;
+}
+
+.external-entry-block,
+.external-wid-input {
+  display: inline-block;
+}
+
 .handle {
   color: var(--v-text-decoration-color-base);
   cursor: move;
