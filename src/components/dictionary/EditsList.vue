@@ -69,9 +69,10 @@
             <v-col cols="12" md="10" sm="12">
               <v-row>
                 <v-col cols="12" md="10">
-                  <span class="comment-line" style="overflow-wrap: break-word; width: 100%; overflow:hidden;">
-                    Обоснование: {{editCompare[edit.id].comment}}
-                  </span>
+                  <span
+                    class="comment-line"
+                    v-text="getCommentText(edit)"
+                  />
                 </v-col>
                 <v-col cols="12" md="5" sm="12">
                   <div class="side">
@@ -198,6 +199,9 @@ export default {
         this.newAlert({ msg: `Правка #${editId} отклонена`, type: "warning" });
       }
     },
+    getCommentText(edit) {
+      return 'Обоснование: ' + this.editCompare[edit.id].comment;
+    },
     computeEditClass(type) {
       return {
         "edit-status-new": type === 1,
@@ -299,6 +303,12 @@ export default {
 </script>
 
 <style lang="scss">
+.comment-line {
+  overflow-wrap: break-word;
+  width: 100%;
+  overflow:hidden;
+}
+
 .titles {
   // color: rgba(0,0,0,.7);
 }
