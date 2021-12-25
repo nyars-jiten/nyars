@@ -8,47 +8,56 @@
       <PosDialog />
       <SenseDialog />
       <div class="words-header">
-        <div
-          class="word"
-          v-for="(word, wordIndex) in entry.entry.words"
-          :key="wordIndex"
+        <draggable
+          v-model="entry.entry.words"
+          group="words"
+          handle=".handle"
+          @start="drag=true"
+          @end="drag=false"
         >
-          <div class="word-writings">
-            <div
-              class="writing"
-              v-for="writing in word.writings"
-              :key="writing.id"
-            >
-              {{ writing.value }}
-              <InlineTag
-                v-if="writing.tag"
-                v-bind:tags="writing.tag.values"
-                :short="true"
-                :lang="'rus'"
-                :inf="true"
-              />
-            </div>
-          </div>
-          <div class="word-readings">
-            <div
-              class="reading"
-              v-for="reading in word.readings"
-              :key="reading.id"
-            >
-              {{ convertR(reading.value) }}
-              <InlineTag
-                v-if="reading.tag"
-                v-bind:tags="reading.tag.values"
-                :short="true"
-                :lang="'rus'"
-                :inf="true"
-              />
-            </div>
-          </div>
-          <v-btn icon small @click="openDialog(0, wordIndex)" color="primary"
-            ><v-icon>mdi-pencil</v-icon></v-btn
+          <div
+            class="word"
+            v-for="(word, wordIndex) in entry.entry.words"
+            :key="wordIndex"
           >
-        </div>
+            <v-icon class="handle">mdi-drag</v-icon>
+            <div class="word-writings">
+              <div
+                class="writing"
+                v-for="writing in word.writings"
+                :key="writing.id"
+              >
+                {{ writing.value }}
+                <InlineTag
+                  v-if="writing.tag"
+                  v-bind:tags="writing.tag.values"
+                  :short="true"
+                  :lang="'rus'"
+                  :inf="true"
+                />
+              </div>
+            </div>
+            <div class="word-readings">
+              <div
+                class="reading"
+                v-for="reading in word.readings"
+                :key="reading.id"
+              >
+                {{ convertR(reading.value) }}
+                <InlineTag
+                  v-if="reading.tag"
+                  v-bind:tags="reading.tag.values"
+                  :short="true"
+                  :lang="'rus'"
+                  :inf="true"
+                />
+              </div>
+            </div>
+            <v-btn icon small @click="openDialog(0, wordIndex)" color="primary"
+              ><v-icon>mdi-pencil</v-icon></v-btn
+            >
+          </div>
+        </draggable>
         <v-btn text outlined small @click="addNewWord" color="primary"
           ><v-icon>mdi-plus</v-icon> чтение/написание</v-btn
         >
