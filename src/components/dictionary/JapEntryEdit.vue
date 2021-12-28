@@ -295,7 +295,7 @@
 </template>
 
 <script>
-import sc from "@/core/scriptConverter.js";
+import { transcriptionConvert } from "@/core/scriptConverter.js";
 import Vue from 'vue';
 import draggable from 'vuedraggable'
 import { bbCodesProcess, examplesBbCodesProcess }  from "@/core/bbCodes.js";
@@ -330,7 +330,7 @@ export default {
     },
   }),
   computed: {
-    ...mapGetters(["currentSounds", "existingLangs"]),
+    ...mapGetters(["currentSounds", "existingLangs", 'siteTranscriptions']),
     nokoriLangsComp: function () {
       const exists = this.existingLangs(this.dialogIndex(2));
       return this.allowedLangs.filter((lang) => !exists.includes(lang));
@@ -413,7 +413,7 @@ export default {
         .flat();
     },
     convertR(raw) {
-      return sc.scriptConvert(raw);
+      return transcriptionConvert(raw, 'hiragana', this.siteTranscriptions);
     },
     getRusLang(lang) {
       switch (lang) {

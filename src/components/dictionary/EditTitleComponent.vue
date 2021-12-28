@@ -25,18 +25,24 @@
 </template>
 
 <script>
-import sc from "@/core/scriptConverter.js";
+import { transcriptionConvert } from "@/core/scriptConverter.js";
+
+import { mapGetters } from "vuex";
+
 export default {
   methods: {
     convertR(raw) {
-      return sc.scriptConvert(raw);
+      return transcriptionConvert(raw, 'hiragana', this.siteTranscriptions);
     },
     convertSc(raw) {
-      const converted = raw.map(function (reading) {
-        return sc.scriptConvert(reading);
+      const converted = raw.map(function (reading, siteTranscriptions = this.siteTranscriptions) {
+        return transcriptionConvert(reading, 'hiragana', siteTranscriptions);
       });
       return converted.join("・");
     },
+  },
+  computed: {
+    ...mapGetters(['siteTranscriptions']),
   },
   props: {
     edit: Object,

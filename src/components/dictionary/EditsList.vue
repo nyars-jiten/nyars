@@ -157,7 +157,7 @@
 </template>
 
 <script>
-import sc from "@/core/scriptConverter.js";
+import { transcriptionConvert } from "@/core/scriptConverter.js";
 import { sendPostRequest } from "@/core/apiRequests.js";
 import tdif from "@/core/timeDifference.js";
 import EditTitle from "@/components/dictionary/EditTitleComponent.vue";
@@ -167,7 +167,7 @@ import dictTypesData from "@/data/dictionaryTypes.json";
 
 export default {
   computed: {
-    ...mapGetters(["editCompare", "currentUser", "userHasRights"]),
+    ...mapGetters(["editCompare", "currentUser", "userHasRights", 'siteTranscriptions']),
     getPanelKey() {
       const key = this.lastEdits.length > 0 ? this.lastEdits.at(-1).id : 0;
       return key;
@@ -262,11 +262,11 @@ export default {
       }
     },
     convertR(raw) {
-      return sc.scriptConvert(raw);
+      return transcriptionConvert(raw, 'hiragana', this.siteTranscriptions);
     },
     convertSc(raw) {
-      var converted = raw.map(function (reading) {
-        return sc.scriptConvert(reading);
+      var converted = raw.map(function (reading, siteTranscriptions = this.siteTranscriptions) {
+        return transcriptionConvert(reading, 'hiragana', siteTranscriptions);
       });
       return converted.join("・");
     },

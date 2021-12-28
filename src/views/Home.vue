@@ -59,9 +59,9 @@ import EditsList from '@/components/dictionary/EditsList.vue';
 import Statistics from '@/components/Statistics.vue';
 import Readme from '@/components/readme/Readme.vue';
 import StatisticsSite from '@/components/StatisticsSite.vue';
-import sc from "@/core/scriptConverter.js"
+import { transcriptionConvert } from "@/core/scriptConverter.js"
 export default {
-  computed: mapGetters(["lastEdits"]),
+  computed: mapGetters(["lastEdits", 'siteTranscriptions']),
   methods: {
     ...mapActions(["getLastEdits"]),
     computeEditClass(type) {
@@ -74,8 +74,8 @@ export default {
       };
     },
     convertSc(raw) {
-      var converted = raw.map(function (reading) {
-        return sc.scriptConvert(reading);
+      var converted = raw.map(function (reading, siteTranscriptions = this.siteTranscriptions) {
+        return transcriptionConvert(reading, 'hiragana', siteTranscriptions);
       });
       return converted.join("・");
     },

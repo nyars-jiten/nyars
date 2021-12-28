@@ -72,6 +72,11 @@ const routes = [
     component: () => import('@/views/Search.vue'),
     props: (route) => ({ request: route.query.r, selectedPage: route.query.page || 1 })
   },
+  {
+    path: '/help/transcriptions',
+    name: 'transcriptions',
+    component: () => import('@/views/Helpers/Transcriptions.vue'),
+  },
   { path: '*', }
 ];
 

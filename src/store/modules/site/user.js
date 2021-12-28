@@ -42,6 +42,14 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
+        },
+        async getDictionaries(ctx) {
+            axios
+                .get(process.env.VUE_APP_API + 'kotoba/get-dictionaries')
+                .then(response => (ctx.commit('updateCurrentDictionaries', response.data)))
+                .catch(error => {
+                    console.log(error);
+                });
         }
     },
     mutations: {
@@ -59,13 +67,19 @@ export default {
         },
         updateCurrentDownloads(state, dls) {
             state.downloads = dls;
+        },
+        updateCurrentDictionaries(state, dicts) {
+            state.transcriptions = dicts.transcriptionLists;
+            state.tags = dicts.tags
         }
     },
     state: {
         currentUser: [],
         darkMode: false,
         userProfile: Object,
-        downloads: []
+        downloads: [],
+        transcriptions: Object,
+        tags: []
     },
     getters: {
         currentDownloads(state) {
@@ -73,6 +87,12 @@ export default {
         },
         darkModeState(state) {
             return state.darkMode;
+        },
+        siteTags(state) {
+            return state.tags;
+        },
+        siteTranscriptions(state) {
+            return state.transcriptions;
         },
         userProfile(state) {
             return state.userProfile.user;

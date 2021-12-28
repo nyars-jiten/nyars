@@ -26,7 +26,11 @@
               v-for="reading in word.readings"
               :key="reading.id"
             >
-              {{ convertR(reading.value) }}
+              <!-- {{ convertR(reading.value) }} ( {{convertToTrscr(reading.value)}} ) -->
+              <div class="reading-lines">
+                <div class="jpn-reading">{{ convertR(reading.value) }}</div>
+                <div class="trscpt-reading">{{ convertToTrscr(reading.value) }}</div>
+              </div>
               <InlineTag
                 v-if="reading.tag"
                 v-bind:tags="reading.tag.values"
@@ -172,7 +176,7 @@
 </template>
 
 <script>
-import sc from "@/core/scriptConverter.js";
+import { transcriptionConvert } from "@/core/scriptConverter.js";
 import { bbCodesProcess, examplesBbCodesProcess }  from "@/core/bbCodes.js";
 import referenceTypes from "@/data/referenceTypes.json";
 import InlineTag from "@/components/dictionary/InlineTag.vue";
@@ -185,7 +189,7 @@ export default {
     refType: referenceTypes
   }),
   computed:  {
-    ...mapGetters(["currentSounds"]),
+    ...mapGetters(["currentSounds", 'siteTranscriptions']),
     actualTags() {
       if (!this.entry.entry.tags) return [];
       return this.entry.entry.tags.map(
@@ -220,7 +224,10 @@ export default {
         .flat();
     },
     convertR(raw) {
-      return sc.scriptConvert(raw);
+      return transcriptionConvert(raw, 'hiragana', this.siteTranscriptions);
+    },
+    convertToTrscr(raw) {
+       return transcriptionConvert(raw, 'kiriji', this.siteTranscriptions);
     },
     getRusLang(lang) {
       switch (lang) {
@@ -249,6 +256,32 @@ export default {
 <style lang="scss">
 .entry-text-md, .common-tags, .c-tag {
   display: inline;
+}
+
+.reading-lines {
+  font-size: 65%;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  // padding-top: 14px;
+  line-height: 14px;
+  // position: relative;
+  // top: 8px;
+  padding-bottom: 5px;
+}
+
+.jpn-reading {
+  font-size: 120%;
+}
+
+// .trscpt-reading {
+//   // display: block;
+// }
+
+.jpn-reading,
+.trscpt-reading {
+  display: block;
+  // color: rgb(85, 85, 85);
 }
 
 .references-block {

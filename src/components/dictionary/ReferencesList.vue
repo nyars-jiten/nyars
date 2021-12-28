@@ -29,13 +29,17 @@
 
 <script>
 import Vue from "vue";
-import sc from "@/core/scriptConverter.js";
+import { mapGetters } from "vuex";
+import { transcriptionConvert } from "@/core/scriptConverter.js";
 
 export default {
   data: () => ({
     groupedRefs: [],
     typeTitles: ['Синонимы','Частичные синонимы','Антонимы','Сравни','Сокращения']
   }),
+  computed: {
+    ...mapGetters(['siteTranscriptions'])
+  },
   methods: {
     getRefsByType(type) {
       return this.references.filter(ref => ref.type === type);
@@ -43,7 +47,7 @@ export default {
     getHeader(entry) {
       // console.log(entry.words.map(x => x.writings));
       let res = entry.words.map(x => x.writings).flat().map(x => x.value);
-      if (res.length == 0) res = entry.words.map(x => x.readings).flat().map(x => sc.scriptConvert(x.value));
+      if (res.length == 0) res = entry.words.map(x => x.readings).flat().map(x => transcriptionConvert(x.value, 'hiragana', this.siteTranscriptions));
       return res.join('・');
     },
   },

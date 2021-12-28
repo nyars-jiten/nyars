@@ -141,13 +141,13 @@
 </template>
 
 <script>
-import sc from "@/core/scriptConverter.js";
+import { transcriptionConvert } from "@/core/scriptConverter.js";
 import commonTags from "@/data/commonTags.json";
 import corpusList from "@/data/corpus.json";
 import InlineTag from "@/components/dictionary/InlineTag.vue";
 import { bbCodesProcess } from "@/core/bbCodes.js";
 import DictionaryIcon from "@/components/dictionary/DictionaryIcon.vue";
-// import { mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -174,7 +174,7 @@ export default {
       return this.corpus[entry.theme];
     },
     convertR(raw) {
-      return sc.scriptConvert(raw);
+      return transcriptionConvert(raw, 'hiragana', this.siteTranscriptions);
     },
     getRusLang(lang) {
       switch (lang) {
@@ -192,6 +192,7 @@ export default {
     },
   },
   computed: {
+    ...mapGetters(['siteTranscriptions']),
     actualTags() {
       return this.entry.entry.tags.map(
         (key) => this.tags[key]

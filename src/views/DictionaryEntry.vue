@@ -85,7 +85,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { sendPostRequest, sendDeleteRequest } from "@/core/apiRequests.js";
-import sc from "@/core/scriptConverter.js";
+import { transcriptionConvert } from "@/core/scriptConverter.js";
 import dictTypesData from "@/data/dictionaryTypes.json";
 
 import JapEntryView from "@/components/dictionary/JapEntryView.vue";
@@ -117,7 +117,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["currentEntry", "currentImages", "currentEditComment", "userRoleId", "userHasRights"]),
+    ...mapGetters(["currentEntry", "currentImages", "currentEditComment", "userRoleId", "userHasRights", 'siteTranscriptions']),
     currentId() {
       return this.$route.params.id;
     },
@@ -145,8 +145,8 @@ export default {
           })
         );
         readings = readings.concat(
-          item.readings.map(function(w) {
-            return sc.scriptConvert(w.value);
+          item.readings.map(function(w, siteTranscriptions = this.siteTranscriptions) {
+            return transcriptionConvert(w.value, 'hiragana', siteTranscriptions);
           })
         );
       });

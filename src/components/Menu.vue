@@ -196,7 +196,8 @@ export default {
   methods: {
     ...mapActions([
       "getCurrentUser",
-      "logOut"
+      "logOut",
+      'getDictionaries'
     ]),
     linkHasRights(link) {
       let accessRights = true;
@@ -248,8 +249,9 @@ export default {
     },
   },
   components: { SearchBar, HandwritingInput },
-  mounted() {
-    this.getCurrentUser();
+  async mounted() {
+    await this.getCurrentUser();
+    await this.getDictionaries();
   },
   data: () => ({
     drawer: true,
