@@ -70,24 +70,19 @@
                   </v-col>
                 </v-row>
               </v-col>
-              <v-col cols="12" md="6">
+              <v-col cols="12" md="4">
                 <TagSelector
                   :initSelected="validateTag(readings)"
                   :type="'Rinf'"
                   @changeTags="(...args) => changeReadingTags(rIndex, ...args)"
                 />
-
-                <!-- <v-select
-                            class="writing-input"
-                            :menu-props="{ maxHeight: '400' }"
-                            label="Теги"
-                            multiple
-                            small-chips
-                            item-text="rus"
-                            item-value="engShort"
-                            :items="tagList('Rinf')"
-                            v-model="readingTagsComp[rIndex]"
-                            ></v-select> -->
+              </v-col>
+              <v-col cols="12" md="2">
+                <v-text-field
+                  v-model="readings.pitch"
+                  label="Питч"
+                  class="writing-input"
+                />
               </v-col>
             </v-row>
             <div class="dial-btn">

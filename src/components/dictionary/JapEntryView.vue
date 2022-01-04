@@ -27,10 +27,18 @@
               :key="reading.id"
             >
               <!-- {{ convertR(reading.value) }} ( {{convertToTrscr(reading.value)}} ) -->
-              <div class="reading-lines">
-                <div class="jpn-reading">{{ convertR(reading.value) }}</div>
-                <div class="trscpt-reading">{{ convertToTrscr(reading.value) }}</div>
-              </div>
+              <!-- <div class="reading-lines">-->
+                <div class="jpn-reading">
+                  <!-- {{ convertR(reading.value) }} -->
+                  <!-- v-if="reading.pitchedReading" -->
+                  <PitchAccent
+                    :pitch="reading.pitchedReading"
+                    :trscpt="convertToTrscr(reading.value)"
+                    :kana="convertR(reading.value)"
+                  />
+                </div>
+                <!-- <div class="trscpt-reading">{{ convertToTrscr(reading.value) }}</div> -->
+              <!-- </div> -->
               <InlineTag
                 v-if="reading.tag"
                 v-bind:tags="reading.tag.values"
@@ -56,7 +64,7 @@
         </div>
       </div>
 
-      <PitchAccent :raw="entry.entry.pitchAccent" v-if="entry.entry.pitchAccent && entry.entry.pitchAccent.length > 0" />
+      <!-- <PitchAccent :raw="entry.entry.pitchAccent" v-if="entry.entry.pitchAccent && entry.entry.pitchAccent.length > 0" /> -->
 
       <div class="entry-sound">
         <template v-if="currentSounds.length > 0">
@@ -258,27 +266,28 @@ export default {
   display: inline;
 }
 
-.reading-lines {
-  font-size: 65%;
-  display: inline-block;
-  vertical-align: middle;
-  text-align: center;
-  // padding-top: 14px;
-  line-height: 14px;
-  // position: relative;
-  // top: 8px;
-  padding-bottom: 5px;
-}
+// .reading-lines {
+//   font-size: 65%;
+//   display: inline-block;
+//   vertical-align: middle;
+//   text-align: center;
+//   // padding-top: 14px;
+//   line-height: 14px;
+//   // position: relative;
+//   // top: 8px;
+//   padding-bottom: 5px;
+// }
 
 .jpn-reading {
-  font-size: 120%;
+  // font-size: 120%;
+  display: inline-block;
+  font-size: 80%;
 }
 
 // .trscpt-reading {
 //   // display: block;
 // }
 
-.jpn-reading,
 .trscpt-reading {
   display: block;
   // color: rgb(85, 85, 85);
