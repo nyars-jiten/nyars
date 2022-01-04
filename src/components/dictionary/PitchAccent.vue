@@ -177,17 +177,17 @@ export default {
 }
 
 .pitch-num-selected {
-  $color:rgb(158, 189, 209);
-  border: 1px solid $color;
+  border: 1px solid;
+  border-color: var(--v-pitch-num-color-base);
+  background-color: var(--v-pitch-num-color-base);
   color: white;
   border-radius: 30%;
-  background-color: $color;
 }
 
 .pitch-num-unselected {
-  $color:rgb(158, 189, 209);
-  border: 1px solid $color;
-  color: $color;
+  border: 1px solid;
+  border-color: var(--v-pitch-num-color-base);
+  color: var(--v-pitch-num-color-base);
   border-radius: 30%;
 }
 

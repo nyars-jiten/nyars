@@ -87,6 +87,7 @@ export default new Vuetify({
         "svg-primary": "#000000",
 
         "pitch-meta": colors.red.darken3,
+        "pitch-num-color": "#9ebdd1",
       },
       dark: {
         secondary: colors.grey.darken3,
@@ -159,6 +160,7 @@ export default new Vuetify({
         "svg-primary": "#ffffff",
 
         "pitch-meta": colors.red.darken2,
+        "pitch-num-color": "#677c8a",
       }
     }
   }
