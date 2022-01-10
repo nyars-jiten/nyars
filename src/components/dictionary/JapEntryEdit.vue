@@ -262,7 +262,7 @@
       ></v-autocomplete>
       <v-row>
         <v-col cols="12" md="8">
-          <v-textarea label="Питч-акцент" v-model="entry.entry.pitchAccent" auto-grow rows="1" />
+          <v-textarea label="Питч-акцент" v-model="entry.entry.pitchAccent" auto-grow rows="1" readonly />
         </v-col>
         <v-col cols="12" md="4">
           <div class="templates">
