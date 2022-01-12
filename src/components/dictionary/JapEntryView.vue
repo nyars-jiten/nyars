@@ -26,26 +26,14 @@
               v-for="reading in word.readings"
               :key="reading.id"
             >
-              <!-- {{ convertR(reading.value) }} ( {{convertToTrscr(reading.value)}} ) -->
-              <!-- <div class="reading-lines">-->
-                <div class="jpn-reading">
-                  <!-- {{ convertR(reading.value) }} -->
-                  <!-- v-if="reading.pitchedReading" -->
-                  <PitchAccent
-                    :pitch="reading.pitchedReading"
-                    :trscpt="convertToTrscr(reading.value)"
-                    :kana="convertR(reading.value)"
-                  />
-                </div>
-                <!-- <div class="trscpt-reading">{{ convertToTrscr(reading.value) }}</div> -->
-              <!-- </div> -->
-              <InlineTag
-                v-if="reading.tag"
-                v-bind:tags="reading.tag.values"
-                :short="true"
-                :lang="'rus'"
-                :inf="true"
-              />
+              <div class="jpn-reading">
+                <PitchAccent
+                  :pitch="reading.pitchedReading"
+                  :trscpt="convertToTrscr(reading.value)"
+                  :kana="convertR(reading.value)"
+                  :tags="reading.tag"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -235,7 +223,7 @@ export default {
       return transcriptionConvert(raw, 'hiragana', this.siteTranscriptions);
     },
     convertToTrscr(raw) {
-       return transcriptionConvert(raw, 'kiriji', this.siteTranscriptions);
+      return transcriptionConvert(raw, 'kiriji', this.siteTranscriptions);
     },
     getRusLang(lang) {
       switch (lang) {

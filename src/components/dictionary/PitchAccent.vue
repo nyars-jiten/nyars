@@ -42,11 +42,22 @@
         @click="setSelectedPitch(num)"
       />
     </div>
+    <div class="reading-tags">
+      <InlineTag
+        v-if="tags"
+        v-bind:tags="tags.values"
+        :short="true"
+        :lang="'rus'"
+        :inf="true"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 // import { sendGetRequest } from '@/core/apiRequests.js';
+import InlineTag from "@/components/dictionary/InlineTag.vue";
+
 export default {
   data: () => ({
     selectedNum: 0,
@@ -69,7 +80,11 @@ export default {
   props: {
     pitch: Object,
     trscpt: String,
-    kana: String
+    kana: String,
+    tags: Object
+  },
+  components: {
+    InlineTag
   },
 }
 </script>
@@ -90,6 +105,15 @@ export default {
   // position: relative;
   // top: 8px;
   padding-bottom: 5px;
+}
+
+.reading-tags {
+  display: inline-block;
+  font-size: 125%;
+  vertical-align: top;
+  padding-left: 5px;
+  position: relative;
+  bottom: 7px;
 }
 
 .readings-block {

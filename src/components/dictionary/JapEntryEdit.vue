@@ -38,21 +38,21 @@
               </div>
             </div>
             <div class="word-readings">
-              <div
-                class="reading"
-                v-for="reading in word.readings"
-                :key="reading.id"
-              >
-                {{ convertR(reading.value) }}
-                <InlineTag
-                  v-if="reading.tag"
-                  v-bind:tags="reading.tag.values"
-                  :short="true"
-                  :lang="'rus'"
-                  :inf="true"
+            <div
+              class="reading"
+              v-for="reading in word.readings"
+              :key="reading.id"
+            >
+              <div class="jpn-reading">
+                <PitchAccent
+                  :pitch="reading.pitchedReading"
+                  :trscpt="convertToTrscr(reading.value)"
+                  :kana="convertR(reading.value)"
+                  :tags="reading.tag"
                 />
               </div>
             </div>
+          </div>
             <v-btn icon small @click="openDialog(0, wordIndex)" color="primary"
               ><v-icon>mdi-pencil</v-icon></v-btn
             >
@@ -306,6 +306,7 @@ import referenceTypes from "@/data/referenceTypes.json";
 import SenseDialog from "@/components/dictionary/editor/SenseDialog.vue";
 import PosDialog from "@/components/dictionary/editor/PosDialog.vue";
 import NoteDialog from "@/components/dictionary/editor/NoteDialog.vue";
+import PitchAccent from "@/components/dictionary/PitchAccent.vue";
 // import LangDialog from '@/components/dictionary/editor/LangDialog.vue';
 import { mapGetters, mapMutations, mapActions } from "vuex";
 import { sendGetRequest } from '@/core/apiRequests.js';
@@ -382,6 +383,9 @@ export default {
         this.entry.entry.meanings = resp.data.meanings;
       }
     },
+    convertToTrscr(raw) {
+      return transcriptionConvert(raw, 'kiriji', this.siteTranscriptions);
+    },
     // notExistingLang(lang, posIndex) {
     //     console.log(lang)
     //     return this.nokoriLangsComp.includes(lang)
@@ -442,12 +446,18 @@ export default {
     NoteDialog,
     PosDialog,
     SenseDialog,
-    draggable
+    draggable,
+    PitchAccent
   },
 };
 </script>
 
 <style lang="scss">
+.reading-inline-tags {
+  vertical-align: top;
+  position: absolute;
+}
+
 .external-wid-input {
   width: 60px;
 }

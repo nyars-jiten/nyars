@@ -52,7 +52,7 @@ export default {
       {text: 'Литерал', value: 'literal', type: -1},
       {text: 'Хэпбёрн', value: 'hepburn', type: 3},
       {text: 'Кунрэй', value: 'kunrei', type: 4},
-      {text: 'Киридзи', value: 'kiriji', type: 2},
+      {text: 'Поливанов', value: 'kiriji', type: 2},
     ],
     line: '!jetto!kiryu:'
   }),
