@@ -14,7 +14,7 @@
               <!-- {{ currentDownloads }} -->
             <div class="downloads-list">
               <div class="download-el" v-for="dl in currentDownloads" :key="dl.id">
-                {{ getTitle(dl.type).title }}
+                {{ getTitle(dl.type) }}
                 <br>
                 <a target="_blank" :href="getLink(dl.id)"><span class="filelink"><v-icon medium class="linkicon">mdi-download</v-icon>{{ dl.fileSize }}</span></a>
                 <span class="updated">(Обновлено {{ dateFormat(dl.date) }})</span>
@@ -35,7 +35,8 @@ export default {
   methods: {
     ...mapActions(["getDownloads"]),
     getTitle(type) {
-      return this.exports[type];
+      if (!this.exports[type]) return type;
+      return this.exports[type].title;
     },
     getLink(id) {
       return process.env.VUE_APP_API + "users/downloads/" + id;
