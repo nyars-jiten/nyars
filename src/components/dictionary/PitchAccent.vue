@@ -159,7 +159,7 @@ export default {
     content: "◌";
     position: absolute;
     font-size: 130%;
-    transform: translate(-90%, -5%);
+    transform: translate(-90%, 0%);
     color: var(--v-pitch-meta-base);
 }
 
@@ -168,6 +168,7 @@ export default {
     display: inline-block;
     position: absolute;
     left: 80%;
+    font-size: 130%;
     color: var(--v-pitch-meta-base);
 }
 
