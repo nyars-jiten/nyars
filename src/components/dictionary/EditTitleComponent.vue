@@ -35,10 +35,7 @@ export default {
       return transcriptionConvert(raw, 'hiragana', this.siteTranscriptions);
     },
     convertSc(raw) {
-      const converted = raw.map(function (reading, siteTranscriptions = this.siteTranscriptions) {
-        return transcriptionConvert(reading, 'hiragana', siteTranscriptions);
-      });
-      return converted.join("・");
+      return this.convertR(raw.join("・"));
     },
   },
   computed: {

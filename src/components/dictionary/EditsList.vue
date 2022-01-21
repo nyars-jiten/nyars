@@ -157,7 +157,6 @@
 </template>
 
 <script>
-import { transcriptionConvert } from "@/core/scriptConverter.js";
 import { sendPostRequest } from "@/core/apiRequests.js";
 import tdif from "@/core/timeDifference.js";
 import EditTitle from "@/components/dictionary/EditTitleComponent.vue";
@@ -260,15 +259,6 @@ export default {
         default:
           return "—";
       }
-    },
-    convertR(raw) {
-      return transcriptionConvert(raw, 'hiragana', this.siteTranscriptions);
-    },
-    convertSc(raw) {
-      var converted = raw.map(function (reading, siteTranscriptions = this.siteTranscriptions) {
-        return transcriptionConvert(reading, 'hiragana', siteTranscriptions);
-      });
-      return converted.join("・");
     },
     timeDif(previous) {
       var current = new Date();
