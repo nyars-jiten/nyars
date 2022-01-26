@@ -1,6 +1,6 @@
 <template>
   <div class="bb-code-panel">
-    <span class="bb-btn" @click="processbb('[ref]', '[/ref]')">[ref]</span>
+    <!-- <span class="bb-btn" @click="processbb('[ref]', '[/ref]')">[ref]</span> -->
     <span class="bb-btn" @click="processbb('[i]', '[/i]')">[i]</span>
     <span class="bb-btn" @click="processbb('[p]', '[/p]')">[p]</span>
     <span class="bb-btn" @click="processbb('[sub]', '[/sub]')">[sub]</span>
