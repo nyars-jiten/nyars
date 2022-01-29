@@ -19,22 +19,38 @@ export function bbCodesProcess(rawText) {
 }
 
 export function examplesBbCodesProcess(rawText) {
-  const htmlText = rawText
-    .replace(/([一-龯]+)《(.+?)》/gim, "<ruby>$1<rt style=\"font-size: 70%\">$2</rt></ruby>");
+  var htmlText = rawText
+    .replace(/([一-龯]+)《(.+?)》/gim, "<ruby>$1<rt>$2</rt></ruby>");
+
+  htmlText = htmlText.replace(/\[([^|]*)\|([^\]]*)\]/gim, furiganaReplacerBracketsToRuby);
 
   return cleanHtml(htmlText);
 }
 
+function furiganaReplacerBracketsToRuby(match, p1, p2) {
+  var ruby = '';
+  let readings = p2.split('|');
+  if (readings.length === 1) {
+    ruby = `<ruby>${p1}<rp>（</rp><rt>${readings[0]}</rt><rp>）</rp></ruby>`;
+  } else {
+    for (var i = 0; i < p1.length; i++) {
+      let currentKanji = p1.charAt(i);
+      let currentReading = i < readings.length ? readings[i] : '';
+      ruby += `<ruby>${currentKanji}<rp>（</rp><rt>${currentReading}</rt><rp>）</rp></ruby>`;
+    }
+  }
+  return ruby;
+}
+
 function cleanHtml(html) {
   return sanitizeHtml(html.trim(), {
-    allowedTags: ["em", "a", "sub", "sup", "strong", "span", "rt", "ruby"],
+    allowedTags: ["em", "a", "sub", "sup", "strong", "span", "rt", "ruby", "rp"],
     allowedAttributes: {
       a: ["href"], span: ["style"], rt: ["style"]
     },
     allowedStyles: {
       '*': {
-        'font-family': [/^[\s\S]*$/],
-        'font-size': [/^[\s\S]*$/]
+        'font-family': [/^[\s\S]*$/]
       }
     }
   });

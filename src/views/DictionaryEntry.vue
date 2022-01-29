@@ -298,4 +298,15 @@ export default {
   width: 100%;
   padding-left: 20px;
 }
+
+.example {
+  font-size: 120%;
+
+  rt {
+    font-size: 60%;
+    vertical-align: bottom;
+
+  }
+}
+
 </style>
