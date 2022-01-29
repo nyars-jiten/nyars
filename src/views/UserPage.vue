@@ -54,7 +54,7 @@
           </v-card>
         </v-col>
         <v-col cols="12" md="8" sm="12" xs="12">
-          <v-card elevation="2" outlined tile>
+          <v-card elevation="2" outlined tile class="mb-6">
             <v-card-title>
               Статистика
             </v-card-title>
@@ -66,9 +66,7 @@
               ></v-data-table>
             </template>
           </v-card>
-        </v-col>
-        <v-col cols="12" md="8" sm="12" xs="12">
-          <v-card elevation="2" outlined tile>
+          <v-card elevation="2" outlined tile class="mb-6">
             <v-card-title>Последние правки</v-card-title>
             <div class="diff-wrapper ma-4">
               <v-row justify="center">
