@@ -4,7 +4,11 @@
         "icon": ""
     },
     "yomichan": {
-        "title": "Yomichan, .zip",
+        "title": "Yomichan (RU + Pitch), .zip",
+        "icon": ""
+    },
+    "yomichan_eng": {
+        "title": "Yomichan (ENG), .zip",
         "icon": ""
     }
 }
