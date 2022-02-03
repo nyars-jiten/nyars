@@ -195,8 +195,6 @@ export default {
           this.newAlert({ msg: "Правка отправлена", type: "success" });
           this.updatePage();
           this.editMode = false;
-        } else {
-          this.newAlert({ msg: "Нечего сохранять", type: "error" });
         }
       } else {
         const resp = await sendPostRequest(`edits/entries/${this.dictType}`, newEntry);
