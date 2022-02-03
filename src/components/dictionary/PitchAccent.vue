@@ -3,7 +3,7 @@
     <!-- {{pitch}} -->
     <!-- <template v-for="(pitch, pitchId) in pitches" > -->
     <div class="readings-block">
-      <div v-if="pitch && !edit" class="pitch-renders" :class="{kanjiless:kanjiless}">
+      <div v-if="pitch && !no_diagram" class="pitch-renders" :class="{kanjiless:kanjiless}">
         <template v-for="(render, renderId) in pitch.renders" >
           <div class="pitch-word" :key="renderId">
             <div class="pitch-render" v-if="render.num == selectedNum">
@@ -33,7 +33,7 @@
       <div class="trscpt-reading" :class="{trscpt_lower:kanjiless}">{{ trscpt }}</div>
     </div>
     <!-- </template> -->
-    <div v-if="pitch && !edit" class="nums">
+    <div v-if="pitch && !no_diagram" class="nums">
       <span
         v-for="num in pitch.resNum"
         :key="num.id"
@@ -83,7 +83,7 @@ export default {
     kana: String,
     tags: Object,
     kanjiless: Boolean,
-    edit: Boolean,
+    no_diagram: Boolean,
   },
   components: {
     InlineTag

@@ -49,7 +49,7 @@
                   :trscpt="convertToTrscr(reading.value)"
                   :kana="convertR(reading.value)"
                   :tags="reading.tag"
-                  :edit="true"
+                  :no_diagram="true"
                 />
               </div>
             </div>

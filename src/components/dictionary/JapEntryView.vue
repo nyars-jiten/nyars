@@ -167,6 +167,13 @@
             </div>
           </div>
         </div>
+        <!-- <div class="ref-entry mt-4" v-if="entry.entry.externalEntry">
+          Связанная
+          <router-link
+            :to="{ name: 'dict-entry', params: { id: entry.entry.externalEntry, type: 'jp' } }"
+            v-text="'статья'"
+          />.
+        </div> -->
       </div>
     </div>
     <!-- </v-container> -->
