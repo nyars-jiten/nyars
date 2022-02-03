@@ -138,15 +138,15 @@ export default {
 
       var titles = [];
       var readings = [];
-      this.currentEntry.entry.words.forEach(function(item) {
+      this.currentEntry.entry.words.forEach((item) => {
         titles = titles.concat(
           item.writings.map(function(w) {
             return w.value;
           })
         );
         readings = readings.concat(
-          item.readings.map(function(w, siteTranscriptions = this.siteTranscriptions) {
-            return transcriptionConvert(w.value, 'hiragana', siteTranscriptions);
+          item.readings.map((w) => {
+            return transcriptionConvert(w.value, 'hiragana', this.siteTranscriptions);
           })
         );
       });
