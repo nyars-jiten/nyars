@@ -32,6 +32,7 @@
                   :trscpt="convertToTrscr(reading.value)"
                   :kana="convertR(reading.value)"
                   :tags="reading.tag"
+                  :kanjiless="word.writings.length == 0"
                 />
               </div>
             </div>

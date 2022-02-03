@@ -3,7 +3,7 @@
     <!-- {{pitch}} -->
     <!-- <template v-for="(pitch, pitchId) in pitches" > -->
     <div class="readings-block">
-      <div v-if="pitch" class="pitch-renders">
+      <div v-if="pitch" class="pitch-renders" :class="{kanjiless:kanjiless}">
         <template v-for="(render, renderId) in pitch.renders" >
           <div class="pitch-word" :key="renderId">
             <div class="pitch-render" v-if="render.num == selectedNum">
@@ -27,10 +27,10 @@
           </div>
         </template>
       </div>
-      <div class="kana-trscpt-reading" v-else>
+      <div class="kana-trscpt-reading" :class="{kanjiless:kanjiless}" v-else>
         {{ kana }}
       </div>
-      <div class="trscpt-reading">{{ trscpt }}</div>
+      <div class="trscpt-reading" :class="{trscpt_lower:kanjiless}">{{ trscpt }}</div>
     </div>
     <!-- </template> -->
     <div v-if="pitch" class="nums">
@@ -81,7 +81,8 @@ export default {
     pitch: Object,
     trscpt: String,
     kana: String,
-    tags: Object
+    tags: Object,
+    kanjiless: Boolean,
   },
   components: {
     InlineTag
@@ -94,6 +95,13 @@ export default {
 //   -webkit-filter: invert(100%);
 //   filter: invert(100%);
 // }
+
+.kanjiless {
+  font-size: 125%;
+  .pitch-word-mora[data-pitch='high']>.pitch-word-line {
+    top: -0.1em;
+  }
+}
 
 .trscpt-reading {
   font-size: 90%;
