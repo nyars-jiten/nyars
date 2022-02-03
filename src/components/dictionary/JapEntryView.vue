@@ -109,6 +109,7 @@
                     <!-- {{ convertBB(sense.value) }} -->
                     <span
                       class="entry-text-md"
+                      :class="{sense_rare:sense.isRare}"
                       v-html="convertBB(sense.value)"
                       style="white-space: pre-wrap"
                     />
@@ -265,6 +266,10 @@ export default {
 //   // top: 8px;
 //   padding-bottom: 5px;
 // }
+
+.sense_rare {
+  color: var(--v-inline-tag-full-tags-color-base);
+}
 
 .jpn-reading {
   // font-size: 120%;

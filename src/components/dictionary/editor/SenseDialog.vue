@@ -44,6 +44,14 @@
                 />
               </v-col>
               <v-col cols="12" md="12">
+                <div class="rare-checkbox">
+                  <v-checkbox
+                    v-model="sense.isRare"
+                    label="Редкое значение"
+                  />
+                </div>
+              </v-col>
+              <v-col cols="12" md="12">
                 <div class="tabs-wrapper">
                   <div class="tabs">
                     <v-tabs v-model="tabs">

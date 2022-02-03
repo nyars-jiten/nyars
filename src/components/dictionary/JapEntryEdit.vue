@@ -127,7 +127,7 @@
                           v-bind:lang="lm.lang"
                         />
                         <!-- {{ sense.value }} -->
-                        <div class="entry-text-md" v-html="convertBB(sense.value)" style="white-space: pre-wrap" align="left" />
+                        <div class="entry-text-md" :class="{sense_rare:sense.isRare}" v-html="convertBB(sense.value)" style="white-space: pre-wrap" align="left" />
                         <InlineTag
                           v-bind:tags="filterTags(sense.tags, ['Dial', 'Misc'])"
                           v-bind:lang="lm.lang"
@@ -475,6 +475,10 @@ export default {
 .handle {
   color: var(--v-text-decoration-color-base);
   cursor: move;
+}
+
+.sense_rare {
+  color: var(--v-inline-tag-full-tags-color-base);
 }
 
 .new-pos-btn {
