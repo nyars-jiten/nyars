@@ -42,6 +42,7 @@ export default new Vuetify({
         "edit-status-type-new-color": "#1db336",
         "edit-status-type-edit-color": "#1d90b3",
         "edit-status-type-delete-color": "#b31d1d",
+        "edit-status-type-transfer-color": "#a520c7",
 
         "edit-separator-color": "#8f8f8f",
 
@@ -114,6 +115,7 @@ export default new Vuetify({
         "edit-status-type-new-color": "#1db336",
         "edit-status-type-edit-color": "#1d90b3",
         "edit-status-type-delete-color": "#b31d1d",
+        "edit-status-type-transfer-color": "#a520c7",
 
         "edit-separator-color": "#4b4b4b",
 

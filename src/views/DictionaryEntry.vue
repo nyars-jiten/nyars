@@ -113,7 +113,8 @@ export default {
         }
       },
       emptyEntry: {},
-      emptyImage: []
+      emptyImage: [],
+      transferWid: ''
     };
   },
   computed: {
@@ -170,7 +171,66 @@ export default {
       return type === this.dictType;
     },
     changeDict(dict) {
+
+      if (!this.isNew) {
+        this.convertEntry(dict);
+        this.transferWid = this.currentId;
+      } else {
+        this.transferWid = '';
+      }
+
       this.$router.push({ name: "dict-entry", params: { id: "new", type: dict } }).catch(() => {});
+    },
+    convertEntry(dict) {
+      var titles = [];
+      var readings = [];
+      function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+      }
+      this.currentEntry.entry.words.forEach((item) => {
+        titles = titles.concat(
+          item.writings.map(function(w) {
+            return w.value;
+          })
+        );
+        readings = readings.concat(
+          item.readings.map((w) => {
+            return transcriptionConvert(w.value, 'hiragana', this.siteTranscriptions);
+          })
+        );
+      });
+
+      var rusVals = [];
+      var engVals = [];
+      this.currentEntry.entry.meanings.forEach((pos)=>{
+        pos.langMeanings.forEach((lang)=>{
+          lang.senses.forEach((sense)=>{
+            if (lang.lang == 'rus') rusVals.push(sense.value);
+            if (lang.lang == 'eng') engVals.push(sense.value);
+          });
+        });
+      });
+
+      var newEntry = {};
+      if (dict == 'name') {
+        newEntry = {
+          writing: titles.filter(onlyUnique).join("・"),
+          reading: readings.filter(onlyUnique).join("・"),
+          engText: engVals.join('; '),
+          rusText: rusVals.join('; ')
+        };
+      } else if (dict == 'example') {
+        newEntry = {
+          text: titles.filter(onlyUnique).join("・"),
+          translationEng: engVals.join('; '),
+          translationRu: rusVals.join('; ')
+        };
+      }
+      this.$store.commit('updateCurrentEntry', newEntry);
+    },
+    convertEntryToExample() {
+      const newEntry = {writing: '123', reading: '321'};
+      this.$store.commit('updateCurrentEntry', newEntry);
     },
     async removeEdit() {
       // const newEntry = { comment: this.currentEditComment };
@@ -187,7 +247,8 @@ export default {
         exampleEntry: this.isDictType('example') ? this.currentEntry : null,
         nameEntry: this.isDictType('name') ? this.currentEntry : null,
         images: this.currentImages,
-        comment: this.currentEditComment
+        comment: this.currentEditComment,
+        transferWid: this.transferWid
       };
       if (!this.isNew) {
         const resp = await sendPostRequest(`edits/entries/${this.dictType}/${this.currentId}`, newEntry);
@@ -237,8 +298,10 @@ export default {
     updatePage() {
       this.$store.commit('updateEditComment', '');
       if (this.isDictType('jp')) this.updateJpEntry();
-      if (this.isDictType('example')) this.updateExampleEntry();
-      if (this.isDictType('name')) this.updateNameEntry();
+      if (!this.transferWid) {
+        if (this.isDictType('example')) this.updateExampleEntry();
+        if (this.isDictType('name')) this.updateNameEntry();
+      }
 
       this.editMode = this.isNew;
     }

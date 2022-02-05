@@ -215,6 +215,7 @@ export default {
         "edit-status-type-new": type === 1,
         "edit-status-type-edit": type === 2,
         "edit-status-type-delete": type === 3,
+        "edit-status-type-transfer": type === 4,
       };
     },
     computeApproveClass(type) {
@@ -256,6 +257,8 @@ export default {
           return "исправление";
         case 3:
           return "удаление";
+        case 4:
+          return "перенос";
         default:
           return "—";
       }
@@ -387,6 +390,10 @@ a.titles-link {
 
 .edit-status-type-delete {
   color: var(--v-edit-status-type-delete-color-base);
+}
+
+.edit-status-type-transfer {
+  color: var(--v-edit-status-type-transfer-color-base);
 }
 
 .separator {
