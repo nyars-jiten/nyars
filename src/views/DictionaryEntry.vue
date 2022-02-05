@@ -6,7 +6,13 @@
           <v-card class="" elevation="2" outlined tile>
             <v-card-title>
               <div class="title-card" v-text="cardTitle" />
-              <StatusIcons v-if="isDictType('jp') && currentEntry" :currentEntry="currentEntry" :editMode="editMode" />
+              <StatusIcons
+                v-if="isDictType('jp') && currentEntry"
+                :currentEntry="currentEntry"
+                :editMode="editMode"
+                :currentId="currentId"
+                @updatePage="updatePage()"
+              />
               <div class="new-entry-buttons" v-if="editMode && isDictType('jp')">
                 <v-btn
                   color="teal lighten-1"

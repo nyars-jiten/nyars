@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import corpusList from "@/data/corpus.json";
 import DictionaryIcon from "@/components/dictionary/DictionaryIcon.vue";
 import { sendPostRequest } from "@/core/apiRequests.js";
@@ -53,12 +53,15 @@ export default {
     },
   },
   methods: {
+    ...mapActions([
+      "newAlert",
+    ]),
     async changeStatus(type) {
       if (!this.userHasRights(2)) return;
       const resp = await sendPostRequest("dictionary/jap/entry/change-status/" + this.currentId + `?type=${type}`, {});
       if (resp.status == 200 && resp.data.id !== 0) {
         this.newAlert({ msg: "Статус статьи изменён", type: "success" });
-        this.updatePage();
+        this.$emit("updatePage");
         this.editMode = false;
       }
     },
@@ -66,6 +69,7 @@ export default {
   props: {
     currentEntry: Object,
     editMode: Boolean,
+    currentId: String,
   },
   components: {
     DictionaryIcon,
