@@ -15,7 +15,7 @@
         <span>{{ convertSc(readings) }}</span>
       </v-tooltip>
       <div class="title" v-else>
-        {{ convertR(title) }}
+        {{ convertTitle ? convertR(title) : title }}
       </div>
       <span class="separator" v-if="index + 1 < Object.keys(edit.title).length"
         >・</span
@@ -43,6 +43,7 @@ export default {
   },
   props: {
     edit: Object,
+    convertTitle: Boolean,
   },
 };
 </script>
