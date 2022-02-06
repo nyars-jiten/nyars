@@ -273,7 +273,7 @@ export default {
 
 .pos-list {
   // display: block;
-  border-bottom: 1px solid var(--v-search-result-item-pos-list-color-base);
+  // border-bottom: 1px solid var(--v-search-result-item-pos-list-color-base);
   // padding: 6px;
   padding-left: 30px;
 }

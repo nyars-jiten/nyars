@@ -2,8 +2,8 @@
   <div class="search-result">
     <v-container fluid>
       <v-row no-gutters>
-        <v-col cols="12" md="12">
-          <v-card class="mx-auto" tile>
+        <v-col cols="12" md="8">
+          <v-card class="mx-2 my-4" tile>
             <!-- {{ request }} -->
             <v-card-title>Результат поиска</v-card-title>
             <!-- {{ currentSearchResult.info.parsedGrammar }} -->
@@ -75,6 +75,32 @@
                 </div>
           </v-card>
         </v-col>
+        <v-col cols="12" md="4">
+          <v-card class="mx-2 my-4" tile>
+            <v-card-title>Имена</v-card-title>
+            <v-list-item
+              class="res-item"
+              v-for="entry in currentSearchResult.names"
+              :key="entry.wid"
+            >
+              <div class="sch-item mb-4">
+                <SearchNameItem :entry="entry" :linkable="true" />
+              </div>
+            </v-list-item>
+          </v-card>
+          <v-card class="mx-2 my-4" tile>
+            <v-card-title>Примеры</v-card-title>
+            <v-list-item
+              class="res-item"
+              v-for="entry in currentSearchResult.sentences"
+              :key="entry.wid"
+            >
+              <div class="sch-item mb-4" style="width: 100%">
+                <SearchExampleItem :entry="entry" :linkable="true" />
+              </div>
+            </v-list-item>
+          </v-card>
+        </v-col>
       </v-row>
     </v-container>
   </div>
@@ -82,6 +108,8 @@
 
 <script>
 import SearchResultItem from "@/components/SearchResultItem.vue";
+import SearchNameItem from "@/components/search/SearchNameItem.vue";
+import SearchExampleItem from "@/components/search/SearchExampleItem.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -149,7 +177,7 @@ export default {
     this.startSearch({ request: this.request, page: this.page });
     this.fetchTags();
   },
-  components: { SearchResultItem },
+  components: { SearchResultItem, SearchExampleItem, SearchNameItem },
   metaInfo() {
     return {
       title: this.request + ' — поиск в НЯРСе',
@@ -170,6 +198,10 @@ export default {
 </script>
 
 <style lang="scss">
+.sch-item {
+  width: 100%
+}
+
 .parser-info-lemma {
   display: inline;
   margin: 3px;

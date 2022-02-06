@@ -14,6 +14,7 @@
       v-model="entry.reading"
       auto-grow
     />
+    Оставьте поля перевода пустыми, если нужна авто-транслитерация.
     <v-textarea
       outlined
       label="Английский перевод"
