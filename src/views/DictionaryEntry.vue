@@ -15,6 +15,7 @@
               />
               <div class="new-entry-buttons" v-if="editMode && isDictType('jp')">
                 <v-btn
+                  v-if="isNew || userRoleId > 1"
                   color="teal lighten-1"
                   class="mr-2"
                   dark
@@ -24,6 +25,7 @@
                   v-text="isNew ? 'Новый пример' : 'Перенести в примеры'"
                 />
                 <v-btn
+                  v-if="isNew || userRoleId > 1"
                   color="teal lighten-1"
                   class="mr-2"
                   dark

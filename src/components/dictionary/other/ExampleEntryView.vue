@@ -1,5 +1,5 @@
 <template>
-<div class="example-entry-view">
+<div class="example-entry-view" v-if="entry">
   <SearchExampleItem :entry="entry" :linkable="false" />
   <div class="example-line example-source">Источник: {{entry.source}}</div>
 </div>

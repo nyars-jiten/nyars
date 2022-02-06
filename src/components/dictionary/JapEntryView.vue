@@ -352,8 +352,8 @@ export default {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 10px;
-  margin: 0 10px;
-  padding: 10px;
+  // margin: 0 10px;
+  padding: 2px;
 }
 
 .pos-list {

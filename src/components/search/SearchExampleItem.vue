@@ -1,5 +1,5 @@
 <template>
-  <div class="example-item">
+  <div class="example-item" v-if="entry">
     <router-link
       class="titles-link"
       :to="{ name: 'dict-entry', params: { id: entry.wid, type: 'example' } }"
@@ -10,6 +10,7 @@
     <div class="example-text" v-html="exBbCodes(entry.text)" v-else />
     <div class="example-eng">{{ entry.translationEng }}</div>
     <div class="example-ru">{{ entry.translationRu }}</div>
+    <v-divider inset></v-divider>
   </div>
 </template>
 
@@ -19,6 +20,7 @@ import { examplesBbCodesProcess }  from "@/core/bbCodes.js";
 export default {
   methods: {
     exBbCodes(text){
+      if (!text) return '';
       return examplesBbCodesProcess(text);
     },
   },
@@ -33,7 +35,6 @@ export default {
 
 .example-text {
   font-size: 20px;
-  border-bottom: 1px solid var(--v-jap-entry-view-lang-sep-color-base);
   margin-bottom: 10px;
 }
 
