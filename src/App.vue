@@ -50,6 +50,10 @@ $body-font-family: "Rubik", "Noto Sans JP", HanaMinA, HanaMinB, Helvetica, Arial
     //   // color: rgba(77, 77, 77, 0.7);
     // }
   }
+
+  rt {
+    user-select: none;
+  }
 }
 
 // .theme--dark .v-main {

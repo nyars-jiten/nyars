@@ -11,7 +11,7 @@
       :items="tagList"
       :value="initSelected"
       @input="changeTags($event)"
-    ></v-autocomplete>
+    />
   </div>
 </template>
 
