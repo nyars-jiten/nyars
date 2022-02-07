@@ -70,7 +70,7 @@
             <v-card-title>Последние правки</v-card-title>
             <div class="diff-wrapper ma-4">
               <v-row justify="center">
-                <EditsList v-if="userProfileEdits" v-bind:lastEdits="userProfileEdits" />
+                <EditsList v-if="userProfileEdits" :lastEdits="userProfileEdits" />
               </v-row>
             </div>
           </v-card>

@@ -31,7 +31,7 @@
               >
                 {{ computeApproveText(edit.status) }}
               </div>
-              <div class="approver" v-if="edit.status != 4 && edit.status != 1">
+              <div class="approver" v-if="edit.status != 4 && edit.status != 1 && edit.approver">
                 <v-avatar size="22px" class="avatar">
                   <img :src="avatarLink(edit.approver.avatar)" />
                 </v-avatar>
