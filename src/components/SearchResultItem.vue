@@ -99,9 +99,12 @@
                   v-for="(sense, senseIndex) in lm.senses"
                   :key="senseIndex"
                 >
-                  <template v-if="lm.senses.length > 1">
-                    {{ 1 + senseIndex }}&#41;
-                  </template>
+                  <div
+                    v-if="lm.senses.length > 1"
+                    class="sense-num"
+                    :class="{sense_rare:sense.isRare}"
+                    v-text="1 + senseIndex + ')'"
+                  />
                   <InlineTag
                     v-bind:tags="filterTags(sense.tags, ['Fld'])"
                     v-bind:short="true"
@@ -110,6 +113,7 @@
                   <!-- {{ sense.value }} -->
                   <span
                     class="entry-text-md"
+                    :class="{sense_rare:sense.isRare}"
                     v-html="convertBB(sense.value)"
                   />
                   <InlineTag
@@ -210,7 +214,7 @@ export default {
 </script>
 
 <style lang="scss">
-.common-tags, .c-tag {
+.common-tags, .c-tag, .sense-num {
   display: inline;
 }
 
@@ -302,6 +306,10 @@ export default {
 .jap-view {
   width: 100%;
   padding: 0 16px 16px;
+}
+
+.sense_rare {
+  color: var(--v-inline-tag-full-tags-color-base);
 }
 
 .word-writings,

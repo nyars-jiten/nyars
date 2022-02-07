@@ -94,11 +94,12 @@
                   v-for="(sense, senseIndex) in lm.senses"
                   :key="senseIndex"
                 >
-                  <div class="sense-num">
-                    <template v-if="lm.senses.length > 1">
-                      {{ 1 + senseIndex }}&#41;
-                    </template>
-                  </div>
+                  <div
+                    v-if="lm.senses.length > 1"
+                    class="sense-num"
+                    :class="{sense_rare:sense.isRare}"
+                    v-text="1 + senseIndex + ')'"
+                  />
 
                   <div class="sense-text">
                     <InlineTag
@@ -259,7 +260,7 @@ export default {
 </script>
 
 <style lang="scss">
-.entry-text-md, .common-tags, .c-tag {
+.entry-text-md, .common-tags, .c-tag, .sense-num {
   display: inline;
 }
 
@@ -306,7 +307,7 @@ export default {
   margin: 0 30px;
 }
 
-.sense-text, .sense-num {
+.sense-text {
   display: inline-block;
   vertical-align: top;
 }

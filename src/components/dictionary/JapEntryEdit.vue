@@ -116,9 +116,12 @@
                           ><v-icon>mdi-pencil</v-icon></v-btn
                         >
                         <v-icon class="handle">mdi-drag</v-icon>
-                        <template v-if="lm.senses.length > 1">
-                          {{ 1 + senseIndex }}&#41;
-                        </template>
+                        <div
+                          v-if="lm.senses.length > 1"
+                          class="sense-num"
+                          :class="{sense_rare:sense.isRare}"
+                          v-text="1 + senseIndex + ')'"
+                        />
                     </div>
 
                     <div class="sense-text">
