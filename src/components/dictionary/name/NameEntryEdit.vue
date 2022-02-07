@@ -30,7 +30,7 @@
       auto-grow
     />
     <TagSelector
-      :initSelected="entry.tags"
+      :initSelected="this.entry.tags"
       :type="'Name'"
       title="Тип"
       @changeTags="(...args) => entry.tags = args[0]"
@@ -42,6 +42,12 @@
 import TagSelector from "@/components/dictionary/editor/TagSelector.vue";
 
 export default {
+  mounted () {
+    if (this.entry && typeof this.entry.tags[0] !== 'string') {
+      const res = this.entry.tags.map(i => i.engShort);
+      this.entry.tags = res;
+    }
+  },
   props: {
     entry: Object
   },

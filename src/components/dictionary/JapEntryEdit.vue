@@ -263,7 +263,7 @@
         item-value="val"
         :items="tagList"
         v-model="entry.entry.tags"
-      ></v-autocomplete>
+      />
       <v-row>
         <v-col cols="12" md="8">
           <v-textarea label="Питч-акцент" v-model="entry.entry.pitchAccent" auto-grow rows="1" readonly />
