@@ -1,6 +1,10 @@
 {
     "main_clear": {
-        "title": "Основная версия, .txt/.zip",
+        "title": "Основная версия RU, .txt/.zip",
+        "icon": ""
+    },
+    "main_clear_eng": {
+        "title": "Основная версия ENG, .txt/.zip",
         "icon": ""
     },
     "yomichan": {
