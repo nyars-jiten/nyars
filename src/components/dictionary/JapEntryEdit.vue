@@ -46,6 +46,7 @@
               <div class="jpn-reading">
                 <PitchAccent
                   :pitch="reading.pitchedReading"
+                  :nums="reading.pitch"
                   :trscpt="convertToTrscr(reading.value)"
                   :kana="convertR(reading.value)"
                   :tags="reading.tag"

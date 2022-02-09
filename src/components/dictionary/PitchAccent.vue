@@ -42,6 +42,12 @@
         @click="setSelectedPitch(num)"
       />
     </div>
+    <div v-if="nums && no_diagram" class="nums">
+      <span
+        v-text="nums"
+        class="pitch-num pitch-num-unselected"
+      />
+    </div>
     <div class="reading-tags">
       <InlineTag
         v-if="tags"
@@ -84,6 +90,7 @@ export default {
     tags: Object,
     kanjiless: Boolean,
     no_diagram: Boolean,
+    nums: String,
   },
   components: {
     InlineTag
