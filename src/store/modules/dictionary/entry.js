@@ -275,8 +275,7 @@ export default {
             return state.editComment;
         },
         currentDoublesSearchResult(state) {
-            if (state.searchDblResult.length === undefined) return state.searchDblResult;
-            return state.searchDblResult.filter(x => x.id != state.currentEntry.id);
+            return state.searchDblResult;
         },
         currentSearchRequest(state) {
             return state.searchRequest;
