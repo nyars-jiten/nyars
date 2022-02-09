@@ -65,7 +65,7 @@ export default {
             if (!ctx.state.currentEntry.entry) return;
             ctx.commit('updateLoadingState', true);
             ctx.commit('updateDublesSearchState', {});
-            const currentEntry = { japEntry: ctx.state.currentEntry.entry };
+            const currentEntry = { japEntry: ctx.state.currentEntry.entry, identifier: ctx.state.currentEntry.wid };
             axios
                 .post(process.env.VUE_APP_API + 'search/search-jap-doubles', currentEntry)
                 .then(response => (ctx.commit('updateDublesSearchState', response.data)))
