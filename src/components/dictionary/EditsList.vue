@@ -21,9 +21,9 @@
                 :to="{ name: 'dict-entry', params: { id: edit.identifier, type: getDictTypeIdent(edit.dictionary) } }"
                 v-if="edit.identifier && !(edit.type == 3 && (edit.status == 4 || edit.status == 3))"
               >
-                <EditTitle :edit="edit" :convertTitle="edit.dictionary == 0" />
+                <EditTitle :edit="edit" :convertTitle="edit.dictionary == 0 || edit.dictionary == 4" />
               </router-link>
-              <EditTitle :edit="edit" :convertTitle="edit.dictionary == 0" v-else />
+              <EditTitle :edit="edit" :convertTitle="edit.dictionary == 0 || edit.dictionary == 4" v-else />
               <v-spacer></v-spacer>
               <div
                 class="approveStatus"
