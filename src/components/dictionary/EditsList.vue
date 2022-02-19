@@ -302,19 +302,11 @@ export default {
   overflow:hidden;
 }
 
-.titles {
-  // color: rgba(0,0,0,.7);
-}
-
 a.titles-link {
   text-decoration: none;
   // color: inherit;
   cursor: pointer;
   color: unset !important;
-
-  &:hover {
-    // color: rgba(77, 77, 77, 0.7);
-  }
 }
 
 .title-wrap,
