@@ -5,10 +5,7 @@
       <div :class="{ shorttagfld: !inf, shorttaginf: inf }" v-if="short">
         <v-tooltip top v-for="(tag, tagId) in tags" :key="tagId">
           <template v-slot:activator="{ on, attrs }">
-            <span dark v-bind="attrs" v-on="on" style="cursor: text">
-              {{ searchTag(tag).short }}
-              <span v-if="tagId + 1 < tags.length">,</span>
-            </span>
+            <span dark v-bind="attrs" v-on="on" style="cursor: text">{{searchTag(tag).short}}<span v-if="tagId + 1 < tags.length">,</span></span>
           </template>
           <span>{{ searchTag(tag).full }}</span>
         </v-tooltip>
