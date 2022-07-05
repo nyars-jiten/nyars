@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --port 8080",
+    "serve": "vue-cli-service serve --port 8080 --skip-plugins @vue/cli-plugin-eslint",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build-prod": "vue-cli-service build --dest \"/var/www/static\""
+    "build-prod": "vue-cli-service build --dest \"/var/www/static\" --skip-plugins @vue/cli-plugin-eslint"
   },
   "dependencies": {
     "axios": "^0.24.0",
@@ -21,13 +21,13 @@
     "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.5.15",
-    "@vue/cli-plugin-eslint": "^4.5.15",
-    "@vue/cli-plugin-router": "^4.5.15",
-    "@vue/cli-service": "^4.5.15",
+    "@vue/cli-plugin-babel": "^5.0.7",
+    "@vue/cli-plugin-eslint": "^5.0.7",
+    "@vue/cli-plugin-router": "^5.0.7",
+    "@vue/cli-service": "^5.0.7",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
+    "eslint": "^7.0.0",
+    "eslint-plugin-vue": "^7.0.0",
     "sass": "~1.32.12",
     "sass-loader": "^8.0.0",
     "vue-cli-plugin-vuetify": "^2.4.5",
