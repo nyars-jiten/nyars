@@ -214,7 +214,7 @@ export default {
 </script>
 
 <style lang="scss">
-.common-tags, .c-tag, .sense-num {
+.entry-text-md, .common-tags, .c-tag, .sense-num {
   display: inline;
 }
 
@@ -222,6 +222,10 @@ export default {
   a {
     color: var(--v-search-result-item-entry-text-md-color-base) !important;
   }
+}
+
+.sense-num {
+  margin-right: 5px;
 }
 
 .nonreviewed {
@@ -320,6 +324,17 @@ export default {
   .reading {
     font-size: 85%;
   }
+}
+
+.sense-text {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.sense-grid {
+  // display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 5px;
 }
 
 .word-writings {

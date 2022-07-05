@@ -108,7 +108,7 @@
                     v-for="(sense, senseIndex) in lm.senses"
                     :key="sense.id"
                   >
-                    <div class="sense-num">
+                    <div class="sense-num-ext">
                         <v-btn
                           icon
                           x-small
@@ -521,7 +521,7 @@ export default {
   margin: 0 30px;
 }
 
-.sense-text, .sense-num {
+.sense-text, .sense-num, .sense-num-ext {
   display: inline-block;
   vertical-align: top;
 }
