@@ -13,8 +13,8 @@
 import { RouteName } from "@/rotuer/route-name";
 import { useSearch } from "@/stores/search";
 import { debounce } from "lodash";
-import { watch } from "vue";
-import { useRouter } from "vue-router";
+import { onBeforeMount, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 const store = useSearch();
 const router = useRouter();
@@ -30,6 +30,13 @@ async function onRequest(request: string) {
 }
 
 watch(() => store.request, onRequest);
+
+onBeforeMount(() => {
+	const { query } = useRoute();
+	const { request } = query;
+
+	if (typeof request == "string") store.request = request;
+});
 </script>
 
 <style scoped></style>
