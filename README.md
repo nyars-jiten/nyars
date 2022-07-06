@@ -1,24 +1,11 @@
-# nyars-frontend
+# NYARS THE DICTIONARY
 
-## Project setup
-```
-npm install
-```
+## Development
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+| What       | Description        |
+| ---------- | ------------------ |
+| debug      | Press F5 in VSCode |
+| dev server | pnpm dev           |
+| build      | pnpm build         |
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[![Discord](https://img.shields.io/discord/564319699152666624?style=for-the-badge&label=Discor%20server)](https://discord.gg/u7H5nsPWVB)
