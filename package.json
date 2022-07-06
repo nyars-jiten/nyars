@@ -1,56 +1,24 @@
 {
-  "name": "nyars-frontend",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve --port 8080",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "build-prod": "vue-cli-service build --dest \"/var/www/static\""
-  },
-  "dependencies": {
-    "axios": "^0.24.0",
-    "core-js": "^3.20.1",
-    "sanitize-html": "^2.6.1",
-    "vue": "^2.6.14",
-    "vue-meta": "^2.4.0",
-    "vue-router": "^3.5.3",
-    "vuedraggable": "^2.24.3",
-    "vuetify": "^2.6.1",
-    "vuex": "^3.6.2",
-    "vuex-persistedstate": "^4.1.0"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.5.15",
-    "@vue/cli-plugin-eslint": "^4.5.15",
-    "@vue/cli-plugin-router": "^4.5.15",
-    "@vue/cli-service": "^4.5.15",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "sass": "~1.32.12",
-    "sass-loader": "^8.0.0",
-    "vue-cli-plugin-vuetify": "^2.4.5",
-    "vue-template-compiler": "^2.6.14",
-    "vuetify-loader": "^1.7.3"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+	"name": "nyars",
+	"private": true,
+	"version": "1.0.0",
+	"scripts": {
+		"dev": "vite",
+		"build": "vue-tsc --noEmit && vite build"
+	},
+	"dependencies": {
+		"pinia": "^2.0.14",
+		"vue": "^3.2.37",
+		"vue-i18n": "^9.1.10",
+		"vue-router": "^4.1.1"
+	},
+	"devDependencies": {
+		"@vitejs/plugin-vue": "^2.3.3",
+		"autoprefixer": "^10.4.7",
+		"postcss": "^8.4.14",
+		"tailwindcss": "^3.1.4",
+		"typescript": "^4.7.4",
+		"vite": "^2.9.13",
+		"vue-tsc": "^0.38.2"
+	}
 }
