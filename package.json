@@ -8,12 +8,14 @@
 		"test": "exit 0"
 	},
 	"dependencies": {
+		"lodash": "^4.17.21",
 		"pinia": "^2.0.14",
 		"vue": "^3.2.37",
 		"vue-i18n": "^9.1.10",
 		"vue-router": "^4.1.1"
 	},
 	"devDependencies": {
+		"@types/lodash": "^4.14.182",
 		"@vitejs/plugin-vue": "^2.3.3",
 		"autoprefixer": "^10.4.7",
 		"postcss": "^8.4.14",
