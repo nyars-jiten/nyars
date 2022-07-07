@@ -31,8 +31,8 @@ jobs:
           pnpm add -D @microsoft/eslint-formatter-sarif
 
       - name: Run ESLint
-        run: pnpx lint
-          --format @microsoft/eslint-formatter-sarif
+        run: pnpm lint
+          --format @microsoft/eslint-formatter-sarif 
           --output-file eslint-results.sarif
         continue-on-error: true
 
