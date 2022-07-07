@@ -2,7 +2,9 @@
 	<section
 		class="bg-white p-10 leading-relaxed rounded-md shadow-xl border border-gray-100"
 	>
-		<div v-for="info in $tm(MessagesNames.SearchInfo)">📙 {{ info }}</div>
+		<div v-for="(info, i) in $tm(MessagesNames.SearchInfo)" :key="i">
+			📙 {{ info }}
+		</div>
 	</section>
 </template>
 

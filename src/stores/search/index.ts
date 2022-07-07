@@ -1,5 +1,5 @@
 import { api } from "@/api";
-import { defineStore, _GettersTree } from "pinia";
+import { defineStore } from "pinia";
 
 import type { Actions, Getters, State } from "./types";
 
