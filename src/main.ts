@@ -1,9 +1,10 @@
 import "./index.css";
 
-import { createApp } from "vue";
 import { createPinia } from "pinia";
+import { createApp } from "vue";
+import { locale } from "./locale";
 import { router } from "./rotuer";
 
 import app from "./app.vue";
 
-createApp(app).use(createPinia()).use(router).mount("#app");
+createApp(app).use(locale).use(createPinia()).use(router).mount("#app");
