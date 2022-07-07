@@ -1,12 +1,12 @@
 <template>
 	<section class="flex flex-col gap-10">
-		<SearchInput />
+		<TheInput />
 		<RouterView />
 	</section>
 </template>
 
 <script setup lang="ts">
-	import SearchInput from "@/components/search-input.vue";
+	import TheInput from "@/components/search/the-input.vue";
 </script>
 
 <style scoped></style>

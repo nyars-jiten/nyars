@@ -12,7 +12,7 @@ module.exports = {
 		browser: true,
 		node: true,
 	},
-	plugins: ["@typescript-eslint", "tailwindcss"],
+	plugins: ["prettier", "@typescript-eslint", "tailwindcss"],
 	extends: [
 		"eslint:recommended",
 		"plugin:vue/vue3-recommended",

@@ -1,4 +1,4 @@
 export type Pagable<T> = {
-  total: number;
-  results: T[];
+	total: number;
+	results: T[];
 };
