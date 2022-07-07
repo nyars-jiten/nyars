@@ -5,6 +5,7 @@
 			type="text"
 			class="w-full border border-gray-100 text-lg text-center p-4 shadow-sm"
 			placeholder="Search request"
+			@keydown.enter="searchImmediately"
 		/>
 	</section>
 </template>
@@ -28,8 +29,14 @@
 				name: RouteName.SearchResults,
 				query: { request: request },
 			});
+
 			await search();
 		}
+	}
+
+	async function searchImmediately() {
+		search.cancel();
+		await search();
 	}
 
 	watch(() => store.request, onRequest);
