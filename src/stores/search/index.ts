@@ -1,7 +1,7 @@
 import { api } from "@/api";
 import { defineStore, _GettersTree } from "pinia";
 
-import type { SearchResults } from "@/api/types/search-results";
+import type { SearchResults } from "@/api/search-rest/types/search-results";
 
 export type State = {
 	request: string;
