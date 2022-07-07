@@ -11,11 +11,12 @@
 </template>
 
 <script setup lang="ts">
-	import { RouteName } from "@/rotuer/route-name";
-	import { useSearch } from "@/stores/search";
 	import { debounce } from "lodash";
 	import { onBeforeMount, watch } from "vue";
 	import { useRoute, useRouter } from "vue-router";
+
+	import { RouteName } from "@/rotuer/route-name";
+	import { useSearch } from "@/stores/search";
 
 	const store = useSearch();
 	const router = useRouter();
