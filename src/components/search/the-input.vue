@@ -3,7 +3,7 @@
 		<input
 			v-model="store.request"
 			type="text"
-			class="w-full border border-gray-100 text-lg text-center p-4 shadow-sm"
+			class="focus:scale-105 focus:shadow-2xl outline-none duration-300 ease-in-out w-full border border-gray-100 text-lg text-center p-4 shadow-sm"
 			:placeholder="$t('search.input')"
 			@keydown.enter="searchImmediately"
 		/>
