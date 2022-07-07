@@ -21,6 +21,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: latest
+
       - name: Install ESLint
         run: |
           pnpm add -D @microsoft/eslint-formatter-sarif
