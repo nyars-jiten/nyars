@@ -1,8 +1,9 @@
 <template>
 	<section
-		class="focus-within:scale-105 focus-within:shadow-2xl duration-150 ease-in-out border border-gray-100 text-lg shadow-sm bg-white flex items-center p-4"
+		class="group focus-within:shadow-2xl relative duration-150 ease-in-out border border-gray-100 text-lg shadow-sm bg-white flex items-center p-4 gap-4"
 	>
-		<span class="select-none">🔎</span>
+		<span>🔎</span>
+
 		<input
 			v-model="store.request"
 			type="text"
@@ -10,18 +11,38 @@
 			:placeholder="$t(MessagesNames.SearchInput)"
 			@keydown.enter="searchImmediately"
 		/>
+
+		<button @click="showDrawPanel = !showDrawPanel">✍️</button>
+
+		<Transition
+			enter-active-class="duration-150 ease-out"
+			enter-from-class="transform opacity-0 -translate-y-2"
+			enter-to-class="opacity-100 translate-y-0"
+			leave-active-class="duration-150 ease-in"
+			leave-from-class="opacity-100 translate-y-0"
+			leave-to-class="transform opacity-0 -translate-y-2"
+			mode="out-in"
+		>
+			<TheHandwriting
+				v-if="showDrawPanel"
+				class="shadow-2xl absolute right-0 top-[calc(100%+1rem)] border-gray-100"
+			/>
+		</Transition>
 	</section>
 </template>
 
 <script setup lang="ts">
 	import { debounce } from "lodash";
-	import { onBeforeMount, watch } from "vue";
+	import { onBeforeMount, ref, watch } from "vue";
 	import { useRoute, useRouter } from "vue-router";
 
 	import { RouteName } from "@/rotuer/route-name";
 	import { useSearch } from "@/stores/search";
 	import { MessagesNames } from "@/locale/messages-names";
 
+	import TheHandwriting from "./the-handwriting.vue";
+
+	const showDrawPanel = ref(false);
 	const store = useSearch();
 	const router = useRouter();
 
@@ -54,6 +75,7 @@
 	});
 
 	// https://youtu.be/ERa9y6daDFY
+	// https://youtu.be/laEn1BsYJlc
 </script>
 
 <style scoped></style>

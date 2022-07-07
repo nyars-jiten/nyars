@@ -5,7 +5,7 @@ export const ru = {
 	[MessagesNames.HeaderBugTracker]: "Багтреккер",
 	[MessagesNames.HeaderDownload]: "Скачать",
 
-	[MessagesNames.SearchInput]: "Шо ищем?",
+	[MessagesNames.SearchInput]: "Шо ищем? (Используйте ✍️ для рисования)",
 	[MessagesNames.SearchInfo]: [
 		"Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
 		"Quod repellendus reiciendis maiores neque, voluptas molestiae?",

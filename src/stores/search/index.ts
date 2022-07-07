@@ -1,19 +1,7 @@
 import { api } from "@/api";
 import { defineStore, _GettersTree } from "pinia";
 
-import type { SearchResults } from "@/api/search-rest/types/search-results";
-
-export type State = {
-	request: string;
-	results: SearchResults;
-};
-
-export type Actions = {
-	search(): Promise<void>;
-	clearResults(): void;
-};
-
-type Getters = _GettersTree<State>;
+import type { Actions, Getters, State } from "./types";
 
 export const useSearch = defineStore<string, State, Getters, Actions>(
 	"search",

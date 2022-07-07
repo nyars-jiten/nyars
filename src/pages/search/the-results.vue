@@ -2,12 +2,13 @@
 	<TransitionGroup
 		tag="section"
 		class="flex flex-col gap-10"
-		enter-active-class="duration-500 ease-out"
+		enter-active-class="duration-300 ease-out"
 		enter-from-class="transform opacity-0 translate-x-3"
 		enter-to-class="opacity-100 translate-x-0"
-		leave-active-class="duration-300 ease-in"
+		leave-active-class="duration-150 ease-in"
 		leave-from-class="opacity-100 translate-x-0"
 		leave-to-class="transform opacity-0 translate-x-3"
+		mode="out-in"
 	>
 		<article
 			v-for="result of store.results.results"
