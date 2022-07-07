@@ -1,10 +1,10 @@
 <template>
 	<section>
 		<input
+			v-model="store.request"
 			type="text"
 			class="w-full border border-gray-100 text-lg text-center p-4 shadow-sm"
 			placeholder="Search request"
-			v-model="store.request"
 		/>
 	</section>
 </template>

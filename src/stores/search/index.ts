@@ -13,24 +13,29 @@ export type Actions = {
 	clearResults(): void;
 };
 
-export const useSearch = defineStore<string, State, {}, Actions>("search", {
-	state() {
-		return {
-			request: "",
-			results: { results: [], total: 0 },
-		};
-	},
+type Getters = _GettersTree<State>;
 
-	actions: {
-		async search() {
-			this.results = await api.search.search({ request: this.request });
-		},
-
-		clearResults() {
-			this.results = {
-				results: [],
-				total: 0,
+export const useSearch = defineStore<string, State, Getters, Actions>(
+	"search",
+	{
+		state() {
+			return {
+				request: "",
+				results: { results: [], total: 0 },
 			};
 		},
+
+		actions: {
+			async search() {
+				this.results = await api.search.search({ request: this.request });
+			},
+
+			clearResults() {
+				this.results = {
+					results: [],
+					total: 0,
+				};
+			},
+		},
 	},
-});
+);

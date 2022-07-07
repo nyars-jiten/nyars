@@ -1,7 +1,11 @@
 <template>
 	<section>
 		<div class="flex flex-wrap">
-			<div class="p-4 md:w-1/3 flex" v-for="{ name, avatar, statistics } of bestUsers.results">
+			<div
+				v-for="{ name, avatar, statistics } of bestUsers.results"
+				:key="name"
+				class="p-4 md:w-1/3 flex"
+			>
 				<img
 					class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-gray-200 object-contain"
 					:src="avatar"
@@ -25,8 +29,8 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue";
-import { api } from "@/api";
+	import { reactive } from "vue";
+	import { api } from "@/api";
 
-const bestUsers = reactive(await api.statistics.bestUsers());
+	const bestUsers = reactive(await api.statistics.bestUsers());
 </script>

@@ -1,0 +1,38 @@
+name: ESLint
+
+on:
+  push:
+    branches: ["dev"]
+
+  pull_request:
+    branches: ["dev"]
+
+jobs:
+  eslint:
+    name: Run eslint scanning
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install ESLint
+        run: |
+          pnpm add -D @microsoft/eslint-formatter-sarif
+
+      - name: Run ESLint
+        run: pnpx lint
+          --format @microsoft/eslint-formatter-sarif
+          --output-file eslint-results.sarif
+        continue-on-error: true
+
+      - name: Upload analysis results to GitHub
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: eslint-results.sarif
+          wait-for-processing: true

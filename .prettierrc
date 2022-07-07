@@ -1,0 +1,10 @@
+{
+	"tabWidth": 2,
+	"useTabs": true,
+	"endOfLine": "lf",
+	"semi": true,
+	"arrowParens": "avoid",
+	"htmlWhitespaceSensitivity": "css",
+	"vueIndentScriptAndStyle": true,
+	"trailingComma": "all"
+}
