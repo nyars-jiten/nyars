@@ -5,16 +5,16 @@ export const routes: Readonly<RouteRecordRaw[]> = [
 	{
 		path: "/",
 		redirect: RouteName.SearchHome,
-		component: () => import("@/views/search-view.vue"),
+		component: () => import("@/views/the-search.vue"),
 		children: [
 			{
 				name: RouteName.SearchHome,
-				component: () => import("@/pages/search/search-home.vue"),
+				component: () => import("@/pages/search/the-home.vue"),
 				path: RouteName.SearchHome,
 			},
 			{
 				name: RouteName.SearchResults,
-				component: () => import("@/pages/search/search-results.vue"),
+				component: () => import("@/pages/search/the-results.vue"),
 				path: RouteName.SearchResults,
 			},
 		],
