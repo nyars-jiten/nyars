@@ -1,10 +1,13 @@
 <template>
-	<section>
+	<section
+		class="focus-within:scale-105 focus-within:shadow-2xl duration-150 ease-in-out border border-gray-100 text-lg shadow-sm bg-white flex items-center p-4"
+	>
+		<span class="select-none">🔎</span>
 		<input
 			v-model="store.request"
 			type="text"
-			class="focus:scale-105 focus:shadow-2xl outline-none duration-300 ease-in-out w-full border border-gray-100 text-lg text-center p-4 shadow-sm"
-			:placeholder="$t('search.input')"
+			class="text-center outline-none w-full"
+			:placeholder="$t(MessagesNames.SearchInput)"
 			@keydown.enter="searchImmediately"
 		/>
 	</section>
@@ -17,6 +20,7 @@
 
 	import { RouteName } from "@/rotuer/route-name";
 	import { useSearch } from "@/stores/search";
+	import { MessagesNames } from "@/locale/messages-names";
 
 	const store = useSearch();
 	const router = useRouter();
@@ -48,6 +52,8 @@
 
 		if (typeof request == "string") store.request = request;
 	});
+
+	// https://youtu.be/ERa9y6daDFY
 </script>
 
 <style scoped></style>

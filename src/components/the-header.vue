@@ -10,12 +10,20 @@
 			</div>
 
 			<nav class="flex flex-wrap items-center text-base justify-center gap-5">
-				<a href="#" class="hover:text-red-900">{{ $t("header.home") }}</a>
-				<a href="#" class="hover:text-red-900">{{ $t("header.bugtracker") }}</a>
-				<a href="#" class="hover:text-red-900">{{ $t("header.download") }}</a>
+				<a href="#" class="hover:text-red-900">{{
+					$t(MessagesNames.HeaderHome)
+				}}</a>
+				<a href="#" class="hover:text-red-900">{{
+					$t(MessagesNames.HeaderBugTracker)
+				}}</a>
+				<a href="#" class="hover:text-red-900">{{
+					$t(MessagesNames.HeaderDownload)
+				}}</a>
 			</nav>
 		</div>
 	</header>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+	import { MessagesNames } from "@/locale/messages-names";
+</script>
