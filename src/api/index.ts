@@ -10,7 +10,7 @@ export const api = new (class {
 	public readonly users;
 
 	public constructor() {
-		this.#endpoint = axios.create({ baseURL: "https://nyars.org/api" });
+		this.#endpoint = axios.create({ baseURL: import.meta.env.VITE_APP_API });
 
 		this.statistics = new StatisticsRest(this.#endpoint);
 		this.search = new SearchRest(this.#endpoint);

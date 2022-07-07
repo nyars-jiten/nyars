@@ -9,3 +9,12 @@ declare module "*.vue" {
 	const component: DefineComponent<PropsOrPropOptions, RawBindings, D>;
 	export default component;
 }
+
+interface ImportMetaEnv {
+	readonly VITE_APP_BASE: string;
+	readonly VITE_APP_API: string;
+}
+
+interface ImportMeta {
+	readonly env: ImportMetaEnv;
+}
