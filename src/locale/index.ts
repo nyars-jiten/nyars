@@ -1,4 +1,9 @@
 import { createI18n } from "vue-i18n";
-import * as messages from "./langs";
+import { en, jp, ru } from "./langs";
 
-export const locale = createI18n({ locale: "ru", fallback: "ru", messages });
+export const locale = createI18n({
+	locale: "ru",
+	fallback: "ru",
+
+	messages: { en, jp, ru },
+});

@@ -4,7 +4,7 @@
 			v-model="store.request"
 			type="text"
 			class="w-full border border-gray-100 text-lg text-center p-4 shadow-sm"
-			placeholder="Search request"
+			:placeholder="$t('search.input')"
 			@keydown.enter="searchImmediately"
 		/>
 	</section>

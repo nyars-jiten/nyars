@@ -9,7 +9,7 @@ export class SearchRest {
 
 		return Promise.resolve<SearchResults>({
 			total: 100,
-			results: Array.from({ length: random(1, 10) }).map(() => ({
+			results: Array.from({ length: random(1, 5) }).map(() => ({
 				uuid: "test",
 				name: "Name",
 			})),
