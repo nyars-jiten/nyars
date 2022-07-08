@@ -1,22 +1,28 @@
-import { random } from "lodash";
-
 import type { Axios } from "axios";
-import type { SearchResults } from "./types";
+import { BasicRest } from "../basic-rest";
+import { SearchResult } from "../types/search/search-result";
 
-export class SearchRest {
-	public search(props: { request: string }): Promise<SearchResults> {
-		console.log(props);
+type SearchReq = {
+	request: string;
+	page: number;
+};
 
-		return Promise.resolve<SearchResults>({
-			total: 100,
-			results: Array.from({ length: random(1, 5) }).map(() => ({
-				uuid: "test",
-				name: "Name",
-			})),
-		});
+export class SearchRest extends BasicRest {
+	public search(props: SearchReq): Promise<SearchResult> {
+		return this.extractData(
+			this.#endpoint.get("search/jap", {
+				params: {
+					r: props.request,
+					p: props.page,
+					exact: false,
+				},
+			}),
+		);
 	}
 
 	public constructor(endpoint: Axios) {
+		super();
+
 		this.#endpoint = endpoint;
 	}
 

@@ -1,1 +1,1 @@
-export type SearchResult = { uuid: string; name: string };
+// export type SearchResult = { uuid: string; name: string };

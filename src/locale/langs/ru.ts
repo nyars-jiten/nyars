@@ -12,4 +12,10 @@ export const ru = {
 		"Assumenda accusamus fuga modi alias dolorum deleniti!",
 		"Impedit natus numquam eveniet, recusandae...",
 	],
+	[MessagesNames.SearchShortLangName]: {
+		rus: "рус",
+		jpn: "япо",
+		eng: "анг",
+		lat: "лат",
+	},
 };

@@ -1,6 +1,6 @@
 <template>
 	<section
-		class="group focus-within:shadow-2xl relative duration-150 ease-in-out border border-gray-100 text-lg shadow-sm bg-white flex items-center p-4 gap-4"
+		class="group focus-within:shadow-2xl relative duration-150 ease-in-out border border-gray-100 text-xl shadow-sm bg-white flex items-center p-4 gap-4"
 	>
 		<span>🔎</span>
 
@@ -55,6 +55,11 @@
 
 	const search = debounce(store.search, 300);
 
+	async function searchImmediately() {
+		search.cancel();
+		await search({ userRequest: true });
+	}
+
 	async function onRequest(request: string) {
 		if (request == "") await router.push({ name: RouteName.SearchHome });
 		else {
@@ -63,16 +68,11 @@
 				query: { request: request },
 			});
 
-			await search();
+			await search({ userRequest: true });
 		}
 	}
 
-	async function searchImmediately() {
-		search.cancel();
-		await search();
-	}
-
-	watch(() => store.request, onRequest);
+	watch(() => store.request, onRequest, { immediate: true });
 
 	onBeforeMount(() => {
 		const { query } = useRoute();

@@ -3,7 +3,7 @@
 	"private": true,
 	"version": "1.0.0",
 	"scripts": {
-		"dev": "vite",
+		"dev": "vite --port 8080",
 		"build": "vue-tsc --noEmit && vite build",
 		"test": "exit 0",
 		"lint": "eslint src --ext .js,.vue,.ts --ignore-path .gitignore"

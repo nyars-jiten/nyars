@@ -1,54 +1,54 @@
 export type EntryJp = {
-	wid: string,
-	entry: InternalEntryJp,
-	externalEntry: string,
-	isReviewed: boolean,
-	isUnconfirmed: boolean,
+	wid: string;
+	entry: InternalEntryJp;
+	externalEntry: string;
+	isReviewed: boolean;
+	isUnconfirmed: boolean;
 	// accent:,
-	picturesId: number,
+	picturesId: number;
 	// conjugations:[]
 	// references:[]
 };
 
 type InternalEntryJp = {
-	words: Word[],
-	meanings: Meaning[],
-	externalEntry: string,
-}
+	words: Word[];
+	meanings: Meaning[];
+	externalEntry: string;
+};
 
 type Word = {
-	writings: Writing[],
-	readings: Reading[],
-}
+	writings: Writing[];
+	readings: Reading[];
+};
 
 type Writing = {
-	value: string,
+	value: string;
 	// tag:,
-}
+};
 
 type Reading = {
-	value: string,
+	value: string;
 	// tag:,
-	pitch: string,
+	pitch: string;
 	// pitchedReading:,
-}
+};
 
 type Meaning = {
-	pos: string[],
-	langMeanings: LangMeaning[],
-}
+	pos: string[];
+	langMeanings: LangMeaning[];
+};
 
 type LangMeaning = {
-	lang: string,
-	note: string,
-	senses: Sense[],
-}
+	lang: "rus" | "jpn" | "eng" | "lat";
+	note: string;
+	senses: Sense[];
+};
 
 type Sense = {
 	// tags:,
-	value: string,
+	value: string;
 	// examples: ,
-	isRare: boolean,
+	isRare: boolean;
 	// references: ,
 	// loanSources: ,
-}
+};
