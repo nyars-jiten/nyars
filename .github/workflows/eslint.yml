@@ -31,9 +31,7 @@ jobs:
           pnpm add -D @microsoft/eslint-formatter-sarif
 
       - name: Run ESLint
-        run: pnpm lint
-          --format @microsoft/eslint-formatter-sarif
-          --output-file eslint-results.sarif
+        run: pnpm lint --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif
         continue-on-error: true
 
       - name: Upload analysis results to GitHub
