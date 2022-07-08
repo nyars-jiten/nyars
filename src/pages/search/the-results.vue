@@ -25,5 +25,3 @@
 
 	const store = useSearch();
 </script>
-
-<style scoped></style>

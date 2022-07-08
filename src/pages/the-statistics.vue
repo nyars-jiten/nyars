@@ -42,5 +42,3 @@
 	import TotalStats from "@/components/total-stats.vue";
 	import BestUsers from "@/components/best-users.vue";
 </script>
-
-<style scoped></style>

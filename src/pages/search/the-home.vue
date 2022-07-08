@@ -14,5 +14,3 @@
 
 	const locale = useI18n();
 </script>
-
-<style scoped></style>

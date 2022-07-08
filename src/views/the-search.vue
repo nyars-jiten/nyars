@@ -22,4 +22,3 @@
 	import TheInput from "@/components/search/the-input.vue";
 </script>
 
-<style scoped></style>

@@ -84,5 +84,3 @@
 	// https://youtu.be/ERa9y6daDFY
 	// https://youtu.be/laEn1BsYJlc
 </script>
-
-<style scoped></style>

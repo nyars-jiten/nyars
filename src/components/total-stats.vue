@@ -28,5 +28,3 @@
 		return formatter.format(value);
 	}
 </script>
-
-<style scoped></style>
