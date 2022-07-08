@@ -44,7 +44,6 @@ export class Canvas implements Handwriting {
 	async undo() {
 		const el = this.history.pop();
 		if (!el) return;
-		console.log("und");
 
 		const img = await this.restoreImage(el);
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);

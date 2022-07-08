@@ -36,9 +36,9 @@
 	import { onBeforeMount, ref, watch } from "vue";
 	import { useRoute, useRouter } from "vue-router";
 
+	import { MessagesNames } from "@/locale/messages-names";
 	import { RouteName } from "@/rotuer/route-name";
 	import { useSearch } from "@/stores/search";
-	import { MessagesNames } from "@/locale/messages-names";
 
 	import TheHandwriting from "./the-handwriting.vue";
 
