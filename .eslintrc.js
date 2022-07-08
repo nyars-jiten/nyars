@@ -1,27 +1,30 @@
 module.exports = {
 	root: true,
-	parser: "vue-eslint-parser",
-	parserOptions: {
-		parser: "@typescript-eslint/parser",
-		sourceType: "module",
-		ecmaVersion: "latest",
-	},
 	env: {
-		browser: true,
 		node: true,
 	},
-	plugins: ["prettier", "@typescript-eslint", "tailwindcss"],
 	extends: [
-		"plugin:@typescript-eslint/recommended",
+		"plugin:vue/vue3-essential",
 		"eslint:recommended",
+		"@vue/typescript/recommended",
 		"plugin:prettier/recommended",
-		"plugin:vue/vue3-recommended",
 	],
-	rules: {
-		"no-unused-vars": "off",
-		indent: ["error", "tab"],
-		"@typescript-eslint/indent": ["error", "tab"],
-		"vue/script-indent": ["error", "tab"],
-		"vue/html-indent": ["error", "tab"],
+	parserOptions: {
+		ecmaVersion: "latest",
 	},
+	rules: {
+		"no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+		"no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+	},
+	overrides: [
+		{
+			files: [
+				"**/__tests__/*.{j,t}s?(x)",
+				"**/tests/unit/**/*.spec.{j,t}s?(x)",
+			],
+			env: {
+				jest: true,
+			},
+		},
+	],
 };
