@@ -26,6 +26,15 @@ jobs:
         with:
           version: latest
 
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Run ESLint
         run: pnpm lint-report
         continue-on-error: true
