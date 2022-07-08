@@ -1,6 +1,6 @@
 import { api } from "@/api";
-import { SearchResult } from "@/api/types/search/search-result";
-import { SearchResultInfo } from "@/api/types/search/search-result-info";
+import { SearchResult } from "@/api/search-rest/types/search-result";
+import { SearchResultInfo } from "@/api/search-rest/types/search-result-info";
 import { defineStore } from "pinia";
 
 import type { Actions, Getters, State } from "./types";

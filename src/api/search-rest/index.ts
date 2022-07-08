@@ -1,6 +1,6 @@
 import type { Axios } from "axios";
 import { BasicRest } from "../basic-rest";
-import { SearchResult } from "../types/search/search-result";
+import { SearchResult } from "./types/search-result";
 
 type SearchReq = {
 	request: string;

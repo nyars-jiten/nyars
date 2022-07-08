@@ -58,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-	import type { EntryJp } from "@/api/types/dictionary/jp/entry-jp";
+	import { EntryJp } from "@/api/search-rest/types";
 	import { MessagesNames } from "@/locale/messages-names";
 	import { useReadingsStorage } from "@/stores/readings";
 	import { useI18n } from "vue-i18n";

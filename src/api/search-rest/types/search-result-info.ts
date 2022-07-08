@@ -1,4 +1,4 @@
-import type { ParserResponse } from "./parser-response";
+import { ParserResponse } from "@/api/types/search/parser-response";
 
 export type SearchResultInfo = {
 	count: number;

@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "vite --port 8080",
 		"build": "vue-tsc --noEmit && vite build",
-		"test": "exit 0",
+		"test": "ava",
 		"lint": "eslint src --ext .js,.vue,.ts --ignore-path .gitignore",
 		"lint-report": "pnpm lint --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif"
 	},
@@ -20,11 +20,13 @@
 	"devDependencies": {
 		"@microsoft/eslint-formatter-sarif": "^3.0.0",
 		"@types/lodash": "^4.14.182",
+		"@types/node": "^18.0.3",
 		"@typescript-eslint/eslint-plugin": "^5.30.5",
 		"@typescript-eslint/parser": "^5.30.5",
 		"@vitejs/plugin-vue": "^2.3.3",
 		"@vue/eslint-config-typescript": "^11.0.0",
 		"autoprefixer": "^10.4.7",
+		"ava": "^4.3.0",
 		"eslint": "^8.19.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-prettier": "^4.2.1",
