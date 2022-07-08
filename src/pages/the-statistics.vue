@@ -10,7 +10,7 @@
 			<template #default>
 				<BestUsers class="mb-20" />
 			</template>
-			<template #fallback>loading...</template>
+			<template #fallback> loading... </template>
 		</Suspense>
 
 		<h1 class="text-4xl font-medium title-font text-center mb-10">
@@ -24,7 +24,7 @@
 			<template #default>
 				<BestUsers class="mb-20" />
 			</template>
-			<template #fallback>loading...</template>
+			<template #fallback> loading... </template>
 		</Suspense>
 
 		<h1 class="text-3xl font-medium title-font text-center mb-10">Было</h1>
@@ -33,12 +33,12 @@
 			<template #default>
 				<TotalStats />
 			</template>
-			<template #fallback>loading...</template>
+			<template #fallback> loading... </template>
 		</Suspense>
 	</main>
 </template>
 
 <script setup lang="ts">
-	import TotalStats from "@/components/total-stats.vue";
 	import BestUsers from "@/components/best-users.vue";
+	import TotalStats from "@/components/total-stats.vue";
 </script>

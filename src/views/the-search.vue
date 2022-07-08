@@ -21,4 +21,3 @@
 <script setup lang="ts">
 	import TheInput from "@/components/search/the-input.vue";
 </script>
-

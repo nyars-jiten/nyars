@@ -11,7 +11,9 @@
 					:src="avatar"
 				/>
 				<div class="flex-grow pl-6">
-					<h2 class="text-lg title-font font-medium mb-2">{{ name }}</h2>
+					<h2 class="text-lg title-font font-medium mb-2">
+						{{ name }}
+					</h2>
 					<div class="leading-relaxed grid grid-cols-[1fr_min-content] gap-x-4">
 						<div>Рейтинг</div>
 						<div>{{ statistics.rating }}</div>
@@ -29,8 +31,8 @@
 </template>
 
 <script setup lang="ts">
-	import { reactive } from "vue";
 	import { api } from "@/api";
+	import { reactive } from "vue";
 
 	const bestUsers = reactive(await api.statistics.bestUsers());
 </script>

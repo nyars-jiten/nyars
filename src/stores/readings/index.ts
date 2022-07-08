@@ -1,5 +1,7 @@
-import { api, TransList, TransVariant } from "@/api";
+import { api } from "@/api";
 import { defineStore, _GettersTree } from "pinia";
+
+import type { TransList, TransVariant } from "@/api/kotoba-rest/types";
 
 type State = {
 	table: TransList;

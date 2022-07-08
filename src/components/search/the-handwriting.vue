@@ -27,8 +27,8 @@
 </template>
 
 <script setup lang="ts">
-	import { computed, onMounted, ref, VNodeRef } from "vue";
 	import { Canvas, Null } from "@/core/handwriting";
+	import { computed, onMounted, ref, VNodeRef } from "vue";
 
 	import type { Handwriting } from "@/core/handwriting";
 

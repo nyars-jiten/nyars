@@ -4,9 +4,7 @@ module.exports = {
 	parserOptions: {
 		parser: "@typescript-eslint/parser",
 		sourceType: "module",
-		ecmaFeatures: {
-			jsx: true,
-		},
+		ecmaVersion: "latest",
 	},
 	env: {
 		browser: true,
@@ -14,9 +12,16 @@ module.exports = {
 	},
 	plugins: ["prettier", "@typescript-eslint", "tailwindcss"],
 	extends: [
-		"eslint:recommended",
-		"plugin:vue/vue3-recommended",
-		"prettier",
 		"plugin:@typescript-eslint/recommended",
+		"eslint:recommended",
+		"plugin:prettier/recommended",
+		"plugin:vue/vue3-recommended",
 	],
+	rules: {
+		"no-unused-vars": "off",
+		indent: ["error", "tab"],
+		"@typescript-eslint/indent": ["error", "tab"],
+		"vue/script-indent": ["error", "tab"],
+		"vue/html-indent": ["error", "tab"],
+	},
 };
