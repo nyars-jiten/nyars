@@ -8,11 +8,16 @@
 			v-model="store.request"
 			type="text"
 			class="text-center outline-none w-full"
-			:placeholder="$t(MessagesNames.SearchInput)"
+			:placeholder="locale.t(MessagesNames.SearchInput)"
 			@keydown.enter="searchImmediately"
 		/>
 
-		<button @click="showDrawPanel = !showDrawPanel">✍️</button>
+		<button
+			class="opacity-100 hover:opacity-50 duration-75 ease-in-out"
+			@click="showDrawPanel = !showDrawPanel"
+		>
+			✍️
+		</button>
 
 		<Transition
 			enter-active-class="duration-150 ease-out"
@@ -34,6 +39,7 @@
 <script setup lang="ts">
 	import { debounce } from "lodash";
 	import { onBeforeMount, ref, watch } from "vue";
+	import { useI18n } from "vue-i18n";
 	import { useRoute, useRouter } from "vue-router";
 
 	import { MessagesNames } from "@/locale/messages-names";
@@ -45,6 +51,7 @@
 	const showDrawPanel = ref(false);
 	const store = useSearch();
 	const router = useRouter();
+	const locale = useI18n();
 
 	const search = debounce(store.search, 300);
 

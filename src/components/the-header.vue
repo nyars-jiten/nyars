@@ -11,13 +11,13 @@
 
 			<nav class="flex flex-wrap items-center text-base justify-center gap-5">
 				<a href="#" class="hover:text-red-900">{{
-					$t(MessagesNames.HeaderHome)
+					locale.t(MessagesNames.HeaderHome)
 				}}</a>
 				<a href="#" class="hover:text-red-900">{{
-					$t(MessagesNames.HeaderBugTracker)
+					locale.t(MessagesNames.HeaderBugTracker)
 				}}</a>
 				<a href="#" class="hover:text-red-900">{{
-					$t(MessagesNames.HeaderDownload)
+					locale.t(MessagesNames.HeaderDownload)
 				}}</a>
 			</nav>
 		</div>
@@ -26,4 +26,7 @@
 
 <script setup lang="ts">
 	import { MessagesNames } from "@/locale/messages-names";
+	import { useI18n } from "vue-i18n";
+
+	const locale = useI18n();
 </script>
