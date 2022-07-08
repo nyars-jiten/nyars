@@ -1,9 +1,9 @@
 {
 	"typescript.tsdk": "node_modules\\typescript\\lib",
-	"editor.formatOnSave": false,
+	"editor.formatOnSave": true,
 	"editor.codeActionsOnSave": {
 		"source.fixAll": true,
-		"source.organizeImports": false
+		"source.organizeImports": true
 	},
 	"[typescript]": {
 		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
@@ -28,5 +28,5 @@
 	},
 	"[markdown]": {
 		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-	},
+	}
 }
