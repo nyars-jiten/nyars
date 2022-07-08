@@ -1,0 +1,56 @@
+{
+    "pos": {
+        "default": [
+            "adv-to","n-adv","aux","aux-v","conj","ctr","exp",
+            "v1","v1-s","vz","int","vn","vr","vk","n-t","vs",
+            "n-pref","n-suf","vs-c","vs-i","vs-s","v-unspec","n-pr",
+            "pn","adv","unc","vi","vt","pref","cop-da","suf","n","prt","num"
+        ],
+        "v5": ["v5aru","v5k-s","v5uru","v5b","v5g","v5k","v5m","v5n","v5r","v5r-i","v5s","v5t","v5u","v5u-s"],
+        "v2": ["v2b-s","v2d-s","v2g-s","v2h-s","v2k-s","v2m-s","v2n-s","v2r-s","v2s-s","v2t-s","v2w-s","v2y-s","v2z-s","v2b-k","v2d-k","v2g-k","v2h-k","v2k-k","v2m-k","v2r-k","v2t-k","v2y-k","v2a-s"],
+        "v4": ["v4b","v4g","v4h","v4k","v4m","v4n","v4r","v4s","v4t"],
+        "adj": ["adj-f","adj-t","adj-i","adj-shiku","adj-nari","aux-adj","adj-ix","adj-ku","adj-na","adj-kari","adj-no","adj-pn"]
+    },
+    "dial": ["ama","ktb","kyb","kyu","nab","tsb","thb","hob","tsug","ksb","osb","rkb"],
+    "fld": [
+        "audio-visual","horse","aviat","auto","alp","anat","archeol","archit","astron",
+        "baseb","biol","biochem","exch","MA","bot","Buddh","bkpg","vet","mil","aero",
+        "volcan","comp","genet","geogr","geol","geom","go","mining","gramm","bus","grmyth",
+        "rail","zool","art","hyst","hystjp","ichth","chn-hyst","China","vidg","cond",
+        "shipbuild","cosm","cryst","food","kyūdō","ling","lit","logic","mahj","math",
+        "mech","med","metall","met","mycol","mineral","myth","nav","music","petroleum",
+        "optics","ornith","paleo","pathol","print","polit","psych","bee","radio","rlc",
+        "relig","rhetor","fish","gardn","comm","shogi","agric","Shinto","sports","stat",
+        "sumo","theatre","Jptheatre","textile","telec","engr","tradem","chn-med","fantasy",
+        "pharm","physics","physiol","phil","finc","photo","hanaf","chem","Christn","paper",
+        "chess","ecol","econ","electr","elec","embryo","ent","law","nucl"
+    ],
+    "misc": [
+        "net-sl","arch","wasei","pol","vulg","X","chn","yoji","fem","id","kigo","kigo-spring",
+        "kigo-winter","kigo-summer","kigo-autumn","literary","obsc","m-sl","male","male-sl",
+        "unc-misc","sens","uk","on-mim","derog","figur","proverb","hon","poet","col","rare",
+        "court","hum","sl","abbr","ek","eK","obs","fam","quote","joc","euph","epist"
+    ],
+    "rinf": ["rk","gikun","oik","uK","rm","ok"],
+    "kinf": ["ateji","jK","mK","io","iK","oK"],
+    "main": {
+        "common": {
+            "color": "common-tag-common"
+        },
+        "jlpt-n5": {
+            "color": "common-tag-jlpt-n5"
+        },
+        "jlpt-n4": {
+            "color": "common-tag-jlpt-n4"
+        },
+        "jlpt-n3": {
+            "color": "common-tag-jlpt-n3"
+        },
+        "jlpt-n2": {
+            "color": "common-tag-jlpt-n2"
+        },
+        "jlpt-n1": {
+            "color": "common-tag-jlpt-n1"
+        }
+    }
+}
