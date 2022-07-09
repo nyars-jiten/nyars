@@ -3,6 +3,7 @@
 	"private": true,
 	"version": "1.0.0",
 	"scripts": {
+		"ci": "pnpm install --frozen-lockfile",
 		"dev": "vite --port 8080",
 		"build": "vue-tsc --noEmit && vite build",
 		"test": "ava",
