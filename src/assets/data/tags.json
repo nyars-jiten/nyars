@@ -2,13 +2,15 @@
     "pos": {
         "default": [
             "adv-to","n-adv","aux","aux-v","conj","ctr","exp",
-            "v1","v1-s","vz","int","vn","vr","vk","n-t","vs",
-            "n-pref","n-suf","vs-c","vs-i","vs-s","v-unspec","n-pr",
-            "pn","adv","unc","vi","vt","pref","cop-da","suf","n","prt","num"
+            "v1","int","vn","vr","vk","n-t","vs",
+            "n-pref","n-suf","v-unspec","n-pr",
+            "pn","adv","unc","pref","cop-da","suf","n","prt","num"
         ],
-        "v5": ["v5aru","v5k-s","v5uru","v5b","v5g","v5k","v5m","v5n","v5r","v5r-i","v5s","v5t","v5u","v5u-s"],
-        "v2": ["v2b-s","v2d-s","v2g-s","v2h-s","v2k-s","v2m-s","v2n-s","v2r-s","v2s-s","v2t-s","v2w-s","v2y-s","v2z-s","v2b-k","v2d-k","v2g-k","v2h-k","v2k-k","v2m-k","v2r-k","v2t-k","v2y-k","v2a-s"],
-        "v4": ["v4b","v4g","v4h","v4k","v4m","v4n","v4r","v4s","v4t"],
+        "v5": ["vi","vt","v5aru","v5k-s","v5uru","v5b","v5g","v5k","v5m","v5n","v5r","v5r-i","v5s","v5t","v5u","v5u-s"],
+        "v2": ["vi","vt","v2b-s","v2d-s","v2g-s","v2h-s","v2k-s","v2m-s","v2n-s","v2r-s","v2s-s","v2t-s","v2w-s","v2y-s","v2z-s","v2b-k","v2d-k","v2g-k","v2h-k","v2k-k","v2m-k","v2r-k","v2t-k","v2y-k","v2a-s"],
+        "v4": ["vi","vt","v4b","v4g","v4h","v4k","v4m","v4n","v4r","v4s","v4t"],
+		"v1": ["vi","vt","v1-s","vz"],
+		"vs": ["vi","vt","vs-c","vs-i","vs-s"],
         "adj": ["adj-f","adj-t","adj-i","adj-shiku","adj-nari","aux-adj","adj-ix","adj-ku","adj-na","adj-kari","adj-no","adj-pn"]
     },
     "dial": ["ama","ktb","kyb","kyu","nab","tsb","thb","hob","tsug","ksb","osb","rkb"],
