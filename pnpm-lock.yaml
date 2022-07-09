@@ -26,6 +26,7 @@ specifiers:
   vue: ^3.2.37
   vue-eslint-parser: ^9.0.3
   vue-i18n: ^9.1.10
+  vue-material-design-icons: ^5.1.1
   vue-router: ^4.1.1
   vue-tsc: ^0.38.3
 
@@ -35,6 +36,7 @@ dependencies:
   pinia: 2.0.14_j6bzmzd4ujpabbp5objtwxyjp4
   vue: 3.2.37
   vue-i18n: 9.1.10_vue@3.2.37
+  vue-material-design-icons: 5.1.1
   vue-router: 4.1.1_vue@3.2.37
 
 devDependencies:
@@ -2575,6 +2577,10 @@ packages:
       '@intlify/vue-devtools': 9.1.10
       '@vue/devtools-api': 6.2.0
       vue: 3.2.37
+    dev: false
+
+  /vue-material-design-icons/5.1.1:
+    resolution: {integrity: sha512-f2M4+7GWIwrg106KJ9a4BU1G5kOxvemIuK1ZDkIdh3ehAJ0vvln7/5PZJ8u6ka4VWV8oA+26mBYSDbS1dpq05w==}
     dev: false
 
   /vue-router/4.1.1_vue@3.2.37:

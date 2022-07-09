@@ -3,7 +3,7 @@
 		v-show="grammars.length"
 		class="select-text px-10 py-5 bg-white rounded shadow"
 	>
-		<div class="flex gap-2 underline underline-offset-4">
+		<div class="flex gap-2 underline underline-offset-4 flex-wrap">
 			<button
 				v-for="(grammar, i) of grammars"
 				:key="`${grammar.word}-${i}`"
