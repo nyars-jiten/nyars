@@ -1,8 +1,8 @@
 <template>
 	<section
-		class="group focus-within:shadow-2xl relative duration-150 ease-in-out border border-gray-100 text-xl shadow-sm bg-white flex items-center p-4 gap-4"
+		class="group focus-within:shadow-2xl relative duration-150 ease-in-out border border-gray-100 text-2xl shadow-sm bg-white flex items-center p-4 gap-4"
 	>
-		<span>🔎</span>
+		<SearchIcon />
 
 		<input
 			v-model="store.request"
@@ -16,7 +16,7 @@
 			class="opacity-100 hover:opacity-50 duration-75 ease-in-out"
 			@click="showDrawPanel = !showDrawPanel"
 		>
-			✍️
+			<DrawIcon />
 		</button>
 
 		<Transition
@@ -46,6 +46,8 @@
 	import { RouteName } from "@/rotuer/route-name";
 	import { useSearch } from "@/stores/search";
 
+	import DrawIcon from "vue-material-design-icons/Draw.vue";
+	import SearchIcon from "vue-material-design-icons/Magnify.vue";
 	import TheHandwriting from "./the-handwriting.vue";
 
 	const showDrawPanel = ref(false);

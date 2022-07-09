@@ -26,6 +26,7 @@ specifiers:
   vue: ^3.2.37
   vue-eslint-parser: ^9.0.3
   vue-i18n: ^9.1.10
+  vue-material-design-icons: ^5.1.1
   vue-router: ^4.1.1
   vue-tsc: ^0.38.3
 
@@ -35,6 +36,7 @@ dependencies:
   pinia: 2.0.14_j6bzmzd4ujpabbp5objtwxyjp4
   vue: 3.2.37
   vue-i18n: 9.1.10_vue@3.2.37
+  vue-material-design-icons: 5.1.1
   vue-router: 4.1.1_vue@3.2.37
 
 devDependencies:
@@ -730,7 +732,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001363
-      electron-to-chromium: 1.4.184
+      electron-to-chromium: 1.4.185
       node-releases: 2.0.6
       update-browserslist-db: 1.0.4_browserslist@4.21.1
     dev: true
@@ -993,8 +995,8 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /electron-to-chromium/1.4.184:
-    resolution: {integrity: sha512-IADi390FRdvxWfVX3hjzfTDNVHiTqVo9ar53/7em/SfhUG9YcjVhyQecY/XwmBHRKden/wFud7RWOUH7+7LFng==}
+  /electron-to-chromium/1.4.185:
+    resolution: {integrity: sha512-9kV/isoOGpKkBt04yYNaSWIBn3187Q5VZRtoReq8oz5NY/A4XmU6cAoqgQlDp7kKJCZMRjWZ8nsQyxfpFHvfyw==}
     dev: true
 
   /emittery/0.11.0:
@@ -2575,6 +2577,10 @@ packages:
       '@intlify/vue-devtools': 9.1.10
       '@vue/devtools-api': 6.2.0
       vue: 3.2.37
+    dev: false
+
+  /vue-material-design-icons/5.1.1:
+    resolution: {integrity: sha512-f2M4+7GWIwrg106KJ9a4BU1G5kOxvemIuK1ZDkIdh3ehAJ0vvln7/5PZJ8u6ka4VWV8oA+26mBYSDbS1dpq05w==}
     dev: false
 
   /vue-router/4.1.1_vue@3.2.37:
