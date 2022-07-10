@@ -67,6 +67,7 @@
 								>
 									{{ 1 + senseId }}
 								</div>
+								<!-- eslint-disable vue/no-v-html -->
 								<div v-html="bbCodesProcess(sence.value)" />
 							</template>
 						</div>

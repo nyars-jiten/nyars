@@ -1,4 +1,4 @@
-import sanitizeHtml from 'sanitize-html';
+import sanitizeHtml from "sanitize-html";
 
 /**
  * Replaces user BB-codes with a HTML-tags
@@ -29,41 +29,58 @@ export function bbCodesProcess(value: string) {
 
 // BB-codes used in a entry examples, such as furigana
 export function examplesBbCodesProcess(rawText: string) {
-  var htmlText = rawText
-    .replace(/([一-龯]+)《(.+?)》/gim, "<ruby>$1<rt>$2</rt></ruby>");
+	let htmlText = rawText.replace(
+		/([一-龯]+)《(.+?)》/gim,
+		"<ruby>$1<rt>$2</rt></ruby>",
+	);
 
-  htmlText = htmlText.replace(/\[([^|]*)\|([^\]]*)\]/gim, furiganaReplacerBracketsToRuby);
+	htmlText = htmlText.replace(
+		/\[([^|]*)\|([^\]]*)\]/gim,
+		furiganaReplacerBracketsToRuby,
+	);
 
-  return cleanHtml(htmlText);
+	return cleanHtml(htmlText);
 }
 
 // replaces japanese 《reading》 brackets with a furigana ruby-tags
 function furiganaReplacerBracketsToRuby(match: string, p1: string, p2: string) {
-  var ruby = '';
-  let readings = p2.split('|');
-  if (readings.length === 1) {
-    ruby = `<ruby>${p1}<rp>（</rp><rt>${readings[0]}</rt><rp>）</rp></ruby>`;
-  } else {
-    for (var i = 0; i < p1.length; i++) {
-      let currentKanji = p1.charAt(i);
-      let currentReading = i < readings.length ? readings[i] : '';
-      ruby += `<ruby>${currentKanji}<rp>（</rp><rt>${currentReading}</rt><rp>）</rp></ruby>`;
-    }
-  }
-  return ruby;
+	let ruby = "";
+	const readings = p2.split("|");
+	if (readings.length === 1) {
+		ruby = `<ruby>${p1}<rp>（</rp><rt>${readings[0]}</rt><rp>）</rp></ruby>`;
+	} else {
+		for (let i = 0; i < p1.length; i++) {
+			const currentKanji = p1.charAt(i);
+			const currentReading = i < readings.length ? readings[i] : "";
+			ruby += `<ruby>${currentKanji}<rp>（</rp><rt>${currentReading}</rt><rp>）</rp></ruby>`;
+		}
+	}
+	return ruby;
 }
 
 // html sanitazer for a user input
 function cleanHtml(html: string) {
-  return sanitizeHtml(html.trim(), {
-    allowedTags: ["em", "a", "sub", "sup", "strong", "span", "rt", "ruby", "rp"],
-    allowedAttributes: {
-      a: ["href"], span: ["style"], rt: ["style"]
-    },
-    allowedStyles: {
-      '*': {
-        'font-family': [/^[\s\S]*$/]
-      }
-    }
-  });
+	return sanitizeHtml(html.trim(), {
+		allowedTags: [
+			"em",
+			"a",
+			"sub",
+			"sup",
+			"strong",
+			"span",
+			"rt",
+			"ruby",
+			"rp",
+		],
+		allowedAttributes: {
+			a: ["href"],
+			span: ["style"],
+			rt: ["style"],
+		},
+		allowedStyles: {
+			"*": {
+				"font-family": [/^[\s\S]*$/],
+			},
+		},
+	});
 }
