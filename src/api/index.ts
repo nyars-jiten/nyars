@@ -1,18 +1,29 @@
 import axios from "axios";
 
+import { BasicRest } from "./basic-rest";
 import { KotobaRest } from "./kotoba-rest";
 import { SearchRest } from "./search-rest";
 import { StatisticsRest } from "./statistics-rest";
 import { UsersRest } from "./users-rest";
 
-export const api = new (class {
-	public readonly statistics;
-	public readonly search;
-	public readonly kotoba;
-	public readonly users;
+import type { EntryJp } from "./search-rest/types";
 
-	public constructor() {
-		this.#endpoint = axios.create({ baseURL: import.meta.env.VITE_APP_API });
+export const api = new (class extends BasicRest {
+	readonly statistics;
+	readonly search;
+	readonly kotoba;
+	readonly users;
+
+	dictionaryJapEntries(props: { wid: string }) {
+		return this.extractData(
+			this.#endpoint.get<EntryJp>(`dictionary/jap/entries/${props.wid}`),
+		);
+	}
+
+	constructor() {
+		super();
+
+		this.#endpoint = axios.create({ baseURL: import.meta.env.VITE_API_URL });
 
 		this.statistics = new StatisticsRest(this.#endpoint);
 		this.search = new SearchRest(this.#endpoint);

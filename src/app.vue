@@ -9,7 +9,12 @@
 <template>
 	<TheHeader />
 
-	<RouterView class="max-w-4xl container mx-auto my-20" />
+	<Suspense>
+		<template #default>
+			<RouterView class="max-w-4xl container mx-auto my-20" />
+		</template>
+		<template #fallback> loading... </template>
+	</Suspense>
 </template>
 
 <style>

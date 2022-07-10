@@ -3,7 +3,7 @@ import "./index.css";
 import { createPinia } from "pinia";
 import { createApp } from "vue";
 import { locale } from "./locale";
-import { router } from "./rotuer";
+import { router } from "./router";
 
 import app from "./app.vue";
 

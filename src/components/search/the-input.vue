@@ -43,7 +43,7 @@
 	import { useRoute, useRouter } from "vue-router";
 
 	import { MessagesNames } from "@/locale/messages-names";
-	import { RouteName } from "@/rotuer/route-name";
+	import { RoutesNames } from "@/router/routes-names";
 	import { useSearch } from "@/stores/search";
 
 	import DrawIcon from "vue-material-design-icons/Draw.vue";
@@ -63,10 +63,10 @@
 	}
 
 	async function onRequest(request: string) {
-		if (request == "") await router.push({ name: RouteName.SearchHome });
+		if (request == "") await router.push({ name: RoutesNames.SearchHome });
 		else {
 			await router.push({
-				name: RouteName.SearchResults,
+				name: RoutesNames.SearchResults,
 				query: { request: request },
 			});
 

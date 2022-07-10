@@ -1,13 +1,17 @@
 <template>
 	<article
-		class="select-text bg-white px-10 py-5 leading-relaxed rounded-md shadow-md border border-gray-100"
+		class="select-text bg-white px-10 py-5 leading-relaxed rounded shadow-md border border-gray-100"
 	>
-		<div
-			class="border-b border-b-gray-100 pb-2 mb-2 text-2xl font-header"
-			@copy="copy"
-		>
-			<div v-for="(word, wordId) of article.entry.words" :key="wordId">
-				<span class="before:content-['【'] after:content-['】']">
+		<div class="flex items-start border-b border-gray-100 pb-2 mb-2">
+			<div
+				v-for="(word, wordId) of article.entry.words"
+				:key="wordId"
+				class="flex-1 text-2xl font-header"
+			>
+				<span
+					v-show="word.writings.length > 0"
+					class="before:content-['【'] after:content-['】']"
+				>
 					<span
 						v-for="(w, writingId) of word.writings"
 						:key="writingId"
@@ -25,6 +29,26 @@
 					{{ store.getByLiteral(r.value) }}
 				</span>
 			</div>
+
+			<button
+				v-show="!isShowFullInfo"
+				type="button"
+				class="flex items-center gap-2 hover:opacity-50 bg-gray-100 rounded select-none px-2"
+				@click="toggleInfo"
+			>
+				Показать чуть больше
+				<PlusIcon :size="18" />
+			</button>
+
+			<button
+				v-show="isShowFullInfo"
+				type="button"
+				class="flex items-center gap-2 hover:opacity-50 bg-gray-100 rounded select-none px-2"
+				@click="toggleInfo"
+			>
+				Показать чуть меньше
+				<MinusIcon :size="18" />
+			</button>
 		</div>
 
 		<!-- {{ mean.pos }} -->
@@ -48,32 +72,92 @@
 						</div>
 					</template>
 
-					<div v-if="lang.senses.length == 1">
-						{{ lang.senses[0].value }}
-					</div>
+					<div
+						v-if="lang.senses.length == 1"
+						v-html="bbCodesProcess(lang.senses[0].value)"
+					/>
 				</template>
 			</template>
 		</div>
 
 		<p>{{ article.entry.externalEntry }}</p>
+
+		<div class="border-t border-gray-100 pt-2 mt-2">
+			<p
+				class="hover:opacity-50 inline-flex px-2 items-center gap-2 cursor-copy bg-gray-100 rounded select-none"
+				@click="copy"
+			>
+				{{ url }}{{ RoutesNames.DictArticle }}/{{ article.wid }}
+				<ContentCopyIcon :size="18" class="opacity-50" />
+			</p>
+		</div>
 	</article>
 </template>
 
 <script setup lang="ts">
+	import { api } from "@/api";
+	import { ref } from "vue";
+	import { useI18n } from "vue-i18n";
+	import { useRoute, useRouter } from "vue-router";
+
 	import { EntryJp } from "@/api/search-rest/types";
 	import { bbCodesProcess } from "@/core/text/bb-code";
 	import { MessagesNames } from "@/locale/messages-names";
+	import { RoutesNames } from "@/router/routes-names";
 	import { useReadingsStorage } from "@/stores/readings";
-	import { useI18n } from "vue-i18n";
 
-	type Props = { article: EntryJp };
+	import ContentCopyIcon from "vue-material-design-icons/ContentCopy.vue";
+	import MinusIcon from "vue-material-design-icons/Minus.vue";
+	import PlusIcon from "vue-material-design-icons/Plus.vue";
 
-	defineProps<Props>();
+	type Props = { article?: EntryJp };
+
+	const props = defineProps<Props>();
+
+	const article = await getArticle();
+
+	const url = import.meta.env.VITE_BASE_URL;
 
 	const locale = useI18n();
 	const store = useReadingsStorage();
 
-	function copy(e: any) {
-		console.log(e);
+	const isShowFullInfo = ref(false);
+
+	async function getArticle(): Promise<EntryJp> {
+		if (props.article) return props.article;
+
+		const route = useRoute();
+
+		const wid = route.params.wid;
+		if (typeof wid !== "string") {
+			const router = useRouter();
+			await router.push(RoutesNames.SearchHome);
+
+			return {
+				entry: {
+					externalEntry: "",
+					meanings: [],
+					words: [],
+				},
+				externalEntry: "",
+				isReviewed: false,
+				isUnconfirmed: false,
+				picturesId: 0,
+				wid: "",
+			};
+		}
+
+		return await api.dictionaryJapEntries({ wid });
+	}
+
+	async function toggleInfo() {
+		isShowFullInfo.value = !isShowFullInfo.value;
+	}
+
+	async function copy(e: MouseEvent) {
+		const { target } = e;
+		if (target instanceof HTMLElement) {
+			await navigator.clipboard.writeText(target.innerText);
+		}
 	}
 </script>
