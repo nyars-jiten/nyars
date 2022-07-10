@@ -98,7 +98,7 @@
 	import { api } from "@/api";
 	import { ref } from "vue";
 	import { useI18n } from "vue-i18n";
-	import { useRoute, useRouter } from "vue-router";
+	import { useRoute } from "vue-router";
 
 	import { EntryJp } from "@/api/search-rest/types";
 	import { bbCodesProcess } from "@/core/text/bb-code";
@@ -129,23 +129,7 @@
 		const route = useRoute();
 
 		const wid = route.params.wid;
-		if (typeof wid !== "string") {
-			const router = useRouter();
-			await router.push(RoutesNames.SearchHome);
-
-			return {
-				entry: {
-					externalEntry: "",
-					meanings: [],
-					words: [],
-				},
-				externalEntry: "",
-				isReviewed: false,
-				isUnconfirmed: false,
-				picturesId: 0,
-				wid: "",
-			};
-		}
+		if (typeof wid !== "string") throw new Error("Bad component usage");
 
 		return await api.dictionaryJapEntries({ wid });
 	}
