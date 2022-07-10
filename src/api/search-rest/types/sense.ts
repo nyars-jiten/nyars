@@ -1,6 +1,15 @@
+type TagVariant = "Fld" | "Dial" | "Misc";
+
+type Tag = {
+	type: TagVariant;
+	values: string[];
+};
+
+type Tags = Tag[];
+
 export type Sense = {
-	// tags:,
+	tags: Tags;
 	value: string;
-	// examples: ,
+	examples: { value: string; translation: string }[];
 	isRare: boolean;
 };

@@ -10,6 +10,7 @@
 			class="text-center outline-none w-full"
 			:placeholder="locale.t(MessagesNames.SearchInput)"
 			@keydown.enter="searchImmediately"
+			@input="onInputRequest"
 		/>
 
 		<button
@@ -38,7 +39,7 @@
 
 <script setup lang="ts">
 	import { debounce } from "lodash";
-	import { onBeforeMount, ref, watch } from "vue";
+	import { onBeforeMount, ref } from "vue";
 	import { useI18n } from "vue-i18n";
 	import { useRoute, useRouter } from "vue-router";
 
@@ -62,25 +63,27 @@
 		await search({ userRequest: true });
 	}
 
+	async function onInputRequest(e: Event) {
+		const { target } = e;
+		if (!(target instanceof HTMLInputElement)) return;
+
+		await onRequest(target.value);
+	}
+
 	async function onRequest(request: string) {
 		if (request == "") await router.push({ name: RoutesNames.SearchHome });
 		else {
-			await router.push({
-				name: RoutesNames.SearchResults,
-				query: { request: request },
-			});
-
 			await search({ userRequest: true });
 		}
 	}
 
-	watch(() => store.request, onRequest, { immediate: true });
-
-	onBeforeMount(() => {
+	onBeforeMount(async () => {
 		const { query } = useRoute();
 		const { request } = query;
 
-		if (typeof request == "string") store.request = request;
+		if (typeof request == "string") {
+			await store.search({ request, userRequest: true });
+		}
 	});
 
 	// https://youtu.be/ERa9y6daDFY

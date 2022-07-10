@@ -7,6 +7,7 @@
 				:is="standalone ? 'div' : 'RouterLink'"
 				:class="standalone ? '' : 'hover:opacity-50'"
 				:to="{ name: RoutesNames.DictJpArticle, params: { wid: article.wid } }"
+				class="grow inline"
 			>
 				<div
 					v-for="(word, wordId) of article.entry.words"
@@ -36,7 +37,112 @@
 				</div>
 			</component>
 
-			<div v-if="!standalone" class="whitespace-nowrap">
+			<div
+				v-show="article.entry.tags.length > 0"
+				class="px-5 flex gap-2 items-start"
+			>
+				<button
+					v-for="tag of article.entry.tags"
+					:key="tag"
+					type="button"
+					class="border rounded-xl px-2 hover:opacity-50"
+					:class="[`text-tag-${tag}`, `border-tag-${tag}`]"
+					@click="sStore.search({ request: `#${tag}`, userRequest: false })"
+				>
+					{{ locale.t(`${MessagesNames.ArticleTagName}.${tag}`) }}
+				</button>
+			</div>
+		</div>
+
+		<div class="grid grid-cols-[auto_1fr] gap-4">
+			<template v-for="(mean, meanId) of article.entry.meanings" :key="meanId">
+				<template v-for="(lang, langId) of mean.langMeanings" :key="langId">
+					<div
+						v-show="infoState && mean.pos.length > 0"
+						class="px-5 col-span-full flex gap-2 items-start border-b border-gray-100 pb-2"
+					>
+						<span
+							v-for="pos of mean.pos"
+							:key="pos"
+							class="uppercase italic underline underline-offset-2"
+						>
+							{{ pos }}
+						</span>
+					</div>
+
+					<div class="italic text-gray-400">
+						{{ locale.t(`${MessagesNames.SearchShortLangName}.${lang.lang}`) }}
+					</div>
+
+					<div class="grid grid-cols-[auto_1fr] gap-x-2">
+						<template v-for="(sence, senseId) of lang.senses" :key="senseId">
+							<div
+								class="text-center border-r border-dotted border-gray-100 pr-2"
+							>
+								<template v-if="lang.senses.length > 1">
+									{{ 1 + senseId }}
+								</template>
+							</div>
+
+							<div>
+								<span
+									v-show="sence.tags.some(e => e.type == 'Fld')"
+									class="italic text-green-600"
+								>
+									{{
+										sence.tags
+											.filter(e => e.type == "Fld")
+											.map(e => `${e.values}`)
+											.join(", ")
+									}}&#8203;
+								</span>
+
+								<!-- eslint-disable vue/no-v-html -->
+								<span v-html="bbCodesProcess(sence.value)" />
+
+								<span
+									v-show="sence.tags.some(e => e.type != 'Fld')"
+									class="italic text-gray-400"
+								>
+									&#8203;({{
+										sence.tags
+											.filter(e => e.type != "Fld")
+											.map(e => `${e.values}`)
+											.join(", ")
+									}})
+								</span>
+
+								<div class="border-l border-gray-200 text-gray-600 pl-2 ml-5">
+									<p
+										v-for="{ value, translation } of sence.examples"
+										:key="`${value}${translation}`"
+									>
+										{{ value }}
+										{{ translation }}
+									</p>
+								</div>
+							</div>
+						</template>
+					</div>
+				</template>
+			</template>
+		</div>
+
+		<p>{{ article.entry.externalEntry }}</p>
+
+		<div
+			v-if="!standalone"
+			class="flex gap-2 border-t border-gray-100 pt-2 mt-2"
+		>
+			<p
+				class="hover:opacity-50 inline-flex px-2 items-center gap-2 cursor-copy bg-gray-100 rounded select-none"
+				@click="copy"
+			>
+				{{ article.wid }}
+				<ContentCopyIcon :size="18" class="opacity-50" />
+			</p>
+
+			<div class="whitespace-nowrap">
 				<button
 					v-show="!infoState"
 					type="button"
@@ -58,54 +164,12 @@
 				</button>
 			</div>
 		</div>
-
-		<!-- {{ mean.pos }} -->
-		<div class="grid grid-cols-[auto_1fr] gap-4">
-			<template v-for="(mean, meanId) of article.entry.meanings" :key="meanId">
-				<template v-for="(lang, langId) of mean.langMeanings" :key="langId">
-					<div class="italic text-gray-400">
-						{{ locale.t(`${MessagesNames.SearchShortLangName}.${lang.lang}`) }}
-					</div>
-
-					<template v-if="lang.senses.length > 1">
-						<div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-1">
-							<template v-for="(sence, senseId) of lang.senses" :key="senseId">
-								<div
-									class="text-center border-r border-dotted border-gray-100 pr-2"
-								>
-									{{ 1 + senseId }}
-								</div>
-								<!-- eslint-disable vue/no-v-html -->
-								<div v-html="bbCodesProcess(sence.value)" />
-							</template>
-						</div>
-					</template>
-
-					<div
-						v-if="lang.senses.length == 1"
-						v-html="bbCodesProcess(lang.senses[0].value)"
-					/>
-				</template>
-			</template>
-		</div>
-
-		<p>{{ article.entry.externalEntry }}</p>
-
-		<div v-if="!standalone" class="border-t border-gray-100 pt-2 mt-2">
-			<p
-				class="hover:opacity-50 inline-flex px-2 items-center gap-2 cursor-copy bg-gray-100 rounded select-none"
-				@click="copy"
-			>
-				{{ url }}jp/{{ article.wid }}
-				<ContentCopyIcon :size="18" class="opacity-50" />
-			</p>
-		</div>
 	</article>
 </template>
 
 <script setup lang="ts">
 	import { RoutesNames } from "@/router/routes-names";
-	import { computed, ref } from "vue";
+	import { ref } from "vue";
 	import { useI18n } from "vue-i18n";
 
 	import { EntryJp } from "@/api/search-rest/types";
@@ -113,7 +177,8 @@
 	import { MessagesNames } from "@/locale/messages-names";
 	import { useReadingsStorage } from "@/stores/readings";
 
-	import ContentCopyIcon from "vue-material-design-icons/ContentCopy.vue";
+	import { useSearch } from "@/stores/search";
+	import ContentCopyIcon from "vue-material-design-icons/LinkVariant.vue";
 	import MinusIcon from "vue-material-design-icons/Minus.vue";
 	import PlusIcon from "vue-material-design-icons/Plus.vue";
 
@@ -126,9 +191,9 @@
 	const locale = useI18n();
 	const store = useReadingsStorage();
 
-	const infoState = ref(false);
+	const sStore = useSearch();
 
-	const isShowFullInfo = computed(() => infoState.value || props.standalone);
+	const infoState = ref(props.standalone);
 
 	async function toggleInfo() {
 		infoState.value = !infoState.value;
@@ -137,7 +202,7 @@
 	async function copy(e: MouseEvent) {
 		const { target } = e;
 		if (target instanceof HTMLElement) {
-			await navigator.clipboard.writeText(target.innerText);
+			await navigator.clipboard.writeText(`${url}jp/${target.innerText}`);
 		}
 	}
 </script>

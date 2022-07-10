@@ -6,6 +6,8 @@ const enum _Names {
 	SearchInput,
 	SearchInfo,
 	SearchShortLangName,
+
+	ArticleTagName,
 }
 
 export class MessagesNames {
@@ -16,4 +18,5 @@ export class MessagesNames {
 	static readonly SearchInput = String(_Names.SearchInput);
 	static readonly SearchInfo = String(_Names.SearchInfo);
 	static readonly SearchShortLangName = String(_Names.SearchShortLangName);
+	static readonly ArticleTagName = String(_Names.ArticleTagName);
 }
