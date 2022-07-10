@@ -18,6 +18,7 @@
 				v-for="result of results.result"
 				:key="result.wid"
 				:article="result"
+				:standalone="false"
 			/>
 		</TransitionGroup>
 	</section>

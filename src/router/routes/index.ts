@@ -9,20 +9,20 @@ export const routes: Readonly<RouteRecordRaw[]> = [
 		children: [
 			{
 				name: RoutesNames.SearchHome,
-				component: () => import("@/pages/search/the-home.vue"),
 				path: RoutesNames.SearchHome,
+				component: () => import("@/pages/search/the-home.vue"),
 			},
 			{
 				name: RoutesNames.SearchResults,
-				component: () => import("@/pages/search/the-results.vue"),
 				path: RoutesNames.SearchResults,
+				component: () => import("@/pages/search/the-results.vue"),
 			},
 		],
 	},
 	{
-		name: RoutesNames.DictArticle,
-		path: `/${RoutesNames.DictArticle}/:wid?`,
-		component: () => import("@/pages/search/the-article.vue"),
-		props: true,
+		name: RoutesNames.DictJpArticle,
+		path: `/${RoutesNames.DictJpArticle}/:wid?`,
+		component: () => import("@/pages/dict/jp/the-article.vue"),
+		props: { standalone: true },
 	},
 ];
