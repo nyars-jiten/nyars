@@ -103,7 +103,7 @@
 									}}&#8203;
 								</span>
 
-								<!-- eslint-disable vue/no-v-html -->
+								<!-- eslint-disable-next-line vue/no-v-html -->
 								<span v-html="bbCodesProcess(sence.value)" />
 
 								<span

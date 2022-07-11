@@ -1,10 +1,11 @@
 import type { Handwriting } from "./handwriting";
 
 export class Null implements Handwriting {
-	/* eslint-disable */
+	/* eslint-disable-next-line */
 	onStart(_: MouseEvent) {}
+	/* eslint-disable-next-line */
 	onEnd() {}
-	/* eslint-disable */
+	/* eslint-disable-next-line */
 	onDraw(_: MouseEvent) {}
 
 	undo() {
