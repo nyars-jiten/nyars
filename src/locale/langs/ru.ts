@@ -4,6 +4,7 @@ import rinf from "./tags/rinf";
 
 export const ru = {
 	[MessagesNames.HeaderHome]: "Главная",
+	[MessagesNames.HeaderEdits]: "Правки",
 	[MessagesNames.HeaderBugTracker]: "Багтреккер",
 	[MessagesNames.HeaderDownload]: "Скачать",
 
@@ -417,4 +418,29 @@ export const ru = {
 			oK: { short: "◇", full: "устаревшее написание, кюдзитай формы" },
 		},
 	},
+	[MessagesNames.ArticleAbbr]: ["см.", "см. также", "ант.", "ср.", "сокр. от"],
+
+	[MessagesNames.EditsType]: [
+		"",
+		"новая",
+		"исправление",
+		"удаление",
+		"перенос",
+	],
+	[MessagesNames.EditsStatus]: [
+		"",
+		"не проверено",
+		"отклонено",
+		"принято",
+		"принято авт.",
+		"восстановлено",
+	],
+	[MessagesNames.EditsDictName]: [
+		"яп-ру",
+		"ру-яп",
+		"кандзи",
+		"имя",
+		"яп-ру (авто)",
+		"пример",
+	],
 };

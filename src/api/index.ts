@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { BasicRest } from "./basic-rest";
+import { EditsRest } from "./edits-rest";
 import { KotobaRest } from "./kotoba-rest";
 import { SearchRest } from "./search-rest";
 import { StatisticsRest } from "./statistics-rest";
@@ -13,6 +14,7 @@ export const api = new (class extends BasicRest {
 	readonly search;
 	readonly kotoba;
 	readonly users;
+	readonly edits;
 
 	dictionaryJapEntries(props: { wid: string }) {
 		return this.extractData(
@@ -29,6 +31,7 @@ export const api = new (class extends BasicRest {
 		this.search = new SearchRest(this.#endpoint);
 		this.kotoba = new KotobaRest(this.#endpoint);
 		this.users = new UsersRest(this.#endpoint);
+		this.edits = new EditsRest(this.#endpoint);
 	}
 
 	#endpoint;

@@ -16,12 +16,18 @@
 				>
 					{{ locale.t(MessagesNames.HeaderHome) }}
 				</RouterLink>
-				<a href="#" class="hover:text-red-900">{{
-					locale.t(MessagesNames.HeaderBugTracker)
-				}}</a>
-				<a href="#" class="hover:text-red-900">{{
-					locale.t(MessagesNames.HeaderDownload)
-				}}</a>
+				<RouterLink
+					:to="{ name: RoutesNames.Edits }"
+					class="hover:text-red-900"
+				>
+					{{ locale.t(MessagesNames.HeaderEdits) }}
+				</RouterLink>
+				<a href="#" class="hover:text-red-900">
+					{{ locale.t(MessagesNames.HeaderBugTracker) }}
+				</a>
+				<a href="#" class="hover:text-red-900">
+					{{ locale.t(MessagesNames.HeaderDownload) }}
+				</a>
 			</nav>
 		</div>
 	</header>

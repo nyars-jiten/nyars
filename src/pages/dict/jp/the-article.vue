@@ -56,5 +56,3 @@
 	const article = await api.dictionaryJapEntries({ wid });
 	const images = await api.kotoba.entryImages({ wid });
 </script>
-
-<style scoped></style>

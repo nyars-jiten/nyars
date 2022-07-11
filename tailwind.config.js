@@ -36,7 +36,16 @@ module.exports = {
 		},
 	},
 	plugins: [],
-	safelist: [{ pattern: /text-tag-/ }, { pattern: /border-tag-/ }],
+	safelist: [
+		"before:content-['「']",
+		"after:content-['」']",
+
+		"before:content-['【']",
+		"after:content-['】']",
+
+		{ pattern: /text-tag-/ },
+		{ pattern: /border-tag-/ },
+	],
 };
 
 // '"Kaisei Tokumin"',

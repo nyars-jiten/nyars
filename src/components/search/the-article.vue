@@ -74,7 +74,10 @@
 									}})
 								</span>
 
-								<div class="border-l border-gray-200 text-gray-600 pl-2 ml-5">
+								<div
+									v-show="infoState"
+									class="border-l border-gray-200 text-gray-600 pl-2 ml-5"
+								>
 									<p
 										v-for="{ value, translation } of sence.examples"
 										:key="`${value}${translation}`"
@@ -82,6 +85,22 @@
 										{{ value }}
 										{{ translation }}
 									</p>
+								</div>
+
+								<div v-show="infoState" class="pl-5">
+									<ul v-for="ref of sence.references">
+										<li class="italic">
+											<span class="text-xs">⇒</span>
+											{{
+												locale.t(
+													`${MessagesNames.ArticleAbbr}.${ref.referenceType}`,
+												)
+											}}
+											<RouterLink :to="location(ref)" class="text-indigo-500">
+												{{ ref.value }}
+											</RouterLink>
+										</li>
+									</ul>
 								</div>
 							</div>
 						</template>
@@ -134,13 +153,17 @@
 	import { useI18n } from "vue-i18n";
 
 	import { EntryJp } from "@/api/search-rest/types";
+	import { Reference } from "@/api/search-rest/types/reference";
 	import { bbCodesProcess } from "@/core/text/bb-code";
 	import { MessagesNames } from "@/locale/messages-names";
+	import { RoutesNames } from "@/router/routes-names";
 
 	import ContentCopyIcon from "vue-material-design-icons/LinkVariant.vue";
 	import MinusIcon from "vue-material-design-icons/Minus.vue";
 	import PlusIcon from "vue-material-design-icons/Plus.vue";
 	import TheHeader from "./the-article/the-header.vue";
+
+	import type { RouteLocationRaw } from "vue-router";
 
 	type Props = { article: EntryJp; standalone: boolean };
 
@@ -151,6 +174,22 @@
 	const locale = useI18n();
 
 	const infoState = ref(props.standalone);
+
+	function location(ref: Reference): RouteLocationRaw {
+		console.log(ref);
+
+		if (!ref.target || ref.target.length < 1) {
+			return {
+				name: RoutesNames.SearchResults,
+				query: { request: ref.value },
+			};
+		}
+
+		return {
+			name: RoutesNames.DictJpArticle,
+			params: { wid: ref.target },
+		};
+	}
 
 	async function toggleInfo() {
 		infoState.value = !infoState.value;

@@ -14,23 +14,43 @@
 				>
 					<span
 						v-show="word.writings.length > 0"
-						class="before:content-['【'] after:content-['】']"
+						class="before:text-gray-200 after:text-gray-200 before:content-['【'] after:content-['】']"
 					>
 						<span
 							v-for="(w, writingId) of word.writings"
-							:key="writingId"
-							class="after:content-['・'] last:after:content-none"
+							:key="`${w.value}-${writingId}`"
+							class="before:text-gray-200 after:text-gray-200 after:content-['・'] last:after:content-none"
 						>
 							{{ w.value }}
+
+							<span
+								v-for="tag of w.tag?.values"
+								:key="tag"
+								class="text-fuchsia-700 italic align-text-bottom text-sm"
+							>
+								{{
+									locale.t(`${MessagesNames.ArticleTagName}.kinf.${tag}.short`)
+								}}
+							</span>
 						</span>
 					</span>
 
 					<span
 						v-for="(r, readingId) of word.readings"
 						:key="readingId"
-						class="after:content-['・'] last:after:content-none"
+						class="after:text-gray-200 after:content-['・'] last:after:content-none"
 					>
 						{{ rStore.getByLiteral(r.value) }}
+
+						<span
+							v-for="tag of r.tag?.values"
+							:key="tag"
+							class="text-fuchsia-700 italic align-text-top text-sm"
+						>
+							{{
+								locale.t(`${MessagesNames.ArticleTagName}.rinf.${tag}.short`)
+							}}
+						</span>
 					</span>
 				</div>
 			</component>
@@ -74,5 +94,3 @@
 		return ["border-r", "border-gray-100", "mr-2", "pr-2"];
 	}
 </script>
-
-<style scoped></style>

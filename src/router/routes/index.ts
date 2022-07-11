@@ -25,4 +25,9 @@ export const routes: Readonly<RouteRecordRaw[]> = [
 		component: () => import("@/pages/dict/jp/the-article.vue"),
 		props: { standalone: true },
 	},
+	{
+		name: RoutesNames.Edits,
+		path: `/${RoutesNames.Edits}`,
+		component: () => import("@/pages/edits/the-articles.vue"),
+	},
 ];
