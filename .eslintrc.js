@@ -15,16 +15,9 @@ module.exports = {
 	rules: {
 		"no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
 		"no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+
+		// note you must disable the base rule as it can report incorrect errors
+		"no-unused-vars": "off",
+		"@typescript-eslint/no-unused-vars": ["error"],
 	},
-	overrides: [
-		{
-			files: [
-				"**/__tests__/*.{j,t}s?(x)",
-				"**/tests/unit/**/*.spec.{j,t}s?(x)",
-			],
-			env: {
-				jest: true,
-			},
-		},
-	],
 };
