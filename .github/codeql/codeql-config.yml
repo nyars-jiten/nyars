@@ -1,0 +1,8 @@
+# https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-a-custom-configuration-file
+
+paths:
+  - src
+paths-ignore:
+  - "**/node_modules/**"
+  - "**/*.test*.ts"
+  - "**/*.spec*.ts"
