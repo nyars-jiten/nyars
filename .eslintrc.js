@@ -6,8 +6,8 @@ module.exports = {
 	extends: [
 		"eslint:recommended",
 		"plugin:vue/vue3-recommended",
-		"plugin:prettier/recommended",
-		"@vue/typescript/recommended",
+		"@vue/eslint-config-prettier",
+		"@vue/eslint-config-typescript/recommended",
 	],
 	parserOptions: {
 		ecmaVersion: "latest",
@@ -15,9 +15,5 @@ module.exports = {
 	rules: {
 		"no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
 		"no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
-
-		// note you must disable the base rule as it can report incorrect errors
-		"no-unused-vars": "off",
-		"@typescript-eslint/no-unused-vars": ["error"],
 	},
 };
