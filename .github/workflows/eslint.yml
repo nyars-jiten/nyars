@@ -30,16 +30,16 @@ jobs:
       - name: Install dependencies
         run: pnpm ci
 
-      - name: Generate ESLint report
-        run: pnpm lint-report
-        if: github.event_name != 'pull_request'
-        continue-on-error: true
+      # - name: Generate ESLint report
+      #   run: pnpm lint-report
+      #   if: github.event_name != 'pull_request'
+      #   continue-on-error: true
 
-      - name: Upload analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@v2
-        if: github.event_name != 'pull_request'
-        with:
-          sarif_file: eslint-results.sarif
+      # - name: Upload analysis results to GitHub
+      #   uses: github/codeql-action/upload-sarif@v2
+      #   if: github.event_name != 'pull_request'
+      #   with:
+      #     sarif_file: eslint-results.sarif
 
       - name: Run linters
         uses: wearerequired/lint-action@v2
