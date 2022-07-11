@@ -45,7 +45,7 @@
 					v-for="tag of article.entry.tags"
 					:key="tag"
 					type="button"
-					class="border rounded-xl px-2 hover:opacity-50"
+					class="border rounded-xl px-2 hover:opacity-50 whitespace-nowrap"
 					:class="[`text-tag-${tag}`, `border-tag-${tag}`]"
 					@click="sStore.search({ request: `#${tag}`, userRequest: false })"
 				>
