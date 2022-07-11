@@ -5,11 +5,23 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"type": "msedge",
 			"request": "launch",
-			"name": "Launch Edge against localhost",
+			"name": "Launch Edge",
+			"type": "msedge",
 			"url": "http://localhost:8080",
 			"webRoot": "${workspaceFolder}/src"
+		},
+		{
+			"request": "launch",
+			"name": "Dev server",
+			"type": "node-terminal",
+			"command": "pnpm dev"
+		}
+	],
+	"compounds": [
+		{
+			"name": "[Dev] Browser & Server",
+			"configurations": ["Dev server", "Launch Edge"]
 		}
 	]
 }
