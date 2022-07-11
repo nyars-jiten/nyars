@@ -92,7 +92,13 @@
 									{{
 										sence.tags
 											.filter(e => e.type == "Fld")
-											.map(e => `${e.values}`)
+											.map(e =>
+												e.values.map(v =>
+													locale.t(
+														`${MessagesNames.ArticleTagName}.fld.${v}.short`,
+													),
+												),
+											)
 											.join(", ")
 									}}&#8203;
 								</span>
@@ -107,7 +113,13 @@
 									&#8203;({{
 										sence.tags
 											.filter(e => e.type != "Fld")
-											.map(e => `${e.values}`)
+											.map(e =>
+												e.values.map(v =>
+													locale.t(
+														`${MessagesNames.ArticleTagName}.misc.${v}.full`,
+													),
+												),
+											)
 											.join(", ")
 									}})
 								</span>
