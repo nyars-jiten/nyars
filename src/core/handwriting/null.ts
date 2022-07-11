@@ -1,14 +1,20 @@
 import type { Handwriting } from "./handwriting";
 
 export class Null implements Handwriting {
-	/* eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars */
-	onStart(_: MouseEvent) {}
+	/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+	onStart(_: MouseEvent) {
+		return undefined;
+	}
 
 	/* eslint-disable-next-line @typescript-eslint/no-empty-function */
-	onEnd() {}
+	onEnd() {
+		return undefined;
+	}
 
-	/* eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars */
-	onDraw(_: MouseEvent) {}
+	/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+	onDraw(_: MouseEvent) {
+		return undefined;
+	}
 
 	undo() {
 		return Promise.resolve();
