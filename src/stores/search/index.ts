@@ -43,7 +43,7 @@ export const useSearch = defineStore<string, State, Getters, Actions>(
 
 				await this.router.push({
 					name: RoutesNames.SearchResults,
-					query: { request: props.request },
+					query: { request: this.request },
 				});
 
 				const response = await api.search.search({

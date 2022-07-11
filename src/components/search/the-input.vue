@@ -60,7 +60,7 @@
 
 	async function searchImmediately() {
 		search.cancel();
-		await search({ userRequest: true });
+		await store.search({ userRequest: true });
 	}
 
 	async function onInputRequest(e: Event) {

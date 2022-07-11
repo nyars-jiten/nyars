@@ -2,57 +2,7 @@
 	<article
 		class="select-text bg-white px-10 py-5 leading-relaxed rounded shadow-md border border-gray-100"
 	>
-		<div class="flex gap-4 items-start border-b border-gray-100 pb-2 mb-2">
-			<component
-				:is="standalone ? 'div' : 'RouterLink'"
-				:class="standalone ? '' : 'hover:opacity-50'"
-				:to="{ name: RoutesNames.DictJpArticle, params: { wid: article.wid } }"
-				class="grow inline"
-			>
-				<div
-					v-for="(word, wordId) of article.entry.words"
-					:key="wordId"
-					class="flex-1 text-2xl font-header"
-				>
-					<span
-						v-show="word.writings.length > 0"
-						class="before:content-['【'] after:content-['】']"
-					>
-						<span
-							v-for="(w, writingId) of word.writings"
-							:key="writingId"
-							class="after:content-['・'] last:after:content-none"
-						>
-							{{ w.value }}
-						</span>
-					</span>
-
-					<span
-						v-for="(r, readingId) of word.readings"
-						:key="readingId"
-						class="after:content-['・'] last:after:content-none"
-					>
-						{{ store.getByLiteral(r.value) }}
-					</span>
-				</div>
-			</component>
-
-			<div
-				v-show="article.entry.tags.length > 0"
-				class="px-5 flex gap-2 items-start"
-			>
-				<button
-					v-for="tag of article.entry.tags"
-					:key="tag"
-					type="button"
-					class="border rounded-xl px-2 hover:opacity-50 whitespace-nowrap"
-					:class="[`text-tag-${tag}`, `border-tag-${tag}`]"
-					@click="sStore.search({ request: `#${tag}`, userRequest: false })"
-				>
-					{{ locale.t(`${MessagesNames.ArticleTagName}.${tag}`) }}
-				</button>
-			</div>
-		</div>
+		<TheHeader :article="article" :standalone="standalone" />
 
 		<div class="grid grid-cols-[auto_1fr] gap-4">
 			<template v-for="(mean, meanId) of article.entry.meanings" :key="meanId">
@@ -180,19 +130,17 @@
 </template>
 
 <script setup lang="ts">
-	import { RoutesNames } from "@/router/routes-names";
 	import { ref } from "vue";
 	import { useI18n } from "vue-i18n";
 
 	import { EntryJp } from "@/api/search-rest/types";
 	import { bbCodesProcess } from "@/core/text/bb-code";
 	import { MessagesNames } from "@/locale/messages-names";
-	import { useReadingsStorage } from "@/stores/readings";
 
-	import { useSearch } from "@/stores/search";
 	import ContentCopyIcon from "vue-material-design-icons/LinkVariant.vue";
 	import MinusIcon from "vue-material-design-icons/Minus.vue";
 	import PlusIcon from "vue-material-design-icons/Plus.vue";
+	import TheHeader from "./the-article/the-header.vue";
 
 	type Props = { article: EntryJp; standalone: boolean };
 
@@ -201,9 +149,6 @@
 	const url = import.meta.env.VITE_BASE_URL;
 
 	const locale = useI18n();
-	const store = useReadingsStorage();
-
-	const sStore = useSearch();
 
 	const infoState = ref(props.standalone);
 
