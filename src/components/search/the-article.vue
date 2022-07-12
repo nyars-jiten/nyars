@@ -88,16 +88,22 @@
 								</div>
 
 								<div v-show="infoState" class="pl-5">
-									<ul v-for="ref of sence.references">
+									<ul
+										v-for="reference of sence.references"
+										:key="`${reference.value}`"
+									>
 										<li class="italic">
 											<span class="text-xs">⇒</span>
 											{{
 												locale.t(
-													`${MessagesNames.ArticleAbbr}.${ref.referenceType}`,
+													`${MessagesNames.ArticleAbbr}.${reference.referenceType}`,
 												)
 											}}
-											<RouterLink :to="location(ref)" class="text-indigo-500">
-												{{ ref.value }}
+											<RouterLink
+												:to="location(reference)"
+												class="text-indigo-500"
+											>
+												{{ reference.value }}
 											</RouterLink>
 										</li>
 									</ul>
