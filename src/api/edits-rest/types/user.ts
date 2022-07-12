@@ -1,3 +1,5 @@
+import type { RatingUser } from "@/api/types/rating-user";
+
 export type User = {
 	id: number;
 	username: string;
@@ -6,6 +8,6 @@ export type User = {
 	access: number;
 	avatar: string;
 	isBot: boolean;
-	userRating: any;
+	userRating: RatingUser;
 	createdDate: string;
 };

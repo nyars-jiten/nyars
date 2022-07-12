@@ -120,7 +120,11 @@ export function transcriptionConvert(
 	return result;
 }
 
+import { isEmpty } from "lodash";
+
 function scriptConvert(raw: string, table: TransList) {
+	if (isEmpty(table)) return "-";
+
 	const notChanged = raw;
 	raw = raw.toLowerCase();
 	let type: TransVariant = "hiragana";

@@ -1,3 +1,5 @@
+import { StatusVariant } from "@/api/edits-rest/types/status-variant";
+import { TypeVariant } from "@/api/edits-rest/types/type-variant";
 import { MessagesNames } from "../messages-names";
 
 import rinf from "./tags/rinf";
@@ -420,21 +422,20 @@ export const ru = {
 	},
 	[MessagesNames.ArticleAbbr]: ["см.", "см. также", "ант.", "ср.", "сокр. от"],
 
-	[MessagesNames.EditsType]: [
-		"",
-		"новая",
-		"исправление",
-		"удаление",
-		"перенос",
-	],
-	[MessagesNames.EditsStatus]: [
-		"",
-		"не проверено",
-		"отклонено",
-		"принято",
-		"принято авт.",
-		"восстановлено",
-	],
+	[MessagesNames.EditsType]: {
+		[TypeVariant.New]: "новая",
+		[TypeVariant.Edit]: "исправление",
+		[TypeVariant.Delete]: "удаление",
+		[TypeVariant.Transfer]: "перенос",
+		[TypeVariant.Reverted]: "восстановлено",
+	},
+	[MessagesNames.EditsStatus]: {
+		[StatusVariant.New]: "не проверено",
+		[StatusVariant.Declined]: "отклонено",
+		[StatusVariant.Accepted]: "принято",
+		[StatusVariant.AutoAccepted]: "принято автоматически",
+		[StatusVariant.Reverted]: "восстановлено",
+	},
 	[MessagesNames.EditsDictName]: [
 		"яп-ру",
 		"ру-яп",

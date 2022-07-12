@@ -17,17 +17,17 @@ export const routes: Readonly<RouteRecordRaw[]> = [
 				path: RoutesNames.SearchResults,
 				component: () => import("@/pages/search/the-results.vue"),
 			},
+			{
+				name: RoutesNames.DictJpArticle,
+				path: `/${RoutesNames.DictJpArticle}/:wid?`,
+				component: () => import("@/pages/dict/jp/the-article.vue"),
+				props: { standalone: true },
+			},
+			{
+				name: RoutesNames.Edits,
+				path: `/${RoutesNames.Edits}`,
+				component: () => import("@/pages/edits/the-articles.vue"),
+			},
 		],
-	},
-	{
-		name: RoutesNames.DictJpArticle,
-		path: `/${RoutesNames.DictJpArticle}/:wid?`,
-		component: () => import("@/pages/dict/jp/the-article.vue"),
-		props: { standalone: true },
-	},
-	{
-		name: RoutesNames.Edits,
-		path: `/${RoutesNames.Edits}`,
-		component: () => import("@/pages/edits/the-articles.vue"),
 	},
 ];

@@ -29,7 +29,12 @@
 		<div
 			class="bg-white px-10 py-5 leading-relaxed rounded shadow-xl border border-gray-100"
 		>
-			правки
+			<ShortArticle
+				v-for="article of articles"
+				:key="article.id"
+				:article="article"
+				class="border-b border-gray-100 pb-2 px-2 last:border-none last:pb-0"
+			/>
 		</div>
 	</section>
 </template>
@@ -41,6 +46,7 @@
 	import { api } from "@/api";
 	import { MessagesNames } from "@/locale/messages-names";
 
+	import ShortArticle from "@/components/edits/short-article.vue";
 	import TheArticle from "@/components/search/the-article.vue";
 
 	type Props = { standalone: boolean };
@@ -55,4 +61,5 @@
 
 	const article = await api.dictionaryJapEntries({ wid });
 	const images = await api.kotoba.entryImages({ wid });
+	const articles = await api.edits.list({ n: 25, p: 0, statuses: [] });
 </script>

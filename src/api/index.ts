@@ -8,6 +8,7 @@ import { StatisticsRest } from "./statistics-rest";
 import { UsersRest } from "./users-rest";
 
 import type { EntryJp } from "./search-rest/types";
+import { Users } from "./types";
 
 export const api = new (class extends BasicRest {
 	readonly statistics;
@@ -19,6 +20,12 @@ export const api = new (class extends BasicRest {
 	dictionaryJapEntries(props: { wid: string }) {
 		return this.extractData(
 			this.#endpoint.get<EntryJp>(`dictionary/jap/entries/${props.wid}`),
+		);
+	}
+
+	dictionaryJapBestUsers() {
+		return this.extractData(
+			this.#endpoint.get<Users>("/dictionary/jap/stats-user"),
 		);
 	}
 

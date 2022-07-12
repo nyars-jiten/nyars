@@ -1,8 +1,12 @@
 <template>
+	<TheWeeaboo
+		class="bg-white px-10 py-5 leading-relaxed rounded shadow-xl border border-gray-100"
+	/>
+
 	<section
 		class="flex flex-col gap-2 bg-white px-10 py-5 leading-relaxed rounded shadow-xl border border-gray-100"
 	>
-		<TheArticle
+		<Article
 			v-for="article of articles"
 			:key="article.id"
 			:article="article"
@@ -13,7 +17,8 @@
 
 <script setup lang="ts">
 	import { api } from "@/api";
-	import TheArticle from "./the-article.vue";
+	import Article from "@/components/edits/article.vue";
+	import TheWeeaboo from "@/components/the-weeaboo.vue";
 
 	const articles = await api.edits.list({ n: 25, p: 0, statuses: [] });
 </script>

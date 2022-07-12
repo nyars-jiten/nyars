@@ -1,6 +1,6 @@
 <template>
 	<span class="flex gap-2 items-center">
-		<img class="rounded-full h-6 shadow" :src="avatar(user.avatar).href" />
+		<img class="rounded-full h-6 shadow" :src="avatarUrl(user.avatar).href" />
 
 		<TextBetween class="whitespace-nowrap">
 			{{ user.username }}
@@ -9,13 +9,13 @@
 </template>
 
 <script setup lang="ts">
+	import { avatarUrl } from "@/core/avatar-url";
+
 	import type { User } from "@/api/edits-rest/types";
+
+	import TextBetween from "@/components/text-between.vue";
 
 	type Props = { user: User };
 
 	defineProps<Props>();
-
-	function avatar(relative: string) {
-		return new URL(relative, "https://nyars.org/upload/avatars/");
-	}
 </script>

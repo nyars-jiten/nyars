@@ -1,0 +1,66 @@
+<template>
+	<section>
+		<div
+			class="border-l-2 pl-2 cursor-pointer"
+			:class="`border-status-variant-${article.status}`"
+			@click="toggleChanges"
+		>
+			<div class="flex gap-4">
+				<TextBetween class="whitespace-nowrap"> #{{ article.id }} </TextBetween>
+
+				<span :class="`text-status-variant-${article.status}`">
+					{{ locale.t(`${MessagesNames.EditsStatus}.${article.status}`) }}
+				</span>
+
+				<UserProfile v-if="isShowApprover" :user="article.approver!" />
+
+				<span :class="`text-type-variant-${article.type}`" class="italic">
+					{{ locale.t(`${MessagesNames.EditsType}.${article.type}`) }}
+				</span>
+
+				<span class="whitespace-nowrap overflow-hidden overflow-ellipsis grow">
+					создано {{ formatDistanceToNow(Date.parse(article.createdDate)) }}
+				</span>
+
+				<UserProfile :user="article.author" />
+			</div>
+		</div>
+
+		<div v-if="isChangesVisible" class="p-4 border-x border-gray-100 mt-2">
+			<ChangesPreview :id="article.id" />
+		</div>
+	</section>
+</template>
+
+<script setup lang="ts">
+	import { computed, ref } from "vue";
+	import { useI18n } from "vue-i18n";
+
+	import { StatusVariant } from "@/api/edits-rest/types/status-variant";
+	import { formatDistanceToNow } from "@/locale/formatDistanceToNow";
+	import { MessagesNames } from "@/locale/messages-names";
+
+	import TextBetween from "@/components/text-between.vue";
+	import ChangesPreview from "./changes-preview.vue";
+	import UserProfile from "./user-profile.vue";
+
+	import type { Article } from "@/api/edits-rest/types";
+
+	type Props = { article: Article };
+
+	const props = defineProps<Props>();
+
+	const locale = useI18n();
+
+	const isShowApprover = computed(
+		() =>
+			props.article.approver &&
+			props.article.status != StatusVariant.AutoAccepted,
+	);
+
+	const isChangesVisible = ref(false);
+
+	function toggleChanges() {
+		isChangesVisible.value = !isChangesVisible.value;
+	}
+</script>
