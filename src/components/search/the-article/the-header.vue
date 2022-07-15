@@ -40,7 +40,7 @@
 						:key="readingId"
 						class="after:text-gray-200 after:content-['・'] last:after:content-none"
 					>
-						{{ rStore.getByLiteral(r.value) }}
+						{{ convert_to_kana(r.value) }}
 
 						<span
 							v-for="tag of r.tag?.values"
@@ -77,8 +77,8 @@
 	import { EntryJp } from "@/api/search-rest/types";
 	import { MessagesNames } from "@/locale/messages-names";
 	import { RoutesNames } from "@/router/routes-names";
-	import { useReadingsStorage } from "@/stores/readings";
 	import { useSearch } from "@/stores/search";
+	import { convert_to_kana } from "@/package/jp_transcript";
 
 	type Props = { article: EntryJp; standalone: boolean };
 
@@ -86,7 +86,6 @@
 
 	const locale = useI18n();
 	const sStore = useSearch();
-	const rStore = useReadingsStorage();
 
 	function headerStyle(tags: string[]) {
 		if (tags.length < 1) return [];

@@ -1,6 +1,6 @@
 <template>
 	<section class="flex flex-col gap-10">
-		<TheGrammar :grammars="results.info.parsedGrammar" />
+		<TheGrammar :grammars="store.results.info.parsedGrammar" />
 
 		<TransitionGroup
 			tag="main"
@@ -15,7 +15,7 @@
 			:class="'min-w-full'"
 		>
 			<TheArticle
-				v-for="result of results.result"
+				v-for="result of store.results.result"
 				:key="result.wid"
 				:article="result"
 				:standalone="false"
@@ -26,10 +26,9 @@
 
 <script setup lang="ts">
 	import { useSearch } from "@/stores/search";
-	import { storeToRefs } from "pinia";
 
 	import TheArticle from "@/components/search/the-article.vue";
 	import TheGrammar from "@/components/search/the-grammar.vue";
 
-	const { results } = storeToRefs(useSearch());
+	const store = useSearch();
 </script>

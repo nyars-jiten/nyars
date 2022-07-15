@@ -30,10 +30,10 @@
 			class="bg-white px-10 py-5 leading-relaxed rounded shadow-xl border border-gray-100"
 		>
 			<ShortArticle
-				v-for="article of articles"
-				:key="article.id"
-				:article="article"
-				class="border-b border-gray-100 pb-2 px-2 last:border-none last:pb-0"
+				v-for="value of articles"
+				:key="value.id"
+				:article="value"
+				class="border-b border-gray-100 p-2 last:border-none first:pt-0 last:pb-0"
 			/>
 		</div>
 	</section>
@@ -61,5 +61,5 @@
 
 	const article = await api.dictionaryJapEntries({ wid });
 	const images = await api.kotoba.entryImages({ wid });
-	const articles = await api.edits.list({ n: 25, p: 0, statuses: [] });
+	const articles = await api.edits.byEntry({ wid });
 </script>

@@ -4,7 +4,7 @@ import type { Axios } from "axios";
 import type { Articles, Compare } from "./types";
 
 export class EditsRest extends BasicRest {
-	list(props: { n: number; p: number; statuses: any[] }) {
+	list(props: { n: number; p: number; statuses: number[] }) {
 		return this.extractData(
 			this.#endpoint.get<Articles>("edits", { params: props }),
 		);
@@ -13,6 +13,12 @@ export class EditsRest extends BasicRest {
 	compare(props: { id: number }) {
 		return this.extractData(
 			this.#endpoint.get<Compare>(`edits/${props.id}/compare`),
+		);
+	}
+
+	byEntry(props: { wid: string }) {
+		return this.extractData(
+			this.#endpoint.get<Articles>(`edits/by-entry/0/${props.wid}`),
 		);
 	}
 

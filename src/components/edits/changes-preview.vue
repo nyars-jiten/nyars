@@ -3,8 +3,9 @@
 		<div class="grid grid-cols-[1fr_auto_1fr] gap-4">
 			<div class="py-4">
 				<span
-					v-for="v of changes.source"
-					class="whitespace-pre-wrap"
+					v-for="(v, i) of changes.source"
+					:key="`${i}-${v}`"
+					class="whitespace-pre-wrap select-text"
 					:class="{ 'text-red-500': v.isDiffered }"
 				>
 					{{ v.value }}
@@ -19,8 +20,9 @@
 
 			<div class="py-4">
 				<span
-					v-for="v of changes.result"
-					class="whitespace-pre-wrap"
+					v-for="(v, i) of changes.result"
+					:key="`${i}-${v}`"
+					class="whitespace-pre-wrap select-text"
 					:class="{ 'text-green-500': v.isDiffered }"
 				>
 					{{ v.value }}

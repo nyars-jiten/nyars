@@ -20,6 +20,14 @@ export class SearchRest extends BasicRest {
 		);
 	}
 
+	public sugg(props: { request: string }): Promise<string[]> {
+		return this.extractData(
+			this.#endpoint.get("search/preview", {
+				params: { r: props.request, n: 10 },
+			}),
+		);
+	}
+
 	public constructor(endpoint: Axios) {
 		super();
 

@@ -182,8 +182,6 @@
 	const infoState = ref(props.standalone);
 
 	function location(ref: Reference): RouteLocationRaw {
-		console.log(ref);
-
 		if (!ref.target || ref.target.length < 1) {
 			return {
 				name: RoutesNames.SearchResults,

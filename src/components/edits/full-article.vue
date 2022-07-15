@@ -12,7 +12,7 @@
 						:key="`${title}-${value}`"
 						class="font-header text-2xl"
 					>
-						{{ rStore.getByLiteral(value) }}
+						{{ convert_to_kana(value) }}
 					</TextSplitted>
 				</div>
 
@@ -69,7 +69,7 @@
 	import { StatusVariant } from "@/api/edits-rest/types/status-variant";
 	import { formatDistanceToNow } from "@/locale/formatDistanceToNow";
 	import { MessagesNames } from "@/locale/messages-names";
-	import { useReadingsStorage } from "@/stores/readings";
+	import { convert_to_kana } from "@/package/jp_transcript";
 
 	import TextBetween from "@/components/text-between.vue";
 	import TextSplitted from "@/components/text-splitted.vue";
@@ -83,7 +83,6 @@
 	defineProps<Props>();
 
 	const locale = useI18n();
-	const rStore = useReadingsStorage();
 
 	const isChangesVisible = ref(false);
 

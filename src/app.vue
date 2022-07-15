@@ -1,9 +1,5 @@
 <script setup lang="ts">
 	import TheHeader from "./components/the-header.vue";
-	import { useReadingsStorage } from "./stores/readings";
-
-	const store = useReadingsStorage();
-	store.load();
 </script>
 
 <template>
