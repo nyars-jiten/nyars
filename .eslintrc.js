@@ -3,11 +3,13 @@ module.exports = {
 	env: {
 		node: true,
 	},
+	plugins: ["tailwindcss"],
 	extends: [
 		"eslint:recommended",
 		"plugin:vue/vue3-recommended",
 		"@vue/eslint-config-prettier",
 		"@vue/eslint-config-typescript/recommended",
+		"plugin:tailwindcss/recommended",
 	],
 	parserOptions: {
 		ecmaVersion: "latest",
