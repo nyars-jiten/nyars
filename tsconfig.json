@@ -6,7 +6,6 @@
 		"moduleResolution": "Node",
 		"strict": true,
 		"jsx": "preserve",
-		"sourceMap": true,
 		"inlineSourceMap": true,
 		"resolveJsonModule": true,
 		"isolatedModules": true,
