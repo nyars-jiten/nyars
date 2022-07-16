@@ -61,7 +61,7 @@
 				v-for="tag of article.entry.tags"
 				:key="tag"
 				type="button"
-				class="border rounded-xl px-2 hover:opacity-50 whitespace-nowrap"
+				class="border rounded px-2 hover:opacity-50 whitespace-nowrap"
 				:class="[`text-tag-${tag}`, `border-tag-${tag}`]"
 				@click="sStore.search({ request: `#${tag}`, userRequest: false })"
 			>
@@ -76,9 +76,9 @@
 
 	import { EntryJp } from "@/api/search-rest/types";
 	import { MessagesNames } from "@/locale/messages-names";
+	import { convert_to_kana } from "@/package/jp_transcript";
 	import { RoutesNames } from "@/router/routes-names";
 	import { useSearch } from "@/stores/search";
-	import { convert_to_kana } from "@/package/jp_transcript";
 
 	type Props = { article: EntryJp; standalone: boolean };
 

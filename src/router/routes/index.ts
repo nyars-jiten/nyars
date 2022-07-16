@@ -1,5 +1,6 @@
-import { RouteRecordRaw } from "vue-router";
 import { RoutesNames } from "../routes-names";
+
+import type { RouteRecordRaw } from "vue-router";
 
 export const routes: Readonly<RouteRecordRaw[]> = [
 	{
