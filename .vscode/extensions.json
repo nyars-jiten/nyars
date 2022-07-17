@@ -1,3 +1,7 @@
 {
-	"recommendations": ["Vue.volar", "rvest.vs-code-prettier-eslint"]
+	"recommendations": [
+		"Vue.volar",
+		"rvest.vs-code-prettier-eslint",
+		"bradlc.vscode-tailwindcss"
+	]
 }
