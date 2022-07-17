@@ -1,17 +1,17 @@
 <template>
 	<section class="flex flex-col gap-10">
 		<TheWeeaboo
-			class="bg-white px-10 py-5 leading-relaxed rounded shadow-xl border border-gray-100"
+			class="rounded border border-gray-100 bg-white px-10 py-5 leading-relaxed shadow-xl"
 		/>
 
 		<section
-			class="flex flex-col gap-2 bg-white px-10 py-5 leading-relaxed rounded shadow-xl border border-gray-100"
+			class="flex flex-col gap-2 rounded border border-gray-100 bg-white px-10 py-5 leading-relaxed shadow-xl"
 		>
 			<FullArticle
 				v-for="article of articles"
 				:key="article.id"
 				:article="article"
-				class="border-b border-gray-100 pb-2 px-2 last:border-none last:pb-0"
+				class="px-2 pb-2 shadow"
 			/>
 		</section>
 	</section>

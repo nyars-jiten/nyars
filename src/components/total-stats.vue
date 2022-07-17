@@ -1,14 +1,14 @@
 <template>
 	<section>
-		<div class="flex flex-wrap -m-4 text-center">
-			<div class="p-4 w-1/4">
-				<h2 class="title-font font-medium text-3xl">
+		<div class="-m-4 flex flex-wrap text-center">
+			<div class="w-1/4 p-4">
+				<h2 class="text-3xl font-medium">
 					{{ format(stats.added) }}
 				</h2>
 				<p class="leading-relaxed">Добавлено статей</p>
 			</div>
-			<div class="p-4 w-1/4">
-				<h2 class="title-font font-medium text-3xl">
+			<div class="w-1/4 p-4">
+				<h2 class="text-3xl font-medium">
 					{{ format(stats.verified) }}
 				</h2>
 				<p class="leading-relaxed">Исправлено статей</p>

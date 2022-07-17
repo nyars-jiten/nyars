@@ -8,9 +8,11 @@
 		"build": "vue-tsc --noEmit && vite build",
 		"test": "ava",
 		"lint": "eslint src --ext .js,.vue,.ts --ignore-path .gitignore",
+		"lint-fix": "pnpm lint --fix",
 		"lint-report": "pnpm lint --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif"
 	},
 	"dependencies": {
+		"@nyars-jiten/jp-transcript": "^0.1.0",
 		"axios": "^0.27.2",
 		"date-fns": "^2.28.0",
 		"lodash": "^4.17.21",

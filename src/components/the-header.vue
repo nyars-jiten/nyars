@@ -1,15 +1,16 @@
 <template>
-	<header class="sticky top-0 z-50 shadow-md bg-white">
+	<header class="sticky top-0 z-50 bg-white shadow-md">
 		<div
-			class="max-w-4xl container mx-auto flex flex-wrap py-5 flex-row items-center"
+			class="container mx-auto flex max-w-4xl flex-row flex-wrap items-center py-5"
 		>
-			<div class="mr-4 py-1 pr-4 border-r border-gray-100">
-				<a
-					class="flex title-font font-medium items-center bg-logo w-10 h-10 rounded-full bg-cover"
+			<div class="mr-4 border-r border-gray-100 py-1 pr-4">
+				<RouterLink
+					class="flex h-10 w-10 items-center rounded-full bg-logo bg-cover font-medium"
+					:to="{ name: RoutesNames.SearchHome }"
 				/>
 			</div>
 
-			<nav class="flex flex-wrap items-center text-base justify-center gap-5">
+			<nav class="flex flex-wrap items-center justify-center gap-5 text-base">
 				<RouterLink
 					:to="{ name: RoutesNames.SearchHome }"
 					class="hover:text-red-900"

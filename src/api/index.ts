@@ -10,6 +10,19 @@ import { UsersRest } from "./users-rest";
 import type { EntryJp } from "./search-rest/types";
 import { Users } from "./types";
 
+type SatelliteValue = {
+	title: string;
+	lang: "eng" | "rus" | "jap";
+};
+
+type Satellite = {
+	body: string;
+	key: number;
+	satellite: SatelliteValue;
+};
+
+type Satellites = Satellite[];
+
 export const api = new (class extends BasicRest {
 	readonly statistics;
 	readonly search;
@@ -26,6 +39,12 @@ export const api = new (class extends BasicRest {
 	dictionaryJapBestUsers() {
 		return this.extractData(
 			this.#endpoint.get<Users>("/dictionary/jap/stats-user"),
+		);
+	}
+
+	satellites(props: { wid: string }) {
+		return this.extractData(
+			this.#endpoint.get<Satellites>(`/satellites/${props.wid}`),
 		);
 	}
 

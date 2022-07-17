@@ -4,17 +4,17 @@
 			<div
 				v-for="{ username, avatar, userRating } of bestUsers"
 				:key="username"
-				class="p-4 md:w-1/3 flex"
+				class="flex p-4 md:w-1/3"
 			>
 				<img
-					class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-gray-200 object-contain"
+					class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-gray-200 object-contain"
 					:src="avatarUrl(avatar).href"
 				/>
-				<div class="flex-grow pl-6">
-					<h2 class="text-lg title-font font-medium mb-2">
+				<div class="grow pl-6">
+					<h2 class="mb-2 text-lg font-medium">
 						{{ username }}
 					</h2>
-					<div class="leading-relaxed grid grid-cols-[1fr_min-content] gap-x-4">
+					<div class="grid grid-cols-[1fr_min-content] gap-x-4 leading-relaxed">
 						<div>Рейтинг</div>
 						<div>{{ userRating.weekRating }}</div>
 

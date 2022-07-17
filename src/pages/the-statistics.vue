@@ -1,9 +1,7 @@
 <template>
-	<main class="my-20 max-w-4xl container mx-auto">
-		<h1 class="text-4xl font-medium title-font text-center mb-10">
-			На этой неделе
-		</h1>
-		<h2 class="text-3xl font-medium title-font text-center mb-20">
+	<main class="container my-20 mx-auto max-w-4xl">
+		<h1 class="mb-10 text-center text-4xl font-medium">На этой неделе</h1>
+		<h2 class="mb-20 text-center text-3xl font-medium">
 			Наибольший вклад внесли
 		</h2>
 		<Suspense>
@@ -13,10 +11,8 @@
 			<template #fallback> loading... </template>
 		</Suspense>
 
-		<h1 class="text-4xl font-medium title-font text-center mb-10">
-			За все время
-		</h1>
-		<h2 class="text-3xl font-medium title-font text-center mb-20">
+		<h1 class="mb-10 text-center text-4xl font-medium">За все время</h1>
+		<h2 class="mb-20 text-center text-3xl font-medium">
 			Оставили след в истории
 		</h2>
 
@@ -27,7 +23,7 @@
 			<template #fallback> loading... </template>
 		</Suspense>
 
-		<h1 class="text-3xl font-medium title-font text-center mb-10">Было</h1>
+		<h1 class="mb-10 text-center text-3xl font-medium">Было</h1>
 
 		<Suspense>
 			<template #default>

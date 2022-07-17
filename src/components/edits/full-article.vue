@@ -1,12 +1,18 @@
 <template>
-	<section>
-		<div
-			class="border-l-2 pl-2 cursor-pointer"
-			:class="`border-status-variant-${article.status}`"
-			@click="toggleChanges"
-		>
-			<div class="flex gap-4">
-				<div class="grow whitespace-nowrap overflow-hidden overflow-ellipsis">
+	<section
+		class="border-l-2"
+		:class="`border-status-variant-${article.status}`"
+	>
+		<div class="pl-2">
+			<div class="flex items-center gap-4">
+				<component
+					:is="isLink() ? 'router-link' : 'div'"
+					:to="{
+						name: RoutesNames.DictJpArticle,
+						params: { wid: article.identifier },
+					}"
+					class="overflow-hidden text-ellipsis whitespace-nowrap"
+				>
 					<TextSplitted
 						v-for="(title, value) in article.title"
 						:key="`${title}-${value}`"
@@ -14,10 +20,10 @@
 					>
 						{{ convert_to_kana(value) }}
 					</TextSplitted>
-				</div>
+				</component>
 
 				<span
-					class="whitespace-nowrap"
+					class="grow whitespace-nowrap text-right"
 					:class="`text-status-variant-${article.status}`"
 				>
 					{{ locale.t(`${MessagesNames.EditsStatus}.${article.status}`) }}
@@ -32,10 +38,24 @@
 			</div>
 
 			<div class="flex">
-				<div class="grow flex">
+				<div class="flex grow">
+					<button
+						type="button"
+						class="rounded bg-neutral-100 px-2 hover:opacity-50"
+						@click="toggleChanges"
+					>
+						<Component
+							:is="
+								isChangesVisible
+									? FormatFontSizeIncrease
+									: FormatFontSizeDecrease
+							"
+							:size="16"
+						/>
+					</button>
 					<TextBetween> #{{ article.id }} </TextBetween>
 
-					<span class="text-neutral-500 italic">
+					<span class="italic text-neutral-500">
 						{{
 							locale.t(`${MessagesNames.EditsDictName}.${article.dictionary}`)
 						}} </span
@@ -56,35 +76,53 @@
 			</div>
 		</div>
 
-		<div v-if="isChangesVisible" class="p-4 border-x border-gray-100 mt-2">
-			<ChangesPreview :id="article.id" />
-		</div>
+		<ChangesPreview
+			v-if="isChangesVisible"
+			:id="article.id"
+			class="m-4 p-4 shadow-md"
+		/>
 	</section>
 </template>
 
 <script setup lang="ts">
+	import { RoutesNames } from "@/router/routes-names";
 	import { ref } from "vue";
 	import { useI18n } from "vue-i18n";
 
 	import { StatusVariant } from "@/api/edits-rest/types/status-variant";
 	import { formatDistanceToNow } from "@/locale/formatDistanceToNow";
 	import { MessagesNames } from "@/locale/messages-names";
-	import { convert_to_kana } from "@/package/jp_transcript";
+	import { convert_to_kana } from "@nyars-jiten/jp-transcript";
 
 	import TextBetween from "@/components/text-between.vue";
 	import TextSplitted from "@/components/text-splitted.vue";
 	import ChangesPreview from "./changes-preview.vue";
 	import UserProfile from "./user-profile.vue";
 
+	import FormatFontSizeDecrease from "vue-material-design-icons/FormatFontSizeDecrease.vue";
+	import FormatFontSizeIncrease from "vue-material-design-icons/FormatFontSizeIncrease.vue";
+
 	import type { Article } from "@/api/edits-rest/types";
+	import { TypeVariant } from "@/api/edits-rest/types/type-variant";
 
 	type Props = { article: Article };
 
-	defineProps<Props>();
+	const props = defineProps<Props>();
 
 	const locale = useI18n();
 
 	const isChangesVisible = ref(false);
+
+	function isLink() {
+		return (
+			props.article.identifier &&
+			!(
+				props.article.type == TypeVariant.Delete &&
+				(props.article.status == StatusVariant.AutoAccepted ||
+					props.article.status == StatusVariant.Accepted)
+			)
+		);
+	}
 
 	function toggleChanges() {
 		isChangesVisible.value = !isChangesVisible.value;

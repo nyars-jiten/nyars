@@ -5,14 +5,14 @@
 				<span
 					v-for="(v, i) of changes.source"
 					:key="`${i}-${v}`"
-					class="whitespace-pre-wrap select-text"
+					class="select-text whitespace-pre-wrap"
 					:class="{ 'text-red-500': v.isDiffered }"
 				>
 					{{ v.value }}
 				</span>
 			</div>
 
-			<div class="p-4 border-x border-gray-400 flex flex-col justify-evenly">
+			<div class="flex flex-col justify-evenly border-x border-gray-400 p-4">
 				<div>⟶</div>
 				<div>⟶</div>
 				<div>⟶</div>
@@ -22,7 +22,7 @@
 				<span
 					v-for="(v, i) of changes.result"
 					:key="`${i}-${v}`"
-					class="whitespace-pre-wrap select-text"
+					class="select-text whitespace-pre-wrap"
 					:class="{ 'text-green-500': v.isDiffered }"
 				>
 					{{ v.value }}

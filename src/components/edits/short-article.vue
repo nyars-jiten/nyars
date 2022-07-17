@@ -1,7 +1,7 @@
 <template>
 	<section>
 		<div
-			class="border-l-2 pl-2 cursor-pointer"
+			class="cursor-pointer border-l-2 pl-2"
 			:class="`border-status-variant-${article.status}`"
 			@click="toggleChanges"
 		>
@@ -18,7 +18,7 @@
 					{{ locale.t(`${MessagesNames.EditsType}.${article.type}`) }}
 				</span>
 
-				<span class="whitespace-nowrap overflow-hidden overflow-ellipsis grow">
+				<span class="grow overflow-hidden text-ellipsis whitespace-nowrap">
 					создано {{ formatDistanceToNow(Date.parse(article.createdDate)) }}
 				</span>
 
@@ -26,7 +26,7 @@
 			</div>
 		</div>
 
-		<div v-if="isChangesVisible" class="p-4 border-x border-gray-100 mt-2">
+		<div v-if="isChangesVisible" class="mt-2 border-x border-gray-100 p-4">
 			<ChangesPreview :id="article.id" />
 		</div>
 	</section>

@@ -1,6 +1,6 @@
 <template>
 	<section
-		class="focus-within:shadow-2xl relative duration-150 ease-in-out border border-gray-100 shadow-sm bg-white flex items-center p-4 gap-4"
+		class="relative flex items-center gap-4 border border-gray-100 bg-white p-4 shadow-sm duration-150 ease-in-out focus-within:shadow-2xl"
 	>
 		<SearchIcon />
 
@@ -8,7 +8,7 @@
 			<input
 				v-model="store.request"
 				type="text"
-				class="peer text-center outline-none w-full text-2xl"
+				class="peer w-full text-center text-2xl outline-none"
 				:placeholder="locale.t(MessagesNames.SearchInput)"
 				@keydown.enter="() => searchImmediately()"
 				@input="onInputRequest"
@@ -16,13 +16,13 @@
 
 			<div
 				v-if="sugg.length > 0"
-				class="invisible peer-focus:visible hover:visible z-10 left-0 right-0 absolute top-[calc(100%+2rem)] shadow-2xl bg-white px-4 py-2 rounded"
+				class="invisible absolute inset-x-0 top-[calc(100%+2rem)] z-10 rounded bg-white px-4 py-2 shadow-2xl hover:visible peer-focus:visible"
 			>
 				<button
 					v-for="sug of sugg"
 					:key="sug"
 					type="button"
-					class="text-left block min-w-full border-b border-gray-100 pb-2 pt-2 last:border-none last:pb-0 first:pt-0 hover:translate-x-1"
+					class="block min-w-full border-b border-gray-100 py-2 text-left first:pt-0 last:border-none last:pb-0 hover:translate-x-1"
 					@click="selectSugg(sug)"
 				>
 					{{ sug }}
@@ -31,7 +31,7 @@
 		</div>
 
 		<button
-			class="opacity-100 hover:opacity-50 duration-75 ease-in-out"
+			class="opacity-100 duration-75 ease-in-out hover:opacity-50"
 			@click="showDrawPanel = !showDrawPanel"
 		>
 			<DrawIcon />
@@ -48,7 +48,7 @@
 		>
 			<TheHandwriting
 				v-if="showDrawPanel"
-				class="shadow-2xl absolute right-0 top-[calc(100%+1rem)] border-gray-100"
+				class="absolute right-0 top-[calc(100%+1rem)] border-gray-100 shadow-2xl"
 			/>
 		</Transition>
 	</section>

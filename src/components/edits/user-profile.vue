@@ -1,6 +1,6 @@
 <template>
-	<span class="flex gap-2 items-center">
-		<img class="rounded-full h-6 shadow" :src="avatarUrl(user.avatar).href" />
+	<span class="flex items-center gap-2">
+		<img class="h-6 rounded-full shadow" :src="avatarUrl(user.avatar).href" />
 
 		<TextBetween class="whitespace-nowrap">
 			{{ user.username }}

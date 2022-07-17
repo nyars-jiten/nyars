@@ -1,8 +1,8 @@
 <template>
-	<section class="flex flex-col gap-2 bg-white border p-2">
+	<section class="flex flex-col gap-2 border bg-white p-2">
 		<canvas
 			ref="element"
-			class="w-80 h-80 border border-dotted bg-gray-50 cursor-crosshair z-50"
+			class="z-50 h-80 w-80 cursor-crosshair border border-dotted bg-gray-50"
 			@mousemove="hw.onDraw"
 			@mousedown="hw.onStart"
 			@mouseup="hw.onEnd"

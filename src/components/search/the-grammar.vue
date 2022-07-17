@@ -1,9 +1,9 @@
 <template>
 	<section
 		v-show="grammars.length"
-		class="select-text px-10 py-5 bg-white rounded shadow"
+		class="select-text rounded bg-white px-10 py-5 shadow"
 	>
-		<div class="flex gap-2 underline underline-offset-4 flex-wrap">
+		<div class="flex flex-wrap gap-2 underline underline-offset-4">
 			<button
 				v-for="(grammar, i) of grammars"
 				:key="`${grammar.word}-${i}`"

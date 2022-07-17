@@ -7,7 +7,7 @@
 
 	<Suspense>
 		<template #default>
-			<RouterView class="max-w-4xl container mx-auto my-20" />
+			<RouterView class="container mx-auto my-20 max-w-4xl" />
 		</template>
 		<template #fallback> loading... </template>
 	</Suspense>
