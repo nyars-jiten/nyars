@@ -1,6 +1,7 @@
 <template>
 	<article
 		class="select-text rounded border border-gray-100 bg-white px-10 py-5 leading-relaxed shadow-md"
+		:class="confStyles()"
 	>
 		<TheHeader :article="article" :standalone="standalone" />
 
@@ -172,6 +173,12 @@
 	const locale = useI18n();
 
 	const infoState = ref(props.standalone);
+
+	function confStyles() {
+		if (props.article.isReviewed) return [];
+
+		return ["border-l-2", "border-l-orange-500"];
+	}
 
 	function capitalizeWords(string: string) {
 		return string.replace(/(?:^|\s)\S/g, function (a) {

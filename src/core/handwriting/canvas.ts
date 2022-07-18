@@ -1,4 +1,6 @@
+import { isEmpty } from "lodash";
 import type { Handwriting } from "./handwriting";
+import type { GoogleProposals } from "./types/google-proposals";
 
 export class Canvas implements Handwriting {
 	readonly step = 1;
@@ -13,10 +15,57 @@ export class Canvas implements Handwriting {
 		return this.context.lineWidth;
 	}
 
-	onStart(e: MouseEvent) {
-		this.history.push(this.canvas.toDataURL());
+	get inAction() {
+		return this._inAction;
+	}
 
-		this.inAction = true;
+	async getProposals(): Promise<GoogleProposals> {
+		if (isEmpty(this.history)) return ["SUCCESS", [["", []]]];
+
+		const body = {
+			options: "enable_pre_space",
+			requests: [
+				{
+					writing_guide: {
+						writing_area_width: this.canvas.width,
+						writing_area_height: this.canvas.height,
+					},
+					ink: this.history.map(e => [
+						e.points.map(e => e[0]),
+						e.points.map(e => e[1]),
+						[],
+					]),
+					language: "ja",
+				},
+			],
+		};
+
+		const response = await fetch(
+			"https://www.google.com.tw/inputtools/request?ime=handwriting&app=mobilesearch&cs=1&oe=UTF-8",
+			{
+				method: "POST",
+				headers: {
+					"content-type": "application/json",
+				},
+				body: JSON.stringify(body),
+			},
+		);
+
+		return await response.json();
+	}
+
+	clear() {
+		this.history = [];
+		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	}
+
+	onStart(e: MouseEvent) {
+		this.history.push({
+			image: this.canvas.toDataURL(),
+			points: [],
+		});
+
+		this._inAction = true;
 		this.updatePosition(e);
 
 		this.context.beginPath();
@@ -24,40 +73,37 @@ export class Canvas implements Handwriting {
 
 		this.context.lineCap = "round";
 		this.context.strokeStyle = "rgb(55, 65, 81)";
+
+		this.pushNext();
 	}
 
 	onEnd() {
-		if (!this.inAction) return;
+		if (!this._inAction) return;
 
-		this.inAction = false;
+		this._inAction = false;
+
+		this.pushNext();
 	}
 
 	onDraw(e: MouseEvent) {
-		if (!this.inAction) return;
+		if (!this._inAction) return;
 
 		this.updatePosition(e);
 
 		this.context.lineTo(this.pos.x, this.pos.y);
 		this.context.stroke();
+
+		this.pushNext();
 	}
 
 	async undo() {
 		const el = this.history.pop();
 		if (!el) return;
 
-		const img = await this.restoreImage(el);
+		const img = await this.restoreImage(el.image);
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		this.context.drawImage(img, 0, 0);
 	}
-
-	private restoreImage = (value: string) => {
-		return new Promise<HTMLImageElement>(resolve => {
-			const img = new Image();
-			img.onload = () => resolve(img);
-
-			img.src = value;
-		});
-	};
 
 	constructor(canvas: HTMLCanvasElement) {
 		this.canvas = canvas;
@@ -65,15 +111,28 @@ export class Canvas implements Handwriting {
 		this.canvas.width = this.canvas.clientWidth;
 		this.canvas.height = this.canvas.clientHeight;
 
-		this.context = this.GetContext();
+		this.context = this.getContext();
 		this.pos = { x: 0, y: 0 };
-		this.inAction = false;
+		this._inAction = false;
 		this.history = [];
 
 		this.lineWidth = 3;
 	}
 
-	private GetContext() {
+	private restoreImage(value: string) {
+		return new Promise<HTMLImageElement>(resolve => {
+			const img = new Image();
+			img.onload = () => resolve(img);
+
+			img.src = value;
+		});
+	}
+
+	private pushNext() {
+		this.history[this.history.length - 1].points.push([this.pos.x, this.pos.y]);
+	}
+
+	private getContext() {
 		const ctx = this.canvas.getContext("2d");
 		if (ctx == null) throw new Error("No canvas context");
 
@@ -95,6 +154,10 @@ export class Canvas implements Handwriting {
 	private canvas;
 	private context;
 	private pos;
-	private inAction;
-	private history: string[];
+	private _inAction;
+
+	private history: {
+		points: number[][];
+		image: string;
+	}[];
 }

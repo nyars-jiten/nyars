@@ -5,12 +5,12 @@
 				:is="standalone ? 'div' : 'RouterLink'"
 				:class="[standalone ? '' : 'hover:opacity-50']"
 				:to="{ name: RoutesNames.DictJpArticle, params: { wid: article.wid } }"
-				class="inline"
+				class="inline-flex flex-col"
 			>
 				<div
 					v-for="(word, wordId) of article.entry.words"
 					:key="wordId"
-					class="inline flex-1 font-header text-2xl"
+					class="font-header inline flex-1 text-2xl"
 				>
 					<span
 						v-show="word.writings.length > 0"

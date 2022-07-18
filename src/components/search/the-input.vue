@@ -11,7 +11,6 @@
 				class="peer w-full text-center text-2xl outline-none"
 				:placeholder="locale.t(MessagesNames.SearchInput)"
 				@keydown.enter="() => searchImmediately()"
-				@input="onInputRequest"
 			/>
 
 			<div
@@ -56,13 +55,12 @@
 
 <script setup lang="ts">
 	import { api } from "@/api";
-	import { debounce } from "lodash";
-	import { onBeforeMount, ref } from "vue";
+	import { debounce, isEmpty } from "lodash";
+	import { onBeforeMount, ref, watch } from "vue";
 	import { useI18n } from "vue-i18n";
-	import { useRoute, useRouter } from "vue-router";
+	import { useRoute } from "vue-router";
 
 	import { MessagesNames } from "@/locale/messages-names";
-	import { RoutesNames } from "@/router/routes-names";
 	import { useSearch } from "@/stores/search";
 
 	import DrawIcon from "vue-material-design-icons/Draw.vue";
@@ -71,35 +69,33 @@
 
 	const showDrawPanel = ref(false);
 	const store = useSearch();
-	const router = useRouter();
 	const locale = useI18n();
 
-	const search = debounce(store.search, 300);
-	const searchSugg = debounce(updateSugg, 300);
+	const searchSugg = debounce(updateSugg, 100);
 	const sugg = ref<string[]>([]);
 
+	watch(
+		() => store.request,
+		async () => {
+			if (isEmpty(store.request)) {
+				sugg.value = [];
+				return;
+			}
+
+			await searchSugg();
+		},
+	);
+
 	async function searchImmediately(request?: string) {
-		search.cancel();
+		searchSugg.cancel();
 		await store.search({ request, userRequest: true });
 	}
 
-	async function onInputRequest(e: Event) {
-		const { target } = e;
-		if (!(target instanceof HTMLInputElement)) return;
+	async function updateSugg(request?: string) {
+		const r = request ?? store.request;
+		if (isEmpty(r)) return;
 
-		await onRequest(target.value);
-	}
-
-	async function updateSugg(request: string) {
-		sugg.value = await api.search.sugg({ request });
-	}
-
-	async function onRequest(request: string) {
-		if (request == "") await router.push({ name: RoutesNames.SearchHome });
-		else {
-			await searchSugg(request);
-			await search({ userRequest: true });
-		}
+		sugg.value = await api.search.sugg({ request: r });
 	}
 
 	async function selectSugg(value: string) {
