@@ -7,7 +7,7 @@ import rinf from "./tags/rinf";
 export const ru = {
 	[MessagesNames.HeaderHome]: "Главная",
 	[MessagesNames.HeaderEdits]: "Правки",
-	[MessagesNames.HeaderBugTracker]: "Багтреккер",
+	[MessagesNames.HeaderBugTracker]: "Багтрекер",
 	[MessagesNames.HeaderDownload]: "Скачать",
 
 	[MessagesNames.SearchInput]: "Шо ищем?",
@@ -436,6 +436,8 @@ export const ru = {
 		[StatusVariant.AutoAccepted]: "принято автоматически",
 		[StatusVariant.Reverted]: "восстановлено",
 	},
+	[MessagesNames.EditsCreated]: "создано",
+
 	[MessagesNames.EditsDictName]: [
 		"яп-ру",
 		"ру-яп",
@@ -444,4 +446,16 @@ export const ru = {
 		"яп-ру (авто)",
 		"пример",
 	],
+
+	[MessagesNames.UserWeekRating]: "рейтинг",
+	[MessagesNames.UserSummaryNew]: "новых статей",
+	[MessagesNames.UserSummaryEdit]: "исправлений",
+
+	[MessagesNames.Statistics]: {
+		added: "добавлено статей",
+		verified: "исправлено статей",
+	},
+
+	[MessagesNames.ShowMore]: "подробнее",
+	[MessagesNames.ShowLess]: "скрыть",
 };
