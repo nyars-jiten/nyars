@@ -15,13 +15,13 @@
 						{{ username }}
 					</h2>
 					<div class="grid grid-cols-[1fr_min-content] gap-x-4 leading-relaxed">
-						<div>Рейтинг</div>
+						<div>{{ locale.t(MessagesNames.UserWeekRating) }}</div>
 						<div>{{ userRating.weekRating }}</div>
 
-						<div>Новых статей</div>
+						<div>{{ locale.t(MessagesNames.UserSummaryNew) }}</div>
 						<div>{{ userRating.summary.week.japNew }}</div>
 
-						<div>Исправлений</div>
+						<div>{{ locale.t(MessagesNames.UserSummaryEdit) }}</div>
 						<div>{{ userRating.summary.week.japEdit }}</div>
 					</div>
 				</div>
@@ -31,10 +31,14 @@
 </template>
 
 <script setup lang="ts">
+	import { MessagesNames } from "@/locale/messages-names";
 	import { reactive } from "vue";
+	import { useI18n } from "vue-i18n";
 
 	import { api } from "@/api";
 	import { avatarUrl } from "@/core/avatar-url";
+
+	const locale = useI18n();
 
 	const bestUsers = reactive(await api.dictionaryJapBestUsers());
 </script>

@@ -124,20 +124,20 @@
 				<button
 					v-show="!infoState"
 					type="button"
-					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 hover:opacity-50"
+					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-50"
 					@click="toggleInfo"
 				>
-					Показать чуть больше
+					{{ locale.t(MessagesNames.ShowMore) }}
 					<PlusIcon :size="16" />
 				</button>
 
 				<button
 					v-show="infoState"
 					type="button"
-					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 hover:opacity-50"
+					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-50"
 					@click="toggleInfo"
 				>
-					Показать чуть меньше
+					{{ locale.t(MessagesNames.ShowLess) }}
 					<MinusIcon :size="16" />
 				</button>
 			</div>
@@ -172,6 +172,12 @@
 	const locale = useI18n();
 
 	const infoState = ref(props.standalone);
+
+	function capitalizeWords(string: string) {
+		return string.replace(/(?:^|\s)\S/g, function (a) {
+			return a.toUpperCase();
+		});
+	}
 
 	function senseLastTags(sense: Sense) {
 		return sense.tags
