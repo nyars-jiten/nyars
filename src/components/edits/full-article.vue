@@ -68,7 +68,8 @@
 
 				<div class="flex gap-4">
 					<span>
-						создано {{ formatDistanceToNow(Date.parse(article.createdDate)) }}
+						{{ locale.t(MessagesNames.EditsCreated) }}
+						{{ formatDistanceToNow(Date.parse(article.createdDate)) }}
 					</span>
 
 					<UserProfile :user="article.author" />

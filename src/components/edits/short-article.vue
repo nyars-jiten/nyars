@@ -19,7 +19,8 @@
 				</span>
 
 				<span class="grow overflow-hidden text-ellipsis whitespace-nowrap">
-					создано {{ formatDistanceToNow(Date.parse(article.createdDate)) }}
+					{{ locale.t(MessagesNames.EditsCreated) }}
+					{{ formatDistanceToNow(Date.parse(article.createdDate)) }}
 				</span>
 
 				<UserProfile :user="article.author" />

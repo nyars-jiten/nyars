@@ -20,11 +20,22 @@
 		>
 			<div class="pb-4">
 				<button
-					class="rounded bg-neutral-100 px-2 hover:opacity-50"
+					v-show="allStatus"
+					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-50"
 					type="button"
 					@click="toggleAllStatuses"
 				>
-					{{ allStatus ? "Показать всё" : "Скрыть всё" }}
+					{{ locale.t(MessagesNames.ShowMore) }}
+					<PlusIcon :size="16" />
+				</button>
+				<button
+					v-show="!allStatus"
+					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-50"
+					type="button"
+					@click="toggleAllStatuses"
+				>
+					{{ locale.t(MessagesNames.ShowLess) }}
+					<MinusIcon :size="16" />
 				</button>
 			</div>
 
@@ -64,18 +75,24 @@
 
 <script setup lang="ts">
 	import { computed, reactive } from "vue";
+	import { useI18n } from "vue-i18n";
 	import { useRoute } from "vue-router";
 
 	import { api } from "@/api";
+	import { MessagesNames } from "@/locale/messages-names";
 
 	import ShortArticle from "@/components/edits/short-article.vue";
 	import TheArticle from "@/components/search/the-article.vue";
+	import MinusIcon from "vue-material-design-icons/Minus.vue";
+	import PlusIcon from "vue-material-design-icons/Plus.vue";
 
 	type Props = { standalone: boolean };
 
 	defineProps<Props>();
 
 	const route = useRoute();
+
+	const locale = useI18n();
 
 	const wid = route.params.wid;
 	if (typeof wid !== "string") throw new Error("Bad component usage");

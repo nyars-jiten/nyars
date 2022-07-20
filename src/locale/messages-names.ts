@@ -14,6 +14,16 @@ const enum _Names {
 	EditsType,
 	EditsStatus,
 	EditsDictName,
+	EditsCreated,
+
+	UserWeekRating,
+	UserSummaryNew,
+	UserSummaryEdit,
+
+	Statistics,
+
+	ShowMore,
+	ShowLess,
 }
 
 export class MessagesNames {
@@ -32,4 +42,14 @@ export class MessagesNames {
 	static readonly EditsType = String(_Names.EditsType);
 	static readonly EditsStatus = String(_Names.EditsStatus);
 	static readonly EditsDictName = String(_Names.EditsDictName);
+	static readonly EditsCreated = String(_Names.EditsCreated);
+
+	static readonly UserWeekRating = String(_Names.UserWeekRating);
+	static readonly UserSummaryNew = String(_Names.UserSummaryNew);
+	static readonly UserSummaryEdit = String(_Names.UserSummaryEdit);
+
+	static readonly Statistics = String(_Names.Statistics);
+
+	static readonly ShowMore = String(_Names.ShowMore);
+	static readonly ShowLess = String(_Names.ShowLess);
 }
