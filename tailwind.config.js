@@ -1,3 +1,5 @@
+const accent = "#6aa3ab";
+
 const tagJlptN1 = "#ea2a92";
 const tagJlptN2 = "#f99717";
 const tagJlptN3 = "#84bf26";
@@ -24,6 +26,18 @@ module.exports = {
 				logo: "url('/favicon-96x96.png')",
 			},
 			colors: {
+				accent: {
+					100: "#e7faf7",
+					200: "#d1f6f2",
+					300: "#b1e5e3",
+					400: "#92cacc",
+					500: "#6aa3ab",
+					600: "#4d8493",
+					700: "#35677b",
+					800: "#214b63",
+					900: "#143652",
+				},
+
 				"tag-common": tagCommon,
 				"tag-jlpt-n5": tagJlptN5,
 				"tag-jlpt-n4": tagJlptN4,

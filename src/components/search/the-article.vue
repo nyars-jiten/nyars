@@ -1,6 +1,6 @@
 <template>
 	<article
-		class="select-text rounded border border-gray-100 bg-white px-10 py-5 leading-relaxed shadow-md"
+		class="select-text border border-gray-100 bg-white p-8 leading-loose shadow-md md:rounded-md"
 		:class="confStyles()"
 	>
 		<TheHeader :article="article" :standalone="standalone" />
@@ -10,7 +10,7 @@
 				<template v-for="(lang, langId) of mean.langMeanings" :key="langId">
 					<div
 						v-show="infoState && mean.pos.length > 0"
-						class="col-span-full flex items-start gap-2 border-b border-gray-100 px-5 pb-2"
+						class="col-span-full flex items-start gap-2 border-b border-gray-100 px-2 pb-2"
 					>
 						<span
 							v-for="pos of mean.pos"

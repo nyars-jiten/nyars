@@ -1,6 +1,6 @@
 <template>
 	<section
-		class="rounded border border-gray-100 bg-white p-10 leading-relaxed shadow-xl"
+		class="border border-gray-100 bg-white p-10 leading-relaxed shadow-md md:rounded-md"
 	>
 		<div
 			v-for="(info, infoId) in locale.tm(MessagesNames.SearchInfo)"

@@ -1,5 +1,5 @@
 <template>
-	<section class="z-10 flex gap-2 border bg-white p-2">
+	<section class="z-10 flex gap-2 border bg-white p-2 md:rounded-md">
 		<div
 			v-show="proposals.length"
 			class="grid grid-cols-2 content-start gap-2 text-center"
@@ -25,11 +25,11 @@
 				@mouseleave="onEnd"
 			/>
 
-			<div class="flex items-center gap-4 px-4">
+			<div class="flex items-center gap-4">
 				<input
 					v-show="hw.maxLineWidth > 0"
 					v-model="lineWidth"
-					class="w-full"
+					class="slider-thumb h-2 w-full appearance-none rounded bg-gray-100"
 					type="range"
 					:step="hw.step"
 					:min="hw.minLineWidth"

@@ -1,6 +1,6 @@
 <template>
 	<section
-		class="relative flex items-center gap-4 border border-gray-100 bg-white p-4 shadow-sm duration-150 ease-in-out focus-within:shadow-2xl"
+		class="relative flex items-center gap-4 border border-gray-100 bg-white p-4 shadow-sm duration-150 ease-in-out focus-within:shadow-2xl md:rounded-md"
 	>
 		<SearchIcon />
 

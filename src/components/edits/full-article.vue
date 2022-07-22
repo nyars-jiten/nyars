@@ -3,7 +3,7 @@
 		class="border-l-2"
 		:class="`border-status-variant-${article.status}`"
 	>
-		<div class="pl-2">
+		<div class="p-2">
 			<div class="flex items-center gap-4">
 				<component
 					:is="isLink() ? 'router-link' : 'div'"
@@ -37,11 +37,11 @@
 				/>
 			</div>
 
-			<div class="flex">
+			<div class="flex pt-2">
 				<div class="flex grow">
 					<button
 						type="button"
-						class="rounded bg-neutral-100 px-2 hover:opacity-50"
+						class="rounded-md bg-neutral-100 px-2 hover:opacity-50"
 						@click="toggleChanges"
 					>
 						<Component
@@ -80,7 +80,7 @@
 		<ChangesPreview
 			v-if="isChangesVisible"
 			:id="article.id"
-			class="m-4 p-4 shadow-md"
+			class="m-2 rounded-md border border-gray-200"
 		/>
 	</section>
 </template>
