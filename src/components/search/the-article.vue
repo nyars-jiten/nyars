@@ -180,11 +180,11 @@
 		return ["border-l-2", "border-l-orange-500"];
 	}
 
-	function capitalizeWords(string: string) {
-		return string.replace(/(?:^|\s)\S/g, function (a) {
-			return a.toUpperCase();
-		});
-	}
+	// function capitalizeWords(string: string) {
+	// 	return string.replace(/(?:^|\s)\S/g, function (a) {
+	// 		return a.toUpperCase();
+	// 	});
+	// }
 
 	function senseLastTags(sense: Sense) {
 		return sense.tags

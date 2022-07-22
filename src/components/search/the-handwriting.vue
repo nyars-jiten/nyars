@@ -35,10 +35,10 @@
 					:min="hw.minLineWidth"
 					:max="hw.maxLineWidth"
 				/>
-				<button type="button" class="button hover:opacity-50" @click="hw.clear">
+				<button type="button" class="hover:opacity-50" @click="clear">
 					<Eraser />
 				</button>
-				<button type="button" class="button hover:opacity-50" @click="undo">
+				<button type="button" class="hover:opacity-50" @click="undo">
 					<ArrowULeftBottom />
 				</button>
 			</div>
@@ -69,11 +69,15 @@
 
 	const store = useSearch();
 
+	async function clear() {
+		proposals.value = [];
+		hw.value.clear();
+	}
+
 	function onSelect(request: string) {
 		store.request += request;
 
-		proposals.value = [];
-		hw.value.clear();
+		clear();
 	}
 
 	async function onEnd() {
@@ -82,7 +86,6 @@
 		// if (hw.value.inAction)
 		await updateProposals();
 	}
-
 	async function undo() {
 		hw.value.undo();
 

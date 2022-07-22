@@ -5,6 +5,6 @@ export const locale = createI18n({
 	locale: "ru",
 	fallback: "ru",
 
-	// @ts-ignore
+	// @ts-nocheck: For debug
 	messages: { en, jp, ru },
 });
