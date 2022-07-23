@@ -1,27 +1,31 @@
 <template>
 	<section
-		class="relative flex items-center gap-4 border border-gray-100 bg-white p-4 shadow-sm duration-150 ease-in-out focus-within:shadow-2xl"
+		class="relative flex items-stretch border border-gray-100 bg-white shadow-md duration-150 ease-in-out dark:border-zinc-700 dark:bg-zinc-800 md:rounded-md"
 	>
-		<SearchIcon />
+		<button
+			class="p-4 opacity-100 duration-75 ease-in-out hover:opacity-50"
+			@click="() => searchImmediately()"
+		>
+			<SearchIcon />
+		</button>
 
-		<div class="relative grow focus-within:visible">
+		<div class="relative grow">
 			<input
 				v-model="store.request"
 				type="text"
-				class="peer w-full text-center text-2xl outline-none"
+				class="peer h-full w-full pb-px text-center text-2xl leading-loose outline-none transition-colors duration-150 ease-in-out focus-within:border-b focus-within:bg-neutral-50 focus-within:pb-0 dark:border-zinc-600 dark:bg-zinc-800 dark:focus-within:bg-zinc-700"
 				:placeholder="locale.t(MessagesNames.SearchInput)"
 				@keydown.enter="() => searchImmediately()"
 			/>
-
 			<div
 				v-if="sugg.length > 0"
-				class="invisible absolute inset-x-0 top-[calc(100%+2rem)] z-10 rounded bg-white px-4 py-2 shadow-2xl hover:visible peer-focus:visible"
+				class="invisible absolute inset-x-0 top-[calc(100%)] z-10 rounded-b-md bg-neutral-50 shadow-xl hover:visible peer-focus:visible"
 			>
 				<button
 					v-for="sug of sugg"
 					:key="sug"
 					type="button"
-					class="block min-w-full border-b border-gray-100 py-2 text-left first:pt-0 last:border-none last:pb-0 hover:translate-x-1"
+					class="block min-w-full border-b border-gray-100 py-2 px-4 text-left last:rounded-b-md last:border-none hover:bg-white dark:border-zinc-600 dark:bg-zinc-700"
 					@click="selectSugg(sug)"
 				>
 					{{ sug }}
@@ -30,7 +34,7 @@
 		</div>
 
 		<button
-			class="opacity-100 duration-75 ease-in-out hover:opacity-50"
+			class="p-4 opacity-100 duration-75 ease-in-out hover:opacity-50"
 			@click="showDrawPanel = !showDrawPanel"
 		>
 			<DrawIcon />

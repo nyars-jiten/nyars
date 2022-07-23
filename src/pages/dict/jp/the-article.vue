@@ -4,7 +4,7 @@
 
 		<div
 			v-if="images.length > 0"
-			class="flex flex-wrap gap-2 rounded border border-gray-100 bg-white px-10 py-5 leading-relaxed shadow-xl"
+			class="flex flex-wrap gap-2 border border-gray-100 bg-white px-10 py-5 leading-relaxed shadow-md dark:border-zinc-600 md:rounded-md"
 		>
 			<img
 				v-for="image of images"
@@ -16,12 +16,12 @@
 		</div>
 
 		<div
-			class="rounded border border-gray-100 bg-white px-10 py-5 leading-relaxed shadow-xl"
+			class="border border-gray-100 bg-white p-8 leading-relaxed shadow-md dark:border-zinc-700 dark:bg-zinc-800 md:rounded-md"
 		>
 			<div class="pb-4">
 				<button
 					v-show="allStatus"
-					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-50"
+					class="flex select-none items-center gap-2 rounded-md bg-gray-100 px-2 capitalize hover:opacity-50 dark:bg-zinc-700"
 					type="button"
 					@click="toggleAllStatuses"
 				>
@@ -30,7 +30,7 @@
 				</button>
 				<button
 					v-show="!allStatus"
-					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-50"
+					class="flex select-none items-center gap-2 rounded-md bg-gray-100 px-2 capitalize hover:opacity-50 dark:bg-zinc-700"
 					type="button"
 					@click="toggleAllStatuses"
 				>
@@ -43,7 +43,7 @@
 				<div
 					v-for="satellite of satellites"
 					:key="`${satellite.key}-${satellite.satellite.title}`"
-					class="flex gap-4 border-b border-neutral-100 px-4 py-2 shadow"
+					class="flex gap-4 rounded-md border border-gray-200 px-4 py-2 dark:border-zinc-600"
 				>
 					<div class="contents" @click="toggleStatus(satellite)">
 						<div v-show="!satellite.status" class="grow">
@@ -61,13 +61,13 @@
 
 		<div
 			v-if="articles.length > 0"
-			class="rounded border border-gray-100 bg-white px-10 py-5 leading-relaxed shadow-xl"
+			class="border border-gray-100 bg-white p-8 leading-relaxed shadow-md dark:border-zinc-700 dark:bg-zinc-800 md:rounded-md"
 		>
 			<ShortArticle
 				v-for="value of articles"
 				:key="value.id"
 				:article="value"
-				class="border-b border-gray-100 py-2 first:pt-0 last:border-none last:pb-0"
+				class="border-b border-gray-100 py-2 first:pt-0 last:border-none last:pb-0 dark:border-zinc-700"
 			/>
 		</div>
 	</section>

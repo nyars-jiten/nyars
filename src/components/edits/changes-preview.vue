@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="grid grid-cols-[1fr_auto_1fr] gap-4">
-			<div class="py-4">
+			<div class="p-4">
 				<span
 					v-for="(v, i) of changes.source"
 					:key="`${i}-${v}`"
@@ -12,13 +12,15 @@
 				</span>
 			</div>
 
-			<div class="flex flex-col justify-evenly border-x border-gray-400 p-4">
+			<div
+				class="flex flex-col justify-evenly border-x border-gray-200 p-4 dark:border-zinc-600"
+			>
 				<div>⟶</div>
 				<div>⟶</div>
 				<div>⟶</div>
 			</div>
 
-			<div class="py-4">
+			<div class="p-4">
 				<span
 					v-for="(v, i) of changes.result"
 					:key="`${i}-${v}`"

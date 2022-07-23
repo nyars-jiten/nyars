@@ -27,7 +27,10 @@
 			</div>
 		</div>
 
-		<div v-if="isChangesVisible" class="mt-2 border-x border-gray-100 p-4">
+		<div
+			v-if="isChangesVisible"
+			class="mt-4 mb-2 rounded-md border border-gray-200 dark:border-zinc-600"
+		>
 			<ChangesPreview :id="article.id" />
 		</div>
 	</section>

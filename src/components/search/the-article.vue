@@ -1,6 +1,6 @@
 <template>
 	<article
-		class="select-text rounded border border-gray-100 bg-white px-10 py-5 leading-relaxed shadow-md"
+		class="select-text border border-gray-100 bg-white p-8 leading-loose shadow-md dark:border-zinc-700 dark:bg-zinc-800 md:rounded-md"
 		:class="confStyles()"
 	>
 		<TheHeader :article="article" :standalone="standalone" />
@@ -10,7 +10,7 @@
 				<template v-for="(lang, langId) of mean.langMeanings" :key="langId">
 					<div
 						v-show="infoState && mean.pos.length > 0"
-						class="col-span-full flex items-start gap-2 border-b border-gray-100 px-5 pb-2"
+						class="col-span-full flex items-start gap-2 border-b border-gray-100 px-2 pb-2 dark:border-zinc-700"
 					>
 						<span
 							v-for="pos of mean.pos"
@@ -21,14 +21,14 @@
 						</span>
 					</div>
 
-					<div class="italic text-gray-400">
+					<div class="italic text-gray-400 dark:text-zinc-400">
 						{{ locale.t(`${MessagesNames.SearchShortLangName}.${lang.lang}`) }}
 					</div>
 
 					<div class="grid grid-cols-[auto_1fr] gap-x-2">
 						<template v-for="(sense, senseId) of lang.senses" :key="senseId">
 							<div
-								class="border-r border-dotted border-gray-100 pr-2 text-center"
+								class="border-r border-dotted border-gray-100 pr-2 text-center dark:border-zinc-500"
 							>
 								<template v-if="lang.senses.length > 1">
 									{{ 1 + senseId }}
@@ -61,14 +61,14 @@
 
 								<span
 									v-show="sense.tags.some(e => e.type != 'Fld')"
-									class="italic text-gray-400"
+									class="italic text-gray-400 dark:text-zinc-400"
 								>
 									&#8203;({{ senseLastTags(sense).join(", ") }})
 								</span>
 
 								<div
 									v-show="infoState"
-									class="ml-5 border-l border-gray-200 pl-2 text-gray-600"
+									class="ml-5 border-l border-gray-200 pl-2 text-gray-600 dark:border-zinc-500 dark:text-zinc-400"
 								>
 									<p
 										v-for="{ value, translation } of sense.examples"
@@ -111,10 +111,10 @@
 
 		<div
 			v-if="!standalone"
-			class="mt-2 flex gap-2 border-t border-gray-100 pt-2"
+			class="mt-2 flex gap-2 border-t border-gray-100 pt-2 dark:border-zinc-700"
 		>
 			<p
-				class="inline-flex cursor-copy select-none items-center gap-2 rounded bg-gray-100 px-2 hover:opacity-50"
+				class="inline-flex cursor-copy select-none items-center gap-2 rounded bg-gray-100 px-2 hover:opacity-50 dark:bg-zinc-700"
 				@click="copy"
 			>
 				{{ article.wid }}
@@ -125,7 +125,7 @@
 				<button
 					v-show="!infoState"
 					type="button"
-					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-50"
+					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-50 dark:bg-zinc-700"
 					@click="toggleInfo"
 				>
 					{{ locale.t(MessagesNames.ShowMore) }}
@@ -135,7 +135,7 @@
 				<button
 					v-show="infoState"
 					type="button"
-					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-50"
+					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-50 dark:bg-zinc-700"
 					@click="toggleInfo"
 				>
 					{{ locale.t(MessagesNames.ShowLess) }}
