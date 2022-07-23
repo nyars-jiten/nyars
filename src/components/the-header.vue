@@ -9,7 +9,10 @@
 				>
 					<RouterLink
 						class="flex h-10 w-10 items-center rounded-full bg-cover font-medium"
-						:class="`bg-logo-${userTheme}`"
+						:class="{
+							'bg-logo-dark': isDarkTheme,
+							'bg-logo-light': !isDarkTheme,
+						}"
 						:to="{ name: RoutesNames.SearchHome }"
 					/>
 				</div>
@@ -49,9 +52,12 @@
 	import { userTheme } from "@/core/theme/theme-control";
 	import { MessagesNames } from "@/locale/messages-names";
 	import { RoutesNames } from "@/router/routes-names";
+	import { computed } from "vue";
 	import { useI18n } from "vue-i18n";
 
 	import ThemeSwitcher from "./theme-switcher.vue";
+
+	const isDarkTheme = computed(_ => userTheme.value == "dark");
 
 	const locale = useI18n();
 </script>
