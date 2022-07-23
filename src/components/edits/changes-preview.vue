@@ -12,7 +12,9 @@
 				</span>
 			</div>
 
-			<div class="flex flex-col justify-evenly border-x border-gray-200 p-4">
+			<div
+				class="flex flex-col justify-evenly border-x border-gray-200 p-4 dark:border-zinc-600"
+			>
 				<div>⟶</div>
 				<div>⟶</div>
 				<div>⟶</div>

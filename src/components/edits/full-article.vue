@@ -41,7 +41,7 @@
 				<div class="flex grow">
 					<button
 						type="button"
-						class="rounded-md bg-neutral-100 px-2 hover:opacity-50"
+						class="rounded-md bg-neutral-100 px-2 hover:opacity-50 dark:bg-zinc-700"
 						@click="toggleChanges"
 					>
 						<Component
@@ -80,7 +80,7 @@
 		<ChangesPreview
 			v-if="isChangesVisible"
 			:id="article.id"
-			class="m-2 rounded-md border border-gray-200"
+			class="m-2 rounded-md border border-gray-200 dark:border-zinc-600"
 		/>
 	</section>
 </template>

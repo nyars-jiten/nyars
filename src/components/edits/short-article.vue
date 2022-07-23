@@ -29,7 +29,7 @@
 
 		<div
 			v-if="isChangesVisible"
-			class="mt-4 mb-2 rounded-md border border-gray-200"
+			class="mt-4 mb-2 rounded-md border border-gray-200 dark:border-zinc-600"
 		>
 			<ChangesPreview :id="article.id" />
 		</div>

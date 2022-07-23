@@ -1,11 +1,11 @@
 <template>
 	<section class="flex flex-col gap-10">
 		<TheWeeaboo
-			class="border border-gray-100 bg-white p-8 leading-relaxed shadow-md md:rounded-md"
+			class="border border-gray-100 bg-white p-8 leading-relaxed shadow-md dark:border-zinc-700 dark:bg-zinc-800 md:rounded-md"
 		/>
 
 		<section
-			class="flex flex-col gap-2 border border-gray-100 bg-white p-8 leading-relaxed shadow-md md:rounded-md"
+			class="flex flex-col gap-2 border border-gray-100 bg-white p-8 leading-relaxed shadow-md dark:border-zinc-700 dark:bg-zinc-800 md:rounded-md"
 		>
 			<FullArticle
 				v-for="article of articles"
