@@ -1,6 +1,6 @@
 <template>
 	<section
-		class="relative flex items-center items-stretch border border-gray-100 bg-white shadow-md duration-150 ease-in-out dark:border-zinc-700 dark:bg-zinc-800 md:rounded-md"
+		class="relative flex items-stretch border border-gray-100 bg-white shadow-md duration-150 ease-in-out dark:border-zinc-700 dark:bg-zinc-800 md:rounded-md"
 	>
 		<button
 			class="p-4 opacity-100 duration-75 ease-in-out hover:opacity-50"
@@ -13,13 +13,13 @@
 			<input
 				v-model="store.request"
 				type="text"
-				class="peer leading-15 h-full w-full pb-px text-center text-2xl outline-none transition-colors duration-150 ease-in-out focus-within:border-b focus-within:bg-neutral-50 focus-within:pb-0 dark:border-zinc-600 dark:bg-zinc-800 dark:focus-within:bg-zinc-700"
+				class="peer h-full w-full pb-px text-center text-2xl leading-loose outline-none transition-colors duration-150 ease-in-out focus-within:border-b focus-within:bg-neutral-50 focus-within:pb-0 dark:border-zinc-600 dark:bg-zinc-800 dark:focus-within:bg-zinc-700"
 				:placeholder="locale.t(MessagesNames.SearchInput)"
 				@keydown.enter="() => searchImmediately()"
 			/>
 			<div
 				v-if="sugg.length > 0"
-				class="w-150 invisible absolute inset-x-0 top-[calc(100%)] z-10 rounded-b-md bg-neutral-50 shadow-xl hover:visible peer-focus:visible"
+				class="invisible absolute inset-x-0 top-[calc(100%)] z-10 rounded-b-md bg-neutral-50 shadow-xl hover:visible peer-focus:visible"
 			>
 				<button
 					v-for="sug of sugg"

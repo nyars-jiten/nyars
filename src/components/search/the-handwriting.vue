@@ -31,7 +31,7 @@
 				<input
 					v-show="hw.maxLineWidth > 0"
 					v-model="lineWidth"
-					class="slider-thumb h-2 w-full appearance-none rounded bg-gray-100 dark:bg-zinc-600"
+					class="h-2 w-full appearance-none rounded bg-gray-100 dark:bg-zinc-600"
 					type="range"
 					:step="hw.step"
 					:min="hw.minLineWidth"

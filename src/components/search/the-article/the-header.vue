@@ -12,7 +12,7 @@
 				<div
 					v-for="(word, wordId) of article.entry.words"
 					:key="wordId"
-					class="font-header inline flex-1 text-2xl"
+					class="inline flex-1 font-header text-2xl"
 				>
 					<span
 						v-show="word.writings.length > 0"
