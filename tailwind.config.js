@@ -16,6 +16,7 @@ const statusVariant5 = "#aa1db3"; // Reverted
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ["./index.html", "./src/**/*.{vue,js,ts}"],
+	darkMode: "class",
 	theme: {
 		extend: {
 			fontFamily: {
@@ -23,7 +24,8 @@ module.exports = {
 				body: ['"Exo 2"', '"Kosugi"', "Arial", "sans-serif"],
 			},
 			backgroundImage: {
-				logo: "url('/favicon-96x96.png')",
+				"logo-light": "url('/favicon-96x96.png')",
+				"logo-dark": "url('/favicon-dark-96x96.png')",
 			},
 			colors: {
 				accent: {

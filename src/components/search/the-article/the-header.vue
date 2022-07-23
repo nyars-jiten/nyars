@@ -1,5 +1,7 @@
 <template>
-	<header class="mb-2 flex items-start gap-4 border-b border-gray-100 pb-2">
+	<header
+		class="mb-2 flex items-start gap-4 border-b border-gray-100 pb-2 dark:border-zinc-700"
+	>
 		<div class="grow">
 			<component
 				:is="standalone ? 'div' : 'RouterLink'"
