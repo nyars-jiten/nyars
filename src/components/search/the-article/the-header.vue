@@ -12,11 +12,11 @@
 				<div
 					v-for="(word, wordId) of article.entry.words"
 					:key="wordId"
-					class="inline flex-1 font-header text-2xl"
+					class="font-header inline flex-1 text-2xl"
 				>
 					<span
 						v-show="word.writings.length > 0"
-						class="before:text-gray-200 before:content-['【'] after:text-gray-200 after:content-['】']"
+						class="before:text-gray-200 before:content-['【'] after:text-gray-200 after:content-['】'] dark:before:text-stone-500 dark:after:text-stone-500"
 					>
 						<span
 							v-for="(w, writingId) of word.writings"
