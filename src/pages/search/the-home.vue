@@ -6,17 +6,19 @@
 			class="whitespace-pre-wrap"
 			v-text="locale.tm(MessagesNames.SearchInfoPre)"
 		/>
+		<!-- eslint-disable vue/no-v-html -->
 		<div
 			v-for="(info, infoId) in locale.tm(MessagesNames.SearchExamples)"
 			:key="infoId"
 		>
 			👉 <span v-html="bbCodesProcess(info)" />
 		</div>
-		<!-- eslint-disable-next-line vue/no-v-html -->
+
 		<span
 			class="whitespace-pre-wrap"
 			v-html="locale.tm(MessagesNames.SearchInfoPost)"
 		/>
+		<!-- eslint-enable vue/no-v-html -->
 	</section>
 </template>
 
