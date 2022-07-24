@@ -1,6 +1,6 @@
 export const enum RoutesNames {
 	SearchHome = "search-home",
-	SearchResults = "search-results",
+	SearchResults = "search",
 	DictJpArticle = "jp",
 	Edits = "edits",
 }
