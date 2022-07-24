@@ -10,12 +10,17 @@ export const ru = {
 	[MessagesNames.HeaderBugTracker]: "Багтрекер",
 	[MessagesNames.HeaderDownload]: "Скачать",
 
-	[MessagesNames.SearchInput]: "Шо ищем?",
-	[MessagesNames.SearchInfo]: [
-		"Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
-		"Quod repellendus reiciendis maiores neque, voluptas molestiae?",
-		"Assumenda accusamus fuga modi alias dolorum deleniti!",
-		"Impedit natus numquam eveniet, recusandae...",
+	[MessagesNames.SearchInput]: "Японское, русское или английское слово",
+	[MessagesNames.SearchInfoPre]:
+		"НЯРС — редактируемый японско-русский(-английский) словарь. Для начала работы со словарём введите поисковой запрос в строку выше. Вот несколько примеров: \n\n",
+	[MessagesNames.SearchInfoPost]:
+		'\nПодробно функционал сайта описан в <a href="https://docs.nyars.org/" target="_blank">документации</a>, также присоединяйтесь к нашему сообществу в <a href="https://discord.gg/u7H5nsPWVB" target="_blank">Discord</a> — там можно будет спросить все непонятные моменты, а также внести предложения по сайту.',
+	[MessagesNames.SearchExamples]: [
+		"Поиск по японским словам: [ref]遷都[/ref], [ref]メカニズム[/ref]",
+		"Поиск по русским и английским словам: [ref]разряжаться[/ref], [ref]sugar acid[/ref]",
+		"Поиск по транскрипции: [ref]сэйка[/ref], [ref]ikimashii[/ref], [ref]itizyou[/ref]",
+		"Парсинг форм слова, предложений и текстов: [ref]いきなりブックマークが増えて驚きました。[/ref]",
+		"Поиск по шаблону: [ref]*動詞[/ref], [ref]交通?関[/ref]",
 	],
 	[MessagesNames.SearchShortLangName]: {
 		rus: "рус",

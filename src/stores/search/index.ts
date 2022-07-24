@@ -28,7 +28,7 @@ export const useSearch = defineStore<string, State, Getters, Actions>(
 	{
 		state() {
 			return {
-				request: "ようこそ実力至上主義の教室へ 2期",
+				request: "",
 				results: emptySearchResults(),
 			};
 		},

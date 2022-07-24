@@ -12,7 +12,10 @@ export function bbCodesProcess(value: string) {
 		.replace(/\[p\](.*?)\[\/p\]/gim, "<em>$1</em>")
 		.replace(/\\([\n,;])/gim, "$1")
 		.replace(/⌈/gim, "")
-		.replace(/\[ref=?\](.*?)\[\/ref\]/gim, "<a href='/search?r=$1'>$1</a>")
+		.replace(
+			/\[ref=?\](.*?)\[\/ref\]/gim,
+			"<a href='/search?request=$1'>$1</a>",
+		)
 		.replace(
 			/\[ref=([a-zA-Z\d]{4,7})\](.*?)\[\/ref\]/gim,
 			"<a href='/dict/jp/$1'>$2</a>",
