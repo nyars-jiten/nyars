@@ -177,7 +177,7 @@
 	function confStyles() {
 		if (props.article.isReviewed) return [];
 
-		return ["border-l-2", "border-l-orange-500"];
+		return ["border-l-2", "border-l-orange-500", "dark:border-l-orange-500"];
 	}
 
 	// function capitalizeWords(string: string) {
