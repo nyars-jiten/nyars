@@ -1,11 +1,11 @@
 <template>
-	<header class="sticky top-0 z-50 bg-white shadow-md dark:bg-zinc-800">
+	<header class="sticky top-0 z-50 bg-white shadow-md dark:bg-gray-800">
 		<div
 			class="container mx-auto flex max-w-4xl flex-row flex-wrap items-center justify-between py-5"
 		>
 			<div class="flex">
 				<div
-					class="mr-8 border-r border-gray-100 py-1 pr-8 dark:border-zinc-600"
+					class="mr-8 border-r border-gray-100 py-1 pr-8 dark:border-gray-600"
 				>
 					<RouterLink
 						class="flex h-10 w-10 items-center rounded-full bg-cover font-medium"
@@ -18,7 +18,7 @@
 				</div>
 
 				<nav
-					class="flex flex-wrap items-center justify-center gap-7 text-base dark:text-zinc-300 [&>*]:duration-150 [&>*]:ease-in-out"
+					class="flex flex-wrap items-center justify-center gap-7 text-base dark:text-gray-300 [&>*]:duration-150 [&>*]:ease-in-out"
 				>
 					<RouterLink
 						:to="{ name: RoutesNames.SearchHome }"

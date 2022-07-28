@@ -1,6 +1,6 @@
 <template>
 	<header
-		class="mb-2 flex items-start gap-4 border-b border-gray-100 pb-2 dark:border-zinc-700"
+		class="mb-2 flex items-start gap-4 border-b border-gray-100 pb-2 dark:border-gray-700"
 	>
 		<div class="grow">
 			<component
@@ -12,19 +12,19 @@
 				<div
 					v-for="(word, wordId) of article.entry.words"
 					:key="wordId"
-					class="font-header inline flex-1 text-2xl"
+					class="inline flex-1 font-header text-2xl"
 				>
 					<span
 						v-show="word.writings.length > 0"
-						class="before:text-gray-200 before:content-['【'] after:text-gray-200 after:content-['】'] dark:before:text-stone-500 dark:after:text-stone-500"
+						class="before:text-gray-200 before:content-['【'] after:text-gray-200 after:content-['】'] dark:before:text-gray-500 dark:after:text-gray-500"
 					>
 						<span
 							v-for="(w, writingId) of word.writings"
 							:key="`${w.value}-${writingId}`"
-							class="before:text-gray-200 after:text-gray-200 after:content-['・'] last:after:content-none"
+							class="before:text-gray-200 after:text-gray-200 after:content-['・'] last:after:content-none dark:after:text-gray-500"
 						>
 							{{ w.value }}
-
+							<!---->
 							<span
 								v-for="tag of w.tag?.values"
 								:key="tag"
@@ -40,7 +40,7 @@
 					<span
 						v-for="(r, readingId) of word.readings"
 						:key="readingId"
-						class="after:text-gray-200 after:content-['・'] last:after:content-none"
+						class="after:text-gray-200 after:content-['・'] last:after:content-none dark:after:text-gray-500"
 					>
 						{{ convert_to_kana(r.value) }}
 

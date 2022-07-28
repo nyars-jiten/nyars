@@ -29,6 +29,23 @@ export const ru = {
 		lat: "лат",
 	},
 
+	[MessagesNames.Radical]: "Ключ",
+	[MessagesNames.Ids]: "Композиция",
+	[MessagesNames.StrokeCount]: "Черты",
+	[MessagesNames.StandaloneMeaning]: "Самостоятельные значения",
+	[MessagesNames.ComposedMeanings]: "Составные значения",
+
+	[MessagesNames.KanjiReadingTagName]: {
+		chuu: { badge: "中", full: "Шаблон пояснения, надо заменить" },
+		kan: { badge: "漢", full: "Шаблон пояснения, надо заменить" },
+		tou: { badge: "唐", full: "Шаблон пояснения, надо заменить" },
+		go: { badge: "呉", full: "Шаблон пояснения, надо заменить" },
+		kanyo: { badge: "慣", full: "Шаблон пояснения, надо заменить" },
+		gai: { badge: "外", full: "Шаблон пояснения, надо заменить" },
+		shou: { badge: "小", full: "Шаблон пояснения, надо заменить" },
+		kou: { badge: "高", full: "Шаблон пояснения, надо заменить" },
+	},
+
 	[MessagesNames.ArticleTagName]: {
 		common: "common",
 		"jlpt-n5": "jlpt n5",

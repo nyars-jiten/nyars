@@ -1,6 +1,6 @@
 <template>
 	<article
-		class="select-text border border-gray-100 bg-white p-8 leading-loose shadow-md dark:border-zinc-700 dark:bg-zinc-800 md:rounded-md"
+		class="select-text border border-gray-100 bg-white p-8 leading-loose shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
 		:class="confStyles()"
 	>
 		<TheHeader :article="article" :standalone="standalone" />
@@ -10,7 +10,7 @@
 				<template v-for="(lang, langId) of mean.langMeanings" :key="langId">
 					<div
 						v-show="infoState && mean.pos.length > 0"
-						class="col-span-full flex items-start gap-2 border-b border-gray-100 px-2 pb-2 dark:border-zinc-700"
+						class="col-span-full flex items-start gap-2 border-b border-gray-100 px-2 pb-2 dark:border-gray-700"
 					>
 						<span
 							v-for="pos of mean.pos"
@@ -21,14 +21,14 @@
 						</span>
 					</div>
 
-					<div class="italic text-gray-400 dark:text-zinc-400">
+					<div class="italic text-gray-400 dark:text-gray-400">
 						{{ locale.t(`${MessagesNames.SearchShortLangName}.${lang.lang}`) }}
 					</div>
 
 					<div class="grid grid-cols-[auto_1fr] gap-x-2">
 						<template v-for="(sense, senseId) of lang.senses" :key="senseId">
 							<div
-								class="border-r border-dotted border-gray-100 pr-2 text-center dark:border-zinc-500"
+								class="border-r border-dotted border-gray-100 pr-2 text-center dark:border-gray-500"
 							>
 								<template v-if="lang.senses.length > 1">
 									{{ 1 + senseId }}
@@ -37,45 +37,41 @@
 
 							<div>
 								<span
-									v-show="sense.tags.some(e => e.type == 'Fld')"
+									v-show="
+										sense.tags.some(e => e.type == 'Fld' && e.values.length)
+									"
 									class="italic text-green-600"
 								>
-									{{
-										sense.tags
-											.filter(e => e.type == "Fld")
-											.map(e =>
-												e.values.map(v =>
-													locale.t(
-														`${
-															MessagesNames.ArticleTagName
-														}.${e.type.toLocaleLowerCase()}.${v}.short`,
-													),
-												),
-											)
-											.join(", ")
-									}}&#8203;
+									{{ senseBeforeTags(sense).join(", ") }}&#8203;
 								</span>
 
-								<!-- eslint-disable-next-line vue/no-v-html -->
-								<span v-html="bbCodesProcess(sense.value)" />
+								<!-- eslint-disable vue/no-v-html -->
+								<span
+									class="whitespace-pre-wrap"
+									v-html="bbCodesProcess(sense.value)"
+								/>
+								<!-- eslint-enable vue/no-v-html -->
 
 								<span
-									v-show="sense.tags.some(e => e.type != 'Fld')"
-									class="italic text-gray-400 dark:text-zinc-400"
+									v-show="
+										sense.tags.some(e => e.type != 'Fld' && e.values.length)
+									"
+									class="italic text-gray-400 dark:text-gray-400"
 								>
-									&#8203;({{ senseLastTags(sense).join(", ") }})
+									&#8203;({{ senseAfterTags(sense).join(", ") }})
 								</span>
 
 								<div
 									v-show="infoState"
-									class="ml-5 border-l border-gray-200 pl-2 text-gray-600 dark:border-zinc-500 dark:text-zinc-400"
+									class="ml-5 border-l border-gray-200 pl-2 text-gray-600 dark:border-gray-500 dark:text-gray-400"
 								>
 									<p
 										v-for="{ value, translation } of sense.examples"
 										:key="`${value}${translation}`"
 									>
 										{{ value }}
-										{{ translation }}
+										<!-- eslint-disable-next-line vue/no-v-html -->
+										<span v-html="bbCodesProcess(translation)" />
 									</p>
 								</div>
 
@@ -111,10 +107,10 @@
 
 		<div
 			v-if="!standalone"
-			class="mt-2 flex gap-2 border-t border-gray-100 pt-2 dark:border-zinc-700"
+			class="mt-2 flex gap-2 border-t border-gray-100 pt-2 dark:border-gray-700"
 		>
 			<p
-				class="inline-flex cursor-copy select-none items-center gap-2 rounded bg-gray-100 px-2 hover:opacity-50 dark:bg-zinc-700"
+				class="inline-flex cursor-copy select-none items-center gap-2 rounded bg-gray-100 px-2 hover:opacity-50 dark:bg-gray-700"
 				@click="copy"
 			>
 				{{ article.wid }}
@@ -125,7 +121,7 @@
 				<button
 					v-show="!infoState"
 					type="button"
-					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-50 dark:bg-zinc-700"
+					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-50 dark:bg-gray-700"
 					@click="toggleInfo"
 				>
 					{{ locale.t(MessagesNames.ShowMore) }}
@@ -135,7 +131,7 @@
 				<button
 					v-show="infoState"
 					type="button"
-					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-50 dark:bg-zinc-700"
+					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-50 dark:bg-gray-700"
 					@click="toggleInfo"
 				>
 					{{ locale.t(MessagesNames.ShowLess) }}
@@ -180,13 +176,24 @@
 		return ["border-l-2", "border-l-orange-500", "dark:border-l-orange-500"];
 	}
 
-	// function capitalizeWords(string: string) {
-	// 	return string.replace(/(?:^|\s)\S/g, function (a) {
-	// 		return a.toUpperCase();
-	// 	});
-	// }
+	function senseBeforeTags(sense: Sense) {
+		return [
+			sense.tags
+				.filter(e => e.type == "Fld")
+				.map(e =>
+					e.values.map(v =>
+						locale.t(
+							`${
+								MessagesNames.ArticleTagName
+							}.${e.type.toLocaleLowerCase()}.${v}.short`,
+						),
+					),
+				)
+				.filter(e => e.length > 0),
+		];
+	}
 
-	function senseLastTags(sense: Sense) {
+	function senseAfterTags(sense: Sense) {
 		return sense.tags
 			.filter(e => e.type != "Fld")
 			.map(e =>

@@ -10,6 +10,13 @@ const enum _Names {
 	SearchExamples,
 	SearchShortLangName,
 
+	Radical,
+	Ids,
+	StrokeCount,
+	StandaloneMeaning,
+	ComposedMeanings,
+
+	KanjiReadingTagName,
 	ArticleTagName,
 	ArticleAbbr,
 
@@ -40,6 +47,13 @@ export class MessagesNames {
 	static readonly SearchExamples = String(_Names.SearchExamples);
 	static readonly SearchShortLangName = String(_Names.SearchShortLangName);
 
+	static readonly Radical = String(_Names.Radical);
+	static readonly Ids = String(_Names.Ids);
+	static readonly StrokeCount = String(_Names.StrokeCount);
+	static readonly StandaloneMeaning = String(_Names.StandaloneMeaning);
+	static readonly ComposedMeanings = String(_Names.ComposedMeanings);
+
+	static readonly KanjiReadingTagName = String(_Names.KanjiReadingTagName);
 	static readonly ArticleTagName = String(_Names.ArticleTagName);
 	static readonly ArticleAbbr = String(_Names.ArticleAbbr);
 

@@ -3,4 +3,5 @@ export const enum RoutesNames {
 	SearchResults = "search",
 	DictJpArticle = "jp",
 	Edits = "edits",
+	Kanji = "kanji",
 }

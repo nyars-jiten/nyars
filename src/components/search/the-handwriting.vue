@@ -1,6 +1,6 @@
 <template>
 	<section
-		class="z-10 flex gap-2 border bg-white p-2 dark:border-zinc-700 dark:bg-zinc-800 md:rounded-md"
+		class="z-10 flex gap-2 border bg-white p-2 dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
 	>
 		<div
 			v-show="proposals.length"
@@ -10,7 +10,7 @@
 				v-for="request of proposals"
 				:key="request"
 				type="button"
-				class="basis-2/4 rounded bg-neutral-100 px-2 hover:opacity-50 dark:bg-zinc-700"
+				class="basis-2/4 rounded bg-neutral-100 px-2 hover:opacity-50 dark:bg-gray-700"
 				@click="onSelect(request)"
 			>
 				{{ request }}
@@ -20,7 +20,7 @@
 		<div class="flex flex-col gap-2">
 			<canvas
 				ref="element"
-				class="h-80 w-80 cursor-crosshair border border-dotted bg-gray-50 dark:border-zinc-700 dark:bg-zinc-900"
+				class="h-80 w-80 cursor-crosshair border border-dotted bg-gray-50 dark:border-gray-700 dark:bg-gray-900"
 				@mousemove="hw.onDraw"
 				@mousedown="hw.onStart"
 				@mouseup="onEnd"
@@ -31,7 +31,7 @@
 				<input
 					v-show="hw.maxLineWidth > 0"
 					v-model="lineWidth"
-					class="h-2 w-full appearance-none rounded bg-gray-100 dark:bg-zinc-600"
+					class="h-2 w-full appearance-none rounded bg-gray-100 dark:bg-gray-600"
 					type="range"
 					:step="hw.step"
 					:min="hw.minLineWidth"

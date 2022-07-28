@@ -1,7 +1,7 @@
 <template>
 	<button
 		type="button"
-		class="select-none rounded-md bg-neutral-100 p-1.5 capitalize text-gray-500 duration-150 ease-in-out hover:opacity-50 dark:bg-zinc-700 dark:text-zinc-300"
+		class="select-none rounded-md bg-neutral-100 p-1.5 capitalize text-gray-500 duration-150 ease-in-out hover:opacity-50 dark:bg-gray-700 dark:text-gray-300"
 		@click="toggleTheme"
 	>
 		<span v-if="userTheme === 'dark'">

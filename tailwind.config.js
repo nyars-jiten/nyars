@@ -1,4 +1,4 @@
-const accent = "#6aa3ab";
+const colors = require("tailwindcss/colors");
 
 const tagJlptN1 = "#ea2a92";
 const tagJlptN2 = "#f99717";
@@ -6,6 +6,15 @@ const tagJlptN3 = "#84bf26";
 const tagJlptN4 = "#459f94";
 const tagJlptN5 = "#3273bb";
 const tagCommon = "gray";
+
+const tagChuu = colors.amber;
+const tagShou = colors.teal;
+const tagKou = colors.orange;
+const tagKan = colors.slate;
+const tagTou = colors.slate;
+const tagGo = colors.slate;
+const tagKanyo = colors.slate;
+const tagGai = colors.blue;
 
 const statusVariant1 = "#1d90b3"; // New
 const statusVariant2 = "#b31d1d"; // Declined
@@ -40,12 +49,22 @@ module.exports = {
 					900: "#143652",
 				},
 
+				gray: colors.zinc,
+
 				"tag-common": tagCommon,
 				"tag-jlpt-n5": tagJlptN5,
 				"tag-jlpt-n4": tagJlptN4,
 				"tag-jlpt-n3": tagJlptN3,
 				"tag-jlpt-n2": tagJlptN2,
 				"tag-jlpt-n1": tagJlptN1,
+				"tag-chuu": tagChuu,
+				"tag-shou": tagShou,
+				"tag-kou": tagKou,
+				"tag-kan": tagKan,
+				"tag-tou": tagTou,
+				"tag-go": tagGo,
+				"tag-kanyo": tagKanyo,
+				"tag-gai": tagGai,
 
 				"status-variant-1": statusVariant1,
 				"status-variant-2": statusVariant2,

@@ -1,7 +1,7 @@
 <template>
 	<section
 		v-show="grammars.length"
-		class="select-text rounded border border-gray-100 bg-white px-10 py-5 shadow-md dark:border-zinc-700 dark:bg-zinc-800"
+		class="select-text rounded border border-gray-100 bg-white px-10 py-5 shadow-md dark:border-gray-700 dark:bg-gray-800"
 	>
 		<div class="flex flex-wrap gap-2 underline underline-offset-4">
 			<button
