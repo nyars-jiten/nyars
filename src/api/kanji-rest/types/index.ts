@@ -3,5 +3,8 @@ export * from "./general";
 export * from "./internal-entry-kanji";
 export * from "./kanji-image";
 export * from "./kanji-index";
+export * from "./kanji-index-type";
+export * from "./kanji-word";
 export * from "./meaning";
 export * from "./reading";
+export * from "./readings";

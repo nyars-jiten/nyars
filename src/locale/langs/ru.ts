@@ -1,5 +1,6 @@
 import { StatusVariant } from "@/api/edits-rest/types/status-variant";
 import { TypeVariant } from "@/api/edits-rest/types/type-variant";
+import { KanjiIndexType } from "@/api/kanji-rest/types/kanji-index-type";
 import { MessagesNames } from "../messages-names";
 
 import rinf from "./tags/rinf";
@@ -32,8 +33,18 @@ export const ru = {
 	[MessagesNames.Radical]: "Ключ",
 	[MessagesNames.Ids]: "Композиция",
 	[MessagesNames.StrokeCount]: "Черты",
-	[MessagesNames.StandaloneMeaning]: "Самостоятельные значения",
+	[MessagesNames.Frequency]: "Частотность",
+	[MessagesNames.StandaloneMeanings]: "Самостоятельные значения",
 	[MessagesNames.ComposedMeanings]: "Составные значения",
+	[MessagesNames.KanbunMeanings]: "Камбун",
+	[MessagesNames.Note]: "Примечание",
+
+	[MessagesNames.KanjiReadingTypeName]: {
+		onyomi: { badge: "音", full: "Онъёми" },
+		kunyomi: { badge: "訓", full: "Кунъёми" },
+		nanori: { badge: "名", full: "Нанори" },
+		other: { badge: "他", full: "Прочие варианты чтения" },
+	},
 
 	[MessagesNames.KanjiReadingTagName]: {
 		chuu: { badge: "中", full: "Шаблон пояснения, надо заменить" },
@@ -44,6 +55,18 @@ export const ru = {
 		gai: { badge: "外", full: "Шаблон пояснения, надо заменить" },
 		shou: { badge: "小", full: "Шаблон пояснения, надо заменить" },
 		kou: { badge: "高", full: "Шаблон пояснения, надо заменить" },
+	},
+
+	[MessagesNames.Index]: "Индекс",
+	[MessagesNames.Source]: "Источник",
+	[MessagesNames.KanjiIndexTypeName]: {
+		[KanjiIndexType.Dictionary]: "Индексы в словарях",
+		[KanjiIndexType.Classification]: "Регистры",
+		[KanjiIndexType.Codepoint]: "Кодировки",
+	},
+
+	[MessagesNames.IndexSourceAbbr]: {
+		ucs: "Универсальный набор символов (Unicode)",
 	},
 
 	[MessagesNames.ArticleTagName]: {

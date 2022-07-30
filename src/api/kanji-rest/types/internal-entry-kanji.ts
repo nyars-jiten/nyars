@@ -3,15 +3,14 @@ import type { KanjiForm } from "./kanji-form";
 import type { KanjiIndex } from "./kanji-index";
 import { KanjiWord } from "./kanji-word";
 import type { Meaning } from "./meaning";
-import type { Reading } from "./reading";
+import type { Readings } from "./readings";
 
 export type InternalEntryKanji = {
 	general: General;
+	readings: Readings;
 	forms: KanjiForm[];
-	standaloneMeaning: KanjiWord[];
+	standaloneMeanings: KanjiWord[];
 	composedMeanings: Meaning[];
+	kanbunMeanings: Meaning[];
 	indices: KanjiIndex[];
-	onyomi: Reading[];
-	kunyomi: Reading[];
-	nanori: Reading[];
 };

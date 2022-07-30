@@ -33,6 +33,7 @@ export const routes: Readonly<RouteRecordRaw[]> = [
 				name: RoutesNames.Kanji,
 				path: `/${RoutesNames.Kanji}/:kid?`,
 				component: () => import("@/pages/dict/kanji/the-article.vue"),
+				props: { standalone: true },
 			},
 		],
 	},

@@ -13,10 +13,18 @@ const enum _Names {
 	Radical,
 	Ids,
 	StrokeCount,
-	StandaloneMeaning,
+	Frequency,
+	StandaloneMeanings,
 	ComposedMeanings,
+	KanbunMeanings,
+	Note,
 
+	KanjiReadingTypeName,
 	KanjiReadingTagName,
+	Index,
+	Source,
+	KanjiIndexTypeName,
+	IndexSourceAbbr,
 	ArticleTagName,
 	ArticleAbbr,
 
@@ -50,10 +58,18 @@ export class MessagesNames {
 	static readonly Radical = String(_Names.Radical);
 	static readonly Ids = String(_Names.Ids);
 	static readonly StrokeCount = String(_Names.StrokeCount);
-	static readonly StandaloneMeaning = String(_Names.StandaloneMeaning);
+	static readonly Frequency = String(_Names.Frequency);
+	static readonly StandaloneMeanings = String(_Names.StandaloneMeanings);
 	static readonly ComposedMeanings = String(_Names.ComposedMeanings);
+	static readonly KanbunMeanings = String(_Names.KanbunMeanings);
+	static readonly Note = String(_Names.Note);
 
+	static readonly KanjiReadingTypeName = String(_Names.KanjiReadingTypeName);
 	static readonly KanjiReadingTagName = String(_Names.KanjiReadingTagName);
+	static readonly Index = String(_Names.Index);
+	static readonly Source = String(_Names.Source);
+	static readonly KanjiIndexTypeName = String(_Names.KanjiIndexTypeName);
+	static readonly IndexSourceAbbr = String(_Names.IndexSourceAbbr);
 	static readonly ArticleTagName = String(_Names.ArticleTagName);
 	static readonly ArticleAbbr = String(_Names.ArticleAbbr);
 

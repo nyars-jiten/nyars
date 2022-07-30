@@ -7,7 +7,8 @@ export type General = {
 	radical: string;
 	shortMeans: string;
 	strokeCount: number;
-	jis: string;
+	jis: number;
 	note: string;
+	freq: number;
 	tags: string[];
 };

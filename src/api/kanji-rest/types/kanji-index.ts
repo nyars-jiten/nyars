@@ -4,4 +4,5 @@ export type KanjiIndex = {
 	type: KanjiIndexType;
 	source: string;
 	value: string;
+	note: string;
 };
