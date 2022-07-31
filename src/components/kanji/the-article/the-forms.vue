@@ -32,7 +32,7 @@
 				<div class="flex flex-col gap-2">
 					<span
 						v-show="form.type !== null"
-						class="border-tag-jlpt-n4 text-tag-jlpt-n4 select-none whitespace-nowrap rounded-md border px-2 text-sm hover:opacity-50"
+						class="select-none whitespace-nowrap rounded-md border border-tag-jlpt-n4 px-2 text-sm text-tag-jlpt-n4 hover:opacity-50"
 					>
 						{{
 							locale.t(`${MessagesNames.KanjiFormTypeName}.${form.type}.short`)
@@ -56,7 +56,7 @@
 
 	type Props = { forms: KanjiForm[] };
 
-	const props = defineProps<Props>();
+	defineProps<Props>();
 
 	const locale = useI18n();
 

@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col gap-2 leading-loose">
-		<div class="border-accent-500 text-accent-500 select-none border-l-2 px-3">
+		<div class="select-none border-l-2 border-accent-500 px-3 text-accent-500">
 			{{ title }}
 		</div>
 		<div class="flex flex-col gap-y-1">
@@ -25,7 +25,6 @@
 <script setup lang="ts">
 	import { bbCodesProcess } from "@/core/text/bb-code";
 	import { convert_to_kana } from "@nyars-jiten/jp-transcript";
-	import { useI18n } from "vue-i18n";
 	import type { RouteLocationRaw } from "vue-router";
 
 	import { RoutesNames } from "@/router/routes-names";
@@ -35,8 +34,6 @@
 	type Props = { words: KanjiWord[]; title: string };
 
 	defineProps<Props>();
-
-	const locale = useI18n();
 
 	function location(wid: string): RouteLocationRaw {
 		if (!wid || wid.length < 1) {

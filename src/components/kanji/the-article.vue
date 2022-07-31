@@ -4,11 +4,13 @@
 	>
 		<div class="flex flex-col gap-8">
 			<div
-				class="group min-h-44 relative flex w-auto cursor-copy flex-col justify-center gap-2 rounded-md p-2 text-center hover:bg-gray-100 dark:hover:bg-gray-700"
+				class="group relative flex min-h-[11rem] w-auto cursor-copy flex-col justify-center gap-2 rounded-md p-2 text-center hover:bg-gray-100 dark:hover:bg-gray-700"
 				@click="copyContent"
 			>
 				<span class="text-9xl">{{ article.entry.general.literal }}</span>
-				<div class="break-words">{{ article.entry.general.shortMeans }}</div>
+				<div class="break-words">
+					{{ article.entry.general.shortMeans }}
+				</div>
 				<ContentCopyIcon
 					:size="16"
 					class="invisible absolute right-2 bottom-2 opacity-50 group-hover:visible"

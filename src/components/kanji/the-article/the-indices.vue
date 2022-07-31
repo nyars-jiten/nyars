@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<template v-for="(index, indexId) of indicesByTypes">
+		<template v-for="(index, indexId) of indicesByTypes" :key="indexId">
 			<Disclosure
 				v-slot="{ open }"
 				as="div"
@@ -33,6 +33,7 @@
 						<tbody>
 							<tr
 								v-for="(entry, entryId) of index"
+								:key="entryId"
 								class="border-b bg-white last:border-none dark:border-gray-700 dark:bg-gray-800"
 							>
 								<td class="p-3">{{ entry.value }}</td>

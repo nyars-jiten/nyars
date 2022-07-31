@@ -41,7 +41,7 @@
 
 	type Props = { images: KanjiImage[] };
 
-	const props = defineProps<Props>();
+	defineProps<Props>();
 
 	const locale = useI18n();
 
