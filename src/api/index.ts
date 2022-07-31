@@ -41,10 +41,7 @@ export const api = new (class extends BasicRest {
 
 	dictionaryKanjiEntries(props: { kid: string }) {
 		return this.extractData(
-			//this.#endpoint.get<EntryKanji>(`dictionary/kanji/entries/${props.kid}`),
-			this.#endpoint.get<EntryKanji>(
-				`https://62e093e6fa8ed271c484e539.mockapi.io/api/kanji/${props.kid}`,
-			),
+			this.#endpoint.get<EntryKanji>(`dictionary/kanji/entries/${props.kid}`),
 		);
 	}
 

@@ -14,11 +14,16 @@ const enum _Names {
 	Ids,
 	StrokeCount,
 	Frequency,
+	Unicode,
+	JIS,
+	KanjiForm,
+	KanjiFormTypeName,
+	KanjiStyle,
+	KanjiStyleName,
 	StandaloneMeanings,
 	ComposedMeanings,
 	KanbunMeanings,
 	Note,
-
 	KanjiReadingTypeName,
 	KanjiReadingTagName,
 	Index,
@@ -59,11 +64,16 @@ export class MessagesNames {
 	static readonly Ids = String(_Names.Ids);
 	static readonly StrokeCount = String(_Names.StrokeCount);
 	static readonly Frequency = String(_Names.Frequency);
+	static readonly Unicode = String(_Names.Unicode);
+	static readonly JIS = String(_Names.JIS);
+	static readonly KanjiForm = String(_Names.KanjiForm);
+	static readonly KanjiFormTypeName = String(_Names.KanjiFormTypeName);
+	static readonly KanjiStyle = String(_Names.KanjiStyle);
+	static readonly KanjiStyleName = String(_Names.KanjiStyleName);
 	static readonly StandaloneMeanings = String(_Names.StandaloneMeanings);
 	static readonly ComposedMeanings = String(_Names.ComposedMeanings);
 	static readonly KanbunMeanings = String(_Names.KanbunMeanings);
 	static readonly Note = String(_Names.Note);
-
 	static readonly KanjiReadingTypeName = String(_Names.KanjiReadingTypeName);
 	static readonly KanjiReadingTagName = String(_Names.KanjiReadingTagName);
 	static readonly Index = String(_Names.Index);

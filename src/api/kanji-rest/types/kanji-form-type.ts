@@ -1,5 +1,5 @@
 export const enum KanjiFormType {
-	Kyuujitai = 1,
+	Kyuujitai,
 	Shinjitai,
 	Hyoujunjitai,
 	Kyoyoujitai,

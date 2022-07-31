@@ -7,13 +7,14 @@ const tagJlptN4 = "#459f94";
 const tagJlptN5 = "#3273bb";
 const tagCommon = "gray";
 
-const tagChuu = colors.amber;
 const tagShou = colors.teal;
+const tagChuu = colors.amber;
 const tagKou = colors.orange;
-const tagKan = colors.slate;
-const tagTou = colors.slate;
-const tagGo = colors.slate;
-const tagKanyo = colors.slate;
+const tagKanon = colors.slate;
+const tagTouon = colors.slate;
+const tagGoon = colors.slate;
+const tagkanyoon = colors.slate;
+const tagSouon = colors.slate;
 const tagGai = colors.blue;
 
 const statusVariant1 = "#1d90b3"; // New
@@ -57,13 +58,13 @@ module.exports = {
 				"tag-jlpt-n3": tagJlptN3,
 				"tag-jlpt-n2": tagJlptN2,
 				"tag-jlpt-n1": tagJlptN1,
-				"tag-chuu": tagChuu,
 				"tag-shou": tagShou,
+				"tag-chuu": tagChuu,
 				"tag-kou": tagKou,
-				"tag-kan": tagKan,
-				"tag-tou": tagTou,
-				"tag-go": tagGo,
-				"tag-kanyo": tagKanyo,
+				"tag-kanon": tagKanon,
+				"tag-touon": tagTouon,
+				"tag-goon": tagGoon,
+				"tag-kanyoon": tagkanyoon,
 				"tag-gai": tagGai,
 
 				"status-variant-1": statusVariant1,

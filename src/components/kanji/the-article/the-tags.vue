@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-wrap items-start gap-2">
+	<div v-show="tags.length > 0" class="flex flex-wrap items-start gap-2">
 		<span
 			v-for="(tag, tagId) of tags"
 			:key="tagId"

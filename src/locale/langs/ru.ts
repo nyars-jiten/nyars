@@ -1,5 +1,7 @@
 import { StatusVariant } from "@/api/edits-rest/types/status-variant";
 import { TypeVariant } from "@/api/edits-rest/types/type-variant";
+import { KanjiFormType } from "@/api/kanji-rest/types";
+import { KanjiImageStyle } from "@/api/kanji-rest/types/kanji-image-style";
 import { KanjiIndexType } from "@/api/kanji-rest/types/kanji-index-type";
 import { MessagesNames } from "../messages-names";
 
@@ -34,29 +36,54 @@ export const ru = {
 	[MessagesNames.Ids]: "Композиция",
 	[MessagesNames.StrokeCount]: "Черты",
 	[MessagesNames.Frequency]: "Частотность",
+	[MessagesNames.Unicode]: "Unicode",
+	[MessagesNames.JIS]: "JIS",
+	[MessagesNames.KanjiForm]: "Иные формы",
+	[MessagesNames.KanjiFormTypeName]: {
+		[KanjiFormType.Kyuujitai]: { short: "", full: "" },
+		[KanjiFormType.Shinjitai]: { short: "", full: "" },
+		[KanjiFormType.Hyoujunjitai]: { short: "", full: "" },
+		[KanjiFormType.Kyoyoujitai]: { short: "", full: "" },
+		[KanjiFormType.Itaiji]: { short: "", full: "" },
+		[KanjiFormType.Rare]: { short: "", full: "" },
+		[KanjiFormType.Popular]: { short: "", full: "" },
+		[KanjiFormType.Japanese]: { short: "", full: "" },
+		[KanjiFormType.Nonjapanese]: { short: "", full: "" },
+		[KanjiFormType.Kankan]: { short: "", full: "" },
+		[KanjiFormType.Inhyou]: { short: "", full: "" },
+		[KanjiFormType.Seiji]: { short: "", full: "" },
+		[KanjiFormType.Ryakuji]: { short: "", full: "" },
+	},
 	[MessagesNames.StandaloneMeanings]: "Самостоятельные значения",
 	[MessagesNames.ComposedMeanings]: "Составные значения",
 	[MessagesNames.KanbunMeanings]: "Камбун",
 	[MessagesNames.Note]: "Примечание",
-
+	[MessagesNames.KanjiStyle]: "Стили написания",
+	[MessagesNames.KanjiStyleName]: {
+		[KanjiImageStyle.Mincho]: "",
+		[KanjiImageStyle.Gothic]: "",
+		[KanjiImageStyle.Kaisyo]: "",
+		[KanjiImageStyle.Gyousyo]: "",
+		[KanjiImageStyle.Sousyo]: "",
+		[KanjiImageStyle.Other]: "",
+	},
 	[MessagesNames.KanjiReadingTypeName]: {
 		onyomi: { badge: "音", full: "Онъёми" },
 		kunyomi: { badge: "訓", full: "Кунъёми" },
 		nanori: { badge: "名", full: "Нанори" },
 		other: { badge: "他", full: "Прочие варианты чтения" },
 	},
-
 	[MessagesNames.KanjiReadingTagName]: {
-		chuu: { badge: "中", full: "Шаблон пояснения, надо заменить" },
-		kan: { badge: "漢", full: "Шаблон пояснения, надо заменить" },
-		tou: { badge: "唐", full: "Шаблон пояснения, надо заменить" },
-		go: { badge: "呉", full: "Шаблон пояснения, надо заменить" },
-		kanyo: { badge: "慣", full: "Шаблон пояснения, надо заменить" },
-		gai: { badge: "外", full: "Шаблон пояснения, надо заменить" },
-		shou: { badge: "小", full: "Шаблон пояснения, надо заменить" },
-		kou: { badge: "高", full: "Шаблон пояснения, надо заменить" },
+		shou: { badge: "小", full: "" },
+		chuu: { badge: "中", full: "" },
+		kou: { badge: "高", full: "" },
+		kanon: { badge: "漢", full: "" },
+		touon: { badge: "唐", full: "" },
+		goon: { badge: "呉", full: "" },
+		kanyoon: { badge: "慣", full: "" },
+		souon: { badge: "宋", full: "" },
+		gai: { badge: "外", full: "" },
 	},
-
 	[MessagesNames.Index]: "Индекс",
 	[MessagesNames.Source]: "Источник",
 	[MessagesNames.KanjiIndexTypeName]: {
@@ -64,7 +91,6 @@ export const ru = {
 		[KanjiIndexType.Classification]: "Регистры",
 		[KanjiIndexType.Codepoint]: "Кодировки",
 	},
-
 	[MessagesNames.IndexSourceAbbr]: {
 		ucs: "Универсальный набор символов (Unicode)",
 	},

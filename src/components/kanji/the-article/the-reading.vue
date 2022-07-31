@@ -11,19 +11,28 @@
 			<div
 				v-for="(reading, readingId) of readings"
 				:key="readingId"
+				:class="[reading.tags.includes('gai') ? `text-gray-400` : '']"
 				class="after:ml-2 after:text-gray-200 after:content-['・'] last:after:content-none dark:after:text-gray-500"
 			>
-				<span v-show="reading.tags.length > 0" class="mx-1">
-					<span
-						v-for="(tag, tagId) of reading.tags"
-						:key="tagId"
-						class="select-none rounded-tl-md border-t border-l px-1 py-0.5"
-						:class="[`text-tag-${tag}-500`, `border-tag-${tag}-500`]"
-					>
-						{{ locale.t(`${MessagesNames.KanjiReadingTagName}.${tag}.badge`) }}
-					</span>
+				<span
+					v-show="reading.tags.length > 0 && !reading.tags.includes('gai')"
+					class="mx-1"
+				>
+					<template v-for="(tag, tagId) of reading.tags" :key="tagId">
+						<span
+							v-show="tag != 'gai'"
+							class="select-none rounded-tl-md border-t border-l px-1 py-0.5 empty:hidden"
+							:class="[`text-tag-${tag}-500`, `border-tag-${tag}-500`]"
+						>
+							{{
+								locale.t(`${MessagesNames.KanjiReadingTagName}.${tag}.badge`)
+							}}
+						</span>
+					</template>
 				</span>
-				<span class="ml-1">{{ convert_to_kana(reading.value) }}</span>
+				<span class="ml-1">
+					{{ convert_to_kana(reading.value) }}
+				</span>
 			</div>
 		</div>
 	</div>

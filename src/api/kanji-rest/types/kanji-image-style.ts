@@ -1,5 +1,5 @@
 export const enum KanjiImageStyle {
-	Mincho = 1,
+	Mincho,
 	Gothic,
 	Kaisyo,
 	Gyousyo,
