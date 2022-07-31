@@ -20,11 +20,11 @@
 			<div
 				class="flex flex-col gap-2 rounded-md bg-neutral-100 py-2 px-3 dark:bg-gray-700"
 			>
-				<p v-show="article.entry.general.radical">
+				<p v-show="article.radical.literal">
 					<span class="select-none text-sm text-gray-400">
 						{{ locale.t(MessagesNames.Radical) }}
 					</span>
-					<span class="ml-2">{{ article.entry.general.radical }}</span>
+					<span class="ml-2 font-medium">{{ article.radical.literal }}</span>
 				</p>
 				<p v-show="article.entry.general.ids">
 					<span class="select-none text-sm text-gray-400">
