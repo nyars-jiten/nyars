@@ -4,19 +4,19 @@
 	>
 		<span
 			class="whitespace-pre-wrap"
-			v-text="locale.tm(MessagesNames.SearchInfoPre)"
+			v-text="locale.t(MessagesNames.SearchInfoPre)"
 		/>
 		<!-- eslint-disable vue/no-v-html -->
 		<div
 			v-for="(info, infoId) in locale.tm(MessagesNames.SearchExamples)"
 			:key="infoId"
 		>
-			👉 <span v-html="bbCodesProcess(info)" />
+			👉 <span v-html="bbCodesProcess(info as string)" />
 		</div>
 
 		<span
 			class="whitespace-pre-wrap"
-			v-html="locale.tm(MessagesNames.SearchInfoPost)"
+			v-html="locale.t(MessagesNames.SearchInfoPost)"
 		/>
 		<!-- eslint-enable vue/no-v-html -->
 	</section>
