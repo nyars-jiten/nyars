@@ -83,7 +83,7 @@
 	import { MessagesNames } from "@/locale/messages-names";
 
 	import ShortArticle from "@/components/edits/short-article.vue";
-	import TheArticle from "@/components/search/the-article.vue";
+	import TheArticle from "@/components/search/jp/the-article.vue";
 	import MinusIcon from "vue-material-design-icons/Minus.vue";
 	import PlusIcon from "vue-material-design-icons/Plus.vue";
 

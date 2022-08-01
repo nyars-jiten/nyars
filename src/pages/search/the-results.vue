@@ -27,8 +27,8 @@
 <script setup lang="ts">
 	import { useSearch } from "@/stores/search";
 
-	import TheArticle from "@/components/search/the-article.vue";
-	import TheGrammar from "@/components/search/the-grammar.vue";
+	import TheArticle from "@/components/search/jp/the-article.vue";
+	import TheGrammar from "@/components/search/jp/the-grammar.vue";
 
 	const store = useSearch();
 </script>

@@ -9,7 +9,7 @@
 
 	import { useRoute } from "vue-router";
 
-	import TheArticle from "@/components/kanji/the-article.vue";
+	import TheArticle from "@/components/search/kanji/the-article.vue";
 
 	type Props = { standalone: boolean };
 
