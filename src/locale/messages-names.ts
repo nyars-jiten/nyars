@@ -46,6 +46,7 @@ const enum _Names {
 
 	ShowMore,
 	ShowLess,
+	CopyLink,
 }
 
 export class MessagesNames {
@@ -96,4 +97,5 @@ export class MessagesNames {
 
 	static readonly ShowMore = String(_Names.ShowMore);
 	static readonly ShowLess = String(_Names.ShowLess);
+	static readonly CopyLink = String(_Names.CopyLink);
 }

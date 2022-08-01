@@ -229,7 +229,7 @@
 	async function copy(e: MouseEvent) {
 		const { target } = e;
 		if (target instanceof HTMLElement) {
-			await navigator.clipboard.writeText(`${url}jp/${target.innerText}`);
+			await navigator.clipboard.writeText(`${url}/jp/${target.innerText}`);
 		}
 	}
 </script>

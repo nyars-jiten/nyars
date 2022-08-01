@@ -1,130 +1,156 @@
 <template>
 	<article
-		class="grid select-text grid-cols-1 gap-8 border border-gray-100 bg-white p-8 leading-relaxed shadow-md dark:border-gray-700 dark:bg-gray-800 md:grid-cols-[12rem_1fr] md:rounded-md"
+		class="border border-gray-100 bg-white p-8 leading-relaxed shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
+		:class="confStyles()"
 	>
-		<div class="flex flex-col gap-8">
-			<div
-				class="group relative flex min-h-[11rem] w-auto cursor-copy flex-col justify-center gap-2 rounded-md p-2 text-center hover:bg-gray-100 dark:hover:bg-gray-700"
-				@click="copyContent"
-			>
-				<span class="text-9xl">{{ article.entry.general.literal }}</span>
-				<div class="break-words">
-					{{ article.entry.general.shortMeans }}
-				</div>
-				<ContentCopyIcon
-					:size="16"
-					class="invisible absolute right-2 bottom-2 opacity-50 group-hover:visible"
-				/>
-			</div>
-
-			<div
-				class="flex flex-col gap-2 rounded-md bg-neutral-100 py-2 px-3 dark:bg-gray-700"
-			>
-				<p v-show="article.radical.literal">
-					<span class="select-none text-sm text-gray-400">
-						{{ locale.t(MessagesNames.Radical) }}
-					</span>
-					<span class="ml-2 font-medium">{{ article.radical.literal }}</span>
-				</p>
-				<p v-show="article.entry.general.ids">
-					<span class="select-none text-sm text-gray-400">
-						{{ locale.t(MessagesNames.Ids) }}
-					</span>
-					<span class="ml-2">{{ article.entry.general.ids }}</span>
-				</p>
-				<p v-show="article.entry.general.strokeCount">
-					<span class="select-none text-sm text-gray-400">
-						{{ locale.t(MessagesNames.StrokeCount) }}
-					</span>
-					<span class="ml-2">{{ article.entry.general.strokeCount }}</span>
-				</p>
-				<p v-show="article.entry.general.freq">
-					<span class="select-none text-sm text-gray-400">
-						{{ locale.t(MessagesNames.Frequency) }}
-					</span>
-					<span class="ml-2">{{ article.entry.general.freq }}</span>
-				</p>
-			</div>
-
-			<div class="flex flex-col gap-2 rounded-md">
-				<p>
-					<span class="select-none text-sm text-gray-400 dark:text-gray-400">
-						{{ locale.t(MessagesNames.Unicode) }}
-					</span>
-					<span class="ml-2">{{
-						article.entry.general.literal.length == 1 ? literalUnicode : "-"
-					}}</span>
-				</p>
-				<p v-show="article.entry.general.jis">
-					<span class="select-none text-sm text-gray-400 dark:text-gray-400">
-						{{ locale.t(MessagesNames.JIS) }}
-					</span>
-					<span class="ml-2">第{{ article.entry.general.jis }}水準</span>
-				</p>
-			</div>
-
-			<TheForms :forms="article.entry.forms" />
-
-			<TheImages :images="article.entry.general.images" />
-		</div>
-
-		<div class="flex flex-col gap-8">
-			<TheTags :tags="article.entry.general.tags" />
-
-			<div
-				v-show="article.entry.general.tags.length > 0"
-				class="flex flex-col gap-4"
-			>
-				<template
-					v-for="(reading, readingType) of article.entry.readings"
-					:key="readingType"
+		<div class="grid select-text grid-cols-1 gap-8 md:grid-cols-[12rem_1fr]">
+			<div class="flex flex-col gap-8">
+				<component
+					:is="standalone ? 'div' : 'RouterLink'"
+					:class="[
+						standalone
+							? 'cursor-copy rounded-md hover:bg-gray-100 dark:hover:bg-gray-700'
+							: 'hover:opacity-50',
+					]"
+					:to="{
+						name: RoutesNames.DictKanjiArticle,
+						params: { kid: article.kid },
+					}"
+					class="group relative flex min-h-[11rem] w-auto flex-col justify-center gap-2 p-2 text-center"
 				>
-					<TheReading
-						v-show="
-							(standalone || readingType != 'other') && reading.length > 0
-						"
-						:readings="reading"
-						:type="readingType"
-					/>
-				</template>
-			</div>
+					<div>
+						<span class="text-9xl">{{ article.entry.general.literal }}</span>
+						<div class="break-words">
+							{{ article.entry.general.shortMeans }}
+						</div>
+						<ContentCopyIcon
+							v-if="standalone"
+							:size="16"
+							class="invisible absolute right-2 bottom-2 opacity-50 group-hover:visible"
+						/>
+					</div>
+				</component>
 
-			<div
-				v-show="article.entry.general.note"
-				class="flex flex-col gap-2 rounded-md bg-neutral-100 py-2 px-3 dark:bg-gray-700"
-			>
-				<span class="select-none text-sm text-gray-400">{{
-					locale.t(MessagesNames.Note)
-				}}</span>
-				<p v-show="article.entry.general.ids">
-					{{ article.entry.general.note }}
-				</p>
+				<div
+					v-if="standalone"
+					class="flex flex-col gap-2 rounded-md bg-neutral-100 py-2 px-3 dark:bg-gray-700"
+				>
+					<p v-if="article.radical.literal">
+						<span class="select-none text-sm text-gray-400">
+							{{ locale.t(MessagesNames.Radical) }}
+						</span>
+						<span class="ml-2 font-medium">{{ article.radical.literal }}</span>
+					</p>
+					<p v-if="article.entry.general.ids">
+						<span class="select-none text-sm text-gray-400">
+							{{ locale.t(MessagesNames.Ids) }}
+						</span>
+						<span class="ml-2">{{ article.entry.general.ids }}</span>
+					</p>
+					<p v-if="article.entry.general.strokeCount">
+						<span class="select-none text-sm text-gray-400">
+							{{ locale.t(MessagesNames.StrokeCount) }}
+						</span>
+						<span class="ml-2">{{ article.entry.general.strokeCount }}</span>
+					</p>
+					<p v-if="article.entry.general.freq">
+						<span class="select-none text-sm text-gray-400">
+							{{ locale.t(MessagesNames.Frequency) }}
+						</span>
+						<span class="ml-2">{{ article.entry.general.freq }}</span>
+					</p>
+				</div>
+
+				<div v-if="standalone" class="flex flex-col gap-2 rounded-md">
+					<p>
+						<span class="select-none text-sm text-gray-400 dark:text-gray-400">
+							{{ locale.t(MessagesNames.Unicode) }}
+						</span>
+						<span class="ml-2">{{
+							article.entry.general.literal.length == 1 ? literalUnicode : "-"
+						}}</span>
+					</p>
+					<p v-show="article.entry.general.jis">
+						<span class="select-none text-sm text-gray-400 dark:text-gray-400">
+							{{ locale.t(MessagesNames.JIS) }}
+						</span>
+						<span class="ml-2">第{{ article.entry.general.jis }}水準</span>
+					</p>
+				</div>
+
+				<TheForms v-if="standalone" :forms="article.entry.forms" />
+
+				<TheImages v-if="standalone" :images="article.entry.general.images" />
 			</div>
 
 			<div class="flex flex-col gap-8">
-				<TheWords
-					v-show="article.entry.standaloneMeanings.length > 0"
-					:words="article.entry.standaloneMeanings"
-					:title="locale.t(MessagesNames.StandaloneMeanings)"
-				/>
+				<TheTags :tags="article.entry.general.tags" />
 
-				<TheMeanings
-					v-show="article.entry.composedMeanings.length > 0"
-					:meanings="article.entry.composedMeanings"
-					:title="locale.t(MessagesNames.ComposedMeanings)"
-				/>
+				<div
+					v-if="article.entry.general.tags.length > 0"
+					class="flex flex-col gap-4"
+				>
+					<template
+						v-for="(reading, readingType) of article.entry.readings"
+						:key="readingType"
+					>
+						<TheReading
+							v-if="
+								(standalone || !['other', 'nanori'].includes(readingType)) &&
+								reading.length > 0
+							"
+							:readings="reading"
+							:type="readingType"
+						/>
+					</template>
+				</div>
 
-				<TheMeanings
-					v-show="article.entry.kanbunMeanings.length > 0"
-					:meanings="article.entry.kanbunMeanings"
-					:title="locale.t(MessagesNames.KanbunMeanings)"
-				/>
+				<div
+					v-if="standalone && article.entry.general.note"
+					class="flex flex-col gap-2 rounded-md bg-neutral-100 py-2 px-3 dark:bg-gray-700"
+				>
+					<span class="select-none text-sm text-gray-400">{{
+						locale.t(MessagesNames.Note)
+					}}</span>
+					<p v-show="article.entry.general.ids">
+						{{ article.entry.general.note }}
+					</p>
+				</div>
 
-				<TheIndices
-					v-show="article.entry.indices.length > 0"
-					:indices="article.entry.indices"
-				/>
+				<div v-if="standalone" class="flex flex-col gap-8">
+					<TheWords
+						v-if="article.entry.standaloneMeanings.length > 0"
+						:words="article.entry.standaloneMeanings"
+						:title="locale.t(MessagesNames.StandaloneMeanings)"
+					/>
+
+					<TheMeanings
+						v-if="article.entry.composedMeanings.length > 0"
+						:meanings="article.entry.composedMeanings"
+						:title="locale.t(MessagesNames.ComposedMeanings)"
+					/>
+
+					<TheMeanings
+						v-if="article.entry.kanbunMeanings.length > 0"
+						:meanings="article.entry.kanbunMeanings"
+						:title="locale.t(MessagesNames.KanbunMeanings)"
+					/>
+
+					<TheIndices
+						v-if="article.entry.indices.length > 0"
+						:indices="article.entry.indices"
+					/>
+				</div>
 			</div>
+		</div>
+		<div v-if="!standalone" class="mt-4 flex gap-2 leading-loose">
+			<p
+				class="inline-flex cursor-copy select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-50 dark:bg-gray-700"
+				@click="copy"
+			>
+				{{ locale.t(MessagesNames.CopyLink) }}
+				<ContentCopyIcon :size="16" class="opacity-50" />
+			</p>
 		</div>
 	</article>
 </template>
@@ -134,6 +160,7 @@
 	import { useRoute } from "vue-router";
 
 	import { MessagesNames } from "@/locale/messages-names";
+	import { RoutesNames } from "@/router/routes-names";
 	import { useI18n } from "vue-i18n";
 
 	import { EntryKanji } from "@/api/kanji-rest/types";
@@ -152,6 +179,7 @@
 
 	const props = defineProps<Props>();
 
+	const url = import.meta.env.VITE_BASE_URL;
 	const route = useRoute();
 
 	const locale = useI18n();
@@ -163,10 +191,16 @@
 		return charUnicode(props.article.entry.general.literal);
 	});
 
-	async function copyContent(e: MouseEvent) {
+	function confStyles() {
+		if (props.article.isReviewed) return [];
+
+		return ["border-l-2", "border-l-orange-500", "dark:border-l-orange-500"];
+	}
+
+	async function copy(e: MouseEvent) {
 		const { target } = e;
 		if (target instanceof HTMLElement) {
-			await navigator.clipboard.writeText(target.innerText);
+			await navigator.clipboard.writeText(`${url}/kanji/${props.article.kid}`);
 		}
 	}
 </script>

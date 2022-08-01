@@ -529,4 +529,5 @@ export const ru = {
 
 	[MessagesNames.ShowMore]: "подробнее",
 	[MessagesNames.ShowLess]: "скрыть",
+	[MessagesNames.CopyLink]: "ссылка",
 };

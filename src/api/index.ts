@@ -8,7 +8,7 @@ import { SearchRest } from "./search-rest";
 import { StatisticsRest } from "./statistics-rest";
 import { UsersRest } from "./users-rest";
 
-import { EntryKanji } from "./kanji-rest/types";
+import type { EntryKanji } from "./kanji-rest/types";
 import type { EntryJp } from "./search-rest/types";
 import { Users } from "./types";
 
