@@ -3,6 +3,7 @@ import { TypeVariant } from "@/api/edits-rest/types/type-variant";
 import { KanjiFormType } from "@/api/kanji-rest/types";
 import { KanjiImageStyle } from "@/api/kanji-rest/types/kanji-image-style";
 import { KanjiIndexType } from "@/api/kanji-rest/types/kanji-index-type";
+import { SearchType } from "@/api/types/search/search-type";
 import { MessagesNames } from "../messages-names";
 
 import rinf from "./tags/rinf";
@@ -14,6 +15,10 @@ export const ru = {
 	[MessagesNames.HeaderDownload]: "Скачать",
 
 	[MessagesNames.SearchInput]: "Японское, русское или английское слово",
+	[MessagesNames.SearchTypeName]: {
+		[SearchType.Jap]: { badge: "詞", short: "слова" },
+		[SearchType.Kanji]: { badge: "字", short: "кандзи" },
+	},
 	[MessagesNames.SearchInfoPre]:
 		"НЯРС — редактируемый японско-русский(-английский) словарь. Для начала работы со словарём введите поисковой запрос в строку выше. Вот несколько примеров: \n\n",
 	[MessagesNames.SearchInfoPost]:

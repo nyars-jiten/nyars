@@ -2,7 +2,6 @@ import axios from "axios";
 
 import { BasicRest } from "./basic-rest";
 import { EditsRest } from "./edits-rest";
-import { KanjiRest } from "./kanji-rest";
 import { KotobaRest } from "./kotoba-rest";
 import { SearchRest } from "./search-rest";
 import { StatisticsRest } from "./statistics-rest";
@@ -28,7 +27,6 @@ type Satellites = Satellite[];
 export const api = new (class extends BasicRest {
 	readonly statistics;
 	readonly search;
-	readonly kanji;
 	readonly kotoba;
 	readonly users;
 	readonly edits;
@@ -39,15 +37,15 @@ export const api = new (class extends BasicRest {
 		);
 	}
 
-	dictionaryKanjiEntries(props: { kid: string }) {
-		return this.extractData(
-			this.#endpoint.get<EntryKanji>(`dictionary/kanji/entries/${props.kid}`),
-		);
-	}
-
 	dictionaryJapBestUsers() {
 		return this.extractData(
 			this.#endpoint.get<Users>("/dictionary/jap/stats-user"),
+		);
+	}
+
+	dictionaryKanjiEntries(props: { kid: string }) {
+		return this.extractData(
+			this.#endpoint.get<EntryKanji>(`dictionary/kanji/entries/${props.kid}`),
 		);
 	}
 
@@ -64,7 +62,6 @@ export const api = new (class extends BasicRest {
 
 		this.statistics = new StatisticsRest(this.#endpoint);
 		this.search = new SearchRest(this.#endpoint);
-		this.kanji = new KanjiRest(this.#endpoint);
 		this.kotoba = new KotobaRest(this.#endpoint);
 		this.users = new UsersRest(this.#endpoint);
 		this.edits = new EditsRest(this.#endpoint);

@@ -5,14 +5,14 @@
 		<div class="grow">
 			<component
 				:is="standalone ? 'div' : 'RouterLink'"
-				:class="[standalone ? '' : 'hover:opacity-50']"
+				:class="[standalone ? '' : 'hover:opacity-75']"
 				:to="{ name: RoutesNames.DictJpArticle, params: { wid: article.wid } }"
 				class="inline-flex flex-col"
 			>
 				<div
 					v-for="(word, wordId) of article.entry.words"
 					:key="wordId"
-					class="font-header inline flex-1 text-2xl"
+					class="inline flex-1 font-header text-2xl"
 				>
 					<span
 						v-show="word.writings.length > 0"
@@ -63,7 +63,7 @@
 				v-for="tag of article.entry.tags"
 				:key="tag"
 				type="button"
-				class="whitespace-nowrap rounded-md border px-2 hover:opacity-50"
+				class="whitespace-nowrap rounded-md border px-2 hover:opacity-75"
 				:class="[`text-tag-${tag}`, `border-tag-${tag}`]"
 				@click="sStore.search({ request: `#${tag}`, userRequest: false })"
 			>

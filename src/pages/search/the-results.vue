@@ -1,6 +1,9 @@
 <template>
 	<section class="flex flex-col gap-10">
-		<TheGrammar :grammars="store.results.info.parsedGrammar" />
+		<TheGrammar
+			v-if="store.resultsJap.info"
+			:grammars="store.resultsJap.info.parsedGrammar"
+		/>
 
 		<TransitionGroup
 			tag="main"
@@ -14,21 +17,33 @@
 			mode="out-in"
 			:class="'min-w-full'"
 		>
-			<TheArticle
-				v-for="result of store.results.result"
-				:key="result.wid"
-				:article="result"
-				:standalone="false"
-			/>
+			<template v-if="store.type == SearchType.Jap">
+				<JapArticle
+					v-for="result of store.resultsJap.result"
+					:key="result.wid"
+					:article="result"
+					:standalone="false"
+				/>
+			</template>
+			<template v-else-if="store.type == SearchType.Kanji">
+				<KanjiArticle
+					v-for="result of store.resultsKanji.result"
+					:key="result.kid"
+					:article="result"
+					:standalone="false"
+				/>
+			</template>
 		</TransitionGroup>
 	</section>
 </template>
 
 <script setup lang="ts">
+	import { SearchType } from "@/api/types/search/search-type";
 	import { useSearch } from "@/stores/search";
 
-	import TheArticle from "@/components/search/jp/the-article.vue";
+	import JapArticle from "@/components/search/jp/the-article.vue";
 	import TheGrammar from "@/components/search/jp/the-grammar.vue";
+	import KanjiArticle from "@/components/search/kanji/the-article.vue";
 
 	const store = useSearch();
 </script>

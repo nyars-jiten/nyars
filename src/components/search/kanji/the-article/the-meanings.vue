@@ -10,7 +10,7 @@
 					<span v-html="bbCodesProcess(meaning.title)" />
 
 					<span
-						v-show="meaning.readings.length > 0"
+						v-if="meaning.readings.length > 0"
 						class="before:text-gray-200 before:content-['【'] after:text-gray-200 after:content-['】'] dark:before:text-gray-500 dark:after:text-gray-500"
 					>
 						<span

@@ -41,7 +41,7 @@
 				<div class="flex grow">
 					<button
 						type="button"
-						class="rounded-md bg-neutral-100 px-2 hover:opacity-50 dark:bg-gray-700"
+						class="rounded-md bg-neutral-100 px-2 hover:opacity-75 dark:bg-gray-700"
 						@click="toggleChanges"
 					>
 						<Component

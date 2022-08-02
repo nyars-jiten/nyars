@@ -5,6 +5,7 @@ const enum _Names {
 	HeaderDownload,
 
 	SearchInput,
+	SearchTypeName,
 	SearchInfoPre,
 	SearchInfoPost,
 	SearchExamples,
@@ -56,6 +57,7 @@ export class MessagesNames {
 	static readonly HeaderDownload = String(_Names.HeaderDownload);
 
 	static readonly SearchInput = String(_Names.SearchInput);
+	static readonly SearchTypeName = String(_Names.SearchTypeName);
 	static readonly SearchInfoPre = String(_Names.SearchInfoPre);
 	static readonly SearchInfoPost = String(_Names.SearchInfoPost);
 	static readonly SearchExamples = String(_Names.SearchExamples);

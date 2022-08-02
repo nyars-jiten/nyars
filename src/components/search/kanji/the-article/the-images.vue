@@ -1,5 +1,5 @@
 <template>
-	<div v-show="images.length > 0" class="flex flex-col gap-4">
+	<div v-if="images.length > 0" class="flex flex-col gap-4">
 		<span class="select-none text-sm text-gray-400 dark:text-gray-400">
 			{{ locale.t(MessagesNames.KanjiStyle) }}
 		</span>

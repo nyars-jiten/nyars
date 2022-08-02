@@ -22,7 +22,7 @@
 			<div class="pb-4">
 				<button
 					v-show="allStatus"
-					class="flex select-none items-center gap-2 rounded-md bg-gray-100 px-2 capitalize hover:opacity-50 dark:bg-gray-700"
+					class="flex select-none items-center gap-2 rounded-md bg-gray-100 px-2 capitalize hover:opacity-75 dark:bg-gray-700"
 					type="button"
 					@click="toggleAllStatuses"
 				>
@@ -31,7 +31,7 @@
 				</button>
 				<button
 					v-show="!allStatus"
-					class="flex select-none items-center gap-2 rounded-md bg-gray-100 px-2 capitalize hover:opacity-50 dark:bg-gray-700"
+					class="flex select-none items-center gap-2 rounded-md bg-gray-100 px-2 capitalize hover:opacity-75 dark:bg-gray-700"
 					type="button"
 					@click="toggleAllStatuses"
 				>

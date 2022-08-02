@@ -7,7 +7,7 @@
 			<button
 				v-for="(grammar, i) of grammars"
 				:key="`${grammar.word}-${i}`"
-				class="hover:opacity-50"
+				class="hover:opacity-75"
 				type="button"
 				@click="search(grammar.word)"
 			>

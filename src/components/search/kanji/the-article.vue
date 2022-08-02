@@ -10,7 +10,7 @@
 					:class="[
 						standalone
 							? 'cursor-copy rounded-md hover:bg-gray-100 dark:hover:bg-gray-700'
-							: 'hover:opacity-50',
+							: 'hover:opacity-75',
 					]"
 					:to="{
 						name: RoutesNames.DictKanjiArticle,
@@ -18,11 +18,11 @@
 					}"
 					class="group relative flex min-h-[11rem] w-auto flex-col justify-center gap-2 p-2 text-center"
 				>
-					<div>
+					<div class="flex flex-col gap-2">
 						<span class="text-9xl">{{ article.entry.general.literal }}</span>
-						<div class="break-words">
+						<span class="break-words">
 							{{ article.entry.general.shortMeans }}
-						</div>
+						</span>
 						<ContentCopyIcon
 							v-if="standalone"
 							:size="16"
@@ -35,7 +35,7 @@
 					v-if="standalone"
 					class="flex flex-col gap-2 rounded-md bg-neutral-100 py-2 px-3 dark:bg-gray-700"
 				>
-					<p v-if="article.radical.literal">
+					<p v-if="article.radical && article.radical.literal">
 						<span class="select-none text-sm text-gray-400">
 							{{ locale.t(MessagesNames.Radical) }}
 						</span>
@@ -145,7 +145,7 @@
 		</div>
 		<div v-if="!standalone" class="mt-4 flex gap-2 leading-loose">
 			<p
-				class="inline-flex cursor-copy select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-50 dark:bg-gray-700"
+				class="inline-flex cursor-copy select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-75 dark:bg-gray-700"
 				@click="copy"
 			>
 				{{ locale.t(MessagesNames.CopyLink) }}
@@ -157,7 +157,6 @@
 
 <script setup lang="ts">
 	import { computed } from "vue";
-	import { useRoute } from "vue-router";
 
 	import { MessagesNames } from "@/locale/messages-names";
 	import { RoutesNames } from "@/router/routes-names";
@@ -180,12 +179,8 @@
 	const props = defineProps<Props>();
 
 	const url = import.meta.env.VITE_BASE_URL;
-	const route = useRoute();
 
 	const locale = useI18n();
-
-	const kid = route.params.kid;
-	if (typeof kid !== "string") throw new Error("Bad component usage");
 
 	const literalUnicode = computed(() => {
 		return charUnicode(props.article.entry.general.literal);

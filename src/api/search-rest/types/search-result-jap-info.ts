@@ -1,6 +1,6 @@
 import { ParserResponse } from "@/api/types/search/parser-response";
 
-export type SearchResultInfo = {
+export type SearchResultJapInfo = {
 	count: number;
 	page: number; // remove
 	request: string; // remove

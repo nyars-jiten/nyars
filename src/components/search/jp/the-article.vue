@@ -110,7 +110,7 @@
 			class="mt-2 flex gap-2 border-t border-gray-100 pt-2 dark:border-gray-700"
 		>
 			<p
-				class="inline-flex cursor-copy select-none items-center gap-2 rounded bg-gray-100 px-2 hover:opacity-50 dark:bg-gray-700"
+				class="inline-flex cursor-copy select-none items-center gap-2 rounded bg-gray-100 px-2 hover:opacity-75 dark:bg-gray-700"
 				@click="copy"
 			>
 				{{ article.wid }}
@@ -121,7 +121,7 @@
 				<button
 					v-show="!infoState"
 					type="button"
-					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-50 dark:bg-gray-700"
+					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-75 dark:bg-gray-700"
 					@click="toggleInfo"
 				>
 					{{ locale.t(MessagesNames.ShowMore) }}
@@ -131,7 +131,7 @@
 				<button
 					v-show="infoState"
 					type="button"
-					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-50 dark:bg-gray-700"
+					class="flex select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-75 dark:bg-gray-700"
 					@click="toggleInfo"
 				>
 					{{ locale.t(MessagesNames.ShowLess) }}

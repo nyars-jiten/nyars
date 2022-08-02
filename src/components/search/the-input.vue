@@ -3,10 +3,19 @@
 		class="relative flex items-stretch border border-gray-100 bg-white shadow-md duration-150 ease-in-out dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
 	>
 		<button
-			class="p-4 opacity-100 duration-75 ease-in-out hover:opacity-50"
-			@click="() => searchImmediately()"
+			class="p-4 text-xl opacity-100 duration-75 ease-in-out hover:bg-gray-100 hover:opacity-75 dark:hover:bg-gray-700"
+			@click="searchToggle()"
 		>
-			<SearchIcon />
+			<span :class="[searchType == SearchType.Jap ? 'visible' : 'hidden']">
+				{{
+					locale.t(`${MessagesNames.SearchTypeName}.${SearchType.Jap}.badge`)
+				}}
+			</span>
+			<span :class="[searchType == SearchType.Kanji ? 'visible' : 'hidden']">
+				{{
+					locale.t(`${MessagesNames.SearchTypeName}.${SearchType.Kanji}.badge`)
+				}}
+			</span>
 		</button>
 
 		<div class="relative grow">
@@ -34,7 +43,14 @@
 		</div>
 
 		<button
-			class="p-4 opacity-100 duration-75 ease-in-out hover:opacity-50"
+			class="p-4 text-xl opacity-100 duration-75 ease-in-out hover:bg-gray-100 hover:opacity-75 dark:hover:bg-gray-700"
+			@click="() => searchImmediately()"
+		>
+			<SearchIcon />
+		</button>
+
+		<button
+			class="p-4 text-xl opacity-100 duration-75 ease-in-out hover:bg-gray-100 hover:opacity-75 dark:hover:bg-gray-700"
 			@click="showDrawPanel = !showDrawPanel"
 		>
 			<DrawIcon />
@@ -64,6 +80,7 @@
 	import { useI18n } from "vue-i18n";
 	import { useRoute } from "vue-router";
 
+	import { SearchType } from "@/api/types/search/search-type";
 	import { MessagesNames } from "@/locale/messages-names";
 	import { useSearch } from "@/stores/search";
 
@@ -72,11 +89,20 @@
 	import TheHandwriting from "./the-handwriting.vue";
 
 	const showDrawPanel = ref(false);
+	const searchType = ref(SearchType.Jap);
 	const store = useSearch();
 	const locale = useI18n();
 
 	const searchSugg = debounce(updateSugg, 100);
 	const sugg = ref<string[]>([]);
+
+	async function searchToggle() {
+		if (searchType.value == SearchType.Jap) {
+			searchType.value = SearchType.Kanji;
+		} else {
+			searchType.value = SearchType.Jap;
+		}
+	}
 
 	watch(
 		() => store.request,
@@ -92,7 +118,18 @@
 
 	async function searchImmediately(request?: string) {
 		searchSugg.cancel();
-		await store.search({ request, userRequest: true });
+		if (searchType.value == SearchType.Jap) {
+			await updateSugg(request);
+			await store.searchJap({
+				request,
+				userRequest: true,
+			});
+		} else if (searchType.value == SearchType.Kanji) {
+			await store.searchKanji({
+				request,
+				userRequest: true,
+			});
+		}
 	}
 
 	async function updateSugg(request?: string) {
@@ -109,10 +146,21 @@
 	onBeforeMount(async () => {
 		const { query } = useRoute();
 		const { request } = query;
+		const { type } = query;
 
 		if (typeof request == "string") {
-			await updateSugg(request);
-			await store.search({ request, userRequest: true });
+			if (type == SearchType.Jap) {
+				await updateSugg(request);
+				await store.searchJap({
+					request,
+					userRequest: true,
+				});
+			} else if (type == SearchType.Kanji) {
+				await store.searchKanji({
+					request,
+					userRequest: true,
+				});
+			}
 		}
 	});
 

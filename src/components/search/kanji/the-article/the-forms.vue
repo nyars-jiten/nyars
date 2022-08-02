@@ -31,14 +31,14 @@
 				</div>
 				<div class="flex flex-col gap-2">
 					<span
-						v-show="form.type !== null"
-						class="select-none whitespace-nowrap rounded-md border border-tag-jlpt-n4 px-2 text-sm text-tag-jlpt-n4 hover:opacity-50"
+						v-if="form.type !== null"
+						class="select-none whitespace-nowrap rounded-md border border-tag-jlpt-n4 px-2 text-sm text-tag-jlpt-n4 hover:opacity-75"
 					>
 						{{
 							locale.t(`${MessagesNames.KanjiFormTypeName}.${form.type}.short`)
 						}}
 					</span>
-					<span v-show="form.literal.length === 1" class="text-sm">
+					<span v-if="form.literal.length === 1" class="text-sm">
 						{{ charUnicode(form.literal) }}
 					</span>
 				</div>

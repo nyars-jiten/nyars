@@ -10,7 +10,7 @@
 				v-for="request of proposals"
 				:key="request"
 				type="button"
-				class="basis-2/4 rounded bg-neutral-100 px-2 hover:opacity-50 dark:bg-gray-700"
+				class="basis-2/4 rounded bg-neutral-100 px-2 hover:opacity-75 dark:bg-gray-700"
 				@click="onSelect(request)"
 			>
 				{{ request }}
@@ -37,10 +37,10 @@
 					:min="hw.minLineWidth"
 					:max="hw.maxLineWidth"
 				/>
-				<button type="button" class="hover:opacity-50" @click="clear">
+				<button type="button" class="hover:opacity-75" @click="clear">
 					<Eraser />
 				</button>
-				<button type="button" class="hover:opacity-50" @click="undo">
+				<button type="button" class="hover:opacity-75" @click="undo">
 					<ArrowULeftBottom />
 				</button>
 			</div>

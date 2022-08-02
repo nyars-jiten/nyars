@@ -1,12 +1,14 @@
 import { api } from "@/api";
-import { SearchResult } from "@/api/search-rest/types/search-result";
-import { SearchResultInfo } from "@/api/search-rest/types/search-result-info";
+import { SearchResultJapInfo } from "@/api/search-rest/types/search-result-jap-info";
+import { SearchResultKanji } from "@/api/search-rest/types/search-result-kanji";
+import { SearchResultWord } from "@/api/search-rest/types/search-result-word";
+import { SearchType } from "@/api/types/search/search-type";
 import { RoutesNames } from "@/router/routes-names";
 import { defineStore } from "pinia";
 
 import type { Actions, Getters, State } from "./types";
 
-function emptySearchGrammar(): SearchResultInfo {
+function emptySearchGrammar(): SearchResultJapInfo {
 	return {
 		count: 0,
 		page: 0,
@@ -16,9 +18,15 @@ function emptySearchGrammar(): SearchResultInfo {
 	};
 }
 
-function emptySearchResults(): SearchResult {
+function emptySearchWordResults(): SearchResultWord {
 	return {
 		info: emptySearchGrammar(),
+		result: [],
+	};
+}
+
+function emptySearchKanjiResults(): SearchResultKanji {
+	return {
 		result: [],
 	};
 }
@@ -29,13 +37,16 @@ export const useSearch = defineStore<string, State, Getters, Actions>(
 		state() {
 			return {
 				request: "",
-				results: emptySearchResults(),
+				resultsJap: emptySearchWordResults(),
+				resultsKanji: emptySearchKanjiResults(),
+				type: SearchType.Jap,
 			};
 		},
 
 		actions: {
-			async search(props: { request?: string; userRequest?: boolean }) {
-				this.results.result = [];
+			async searchJap(props: { request?: string; userRequest?: boolean }) {
+				this.type = SearchType.Jap;
+				this.resultsJap.result = [];
 
 				if (props.request) {
 					this.request = props.request;
@@ -43,19 +54,40 @@ export const useSearch = defineStore<string, State, Getters, Actions>(
 
 				await this.router.push({
 					name: RoutesNames.SearchResults,
-					query: { request: this.request },
+					query: { request: this.request, type: this.type },
 				});
 
-				const response = await api.search.search({
+				const response = await api.search.searchJap({
 					request: this.request,
 					page: 0,
 				});
 
 				if (props.userRequest) {
-					this.results.info = response.info;
+					this.resultsJap.info = response.info;
 				}
 
-				this.results.result = response.result;
+				this.resultsJap.result = response.result;
+			},
+
+			async searchKanji(props: { request?: string; userRequest?: boolean }) {
+				this.type = SearchType.Kanji;
+				this.resultsJap.result = [];
+
+				if (props.request) {
+					this.request = props.request;
+				}
+
+				await this.router.push({
+					name: RoutesNames.SearchResults,
+					query: { request: this.request, type: this.type },
+				});
+
+				const response = await api.search.searchKanji({
+					request: this.request,
+					page: 0,
+				});
+
+				this.resultsKanji.result = response.result;
 			},
 
 			clearResults(props: { withGrammar: boolean }) {

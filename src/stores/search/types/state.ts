@@ -1,6 +1,10 @@
-import type { SearchResult } from "@/api/search-rest/types/search-result";
+import { SearchResultKanji } from "@/api/search-rest/types/search-result-kanji";
+import type { SearchResultWord } from "@/api/search-rest/types/search-result-word";
+import { SearchType } from "@/api/types/search/search-type";
 
 export type State = {
 	request: string;
-	results: SearchResult;
+	resultsJap: SearchResultWord;
+	resultsKanji: SearchResultKanji;
+	type?: SearchType;
 };
