@@ -1,8 +1,8 @@
+import { KanjiFormType } from "@/api/dictionary/kanji/types";
+import { KanjiImageStyle } from "@/api/dictionary/kanji/types/kanji-image-style";
+import { KanjiIndexType } from "@/api/dictionary/kanji/types/kanji-index-type";
 import { StatusVariant } from "@/api/edits-rest/types/status-variant";
 import { TypeVariant } from "@/api/edits-rest/types/type-variant";
-import { KanjiFormType } from "@/api/kanji-rest/types";
-import { KanjiImageStyle } from "@/api/kanji-rest/types/kanji-image-style";
-import { KanjiIndexType } from "@/api/kanji-rest/types/kanji-index-type";
 import { SearchType } from "@/api/types/search/search-type";
 import { MessagesNames } from "../messages-names";
 
@@ -65,10 +65,12 @@ export const ru = {
 	[MessagesNames.Note]: "Примечание",
 	[MessagesNames.KanjiStyle]: "Стили написания",
 	[MessagesNames.KanjiStyleName]: {
+		[KanjiImageStyle.Kyokasho]: "",
 		[KanjiImageStyle.Mincho]: "",
 		[KanjiImageStyle.Gothic]: "",
 		[KanjiImageStyle.Kaisyo]: "",
 		[KanjiImageStyle.Gyousyo]: "",
+		[KanjiImageStyle.Sousyo]: "",
 		[KanjiImageStyle.Sousyo]: "",
 		[KanjiImageStyle.Other]: "",
 	},

@@ -52,7 +52,7 @@
 	import { MessagesNames } from "@/locale/messages-names";
 	import { useI18n } from "vue-i18n";
 
-	import type { KanjiForm } from "@/api/kanji-rest/types";
+	import type { KanjiForm } from "@/api/dictionary/kanji/types";
 
 	type Props = { forms: KanjiForm[] };
 

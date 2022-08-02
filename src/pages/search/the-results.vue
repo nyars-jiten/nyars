@@ -1,7 +1,7 @@
 <template>
 	<section class="flex flex-col gap-10">
 		<TheGrammar
-			v-if="store.resultsJap.info"
+			v-if="store.resultsJap.info && store.type != SearchType.Kanji"
 			:grammars="store.resultsJap.info.parsedGrammar"
 		/>
 

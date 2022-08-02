@@ -15,7 +15,7 @@
 						xmlns:xlink="http://www.w3.org/1999/xlink"
 						version="1.1"
 						baseProfile="full"
-						viewBox="0 0 200 200"
+						:viewBox="image.viewBox"
 						fill="currentColor"
 					>
 						<path
@@ -37,7 +37,7 @@
 	import { MessagesNames } from "@/locale/messages-names";
 	import { useI18n } from "vue-i18n";
 
-	import { KanjiImage } from "@/api/kanji-rest/types";
+	import { KanjiImage } from "@/api/dictionary/kanji/types";
 
 	type Props = { images: KanjiImage[] };
 

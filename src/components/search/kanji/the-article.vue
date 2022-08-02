@@ -17,8 +17,9 @@
 						params: { kid: article.kid },
 					}"
 					class="group relative flex min-h-[11rem] w-auto flex-col justify-center gap-2 p-2 text-center"
+					v-on="standalone ? { click: copyContent } : {}"
 				>
-					<div class="flex flex-col gap-2">
+					<div class="flex select-none flex-col gap-2">
 						<span class="text-9xl">{{ article.entry.general.literal }}</span>
 						<span class="break-words">
 							{{ article.entry.general.shortMeans }}
@@ -80,7 +81,7 @@
 
 				<TheForms v-if="standalone" :forms="article.entry.forms" />
 
-				<TheImages v-if="standalone" :images="article.entry.general.images" />
+				<TheImages v-if="standalone" :images="article.images" />
 			</div>
 
 			<div class="flex flex-col gap-8">
@@ -162,7 +163,7 @@
 	import { RoutesNames } from "@/router/routes-names";
 	import { useI18n } from "vue-i18n";
 
-	import { EntryKanji } from "@/api/kanji-rest/types";
+	import { EntryKanji } from "@/api/dictionary/kanji/types";
 	import { charUnicode } from "@/core/unicode";
 
 	import ContentCopyIcon from "vue-material-design-icons/LinkVariant.vue";
@@ -196,6 +197,13 @@
 		const { target } = e;
 		if (target instanceof HTMLElement) {
 			await navigator.clipboard.writeText(`${url}/kanji/${props.article.kid}`);
+		}
+	}
+
+	async function copyContent(e: MouseEvent) {
+		const { target } = e;
+		if (target instanceof HTMLElement) {
+			await navigator.clipboard.writeText(target.innerText);
 		}
 	}
 </script>

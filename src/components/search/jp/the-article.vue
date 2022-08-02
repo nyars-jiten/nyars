@@ -146,8 +146,8 @@
 	import { ref } from "vue";
 	import { useI18n } from "vue-i18n";
 
-	import { EntryJp } from "@/api/search-rest/types";
-	import { Reference } from "@/api/search-rest/types/reference";
+	import { EntryJp } from "@/api/dictionary/jp/types";
+	import { Reference } from "@/api/dictionary/jp/types/reference";
 	import { bbCodesProcess } from "@/core/text/bb-code";
 	import { MessagesNames } from "@/locale/messages-names";
 	import { RoutesNames } from "@/router/routes-names";
@@ -157,7 +157,7 @@
 	import PlusIcon from "vue-material-design-icons/Plus.vue";
 	import TheHeader from "./the-article/the-header.vue";
 
-	import type { Sense } from "@/api/search-rest/types/sense";
+	import type { Sense } from "@/api/dictionary/jp/types/sense";
 	import type { RouteLocationRaw } from "vue-router";
 
 	type Props = { article: EntryJp; standalone: boolean };

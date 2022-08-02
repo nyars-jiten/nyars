@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-	import { Reading } from "@/api/kanji-rest/types";
+	import { Reading } from "@/api/dictionary/kanji/types";
 	import { convert_to_kana } from "@nyars-jiten/jp-transcript";
 	import { useI18n } from "vue-i18n";
 

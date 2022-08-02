@@ -56,7 +56,7 @@
 
 	import { RoutesNames } from "@/router/routes-names";
 
-	import { Meaning } from "@/api/kanji-rest/types";
+	import { Meaning } from "@/api/dictionary/kanji/types";
 
 	type Props = { meanings: Meaning[]; title: string };
 

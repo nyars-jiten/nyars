@@ -1,4 +1,4 @@
-import { EntryKanji } from "@/api/kanji-rest/types";
+import { EntryKanji } from "@/api/dictionary/kanji/types";
 
 export type SearchResultKanji = {
 	result: EntryKanji[];

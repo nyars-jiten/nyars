@@ -58,8 +58,7 @@
 	import { MessagesNames } from "@/locale/messages-names";
 	import { useI18n } from "vue-i18n";
 
-	import { KanjiIndex } from "@/api/kanji-rest/types";
-
+	import { KanjiIndex } from "@/api/dictionary/kanji/types";
 	import {
 		Disclosure,
 		DisclosureButton,

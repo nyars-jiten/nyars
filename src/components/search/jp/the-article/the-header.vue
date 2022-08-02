@@ -76,7 +76,7 @@
 <script setup lang="ts">
 	import { useI18n } from "vue-i18n";
 
-	import { EntryJp } from "@/api/search-rest/types";
+	import { EntryJp } from "@/api/dictionary/jp/types";
 	import { MessagesNames } from "@/locale/messages-names";
 	import { RoutesNames } from "@/router/routes-names";
 	import { useSearch } from "@/stores/search";

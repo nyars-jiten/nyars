@@ -7,8 +7,8 @@ import { SearchRest } from "./search-rest";
 import { StatisticsRest } from "./statistics-rest";
 import { UsersRest } from "./users-rest";
 
-import type { EntryKanji } from "./kanji-rest/types";
-import type { EntryJp } from "./search-rest/types";
+import type { EntryJp } from "./dictionary/jp/types";
+import type { EntryKanji } from "./dictionary/kanji/types";
 import { Users } from "./types";
 
 type SatelliteValue = {

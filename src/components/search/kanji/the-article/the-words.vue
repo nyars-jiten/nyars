@@ -29,7 +29,7 @@
 
 	import { RoutesNames } from "@/router/routes-names";
 
-	import { KanjiWord } from "@/api/kanji-rest/types";
+	import { KanjiWord } from "@/api/dictionary/kanji/types";
 
 	type Props = { words: KanjiWord[]; title: string };
 
