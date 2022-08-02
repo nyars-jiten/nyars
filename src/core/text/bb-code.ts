@@ -1,4 +1,4 @@
-import sanitizeHtml from "sanitize-html";
+// import sanitizeHtml from "sanitize-html";
 
 /**
  * Replaces user BB-codes with a HTML-tags
@@ -63,27 +63,28 @@ function furiganaReplacerBracketsToRuby(match: string, p1: string, p2: string) {
 
 // html sanitazer for a user input
 function cleanHtml(html: string) {
-	return sanitizeHtml(html.trim(), {
-		allowedTags: [
-			"em",
-			"a",
-			"sub",
-			"sup",
-			"strong",
-			"span",
-			"rt",
-			"ruby",
-			"rp",
-		],
-		allowedAttributes: {
-			a: ["href"],
-			span: ["style"],
-			rt: ["style"],
-		},
-		allowedStyles: {
-			"*": {
-				"font-family": [/^[\s\S]*$/],
-			},
-		},
-	});
+	return html;
+	// return sanitizeHtml(html.trim(), {
+	// 	allowedTags: [
+	// 		"em",
+	// 		"a",
+	// 		"sub",
+	// 		"sup",
+	// 		"strong",
+	// 		"span",
+	// 		"rt",
+	// 		"ruby",
+	// 		"rp",
+	// 	],
+	// 	allowedAttributes: {
+	// 		a: ["href"],
+	// 		span: ["style"],
+	// 		rt: ["style"],
+	// 	},
+	// 	allowedStyles: {
+	// 		"*": {
+	// 			"font-family": [/^[\s\S]*$/],
+	// 		},
+	// 	},
+	// });
 }
