@@ -1,6 +1,6 @@
 <template>
 	<article
-		class="border border-gray-100 bg-white p-8 leading-relaxed shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
+		class="border border-gray-100 bg-white p-8 shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
 		:class="confStyles()"
 	>
 		<div class="grid select-text grid-cols-1 gap-8 md:grid-cols-[12rem_1fr]">
@@ -144,7 +144,7 @@
 				</div>
 			</div>
 		</div>
-		<div v-if="!standalone" class="mt-4 flex gap-2 leading-loose">
+		<div v-if="!standalone" class="mt-4 flex gap-2">
 			<p
 				class="inline-flex cursor-copy select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-75 dark:bg-gray-700"
 				@click="copy"

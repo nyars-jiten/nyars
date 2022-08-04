@@ -1,6 +1,6 @@
 <template>
 	<article
-		class="select-text border border-gray-100 bg-white p-8 leading-loose shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
+		class="select-text border border-gray-100 bg-white p-8 shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
 		:class="confStyles()"
 	>
 		<TheHeader :article="article" :standalone="standalone" />
