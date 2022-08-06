@@ -38,7 +38,7 @@ export const ru = {
 	},
 
 	[MessagesNames.Radical]: "Ключ",
-	[MessagesNames.Ids]: "Композиция",
+	[MessagesNames.Ids]: "Декомпозиция",
 	[MessagesNames.StrokeCount]: "Черты",
 	[MessagesNames.Frequency]: "Частотность",
 	[MessagesNames.Unicode]: "Unicode",
@@ -99,7 +99,43 @@ export const ru = {
 		[KanjiIndexType.Codepoint]: "Кодировки",
 	},
 	[MessagesNames.IndexSourceAbbr]: {
-		ucs: "Универсальный набор символов (Unicode)",
+		nelson_c:
+			"Modern Reader's Japanese-English Character Dictionary (A. Nelson)",
+		nelson_n: "New Nelson Japanese-English Character Dictionary (A. Nelson)",
+		halpern_njecd: "New Japanese-English Character Dictionary (J. Halpern)",
+		halpern_kkd: "Kodansha Kanji Dictionary (J. Halpern)",
+		halpern_kkld: "Kodansha Kanji Learner's Dictionary (J. Halpern)",
+		halpern_kkld_2ed:
+			"Kodansha Kanji Learner's Dictionary, 2nd Edition (J. Halpern)",
+		heisig: "Remembering The Kanji (J. Heisig)",
+		heisig6: "Remembering The Kanji, 6th edition (J. Heisig)",
+		gakken: "A  New Dictionary of Kanji Usage (Gakken)",
+		oneill_names: "Japanese Names (P.G. O'Neill)",
+		oneill_kk: "Essential Kanji (P.G. O'Neill)",
+		moro: "Dai Kan-Wa Jiten (T. Morohashi)",
+		henshall:
+			"A Guide To Remembering Japanese Characters (Kenneth G. Henshall)",
+		henshall3:
+			"A Guide To Reading and Writing Japanese 3rd edition (Henshall, Seele, De Groot)",
+		sh_kk: "Kanji and Kana (M. Spahn, W. Hadamitzky)",
+		sh_kk2: "Kanji and Kana, Revised edition (M. Spahn, W. Hadamitzky)",
+		sakade: "A Guide To Reading and Writing Japanese (F. Sakade)",
+		jf_cards: "Japanese Kanji Flashcards (M. Hodges, T. Okazaki",
+		tutt_cards: "Tuttle Kanji Cards (A. Kask)",
+		crowley: "The Kanji Way to Japanese Language Power (D. Crowley)",
+		kanji_in_context: "Kanji in Context",
+		busy_people: "Japanese For Busy People",
+		kodansha_compact: "Kodansha Compact Kanji Guide",
+		maniette: "Les Kanjis dans la tete (Y. Maniette)",
+		skip: "Halpern's SKIP",
+		sh_desc: "The Kanji Dictionary descriptor",
+		four_corner: "Four Corner",
+		deroo: "2001 Kanji (J. De Roo)",
+		misclass: "Misclass",
+		jis208: "JIS X 0208-1997",
+		jis212: "JIS X 0212-1990",
+		jis213: "JIS X 0213-2000",
+		ucs: "Unicode 4.0",
 	},
 
 	[MessagesNames.ArticleTagName]: {

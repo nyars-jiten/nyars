@@ -15,9 +15,7 @@
 					<Chevron :class="open ? 'transform rotate-180' : ''" />
 				</DisclosureButton>
 				<DisclosurePanel>
-					<table
-						class="w-full text-left text-sm text-gray-500 dark:text-gray-400"
-					>
+					<table class="w-full text-left text-sm text-gray-500">
 						<thead
 							class="select-none bg-gray-100 dark:bg-gray-700 dark:text-gray-400"
 						>
@@ -36,14 +34,22 @@
 								:key="entryId"
 								class="border-b bg-white last:border-none dark:border-gray-700 dark:bg-gray-800"
 							>
-								<td class="p-3">{{ entry.value }}</td>
-								<td
-									scope="row"
-									class="p-3 font-medium text-gray-900 dark:text-white"
-								>
-									{{
-										locale.t(`${MessagesNames.IndexSourceAbbr}.${entry.source}`)
-									}}
+								<td class="w-1 p-3">{{ entry.value }}</td>
+								<td scope="row">
+									<span
+										class="box-decoration-clone p-3 font-medium text-gray-900 dark:text-white"
+									>
+										{{
+											locale.t(
+												`${MessagesNames.IndexSourceAbbr}.${entry.source}`,
+											)
+										}}
+									</span>
+									<span
+										v-if="entry.note"
+										class="text-gray-400 dark:text-gray-400"
+										>{{ entry.note }}</span
+									>
 								</td>
 							</tr>
 						</tbody>
