@@ -1,6 +1,6 @@
 <template>
 	<section
-		class="border border-gray-100 bg-white p-10 leading-relaxed shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
+		class="border border-gray-100 bg-white p-10 shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
 	>
 		<span
 			class="whitespace-pre-wrap"

@@ -4,7 +4,7 @@
 
 		<div
 			v-if="images.length > 0"
-			class="flex flex-wrap gap-2 border border-gray-100 bg-white px-10 py-5 leading-relaxed shadow-md dark:border-gray-600 md:rounded-md"
+			class="flex flex-wrap gap-2 border border-gray-100 bg-white px-10 py-5 shadow-md dark:border-gray-600 md:rounded-md"
 		>
 			<img
 				v-for="image of images"
@@ -17,7 +17,7 @@
 
 		<div
 			v-show="satellites.length > 0"
-			class="border border-gray-100 bg-white p-8 leading-relaxed shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
+			class="border border-gray-100 bg-white p-8 shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
 		>
 			<div class="pb-4">
 				<button
@@ -62,7 +62,7 @@
 
 		<div
 			v-if="articles.length > 0"
-			class="border border-gray-100 bg-white p-8 leading-relaxed shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
+			class="border border-gray-100 bg-white p-8 shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
 		>
 			<ShortArticle
 				v-for="value of articles"

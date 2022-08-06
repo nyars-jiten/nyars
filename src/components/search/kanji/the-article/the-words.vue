@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col gap-2">
-		<div class="border-accent-500 text-accent-500 select-none border-l-2 px-3">
+		<div class="select-none border-l-2 border-accent-500 px-3 text-accent-500">
 			{{ title }}
 		</div>
 		<div class="flex flex-col gap-y-1">

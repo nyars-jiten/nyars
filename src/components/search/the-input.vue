@@ -1,14 +1,18 @@
 <template>
-	<section class="rounded-md bg-white shadow-md dark:bg-gray-800">
+	<section
+		class="relative select-none rounded-md bg-white shadow-md dark:bg-gray-800"
+	>
 		<div
 			class="relative flex items-stretch border dark:border-gray-700"
-			:class="searchExpanded ? 'rounded-t-md' : 'rounded md'"
+			:class="searchExpanded ? 'rounded-t-md' : 'rounded-md'"
 		>
 			<button
 				class="text-s flex items-center p-4 capitalize opacity-100 duration-75 ease-in-out hover:bg-gray-100 hover:opacity-75 dark:text-gray-400 dark:hover:bg-gray-700"
 				@click="searchExpanded = !searchExpanded"
 			>
-				{{ locale.t(`${MessagesNames.SearchTypeName}.${searchType}.short`) }}
+				<span class="hidden md:block">{{
+					locale.t(`${MessagesNames.SearchTypeName}.${searchType}.short`)
+				}}</span>
 				<ChevronUp v-show="searchExpanded" class="text-gray-400" />
 				<ChevronDown v-show="!searchExpanded" class="text-gray-400" />
 			</button>
@@ -17,19 +21,19 @@
 				<input
 					v-model="store.request"
 					type="text"
-					class="peer h-full w-full pb-px text-center text-xl outline-none transition-colors duration-150 ease-in-out focus-within:border-b focus-within:bg-neutral-50 focus-within:pb-0 dark:border-gray-600 dark:bg-gray-800 dark:focus-within:bg-gray-700"
+					class="peer h-full w-full pb-px text-center text-xl outline-none transition-colors duration-150 ease-in-out focus-within:border-b focus-within:bg-gray-100 focus-within:pb-0 dark:border-gray-600 dark:bg-gray-800 dark:focus-within:bg-gray-700"
 					:placeholder="locale.t(MessagesNames.SearchInput)"
 					@keydown.enter="() => searchImmediately()"
 				/>
 				<div
 					v-if="sugg.length > 0"
-					class="invisible absolute inset-x-0 top-[calc(100%)] z-10 rounded-b-md bg-neutral-50 shadow-xl hover:visible peer-focus:visible"
+					class="invisible absolute inset-x-0 top-[calc(100%)] z-10 overflow-hidden rounded-b-md bg-gray-100 shadow-xl hover:visible peer-focus:visible dark:bg-gray-700"
 				>
 					<button
 						v-for="sug of sugg"
 						:key="sug"
 						type="button"
-						class="block min-w-full border-b border-gray-100 py-2 px-4 text-left last:rounded-b-md last:border-none hover:bg-white dark:border-gray-600 dark:bg-gray-700"
+						class="block min-w-full border-b border-gray-100 py-2 px-4 text-left last:border-none dark:border-gray-600"
 						@click="selectSugg(sug)"
 					>
 						{{ sug }}
@@ -50,7 +54,6 @@
 			>
 				<DrawIcon />
 			</button>
-
 			<Transition
 				enter-active-class="duration-150 ease-out"
 				enter-from-class="transform opacity-0 translate-y-2"
@@ -69,9 +72,9 @@
 		<Transition
 			enter-active-class="duration-200 ease-out"
 			enter-from-class="max-h-0"
-			enter-to-class="max-h-96"
+			enter-to-class="max-h-56"
 			leave-active-class="duration-200 ease-in"
-			leave-from-class="max-h-96"
+			leave-from-class="max-h-56"
 			leave-to-class=" max-h-0"
 			mode="in-out"
 		>
@@ -85,7 +88,7 @@
 						<span
 							:class="
 								checked
-									? 'bg-accent-400 text-white dark:bg-accent-800'
+									? 'bg-accent-400 text-white dark:bg-accent-700'
 									: 'bg-gray-100 dark:bg-gray-700'
 							"
 							class="flex select-none items-center gap-2 rounded-md py-1 px-3 capitalize hover:opacity-75"
@@ -102,7 +105,7 @@
 						<span
 							:class="
 								checked
-									? 'bg-accent-400 text-white dark:bg-accent-800'
+									? 'bg-accent-400 text-white dark:bg-accent-700'
 									: 'bg-gray-100 dark:bg-gray-700'
 							"
 							class="flex select-none items-center gap-2 rounded-md bg-gray-100 py-1 px-3 capitalize hover:opacity-75"
@@ -140,12 +143,12 @@
 
 	const showDrawPanel = ref(false);
 	const searchExpanded = ref(false);
-	const searchType = ref(SearchType.Jap);
 	const store = useSearch();
 	const locale = useI18n();
 
 	const searchSugg = debounce(updateSugg, 100);
 	const sugg = ref<string[]>([]);
+	const searchType = ref(SearchType.Jap);
 
 	watch(
 		() => store.request,
@@ -191,15 +194,17 @@
 		const { request } = query;
 		const { type } = query;
 
+		searchType.value = (type as SearchType) ?? SearchType.Jap;
+
 		if (typeof request == "string") {
-			if (type == SearchType.Jap) {
-				await updateSugg(request);
-				await store.searchJap({
+			if (type == SearchType.Kanji) {
+				await store.searchKanji({
 					request,
 					userRequest: true,
 				});
-			} else if (type == SearchType.Kanji) {
-				await store.searchKanji({
+			} else {
+				await updateSugg(request);
+				await store.searchJap({
 					request,
 					userRequest: true,
 				});

@@ -71,7 +71,7 @@ export const useSearch = defineStore<string, State, Getters, Actions>(
 
 			async searchKanji(props: { request?: string; userRequest?: boolean }) {
 				this.type = SearchType.Kanji;
-				this.resultsJap.result = [];
+				this.resultsKanji.result = [];
 
 				if (props.request) {
 					this.request = props.request;
