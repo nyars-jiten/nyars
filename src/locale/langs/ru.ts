@@ -14,7 +14,8 @@ export const ru = {
 	[MessagesNames.HeaderBugTracker]: "Багтрекер",
 	[MessagesNames.HeaderDownload]: "Скачать",
 
-	[MessagesNames.SearchInput]: "Японское, русское или английское слово",
+	[MessagesNames.SearchJapInput]: "Японское, русское или английское слово",
+	[MessagesNames.SearchKanjiInput]: "Кандзи",
 	[MessagesNames.SearchTypeName]: {
 		[SearchType.Jap]: { badge: "詞", short: "слова" },
 		[SearchType.Kanji]: { badge: "字", short: "кандзи" },

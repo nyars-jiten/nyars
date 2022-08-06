@@ -22,7 +22,11 @@
 					v-model="store.request"
 					type="text"
 					class="peer h-full w-full pb-px text-center text-xl outline-none transition-colors duration-150 ease-in-out focus-within:border-b focus-within:bg-gray-100 focus-within:pb-0 dark:border-gray-600 dark:bg-gray-800 dark:focus-within:bg-gray-700"
-					:placeholder="locale.t(MessagesNames.SearchInput)"
+					:placeholder="
+						searchType == SearchType.Jap
+							? locale.t(MessagesNames.SearchJapInput)
+							: locale.t(MessagesNames.SearchKanjiInput)
+					"
 					@keydown.enter="() => searchImmediately()"
 				/>
 				<div
