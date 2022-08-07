@@ -140,12 +140,13 @@ export const ru = {
 	},
 
 	[MessagesNames.ArticleTagName]: {
-		common: "common",
-		"jlpt-n5": "jlpt n5",
-		"jlpt-n4": "jlpt n4",
-		"jlpt-n3": "jlpt n3",
-		"jlpt-n2": "jlpt n2",
-		"jlpt-n1": "jlpt n1",
+		common: { short: "common" },
+		jyouyou: { short: "jōyō" },
+		insatsu: { short: "insatsu" },
+		jinmeiyou: { short: "jinmeiyō" },
+		kanken: { short: "kanken" },
+		jlpt: { short: "JLPT" },
+		grade: { short: "Класс" },
 		pos: {
 			"adv-to": { short: "adv-to", full: "adverb taking the `to' particle" },
 			"n-adv": { short: "n-adv", full: "adverbial noun (fukushitekimeishi)" },

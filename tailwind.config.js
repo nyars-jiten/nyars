@@ -1,11 +1,16 @@
 const colors = require("tailwindcss/colors");
 
-const tagJlptN1 = "#ea2a92";
-const tagJlptN2 = "#f99717";
-const tagJlptN3 = "#84bf26";
-const tagJlptN4 = "#459f94";
-const tagJlptN5 = "#3273bb";
-const tagCommon = "gray";
+const tagLevel1 = colors.orange;
+const tagLevel2 = colors.amber;
+const tagLevel3 = colors.emerald;
+const tagLevel4 = colors.teal;
+const tagLevel5 = colors.cyan;
+const tagLevel6 = colors.sky;
+const tagLevel7 = colors.blue;
+const tagLevel8 = colors.indigo;
+const tagLevel9 = colors.violet;
+const tagLevel10 = colors.fuchsia;
+const tagCommon = colors.gray;
 
 const tagShou = colors.teal;
 const tagChuu = colors.amber;
@@ -13,7 +18,7 @@ const tagKou = colors.orange;
 const tagKanon = colors.slate;
 const tagTouon = colors.slate;
 const tagGoon = colors.slate;
-const tagkanyoon = colors.slate;
+const tagKanyoon = colors.slate;
 const tagSouon = colors.slate;
 const tagGai = colors.blue;
 
@@ -53,18 +58,27 @@ module.exports = {
 				gray: colors.zinc,
 
 				"tag-common": tagCommon,
-				"tag-jlpt-n5": tagJlptN5,
-				"tag-jlpt-n4": tagJlptN4,
-				"tag-jlpt-n3": tagJlptN3,
-				"tag-jlpt-n2": tagJlptN2,
-				"tag-jlpt-n1": tagJlptN1,
+				"tag-jyouyou": colors.slate,
+				insatsu: colors.slate,
+				jinmeiyou: colors.slate,
+				"tag-level-1": tagLevel1,
+				"tag-level-2": tagLevel2,
+				"tag-level-3": tagLevel3,
+				"tag-level-4": tagLevel4,
+				"tag-level-5": tagLevel5,
+				"tag-level-6": tagLevel6,
+				"tag-level-7": tagLevel7,
+				"tag-level-8": tagLevel8,
+				"tag-level-9": tagLevel9,
+				"tag-level-10": tagLevel10,
 				"tag-shou": tagShou,
 				"tag-chuu": tagChuu,
 				"tag-kou": tagKou,
 				"tag-kanon": tagKanon,
+				"tag-souon": tagSouon,
 				"tag-touon": tagTouon,
 				"tag-goon": tagGoon,
-				"tag-kanyoon": tagkanyoon,
+				"tag-kanyoon": tagKanyoon,
 				"tag-gai": tagGai,
 
 				"status-variant-1": statusVariant1,

@@ -59,16 +59,7 @@
 		</div>
 
 		<div v-show="article.entry.tags.length > 0" class="flex items-start gap-2">
-			<button
-				v-for="tag of article.entry.tags"
-				:key="tag"
-				type="button"
-				class="whitespace-nowrap rounded-md border px-2 hover:opacity-75"
-				:class="[`text-tag-${tag}`, `border-tag-${tag}`]"
-				@click="sStore.search({ request: `#${tag}`, userRequest: false })"
-			>
-				{{ locale.t(`${MessagesNames.ArticleTagName}.${tag}`) }}
-			</button>
+			<TheTags :tags="article.entry.tags"></TheTags>
 		</div>
 	</header>
 </template>
@@ -79,13 +70,13 @@
 	import { EntryJp } from "@/api/dictionary/jp/types";
 	import { MessagesNames } from "@/locale/messages-names";
 	import { RoutesNames } from "@/router/routes-names";
-	import { useSearch } from "@/stores/search";
 	import { convert_to_kana } from "@nyars-jiten/jp-transcript";
+
+	import TheTags from "@/components/the-tags.vue";
 
 	type Props = { article: EntryJp; standalone: boolean };
 
 	defineProps<Props>();
 
 	const locale = useI18n();
-	const sStore = useSearch();
 </script>

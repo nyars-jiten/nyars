@@ -166,13 +166,13 @@
 	import { EntryKanji } from "@/api/dictionary/kanji/types";
 	import { charUnicode } from "@/core/unicode";
 
+	import TheTags from "@/components/the-tags.vue";
 	import ContentCopyIcon from "vue-material-design-icons/LinkVariant.vue";
 	import TheForms from "./the-article/the-forms.vue";
 	import TheImages from "./the-article/the-images.vue";
 	import TheIndices from "./the-article/the-indices.vue";
 	import TheMeanings from "./the-article/the-meanings.vue";
 	import TheReading from "./the-article/the-reading.vue";
-	import TheTags from "./the-article/the-tags.vue";
 	import TheWords from "./the-article/the-words.vue";
 
 	type Props = { article: EntryKanji; standalone: boolean };

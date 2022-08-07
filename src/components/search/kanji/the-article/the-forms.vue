@@ -32,7 +32,7 @@
 				<div class="flex flex-col gap-2">
 					<span
 						v-if="form.type !== null"
-						class="select-none whitespace-nowrap rounded-md border border-tag-jlpt-n4 px-2 text-sm text-tag-jlpt-n4 hover:opacity-75"
+						class="select-none whitespace-nowrap rounded-md border border-accent-500 px-2 text-sm text-accent-500 hover:opacity-75"
 					>
 						{{
 							locale.t(`${MessagesNames.KanjiFormTypeName}.${form.type}.short`)

@@ -7,7 +7,7 @@
 			:class="searchExpanded ? 'rounded-t-md' : 'rounded-md'"
 		>
 			<button
-				class="text-s flex items-center p-4 capitalize opacity-100 duration-75 ease-in-out hover:bg-gray-100 hover:opacity-75 dark:text-gray-400 dark:hover:bg-gray-700"
+				class="flex items-center p-4 capitalize opacity-100 duration-75 ease-in-out hover:bg-gray-100 hover:opacity-75 dark:text-gray-400 dark:hover:bg-gray-700"
 				@click="searchExpanded = !searchExpanded"
 			>
 				<span class="hidden md:block">{{
@@ -68,7 +68,7 @@
 				mode="out-in"
 			>
 				<TheHandwriting
-					v-show="showDrawPanel"
+					v-if="showDrawPanel"
 					class="absolute right-0 top-[calc(100%+1rem)] z-20 border-gray-100 shadow-2xl"
 				/>
 			</Transition>
