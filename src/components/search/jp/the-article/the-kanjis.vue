@@ -3,7 +3,7 @@
 		v-if="kanjis.length > 0"
 		class="select-text border border-gray-100 bg-white p-8 shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
 	>
-		<div class="select-none pb-8 text-gray-400 dark:text-gray-400">
+		<div class="select-none pb-4 text-gray-400">
 			{{ locale.t(MessagesNames.WordKanjisTitle) }}
 		</div>
 		<div class="flex flex-col flex-wrap gap-8">

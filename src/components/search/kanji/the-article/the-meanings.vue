@@ -1,6 +1,6 @@
 <template>
-	<div class="flex flex-col gap-2">
-		<div class="select-none border-l-2 border-accent-500 px-3 text-accent-500">
+	<div class="flex flex-col gap-4">
+		<div class="select-none rounded-md text-accent-500">
 			{{ title }}
 		</div>
 		<template v-for="(meaning, meaningsId) of meanings" :key="meaningsId">
@@ -23,14 +23,14 @@
 					</span>
 				</div>
 				<div
-					class="flex flex-col border-l border-gray-200 pl-2 text-gray-600 dark:border-gray-600 dark:text-gray-400"
+					class="flex flex-col gap-y-2 border-l border-gray-200 pl-3 text-gray-600 dark:border-gray-600 dark:text-gray-400"
 				>
 					<div
 						v-for="word of meaning.words"
 						:key="word.wid"
 						class="inline-flex flex-wrap gap-x-2"
 					>
-						<RouterLink :to="location(word.wid)">
+						<RouterLink :to="location(word.wid)" class="text-lg">
 							{{ word.word }}
 						</RouterLink>
 						<span class="text-gray-400 dark:text-gray-500">

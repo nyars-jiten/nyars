@@ -26,6 +26,7 @@ const enum _Names {
 	StandaloneMeanings,
 	ComposedMeanings,
 	KanbunMeanings,
+	MeaningsEmpty,
 	Note,
 	KanjiReadingTypeName,
 	KanjiReadingTagName,
@@ -80,6 +81,7 @@ export class MessagesNames {
 	static readonly StandaloneMeanings = String(_Names.StandaloneMeanings);
 	static readonly ComposedMeanings = String(_Names.ComposedMeanings);
 	static readonly KanbunMeanings = String(_Names.KanbunMeanings);
+	static readonly MeaningsEmpty = String(_Names.MeaningsEmpty);
 	static readonly Note = String(_Names.Note);
 	static readonly KanjiReadingTypeName = String(_Names.KanjiReadingTypeName);
 	static readonly KanjiReadingTagName = String(_Names.KanjiReadingTagName);

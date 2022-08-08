@@ -15,7 +15,7 @@ export const ru = {
 	[MessagesNames.HeaderDownload]: "Скачать",
 
 	[MessagesNames.SearchJapInput]: "Японское, русское или английское слово",
-	[MessagesNames.SearchKanjiInput]: "Кандзи",
+	[MessagesNames.SearchKanjiInput]: "Японское слово или кандзи",
 	[MessagesNames.SearchTypeName]: {
 		[SearchType.Jap]: { badge: "詞", short: "слова" },
 		[SearchType.Kanji]: { badge: "字", short: "кандзи" },
@@ -40,7 +40,7 @@ export const ru = {
 	[MessagesNames.WordKanjisTitle]: "Кандзи в этом слове",
 
 	[MessagesNames.Radical]: "Ключ",
-	[MessagesNames.Ids]: "Декомпозиция",
+	[MessagesNames.Ids]: "IDS",
 	[MessagesNames.StrokeCount]: "Черты",
 	[MessagesNames.Frequency]: "Частотность",
 	[MessagesNames.Unicode]: "Unicode",
@@ -64,10 +64,11 @@ export const ru = {
 	[MessagesNames.StandaloneMeanings]: "Самостоятельные значения",
 	[MessagesNames.ComposedMeanings]: "Составные значения",
 	[MessagesNames.KanbunMeanings]: "Камбун",
+	[MessagesNames.MeaningsEmpty]: "Данные о значениях отсутствуют",
 	[MessagesNames.Note]: "Примечание",
 	[MessagesNames.KanjiStyle]: "Стили написания",
 	[MessagesNames.KanjiStyleName]: {
-		[KanjiImageStyle.Kyokasho]: "",
+		[KanjiImageStyle.Kyoukasyo]: "",
 		[KanjiImageStyle.Mincho]: "",
 		[KanjiImageStyle.Gothic]: "",
 		[KanjiImageStyle.Kaisyo]: "",

@@ -38,17 +38,17 @@
 					v-if="standalone"
 					class="flex flex-col gap-2 rounded-md bg-neutral-100 py-2 px-3 dark:bg-gray-700"
 				>
+					<p v-if="article.entry.general.freq">
+						<span class="select-none text-sm text-gray-400">
+							{{ locale.t(MessagesNames.Frequency) }}
+						</span>
+						<span class="ml-2">{{ article.entry.general.freq }}</span>
+					</p>
 					<p v-if="article.radical && article.radical.literal">
 						<span class="select-none text-sm text-gray-400">
 							{{ locale.t(MessagesNames.Radical) }}
 						</span>
 						<span class="ml-2 font-medium">{{ article.radical.literal }}</span>
-					</p>
-					<p v-if="article.entry.general.ids">
-						<span class="select-none text-sm text-gray-400">
-							{{ locale.t(MessagesNames.Ids) }}
-						</span>
-						<span class="ml-2">{{ article.entry.general.ids }}</span>
 					</p>
 					<p v-if="article.entry.general.strokeCount">
 						<span class="select-none text-sm text-gray-400">
@@ -56,11 +56,11 @@
 						</span>
 						<span class="ml-2">{{ article.entry.general.strokeCount }}</span>
 					</p>
-					<p v-if="article.entry.general.freq">
+					<p v-if="article.entry.general.ids">
 						<span class="select-none text-sm text-gray-400">
-							{{ locale.t(MessagesNames.Frequency) }}
+							{{ locale.t(MessagesNames.Ids) }}
 						</span>
-						<span class="ml-2">{{ article.entry.general.freq }}</span>
+						<span class="ml-2">{{ article.entry.general.ids }}</span>
 					</p>
 				</div>
 
@@ -89,10 +89,7 @@
 			<div class="flex flex-col gap-8">
 				<TheTags :tags="article.entry.general.tags" class="text-sm" />
 
-				<div
-					v-if="article.entry.general.tags.length > 0"
-					class="flex flex-col gap-4"
-				>
+				<div v-if="article.entry.readings" class="flex flex-col gap-4">
 					<template
 						v-for="(reading, readingType) of article.entry.readings"
 						:key="readingType"
@@ -138,6 +135,17 @@
 						:meanings="article.entry.kanbunMeanings"
 						:title="locale.t(MessagesNames.KanbunMeanings)"
 					/>
+
+					<div
+						v-if="
+							article.entry.composedMeanings.length == 0 &&
+							article.entry.standaloneMeanings.length == 0 &&
+							article.entry.kanbunMeanings.length == 0
+						"
+						class="select-none rounded-md bg-gray-100 p-4 text-gray-400 dark:bg-gray-700"
+					>
+						{{ locale.t(MessagesNames.MeaningsEmpty) }}
+					</div>
 
 					<TheIndices
 						v-if="article.entry.indices.length > 0"

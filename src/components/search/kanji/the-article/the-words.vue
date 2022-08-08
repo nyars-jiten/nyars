@@ -1,11 +1,11 @@
 <template>
-	<div class="flex flex-col gap-2">
-		<div class="select-none border-l-2 border-accent-500 px-3 text-accent-500">
+	<div class="flex flex-col gap-4">
+		<div class="select-none rounded-md text-accent-500">
 			{{ title }}
 		</div>
-		<div class="flex flex-col gap-y-1">
-			<span v-for="word of words" :key="word.wid">
-				<RouterLink :to="location(word.wid)">
+		<div class="flex flex-col gap-y-2">
+			<div v-for="word of words" :key="word.wid">
+				<RouterLink :to="location(word.wid)" class="text-lg">
 					{{ word.word }}
 				</RouterLink>
 				<span class="mx-2 text-gray-400 dark:text-gray-500">
@@ -17,7 +17,7 @@
 					v-html="bbCodesProcess(word.meaning)"
 				/>
 				<!-- eslint-enable vue/no-v-html -->
-			</span>
+			</div>
 		</div>
 	</div>
 </template>

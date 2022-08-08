@@ -3,11 +3,11 @@
 		<span class="select-none text-sm text-gray-400 dark:text-gray-400">
 			{{ locale.t(MessagesNames.KanjiStyle) }}
 		</span>
-		<div class="flex flex-row flex-wrap gap-2">
+		<div class="flex flex-row flex-wrap justify-center gap-2">
 			<div
 				v-for="(image, imageId) of images"
 				:key="imageId"
-				class="flex flex-col items-center gap-2 align-middle"
+				class="flex flex-col items-center gap-2"
 			>
 				<div class="w-20">
 					<svg
@@ -25,7 +25,7 @@
 						></path>
 					</svg>
 				</div>
-				<span class="text-sm">
+				<span class="text-center text-sm">
 					{{ locale.t(`${MessagesNames.KanjiStyleName}.${image.style}`) }}
 				</span>
 			</div>
