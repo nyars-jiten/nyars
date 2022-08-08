@@ -20,7 +20,9 @@
 					v-on="standalone ? { click: copyContent } : {}"
 				>
 					<div class="flex select-none flex-col gap-2">
-						<span class="text-9xl">{{ article.entry.general.literal }}</span>
+						<span class="font-header text-9xl">{{
+							article.entry.general.literal
+						}}</span>
 						<span class="break-words">
 							{{ article.entry.general.shortMeans }}
 						</span>
