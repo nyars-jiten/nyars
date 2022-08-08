@@ -1,7 +1,7 @@
 <template>
 	<section class="flex flex-col gap-4">
 		<TheArticle :article="article" :standalone="standalone" />
-
+		<TheKanjis :kanjis="article.kanjis" />
 		<div
 			v-if="images.length > 0"
 			class="flex flex-wrap gap-2 border border-gray-100 bg-white px-10 py-5 shadow-md dark:border-gray-600 md:rounded-md"
@@ -84,6 +84,7 @@
 
 	import ShortArticle from "@/components/edits/short-article.vue";
 	import TheArticle from "@/components/search/jp/the-article.vue";
+	import TheKanjis from "@/components/search/jp/the-article/the-kanjis.vue";
 	import MinusIcon from "vue-material-design-icons/Minus.vue";
 	import PlusIcon from "vue-material-design-icons/Plus.vue";
 

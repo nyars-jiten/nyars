@@ -4,7 +4,7 @@
 			v-for="(tag, tagId) of tagsSplitted"
 			:key="tagId"
 			type="button"
-			class="flex select-none items-stretch overflow-hidden whitespace-nowrap rounded-md border text-sm hover:opacity-75"
+			class="flex select-none items-stretch overflow-hidden whitespace-nowrap rounded-md border hover:opacity-75"
 			:class="[
 				tag.valueNum
 					? `border-tag-level-${tag.valueNum}-500`

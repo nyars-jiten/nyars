@@ -11,6 +11,7 @@ const enum _Names {
 	SearchInfoPost,
 	SearchExamples,
 	SearchShortLangName,
+	WordKanjisTitle,
 
 	Radical,
 	Ids,
@@ -64,6 +65,7 @@ export class MessagesNames {
 	static readonly SearchInfoPost = String(_Names.SearchInfoPost);
 	static readonly SearchExamples = String(_Names.SearchExamples);
 	static readonly SearchShortLangName = String(_Names.SearchShortLangName);
+	static readonly WordKanjisTitle = String(_Names.WordKanjisTitle);
 
 	static readonly Radical = String(_Names.Radical);
 	static readonly Ids = String(_Names.Ids);

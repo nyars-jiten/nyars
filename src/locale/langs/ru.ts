@@ -37,6 +37,7 @@ export const ru = {
 		eng: "анг",
 		lat: "лат",
 	},
+	[MessagesNames.WordKanjisTitle]: "Кандзи в этом слове",
 
 	[MessagesNames.Radical]: "Ключ",
 	[MessagesNames.Ids]: "Декомпозиция",

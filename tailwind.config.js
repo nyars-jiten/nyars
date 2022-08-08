@@ -59,8 +59,8 @@ module.exports = {
 
 				"tag-common": tagCommon,
 				"tag-jyouyou": colors.slate,
-				insatsu: colors.slate,
-				jinmeiyou: colors.slate,
+				"tag-insatsu": colors.slate,
+				"tag-jinmeiyou": colors.slate,
 				"tag-level-1": tagLevel1,
 				"tag-level-2": tagLevel2,
 				"tag-level-3": tagLevel3,

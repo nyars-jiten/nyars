@@ -85,7 +85,7 @@
 			</div>
 
 			<div class="flex flex-col gap-8">
-				<TheTags :tags="article.entry.general.tags" />
+				<TheTags :tags="article.entry.general.tags" class="text-sm" />
 
 				<div
 					v-if="article.entry.general.tags.length > 0"

@@ -59,7 +59,7 @@
 		</div>
 
 		<div v-show="article.entry.tags.length > 0" class="flex items-start gap-2">
-			<TheTags :tags="article.entry.tags"></TheTags>
+			<TheTags :tags="article.entry.tags" class="text-sm" />
 		</div>
 	</header>
 </template>
