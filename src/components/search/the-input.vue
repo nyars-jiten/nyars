@@ -23,8 +23,8 @@
 					type="text"
 					class="peer h-full w-full pb-px text-center text-xl outline-none transition-colors duration-150 ease-in-out focus-within:border-b focus-within:bg-gray-100 focus-within:pb-0 dark:border-gray-600 dark:bg-gray-800 dark:focus-within:bg-gray-700"
 					:placeholder="
-						searchType == SearchType.Jap
-							? locale.t(MessagesNames.SearchJapInput)
+						searchType == SearchType.Jp
+							? locale.t(MessagesNames.searchJpInput)
 							: locale.t(MessagesNames.SearchKanjiInput)
 					"
 					@keydown.enter="() => searchImmediately()"
@@ -88,7 +88,7 @@
 			>
 				<span class="text-gray-500">Искать:</span>
 				<RadioGroup v-model="searchType" class="flex flex-row gap-2">
-					<RadioGroupOption v-slot="{ checked }" :value="SearchType.Jap">
+					<RadioGroupOption v-slot="{ checked }" :value="SearchType.Jp">
 						<span
 							:class="
 								checked
@@ -99,7 +99,7 @@
 						>
 							{{
 								locale.t(
-									`${MessagesNames.SearchTypeName}.${SearchType.Jap}.short`,
+									`${MessagesNames.SearchTypeName}.${SearchType.Jp}.short`,
 								)
 							}}
 						</span>
@@ -152,7 +152,7 @@
 
 	const searchSugg = debounce(updateSugg, 100);
 	const sugg = ref<string[]>([]);
-	const searchType = ref(SearchType.Jap);
+	const searchType = ref(SearchType.Jp);
 
 	watch(
 		() => store.request,
@@ -168,9 +168,9 @@
 
 	async function searchImmediately(request?: string) {
 		searchSugg.cancel();
-		if (searchType.value == SearchType.Jap) {
+		if (searchType.value == SearchType.Jp) {
 			await updateSugg(request);
-			await store.searchJap({
+			await store.searchJp({
 				request,
 				userRequest: true,
 			});
@@ -198,7 +198,7 @@
 		const { request } = query;
 		const { type } = query;
 
-		searchType.value = (type as SearchType) ?? SearchType.Jap;
+		searchType.value = (type as SearchType) ?? SearchType.Jp;
 
 		if (typeof request == "string") {
 			if (type == SearchType.Kanji) {
@@ -208,7 +208,7 @@
 				});
 			} else {
 				await updateSugg(request);
-				await store.searchJap({
+				await store.searchJp({
 					request,
 					userRequest: true,
 				});

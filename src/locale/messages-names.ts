@@ -4,7 +4,7 @@ const enum _Names {
 	HeaderBugTracker,
 	HeaderDownload,
 
-	SearchJapInput,
+	searchJpInput,
 	SearchKanjiInput,
 	SearchTypeName,
 	SearchInfoPre,
@@ -59,7 +59,7 @@ export class MessagesNames {
 	static readonly HeaderBugTracker = String(_Names.HeaderBugTracker);
 	static readonly HeaderDownload = String(_Names.HeaderDownload);
 
-	static readonly SearchJapInput = String(_Names.SearchJapInput);
+	static readonly searchJpInput = String(_Names.searchJpInput);
 	static readonly SearchKanjiInput = String(_Names.SearchKanjiInput);
 	static readonly SearchTypeName = String(_Names.SearchTypeName);
 	static readonly SearchInfoPre = String(_Names.SearchInfoPre);

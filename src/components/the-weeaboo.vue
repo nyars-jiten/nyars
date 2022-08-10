@@ -19,10 +19,10 @@
 						<div>{{ userRating.weekRating }}</div>
 
 						<div>{{ locale.t(MessagesNames.UserSummaryNew) }}</div>
-						<div>{{ userRating.summary.week.japNew }}</div>
+						<div>{{ userRating.summary.week.jpNew }}</div>
 
 						<div>{{ locale.t(MessagesNames.UserSummaryEdit) }}</div>
-						<div>{{ userRating.summary.week.japEdit }}</div>
+						<div>{{ userRating.summary.week.jpEdit }}</div>
 					</div>
 				</div>
 			</div>
@@ -40,5 +40,5 @@
 
 	const locale = useI18n();
 
-	const bestUsers = reactive(await api.dictionaryJapBestUsers());
+	const bestUsers = reactive(await api.dictionaryJpBestUsers());
 </script>

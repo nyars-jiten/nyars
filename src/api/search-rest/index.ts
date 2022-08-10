@@ -9,7 +9,7 @@ type SearchReq = {
 };
 
 export class SearchRest extends BasicRest {
-	public searchJap(props: SearchReq): Promise<SearchResultWord> {
+	public searchJp(props: SearchReq): Promise<SearchResultWord> {
 		return this.extractData(
 			this.#endpoint.get(`search/jap`, {
 				params: {

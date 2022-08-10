@@ -28,6 +28,6 @@
 	const store = useSearch();
 
 	async function search(request: string) {
-		await store.searchJap({ request, userRequest: false });
+		await store.searchJp({ request, userRequest: false });
 	}
 </script>

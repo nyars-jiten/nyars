@@ -14,10 +14,10 @@ export const ru = {
 	[MessagesNames.HeaderBugTracker]: "Багтрекер",
 	[MessagesNames.HeaderDownload]: "Скачать",
 
-	[MessagesNames.SearchJapInput]: "Японское, русское или английское слово",
+	[MessagesNames.searchJpInput]: "Японское, русское или английское слово",
 	[MessagesNames.SearchKanjiInput]: "Японское слово или кандзи",
 	[MessagesNames.SearchTypeName]: {
-		[SearchType.Jap]: { badge: "詞", short: "слова" },
+		[SearchType.Jp]: { badge: "詞", short: "слова" },
 		[SearchType.Kanji]: { badge: "字", short: "кандзи" },
 	},
 	[MessagesNames.SearchInfoPre]:

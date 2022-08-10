@@ -1,5 +1,5 @@
 import { api } from "@/api";
-import { SearchResultJapInfo } from "@/api/search-rest/types/search-result-jap-info";
+import { SearchResultJpInfo } from "@/api/search-rest/types/search-result-jp-info";
 import { SearchResultKanji } from "@/api/search-rest/types/search-result-kanji";
 import { SearchResultWord } from "@/api/search-rest/types/search-result-word";
 import { SearchType } from "@/api/types/search/search-type";
@@ -8,7 +8,7 @@ import { defineStore } from "pinia";
 
 import type { Actions, Getters, State } from "./types";
 
-function emptySearchGrammar(): SearchResultJapInfo {
+function emptySearchGrammar(): SearchResultJpInfo {
 	return {
 		count: 0,
 		page: 0,
@@ -37,16 +37,16 @@ export const useSearch = defineStore<string, State, Getters, Actions>(
 		state() {
 			return {
 				request: "",
-				resultsJap: emptySearchWordResults(),
+				resultsJp: emptySearchWordResults(),
 				resultsKanji: emptySearchKanjiResults(),
-				type: SearchType.Jap,
+				type: SearchType.Jp,
 			};
 		},
 
 		actions: {
-			async searchJap(props: { request?: string; userRequest?: boolean }) {
-				this.type = SearchType.Jap;
-				this.resultsJap.result = [];
+			async searchJp(props: { request?: string; userRequest?: boolean }) {
+				this.type = SearchType.Jp;
+				this.resultsJp.result = [];
 
 				if (props.request) {
 					this.request = props.request;
@@ -57,16 +57,16 @@ export const useSearch = defineStore<string, State, Getters, Actions>(
 					query: { request: this.request, type: this.type },
 				});
 
-				const response = await api.search.searchJap({
+				const response = await api.search.searchJp({
 					request: this.request,
 					page: 0,
 				});
 
 				if (props.userRequest) {
-					this.resultsJap.info = response.info;
+					this.resultsJp.info = response.info;
 				}
 
-				this.resultsJap.result = response.result;
+				this.resultsJp.result = response.result;
 			},
 
 			async searchKanji(props: { request?: string; userRequest?: boolean }) {

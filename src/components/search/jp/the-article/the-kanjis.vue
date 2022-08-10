@@ -18,7 +18,7 @@
 						params: { kid: kanji.kid },
 					}"
 				>
-					<span class="font-header text-7xl hover:opacity-75">
+					<span class="text-7xl hover:opacity-75">
 						{{ kanji.entry.general.literal }}
 					</span>
 				</RouterLink>

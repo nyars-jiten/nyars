@@ -1,27 +1,5 @@
 const colors = require("tailwindcss/colors");
 
-const tagLevel1 = colors.orange;
-const tagLevel2 = colors.amber;
-const tagLevel3 = colors.emerald;
-const tagLevel4 = colors.teal;
-const tagLevel5 = colors.cyan;
-const tagLevel6 = colors.sky;
-const tagLevel7 = colors.blue;
-const tagLevel8 = colors.indigo;
-const tagLevel9 = colors.violet;
-const tagLevel10 = colors.fuchsia;
-const tagCommon = colors.gray;
-
-const tagShou = colors.teal;
-const tagChuu = colors.amber;
-const tagKou = colors.orange;
-const tagKanon = colors.slate;
-const tagTouon = colors.slate;
-const tagGoon = colors.slate;
-const tagKanyoon = colors.slate;
-const tagSouon = colors.slate;
-const tagGai = colors.blue;
-
 const statusVariant1 = "#1d90b3"; // New
 const statusVariant2 = "#b31d1d"; // Declined
 const statusVariant3 = "#1db336"; // Accepted
@@ -57,29 +35,22 @@ module.exports = {
 
 				gray: colors.zinc,
 
-				"tag-common": tagCommon,
+				"tag-common": colors.gray,
 				"tag-jyouyou": colors.slate,
 				"tag-insatsu": colors.slate,
 				"tag-jinmeiyou": colors.slate,
-				"tag-level-1": tagLevel1,
-				"tag-level-2": tagLevel2,
-				"tag-level-3": tagLevel3,
-				"tag-level-4": tagLevel4,
-				"tag-level-5": tagLevel5,
-				"tag-level-6": tagLevel6,
-				"tag-level-7": tagLevel7,
-				"tag-level-8": tagLevel8,
-				"tag-level-9": tagLevel9,
-				"tag-level-10": tagLevel10,
-				"tag-shou": tagShou,
-				"tag-chuu": tagChuu,
-				"tag-kou": tagKou,
-				"tag-kanon": tagKanon,
-				"tag-souon": tagSouon,
-				"tag-touon": tagTouon,
-				"tag-goon": tagGoon,
-				"tag-kanyoon": tagKanyoon,
-				"tag-gai": tagGai,
+				"tag-jlpt": colors.amber,
+				"tag-kanken": colors.pink,
+				"tag-grade": colors.teal,
+				"tag-shou": colors.teal,
+				"tag-chuu": colors.amber,
+				"tag-kou": colors.orange,
+				"tag-kanon": colors.slate,
+				"tag-souon": colors.slate,
+				"tag-touon": colors.slate,
+				"tag-goon": colors.slate,
+				"tag-kanyoon": colors.slate,
+				"tag-gai": colors.blue,
 
 				"status-variant-1": statusVariant1,
 				"status-variant-2": statusVariant2,

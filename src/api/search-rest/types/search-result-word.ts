@@ -1,7 +1,7 @@
 import { EntryJp } from "@/api/dictionary/jp/types";
-import { SearchResultJapInfo } from "./search-result-jap-info";
+import { SearchResultJpInfo } from "./search-result-jp-info";
 
 export type SearchResultWord = {
-	info: SearchResultJapInfo;
+	info: SearchResultJpInfo;
 	result: EntryJp[];
 };

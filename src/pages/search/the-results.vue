@@ -1,8 +1,8 @@
 <template>
 	<section class="flex flex-col gap-10">
 		<TheGrammar
-			v-if="store.resultsJap.info && store.type != SearchType.Kanji"
-			:grammars="store.resultsJap.info.parsedGrammar"
+			v-if="store.resultsJp.info && store.type != SearchType.Kanji"
+			:grammars="store.resultsJp.info.parsedGrammar"
 		/>
 
 		<TransitionGroup
@@ -17,9 +17,9 @@
 			mode="out-in"
 			:class="'min-w-full'"
 		>
-			<template v-if="store.type == SearchType.Jap">
-				<JapArticle
-					v-for="result of store.resultsJap.result"
+			<template v-if="store.type == SearchType.Jp">
+				<JpArticle
+					v-for="result of store.resultsJp.result"
 					:key="result.wid"
 					:article="result"
 					:standalone="false"
@@ -41,7 +41,7 @@
 	import { SearchType } from "@/api/types/search/search-type";
 	import { useSearch } from "@/stores/search";
 
-	import JapArticle from "@/components/search/jp/the-article.vue";
+	import JpArticle from "@/components/search/jp/the-article.vue";
 	import TheGrammar from "@/components/search/jp/the-grammar.vue";
 	import KanjiArticle from "@/components/search/kanji/the-article.vue";
 

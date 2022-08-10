@@ -10,7 +10,7 @@
 				class="flex flex-row items-start gap-4"
 			>
 				<div class="w-20">
-					<span v-if="form.literal.length === 1" class="font-header text-7xl">
+					<span v-if="form.literal.length === 1" class="text-7xl">
 						{{ form.literal }}
 					</span>
 					<svg

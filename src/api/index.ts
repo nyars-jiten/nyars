@@ -31,13 +31,13 @@ export const api = new (class extends BasicRest {
 	readonly users;
 	readonly edits;
 
-	dictionaryJapEntries(props: { wid: string }) {
+	dictionaryJpEntries(props: { wid: string }) {
 		return this.extractData(
 			this.#endpoint.get<EntryJp>(`dictionary/jap/entries/${props.wid}`),
 		);
 	}
 
-	dictionaryJapBestUsers() {
+	dictionaryJpBestUsers() {
 		return this.extractData(
 			this.#endpoint.get<Users>("/dictionary/jap/stats-user"),
 		);

@@ -4,7 +4,7 @@ import { SearchType } from "@/api/types/search/search-type";
 
 export type State = {
 	request: string;
-	resultsJap: SearchResultWord;
+	resultsJp: SearchResultWord;
 	resultsKanji: SearchResultKanji;
 	type?: SearchType;
 };

@@ -99,7 +99,7 @@
 	const wid = route.params.wid;
 	if (typeof wid !== "string") throw new Error("Bad component usage");
 
-	const article = await api.dictionaryJapEntries({ wid });
+	const article = await api.dictionaryJpEntries({ wid });
 	const images = await api.kotoba.entryImages({ wid });
 	const articles = await api.edits.byEntry({ wid });
 	const satellites = reactive(
