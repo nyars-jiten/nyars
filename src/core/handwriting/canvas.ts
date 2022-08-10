@@ -72,7 +72,7 @@ export class Canvas implements Handwriting {
 		this.context.moveTo(this.pos.x, this.pos.y);
 
 		this.context.lineCap = "round";
-		this.context.strokeStyle = "rgb(55, 65, 81)";
+		this.context.strokeStyle = "rgb(113, 113, 122)";
 
 		this.pushNext();
 	}

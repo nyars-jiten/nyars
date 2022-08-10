@@ -1,5 +1,9 @@
+import { KanjiFormType } from "@/api/dictionary/kanji/types";
+import { KanjiImageStyle } from "@/api/dictionary/kanji/types/kanji-image-style";
+import { KanjiIndexType } from "@/api/dictionary/kanji/types/kanji-index-type";
 import { StatusVariant } from "@/api/edits-rest/types/status-variant";
 import { TypeVariant } from "@/api/edits-rest/types/type-variant";
+import { SearchType } from "@/api/types/search/search-type";
 import { MessagesNames } from "../messages-names";
 
 import rinf from "./tags/rinf";
@@ -10,7 +14,12 @@ export const ru = {
 	[MessagesNames.HeaderBugTracker]: "Багтрекер",
 	[MessagesNames.HeaderDownload]: "Скачать",
 
-	[MessagesNames.SearchInput]: "Японское, русское или английское слово",
+	[MessagesNames.searchJpInput]: "Японское, русское или английское слово",
+	[MessagesNames.SearchKanjiInput]: "Японское слово или кандзи",
+	[MessagesNames.SearchTypeName]: {
+		[SearchType.Jp]: { badge: "詞", short: "слова" },
+		[SearchType.Kanji]: { badge: "字", short: "кандзи" },
+	},
 	[MessagesNames.SearchInfoPre]:
 		"НЯРС — редактируемый японско-русский(-английский) словарь. Для начала работы со словарём введите поисковой запрос в строку выше. Вот несколько примеров: \n\n",
 	[MessagesNames.SearchInfoPost]:
@@ -28,14 +37,118 @@ export const ru = {
 		eng: "анг",
 		lat: "лат",
 	},
+	[MessagesNames.WordKanjisTitle]: "Кандзи в этом слове",
+
+	[MessagesNames.Radical]: "Ключ",
+	[MessagesNames.Ids]: "IDS",
+	[MessagesNames.StrokeCount]: "Черты",
+	[MessagesNames.Frequency]: "Частотность",
+	[MessagesNames.Unicode]: "Unicode",
+	[MessagesNames.JIS]: "JIS",
+	[MessagesNames.KanjiForm]: "Иные формы",
+	[MessagesNames.KanjiFormTypeName]: {
+		[KanjiFormType.Kyuujitai]: { short: "", full: "" },
+		[KanjiFormType.Shinjitai]: { short: "", full: "" },
+		[KanjiFormType.Hyoujunjitai]: { short: "", full: "" },
+		[KanjiFormType.Kyoyoujitai]: { short: "", full: "" },
+		[KanjiFormType.Itaiji]: { short: "", full: "" },
+		[KanjiFormType.Rare]: { short: "", full: "" },
+		[KanjiFormType.Popular]: { short: "", full: "" },
+		[KanjiFormType.Japanese]: { short: "", full: "" },
+		[KanjiFormType.Nonjapanese]: { short: "", full: "" },
+		[KanjiFormType.Kankan]: { short: "", full: "" },
+		[KanjiFormType.Inhyou]: { short: "", full: "" },
+		[KanjiFormType.Seiji]: { short: "", full: "" },
+		[KanjiFormType.Ryakuji]: { short: "", full: "" },
+	},
+	[MessagesNames.StandaloneMeanings]: "Самостоятельные значения",
+	[MessagesNames.ComposedMeanings]: "Составные значения",
+	[MessagesNames.KanbunMeanings]: "Камбун",
+	[MessagesNames.MeaningsEmpty]: "Данные о значениях отсутствуют",
+	[MessagesNames.Note]: "Примечание",
+	[MessagesNames.KanjiStyle]: "Стили написания",
+	[MessagesNames.KanjiStyleName]: {
+		[KanjiImageStyle.Kyoukasyo]: "",
+		[KanjiImageStyle.Mincho]: "",
+		[KanjiImageStyle.Gothic]: "",
+		[KanjiImageStyle.Kaisyo]: "",
+		[KanjiImageStyle.Gyousyo]: "",
+		[KanjiImageStyle.Sousyo]: "",
+		[KanjiImageStyle.Sousyo]: "",
+		[KanjiImageStyle.Other]: "",
+	},
+	[MessagesNames.KanjiReadingTypeName]: {
+		onyomi: { badge: "音", full: "Онъёми" },
+		kunyomi: { badge: "訓", full: "Кунъёми" },
+		nanori: { badge: "名", full: "Нанори" },
+		other: { badge: "他", full: "Прочие варианты чтения" },
+	},
+	[MessagesNames.KanjiReadingTagName]: {
+		shou: { badge: "小", full: "" },
+		chuu: { badge: "中", full: "" },
+		kou: { badge: "高", full: "" },
+		kanon: { badge: "漢", full: "" },
+		touon: { badge: "唐", full: "" },
+		goon: { badge: "呉", full: "" },
+		kanyoon: { badge: "慣", full: "" },
+		souon: { badge: "宋", full: "" },
+		gai: { badge: "外", full: "" },
+	},
+	[MessagesNames.Index]: "Индекс",
+	[MessagesNames.Source]: "Источник",
+	[MessagesNames.KanjiIndexTypeName]: {
+		[KanjiIndexType.Dictionary]: "Индексы в словарях",
+		[KanjiIndexType.Classification]: "Регистры",
+		[KanjiIndexType.Codepoint]: "Кодировки",
+	},
+	[MessagesNames.IndexSourceAbbr]: {
+		nelson_c:
+			"Modern Reader's Japanese-English Character Dictionary (A. Nelson)",
+		nelson_n: "New Nelson Japanese-English Character Dictionary (A. Nelson)",
+		halpern_njecd: "New Japanese-English Character Dictionary (J. Halpern)",
+		halpern_kkd: "Kodansha Kanji Dictionary (J. Halpern)",
+		halpern_kkld: "Kodansha Kanji Learner's Dictionary (J. Halpern)",
+		halpern_kkld_2ed:
+			"Kodansha Kanji Learner's Dictionary, 2nd Edition (J. Halpern)",
+		heisig: "Remembering The Kanji (J. Heisig)",
+		heisig6: "Remembering The Kanji, 6th edition (J. Heisig)",
+		gakken: "A  New Dictionary of Kanji Usage (Gakken)",
+		oneill_names: "Japanese Names (P.G. O'Neill)",
+		oneill_kk: "Essential Kanji (P.G. O'Neill)",
+		moro: "Dai Kan-Wa Jiten (T. Morohashi)",
+		henshall:
+			"A Guide To Remembering Japanese Characters (Kenneth G. Henshall)",
+		henshall3:
+			"A Guide To Reading and Writing Japanese 3rd edition (Henshall, Seele, De Groot)",
+		sh_kk: "Kanji and Kana (M. Spahn, W. Hadamitzky)",
+		sh_kk2: "Kanji and Kana, Revised edition (M. Spahn, W. Hadamitzky)",
+		sakade: "A Guide To Reading and Writing Japanese (F. Sakade)",
+		jf_cards: "Japanese Kanji Flashcards (M. Hodges, T. Okazaki",
+		tutt_cards: "Tuttle Kanji Cards (A. Kask)",
+		crowley: "The Kanji Way to Japanese Language Power (D. Crowley)",
+		kanji_in_context: "Kanji in Context",
+		busy_people: "Japanese For Busy People",
+		kodansha_compact: "Kodansha Compact Kanji Guide",
+		maniette: "Les Kanjis dans la tete (Y. Maniette)",
+		skip: "Halpern's SKIP",
+		sh_desc: "The Kanji Dictionary descriptor",
+		four_corner: "Four Corner",
+		deroo: "2001 Kanji (J. De Roo)",
+		misclass: "Misclass",
+		jis208: "JIS X 0208-1997",
+		jis212: "JIS X 0212-1990",
+		jis213: "JIS X 0213-2000",
+		ucs: "Unicode 4.0",
+	},
 
 	[MessagesNames.ArticleTagName]: {
-		common: "common",
-		"jlpt-n5": "jlpt n5",
-		"jlpt-n4": "jlpt n4",
-		"jlpt-n3": "jlpt n3",
-		"jlpt-n2": "jlpt n2",
-		"jlpt-n1": "jlpt n1",
+		common: { short: "common" },
+		jyouyou: { short: "jōyō" },
+		insatsu: { short: "insatsu" },
+		jinmeiyou: { short: "jinmeiyō" },
+		kanken: { short: "kanken" },
+		jlpt: { short: "JLPT" },
+		grade: { short: "Класс" },
 		pos: {
 			"adv-to": { short: "adv-to", full: "adverb taking the `to' particle" },
 			"n-adv": { short: "n-adv", full: "adverbial noun (fukushitekimeishi)" },
@@ -463,4 +576,5 @@ export const ru = {
 
 	[MessagesNames.ShowMore]: "подробнее",
 	[MessagesNames.ShowLess]: "скрыть",
+	[MessagesNames.CopyLink]: "ссылка",
 };

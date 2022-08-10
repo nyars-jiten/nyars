@@ -1,13 +1,13 @@
 <template>
 	<section
 		v-show="grammars.length"
-		class="select-text rounded border border-gray-100 bg-white px-10 py-5 shadow-md dark:border-zinc-700 dark:bg-zinc-800"
+		class="select-text rounded border border-gray-100 bg-white px-10 py-5 shadow-md dark:border-gray-700 dark:bg-gray-800"
 	>
 		<div class="flex flex-wrap gap-2 underline underline-offset-4">
 			<button
 				v-for="(grammar, i) of grammars"
 				:key="`${grammar.word}-${i}`"
-				class="hover:opacity-50"
+				class="hover:opacity-75"
 				type="button"
 				@click="search(grammar.word)"
 			>
@@ -28,6 +28,6 @@
 	const store = useSearch();
 
 	async function search(request: string) {
-		await store.search({ request, userRequest: false });
+		await store.searchJp({ request, userRequest: false });
 	}
 </script>

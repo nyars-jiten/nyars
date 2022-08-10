@@ -7,7 +7,8 @@ import { SearchRest } from "./search-rest";
 import { StatisticsRest } from "./statistics-rest";
 import { UsersRest } from "./users-rest";
 
-import type { EntryJp } from "./search-rest/types";
+import type { EntryJp } from "./dictionary/jp/types";
+import type { EntryKanji } from "./dictionary/kanji/types";
 import { Users } from "./types";
 
 type SatelliteValue = {
@@ -30,15 +31,21 @@ export const api = new (class extends BasicRest {
 	readonly users;
 	readonly edits;
 
-	dictionaryJapEntries(props: { wid: string }) {
+	dictionaryJpEntries(props: { wid: string }) {
 		return this.extractData(
 			this.#endpoint.get<EntryJp>(`dictionary/jap/entries/${props.wid}`),
 		);
 	}
 
-	dictionaryJapBestUsers() {
+	dictionaryJpBestUsers() {
 		return this.extractData(
 			this.#endpoint.get<Users>("/dictionary/jap/stats-user"),
+		);
+	}
+
+	dictionaryKanjiEntries(props: { kid: string }) {
+		return this.extractData(
+			this.#endpoint.get<EntryKanji>(`dictionary/kanji/entries/${props.kid}`),
 		);
 	}
 

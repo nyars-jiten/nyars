@@ -1,6 +1,7 @@
 import type { Axios } from "axios";
 import { BasicRest } from "../basic-rest";
-import { SearchResult } from "./types/search-result";
+import { SearchResultKanji } from "./types/search-result-kanji";
+import { SearchResultWord } from "./types/search-result-word";
 
 type SearchReq = {
 	request: string;
@@ -8,9 +9,21 @@ type SearchReq = {
 };
 
 export class SearchRest extends BasicRest {
-	public search(props: SearchReq): Promise<SearchResult> {
+	public searchJp(props: SearchReq): Promise<SearchResultWord> {
 		return this.extractData(
-			this.#endpoint.get("search/jap", {
+			this.#endpoint.get(`search/jap`, {
+				params: {
+					r: props.request,
+					p: props.page,
+					exact: false,
+				},
+			}),
+		);
+	}
+
+	public searchKanji(props: SearchReq): Promise<SearchResultKanji> {
+		return this.extractData(
+			this.#endpoint.get(`search/kanji`, {
 				params: {
 					r: props.request,
 					p: props.page,

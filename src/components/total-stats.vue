@@ -5,7 +5,7 @@
 				<h2 class="text-3xl font-medium">
 					{{ format(stats.added) }}
 				</h2>
-				<p class="leading-relaxed">
+				<p>
 					{{ locale.t(`${MessagesNames.Statistics}.added`) }}
 				</p>
 			</div>
@@ -13,7 +13,7 @@
 				<h2 class="text-3xl font-medium">
 					{{ format(stats.verified) }}
 				</h2>
-				<p class="leading-relaxed">
+				<p>
 					{{ locale.t(`${MessagesNames.Statistics}.verified`) }}
 				</p>
 			</div>

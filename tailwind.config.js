@@ -1,11 +1,4 @@
-const accent = "#6aa3ab";
-
-const tagJlptN1 = "#ea2a92";
-const tagJlptN2 = "#f99717";
-const tagJlptN3 = "#84bf26";
-const tagJlptN4 = "#459f94";
-const tagJlptN5 = "#3273bb";
-const tagCommon = "gray";
+const colors = require("tailwindcss/colors");
 
 const statusVariant1 = "#1d90b3"; // New
 const statusVariant2 = "#b31d1d"; // Declined
@@ -29,23 +22,35 @@ module.exports = {
 			},
 			colors: {
 				accent: {
-					100: "#e7faf7",
-					200: "#d1f6f2",
-					300: "#b1e5e3",
-					400: "#92cacc",
+					100: "#e1edee",
+					200: "#c3dadd",
+					300: "#a6c8cd",
+					400: "#88b5bc",
 					500: "#6aa3ab",
-					600: "#4d8493",
-					700: "#35677b",
-					800: "#214b63",
-					900: "#143652",
+					600: "#558289",
+					700: "#406267",
+					800: "#2a4144",
+					900: "#152122",
 				},
 
-				"tag-common": tagCommon,
-				"tag-jlpt-n5": tagJlptN5,
-				"tag-jlpt-n4": tagJlptN4,
-				"tag-jlpt-n3": tagJlptN3,
-				"tag-jlpt-n2": tagJlptN2,
-				"tag-jlpt-n1": tagJlptN1,
+				gray: colors.zinc,
+
+				"tag-common": colors.gray,
+				"tag-jyouyou": colors.slate,
+				"tag-insatsu": colors.slate,
+				"tag-jinmeiyou": colors.slate,
+				"tag-jlpt": colors.amber,
+				"tag-kanken": colors.pink,
+				"tag-grade": colors.teal,
+				"tag-shou": colors.teal,
+				"tag-chuu": colors.amber,
+				"tag-kou": colors.orange,
+				"tag-kanon": colors.slate,
+				"tag-souon": colors.slate,
+				"tag-touon": colors.slate,
+				"tag-goon": colors.slate,
+				"tag-kanyoon": colors.slate,
+				"tag-gai": colors.blue,
 
 				"status-variant-1": statusVariant1,
 				"status-variant-2": statusVariant2,

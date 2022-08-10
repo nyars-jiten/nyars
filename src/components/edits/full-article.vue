@@ -41,7 +41,7 @@
 				<div class="flex grow">
 					<button
 						type="button"
-						class="rounded-md bg-neutral-100 px-2 hover:opacity-50 dark:bg-zinc-700"
+						class="rounded-md bg-neutral-100 px-2 hover:opacity-75 dark:bg-gray-700"
 						@click="toggleChanges"
 					>
 						<Component
@@ -58,8 +58,8 @@
 					<span class="italic text-neutral-500">
 						{{
 							locale.t(`${MessagesNames.EditsDictName}.${article.dictionary}`)
-						}} </span
-					>, &#8203;
+						}}, &#8203;
+					</span>
 
 					<span :class="`text-type-variant-${article.type}`" class="italic">
 						{{ locale.t(`${MessagesNames.EditsType}.${article.type}`) }}
@@ -80,7 +80,7 @@
 		<ChangesPreview
 			v-if="isChangesVisible"
 			:id="article.id"
-			class="m-2 rounded-md border border-gray-200 dark:border-zinc-600"
+			class="m-2 rounded-md border border-gray-200 dark:border-gray-600"
 		/>
 	</section>
 </template>

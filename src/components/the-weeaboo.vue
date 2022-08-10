@@ -14,15 +14,15 @@
 					<h2 class="mb-2 text-lg font-medium">
 						{{ username }}
 					</h2>
-					<div class="grid grid-cols-[1fr_min-content] gap-x-4 leading-relaxed">
+					<div class="grid grid-cols-[1fr_min-content] gap-x-4">
 						<div>{{ locale.t(MessagesNames.UserWeekRating) }}</div>
 						<div>{{ userRating.weekRating }}</div>
 
 						<div>{{ locale.t(MessagesNames.UserSummaryNew) }}</div>
-						<div>{{ userRating.summary.week.japNew }}</div>
+						<div>{{ userRating.summary.week.jpNew }}</div>
 
 						<div>{{ locale.t(MessagesNames.UserSummaryEdit) }}</div>
-						<div>{{ userRating.summary.week.japEdit }}</div>
+						<div>{{ userRating.summary.week.jpEdit }}</div>
 					</div>
 				</div>
 			</div>
@@ -40,5 +40,5 @@
 
 	const locale = useI18n();
 
-	const bestUsers = reactive(await api.dictionaryJapBestUsers());
+	const bestUsers = reactive(await api.dictionaryJpBestUsers());
 </script>
