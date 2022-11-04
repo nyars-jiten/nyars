@@ -13,14 +13,5 @@ export default defineConfig({
 	server: {
 		port: 8080,
 	},
-	// temporary solution
-	// while topLevelAwait is not working
-	build: {
-		target: "esnext",
-	},
-	plugins: [vue(), wasm()], //, topLevelAwait()
-	define: {
-		__VUE_I18N_LEGACY_API__: false,
-		__VUE_I18N_FULL_INSTALL__: false,
-	},
+	plugins: [vue(), wasm()],
 });
