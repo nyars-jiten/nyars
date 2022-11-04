@@ -1,33 +1,9 @@
 {
-	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"typescript.tsdk": "node_modules/typescript/lib",
 	"editor.formatOnSave": true,
-	"editor.codeActionsOnSave": {
-		"source.fixAll": true,
-		"source.organizeImports": true
-	},
-	"[typescript]": {
-		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-	},
-	"[javascript]": {
-		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-	},
-	"[jsonc]": {
-		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-	},
-	"[html]": {
-		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-	},
-	"[json]": {
-		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-	},
-	"[vue]": {
-		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-	},
-	"[css]": {
-		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-	},
-	"[markdown]": {
-		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-	},
+	"editor.formatOnPaste": false,
+	"editor.formatOnType": false,
+	"editor.codeActionsOnSave": [/*"source.organizeImports", */ "source.fixAll"],
+	"editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
 	"files.eol": "\n"
 }
