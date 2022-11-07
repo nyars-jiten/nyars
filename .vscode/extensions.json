@@ -2,6 +2,7 @@
 	"recommendations": [
 		"Vue.volar",
 		"rvest.vs-code-prettier-eslint",
-		"bradlc.vscode-tailwindcss"
+		"bradlc.vscode-tailwindcss",
+		"moalamri.inline-fold"
 	]
 }

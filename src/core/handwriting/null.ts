@@ -14,6 +14,10 @@ export class Null implements Handwriting {
 		return undefined;
 	}
 
+	onResize(_: FocusEvent) {
+		return undefined;
+	}
+
 	getProposals(): Promise<GoogleProposals> {
 		return Promise.resolve<GoogleProposals>(["SUCCESS", [["", []]]]);
 	}

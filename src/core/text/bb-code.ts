@@ -14,11 +14,11 @@ export function bbCodesProcess(value: string) {
 		.replace(/⌈/gim, "")
 		.replace(
 			/\[ref=?\](.*?)\[\/ref\]/gim,
-			"<a href='/search?request=$1'>$1</a>",
+			"<a class=\"underline underline-offset-4 decoration-dotted hover:text-accent-500\" href='/search?request=$1'>$1</a>",
 		)
 		.replace(
 			/\[ref=([a-zA-Z\d]{4,7})\](.*?)\[\/ref\]/gim,
-			"<a href='/dict/jp/$1'>$2</a>",
+			"<a class=\"underline underline-offset-4 decoration-dotted hover:text-accent-500\" href='/dict/jp/$1'>$2</a>",
 		)
 		.replace(/\[sub\](.*?)\[\/sub\]/gim, "<sub>$1</sub>")
 		.replace(/\[sup\](.*?)\[\/sup\]/gim, "<sup>$1</sup>")

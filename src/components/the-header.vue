@@ -1,3 +1,23 @@
+<script setup lang="ts">
+	import { computed } from "vue";
+	import { useI18n } from "vue-i18n";
+
+	import { userTheme } from "@/core/theme/theme-control";
+	import { MessagesNames } from "@/locale/messages-names";
+	import { RoutesNames } from "@/router/routes-names";
+
+	import ThemeSwitcher from "./theme-switcher.vue";
+
+	const { t } = useI18n();
+
+	const variants = {
+		dark: "bg-logo-dark",
+		light: "bg-logo-light",
+	};
+
+	const logo = computed(() => variants[userTheme.value]);
+</script>
+
 <template>
 	<header class="sticky top-0 z-50 bg-white shadow-md dark:bg-gray-800">
 		<div
@@ -9,10 +29,7 @@
 				>
 					<RouterLink
 						class="flex h-10 w-10 items-center rounded-full bg-cover font-medium"
-						:class="{
-							'bg-logo-dark': isDarkTheme,
-							'bg-logo-light': !isDarkTheme,
-						}"
+						:class="logo"
 						:to="{ name: RoutesNames.SearchHome }"
 					/>
 				</div>
@@ -24,19 +41,26 @@
 						:to="{ name: RoutesNames.SearchHome }"
 						class="hover:text-accent-500"
 					>
-						{{ locale.t(MessagesNames.HeaderHome) }}
+						{{ t(MessagesNames.HeaderHome) }}
 					</RouterLink>
+
 					<RouterLink
 						:to="{ name: RoutesNames.Edits }"
 						class="hover:text-accent-500"
 					>
-						{{ locale.t(MessagesNames.HeaderEdits) }}
+						{{ t(MessagesNames.HeaderEdits) }}
 					</RouterLink>
-					<a href="#" class="hover:text-accent-500">
-						{{ locale.t(MessagesNames.HeaderBugTracker) }}
+
+					<a
+						href="https://github.com/nyars-jiten/nyars/issues"
+						class="hover:text-accent-500"
+						target="_blank"
+					>
+						{{ t(MessagesNames.HeaderBugTracker) }}
 					</a>
+
 					<a href="#" class="hover:text-accent-500">
-						{{ locale.t(MessagesNames.HeaderDownload) }}
+						{{ t(MessagesNames.HeaderDownload) }}
 					</a>
 				</nav>
 			</div>
@@ -47,17 +71,3 @@
 		</div>
 	</header>
 </template>
-
-<script setup lang="ts">
-	import { userTheme } from "@/core/theme/theme-control";
-	import { MessagesNames } from "@/locale/messages-names";
-	import { RoutesNames } from "@/router/routes-names";
-	import { computed } from "vue";
-	import { useI18n } from "vue-i18n";
-
-	import ThemeSwitcher from "./theme-switcher.vue";
-
-	const isDarkTheme = computed(_ => userTheme.value == "dark");
-
-	const locale = useI18n();
-</script>

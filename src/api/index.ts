@@ -7,22 +7,22 @@ import { SearchRest } from "./search-rest";
 import { StatisticsRest } from "./statistics-rest";
 import { UsersRest } from "./users-rest";
 
-import type { EntryJp } from "./dictionary/jp/types";
-import type { EntryKanji } from "./dictionary/kanji/types";
-import { Users } from "./types";
+import { type EntryJp } from "./dictionary/jp/types";
+import { type EntryKanji } from "./dictionary/kanji/types";
+import { type UserList } from "./types";
 
 type SatelliteValue = {
 	title: string;
 	lang: "eng" | "rus" | "jap";
 };
 
-type Satellite = {
+export type SatelliteEntry = {
 	body: string;
 	key: number;
 	satellite: SatelliteValue;
 };
 
-type Satellites = Satellite[];
+export type SatelliteList = SatelliteEntry[];
 
 export const api = new (class extends BasicRest {
 	readonly statistics;
@@ -39,7 +39,7 @@ export const api = new (class extends BasicRest {
 
 	dictionaryJpBestUsers() {
 		return this.extractData(
-			this.#endpoint.get<Users>("/dictionary/jap/stats-user"),
+			this.#endpoint.get<UserList>("/dictionary/jap/stats-user"),
 		);
 	}
 
@@ -51,7 +51,7 @@ export const api = new (class extends BasicRest {
 
 	satellites(props: { wid: string }) {
 		return this.extractData(
-			this.#endpoint.get<Satellites>(`/satellites/${props.wid}`),
+			this.#endpoint.get<SatelliteList>(`/satellites/${props.wid}`),
 		);
 	}
 

@@ -1,3 +1,59 @@
+<script setup lang="ts">
+	import { ref } from "vue";
+	import { useI18n } from "vue-i18n";
+	import { convert_to_kana as convert } from "@nyars-jiten/jp-transcript";
+
+	import { RoutesNames } from "@/router/routes-names";
+	import { StatusVariant } from "@/api/edits-rest/types/status-variant";
+	import { formatDistanceToNow } from "@/locale/formatDistanceToNow";
+	import { MessagesNames } from "@/locale/messages-names";
+	import { TypeVariant } from "@/api/edits-rest/types/type-variant";
+
+	import { DictionaryVariant, type EditEntry } from "@/api/edits-rest/types";
+
+	import TextBetween from "@/components/text-between.vue";
+	import TextSplitted from "@/components/text-splitted.vue";
+	import ChangesPreview from "./ChangesPreview.vue";
+	import UserProfile from "./user-profile.vue";
+	import Button from "../Button.vue";
+
+	import FormatFontSizeDecrease from "vue-material-design-icons/FormatFontSizeDecrease.vue";
+	import FormatFontSizeIncrease from "vue-material-design-icons/FormatFontSizeIncrease.vue";
+
+	type Props = { article: EditEntry };
+
+	defineProps<Props>();
+
+	const { t } = useI18n();
+
+	const isChangesVisible = ref(false);
+
+	function isLink({ article }: { article: EditEntry }) {
+		return (
+			article.identifier &&
+			!(
+				article.type == TypeVariant.Delete &&
+				(article.status == StatusVariant.AutoAccepted ||
+					article.status == StatusVariant.Accepted)
+			)
+		);
+	}
+
+	function toggle() {
+		isChangesVisible.value = !isChangesVisible.value;
+	}
+
+	function path({ article }: { article: EditEntry }) {
+		switch (article.dictionary) {
+			case DictionaryVariant.Kanji:
+				return RoutesNames.DictKanjiArticle;
+
+			default:
+				return RoutesNames.DictJpArticle;
+		}
+	}
+</script>
+
 <template>
 	<section
 		class="border-l-2"
@@ -5,28 +61,27 @@
 	>
 		<div class="p-2">
 			<div class="flex items-center gap-4">
-				<component
-					:is="isLink() ? 'router-link' : 'div'"
+				<Component
+					:is="isLink({ article }) ? 'RouterLink' : 'div'"
 					:to="{
-						name: RoutesNames.DictJpArticle,
-						params: { wid: article.identifier },
+						name: path({ article }),
+						params: { articleId: article.identifier },
 					}"
 					class="overflow-hidden text-ellipsis whitespace-nowrap"
 				>
 					<TextSplitted
-						v-for="(title, value) in article.title"
-						:key="`${title}-${value}`"
+						v-for="(_, w) in article.title"
 						class="font-header text-2xl"
 					>
-						{{ convert_to_kana(value) }}
+						{{ convert(w) }}
 					</TextSplitted>
-				</component>
+				</Component>
 
 				<span
 					class="grow whitespace-nowrap text-right"
 					:class="`text-status-variant-${article.status}`"
 				>
-					{{ locale.t(`${MessagesNames.EditsStatus}.${article.status}`) }}
+					{{ t(`${MessagesNames.EditsStatus}.${article.status}`) }}
 				</span>
 
 				<UserProfile
@@ -39,36 +94,34 @@
 
 			<div class="flex pt-2">
 				<div class="flex grow">
-					<button
-						type="button"
-						class="rounded-md bg-neutral-100 px-2 hover:opacity-75 dark:bg-gray-700"
-						@click="toggleChanges"
-					>
-						<Component
-							:is="
-								isChangesVisible
-									? FormatFontSizeIncrease
-									: FormatFontSizeDecrease
-							"
-							:size="16"
-						/>
-					</button>
+					<Button type="button" @click="toggle">
+						<template #icon="{ size }">
+							<Component
+								:is="
+									isChangesVisible
+										? FormatFontSizeIncrease
+										: FormatFontSizeDecrease
+								"
+								:size="size"
+							/>
+						</template>
+					</Button>
+
 					<TextBetween> #{{ article.id }} </TextBetween>
 
 					<span class="italic text-neutral-500">
-						{{
-							locale.t(`${MessagesNames.EditsDictName}.${article.dictionary}`)
-						}}, &#8203;
+						{{ t(`${MessagesNames.EditsDictName}.${article.dictionary}`) }},
+						&#8203;
 					</span>
 
 					<span :class="`text-type-variant-${article.type}`" class="italic">
-						{{ locale.t(`${MessagesNames.EditsType}.${article.type}`) }}
+						{{ t(`${MessagesNames.EditsType}.${article.type}`) }}
 					</span>
 				</div>
 
 				<div class="flex gap-4">
 					<span>
-						{{ locale.t(MessagesNames.EditsCreated) }}
+						{{ t(MessagesNames.EditsCreated) }}
 						{{ formatDistanceToNow(Date.parse(article.createdDate)) }}
 					</span>
 
@@ -80,52 +133,7 @@
 		<ChangesPreview
 			v-if="isChangesVisible"
 			:id="article.id"
-			class="m-2 rounded-md border border-gray-200 dark:border-gray-600"
+			class="m-2 rounded-md"
 		/>
 	</section>
 </template>
-
-<script setup lang="ts">
-	import { RoutesNames } from "@/router/routes-names";
-	import { ref } from "vue";
-	import { useI18n } from "vue-i18n";
-
-	import { StatusVariant } from "@/api/edits-rest/types/status-variant";
-	import { formatDistanceToNow } from "@/locale/formatDistanceToNow";
-	import { MessagesNames } from "@/locale/messages-names";
-	import { convert_to_kana } from "@nyars-jiten/jp-transcript";
-
-	import TextBetween from "@/components/text-between.vue";
-	import TextSplitted from "@/components/text-splitted.vue";
-	import ChangesPreview from "./changes-preview.vue";
-	import UserProfile from "./user-profile.vue";
-
-	import FormatFontSizeDecrease from "vue-material-design-icons/FormatFontSizeDecrease.vue";
-	import FormatFontSizeIncrease from "vue-material-design-icons/FormatFontSizeIncrease.vue";
-
-	import type { Article } from "@/api/edits-rest/types";
-	import { TypeVariant } from "@/api/edits-rest/types/type-variant";
-
-	type Props = { article: Article };
-
-	const props = defineProps<Props>();
-
-	const locale = useI18n();
-
-	const isChangesVisible = ref(false);
-
-	function isLink() {
-		return (
-			props.article.identifier &&
-			!(
-				props.article.type == TypeVariant.Delete &&
-				(props.article.status == StatusVariant.AutoAccepted ||
-					props.article.status == StatusVariant.Accepted)
-			)
-		);
-	}
-
-	function toggleChanges() {
-		isChangesVisible.value = !isChangesVisible.value;
-	}
-</script>

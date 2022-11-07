@@ -1,12 +1,11 @@
 <template>
 	<div v-show="forms.length > 0" class="flex flex-col gap-4 rounded-md">
 		<span class="select-none text-sm text-gray-400 dark:text-gray-400">
-			{{ locale.t(MessagesNames.KanjiForm) }}
+			{{ t(MessagesNames.KanjiForm) }}
 		</span>
 		<div class="flex flex-row flex-wrap gap-2">
 			<div
 				v-for="(form, formId) of forms"
-				:key="formId"
 				class="flex flex-row items-start gap-4"
 			>
 				<div class="w-20">
@@ -24,7 +23,6 @@
 					>
 						<path
 							v-for="(path, pathId) of splitPaths(form.data)"
-							:key="pathId"
 							:d="path"
 						></path>
 					</svg>
@@ -34,9 +32,7 @@
 						v-if="form.type !== null"
 						class="select-none whitespace-nowrap rounded-md border border-accent-500 px-2 text-sm text-accent-500 hover:opacity-75"
 					>
-						{{
-							locale.t(`${MessagesNames.KanjiFormTypeName}.${form.type}.short`)
-						}}
+						{{ t(`${MessagesNames.KanjiFormTypeName}.${form.type}.short`) }}
 					</span>
 					<span v-if="form.literal.length === 1" class="text-sm">
 						{{ charUnicode(form.literal) }}
@@ -58,7 +54,7 @@
 
 	defineProps<Props>();
 
-	const locale = useI18n();
+	const { t } = useI18n();
 
 	function splitPaths(data: string) {
 		return data !== null ? data.split("|") : "";

@@ -1,8 +1,8 @@
 export interface RatingValue {
-	jpNew: number;
-	jpEdit: number;
-	jpNewAuto: number;
-	jpEditAuto: number;
+	japNew: number;
+	japEdit: number;
+	japNewAuto: number;
+	japEditAuto: number;
 	rusNew: number;
 	rusEdit: number;
 	kanjiNew: number;

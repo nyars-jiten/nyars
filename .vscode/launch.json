@@ -9,7 +9,8 @@
 			"name": "Launch Edge",
 			"type": "msedge",
 			"url": "http://localhost:8080",
-			"webRoot": "${workspaceFolder}/src"
+			"webRoot": "${workspaceFolder}/src",
+			"pauseForSourceMap": false
 		},
 		{
 			"request": "launch",

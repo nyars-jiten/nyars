@@ -3,7 +3,7 @@
 		<div class="select-none rounded-md text-accent-500">
 			{{ title }}
 		</div>
-		<template v-for="(meaning, meaningsId) of meanings" :key="meaningsId">
+		<template v-for="meaning of meanings">
 			<div class="flex flex-col gap-y-2">
 				<div>
 					<!-- eslint-disable-next-line vue/no-v-html -->
@@ -14,8 +14,7 @@
 						class="before:text-gray-200 before:content-['【'] after:text-gray-200 after:content-['】'] dark:before:text-gray-500 dark:after:text-gray-500"
 					>
 						<span
-							v-for="(reading, readingId) of meaning.readings"
-							:key="readingId"
+							v-for="reading of meaning.readings"
 							class="before:text-gray-200 after:text-gray-200 after:content-['・'] last:after:content-none"
 						>
 							{{ convert_to_kana(reading) }}
@@ -27,7 +26,6 @@
 				>
 					<div
 						v-for="word of meaning.words"
-						:key="word.wid"
 						class="inline-flex flex-wrap gap-x-2"
 					>
 						<RouterLink :to="location(word.wid)" class="text-lg">
@@ -72,7 +70,7 @@
 
 		return {
 			name: RoutesNames.DictJpArticle,
-			params: { wid: wid },
+			params: { articleId: wid },
 		};
 	}
 </script>

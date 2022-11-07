@@ -21,6 +21,7 @@
 	} from "@/core/theme/theme-control";
 
 	import { onMounted } from "vue";
+
 	import WeatherNight from "vue-material-design-icons/WeatherNight.vue";
 	import WhiteBalanceSunny from "vue-material-design-icons/WhiteBalanceSunny.vue";
 

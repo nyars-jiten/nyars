@@ -14,22 +14,43 @@ export const ru = {
 	[MessagesNames.HeaderBugTracker]: "Багтрекер",
 	[MessagesNames.HeaderDownload]: "Скачать",
 
-	[MessagesNames.searchJpInput]: "Японское, русское или английское слово",
-	[MessagesNames.SearchKanjiInput]: "Японское слово или кандзи",
-	[MessagesNames.SearchTypeName]: {
-		[SearchType.Jp]: { badge: "詞", short: "слова" },
+	[MessagesNames.SearchIn]: "Искать",
+	[MessagesNames.SearchInput]: {
+		[SearchType.Jp]: "Японское, русское или английское слово",
+		[SearchType.Kanji]: "Японское слово или кандзи",
+	},
+
+	[MessagesNames.SearchWhat]: {
 		[SearchType.Kanji]: { badge: "字", short: "кандзи" },
+		[SearchType.Jp]: { badge: "詞", short: "слова" },
 	},
 	[MessagesNames.SearchInfoPre]:
-		"НЯРС — редактируемый японско-русский(-английский) словарь. Для начала работы со словарём введите поисковой запрос в строку выше. Вот несколько примеров: \n\n",
+		"НЯРС — редактируемый японско-русский(-английский) словарь. Для начала работы со словарём введите поисковой запрос в строку выше. Вот несколько примеров:",
 	[MessagesNames.SearchInfoPost]:
-		'\nПодробно функционал сайта описан в <a href="https://docs.nyars.org/" target="_blank">документации</a>, также присоединяйтесь к нашему сообществу в <a href="https://discord.gg/u7H5nsPWVB" target="_blank">Discord</a> — там можно будет спросить все непонятные моменты, а также внести предложения по сайту.',
+		"Подробно функционал сайта описан в {docs}, также присоединяйтесь к нашему сообществу в {discord} — там можно будет спросить все непонятные моменты, а также внести предложения по сайту.",
+	[MessagesNames.SearchInfoDocs]: "документации",
+	[MessagesNames.SearchInfoDiscord]: "Discord",
 	[MessagesNames.SearchExamples]: [
-		"Поиск по японским словам: [ref]遷都[/ref], [ref]メカニズム[/ref]",
-		"Поиск по русским и английским словам: [ref]разряжаться[/ref], [ref]sugar acid[/ref]",
-		"Поиск по транскрипции: [ref]сэйка[/ref], [ref]ikimashii[/ref], [ref]itizyou[/ref]",
-		"Парсинг форм слова, предложений и текстов: [ref]いきなりブックマークが増えて驚きました。[/ref]",
-		"Поиск по шаблону: [ref]*動詞[/ref], [ref]交通?関[/ref]",
+		{
+			message: "Поиск по японским словам: ",
+			examples: ["遷都", "メカニズム"],
+		},
+		{
+			message: "Поиск по русским и английским словам: ",
+			examples: ["разряжаться", "sugar acid"],
+		},
+		{
+			message: "Поиск по транскрипции: ",
+			examples: ["сэйка", "ikimashii", "itizyou", "hiku"],
+		},
+		{
+			message: "Парсинг форм слова, предложений и текстов: ",
+			examples: ["いきなりブックマークが増えて驚きました。"],
+		},
+		{
+			message: "Поиск по шаблону: ",
+			examples: ["*動詞", "交通?関"],
+		},
 	],
 	[MessagesNames.SearchShortLangName]: {
 		rus: "рус",
@@ -37,6 +58,7 @@ export const ru = {
 		eng: "анг",
 		lat: "лат",
 	},
+
 	[MessagesNames.WordKanjisTitle]: "Кандзи в этом слове",
 
 	[MessagesNames.Radical]: "Ключ",
@@ -364,7 +386,7 @@ export const ru = {
 			exch: { short: "бирж.", full: "биржевой термин" },
 			MA: { short: "б.и.", full: "боевые искусства" },
 			bot: { short: "бот.", full: "ботаника" },
-			Buddh: { short: "буд.", full: "буддизм" },
+			buddh: { short: "буд.", full: "буддизм" },
 			bkpg: { short: "бухг.", full: "бухгалтерский учёт" },
 			vet: { short: "вет.", full: "ветеринария" },
 			mil: { short: "воен.", full: "военный термин" },
@@ -565,6 +587,10 @@ export const ru = {
 		"пример",
 	],
 
+	[MessagesNames.SearchOpenFull]: "открыть полную версию",
+	[MessagesNames.SearchShowMore]: "показать детали",
+	[MessagesNames.SearchShowLess]: "скрыть детали",
+
 	[MessagesNames.UserWeekRating]: "рейтинг",
 	[MessagesNames.UserSummaryNew]: "новых статей",
 	[MessagesNames.UserSummaryEdit]: "исправлений",
@@ -573,6 +599,9 @@ export const ru = {
 		added: "добавлено статей",
 		verified: "исправлено статей",
 	},
+
+	[MessagesNames.ShowMore2]: "Раскрыть",
+	[MessagesNames.ShowLess2]: "Свернуть",
 
 	[MessagesNames.ShowMore]: "подробнее",
 	[MessagesNames.ShowLess]: "скрыть",

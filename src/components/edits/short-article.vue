@@ -9,17 +9,17 @@
 				<TextBetween class="whitespace-nowrap"> #{{ article.id }} </TextBetween>
 
 				<span :class="`text-status-variant-${article.status}`">
-					{{ locale.t(`${MessagesNames.EditsStatus}.${article.status}`) }}
+					{{ t(`${MessagesNames.EditsStatus}.${article.status}`) }}
 				</span>
 
 				<UserProfile v-if="isShowApprover" :user="article.approver!" />
 
 				<span :class="`text-type-variant-${article.type}`" class="italic">
-					{{ locale.t(`${MessagesNames.EditsType}.${article.type}`) }}
+					{{ t(`${MessagesNames.EditsType}.${article.type}`) }}
 				</span>
 
 				<span class="grow overflow-hidden text-ellipsis whitespace-nowrap">
-					{{ locale.t(MessagesNames.EditsCreated) }}
+					{{ t(MessagesNames.EditsCreated) }}
 					{{ formatDistanceToNow(Date.parse(article.createdDate)) }}
 				</span>
 
@@ -45,16 +45,16 @@
 	import { MessagesNames } from "@/locale/messages-names";
 
 	import TextBetween from "@/components/text-between.vue";
-	import ChangesPreview from "./changes-preview.vue";
+	import ChangesPreview from "./ChangesPreview.vue";
 	import UserProfile from "./user-profile.vue";
 
-	import type { Article } from "@/api/edits-rest/types";
+	import type { EditEntry } from "@/api/edits-rest/types";
 
-	type Props = { article: Article };
+	type Props = { article: EditEntry };
 
 	const props = defineProps<Props>();
 
-	const locale = useI18n();
+	const { t } = useI18n();
 
 	const isShowApprover = computed(
 		() =>

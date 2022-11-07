@@ -2,12 +2,13 @@ import "./index.css";
 
 import { createPinia } from "pinia";
 import { createApp, markRaw } from "vue";
-import { locale } from "./locale";
 import { router } from "./router";
+import { locale } from "./locale";
 
-import app from "./app.vue";
+import app from "./TheApp.vue";
 
 const pinia = createPinia();
+
 pinia.use(({ store }) => {
 	store.router = markRaw(router);
 });

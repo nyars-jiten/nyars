@@ -1,3 +1,7 @@
+<script setup lang="ts">
+	import TheInput from "@/components/search/the-input.vue";
+</script>
+
 <template>
 	<section class="flex flex-col gap-10">
 		<TheInput />
@@ -12,12 +16,8 @@
 				leave-to-class="transform opacity-0 translate-y-5"
 				mode="out-in"
 			>
-				<component :is="Component" />
+				<Component :is="Component" />
 			</Transition>
 		</RouterView>
 	</section>
 </template>
-
-<script setup lang="ts">
-	import TheInput from "@/components/search/the-input.vue";
-</script>

@@ -6,7 +6,7 @@
 					{{ format(stats.added) }}
 				</h2>
 				<p>
-					{{ locale.t(`${MessagesNames.Statistics}.added`) }}
+					{{ t(`${MessagesNames.Statistics}.added`) }}
 				</p>
 			</div>
 			<div class="w-1/4 p-4">
@@ -14,7 +14,7 @@
 					{{ format(stats.verified) }}
 				</h2>
 				<p>
-					{{ locale.t(`${MessagesNames.Statistics}.verified`) }}
+					{{ t(`${MessagesNames.Statistics}.verified`) }}
 				</p>
 			</div>
 		</div>
@@ -30,7 +30,7 @@
 
 	const stats = reactive(await api.statistics.total());
 
-	const locale = useI18n();
+	const { t } = useI18n();
 
 	function format(value: number) {
 		const formatter = Intl.NumberFormat("en", { notation: "compact" });

@@ -1,6 +1,6 @@
 import type { RatingUser } from "@/api/types/rating-user";
 
-export type User = {
+export type UserEntry = {
 	id: number;
 	username: string;
 	banned: boolean;

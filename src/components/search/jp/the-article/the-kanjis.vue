@@ -1,21 +1,34 @@
+<script setup lang="ts">
+	import { useI18n } from "vue-i18n";
+
+	import { RoutesNames } from "@/router/routes-names";
+	import { MessagesNames } from "@/locale/messages-names";
+
+	import { type EntryKanji } from "@/api/dictionary/kanji/types";
+
+	import TheTags from "@/components/Tags.vue";
+
+	type Props = { kanjis: EntryKanji[] };
+
+	defineProps<Props>();
+
+	const { t } = useI18n();
+</script>
+
 <template>
 	<div
 		v-if="kanjis.length > 0"
 		class="select-text border border-gray-100 bg-white p-8 shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
 	>
 		<div class="select-none pb-4 text-gray-400">
-			{{ locale.t(MessagesNames.WordKanjisTitle) }}
+			{{ t(MessagesNames.WordKanjisTitle) }}
 		</div>
 		<div class="flex flex-col flex-wrap gap-8">
-			<div
-				:key="kanji.kid"
-				v-for:="kanji of kanjis"
-				class="flex flex-row items-center gap-8"
-			>
+			<div v-for:="kanji of kanjis" class="flex flex-row items-center gap-8">
 				<RouterLink
 					:to="{
 						name: RoutesNames.DictKanjiArticle,
-						params: { kid: kanji.kid },
+						params: { articleId: kanji.kid },
 					}"
 				>
 					<span class="text-7xl hover:opacity-75">
@@ -32,19 +45,3 @@
 		</div>
 	</div>
 </template>
-
-<script setup lang="ts">
-	import { useI18n } from "vue-i18n";
-
-	import { MessagesNames } from "@/locale/messages-names";
-	import { RoutesNames } from "@/router/routes-names";
-
-	import { EntryKanji } from "@/api/dictionary/kanji/types";
-	import TheTags from "@/components/the-tags.vue";
-
-	type Props = { kanjis: EntryKanji[] };
-
-	defineProps<Props>();
-
-	const locale = useI18n();
-</script>

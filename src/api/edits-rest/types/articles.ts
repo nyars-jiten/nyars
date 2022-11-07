@@ -1,3 +1,3 @@
-import type { Article } from "./article";
+import type { EditEntry } from "./article";
 
-export type Articles = Article[];
+export type EditList = EditEntry[];

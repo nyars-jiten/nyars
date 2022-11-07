@@ -3,12 +3,12 @@ import { BasicRest } from "../basic-rest";
 import type { Axios } from "axios";
 import type { Dicts } from "./types";
 
-type Image = {
+export type ImageEntry = {
 	link: string;
 	title: string;
 };
 
-type Images = Image[];
+export type ImageList = ImageEntry[];
 
 export class KotobaRest extends BasicRest {
 	dicts() {
@@ -19,7 +19,7 @@ export class KotobaRest extends BasicRest {
 
 	entryImages(props: { wid: string }) {
 		return this.extractData(
-			this.#endpoint.get<Images>("kotoba/entry-images", {
+			this.#endpoint.get<ImageList>("kotoba/entry-images", {
 				params: { id: props.wid, dict: 0 },
 			}),
 		);

@@ -1,5 +1,5 @@
 <template>
-	<span class="flex items-center gap-2">
+	<span class="flex items-center gap-2 leading-none">
 		<img class="h-6 rounded-full shadow" :src="avatarUrl(user.avatar).href" />
 
 		<span class="whitespace-nowrap">
@@ -11,9 +11,9 @@
 <script setup lang="ts">
 	import { avatarUrl } from "@/core/avatar-url";
 
-	import type { User } from "@/api/edits-rest/types";
+	import type { UserEntry } from "@/api/edits-rest/types";
 
-	type Props = { user: User };
+	type Props = { user: UserEntry };
 
 	defineProps<Props>();
 </script>

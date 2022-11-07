@@ -101,20 +101,38 @@ export class Canvas implements Handwriting {
 		if (!el) return;
 
 		const img = await this.restoreImage(el.image);
+
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		this.context.drawImage(img, 0, 0);
 	}
 
-	constructor(canvas: HTMLCanvasElement) {
-		this.canvas = canvas;
+	onResize(payload?: FocusEvent) {
+		console.log("onResize");
+
+		console.log(this.canvas.clientWidth);
+		console.log(this.canvas.width);
+		console.log(this.canvas.offsetWidth);
+
+		console.log("---");
+
+		console.log(this.canvas.clientHeight);
+		console.log(this.canvas.height);
+		console.log(this.canvas.offsetHeight);
 
 		this.canvas.width = this.canvas.clientWidth;
 		this.canvas.height = this.canvas.clientHeight;
+	}
+
+	constructor(canvas: HTMLCanvasElement) {
+		this.canvas = canvas;
+		this.onResize()
 
 		this.context = this.getContext();
 		this.pos = { x: 0, y: 0 };
 		this._inAction = false;
 		this.history = [];
+		// console.log(this.canvas.width);
+		// console.log(this.canvas.height);
 
 		this.lineWidth = 3;
 	}

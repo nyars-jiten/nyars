@@ -1,6 +1,32 @@
+<script setup lang="ts">
+	import { groupBy } from "lodash";
+	import { useI18n } from "vue-i18n";
+
+	import {
+		Disclosure,
+		DisclosureButton,
+		DisclosurePanel,
+	} from "@headlessui/vue";
+
+	import { type KanjiIndex } from "@/api/dictionary/kanji/types";
+
+	import ChevronIcon from "vue-material-design-icons/ChevronDown.vue";
+	import { MessagesNames } from "@/locale/messages-names";
+
+	type Props = { indices: KanjiIndex[] };
+
+	defineProps<Props>();
+
+	const { t } = useI18n();
+
+	function test(params: any) {
+		return 1;
+	}
+</script>
+
 <template>
 	<div>
-		<template v-for="(index, indexId) of indicesByTypes" :key="indexId">
+		<template v-for="(index, indexId) of groupBy(indices, e => e.type)">
 			<Disclosure
 				v-slot="{ open }"
 				as="div"
@@ -9,10 +35,8 @@
 				<DisclosureButton
 					class="flex w-full select-none justify-between py-2 px-3 text-gray-400 hover:opacity-75"
 				>
-					<span>{{
-						locale.t(`${MessagesNames.KanjiIndexTypeName}.${indexId}`)
-					}}</span>
-					<Chevron :class="open ? 'transform rotate-180' : ''" />
+					<span>{{ t(`${MessagesNames.KanjiIndexTypeName}.${indexId}`) }}</span>
+					<ChevronIcon :class="open ? 'transform rotate-180' : ''" />
 				</DisclosureButton>
 				<DisclosurePanel>
 					<table class="w-full text-left text-sm text-gray-500">
@@ -21,17 +45,16 @@
 						>
 							<tr>
 								<th scope="col" class="p-3 font-normal">
-									{{ locale.t(MessagesNames.Index) }}
+									{{ t(MessagesNames.Index) }}
 								</th>
 								<th scope="col" class="p-3 font-normal">
-									{{ locale.t(MessagesNames.Source) }}
+									{{ t(MessagesNames.Source) }}
 								</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr
 								v-for="(entry, entryId) of index"
-								:key="entryId"
 								class="border-b bg-white last:border-none dark:border-gray-700 dark:bg-gray-800"
 							>
 								<td class="w-20 p-3">{{ entry.value }}</td>
@@ -39,17 +62,14 @@
 									<span
 										class="box-decoration-clone p-3 font-medium text-gray-900 dark:text-white"
 									>
-										{{
-											locale.t(
-												`${MessagesNames.IndexSourceAbbr}.${entry.source}`,
-											)
-										}}
+										{{ t(`${MessagesNames.IndexSourceAbbr}.${entry.source}`) }}
 									</span>
 									<span
 										v-if="entry.note"
 										class="text-gray-400 dark:text-gray-400"
-										>{{ entry.note }}</span
 									>
+										{{ entry.note }}
+									</span>
 								</td>
 							</tr>
 						</tbody>
@@ -59,28 +79,3 @@
 		</template>
 	</div>
 </template>
-
-<script setup lang="ts">
-	import { MessagesNames } from "@/locale/messages-names";
-	import { useI18n } from "vue-i18n";
-
-	import { KanjiIndex } from "@/api/dictionary/kanji/types";
-	import {
-		Disclosure,
-		DisclosureButton,
-		DisclosurePanel,
-	} from "@headlessui/vue";
-	import Chevron from "vue-material-design-icons/ChevronDown.vue";
-
-	type Props = { indices: KanjiIndex[] };
-
-	const props = defineProps<Props>();
-
-	const locale = useI18n();
-
-	const indicesByTypes = props.indices.reduce((acc, curr) => {
-		acc[curr.type] = acc[curr.type] || [];
-		acc[curr.type].push(curr);
-		return acc;
-	}, Object.create(null));
-</script>

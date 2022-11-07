@@ -1,12 +1,14 @@
 import { api } from "@/api";
-import { SearchResultJpInfo } from "@/api/search-rest/types/search-result-jp-info";
-import { SearchResultKanji } from "@/api/search-rest/types/search-result-kanji";
-import { SearchResultWord } from "@/api/search-rest/types/search-result-word";
-import { SearchType } from "@/api/types/search/search-type";
-import { RoutesNames } from "@/router/routes-names";
+import { isEmpty } from "lodash";
 import { defineStore } from "pinia";
 
-import type { Actions, Getters, State } from "./types";
+import { RoutesNames } from "@/router/routes-names";
+import { SearchType } from "@/api/types/search/search-type";
+
+import { type Actions, Getters, State } from "./types";
+import { type SearchResultWord } from "@/api/search-rest/types/search-result-word";
+import { type SearchResultKanji } from "@/api/search-rest/types/search-result-kanji";
+import { type SearchResultJpInfo } from "@/api/search-rest/types/search-result-jp-info";
 
 function emptySearchGrammar(): SearchResultJpInfo {
 	return {
@@ -36,6 +38,7 @@ export const useSearch = defineStore<string, State, Getters, Actions>(
 	{
 		state() {
 			return {
+				suggs: [],
 				request: "",
 				resultsJp: emptySearchWordResults(),
 				resultsKanji: emptySearchKanjiResults(),
@@ -69,7 +72,7 @@ export const useSearch = defineStore<string, State, Getters, Actions>(
 				this.resultsJp.result = response.result;
 			},
 
-			async searchKanji(props: { request?: string; userRequest?: boolean }) {
+			async searchKanji(props: { request?: string }) {
 				this.type = SearchType.Kanji;
 				this.resultsKanji.result = [];
 
@@ -90,8 +93,16 @@ export const useSearch = defineStore<string, State, Getters, Actions>(
 				this.resultsKanji.result = response.result;
 			},
 
+			async searchSuggs({ request }: { request?: string }) {
+				const r = request ?? this.request;
+				if (isEmpty(r)) return;
+
+				this.suggs = await api.search.sugg({ request: r });
+			},
+
 			clearResults(props: { withGrammar: boolean }) {
 				this.results.result = [];
+				this.suggs = [];
 
 				if (props.withGrammar) {
 					this.results.info = emptySearchGrammar();

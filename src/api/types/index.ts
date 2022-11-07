@@ -1,3 +1,3 @@
-import type { User } from "../edits-rest/types";
+import type { UserEntry } from "../edits-rest/types";
 
-export type Users = User[];
+export type UserList = UserEntry[];

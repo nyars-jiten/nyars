@@ -6,7 +6,7 @@ export const routes: Readonly<RouteRecordRaw[]> = [
 	{
 		path: "/",
 		redirect: RoutesNames.SearchHome,
-		component: () => import("@/views/the-search.vue"),
+		component: () => import("@/views/TheSearch.vue"),
 		children: [
 			{
 				name: RoutesNames.SearchHome,
@@ -20,13 +20,13 @@ export const routes: Readonly<RouteRecordRaw[]> = [
 			},
 			{
 				name: RoutesNames.DictJpArticle,
-				path: `/${RoutesNames.DictJpArticle}/:wid?`,
+				path: `/${RoutesNames.DictJpArticle}/:articleId`,
 				component: () => import("@/pages/dict/jp/the-article.vue"),
 				props: { standalone: true },
 			},
 			{
 				name: RoutesNames.DictKanjiArticle,
-				path: `/${RoutesNames.DictKanjiArticle}/:kid?`,
+				path: `/${RoutesNames.DictKanjiArticle}/:articleId`,
 				component: () => import("@/pages/dict/kanji/the-article.vue"),
 				props: { standalone: true },
 			},

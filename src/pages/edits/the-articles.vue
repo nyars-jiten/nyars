@@ -9,7 +9,6 @@
 		>
 			<FullArticle
 				v-for="article of articles"
-				:key="article.id"
 				:article="article"
 				class="px-2 pb-2 shadow"
 			/>
@@ -19,9 +18,16 @@
 
 <script setup lang="ts">
 	import { api } from "@/api";
+	import { onMounted, reactive } from "vue";
+
+	import { EditList } from "@/api/edits-rest/types";
 
 	import FullArticle from "@/components/edits/full-article.vue";
-	import TheWeeaboo from "@/components/the-weeaboo.vue";
+	import TheWeeaboo from "@/components/TheWeeaboo.vue";
 
-	const articles = await api.edits.list({ n: 25, p: 0, statuses: [] });
+	const articles = reactive<EditList>([]);
+
+	onMounted(async () => {
+		articles.push(...(await api.edits.list({ n: 25, p: 0, statuses: [] })));
+	});
 </script>

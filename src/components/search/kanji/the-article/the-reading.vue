@@ -2,15 +2,12 @@
 	<div v-if="readings.length > 0" class="grid grid-cols-[auto_1fr] gap-2">
 		<span
 			class="h-fit select-none rounded-md border border-gray-500 px-1 text-gray-500 dark:border-gray-400 dark:text-gray-400"
-			>{{
-				locale.t(`${MessagesNames.KanjiReadingTypeName}.${type}.badge`)
-			}}</span
+			>{{ t(`${MessagesNames.KanjiReadingTypeName}.${type}.badge`) }}</span
 		>
 
 		<div class="flex flex-row flex-wrap gap-y-2 gap-x-1">
 			<div
 				v-for="(reading, readingId) of readings"
-				:key="readingId"
 				:class="[reading.tags.includes('gai') ? `text-gray-400` : '']"
 				class="after:ml-2 after:text-gray-200 after:content-['・'] last:after:content-none dark:after:text-gray-500"
 			>
@@ -18,15 +15,13 @@
 					v-if="reading.tags.length > 0 && !reading.tags.includes('gai')"
 					class="mx-1"
 				>
-					<template v-for="(tag, tagId) of reading.tags" :key="tagId">
+					<template v-for="(tag, tagId) of reading.tags">
 						<span
 							v-if="tag != 'gai'"
 							class="select-none rounded-tl-md border-t border-l px-1 py-0.5 empty:hidden"
 							:class="[`text-tag-${tag}-500`, `border-tag-${tag}-500`]"
 						>
-							{{
-								locale.t(`${MessagesNames.KanjiReadingTagName}.${tag}.badge`)
-							}}
+							{{ t(`${MessagesNames.KanjiReadingTagName}.${tag}.badge`) }}
 						</span>
 					</template>
 				</span>
@@ -49,5 +44,5 @@
 
 	defineProps<Props>();
 
-	const locale = useI18n();
+	const { t } = useI18n();
 </script>

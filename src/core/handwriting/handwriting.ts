@@ -4,6 +4,7 @@ export interface Handwriting {
 	onStart(e: MouseEvent): void;
 	onEnd(): void;
 	onDraw(e: MouseEvent): void;
+	onResize(e?: FocusEvent): void;
 
 	getProposals(): Promise<GoogleProposals>;
 	undo(): Promise<void>;

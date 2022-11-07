@@ -1,13 +1,20 @@
+<script setup lang="ts">
+	import { storeToRefs } from "pinia";
+	import { SearchType } from "@/api/types/search/search-type";
+	import { useSearch } from "@/stores/search";
+
+	import Grammar from "@/components/search/jp/Grammar.vue";
+	import JpArticle from "@/components/search/jp/Article.vue";
+	import KanjiArticle from "@/components/search/kanji/the-article.vue";
+
+	const { type, resultsJp, resultsKanji } = storeToRefs(useSearch());
+</script>
+
 <template>
-	<section class="flex flex-col gap-10">
-		<TheGrammar
-			v-if="store.resultsJp.info && store.type != SearchType.Kanji"
-			:grammars="store.resultsJp.info.parsedGrammar"
-		/>
+	<section class="flex flex-col gap-5">
+		<Grammar v-if="type != SearchType.Kanji" />
 
 		<TransitionGroup
-			tag="main"
-			class="flex flex-col gap-5"
 			enter-active-class="duration-300 ease-out"
 			enter-from-class="transform opacity-0 translate-x-3"
 			enter-to-class="opacity-100 translate-x-0"
@@ -15,20 +22,18 @@
 			leave-from-class="opacity-100 translate-x-0"
 			leave-to-class="transform opacity-0 translate-x-3"
 			mode="out-in"
-			:class="'min-w-full'"
 		>
-			<template v-if="store.type == SearchType.Jp">
+			<template v-if="type == SearchType.Jp">
 				<JpArticle
-					v-for="result of store.resultsJp.result"
-					:key="result.wid"
+					v-for="result of resultsJp.result"
 					:article="result"
 					:standalone="false"
 				/>
 			</template>
-			<template v-else-if="store.type == SearchType.Kanji">
+
+			<template v-else-if="type == SearchType.Kanji">
 				<KanjiArticle
-					v-for="result of store.resultsKanji.result"
-					:key="result.kid"
+					v-for="result of resultsKanji.result"
 					:article="result"
 					:standalone="false"
 				/>
@@ -36,14 +41,3 @@
 		</TransitionGroup>
 	</section>
 </template>
-
-<script setup lang="ts">
-	import { SearchType } from "@/api/types/search/search-type";
-	import { useSearch } from "@/stores/search";
-
-	import JpArticle from "@/components/search/jp/the-article.vue";
-	import TheGrammar from "@/components/search/jp/the-grammar.vue";
-	import KanjiArticle from "@/components/search/kanji/the-article.vue";
-
-	const store = useSearch();
-</script>

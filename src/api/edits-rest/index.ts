@@ -1,12 +1,12 @@
 import { BasicRest } from "../basic-rest";
 
 import type { Axios } from "axios";
-import type { Articles, Compare } from "./types";
+import type { EditList, Compare } from "./types";
 
 export class EditsRest extends BasicRest {
 	list(props: { n: number; p: number; statuses: number[] }) {
 		return this.extractData(
-			this.#endpoint.get<Articles>("edits", { params: props }),
+			this.#endpoint.get<EditList>("edits", { params: props }),
 		);
 	}
 
@@ -18,7 +18,7 @@ export class EditsRest extends BasicRest {
 
 	byEntry(props: { wid: string }) {
 		return this.extractData(
-			this.#endpoint.get<Articles>(`edits/by-entry/0/${props.wid}`),
+			this.#endpoint.get<EditList>(`edits/by-entry/0/${props.wid}`),
 		);
 	}
 

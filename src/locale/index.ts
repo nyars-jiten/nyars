@@ -4,7 +4,7 @@ import { en, jp, ru } from "./langs";
 export const locale = createI18n({
 	locale: "ru",
 	fallback: "ru",
-
-	// @ts-nocheck: For debug
+	legacy: false,
+	globalInjection: false,
 	messages: { en, jp, ru },
 });

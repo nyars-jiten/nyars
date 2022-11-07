@@ -4,7 +4,7 @@
 			{{ title }}
 		</div>
 		<div class="flex flex-col gap-y-2">
-			<div v-for="word of words" :key="word.wid">
+			<div v-for="word of words">
 				<RouterLink :to="location(word.wid)" class="text-lg">
 					{{ word.word }}
 				</RouterLink>
@@ -45,7 +45,7 @@
 
 		return {
 			name: RoutesNames.DictJpArticle,
-			params: { wid: wid },
+			params: { articleId: wid },
 		};
 	}
 </script>

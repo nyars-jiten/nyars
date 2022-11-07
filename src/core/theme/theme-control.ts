@@ -13,7 +13,13 @@ const getTheme = (): UserTheme => {
 
 export const toggleTheme = (): void => {
 	const activeTheme = localStorage.getItem("user-theme");
-	if (activeTheme === "light") {
+	if (!activeTheme) {
+		if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			setTheme("dark");
+		} else {
+			setTheme("light");
+		}
+	} else if (activeTheme === "light") {
 		setTheme("dark");
 	} else {
 		setTheme("light");
