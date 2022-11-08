@@ -18,9 +18,9 @@
 <template>
 	<div
 		v-if="kanjis.length > 0"
-		class=" border border-gray-100 bg-white p-8 shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
+		class="border border-gray-100 bg-white p-8 shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
 	>
-		<div class=" pb-4 text-gray-400">
+		<div class="pb-4 text-gray-400">
 			{{ t(MessagesNames.WordKanjisTitle) }}
 		</div>
 		<div class="flex flex-col flex-wrap gap-8 select-text">
