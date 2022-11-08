@@ -15,6 +15,8 @@
 	watch(
 		() => store.request,
 		async () => {
+			search.cancel();
+			
 			if (isEmpty(store.request)) {
 				store.suggs = [];
 				return;
