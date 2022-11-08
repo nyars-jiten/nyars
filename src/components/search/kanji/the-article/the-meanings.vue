@@ -24,16 +24,15 @@
 				<div
 					class="flex flex-col gap-y-2 border-l border-gray-200 pl-3 text-gray-600 dark:border-gray-600 dark:text-gray-400"
 				>
-					<div
-						v-for="word of meaning.words"
-						class="inline-flex flex-wrap gap-x-2"
-					>
+					<div v-for="word of meaning.words">
 						<RouterLink :to="location(word.wid)" class="text-lg">
 							{{ word.word }}
 						</RouterLink>
-						<span class="text-gray-400 dark:text-gray-500">
+
+						<span class="text-gray-400 dark:text-gray-500 px-2">
 							{{ convert_to_kana(word.reading) }}
 						</span>
+
 						<!-- eslint-disable vue/no-v-html -->
 						<span
 							class="text-gray-500 dark:text-gray-400"
