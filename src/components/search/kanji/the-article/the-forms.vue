@@ -1,6 +1,6 @@
 <template>
 	<div v-show="forms.length > 0" class="flex flex-col gap-4 rounded-md">
-		<span class="select-none text-sm text-gray-400 dark:text-gray-400">
+		<span class="text-sm text-gray-400 dark:text-gray-400">
 			{{ t(MessagesNames.KanjiForm) }}
 		</span>
 		<div class="flex flex-row flex-wrap gap-2">
@@ -30,7 +30,7 @@
 				<div class="flex flex-col gap-2">
 					<span
 						v-if="form.type !== null"
-						class="select-none whitespace-nowrap rounded-md border border-accent-500 px-2 text-sm text-accent-500 hover:opacity-75"
+						class="whitespace-nowrap rounded-md border border-accent-500 px-2 text-sm text-accent-500 hover:opacity-75"
 					>
 						{{ t(`${MessagesNames.KanjiFormTypeName}.${form.type}.short`) }}
 					</span>

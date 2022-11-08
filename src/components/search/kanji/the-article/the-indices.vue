@@ -33,7 +33,7 @@
 				class="border-l-2 border-gray-400 dark:border-gray-500"
 			>
 				<DisclosureButton
-					class="flex w-full select-none justify-between py-2 px-3 text-gray-400 hover:opacity-75"
+					class="flex w-full  justify-between py-2 px-3 text-gray-400 hover:opacity-75"
 				>
 					<span>{{ t(`${MessagesNames.KanjiIndexTypeName}.${indexId}`) }}</span>
 					<ChevronIcon :class="open ? 'transform rotate-180' : ''" />
@@ -41,7 +41,7 @@
 				<DisclosurePanel>
 					<table class="w-full text-left text-sm text-gray-500">
 						<thead
-							class="select-none bg-gray-100 dark:bg-gray-700 dark:text-gray-400"
+							class=" bg-gray-100 dark:bg-gray-700 dark:text-gray-400"
 						>
 							<tr>
 								<th scope="col" class="p-3 font-normal">

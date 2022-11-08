@@ -71,7 +71,7 @@
 					class="group relative flex min-h-[11rem] w-auto flex-col justify-center gap-2 p-2 text-center"
 					v-on="standalone ? { click: copyContent } : {}"
 				>
-					<div class="flex select-none flex-col gap-2">
+					<div class="flex flex-col gap-2">
 						<span class="text-9xl">{{ article.entry.general.literal }}</span>
 						<span class="break-words">
 							{{ article.entry.general.shortMeans }}
@@ -89,25 +89,25 @@
 					class="flex flex-col gap-2 rounded-md bg-neutral-100 py-2 px-3 dark:bg-gray-700"
 				>
 					<p v-if="article.entry.general.freq">
-						<span class="select-none text-sm text-gray-400">
+						<span class="text-sm text-gray-400">
 							{{ t(MessagesNames.Frequency) }}
 						</span>
 						<span class="ml-2">{{ article.entry.general.freq }}</span>
 					</p>
 					<p v-if="article.radical && article.radical.literal">
-						<span class="select-none text-sm text-gray-400">
+						<span class="text-sm text-gray-400">
 							{{ t(MessagesNames.Radical) }}
 						</span>
 						<span class="ml-2 font-medium">{{ article.radical.literal }}</span>
 					</p>
 					<p v-if="article.entry.general.strokeCount">
-						<span class="select-none text-sm text-gray-400">
+						<span class="text-sm text-gray-400">
 							{{ t(MessagesNames.StrokeCount) }}
 						</span>
 						<span class="ml-2">{{ article.entry.general.strokeCount }}</span>
 					</p>
 					<p v-if="article.entry.general.ids">
-						<span class="select-none text-sm text-gray-400">
+						<span class="text-sm text-gray-400">
 							{{ t(MessagesNames.Ids) }}
 						</span>
 						<span class="ml-2">{{ article.entry.general.ids }}</span>
@@ -116,7 +116,7 @@
 
 				<div v-if="standalone" class="flex flex-col gap-2 rounded-md">
 					<p>
-						<span class="select-none text-sm text-gray-400 dark:text-gray-400">
+						<span class="text-sm text-gray-400 dark:text-gray-400">
 							{{ t(MessagesNames.Unicode) }}
 						</span>
 						<span class="ml-2">{{
@@ -124,7 +124,7 @@
 						}}</span>
 					</p>
 					<p v-show="article.entry.general.jis">
-						<span class="select-none text-sm text-gray-400 dark:text-gray-400">
+						<span class="text-sm text-gray-400 dark:text-gray-400">
 							{{ t(MessagesNames.JIS) }}
 						</span>
 						<span class="ml-2">第{{ article.entry.general.jis }}水準</span>
@@ -158,7 +158,7 @@
 					v-if="standalone && article.entry.general.note"
 					class="flex flex-col gap-2 rounded-md bg-neutral-100 py-2 px-3 dark:bg-gray-700"
 				>
-					<span class="select-none text-sm text-gray-400">{{
+					<span class="text-sm text-gray-400">{{
 						t(MessagesNames.Note)
 					}}</span>
 					<p v-show="article.entry.general.ids">
@@ -191,7 +191,7 @@
 							article.entry.standaloneMeanings.length == 0 &&
 							article.entry.kanbunMeanings.length == 0
 						"
-						class="select-none rounded-md bg-gray-100 p-4 text-gray-400 dark:bg-gray-700"
+						class="rounded-md bg-gray-100 p-4 text-gray-400 dark:bg-gray-700"
 					>
 						{{ t(MessagesNames.MeaningsEmpty) }}
 					</div>
@@ -205,7 +205,7 @@
 		</div>
 		<div v-if="!standalone" class="mt-4 flex gap-2">
 			<p
-				class="inline-flex cursor-copy select-none items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-75 dark:bg-gray-700"
+				class="inline-flex cursor-copy items-center gap-2 rounded bg-gray-100 px-2 capitalize hover:opacity-75 dark:bg-gray-700"
 				@click="copy"
 			>
 				{{ t(MessagesNames.CopyLink) }}

@@ -18,32 +18,33 @@
 	<header class="flex items-start gap-4">
 		<div class="grow flex flex-col">
 			<span v-for="word of article.entry.words" class="font-header text-2xl">
-				<span
+				<ul
 					v-show="word.writings.length > 0"
-					class="before:text-gray-200 dark:before:text-gray-700 dark:after:text-gray-700 after:text-gray-200 before:content-['【'] after:content-['】']"
+					class="inline before:text-gray-200 dark:before:text-gray-700 dark:after:text-gray-700 after:text-gray-200 before:content-['【'] after:content-['】']"
 				>
-					<span
-						v-for="(w) of word.writings"
-						class="before:text-gray-200 after:text-gray-200 after:content-['・'] last:after:content-none dark:after:text-gray-700"
+					<li
+						v-for="writing of word.writings"
+						class="inline-flex items-baseline before:text-gray-200 after:text-gray-200 after:content-['・'] last:after:content-none dark:after:text-gray-700"
 					>
-						{{ w.value }}
+						{{ writing.value }}
+
 						<span
-							v-for="tag of w.tag?.values"
-							class="align-text-bottom text-sm italic text-fuchsia-700"
+							v-for="tag of writing.tag?.values"
+							class="inline align-text-bottom text-sm italic text-fuchsia-700"
 						>
 							{{ t(`${MessagesNames.ArticleTagName}.kinf.${tag}.short`) }}
 						</span>
-					</span>
-				</span>
+					</li>
+				</ul>
 
 				<span
-					v-for="read of word.readings"
+					v-for="reading of word.readings"
 					class="after:text-gray-200 after:content-['・'] last:after:content-none dark:after:text-gray-700"
 				>
-					{{ convert(read.value) }}
+					{{ convert(reading.value) }}
 
 					<span
-						v-for="tag of read.tag?.values"
+						v-for="tag of reading.tag?.values"
 						class="align-text-top text-sm italic text-fuchsia-700"
 					>
 						{{ t(`${MessagesNames.ArticleTagName}.rinf.${tag}.short`) }}

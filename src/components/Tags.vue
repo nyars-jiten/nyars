@@ -24,7 +24,7 @@
 		<button
 			v-for="tag of tags"
 			type="button"
-			class="text-xs leading-6 flex select-none overflow-hidden whitespace-nowrap rounded-md border hover:opacity-75"
+			class="text-xs leading-6 flex overflow-hidden whitespace-nowrap rounded-md border hover:opacity-75"
 			:class="[`border-tag-${tag.title}-500`]"
 			@click="
 				store.type == SearchType.Kanji

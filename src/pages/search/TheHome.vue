@@ -11,7 +11,7 @@
 
 <template>
 	<section
-		class="border border-gray-100 bg-white p-10 shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md flex flex-col gap-4"
+		class="select-text border border-gray-100 bg-white p-10 shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md flex flex-col gap-4"
 	>
 		<div class="indent-10" v-text="t(MessagesNames.SearchInfoPre)" />
 

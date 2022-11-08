@@ -4,7 +4,6 @@
 
 	import { type Compare } from "@/api/edits-rest/types";
 
-	import Panel from "../search/Panel.vue";
 	import PanelBody from "../search/PanelBody.vue";
 
 	type Props = { id: number };
@@ -18,8 +17,8 @@
 </script>
 
 <template>
-	<div class="grid grid-cols-[1fr_auto_1fr] gap-4">
-		<Panel>
+	<section class="flex gap-4 flex-col">
+		<div class="grid grid-cols-[1fr_auto_1fr] gap-4 px-2">
 			<PanelBody>
 				<span
 					v-for="v of changes.source"
@@ -29,13 +28,11 @@
 					{{ v.value }}
 				</span>
 			</PanelBody>
-		</Panel>
 
-		<div class="flex flex-col justify-evenly">
-			<div>⟶</div>
-		</div>
+			<div class="flex flex-col justify-evenly">
+				<div>⟶</div>
+			</div>
 
-		<Panel>
 			<PanelBody>
 				<span
 					v-for="(v, i) of changes.result"
@@ -45,10 +42,12 @@
 					{{ v.value }}
 				</span>
 			</PanelBody>
-		</Panel>
+		</div>
 
-		<div class="col-span-full px-4 border-l-2 mx-2 overflow-hidden">
+		<div
+			class="select-text px-4 border-l-2 border-gray-200 dark:border-gray-700 mx-2 overflow-hidden"
+		>
 			{{ changes.comment }}
 		</div>
-	</div>
+	</section>
 </template>

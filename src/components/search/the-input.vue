@@ -63,7 +63,7 @@
 
 <template>
 	<section
-		class="relative select-none rounded-md bg-white shadow-md dark:bg-gray-800"
+		class="relative  rounded-md bg-white shadow-md dark:bg-gray-800"
 	>
 		<div
 			class="relative flex items-stretch border dark:border-gray-700"

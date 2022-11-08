@@ -11,7 +11,7 @@ export const routes: Readonly<RouteRecordRaw[]> = [
 			{
 				name: RoutesNames.SearchHome,
 				path: RoutesNames.SearchHome,
-				component: () => import("@/pages/search/the-home.vue"),
+				component: () => import("@/pages/search/TheHome.vue"),
 			},
 			{
 				name: RoutesNames.SearchResults,

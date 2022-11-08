@@ -6,7 +6,7 @@
 				? 'bg-accent-400 dark:bg-accent-700'
 				: 'bg-gray-100 dark:bg-gray-700 hover:opacity-75'
 		"
-		class="flex select-none items-center gap-2 rounded-md py-1 px-3 capitalize"
+		class="flex items-center gap-2 rounded-md py-1 px-3 capitalize"
 	>
 		<slot />
 	</button>

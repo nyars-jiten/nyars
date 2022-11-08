@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col gap-4">
-		<div class="select-none rounded-md text-accent-500">
+		<div class="rounded-md text-accent-500">
 			{{ title }}
 		</div>
 		<template v-for="meaning of meanings">

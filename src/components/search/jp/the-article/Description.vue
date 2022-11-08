@@ -139,17 +139,15 @@
 								leave-to-class="transform opacity-0 translate-x-4"
 								mode="out-in"
 							>
-								<Panel
-									:disabled="!details || sense.examples.length <= 0"
+								<PanelBody
 									class="mx-6 my-2"
+									v-show="details && sense.examples.length > 0"
 								>
-									<PanelBody>
-										<p v-for="{ value, translation } of sense.examples">
-											{{ value }}
-											<span v-html="bbCodesProcess(translation)" />
-										</p>
-									</PanelBody>
-								</Panel>
+									<p v-for="{ value, translation } of sense.examples">
+										{{ value }}
+										<span v-html="bbCodesProcess(translation)" />
+									</p>
+								</PanelBody>
 							</Transition>
 
 							<div v-show="details" class="pl-5">
