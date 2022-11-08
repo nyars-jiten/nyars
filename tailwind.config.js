@@ -13,8 +13,22 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				header: ['"Exo 2"', '"Yuji Syuku"', "Arial", "sans-serif"],
-				body: ['"Exo 2"', '"Kosugi"', "Arial", "sans-serif"],
+				header: [
+					'"Exo 2"',
+					'"Noto Sans JP"',
+					"'Sukima Gothic Regular'",
+					"'BabelStone Han'",
+					"Arial",
+					"sans-serif",
+				],
+				body: [
+					'"Exo 2"',
+					'"Noto Sans JP"',
+					"'Sukima Gothic Regular'",
+					"'BabelStone Han'",
+					"Arial",
+					"sans-serif",
+				],
 			},
 			backgroundImage: {
 				"logo-light": "url('/favicon-96x96.png')",
