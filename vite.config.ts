@@ -11,6 +11,9 @@ export default defineConfig({
 			"@": new URL("src", import.meta.url).pathname,
 		},
 	},
+	build: {
+    target: 'esnext'
+	},
 	server: {
 		port: 8080,
 	},
