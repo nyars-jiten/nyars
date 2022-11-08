@@ -30,6 +30,9 @@
 	const { t, tm } = useI18n();
 
 	async function search() {
+		// @ts-ignore
+		document.activeElement?.blur();
+
 		if (state.mode == SearchType.Kanji) {
 			await store.searchKanji({});
 		} else {
@@ -62,9 +65,7 @@
 </script>
 
 <template>
-	<section
-		class="relative  rounded-md bg-white shadow-md dark:bg-gray-800"
-	>
+	<section class="relative rounded-md bg-white shadow-md dark:bg-gray-800">
 		<div
 			class="relative flex items-stretch border dark:border-gray-700"
 			:class="state.selector ? 'rounded-t-md' : 'rounded-md'"

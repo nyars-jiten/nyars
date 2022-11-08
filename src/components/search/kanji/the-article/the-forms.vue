@@ -9,11 +9,12 @@
 				class="flex flex-row items-start gap-4"
 			>
 				<div class="w-20">
-					<span v-if="form.literal.length === 1" class="text-7xl">
+					<span v-if="form.literal.length <= 2" class="text-7xl">
 						{{ form.literal }}
 					</span>
+
 					<svg
-						v-else-if="form.data.length > 0"
+						v-else-if="(form.data?.length || 0) > 0"
 						xmlns="http://www.w3.org/2000/svg"
 						xmlns:xlink="http://www.w3.org/1999/xlink"
 						version="1.1"
@@ -21,10 +22,7 @@
 						viewBox="0 0 200 200"
 						fill="currentColor"
 					>
-						<path
-							v-for="(path, pathId) of splitPaths(form.data)"
-							:d="path"
-						></path>
+						<path v-for="path of splitPaths(form?.data ?? '')" :d="path" />
 					</svg>
 				</div>
 				<div class="flex flex-col gap-2">
@@ -34,9 +32,16 @@
 					>
 						{{ t(`${MessagesNames.KanjiFormTypeName}.${form.type}.short`) }}
 					</span>
-					<span v-if="form.literal.length === 1" class="text-sm">
-						{{ charUnicode(form.literal) }}
+
+					<span v-if="form.literal.length == 1" class="text-sm">
+						{{ unicodeIndexFromUTF8(form.literal) }}
 					</span>
+
+					<span v-else-if="form.literal.length == 2" class="text-sm">
+						{{ unicodeIndexFromUTF16(form.literal) }}
+					</span>
+
+					<span v-else class="text-sm"> - </span>
 				</div>
 			</div>
 		</div>
@@ -44,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-	import { charUnicode } from "@/core/unicode";
+	import { unicodeIndexFromUTF16, unicodeIndexFromUTF8 } from "@/core/unicode";
 	import { MessagesNames } from "@/locale/messages-names";
 	import { useI18n } from "vue-i18n";
 

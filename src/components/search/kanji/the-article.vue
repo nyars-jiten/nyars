@@ -6,7 +6,7 @@
 	import { useI18n } from "vue-i18n";
 
 	import { EntryKanji } from "@/api/dictionary/kanji/types";
-	import { charUnicode } from "@/core/unicode";
+	import { unicodeIndexFromUTF8, unicodeIndexFromUTF16 } from "@/core/unicode";
 
 	import TheTags from "@/components/Tags.vue";
 	import ContentCopyIcon from "vue-material-design-icons/LinkVariant.vue";
@@ -24,10 +24,6 @@
 	const url = import.meta.env.VITE_BASE_URL;
 
 	const { t } = useI18n();
-
-	const literalUnicode = computed(() => {
-		return charUnicode(props.article.entry.general.literal);
-	});
 
 	function confStyles() {
 		if (props.article.isReviewed) return [];
@@ -119,9 +115,17 @@
 						<span class="text-sm text-gray-400 dark:text-gray-400">
 							{{ t(MessagesNames.Unicode) }}
 						</span>
-						<span class="ml-2">{{
-							article.entry.general.literal.length == 1 ? literalUnicode : "-"
-						}}</span>
+						<span class="ml-2">
+							<template v-if="article.entry.general.literal.length == 1">
+								{{ unicodeIndexFromUTF8(article.entry.general.literal) }}
+							</template>
+
+							<template v-else-if="article.entry.general.literal.length == 2">
+								{{ unicodeIndexFromUTF16(article.entry.general.literal) }}
+							</template>
+
+							<template v-else>{{ "-" }}</template>
+						</span>
 					</p>
 					<p v-show="article.entry.general.jis">
 						<span class="text-sm text-gray-400 dark:text-gray-400">
@@ -140,9 +144,7 @@
 				<TheTags :tags="article.entry.general.tags" class="text-sm" />
 
 				<div v-if="article.entry.readings" class="flex flex-col gap-4">
-					<template
-						v-for="(reading, readingType) of article.entry.readings"
-					>
+					<template v-for="(reading, readingType) of article.entry.readings">
 						<TheReading
 							v-if="
 								(standalone || !['other', 'nanori'].includes(readingType)) &&
@@ -158,9 +160,7 @@
 					v-if="standalone && article.entry.general.note"
 					class="flex flex-col gap-2 rounded-md bg-neutral-100 py-2 px-3 dark:bg-gray-700"
 				>
-					<span class="text-sm text-gray-400">{{
-						t(MessagesNames.Note)
-					}}</span>
+					<span class="text-sm text-gray-400">{{ t(MessagesNames.Note) }}</span>
 					<p v-show="article.entry.general.ids">
 						{{ article.entry.general.note }}
 					</p>
