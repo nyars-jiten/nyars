@@ -4,4 +4,5 @@ export const enum RoutesNames {
 	DictJpArticle = "jp",
 	Edits = "edits",
 	DictKanjiArticle = "kanji",
+	DictKanjiArticleEditor = "kanji-editor",
 }
