@@ -1,5 +1,5 @@
 <script setup lang="ts">
-	import TheInput from "@/components/search/the-input.vue";
+	import TheInput from "@/components/search/TheInput.vue";
 </script>
 
 <template>

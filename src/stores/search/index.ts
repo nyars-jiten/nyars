@@ -1,125 +1,42 @@
-import { api } from "@/api";
-import { isEmpty, update } from "lodash";
+import {  ref } from "vue";
 import { defineStore } from "pinia";
 
-import { RoutesNames } from "@/router/routes-names";
 import { SearchType } from "@/api/types/search/search-type";
+import { useJapSearch } from "./jap";
 
-import { type Actions, Getters, State } from "./types";
-import { type SearchResultWord } from "@/api/search-rest/types/search-result-word";
-import { type SearchResultKanji } from "@/api/search-rest/types/search-result-kanji";
-import { type SearchResultJpInfo } from "@/api/search-rest/types/search-result-jp-info";
+import { useKanSearch } from "./kan";
+import { ReadOnlyRequest } from "./types";
 
-function emptySearchGrammar(): SearchResultJpInfo {
-	return {
-		count: 0,
-		page: 0,
-		request: "",
-		selectedLemma: 0,
-		parsedGrammar: [],
-	};
-}
+export const useSearch = defineStore("search", () => {
+	const { searchSuggestions: japSs } = useJapSearch();
+	const { searchResults: searchJap } = useJapSearch();
 
-function emptySearchWordResults(): SearchResultWord {
-	return {
-		info: emptySearchGrammar(),
-		result: [],
-	};
-}
+	const { search: searchKan } = useKanSearch();
 
-function emptySearchKanjiResults(): SearchResultKanji {
-	return {
-		result: [],
-	};
-}
+	const mode = ref(SearchType.Jap);
+	const request = ref("");
 
-export const useSearch = defineStore<string, State, Getters, Actions>(
-	"search",
-	{
-		state() {
-			return {
-				suggs: {
-					updatedAt: new Date(),
-					values: [],
-				},
-				request: "",
-				resultsJp: emptySearchWordResults(),
-				resultsKanji: emptySearchKanjiResults(),
-				type: SearchType.Jp,
-			};
-		},
+	function updateRequest(params?: ReadOnlyRequest) {
+		if (params) {
+			request.value = params.request;
+		}
+	}
 
-		actions: {
-			async searchJp(props: { request?: string; userRequest?: boolean }) {
-				this.type = SearchType.Jp;
-				this.resultsJp.result = [];
+	async function searchResults(params?: ReadOnlyRequest) {
+		updateRequest(params);
 
-				if (props.request) {
-					this.request = props.request;
-				}
+		if (mode.value == SearchType.Kan) {
+			return await searchKan({ request: request.value });
+		}
 
-				await this.router.push({
-					name: RoutesNames.SearchResults,
-					query: { request: this.request, type: this.type },
-				});
+		return await searchJap({ request: request.value });
+	}
 
-				const response = await api.search.searchJp({
-					request: this.request,
-					page: 0,
-				});
+	async function searchSuggestions(params?: ReadOnlyRequest) {
+		updateRequest(params);
 
-				if (props.userRequest) {
-					this.resultsJp.info = response.info;
-				}
+		await japSs({ request: request.value });
+	}
 
-				this.resultsJp.result = response.result;
-			},
-
-			async searchKanji(props: { request?: string }) {
-				this.type = SearchType.Kanji;
-				this.resultsKanji.result = [];
-
-				if (props.request) {
-					this.request = props.request;
-				}
-
-				await this.router.push({
-					name: RoutesNames.SearchResults,
-					query: { request: this.request, type: this.type },
-				});
-
-				const response = await api.search.searchKanji({
-					request: this.request,
-					page: 0,
-				});
-
-				this.resultsKanji.result = response.result;
-			},
-
-			async searchSuggs({ request }: { request?: string }) {
-				const r = request ?? this.request;
-				if (isEmpty(r)) return;
-
-				const updatedAt = new Date();
-				const values = await api.search.sugg({ request: r });
-
-				if (updatedAt >= this.suggs.updatedAt) {
-					this.suggs = { updatedAt, values };
-				}
-			},
-
-			resetSuggs() {
-				this.suggs = { updatedAt: new Date(), values: [] };
-			},
-
-			resetResults(props: { withGrammar: boolean }) {
-				this.results.result = [];
-				this.resetSuggs();
-
-				if (props.withGrammar) {
-					this.results.info = emptySearchGrammar();
-				}
-			},
-		},
-	},
-);
+	return { mode, request, searchSuggestions, searchResults };
+});

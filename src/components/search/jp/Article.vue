@@ -5,12 +5,13 @@
 	import Words from "./the-article/Words.vue";
 	import Description from "./the-article/Description.vue";
 	import UserBar from "./the-article/UserBar.vue";
+	import { type DeepReadonly } from "vue";
 
-	type Props = { article: EntryJp; standalone: boolean };
+	type Props = { article: DeepReadonly<EntryJp>; standalone: boolean };
 
 	defineProps<Props>();
 
-	function unrevived(article: EntryJp) {
+	function unrevived(article: DeepReadonly<EntryJp>) {
 		if (article && article.isReviewed) return [];
 
 		return ["border-l-2", "border-l-orange-500", "dark:border-l-orange-500"];

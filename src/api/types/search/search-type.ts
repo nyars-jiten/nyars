@@ -1,4 +1,4 @@
-export  enum SearchType {
-	Jp = "jp",
-	Kanji = "kanji",
+export enum SearchType {
+	Jap = "jp",
+	Kan = "kanji",
 }

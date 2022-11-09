@@ -6,8 +6,9 @@
 	import { convert_to_kana as convert } from "@nyars-jiten/jp-transcript";
 
 	import TheTags from "@/components/Tags.vue";
+	import { DeepReadonly } from "vue";
 
-	type Props = { article: EntryJp };
+	type Props = { article: DeepReadonly<EntryJp> };
 
 	defineProps<Props>();
 
