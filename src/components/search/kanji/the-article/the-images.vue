@@ -22,10 +22,7 @@
 		</span>
 
 		<div class="flex flex-row flex-wrap justify-center gap-2">
-			<div
-				v-for="(image, imageId) of images"
-				class="flex flex-col items-center gap-2"
-			>
+			<div v-for="image of images" class="flex flex-col items-center gap-2">
 				<div class="w-20">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +32,7 @@
 						:viewBox="image.viewBox"
 						fill="currentColor"
 					>
-						<path v-for="(path, pathId) of splitPaths(image.data)" :d="path" />
+						<path v-for="path of splitPaths(image.data)" :d="path" />
 					</svg>
 				</div>
 				<span class="text-center text-sm">

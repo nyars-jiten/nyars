@@ -7,7 +7,7 @@
 
 		<div class="flex flex-row flex-wrap gap-y-2 gap-x-1">
 			<div
-				v-for="(reading, readingId) of readings"
+				v-for="(reading) of readings"
 				:class="[reading.tags.includes('gai') ? `text-gray-400` : '']"
 				class="after:ml-2 after:text-gray-200 after:content-['・'] last:after:content-none dark:after:text-gray-500"
 			>
@@ -15,7 +15,7 @@
 					v-if="reading.tags.length > 0 && !reading.tags.includes('gai')"
 					class="mx-1"
 				>
-					<template v-for="(tag, tagId) of reading.tags">
+					<template v-for="(tag) of reading.tags">
 						<span
 							v-if="tag != 'gai'"
 							class="rounded-tl-md border-t border-l px-1 py-0.5 empty:hidden"

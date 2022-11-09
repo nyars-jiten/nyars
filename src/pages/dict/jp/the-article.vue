@@ -18,7 +18,6 @@
 	import PlusIcon from "vue-material-design-icons/Plus.vue";
 	import Button from "@/components/Button.vue";
 	import { MessagesNames } from "@/locale/messages-names";
-	import { storeToRefs } from "pinia";
 
 	type Props = { standalone: boolean };
 

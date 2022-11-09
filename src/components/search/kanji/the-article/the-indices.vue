@@ -18,10 +18,6 @@
 	defineProps<Props>();
 
 	const { t } = useI18n();
-
-	function test(params: any) {
-		return 1;
-	}
 </script>
 
 <template>
@@ -33,16 +29,14 @@
 				class="border-l-2 border-gray-400 dark:border-gray-500"
 			>
 				<DisclosureButton
-					class="flex w-full  justify-between py-2 px-3 text-gray-400 hover:opacity-75"
+					class="flex w-full justify-between py-2 px-3 text-gray-400 hover:opacity-75"
 				>
 					<span>{{ t(`${MessagesNames.KanjiIndexTypeName}.${indexId}`) }}</span>
 					<ChevronIcon :class="open ? 'transform rotate-180' : ''" />
 				</DisclosureButton>
 				<DisclosurePanel>
 					<table class="w-full text-left text-sm text-gray-500">
-						<thead
-							class=" bg-gray-100 dark:bg-gray-700 dark:text-gray-400"
-						>
+						<thead class="bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
 							<tr>
 								<th scope="col" class="p-3 font-normal">
 									{{ t(MessagesNames.Index) }}
@@ -54,7 +48,7 @@
 						</thead>
 						<tbody>
 							<tr
-								v-for="(entry, entryId) of index"
+								v-for="entry of index"
 								class="border-b bg-white last:border-none dark:border-gray-700 dark:bg-gray-800"
 							>
 								<td class="w-20 p-3">{{ entry.value }}</td>

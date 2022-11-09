@@ -46,7 +46,7 @@ export function examplesBbCodesProcess(rawText: string) {
 }
 
 // replaces japanese 《reading》 brackets with a furigana ruby-tags
-function furiganaReplacerBracketsToRuby(match: string, p1: string, p2: string) {
+function furiganaReplacerBracketsToRuby(_: string, p1: string, p2: string) {
 	let ruby = "";
 	const readings = p2.split("|");
 	if (readings.length === 1) {

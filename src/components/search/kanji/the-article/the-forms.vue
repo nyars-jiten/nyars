@@ -5,7 +5,7 @@
 		</span>
 		<div class="flex flex-row flex-wrap gap-2">
 			<div
-				v-for="(form, formId) of forms"
+				v-for="(form) of forms"
 				class="flex flex-row items-start gap-4"
 			>
 				<div class="w-20">

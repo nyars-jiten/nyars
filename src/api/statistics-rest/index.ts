@@ -1,4 +1,3 @@
-import type { Axios } from "axios";
 import type { BestUsers, TotalStats } from "./types";
 
 export class StatisticsRest {
@@ -67,9 +66,9 @@ export class StatisticsRest {
 		});
 	}
 
-	public constructor(endpoint: Axios) {
-		this.#endpoint = endpoint;
-	}
+	// public constructor(endpoint: Axios) {
+	// this.#endpoint = endpoint;
+	// }
 
-	#endpoint;
+	// #endpoint;
 }

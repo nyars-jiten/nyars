@@ -60,10 +60,10 @@ export const api = new (class extends BasicRest {
 
 		this.#endpoint = axios.create({ baseURL: import.meta.env.VITE_API_URL });
 
-		this.statistics = new StatisticsRest(this.#endpoint);
+		this.statistics = new StatisticsRest();
 		this.search = new SearchRest(this.#endpoint);
 		this.kotoba = new KotobaRest(this.#endpoint);
-		this.users = new UsersRest(this.#endpoint);
+		this.users = new UsersRest();
 		this.edits = new EditsRest(this.#endpoint);
 	}
 

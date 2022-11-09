@@ -10,8 +10,6 @@
 	const { results } = storeToRefs(useKanSearch());
 
 	onBeforeMount(() => {
-		console.log("kan");
-
 		const { mode } = storeToRefs(useSearch());
 		mode.value = SearchType.Kan;
 	});

@@ -35,7 +35,7 @@
 
 			<PanelBody>
 				<span
-					v-for="(v, i) of changes.result"
+					v-for="(v) of changes.result"
 					class="select-text whitespace-pre-wrap"
 					:class="{ 'text-green-500': v.isDiffered }"
 				>

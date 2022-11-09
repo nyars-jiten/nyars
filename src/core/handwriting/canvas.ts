@@ -106,19 +106,7 @@ export class Canvas implements Handwriting {
 		this.context.drawImage(img, 0, 0);
 	}
 
-	onResize(payload?: FocusEvent) {
-		console.log("onResize");
-
-		console.log(this.canvas.clientWidth);
-		console.log(this.canvas.width);
-		console.log(this.canvas.offsetWidth);
-
-		console.log("---");
-
-		console.log(this.canvas.clientHeight);
-		console.log(this.canvas.height);
-		console.log(this.canvas.offsetHeight);
-
+	onResize(_?: FocusEvent) {
 		this.canvas.width = this.canvas.clientWidth;
 		this.canvas.height = this.canvas.clientHeight;
 	}
@@ -131,8 +119,6 @@ export class Canvas implements Handwriting {
 		this.pos = { x: 0, y: 0 };
 		this._inAction = false;
 		this.history = [];
-		// console.log(this.canvas.width);
-		// console.log(this.canvas.height);
 
 		this.lineWidth = 3;
 	}

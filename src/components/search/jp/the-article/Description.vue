@@ -5,13 +5,13 @@
 	import { bbCodesProcess } from "@/core/text/bb-code";
 	import { RoutesNames } from "@/router/routes-names";
 
-	import { type RouteLocationRaw } from "vue-router";
 	import { type EntryJp } from "@/api/dictionary/jp/types";
 
-	import Panel from "../../Panel.vue";
 	import PanelBody from "../../PanelBody.vue";
 	import { MessagesNames } from "@/locale/messages-names";
 	import { DeepReadonly } from "vue";
+	import { useSearch } from "@/stores/search";
+	import { SearchType } from "@/api/types/search/search-type";
 
 	type Variants = "short" | "full";
 	type Props = {
@@ -22,6 +22,7 @@
 	defineProps<Props>();
 
 	const { t } = useI18n();
+	const { searchResults } = useSearch();
 
 	function path({ type, tag, v }: { type: string; tag: string; v: Variants }) {
 		const p = MessagesNames.ArticleTagName;
@@ -158,10 +159,18 @@
 											{{ ref.value }}
 										</RouterLink>
 
-										<div v-else>
-											{{ ref }}
-											// add search button here
-										</div>
+										<span
+											v-else
+											class="cursor-pointer text-indigo-500 underline underline-offset-4 decoration-dotted hover:text-accent-500"
+											@click="
+												searchResults({
+													request: ref.value,
+													mode: SearchType.Jap,
+												})
+											"
+										>
+											{{ ref.value }}
+										</span>
 									</li>
 								</ul>
 							</div>

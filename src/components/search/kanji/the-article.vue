@@ -1,6 +1,4 @@
 <script setup lang="ts">
-	import { computed } from "vue";
-
 	import { MessagesNames } from "@/locale/messages-names";
 	import { RoutesNames } from "@/router/routes-names";
 	import { useI18n } from "vue-i18n";

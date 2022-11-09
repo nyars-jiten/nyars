@@ -12,8 +12,6 @@
 	const { results } = storeToRefs(useJapSearch());
 
 	onBeforeMount(() => {
-		console.log('jap');
-		
 		const { mode } = storeToRefs(useSearch());
 		mode.value = SearchType.Jap;
 	});

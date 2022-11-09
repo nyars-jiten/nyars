@@ -5,6 +5,10 @@ import { router } from "./router";
 import { locale } from "./locale";
 import { pinia } from "./stores";
 
-import app from "./TheApp.vue";
+import App from "./TheApp.vue";
 
-createApp(app).use(locale).use(pinia).use(router).mount("#app");
+const app = createApp(App);
+app.use(locale);
+app.use(router);
+app.use(pinia);
+app.mount("#app");
