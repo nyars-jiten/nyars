@@ -1,5 +1,5 @@
 import { api } from "@/api";
-import { isEmpty } from "lodash";
+import { isEmpty, update } from "lodash";
 import { defineStore } from "pinia";
 
 import { RoutesNames } from "@/router/routes-names";
@@ -38,7 +38,10 @@ export const useSearch = defineStore<string, State, Getters, Actions>(
 	{
 		state() {
 			return {
-				suggs: [],
+				suggs: {
+					updatedAt: new Date(),
+					values: [],
+				},
 				request: "",
 				resultsJp: emptySearchWordResults(),
 				resultsKanji: emptySearchKanjiResults(),
@@ -97,12 +100,21 @@ export const useSearch = defineStore<string, State, Getters, Actions>(
 				const r = request ?? this.request;
 				if (isEmpty(r)) return;
 
-				this.suggs = await api.search.sugg({ request: r });
+				const updatedAt = new Date();
+				const values = await api.search.sugg({ request: r });
+
+				if (updatedAt >= this.suggs.updatedAt) {
+					this.suggs = { updatedAt, values };
+				}
 			},
 
-			clearResults(props: { withGrammar: boolean }) {
+			resetSuggs() {
+				this.suggs = { updatedAt: new Date(), values: [] };
+			},
+
+			resetResults(props: { withGrammar: boolean }) {
 				this.results.result = [];
-				this.suggs = [];
+				this.resetSuggs();
 
 				if (props.withGrammar) {
 					this.results.info = emptySearchGrammar();

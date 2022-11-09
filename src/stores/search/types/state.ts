@@ -3,7 +3,10 @@ import { type SearchResultWord } from "@/api/search-rest/types/search-result-wor
 import { type SearchType } from "@/api/types/search/search-type";
 
 export type State = {
-	suggs: string[];
+	suggs: {
+		updatedAt: Date;
+		values: string[]
+	};
 	request: string;
 	resultsJp: SearchResultWord;
 	resultsKanji: SearchResultKanji;

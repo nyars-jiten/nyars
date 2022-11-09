@@ -16,9 +16,9 @@
 		() => store.request,
 		async () => {
 			search.cancel();
-			
+
 			if (isEmpty(store.request)) {
-				store.suggs = [];
+				store.resetSuggs();
 				return;
 			}
 
@@ -41,7 +41,7 @@
 		class="invisible peer-focus:visible absolute inset-x-0 top-[calc(100%)] z-10 overflow-hidden rounded-b-md bg-gray-100 shadow-xl hover:visible dark:bg-gray-700"
 	>
 		<button
-			v-for="sugg of store.suggs"
+			v-for="sugg of store.suggs.values"
 			type="button"
 			class="block min-w-full hover:bg-white dark:hover:bg-gray-600 border-t border-gray-300 dark:border-gray-600 dark:bg-gray-700 py-2 px-4 text-left"
 			@click="
