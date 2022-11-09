@@ -31,20 +31,6 @@
 
 		return ["border-l-2", "border-l-orange-500", "dark:border-l-orange-500"];
 	}
-
-	async function copy(e: MouseEvent) {
-		const { target } = e;
-		if (target instanceof HTMLElement) {
-			await navigator.clipboard.writeText(`${url}/kanji/${props.article.kid}`);
-		}
-	}
-
-	async function copyContent(e: MouseEvent) {
-		const { target } = e;
-		if (target instanceof HTMLElement) {
-			await navigator.clipboard.writeText(target.innerText);
-		}
-	}
 </script>
 
 <template>
@@ -60,7 +46,9 @@
 					<div class="flex flex-col gap-2">
 						<span class="text-9xl">{{ article.entry.general.literal }}</span>
 						<span class="break-words">
-							{{ article.entry.general.shortMeans }}
+							<input
+								:value="article.entry.general.shortMeans" name="short-means-input"
+							/>
 						</span>
 					</div>
 				</div>
@@ -72,25 +60,25 @@
 						<span class="text-sm text-gray-400">
 							{{ t(MessagesNames.Frequency) }}
 						</span>
-						<span class="ml-2">{{ article.entry.general.freq }}</span>
+						<input :value="article.entry.general.freq" name="freq-input" />
 					</p>
 					<p>
 						<span class="text-sm text-gray-400">
 							{{ t(MessagesNames.Radical) }}
 						</span>
-						<span class="ml-2 font-medium">{{ article.entry.general.literal }}</span>
+						<input :value="article.entry.general.literal" name="literal-input" />
 					</p>
 					<p>
 						<span class="text-sm text-gray-400">
 							{{ t(MessagesNames.StrokeCount) }}
 						</span>
-						<span class="ml-2">{{ article.entry.general.strokeCount }}</span>
+						<input :value="article.entry.general.strokeCount" name="strokecount-input" />
 					</p>
 					<p>
 						<span class="text-sm text-gray-400">
 							{{ t(MessagesNames.Ids) }}
 						</span>
-						<span class="ml-2">{{ article.entry.general.ids }}</span>
+						<input :value="article.entry.general.ids" name="ids-input" />
 					</p>
 				</div>
 
@@ -99,13 +87,13 @@
 						<span class="text-sm text-gray-400 dark:text-gray-400">
 							{{ t(MessagesNames.JIS) }}
 						</span>
-						<span class="ml-2">{{ article.entry.general.jis }}</span>
+						<input :value="article.entry.general.jis" name="jis-input" />
 					</p>
 				</div>
 
-				<TheForms v-if="standalone" :forms="article.entry.forms" />
+				<!-- <TheForms v-if="standalone" :forms="article.entry.forms" /> -->
 
-				<TheImages v-if="standalone" :images="article.images" />
+				<!-- <TheImages v-if="standalone" :images="article.images" /> -->
 			</div>
 
 			<div class="flex flex-col gap-8">
@@ -128,9 +116,7 @@
 					class="flex flex-col gap-2 rounded-md bg-neutral-100 py-2 px-3 dark:bg-gray-700"
 				>
 					<span class="text-sm text-gray-400">{{ t(MessagesNames.Note) }}</span>
-					<p v-show="article.entry.general.ids">
-						{{ article.entry.general.note }}
-					</p>
+					<input :value="article.entry.general.note" name="note-input" />
 				</div>
 
 				<div class="flex flex-col gap-8">
