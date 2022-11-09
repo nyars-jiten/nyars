@@ -3,6 +3,7 @@
 		<div class="rounded-md text-accent-500">
 			{{ title }}
 		</div>
+
 		<template v-for="meaning of meanings">
 			<div class="flex flex-col gap-y-2">
 				<div>
@@ -25,9 +26,26 @@
 					class="flex flex-col gap-y-2 border-l border-gray-200 pl-3 text-gray-600 dark:border-gray-600 dark:text-gray-400"
 				>
 					<div v-for="word of meaning.words">
-						<RouterLink :to="location(word.wid)" class="text-lg">
+						<RouterLink
+							v-if="exists(word)"
+							:to="{
+								name: RoutesNames.DictKanjiArticle,
+								params: { articleId: word.wid },
+							}"
+							class="text-lg"
+						>
 							{{ word.word }}
 						</RouterLink>
+
+						<span
+							v-else
+							class="text-lg cursor-pointer hover:opacity-50"
+							@click="
+								searchResults({ request: word.word, mode: SearchType.Kan })
+							"
+						>
+							{{ word.word }}
+						</span>
 
 						<span class="text-gray-400 dark:text-gray-500 px-2">
 							{{ convert_to_kana(word.reading) }}
@@ -49,27 +67,20 @@
 <script setup lang="ts">
 	import { bbCodesProcess } from "@/core/text/bb-code";
 	import { convert_to_kana } from "@nyars-jiten/jp-transcript";
-	import type { RouteLocationRaw } from "vue-router";
 
 	import { RoutesNames } from "@/router/routes-names";
 
-	import { Meaning } from "@/api/dictionary/kanji/types";
+	import { KanjiWord, Meaning } from "@/api/dictionary/kanji/types";
+	import { useSearch } from "@/stores/search";
+	import { SearchType } from "@/api/types/search/search-type";
 
 	type Props = { meanings: Meaning[]; title: string };
 
 	defineProps<Props>();
 
-	function location(wid: string): RouteLocationRaw {
-		if (!wid || wid.length < 1) {
-			return {
-				name: RoutesNames.SearchResults,
-				query: { request: wid },
-			};
-		}
+	const { searchResults } = useSearch();
 
-		return {
-			name: RoutesNames.DictJpArticle,
-			params: { articleId: wid },
-		};
+	function exists({ wid }: KanjiWord) {
+		return wid.length >= 1;
 	}
 </script>

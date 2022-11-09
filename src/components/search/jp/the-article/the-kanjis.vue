@@ -9,9 +9,9 @@
 	import TheTags from "@/components/Tags.vue";
 	import { DeepReadonly } from "vue";
 
-	type Props = { kanjis: EntryKanji[] };
+	type Props = { kanjis: DeepReadonly<EntryKanji[]> };
 
-	defineProps<DeepReadonly<Props>>();
+	defineProps<Props>();
 
 	const { t } = useI18n();
 </script>

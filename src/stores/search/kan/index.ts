@@ -30,7 +30,7 @@ export const useKanSearch = defineStore("kanSearch", () => {
 	}
 
 	async function search({ request: q }: ReadOnlyRequest) {
-		if (request.value == q) return false;
+		// if (request.value == q) return false;
 
 		reset();
 
@@ -40,7 +40,7 @@ export const useKanSearch = defineStore("kanSearch", () => {
 		});
 
 		const response = await api.search.searchKanji({
-			request: q,
+			request: (request.value = q),
 			page: 0,
 		});
 

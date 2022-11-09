@@ -1,12 +1,22 @@
 <script setup lang="ts">
 	import { storeToRefs } from "pinia";
+	import { onBeforeMount } from "vue";
 
+	import { useSearch } from "@/stores/search";
 	import { useJapSearch } from "@/stores/search/jap";
+	import { SearchType } from "@/api/types/search/search-type";
 
 	import TheJapGrammar from "@/components/search/jp/TheJapGrammar.vue";
 	import JpArticle from "@/components/search/jp/Article.vue";
 
 	const { results } = storeToRefs(useJapSearch());
+
+	onBeforeMount(() => {
+		console.log('jap');
+		
+		const { mode } = storeToRefs(useSearch());
+		mode.value = SearchType.Jap;
+	});
 </script>
 
 <template>
