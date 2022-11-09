@@ -3,8 +3,18 @@
 	import { useKanSearch } from "@/stores/search/kan";
 
 	import KanjiArticle from "@/components/search/kanji/the-article.vue";
+	import { onBeforeMount } from "vue";
+	import { useSearch } from "@/stores/search";
+	import { SearchType } from "@/api/types/search/search-type";
 
 	const { results } = storeToRefs(useKanSearch());
+
+	onBeforeMount(() => {
+		console.log("kan");
+
+		const { mode } = storeToRefs(useSearch());
+		mode.value = SearchType.Kan;
+	});
 </script>
 
 <template>

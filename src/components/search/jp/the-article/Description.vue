@@ -28,18 +28,8 @@
 		return `${p}.${type.toLocaleLowerCase()}.${tag.toLocaleLowerCase()}.${v}`;
 	}
 
-	function location(ref: Reference): RouteLocationRaw {
-		if (!ref.target || ref.target.length < 1) {
-			return {
-				name: RoutesNames.SearchJapResults,
-				query: { request: ref.value },
-			};
-		}
-
-		return {
-			name: RoutesNames.DictJpArticle,
-			params: { articleId: ref.target },
-		};
+	function exists({ target }: Reference) {
+		return target && target.length < 1;
 	}
 </script>
 
@@ -158,11 +148,20 @@
 										{{ t(`${MessagesNames.ArticleAbbr}.${ref.referenceType}`) }}
 
 										<RouterLink
-											:to="location(ref)"
+											v-if="exists(ref)"
+											:to="{
+												name: RoutesNames.DictJpArticle,
+												params: { articleId: ref.target },
+											}"
 											class="text-indigo-500 underline underline-offset-4 decoration-dotted hover:text-accent-500"
 										>
 											{{ ref.value }}
 										</RouterLink>
+
+										<div v-else>
+											{{ ref }}
+											// add search button here
+										</div>
 									</li>
 								</ul>
 							</div>

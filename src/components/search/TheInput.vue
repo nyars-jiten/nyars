@@ -18,6 +18,7 @@
 	import Button from "./Button.vue";
 	import TheSuggs from "./TheSuggs.vue";
 	import TheHandwriting from "./TheHandwriting.vue";
+	import { useJapSearch } from "@/stores/search/jap";
 
 	const state = reactive({
 		draw: false,
@@ -27,6 +28,7 @@
 	const { t, tm } = useI18n();
 	const { request, mode } = storeToRefs(useSearch());
 	const { searchResults } = useSearch();
+	const { searchResults: searchResults2 } = useJapSearch();
 
 	const searchInputElement = ref<HTMLInputElement>();
 

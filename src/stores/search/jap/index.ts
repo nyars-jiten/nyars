@@ -58,7 +58,7 @@ export const useJapSearch = defineStore("japSearch", () => {
 	}
 
 	async function searchResults({ request: q }: ReadOnlyRequest) {
-		if (request.value == q) return false;
+		// if (request.value == q) return false;
 
 		resetResults();
 
