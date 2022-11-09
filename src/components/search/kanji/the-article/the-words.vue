@@ -5,21 +5,31 @@
 		</div>
 		<div>
 			<div v-for="word of words">
-				<RouterLink :to="location(word.wid)" class="text-lg">
-					{{ word.word }}
-				</RouterLink>
+				<div v-if="!isEditor">
+					<RouterLink :to="location(word.wid)" class="text-lg">
+						{{ word.word }}
+					</RouterLink>
 
-				<span class="text-gray-400 dark:text-gray-500 px-2">
-					{{ convert_to_kana(word.reading) }}
-				</span>
+					<span class="text-gray-400 dark:text-gray-500 px-2">
+						{{ convert_to_kana(word.reading) }}
+					</span>
 
-				<!-- eslint-disable vue/no-v-html -->
-				<span
-					class="flex-wrap text-gray-500 dark:text-gray-400"
-					v-html="bbCodesProcess(word.meaning)"
-				/>
-				<!-- eslint-enable vue/no-v-html -->
+					<!-- eslint-disable vue/no-v-html -->
+					<span
+						class="flex-wrap text-gray-500 dark:text-gray-400"
+						v-html="bbCodesProcess(word.meaning)"
+					/>
+				</div>
+				<div v-else>
+					<input :value="word.wid" name="word-wid-input" placeholder="wid" />
+					<input :value="word.word" name="word-word-input" placeholder="слово" />
+					<input :value="word.reading" name="word-reading-input" placeholder="чтение" />
+					<input :value="word.meaning" name="word-meaning-input" placeholder="значение" />
+				</div>
 			</div>
+			<p v-show="isEditor" class="outline cursor-pointer" @click="addWord">
+				+ слово
+			</p>
 		</div>
 	</div>
 </template>
@@ -33,9 +43,9 @@
 
 	import { RoutesNames } from "@/router/routes-names";
 
-	type Props = { words: KanjiWord[]; title: string };
+	type Props = { words: KanjiWord[]; title: string; isEditor: boolean };
 
-	defineProps<Props>();
+	const props = defineProps<Props>();
 
 	function location(wid: string): RouteLocationRaw {
 		if (!wid || wid.length < 1) {
@@ -49,5 +59,18 @@
 			name: RoutesNames.DictJpArticle,
 			params: { articleId: wid },
 		};
+	}
+
+	const newWord: KanjiWord = {
+		wid: "",
+		word: "",
+		reading: "",
+		meaning: "",
+		nsR: false,
+		nsM: false
+	};
+
+	function addWord() {
+		props.words.push(newWord);
 	}
 </script>

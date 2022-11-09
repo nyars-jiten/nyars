@@ -124,18 +124,21 @@
 						v-if="article.entry.standaloneMeanings.length > 0"
 						:words="article.entry.standaloneMeanings"
 						:title="t(MessagesNames.StandaloneMeanings)"
+						:is-editor='true'
 					/>
 
 					<TheMeanings
 						v-if="article.entry.composedMeanings.length > 0"
 						:meanings="article.entry.composedMeanings"
 						:title="t(MessagesNames.ComposedMeanings)"
+						:is-editor='true'
 					/>
 
 					<TheMeanings
 						v-if="article.entry.kanbunMeanings.length > 0"
 						:meanings="article.entry.kanbunMeanings"
 						:title="t(MessagesNames.KanbunMeanings)"
+						:is-editor='true'
 					/>
 				</div>
 			</div>
