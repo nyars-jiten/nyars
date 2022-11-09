@@ -5,13 +5,13 @@
 	import { MessagesNames } from "@/locale/messages-names";
 
 	import { type EntryKanji } from "@/api/dictionary/kanji/types";
+	import { type DeepReadonly } from "vue";
 
 	import TheTags from "@/components/Tags.vue";
-	import { DeepReadonly } from "vue";
 
-	type Props = { kanjis: EntryKanji[] };
+	type Props = { kanjis: DeepReadonly<EntryKanji[]> };
 
-	defineProps<DeepReadonly<Props>>();
+	defineProps<Props>();
 
 	const { t } = useI18n();
 </script>

@@ -20,13 +20,27 @@
 						v-html="bbCodesProcess(word.meaning)"
 					/>
 				</div>
+
 				<div v-else>
 					<input :value="word.wid" name="word-wid-input" placeholder="wid" />
-					<input :value="word.word" name="word-word-input" placeholder="слово" />
-					<input :value="word.reading" name="word-reading-input" placeholder="чтение" />
-					<input :value="word.meaning" name="word-meaning-input" placeholder="значение" />
+					<input
+						:value="word.word"
+						name="word-word-input"
+						placeholder="слово"
+					/>
+					<input
+						:value="word.reading"
+						name="word-reading-input"
+						placeholder="чтение"
+					/>
+					<input
+						:value="word.meaning"
+						name="word-meaning-input"
+						placeholder="значение"
+					/>
 				</div>
 			</div>
+
 			<p v-show="isEditor" class="outline cursor-pointer" @click="addWord">
 				+ слово
 			</p>
@@ -43,14 +57,14 @@
 
 	import { RoutesNames } from "@/router/routes-names";
 
-	type Props = { words: KanjiWord[]; title: string; isEditor: boolean };
+	type Props = { words: KanjiWord[]; title: string; isEditor?: boolean };
 
-	const props = defineProps<Props>();
+	const props = withDefaults(defineProps<Props>(), { isEditor: false });
 
 	function location(wid: string): RouteLocationRaw {
 		if (!wid || wid.length < 1) {
 			return {
-				name: RoutesNames.SearchResults,
+				name: RoutesNames.SearchKanResults,
 				query: { request: wid },
 			};
 		}
@@ -67,7 +81,7 @@
 		reading: "",
 		meaning: "",
 		nsR: false,
-		nsM: false
+		nsM: false,
 	};
 
 	function addWord() {
