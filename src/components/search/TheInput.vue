@@ -1,11 +1,12 @@
 <script setup lang="ts">
-	import { isEmpty } from "lodash";
 	import { useI18n } from "vue-i18n";
+	import { storeToRefs } from "pinia";
 	import { useRoute } from "vue-router";
-	import { onBeforeMount, reactive } from "vue";
+	import { onBeforeMount, reactive, ref } from "vue";
 	import { RadioGroup, RadioGroupOption } from "@headlessui/vue";
 
 	import { useSearch } from "@/stores/search";
+
 	import { MessagesNames } from "@/locale/messages-names";
 	import { SearchType } from "@/api/types/search/search-type";
 
@@ -20,44 +21,30 @@
 
 	const state = reactive({
 		draw: false,
-		mode: SearchType.Jp,
 		selector: false,
 	});
 
-	const store = useSearch();
-	const route = useRoute();
-
 	const { t, tm } = useI18n();
+	const { request, mode } = storeToRefs(useSearch());
+	const { searchResults } = useSearch();
 
-	async function search() {
-		// @ts-ignore
-		document.activeElement?.blur();
-
-		if (state.mode == SearchType.Kanji) {
-			await store.searchKanji({});
-		} else {
-			await store.searchJp({ userRequest: true });
-		}
-	}
+	const searchInputElement = ref<HTMLInputElement>();
 
 	async function searchImmediately() {
-		if (isEmpty(store.request) || store.request == route.query.request) return;
+		if (await searchResults()) close();
+	}
 
-		await search();
+	function close() {
+		searchInputElement.value?.blur();
 	}
 
 	onBeforeMount(async () => {
 		const { query } = useRoute();
-		const { request, type } = query;
 
-		if (typeof request != "string") return;
+		const { request: q } = query;
+		if (typeof q !== "string") return;
 
-		if (Object.values(SearchType).includes(<SearchType>type)) {
-			state.mode = <SearchType>type;
-		}
-
-		store.request = request;
-		await search();
+		await searchResults({ request: q });
 	});
 
 	// https://youtu.be/ERa9y6daDFY
@@ -75,7 +62,7 @@
 				@click="state.selector = !state.selector"
 			>
 				<span class="hidden md:block">
-					{{ t(`${MessagesNames.SearchWhat}.${state.mode}.short`) }}
+					{{ t(`${MessagesNames.SearchWhat}.${mode}.short`) }}
 				</span>
 
 				<ChevronUp v-show="state.selector" class="text-gray-400" />
@@ -84,11 +71,13 @@
 
 			<div class="group relative z-20 grow">
 				<input
-					v-model="store.request"
+					ref="searchInputElement"
+					v-model="request"
 					type="text"
 					class="peer h-full w-full text-center text-xl outline-none focus-within:bg-gray-100 dark:bg-gray-800 dark:focus-within:bg-gray-700 dark:group-focus-within:bg-gray-700 group-focus-within:bg-gray-100"
-					:placeholder="t(`${MessagesNames.SearchInput}.${SearchType.Jp}`)"
+					:placeholder="t(`${MessagesNames.SearchInput}.${SearchType.Jap}`)"
 					@keydown.enter="searchImmediately"
+					@keydown.escape="close"
 				/>
 
 				<TheSuggs @onSelected="() => searchImmediately()" />
@@ -139,7 +128,7 @@
 			>
 				<span class="text-gray-500">{{ t(MessagesNames.SearchIn) }}:</span>
 
-				<RadioGroup v-model="state.mode" class="flex flex-row gap-2">
+				<RadioGroup v-model="mode" class="flex flex-row gap-2">
 					<div v-for="(value, key) in tm(String(MessagesNames.SearchWhat))">
 						<RadioGroupOption v-slot="{ checked }" :value="key">
 							<Button :disabled="checked">

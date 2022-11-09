@@ -1,14 +1,17 @@
 <script setup lang="ts">
-	import { SearchType } from "@/api/types/search/search-type";
-	import { MessagesNames } from "@/locale/messages-names";
-	import { useSearch } from "@/stores/search";
 	import { useI18n } from "vue-i18n";
 
-	type Props = { tags: string[] };
+	import { useSearch } from "@/stores/search";
+	import { MessagesNames } from "@/locale/messages-names";
+
+	import { type DeepReadonly } from "vue";
+	import { type ReadOnlyRequest } from "@/stores/search/types";
+
+	type Props = { tags: DeepReadonly<string[]> };
 
 	const props = defineProps<Props>();
-	const store = useSearch();
 
+	const { searchResults } = useSearch();
 	const { t } = useI18n();
 
 	const tags = props.tags.map(function (full) {
@@ -17,6 +20,10 @@
 
 		return { title, value, full };
 	});
+
+	async function search({ request }: ReadOnlyRequest) {
+		return await searchResults({ request: `#${request}` });
+	}
 </script>
 
 <template>
@@ -26,11 +33,7 @@
 			type="button"
 			class="text-xs leading-6 flex overflow-hidden whitespace-nowrap rounded-md border hover:opacity-75"
 			:class="[`border-tag-${tag.title}-500`]"
-			@click="
-				store.type == SearchType.Kanji
-					? store.searchKanji({ request: `#${tag.full}` })
-					: store.searchJp({ request: `#${tag.full}`, userRequest: false })
-			"
+			@click="search({ request: tag.full })"
 		>
 			<span
 				class="px-2 uppercase font-medium"

@@ -14,9 +14,14 @@ export const routes: Readonly<RouteRecordRaw[]> = [
 				component: () => import("@/pages/search/TheHome.vue"),
 			},
 			{
-				name: RoutesNames.SearchResults,
-				path: RoutesNames.SearchResults,
-				component: () => import("@/pages/search/the-results.vue"),
+				name: RoutesNames.SearchJapResults,
+				path: RoutesNames.SearchJapResults,
+				component: () => import("@/pages/search/TheJapResults.vue"),
+			},
+			{
+				name: RoutesNames.SearchKanResults,
+				path: RoutesNames.SearchKanResults,
+				component: () => import("@/pages/search/TheKanResults.vue"),
 			},
 			{
 				name: RoutesNames.DictJpArticle,

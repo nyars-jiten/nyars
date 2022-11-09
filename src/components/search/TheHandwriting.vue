@@ -5,14 +5,14 @@
 	import { Canvas, Null } from "@/core/handwriting";
 	import { useSearch } from "@/stores/search";
 
-	import { type VNodeRef } from "vue";
 	import { type Handwriting } from "@/core/handwriting";
 
 	import ArrowULeftBottom from "vue-material-design-icons/ArrowULeftBottom.vue";
 	import Eraser from "vue-material-design-icons/Eraser.vue";
 	import Panel from "./Panel.vue";
+	import { storeToRefs } from "pinia";
 
-	const element = ref<VNodeRef | undefined>(undefined);
+	const canvas = ref<HTMLCanvasElement>();
 	const hw = ref<Handwriting>(new Null());
 	const proposals = ref<string[]>([]);
 
@@ -21,16 +21,17 @@
 		100,
 	);
 
-	const store = useSearch();
+	const { request } = storeToRefs(useSearch());
+	const { searchSuggestions } = useSearch();
 
 	async function clear() {
 		proposals.value = [];
 		hw.value.clear();
 	}
 
-	async function onSelect(request: string) {
-		store.request += request;
-		await store.searchSuggs({});
+	async function onSelect(q: string) {
+		request.value += q;
+		await searchSuggestions({ request: request.value });
 
 		clear();
 	}
@@ -52,11 +53,11 @@
 	});
 
 	onMounted(() => {
-		if (!(element.value instanceof HTMLCanvasElement)) {
+		if (!canvas.value) {
 			throw new Error("element must be a canvas");
 		}
 
-		hw.value = new Canvas(element.value);
+		hw.value = new Canvas(canvas.value);
 	});
 </script>
 
@@ -78,7 +79,7 @@
 
 		<div class="flex flex-col gap-2">
 			<canvas
-				ref="element"
+				ref="canvas"
 				class="h-80 w-80 cursor-crosshair border border-dotted bg-white dark:border-gray-700 dark:bg-gray-800"
 				@mousemove="hw.onDraw"
 				@mousedown="hw.onStart"

@@ -4,9 +4,18 @@
 
 	import ExternalInTextLink from "@/components/ExternalInTextLink.vue";
 	import { MessagesNames } from "@/locale/messages-names";
+	import { storeToRefs } from "pinia";
+	import { SearchType } from "@/api/types/search/search-type";
+	import { ReadOnlyRequest } from "@/stores/search/types";
 
-	const { searchJp } = useSearch();
 	const { t, tm, rt } = useI18n();
+	const { searchResults } = useSearch();
+	const { mode } = storeToRefs(useSearch());
+
+	async function search(params: ReadOnlyRequest) {
+		mode.value = SearchType.Jap;
+		return await searchResults(params);
+	}
 </script>
 
 <template>
@@ -26,7 +35,7 @@
 				>
 					<button
 						class="underline underline-offset-4 decoration-dotted hover:text-accent-500"
-						@click="searchJp({ request: rt(example), userRequest: true })"
+						@click="search({ request: rt(example) })"
 					>
 						{{ rt(example) }}
 					</button>

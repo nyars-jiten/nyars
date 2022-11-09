@@ -11,10 +11,11 @@
 	import Panel from "../../Panel.vue";
 	import PanelBody from "../../PanelBody.vue";
 	import { MessagesNames } from "@/locale/messages-names";
+	import { DeepReadonly } from "vue";
 
 	type Variants = "short" | "full";
 	type Props = {
-		meanings: EntryJp["entry"]["meanings"];
+		meanings: DeepReadonly<EntryJp["entry"]["meanings"]>;
 		details: boolean;
 	};
 
@@ -30,7 +31,7 @@
 	function location(ref: Reference): RouteLocationRaw {
 		if (!ref.target || ref.target.length < 1) {
 			return {
-				name: RoutesNames.SearchResults,
+				name: RoutesNames.SearchJapResults,
 				query: { request: ref.value },
 			};
 		}

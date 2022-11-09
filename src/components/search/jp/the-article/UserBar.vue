@@ -61,8 +61,13 @@
 	import OpenInNewIcon from "vue-material-design-icons/OpenInNew.vue";
 	import Button from "@/components/Button.vue";
 	import { MessagesNames } from "@/locale/messages-names";
+	import { DeepReadonly } from "vue";
 
-	type Props = { article: EntryJp; details: boolean; toggle: () => void };
+	type Props = {
+		article: DeepReadonly<EntryJp>;
+		details: boolean;
+		toggle: () => void;
+	};
 
 	defineProps<Props>();
 

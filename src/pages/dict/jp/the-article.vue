@@ -1,10 +1,10 @@
 <script setup lang="ts">
-	import { computed, reactive } from "vue";
+	import { computed, DeepReadonly, reactive } from "vue";
 	import { useI18n } from "vue-i18n";
 	import { useRoute } from "vue-router";
 
 	import { api } from "@/api";
-	import { useSearch } from "@/stores/search";
+	import { useJapSearch } from "@/stores/search/jap";
 
 	import { type SatelliteList } from "@/api";
 	import { type EntryJp } from "@/api/dictionary/jp/types";
@@ -18,6 +18,7 @@
 	import PlusIcon from "vue-material-design-icons/Plus.vue";
 	import Button from "@/components/Button.vue";
 	import { MessagesNames } from "@/locale/messages-names";
+	import { storeToRefs } from "pinia";
 
 	type Props = { standalone: boolean };
 
@@ -30,13 +31,16 @@
 	const { articleId } = route.params;
 	if (typeof articleId !== "string") throw new Error("Bad component usage");
 
-	const store = useSearch();
+	const { results } = useJapSearch();
 
 	type Content = {
-		article: EntryJp;
-		images: ImageList;
-		edits: EditList;
-		satellites: (SatelliteList[number] & { title: string; status: boolean })[];
+		article: DeepReadonly<EntryJp>;
+		images: DeepReadonly<ImageList>;
+		edits: DeepReadonly<EditList>;
+		satellites: (DeepReadonly<SatelliteList[number]> & {
+			title: Readonly<string>;
+			status: boolean;
+		})[];
 	};
 
 	const content = reactive<Content>({
@@ -59,7 +63,7 @@
 		satellites: [],
 	});
 
-	const cached = store.resultsJp.result.find(e => e.wid == articleId);
+	const cached = results.result.find(e => e.wid == articleId);
 	if (cached) content.article = cached;
 
 	async function update({ wid }: { wid: string }) {
