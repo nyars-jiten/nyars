@@ -6,14 +6,18 @@
 
 	import TheInput from "@/components/search/TheInput.vue";
 	import { storeToRefs } from "pinia";
+	import { SearchType } from "@/api/types/search/search-type";
 
 	onBeforeMount(() => {
 		const { query } = useRoute();
+		const { mode } = storeToRefs(useSearch());
 
 		const { request } = query;
-		if (typeof request !== "string") return;
+		if (typeof request !== "string") {
+			mode.value = SearchType.Jap;
+			return;
+		}
 
-		const { mode } = storeToRefs(useSearch());
 		const { searchResults } = useSearch();
 
 		const cancel = watch(mode, async () => {
