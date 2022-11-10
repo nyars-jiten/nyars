@@ -2,7 +2,7 @@
 	import { useI18n } from "vue-i18n";
 	import { storeToRefs } from "pinia";
 	import { useRoute } from "vue-router";
-	import { onBeforeMount, reactive, ref } from "vue";
+	import { onBeforeMount, onMounted, reactive, ref } from "vue";
 	import { RadioGroup, RadioGroupOption } from "@headlessui/vue";
 
 	import { useSearch } from "@/stores/search";
@@ -37,6 +37,10 @@
 	function close() {
 		searchInputElement.value?.blur();
 	}
+
+	onMounted(() => {
+		searchInputElement.value?.focus();
+	});
 
 	onBeforeMount(async () => {
 		const { query } = useRoute();
