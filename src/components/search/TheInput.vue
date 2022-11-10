@@ -1,8 +1,7 @@
 <script setup lang="ts">
 	import { useI18n } from "vue-i18n";
 	import { storeToRefs } from "pinia";
-	import { useRoute } from "vue-router";
-	import { onBeforeMount, onMounted, reactive, ref } from "vue";
+	import { onMounted, reactive, ref } from "vue";
 	import { RadioGroup, RadioGroupOption } from "@headlessui/vue";
 
 	import { useSearch } from "@/stores/search";
@@ -42,15 +41,6 @@
 		searchInputElement.value?.focus();
 	});
 
-	onBeforeMount(async () => {
-		const { query } = useRoute();
-
-		const { request: q } = query;
-		if (typeof q !== "string") return;
-
-		await searchResults({ request: q });
-	});
-
 	// https://youtu.be/ERa9y6daDFY
 	// https://youtu.be/laEn1BsYJlc
 </script>
@@ -84,7 +74,7 @@
 					@keydown.escape="close"
 				/>
 
-				<TheSuggs @onSelected="() => searchImmediately()" />
+				<TheSuggs @onSelected="searchImmediately" />
 			</div>
 
 			<button

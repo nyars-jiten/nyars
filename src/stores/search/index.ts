@@ -13,7 +13,7 @@ export const useSearch = defineStore("search", () => {
 
 	const { search: searchKan } = useKanSearch();
 
-	const mode = ref(SearchType.Jap);
+	const mode = ref(SearchType.None);
 	const request = ref("");
 
 	function updateRequest(params?: ReadOnlyRequest) {

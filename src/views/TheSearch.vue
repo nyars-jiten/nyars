@@ -1,5 +1,27 @@
 <script setup lang="ts">
+	import { useRoute } from "vue-router";
+	import { onBeforeMount, watch } from "vue";
+
+	import { useSearch } from "@/stores/search";
+
 	import TheInput from "@/components/search/TheInput.vue";
+	import { storeToRefs } from "pinia";
+
+	onBeforeMount(() => {
+		const { query } = useRoute();
+
+		const { request } = query;
+		if (typeof request !== "string") return;
+
+		const { mode } = storeToRefs(useSearch());
+		const { searchResults } = useSearch();
+
+		const cancel = watch(mode, async () => {
+			cancel();
+
+			await searchResults({ request });
+		});
+	});
 </script>
 
 <template>
