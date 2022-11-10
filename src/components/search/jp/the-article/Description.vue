@@ -75,7 +75,7 @@
 							<template v-if="lang.senses.length > 1">
 								{{ 1 + senseId }}
 							</template>
-							<template v-else>-</template>
+							<!-- <template v-else>-</template> -->
 						</span>
 
 						<div class="col-start-3 pr-2">
