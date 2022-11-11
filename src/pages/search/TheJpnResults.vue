@@ -3,7 +3,7 @@
 	import { onBeforeMount } from "vue";
 
 	import { useSearch } from "@/stores/search";
-	import { useJapSearch } from "@/stores/search/jap";
+	import { useJapSearch } from "@/stores/search/jpn";
 	import { SearchType } from "@/api/types/search/search-type";
 
 	import TheJapGrammar from "@/components/search/jp/TheJpnGrammar.vue";
