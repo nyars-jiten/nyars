@@ -13,7 +13,7 @@
 
 	onBeforeMount(() => {
 		const { mode } = storeToRefs(useSearch());
-		mode.value = SearchType.Jap;
+		mode.value = SearchType.Jpn;
 	});
 </script>
 

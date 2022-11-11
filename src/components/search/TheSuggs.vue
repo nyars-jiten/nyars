@@ -1,16 +1,18 @@
 <script setup lang="ts">
+	import { storeToRefs } from "pinia";
+	import { useRoute } from "vue-router";
 	import { onBeforeMount, watch } from "vue";
 	import { debounce, isEmpty } from "lodash";
-	import { useJapSearch } from "@/stores/search/jap";
-	import { useRoute } from "vue-router";
-	import { storeToRefs } from "pinia";
+
 	import { useSearch } from "@/stores/search";
+	import { useJapSearch } from "@/stores/search/jap";
+	import { SearchType } from "@/api/types/search/search-type";
 
 	type Emits = { (event: "onSelected"): void };
 
 	defineEmits<Emits>();
 
-	const { request } = storeToRefs(useSearch());
+	const { request, mode } = storeToRefs(useSearch());
 	const { searchSuggestions } = useSearch();
 
 	const { resetSuggestions } = useJapSearch();
@@ -41,6 +43,7 @@
 
 <template>
 	<div
+		v-show="mode == SearchType.Jpn"
 		class="invisible peer-focus:visible absolute inset-x-0 top-[calc(100%)] z-10 overflow-hidden rounded-b-md bg-gray-100 shadow-xl hover:visible dark:bg-gray-700"
 	>
 		<button

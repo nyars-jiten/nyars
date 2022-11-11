@@ -14,7 +14,7 @@
 
 		const { request } = query;
 		if (typeof request !== "string") {
-			mode.value = SearchType.Jap;
+			mode.value = SearchType.Jpn;
 			return;
 		}
 

@@ -1,19 +1,20 @@
 <script setup lang="ts">
 	import { useI18n } from "vue-i18n";
+	import { storeToRefs } from "pinia";
+
 	import { useSearch } from "@/stores/search";
+	import { MessagesNames } from "@/locale/messages-names";
+	import { ReadOnlyRequest } from "@/stores/search/types";
+	import { SearchType } from "@/api/types/search/search-type";
 
 	import ExternalInTextLink from "@/components/ExternalInTextLink.vue";
-	import { MessagesNames } from "@/locale/messages-names";
-	import { storeToRefs } from "pinia";
-	import { SearchType } from "@/api/types/search/search-type";
-	import { ReadOnlyRequest } from "@/stores/search/types";
 
 	const { t, tm, rt } = useI18n();
 	const { searchResults } = useSearch();
 	const { mode } = storeToRefs(useSearch());
 
 	async function search(params: ReadOnlyRequest) {
-		mode.value = SearchType.Jap;
+		mode.value = SearchType.Jpn;
 		return await searchResults(params);
 	}
 </script>

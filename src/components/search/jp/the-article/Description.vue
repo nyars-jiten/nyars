@@ -48,11 +48,13 @@
 			>
 				<div
 					v-show="details && mean.pos.length > 0"
-					class="pl-4 mb-2 border-b border-gray-200 dark:border-gray-700 pb-2"
+					class="pl-4 mb-2 border-b border-gray-200 dark:border-gray-700 pb-2 text-sm"
 				>
-					<span v-for="tag of mean.pos" class="uppercase font-bold">
+					<span
+						v-for="tag of mean.pos"
+						class="uppercase font-bold pl-1 first:pl-0 after:content-[','] last:after:content-none"
+					>
 						{{ t(path({ type: "pos", tag, v: "full" })) }}
-						&#8203;
 					</span>
 				</div>
 			</Transition>
@@ -165,7 +167,7 @@
 											@click="
 												searchResults({
 													request: ref.value,
-													mode: SearchType.Jap,
+													mode: SearchType.Jpn,
 												})
 											"
 										>

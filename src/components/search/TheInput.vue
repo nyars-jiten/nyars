@@ -69,7 +69,7 @@
 					v-model="request"
 					type="text"
 					class="peer h-full w-full text-center text-xl outline-none focus-within:bg-gray-100 dark:bg-gray-800 dark:focus-within:bg-gray-700 dark:group-focus-within:bg-gray-700 group-focus-within:bg-gray-100"
-					:placeholder="t(`${MessagesNames.SearchInput}.${SearchType.Jap}`)"
+					:placeholder="t(`${MessagesNames.SearchInput}.${SearchType.Jpn}`)"
 					@keydown.enter="searchImmediately"
 					@keydown.escape="close"
 				/>

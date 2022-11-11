@@ -16,13 +16,13 @@ export const ru = {
 
 	[MessagesNames.SearchIn]: "Искать",
 	[MessagesNames.SearchInput]: {
-		[SearchType.Jap]: "Японское, русское или английское слово",
+		[SearchType.Jpn]: "Японское, русское или английское слово",
 		[SearchType.Kan]: "Японское слово или кандзи",
 	},
 
 	[MessagesNames.SearchWhat]: {
 		[SearchType.Kan]: { badge: "字", short: "кандзи" },
-		[SearchType.Jap]: { badge: "詞", short: "слова" },
+		[SearchType.Jpn]: { badge: "詞", short: "слова" },
 	},
 	[MessagesNames.SearchInfoPre]:
 		"НЯРС — редактируемый японско-русский(-английский) словарь. Для начала работы со словарём введите поисковой запрос в строку выше. Вот несколько примеров:",

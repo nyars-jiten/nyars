@@ -1,8 +1,8 @@
 export const enum RoutesNames {
 	SearchHome = "/",
-	SearchJapResults = "s/jap",
-	SearchKanResults = "s/kan",
-	DictJpArticle = "jap",
+	SearchJapResults = "s/jp",
+	SearchKanResults = "s/kanji",
+	DictJpArticle = "jp",
 	Edits = "edits",
-	DictKanjiArticle = "kan",
+	DictKanjiArticle = "kanji",
 }
