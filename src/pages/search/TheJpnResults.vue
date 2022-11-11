@@ -6,7 +6,7 @@
 	import { useJapSearch } from "@/stores/search/jap";
 	import { SearchType } from "@/api/types/search/search-type";
 
-	import TheJapGrammar from "@/components/search/jp/TheJapGrammar.vue";
+	import TheJapGrammar from "@/components/search/jp/TheJpnGrammar.vue";
 	import JpArticle from "@/components/search/jp/Article.vue";
 
 	const { results } = storeToRefs(useJapSearch());
