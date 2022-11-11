@@ -1,22 +1,5 @@
 <template>
 	<div class="flex gap-2">
-		<RouterLink
-			:to="{
-				name: RoutesNames.DictJpArticle,
-				params: { articleId: article.wid },
-			}"
-		>
-			<Button>
-				<template #default>
-					{{ t(MessagesNames.SearchOpenFull) }}
-				</template>
-
-				<template #icon="{ size, class: c }">
-					<OpenInNewIcon :size="size" :class="c" />
-				</template>
-			</Button>
-		</RouterLink>
-
 		<Button @click="copy" class="cursor-copy">
 			<template #default>
 				{{ article.wid }}
@@ -50,18 +33,16 @@
 </template>
 
 <script setup lang="ts">
+	import { DeepReadonly } from "vue";
 	import { useI18n } from "vue-i18n";
-	import { RoutesNames } from "@/router/routes-names";
 
+	import { MessagesNames } from "@/locale/messages-names";
 	import { type EntryJp } from "@/api/dictionary/jp/types";
 
 	import MinusIcon from "vue-material-design-icons/Minus.vue";
 	import PlusIcon from "vue-material-design-icons/Plus.vue";
 	import LinkVariantIcon from "vue-material-design-icons/LinkVariant.vue";
-	import OpenInNewIcon from "vue-material-design-icons/OpenInNew.vue";
 	import Button from "@/components/Button.vue";
-	import { MessagesNames } from "@/locale/messages-names";
-	import { DeepReadonly } from "vue";
 
 	type Props = {
 		article: DeepReadonly<EntryJp>;
