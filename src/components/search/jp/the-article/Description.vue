@@ -77,7 +77,6 @@
 							<template v-if="lang.senses.length > 1">
 								{{ 1 + senseId }}
 							</template>
-							<!-- <template v-else>-</template> -->
 						</span>
 
 						<div class="col-start-3 pr-2">
@@ -118,7 +117,7 @@
 									)"
 								>
 									<template v-for="tag of values">
-										{{ t(path({ tag, type, v: "short" })) }}
+										{{ t(path({ tag, type, v: "full" })) }}
 									</template>
 								</template>
 								&#8203;
