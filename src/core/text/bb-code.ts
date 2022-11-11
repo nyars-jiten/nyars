@@ -18,7 +18,7 @@ export function bbCodesProcess(value: string) {
 		)
 		.replace(
 			/\[ref=([a-zA-Z\d]{4,7})\](.*?)\[\/ref\]/gim,
-			"<a class=\"underline underline-offset-4 decoration-dotted hover:text-accent-500\" href='/dict/jp/$1'>$2</a>",
+			"<a class=\"underline underline-offset-4 decoration-dotted hover:text-accent-500\" href='/jp/$1'>$2</a>",
 		)
 		.replace(/\[sub\](.*?)\[\/sub\]/gim, "<sub>$1</sub>")
 		.replace(/\[sup\](.*?)\[\/sup\]/gim, "<sup>$1</sup>")
