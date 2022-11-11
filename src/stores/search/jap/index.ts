@@ -81,16 +81,18 @@ export const useJapSearch = defineStore("japSearch", () => {
 		return true;
 	}
 
-	async function searchSuggestions({ request }: ReadOnlyRequest) {
-		if (isEmpty(request)) return;
+	async function searchSuggestions({ request: q }: ReadOnlyRequest) {
+		if (isEmpty(q) || q == request.value) return false;
 
 		const updatedAt = new Date();
-		const values = await api.search.sugg({ request });
+		const values = await api.search.sugg({ request: q });
 
 		if (updatedAt >= suggestions.updatedAt) {
 			suggestions.updatedAt = updatedAt;
 			suggestions.values = values;
 		}
+
+		return true;
 	}
 
 	return {

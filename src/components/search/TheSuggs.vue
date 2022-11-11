@@ -20,7 +20,7 @@
 
 	const search = debounce(searchSuggestions, 100);
 
-	async function onRequest(request: string) {
+	async function update(request: string) {
 		if (isEmpty(request)) {
 			resetSuggestions();
 			return;
@@ -29,9 +29,24 @@
 		await search({ request });
 	}
 
-	watch(request, onRequest);
+	async function onRequestChanged(request: string) {
+		if (mode.value != SearchType.Jpn) return;
+		return await update(request);
+	}
+
+	async function onChanged(mode: SearchType) {
+		if (mode != SearchType.Jpn) return;
+
+		return await update(request.value);
+	}
+
+	watch(mode, onChanged);
+	watch(request, onRequestChanged);
 
 	onBeforeMount(async () => {
+		const { mode } = storeToRefs(useSearch());
+		if (mode.value != SearchType.Jpn) return;
+
 		const { query } = useRoute();
 		const { request } = query;
 
