@@ -10,7 +10,7 @@
 
 	import TheTags from "@/components/Tags.vue";
 
-	type Props = { article: DeepReadonly<EntryJp> };
+	type Props = { standalone: boolean; article: DeepReadonly<EntryJp> };
 
 	defineProps<Props>();
 
@@ -19,8 +19,10 @@
 
 <template>
 	<header class="flex items-start gap-4">
-		<RouterLink
-			class="grow flex flex-col hover:text-accent-500"
+		<Component
+			:is="standalone ? 'div' : 'RouterLink'"
+			class="grow flex flex-col"
+			:class="{ 'hover:text-accent-500': !standalone }"
 			:to="{
 				name: RoutesNames.DictJpArticle,
 				params: { articleId: article.wid },
@@ -62,7 +64,7 @@
 					</li>
 				</ul>
 			</div>
-		</RouterLink>
+		</Component>
 
 		<TheTags :tags="article.entry.tags" />
 	</header>
