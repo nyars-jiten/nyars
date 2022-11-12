@@ -5,58 +5,33 @@
 		</div>
 		<div>
 			<div v-for="word of words">
-				<div v-if="!isEditor">
-					<RouterLink
-						v-if="exists(word)"
-						:to="{
-							name: RoutesNames.DictKanjiArticle,
-							params: { articleId: word.wid },
-						}"
-						class="text-lg"
-					>
-						{{ word.word }}
-					</RouterLink>
-					<span
-						v-else
-						class="text-lg cursor-pointer hover:opacity-50"
-						@click="searchResults({ request: word.word, mode: SearchType.Kan })"
-					>
-						{{ word.word }}
-					</span>
-					<span class="text-gray-400 dark:text-gray-500 px-2">
-						{{ convert_to_kana(word.reading) }}
-					</span>
+				<RouterLink
+					v-if="exists(word)"
+					:to="{
+						name: RoutesNames.DictKanjiArticle,
+						params: { articleId: word.wid },
+					}"
+					class="text-lg"
+				>
+					{{ word.word }}
+				</RouterLink>
+				<span
+					v-else
+					class="text-lg cursor-pointer hover:opacity-50"
+					@click="searchResults({ request: word.word, mode: SearchType.Kan })"
+				>
+					{{ word.word }}
+				</span>
+				<span class="text-gray-400 dark:text-gray-500 px-2">
+					{{ convert_to_kana(word.reading) }}
+				</span>
 
-					<!-- eslint-disable vue/no-v-html -->
-					<span
-						class="flex-wrap text-gray-500 dark:text-gray-400"
-						v-html="bbCodesProcess(word.meaning)"
-					/>
-				</div>
-
-				<div v-else>
-					<input :value="word.wid" name="word-wid-input" placeholder="wid" />
-					<input
-						:value="word.word"
-						name="word-word-input"
-						placeholder="слово"
-					/>
-					<input
-						:value="word.reading"
-						name="word-reading-input"
-						placeholder="чтение"
-					/>
-					<input
-						:value="word.meaning"
-						name="word-meaning-input"
-						placeholder="значение"
-					/>
-				</div>
+				<!-- eslint-disable vue/no-v-html -->
+				<span
+					class="flex-wrap text-gray-500 dark:text-gray-400"
+					v-html="bbCodesProcess(word.meaning)"
+				/>
 			</div>
-
-			<p v-show="isEditor" class="outline cursor-pointer" @click="addWord">
-				+ слово
-			</p>
 		</div>
 	</div>
 </template>
@@ -71,26 +46,13 @@
 	import { useSearch } from "@/stores/search";
 	import { SearchType } from "@/api/types/search/search-type";
 
-	type Props = { words: KanjiWord[]; title: string; isEditor?: boolean };
+	type Props = { words: KanjiWord[]; title: string };
 
-	const props = withDefaults(defineProps<Props>(), { isEditor: false });
+	defineProps<Props>();
 
 	const { searchResults } = useSearch();
 
 	function exists({ wid }: KanjiWord) {
 		return wid.length >= 1;
-	}
-
-	const newWord: KanjiWord = {
-		wid: "",
-		word: "",
-		reading: "",
-		meaning: "",
-		nsR: false,
-		nsM: false,
-	};
-
-	function addWord() {
-		props.words.push(newWord);
 	}
 </script>

@@ -23,9 +23,8 @@
 					</span>
 				</div>
 
-				<TheWords :words="meaning.words" :title="''" v-if="isEditor" />
-
 				<div
+					v-if="!isEditor"
 					class="flex flex-col gap-y-2 border-l border-gray-200 pl-3 text-gray-600 dark:border-gray-600 dark:text-gray-400"
 				>
 					<div v-for="word of meaning.words">
@@ -62,39 +61,10 @@
 							/>
 							<!-- eslint-enable vue/no-v-html -->
 						</div>
-
-						<div v-else>
-							<input
-								:value="word.wid"
-								name="word-wid-input"
-								placeholder="wid"
-							/>
-							<input
-								:value="word.word"
-								name="word-word-input"
-								placeholder="слово"
-							/>
-							<input
-								:value="word.reading"
-								name="word-reading-input"
-								placeholder="чтение"
-							/>
-							<input
-								:value="word.meaning"
-								name="word-meaning-input"
-								placeholder="значение"
-							/>
-						</div>
 					</div>
 				</div>
 
-					<p
-						v-show="isEditor"
-						class="outline cursor-pointer"
-						@click="addWord(meaning.words)"
-					>
-						+ слово
-					</p>
+				<TheWords :words="meaning.words" :title="''" v-else />
 
 			</div>
 		</template>

@@ -45,12 +45,13 @@
 				<div
 					class="flex flex-col gap-2 rounded-md bg-neutral-100 py-2 px-3 dark:bg-gray-700"
 				>
-					<p>
+					<!-- вероятно пока что не нужно -->
+					<!-- <p>
 						<span class="text-sm text-gray-400">
 							{{ t(MessagesNames.Frequency) }}
 						</span>
 						<Input v-model="article.entry.general.freq" name="freq-input" />
-					</p>
+					</p> -->
 					<p>
 						<span class="text-sm text-gray-400">
 							{{ t(MessagesNames.Radical) }}
@@ -118,7 +119,6 @@
 					<TheWords
 						:words="article.entry.standaloneMeanings"
 						:title="t(MessagesNames.StandaloneMeanings)"
-						:is-editor="true"
 					/>
 
 					<TheMeanings
