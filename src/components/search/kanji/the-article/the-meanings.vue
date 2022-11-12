@@ -29,41 +29,31 @@
 					class="flex flex-col gap-y-2 border-l border-gray-200 pl-3 text-gray-600 dark:border-gray-600 dark:text-gray-400"
 				>
 					<div v-for="word of meaning.words">
-<<<<<<< HEAD
 						<div v-if="!isEditor">
-							<RouterLink :to="location(word)" class="text-lg">
+							<RouterLink
+								v-if="exists(word)"
+								:to="{
+									name: RoutesNames.DictKanjiArticle,
+									params: { articleId: word.wid },
+								}"
+								class="text-lg"
+							>
 								{{ word.word }}
 							</RouterLink>
+
+							<span
+								v-else
+								class="text-lg cursor-pointer hover:opacity-50"
+								@click="
+									searchResults({ request: word.word, mode: SearchType.Kan })
+								"
+							>
+								{{ word.word }}
+							</span>
 
 							<span class="text-gray-400 dark:text-gray-500 px-2">
 								{{ convert_to_kana(word.reading) }}
 							</span>
-=======
-						<RouterLink
-							v-if="exists(word)"
-							:to="{
-								name: RoutesNames.DictKanjiArticle,
-								params: { articleId: word.wid },
-							}"
-							class="text-lg"
-						>
-							{{ word.word }}
-						</RouterLink>
-
-						<span
-							v-else
-							class="text-lg cursor-pointer hover:opacity-50"
-							@click="
-								searchResults({ request: word.word, mode: SearchType.Kan })
-							"
-						>
-							{{ word.word }}
-						</span>
-
-						<span class="text-gray-400 dark:text-gray-500 px-2">
-							{{ convert_to_kana(word.reading) }}
-						</span>
->>>>>>> sawich
 
 							<!-- eslint-disable vue/no-v-html -->
 							<span
@@ -96,6 +86,7 @@
 							/>
 						</div>
 					</div>
+				</div>
 
 					<p
 						v-show="isEditor"
@@ -104,7 +95,7 @@
 					>
 						+ слово
 					</p>
-				</div>
+
 			</div>
 		</template>
 	</div>
@@ -113,47 +104,24 @@
 <script setup lang="ts">
 	import { bbCodesProcess } from "@/core/text/bb-code";
 	import { convert_to_kana } from "@nyars-jiten/jp-transcript";
-<<<<<<< HEAD
-	import { RoutesNames } from "@/router/routes-names";
-
-	import type { RouteLocationRaw } from "vue-router";
-	import { type Meaning } from "@/api/dictionary/kanji/types";
-	import { type KanjiWord } from "@/api/dictionary/kanji/types";
-=======
 
 	import { RoutesNames } from "@/router/routes-names";
 
 	import { KanjiWord, Meaning } from "@/api/dictionary/kanji/types";
-	import { useSearch } from "@/stores/search";
 	import { SearchType } from "@/api/types/search/search-type";
->>>>>>> sawich
+	import { useSearch } from "@/stores/search";
 
 	import TheWords from "../editor/the-words.vue";
 
 	type Props = { meanings: Meaning[]; title: string; isEditor?: boolean };
 
-<<<<<<< HEAD
 	withDefaults(defineProps<Props>(), { isEditor: false });
-
-	function location(word: KanjiWord): RouteLocationRaw {
-		if (!word.wid || word.wid.length < 1) {
-			return {
-				name: RoutesNames.SearchKanResults,
-				query: { request: word.word },
-			};
-		}
-
-		return {
-			name: RoutesNames.DictJpArticle,
-			params: { articleId: word.wid },
-		};
-=======
-	const { searchResults } = useSearch();
 
 	function exists({ wid }: KanjiWord) {
 		return wid.length >= 1;
->>>>>>> sawich
 	}
+
+	const { searchResults } = useSearch();
 
 	function addWord(words: KanjiWord[]) {
 		words.push({
