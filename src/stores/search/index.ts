@@ -17,7 +17,7 @@ export const useSearch = defineStore("search", () => {
 	const request = ref("");
 
 	function updateRequest(params?: ReadOnlyRequest) {
-		if (params) {
+		if (params?.request) {
 			request.value = params.request;
 		}
 	}
