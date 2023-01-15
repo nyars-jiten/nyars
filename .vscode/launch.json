@@ -6,7 +6,7 @@
 	"configurations": [
 		{
 			"request": "launch",
-			"name": "Launch Edge",
+			"name": "Dev Edge",
 			"type": "msedge",
 			"url": "http://localhost:8080",
 			"webRoot": "${workspaceFolder}/src",
@@ -21,8 +21,8 @@
 	],
 	"compounds": [
 		{
-			"name": "[Dev] Browser & Server",
-			"configurations": ["Dev server", "Launch Edge"]
+			"name": "Dev",
+			"configurations": ["Dev server", "Dev Edge"]
 		}
 	]
 }

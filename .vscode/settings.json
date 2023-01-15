@@ -1,9 +1,23 @@
 {
+	"editor.codeActionsOnSave": {
+		"source.fixAll": true,
+		"editor.formatOnSave": true
+	},
 	"typescript.tsdk": "node_modules/typescript/lib",
-	"editor.formatOnSave": true,
-	"editor.formatOnPaste": false,
-	"editor.formatOnType": false,
-	"editor.codeActionsOnSave": [/*"source.organizeImports", */ "source.fixAll"],
-	"editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
-	"files.eol": "\n"
+	"files.insertFinalNewline": true,
+	"[jsonc]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"[vue]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	}
 }
