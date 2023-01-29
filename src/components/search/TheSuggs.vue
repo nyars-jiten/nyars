@@ -5,7 +5,7 @@
 	import { debounce, isEmpty } from "lodash";
 
 	import { useSearch } from "@/stores/search";
-	import { useJapSearch } from "@/stores/search/jap";
+	import { useJapSearch } from "@/stores/search/jpn";
 	import { SearchType } from "@/api/types/search/search-type";
 
 	type Emits = { (event: "onSelected"): void };

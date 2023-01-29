@@ -4,7 +4,7 @@
 	import { useRoute } from "vue-router";
 
 	import { api } from "@/api";
-	import { useJapSearch } from "@/stores/search/jap";
+	import { useJapSearch } from "@/stores/search/jpn";
 
 	import { type SatelliteList } from "@/api";
 	import { type EntryJp } from "@/api/dictionary/jp/types";

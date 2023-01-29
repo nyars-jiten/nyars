@@ -2,7 +2,7 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 
 import { SearchType } from "@/api/types/search/search-type";
-import { useJapSearch } from "./jap";
+import { useJapSearch } from "./jpn";
 
 import { useKanSearch } from "./kan";
 import { ReadOnlyRequest } from "./types";
@@ -17,7 +17,7 @@ export const useSearch = defineStore("search", () => {
 	const request = ref("");
 
 	function updateRequest(params?: ReadOnlyRequest) {
-		if (params) {
+		if (params?.request) {
 			request.value = params.request;
 		}
 	}

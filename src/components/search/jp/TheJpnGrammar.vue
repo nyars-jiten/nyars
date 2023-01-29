@@ -1,5 +1,5 @@
 <script setup lang="ts">
-	import { useJapSearch } from "@/stores/search/jap";
+	import { useJapSearch } from "@/stores/search/jpn";
 	import { storeToRefs } from "pinia";
 
 	const { results } = storeToRefs(useJapSearch());

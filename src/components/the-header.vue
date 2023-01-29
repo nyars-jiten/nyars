@@ -35,7 +35,7 @@
 				</div>
 
 				<nav
-					class="flex flex-wrap items-center justify-center gap-7 text-base dark:text-gray-300 [&>*]:duration-150 [&>*]:ease-in-out"
+					class="flex flex-wrap items-center justify-center gap-7 text-sm uppercase leading-none dark:text-gray-300 [&>*]:duration-150 [&>*]:ease-in-out"
 				>
 					<RouterLink
 						:to="{ name: RoutesNames.SearchHome }"

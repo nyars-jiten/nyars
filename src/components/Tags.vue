@@ -31,12 +31,12 @@
 		<button
 			v-for="tag of tags"
 			type="button"
-			class="text-xs leading-6 flex overflow-hidden whitespace-nowrap rounded-md border hover:opacity-75"
+			class="flex overflow-hidden whitespace-nowrap rounded-md border text-xs leading-6 hover:opacity-75"
 			:class="[`border-tag-${tag.title}-500`]"
 			@click="search({ request: tag.full })"
 		>
 			<span
-				class="px-2 uppercase font-medium"
+				class="px-2 font-medium uppercase"
 				:class="[`text-tag-${tag.title}-500`]"
 			>
 				{{ t(`${MessagesNames.ArticleTagName}.${tag.title}.short`) }}
