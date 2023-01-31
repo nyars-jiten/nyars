@@ -40,9 +40,6 @@
 	onMounted(() => {
 		searchInputElement.value?.focus();
 	});
-
-	// https://youtu.be/ERa9y6daDFY
-	// https://youtu.be/laEn1BsYJlc
 </script>
 
 <template>
@@ -68,7 +65,7 @@
 					ref="searchInputElement"
 					v-model="request"
 					type="text"
-					class="peer h-full w-full text-center text-xl outline-none focus-within:bg-gray-100 dark:bg-gray-800 dark:focus-within:bg-gray-700 dark:group-focus-within:bg-gray-700 group-focus-within:bg-gray-100"
+					class="peer h-full w-full text-center text-xl outline-none focus-within:bg-gray-100 group-focus-within:bg-gray-100 dark:bg-gray-800 dark:focus-within:bg-gray-700 dark:group-focus-within:bg-gray-700"
 					:placeholder="t(`${MessagesNames.SearchInput}.${SearchType.Jpn}`)"
 					@keydown.enter="searchImmediately"
 					@keydown.escape="close"

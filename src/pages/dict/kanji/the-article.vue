@@ -1,6 +1,7 @@
 <template>
 	<section class="flex flex-col gap-4">
-		<TheArticle :article="article" :standalone="standalone" />
+		<ArticleEditor v-if="editor" :article="article" />
+		<TheArticle v-else :article="article" :standalone="standalone" />
 	</section>
 </template>
 
@@ -10,10 +11,11 @@
 	import { useRoute } from "vue-router";
 
 	import TheArticle from "@/components/search/kanji/the-article.vue";
+	import ArticleEditor from "@/components/search/kanji/ArticleEditor.vue";
 	import { onMounted, ref } from "vue";
 	import { EntryKanji } from "@/api/dictionary/kanji/types";
 
-	type Props = { standalone: boolean };
+	type Props = { standalone: boolean; editor: boolean };
 
 	defineProps<Props>();
 

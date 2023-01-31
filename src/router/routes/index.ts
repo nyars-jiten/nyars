@@ -1,6 +1,10 @@
 import { RoutesNames } from "../routes-names";
 
 import type { RouteRecordRaw } from "vue-router";
+import { SearchType } from "@/api/types/search/search-type";
+import { useSearch } from "@/stores/search";
+import { storeToRefs } from "pinia";
+import { pinia } from "@/stores";
 
 export const routes: Readonly<RouteRecordRaw[]> = [
 	{
@@ -16,11 +20,19 @@ export const routes: Readonly<RouteRecordRaw[]> = [
 				name: RoutesNames.SearchJapResults,
 				path: RoutesNames.SearchJapResults,
 				component: () => import("@/pages/search/TheJpnResults.vue"),
+				beforeEnter() {
+					const { mode } = storeToRefs(useSearch(pinia));
+					mode.value = SearchType.Jap;
+				},
 			},
 			{
 				name: RoutesNames.SearchKanResults,
 				path: RoutesNames.SearchKanResults,
 				component: () => import("@/pages/search/TheKanResults.vue"),
+				beforeEnter() {
+					const { mode } = storeToRefs(useSearch(pinia));
+					mode.value = SearchType.Kan;
+				},
 			},
 			{
 				name: RoutesNames.DictJpArticle,
@@ -29,10 +41,16 @@ export const routes: Readonly<RouteRecordRaw[]> = [
 				props: { standalone: true },
 			},
 			{
+				name: RoutesNames.DictKanjiArticleEditor,
+				path: `/${RoutesNames.DictKanjiArticle}/:articleId/editor`,
+				component: () => import("@/pages/dict/kanji/the-article.vue"),
+				props: { standalone: true, editor: true },
+			},
+			{
 				name: RoutesNames.DictKanjiArticle,
 				path: `/${RoutesNames.DictKanjiArticle}/:articleId`,
 				component: () => import("@/pages/dict/kanji/the-article.vue"),
-				props: { standalone: true },
+				props: { standalone: true, editor: false },
 			},
 			{
 				name: RoutesNames.Edits,
