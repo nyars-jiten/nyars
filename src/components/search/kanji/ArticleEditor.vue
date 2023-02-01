@@ -26,8 +26,9 @@
 					<div class="flex flex-col gap-2">
 						<span class="text-9xl">{{ article.entry.general.literal }}</span>
 						<span class="break-words">
-							<Input
+							<TextArea
 								type="text"
+								:rows="5"
 								v-model="article.entry.general.shortMeans"
 								name="short-means-input"
 							/>
@@ -105,7 +106,11 @@
 					class="flex flex-col gap-2 rounded-md bg-neutral-100 py-2 px-3 dark:bg-gray-700"
 				>
 					<span class="text-sm text-gray-400">{{ t(MessagesNames.Note) }}</span>
-					<TextArea v-model="article.entry.general.note" name="note-input" />
+					<TextArea
+						:rows="4"
+						v-model="article.entry.general.note"
+						name="note-input"
+					/>
 				</div>
 
 				<div class="flex flex-col gap-8">
