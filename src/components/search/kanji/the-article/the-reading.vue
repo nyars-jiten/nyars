@@ -2,12 +2,13 @@
 	<div v-if="readings.length > 0" class="grid grid-cols-[auto_1fr] gap-2">
 		<span
 			class="h-fit rounded-md border border-gray-500 px-1 text-gray-500 dark:border-gray-400 dark:text-gray-400"
-			>{{ t(`${MessagesNames.KanjiReadingTypeName}.${type}.badge`) }}</span
 		>
+			{{ t(`${MessagesNames.KanjiReadingTypeName}.${type}.badge`) }}
+		</span>
 
 		<div class="flex flex-row flex-wrap gap-y-2 gap-x-1">
 			<div
-				v-for="(reading) of readings"
+				v-for="reading of readings"
 				:class="[reading.tags.includes('gai') ? `text-gray-400` : '']"
 				class="after:ml-2 after:text-gray-200 after:content-['・'] last:after:content-none dark:after:text-gray-500"
 			>
@@ -15,7 +16,7 @@
 					v-if="reading.tags.length > 0 && !reading.tags.includes('gai')"
 					class="mx-1"
 				>
-					<template v-for="(tag) of reading.tags">
+					<template v-for="tag of reading.tags">
 						<span
 							v-if="tag != 'gai'"
 							class="rounded-tl-md border-t border-l px-1 py-0.5 empty:hidden"
@@ -28,6 +29,9 @@
 				<span class="ml-1">
 					{{ convert_to_kana(reading.value) }}
 				</span>
+
+				<EditableSpan v-model="v" block="span" />
+				<div>span is: {{ v }}</div>
 			</div>
 		</div>
 	</div>
@@ -39,10 +43,15 @@
 	import { useI18n } from "vue-i18n";
 
 	import { MessagesNames } from "@/locale/messages-names";
+	import { ref } from "vue";
+
+	import EditableSpan from "./editable-span.vue";
 
 	type Props = { readings: Reading[]; type: string };
 
 	defineProps<Props>();
 
 	const { t } = useI18n();
+
+	const v = ref("default value");
 </script>
