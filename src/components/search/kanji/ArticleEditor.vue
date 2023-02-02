@@ -98,6 +98,7 @@
 							"
 							:readings="reading"
 							:type="readingType"
+							:is-editor="true"
 						/>
 					</template>
 				</div>

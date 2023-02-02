@@ -1,9 +1,9 @@
 <template>
 	<Component
 		:is="block"
-		class="ml-1 border-red-600"
+		class="h-full border border-dotted bg-gray-100 px-2 py-1 dark:border-gray-700 dark:bg-gray-900"
 		contenteditable="true"
-		@input="
+		@blur="
 			$emit('update:modelValue', ($event!.target as HTMLElement).innerText)
 		"
 	>

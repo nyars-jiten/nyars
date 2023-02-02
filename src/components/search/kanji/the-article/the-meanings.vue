@@ -22,7 +22,7 @@
 					</span>
 				</div>
 				<div v-else>
-					<Input
+					<EditableSpan
 						v-model="meaning.title"
 						name="meaning-edit-input"
 						placeholder="значение"
@@ -35,14 +35,14 @@
 							v-for="(_, readingId) of meaning.readings"
 							class="before:text-gray-200 after:text-gray-200 after:content-['・'] last:after:content-none"
 						>
-							<Input
+							<EditableSpan
 								v-model="meaning.readings[readingId]"
 								name="reading-edit-input"
 								placeholder="чтение"
 							/>
 							<Button
 								@click="meaning.readings.splice(readingId, 1)"
-								class="font-medium"
+								class="font-medium text-red-700"
 								>X</Button
 							>
 						</span>
@@ -128,6 +128,7 @@
 	import TheWords from "../editor/TheWords.vue";
 	import Input from "../editor/Input.vue";
 	import Button from "@/components/Button.vue";
+	import EditableSpan from "./editable-span.vue";
 
 	type Props = { meanings: Meaning[]; title: string; isEditor?: boolean };
 

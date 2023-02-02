@@ -27,7 +27,7 @@
 					</div>
 
 					<TextArea
-						:rows="1"
+						:rows="2"
 						v-model="word.meaning"
 						name="word-meaning-input"
 						placeholder="значение"

@@ -150,6 +150,7 @@
 							"
 							:readings="reading"
 							:type="readingType"
+							:is-editor="false"
 						/>
 					</template>
 				</div>

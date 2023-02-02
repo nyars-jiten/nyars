@@ -8,7 +8,7 @@
 
 		<div class="flex flex-row flex-wrap gap-y-2 gap-x-1">
 			<div
-				v-for="reading of readings"
+				v-for="(reading, ri) in readings"
 				:class="[reading.tags.includes('gai') ? `text-gray-400` : '']"
 				class="after:ml-2 after:text-gray-200 after:content-['・'] last:after:content-none dark:after:text-gray-500"
 			>
@@ -26,12 +26,17 @@
 						</span>
 					</template>
 				</span>
-				<span class="ml-1">
+				<span v-if="!isEditor" class="ml-1">
 					{{ convert_to_kana(reading.value) }}
 				</span>
-
-				<EditableSpan v-model="v" block="span" />
-				<div>span is: {{ v }}</div>
+				<span v-else class="ml-1">
+					<EditableSpan v-model="reading.value" block="span" />
+					<Button
+						@click="readings.splice(ri, 1)"
+						class="font-medium text-red-700"
+						>X</Button
+					>
+				</span>
 			</div>
 		</div>
 	</div>
@@ -43,15 +48,12 @@
 	import { useI18n } from "vue-i18n";
 
 	import { MessagesNames } from "@/locale/messages-names";
-	import { ref } from "vue";
 
 	import EditableSpan from "./editable-span.vue";
 
-	type Props = { readings: Reading[]; type: string };
+	type Props = { readings: Reading[]; type: string; isEditor: boolean };
 
 	defineProps<Props>();
 
 	const { t } = useI18n();
-
-	const v = ref("default value");
 </script>
