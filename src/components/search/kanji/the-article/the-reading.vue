@@ -1,5 +1,8 @@
 <template>
-	<div v-if="readings.length > 0" class="grid grid-cols-[auto_1fr] gap-2">
+	<div
+		v-if="readings.length > 0 || isEditor"
+		class="grid grid-cols-[auto_1fr] gap-2"
+	>
 		<span
 			class="h-fit rounded-md border border-gray-500 px-1 text-gray-500 dark:border-gray-400 dark:text-gray-400"
 		>
@@ -26,17 +29,28 @@
 						</span>
 					</template>
 				</span>
-				<span v-if="!isEditor" class="ml-1">
-					{{ convert_to_kana(reading.value) }}
-				</span>
-				<span v-else class="ml-1">
-					<EditableSpan v-model="reading.value" block="span" />
-					<Button
-						@click="readings.splice(ri, 1)"
-						class="font-medium text-red-700"
-						>X</Button
+				<template v-if="!isEditor">
+					<span class="ml-1">
+						{{ convert_to_kana(reading.value) }}
+					</span>
+				</template>
+				<template v-else>
+					<span
+						class="h-full border border-dotted bg-gray-100 p-1 dark:border-gray-700 dark:bg-gray-900"
 					>
-				</span>
+						<EditableSpan v-model="reading.value" block="span" />
+						<span
+							@click="readings.splice(ri, 1)"
+							class="ml-1 cursor-pointer font-medium text-red-700"
+							>X</span
+						>
+						<span
+							@click="readings.splice(ri, 1)"
+							class="ml-1 cursor-pointer font-medium text-green-700"
+							>T</span
+						>
+					</span>
+				</template>
 			</div>
 		</div>
 	</div>

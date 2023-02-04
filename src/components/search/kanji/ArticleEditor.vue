@@ -10,7 +10,6 @@
 	import TextArea from "./editor/TextArea.vue";
 	type Props = { article: EntryKanji };
 	defineProps<Props>();
-	const standalone = true;
 	const { t } = useI18n();
 </script>
 
@@ -92,10 +91,6 @@
 				<div v-if="article.entry.readings" class="flex flex-col gap-4">
 					<template v-for="(reading, readingType) of article.entry.readings">
 						<TheReading
-							v-if="
-								(standalone || !['other', 'nanori'].includes(readingType)) &&
-								reading.length > 0
-							"
 							:readings="reading"
 							:type="readingType"
 							:is-editor="true"

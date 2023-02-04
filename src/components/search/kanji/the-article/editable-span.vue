@@ -1,7 +1,7 @@
 <template>
 	<Component
 		:is="block"
-		class="h-full border border-dotted bg-gray-100 px-2 py-1 dark:border-gray-700 dark:bg-gray-900"
+		class="px-1"
 		contenteditable="true"
 		@blur="
 			$emit('update:modelValue', ($event!.target as HTMLElement).innerText)
