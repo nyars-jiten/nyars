@@ -8,7 +8,7 @@
 			"request": "launch",
 			"name": "Dev Edge",
 			"type": "msedge",
-			"url": "http://localhost:8080",
+			"url": "http://localhost:25565",
 			"webRoot": "${workspaceFolder}/src",
 			"pauseForSourceMap": false
 		},

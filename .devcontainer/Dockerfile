@@ -8,6 +8,6 @@ RUN umask 0002
 
 COPY . .
 
-RUN pnpm i --verbose
+RUN pnpm config set store-dir ~/.local/share/pnpm/store
 
 EXPOSE 25565
