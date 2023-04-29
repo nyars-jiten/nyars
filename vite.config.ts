@@ -15,7 +15,7 @@ export default defineConfig({
     target: 'esnext'
 	},
 	server: {
-		port: 8080,
+		port: 25565,
 	},
 	plugins: [
 		vue(),
