@@ -19,5 +19,6 @@
 	},
 	"[typescript]": {
 		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-	}
+	},
+	"explorer.excludeGitIgnore": true
 }
