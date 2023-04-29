@@ -4,10 +4,7 @@
 			{{ t(MessagesNames.KanjiForm) }}
 		</span>
 		<div class="flex flex-row flex-wrap gap-2">
-			<div
-				v-for="(form) of forms"
-				class="flex flex-row items-start gap-4"
-			>
+			<div v-for="form of forms" class="flex flex-row items-start gap-4">
 				<div class="w-20">
 					<span v-if="form.literal.length <= 2" class="text-7xl">
 						{{ form.literal }}

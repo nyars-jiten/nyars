@@ -113,7 +113,7 @@ export class Canvas implements Handwriting {
 
 	constructor(canvas: HTMLCanvasElement) {
 		this.canvas = canvas;
-		this.onResize()
+		this.onResize();
 
 		this.context = this.getContext();
 		this.pos = { x: 0, y: 0 };
