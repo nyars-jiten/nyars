@@ -1,7 +1,6 @@
 <script setup lang="ts">
 	import { MessagesNames } from "@/locale/messages-names";
 	import { RoutesNames } from "@/router/routes-names";
-	import { useI18n } from "vue-i18n";
 
 	import { EntryKanji } from "@/api/dictionary/kanji/types";
 	import { unicodeIndexFromUTF8, unicodeIndexFromUTF16 } from "@/core/unicode";

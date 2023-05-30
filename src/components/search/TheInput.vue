@@ -1,7 +1,4 @@
 <script setup lang="ts">
-	import { useI18n } from "vue-i18n";
-	import { storeToRefs } from "pinia";
-	import { onMounted, reactive, ref } from "vue";
 	import { RadioGroup, RadioGroupOption } from "@headlessui/vue";
 
 	import { useSearch } from "@/stores/search";

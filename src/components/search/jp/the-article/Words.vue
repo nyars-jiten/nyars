@@ -1,6 +1,5 @@
 <script setup lang="ts">
-	import { useI18n } from "vue-i18n";
-	import { DeepReadonly } from "vue";
+	import type { DeepReadonly } from "vue";
 	import { convert_to_kana as convert } from "@nyars-jiten/jp-transcript";
 
 	import { MessagesNames } from "@/locale/messages-names";
@@ -21,7 +20,7 @@
 	<header class="flex items-start gap-4">
 		<Component
 			:is="standalone ? 'div' : 'RouterLink'"
-			class="grow flex flex-col"
+			class="flex grow flex-col"
 			:class="{ 'hover:text-accent-500': !standalone }"
 			:to="{
 				name: RoutesNames.DictJpArticle,
@@ -31,11 +30,11 @@
 			<div v-for="word of article.entry.words" class="font-header text-2xl">
 				<ul
 					v-show="word.writings.length > 0"
-					class="inline before:text-gray-200 dark:before:text-gray-700 dark:after:text-gray-700 after:text-gray-200 before:content-['【'] after:content-['】']"
+					class="inline before:text-gray-200 before:content-['【'] after:text-gray-200 after:content-['】'] dark:before:text-gray-700 dark:after:text-gray-700"
 				>
 					<li
 						v-for="writing of word.writings"
-						class="inline-flex items-baseline flex-wrap before:text-gray-200 after:text-gray-200 after:content-['・'] last:after:content-none dark:after:text-gray-700"
+						class="inline-flex flex-wrap items-baseline before:text-gray-200 after:text-gray-200 after:content-['・'] last:after:content-none dark:after:text-gray-700"
 					>
 						{{ writing.value }}
 
@@ -51,7 +50,7 @@
 				<ul class="inline">
 					<li
 						v-for="reading of word.readings"
-						class="inline-flex items-baseline flex-wrap after:text-gray-200 after:content-['・'] last:after:content-none dark:after:text-gray-700"
+						class="inline-flex flex-wrap items-baseline after:text-gray-200 after:content-['・'] last:after:content-none dark:after:text-gray-700"
 					>
 						{{ convert(reading.value) }}
 

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 	import { groupBy } from "lodash";
-	import { useI18n } from "vue-i18n";
 
 	import {
 		Disclosure,
@@ -29,7 +28,7 @@
 				class="border-l-2 border-gray-400 dark:border-gray-500"
 			>
 				<DisclosureButton
-					class="flex w-full justify-between py-2 px-3 text-gray-400 hover:opacity-75"
+					class="flex w-full justify-between px-3 py-2 text-gray-400 hover:opacity-75"
 				>
 					<span>{{ t(`${MessagesNames.KanjiIndexTypeName}.${indexId}`) }}</span>
 					<ChevronIcon :class="open ? 'transform rotate-180' : ''" />

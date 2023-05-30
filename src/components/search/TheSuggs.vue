@@ -1,7 +1,4 @@
 <script setup lang="ts">
-	import { storeToRefs } from "pinia";
-	import { useRoute } from "vue-router";
-	import { onBeforeMount, watch } from "vue";
 	import { debounce } from "lodash";
 
 	import { useSearch } from "@/stores/search";

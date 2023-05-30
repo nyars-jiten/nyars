@@ -1,13 +1,13 @@
 <script setup lang="ts">
-	import { DeepReadonly } from "vue";
-	import { useI18n } from "vue-i18n";
+	import type { DeepReadonly } from "vue";
+	import type { EntryJp } from "@/api/dictionary/jp/types";
 
 	import { MessagesNames } from "@/locale/messages-names";
-	import { type EntryJp } from "@/api/dictionary/jp/types";
 
 	import MinusIcon from "vue-material-design-icons/Minus.vue";
 	import PlusIcon from "vue-material-design-icons/Plus.vue";
 	import LinkVariantIcon from "vue-material-design-icons/LinkVariant.vue";
+
 	import Button from "@/components/Button.vue";
 
 	type Props = {
@@ -32,7 +32,7 @@
 
 <template>
 	<div class="flex gap-2">
-		<Button @click="copy" class="cursor-copy">
+		<Button class="cursor-copy" @click="copy">
 			<template #default>
 				{{ article.wid }}
 			</template>

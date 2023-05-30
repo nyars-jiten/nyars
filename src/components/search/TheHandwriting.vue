@@ -1,6 +1,5 @@
 <script setup lang="ts">
 	import { debounce } from "lodash";
-	import { computed, onMounted, ref } from "vue";
 
 	import { Canvas, Null } from "@/core/handwriting";
 	import { useSearch } from "@/stores/search";
@@ -10,7 +9,6 @@
 	import ArrowULeftBottom from "vue-material-design-icons/ArrowULeftBottom.vue";
 	import Eraser from "vue-material-design-icons/Eraser.vue";
 	import Panel from "./Panel.vue";
-	import { storeToRefs } from "pinia";
 
 	const canvas = ref<HTMLCanvasElement>();
 	const hw = ref<Handwriting>(new Null());

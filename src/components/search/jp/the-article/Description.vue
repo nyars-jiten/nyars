@@ -1,17 +1,16 @@
 <script setup lang="ts">
-	import { useI18n } from "vue-i18n";
-
 	import { Reference } from "@/api/dictionary/jp/types/reference";
 	import { bbCodesProcess } from "@/core/text/bb-code";
 	import { RoutesNames } from "@/router/routes-names";
 
-	import { type EntryJp } from "@/api/dictionary/jp/types";
+	import type { DeepReadonly } from "vue";
+	import type { EntryJp } from "@/api/dictionary/jp/types";
 
-	import PanelBody from "../../PanelBody.vue";
 	import { MessagesNames } from "@/locale/messages-names";
-	import { DeepReadonly } from "vue";
 	import { useSearch } from "@/stores/search";
 	import { SearchType } from "@/api/types/search/search-type";
+
+	import PanelBody from "../../PanelBody.vue";
 
 	type Variants = "short" | "full";
 	type Props = {
@@ -48,11 +47,11 @@
 			>
 				<div
 					v-show="details && mean.pos.length > 0"
-					class="pl-4 mb-2 border-b border-gray-200 dark:border-gray-700 pb-2 text-sm"
+					class="mb-2 border-b border-gray-200 pb-2 pl-4 text-sm dark:border-gray-700"
 				>
 					<span
 						v-for="tag of mean.pos"
-						class="uppercase font-bold pl-1 first:pl-0 after:content-[','] last:after:content-none"
+						class="pl-1 font-bold uppercase after:content-[','] first:pl-0 last:after:content-none"
 					>
 						{{ t(path({ type: "pos", tag, v: "full" })) }}
 					</span>
@@ -62,17 +61,17 @@
 			<div class="grid grid-cols-[auto_min-content_1fr] items-start">
 				<template v-for="(lang, langId) of mean.langMeanings">
 					<span
-						class="px-2 border-r border-gray-200 dark:border-gray-700 border-dotted text-gray-400 dark:text-gray-400 pr-2 mr-2 h-full"
+						class="mr-2 h-full border-r border-dotted border-gray-200 px-2 text-gray-400 dark:border-gray-700 dark:text-gray-400"
 						:style="{ 'grid-row': `span ${lang.senses.length}` }"
 					>
-						<div class="text-xs leading-6 uppercase font-medium">
+						<div class="text-xs font-medium uppercase leading-6">
 							{{ t(`${MessagesNames.SearchShortLangName}.${lang.lang}`) }}
 						</div>
 					</span>
 
 					<template v-for="(sense, senseId) of lang.senses">
 						<span
-							class="rounded-md text-center col-start-2 text-gray-400 dark:text-gray-400 mr-2 whitespace-nowrap"
+							class="col-start-2 mr-2 whitespace-nowrap rounded-md text-center text-gray-400 dark:text-gray-400"
 						>
 							<template v-if="lang.senses.length > 1">
 								{{ 1 + senseId }}
@@ -133,8 +132,8 @@
 								mode="out-in"
 							>
 								<PanelBody
-									class="mx-6 my-2"
 									v-show="details && sense.examples.length > 0"
+									class="mx-6 my-2"
 								>
 									<p v-for="{ value, translation } of sense.examples">
 										{{ value }}
@@ -155,14 +154,14 @@
 												name: RoutesNames.DictJpArticle,
 												params: { articleId: ref.target },
 											}"
-											class="text-indigo-500 underline underline-offset-4 decoration-dotted hover:text-accent-500"
+											class="hover:text-accent-500 text-indigo-500 underline decoration-dotted underline-offset-4"
 										>
 											{{ ref.value }}
 										</RouterLink>
 
 										<span
 											v-else
-											class="cursor-pointer text-indigo-500 underline underline-offset-4 decoration-dotted hover:text-accent-500"
+											class="hover:text-accent-500 cursor-pointer text-indigo-500 underline decoration-dotted underline-offset-4"
 											@click="
 												searchResults({
 													request: ref.value,
@@ -179,15 +178,15 @@
 					</template>
 
 					<div
-						class="col-span-full h-4"
 						v-show="mean.langMeanings.length != langId + 1"
+						class="col-span-full h-4"
 					/>
 				</template>
 			</div>
 
 			<div
-				class="h-px bg-gray-200 dark:bg-gray-700 col-span-full my-2"
 				v-show="meanings.length != meanId + 1"
+				class="col-span-full my-2 h-px bg-gray-200 dark:bg-gray-700"
 			/>
 		</template>
 	</div>

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-	import { useI18n } from "vue-i18n";
-
 	import { KanjiImage } from "@/api/dictionary/kanji/types";
 	import { MessagesNames } from "@/locale/messages-names";
 

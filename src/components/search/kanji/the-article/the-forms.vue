@@ -48,7 +48,6 @@
 <script setup lang="ts">
 	import { unicodeIndexFromUTF16, unicodeIndexFromUTF8 } from "@/core/unicode";
 	import { MessagesNames } from "@/locale/messages-names";
-	import { useI18n } from "vue-i18n";
 
 	import type { KanjiForm } from "@/api/dictionary/kanji/types";
 

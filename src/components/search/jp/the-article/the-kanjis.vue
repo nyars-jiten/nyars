@@ -1,13 +1,11 @@
 <script setup lang="ts">
-	import { useI18n } from "vue-i18n";
-
 	import { RoutesNames } from "@/router/routes-names";
 	import { MessagesNames } from "@/locale/messages-names";
 
-	import { type EntryKanji } from "@/api/dictionary/kanji/types";
+	import type { DeepReadonly } from "vue";
+	import type { EntryKanji } from "@/api/dictionary/kanji/types";
 
 	import TheTags from "@/components/Tags.vue";
-	import { DeepReadonly } from "vue";
 
 	type Props = { kanjis: DeepReadonly<EntryKanji[]> };
 
@@ -24,7 +22,7 @@
 		<div class="pb-4 text-gray-400">
 			{{ t(MessagesNames.WordKanjisTitle) }}
 		</div>
-		<div class="flex flex-col flex-wrap gap-8 select-text">
+		<div class="flex select-text flex-col flex-wrap gap-8">
 			<div v-for:="kanji of kanjis" class="flex flex-row items-center gap-8">
 				<RouterLink
 					:to="{

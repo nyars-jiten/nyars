@@ -5,7 +5,7 @@
 			>{{ t(`${MessagesNames.KanjiReadingTypeName}.${type}.badge`) }}</span
 		>
 
-		<div class="flex flex-row flex-wrap gap-y-2 gap-x-1">
+		<div class="flex flex-row flex-wrap gap-x-1 gap-y-2">
 			<div
 				v-for="reading of readings"
 				:class="[reading.tags.includes('gai') ? `text-gray-400` : '']"
@@ -18,7 +18,7 @@
 					<template v-for="tag of reading.tags">
 						<span
 							v-if="tag != 'gai'"
-							class="rounded-tl-md border-t border-l px-1 py-0.5 empty:hidden"
+							class="rounded-tl-md border-l border-t px-1 py-0.5 empty:hidden"
 							:class="[`text-tag-${tag}-500`, `border-tag-${tag}-500`]"
 						>
 							{{ t(`${MessagesNames.KanjiReadingTagName}.${tag}.badge`) }}
@@ -36,7 +36,6 @@
 <script setup lang="ts">
 	import { Reading } from "@/api/dictionary/kanji/types";
 	import { convert_to_kana } from "@nyars-jiten/jp-transcript";
-	import { useI18n } from "vue-i18n";
 
 	import { MessagesNames } from "@/locale/messages-names";
 
