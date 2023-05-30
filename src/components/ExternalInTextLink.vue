@@ -2,7 +2,7 @@
 	<a
 		:href="href"
 		target="_blank"
-		class="select-text underline underline-offset-4 decoration-dotted hover:text-accent-500"
+		class="hover:text-accent-500 select-text underline decoration-dotted underline-offset-4"
 	>
 		<slot />
 	</a>

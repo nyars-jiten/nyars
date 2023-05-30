@@ -21,8 +21,5 @@
 		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
 	},
 	"explorer.excludeGitIgnore": true,
-
-	"editor.tabSize": 4,
-	"editor.insertSpaces": false,
 	"editor.detectIndentation": false
 }
