@@ -12,7 +12,6 @@
 	const props = defineProps<Props>();
 
 	const { searchResults } = useSearch();
-	const { t } = useI18n();
 
 	const tags = props.tags.map(function (full) {
 		const [title, ...rest] = full.split("-");
@@ -39,7 +38,7 @@
 				class="px-2 font-medium uppercase"
 				:class="[`text-tag-${tag.title}-500`]"
 			>
-				{{ t(`${MessagesNames.ArticleTagName}.${tag.title}.short`) }}
+				{{ $t(`${MessagesNames.ArticleTagName}.${tag.title}.short`) }}
 			</span>
 
 			<span

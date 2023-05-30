@@ -1,4 +1,3 @@
-import { isEmpty } from "lodash";
 import { defineStore } from "pinia";
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -82,7 +81,7 @@ export const useJapSearch = defineStore("japSearch", () => {
 	}
 
 	async function searchSuggestions({ request: q }: ReadOnlyRequest) {
-		if (isEmpty(q) || q == request.value) return false;
+		if (q == "" || q == request.value) return false;
 
 		const updatedAt = new Date();
 		const values = await api.search.sugg({ request: q });

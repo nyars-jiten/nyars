@@ -2,7 +2,7 @@
 	import { storeToRefs } from "pinia";
 	import { useRoute } from "vue-router";
 	import { onBeforeMount, watch } from "vue";
-	import { debounce, isEmpty } from "lodash";
+	import { debounce } from "lodash";
 
 	import { useSearch } from "@/stores/search";
 	import { useJapSearch } from "@/stores/search/jpn";
@@ -21,7 +21,7 @@
 	const search = debounce(searchSuggestions, 100);
 
 	async function update(request: string) {
-		if (isEmpty(request)) {
+		if (request == '') {
 			resetSuggestions();
 			return;
 		}

@@ -1,4 +1,3 @@
-import { isEmpty } from "lodash";
 import type { Handwriting } from "./handwriting";
 import type { GoogleProposals } from "./types/google-proposals";
 
@@ -20,7 +19,7 @@ export class Canvas implements Handwriting {
 	}
 
 	async getProposals(): Promise<GoogleProposals> {
-		if (isEmpty(this.history)) return ["SUCCESS", [["", []]]];
+		if (this.history.length == 0) return ["SUCCESS", [["", []]]];
 
 		const body = {
 			options: "enable_pre_space",

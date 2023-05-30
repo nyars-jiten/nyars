@@ -1,14 +1,15 @@
 import "./index.css";
 
-import { createApp } from "vue";
-import { router } from "./router";
-import { locale } from "./locale";
-import { pinia } from "./stores";
+import { useRouter } from "./router";
+import { useLocale } from "./locale";
+import { useStore } from "./stores";
 
 import App from "./TheApp.vue";
 
 const app = createApp(App);
-app.use(locale);
-app.use(router);
-app.use(pinia);
+
+app.use(useLocale());
+app.use(useRouter());
+app.use(useStore());
+
 app.mount("#app");
