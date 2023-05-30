@@ -29,9 +29,6 @@
 </template>
 
 <script setup lang="ts">
-	import { useI18n } from "vue-i18n";
-	import { onMounted, reactive } from "vue";
-
 	import { api } from "@/api";
 	import { avatarUrl } from "@/core/avatar-url";
 	import { MessagesNames } from "@/locale/messages-names";

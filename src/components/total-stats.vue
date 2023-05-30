@@ -23,8 +23,6 @@
 
 <script setup lang="ts">
 	import { api } from "@/api";
-	import { reactive } from "vue";
-	import { useI18n } from "vue-i18n";
 
 	import { MessagesNames } from "@/locale/messages-names";
 

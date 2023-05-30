@@ -1,11 +1,9 @@
 <script setup lang="ts">
-	import { useI18n } from "vue-i18n";
-
 	import { useSearch } from "@/stores/search";
 	import { MessagesNames } from "@/locale/messages-names";
 
-	import { type DeepReadonly } from "vue";
-	import { type ReadOnlyRequest } from "@/stores/search/types";
+	import type { DeepReadonly } from "vue";
+	import type { ReadOnlyRequest } from "@/stores/search/types";
 
 	type Props = { tags: DeepReadonly<string[]> };
 

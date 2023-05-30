@@ -1,6 +1,4 @@
 <script setup lang="ts">
-	import { ref } from "vue";
-	import { useI18n } from "vue-i18n";
 	import { convert_to_kana as convert } from "@nyars-jiten/jp-transcript";
 
 	import { RoutesNames } from "@/router/routes-names";

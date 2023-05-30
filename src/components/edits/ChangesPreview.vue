@@ -1,8 +1,7 @@
 <script setup lang="ts">
 	import { api } from "@/api";
-	import { onMounted, ref } from "vue";
 
-	import { type Compare } from "@/api/edits-rest/types";
+	import type { Compare } from "@/api/edits-rest/types";
 
 	import PanelBody from "../search/PanelBody.vue";
 
@@ -17,7 +16,7 @@
 </script>
 
 <template>
-	<section class="flex gap-4 flex-col">
+	<section class="flex flex-col gap-4">
 		<div class="grid grid-cols-[1fr_auto_1fr] gap-4 px-2">
 			<PanelBody>
 				<span
@@ -45,7 +44,7 @@
 		</div>
 
 		<div
-			class="select-text px-4 border-l-2 border-gray-200 dark:border-gray-700 mx-2 overflow-hidden"
+			class="mx-2 select-text overflow-hidden border-l-2 border-gray-200 px-4 dark:border-gray-700"
 		>
 			{{ changes.comment }}
 		</div>

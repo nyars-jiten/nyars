@@ -29,7 +29,7 @@
 
 		<div
 			v-if="isChangesVisible"
-			class="mt-4 mb-2 rounded-md border border-gray-200 dark:border-gray-600"
+			class="mb-2 mt-4 rounded-md border border-gray-200 dark:border-gray-600"
 		>
 			<ChangesPreview :id="article.id" />
 		</div>
@@ -37,9 +37,6 @@
 </template>
 
 <script setup lang="ts">
-	import { computed, ref } from "vue";
-	import { useI18n } from "vue-i18n";
-
 	import { StatusVariant } from "@/api/edits-rest/types/status-variant";
 	import { formatDistanceToNow } from "@/locale/formatDistanceToNow";
 	import { MessagesNames } from "@/locale/messages-names";

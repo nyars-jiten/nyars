@@ -1,11 +1,7 @@
 <script setup lang="ts">
-	import { useRoute } from "vue-router";
-	import { onBeforeMount, watch } from "vue";
-
 	import { useSearch } from "@/stores/search";
 
 	import TheInput from "@/components/search/TheInput.vue";
-	import { storeToRefs } from "pinia";
 	import { SearchType } from "@/api/types/search/search-type";
 
 	onBeforeMount(() => {

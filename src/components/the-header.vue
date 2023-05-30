@@ -1,7 +1,4 @@
 <script setup lang="ts">
-	import { computed } from "vue";
-	import { useI18n } from "vue-i18n";
-
 	import { userTheme } from "@/core/theme/theme-control";
 	import { MessagesNames } from "@/locale/messages-names";
 	import { RoutesNames } from "@/router/routes-names";
