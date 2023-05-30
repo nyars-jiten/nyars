@@ -1,7 +1,4 @@
 <script setup lang="ts">
-	import { storeToRefs } from "pinia";
-	import { onBeforeMount } from "vue";
-
 	import { useSearch } from "@/stores/search";
 	import { useJapSearch } from "@/stores/search/jpn";
 	import { SearchType } from "@/api/types/search/search-type";

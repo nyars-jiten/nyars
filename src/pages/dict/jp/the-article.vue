@@ -1,23 +1,22 @@
 <script setup lang="ts">
-	import { computed, DeepReadonly, reactive } from "vue";
-	import { useI18n } from "vue-i18n";
-	import { useRoute } from "vue-router";
-
 	import { api } from "@/api";
 	import { useJapSearch } from "@/stores/search/jpn";
 
-	import { type SatelliteList } from "@/api";
-	import { type EntryJp } from "@/api/dictionary/jp/types";
-	import { type ImageList } from "@/api/kotoba-rest";
-	import { type EditList } from "@/api/edits-rest/types/articles";
+	import type { SatelliteList } from "@/api";
+	import type { EntryJp } from "@/api/dictionary/jp/types";
+	import type { ImageList } from "@/api/kotoba-rest";
+	import type { EditList } from "@/api/edits-rest/types/articles";
+	import type { DeepReadonly } from "vue";
+
+	import { MessagesNames } from "@/locale/messages-names";
+
+	import MinusIcon from "vue-material-design-icons/Minus.vue";
 
 	import ShortArticle from "@/components/edits/short-article.vue";
 	import Article from "@/components/search/jp/Article.vue";
 	import TheKanjis from "@/components/search/jp/the-article/the-kanjis.vue";
-	import MinusIcon from "vue-material-design-icons/Minus.vue";
 	import PlusIcon from "vue-material-design-icons/Plus.vue";
 	import Button from "@/components/Button.vue";
-	import { MessagesNames } from "@/locale/messages-names";
 
 	type Props = { standalone: boolean };
 

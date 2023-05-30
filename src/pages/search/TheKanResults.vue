@@ -1,9 +1,7 @@
 <script setup lang="ts">
-	import { storeToRefs } from "pinia";
 	import { useKanSearch } from "@/stores/search/kan";
 
 	import KanjiArticle from "@/components/search/kanji/the-article.vue";
-	import { onBeforeMount } from "vue";
 	import { useSearch } from "@/stores/search";
 	import { SearchType } from "@/api/types/search/search-type";
 

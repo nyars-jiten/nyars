@@ -10,8 +10,8 @@
 	import { useRoute } from "vue-router";
 
 	import TheArticle from "@/components/search/kanji/the-article.vue";
-	import { onMounted, ref } from "vue";
-	import { EntryKanji } from "@/api/dictionary/kanji/types";
+
+	import type { EntryKanji } from "@/api/dictionary/kanji/types";
 
 	type Props = { standalone: boolean };
 
