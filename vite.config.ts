@@ -23,9 +23,10 @@ export default defineConfig({
 	plugins: [
 		vue(),
 		wasm(),
-		components({ dts: true }),
+		components({ dts: "./src/typings/components.d.ts" }),
 		auto({
 			imports: ["vue", "vue-router", "pinia", "vue-i18n"],
+			dts: "./src/typings/auto-imports.d.ts",
 		}),
 		locals({
 			compositionOnly: true,
