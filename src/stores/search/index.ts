@@ -1,6 +1,3 @@
-import { ref } from "vue";
-import { defineStore } from "pinia";
-
 import { SearchType } from "@/api/types/search/search-type";
 import { useJapSearch } from "./jpn";
 

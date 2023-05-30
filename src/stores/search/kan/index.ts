@@ -1,13 +1,10 @@
 import { api } from "@/api";
-import { defineStore } from "pinia";
-import { useRouter } from "vue-router";
-import { reactive } from "vue";
 
 import { RoutesNames } from "@/router/routes-names";
 
-import { type DeepReadonly } from "vue";
-import { type SearchResultKanji } from "@/api/search-rest/types/search-result-kanji";
-import { type ReadOnlyRequest } from "../types";
+import type { DeepReadonly } from "vue";
+import type { SearchResultKanji } from "@/api/search-rest/types/search-result-kanji";
+import type { ReadOnlyRequest } from "../types";
 
 function emptySearchKanjiResults(): SearchResultKanji & { updatedAt: Date } {
 	return {

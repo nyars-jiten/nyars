@@ -1,14 +1,10 @@
-import { defineStore } from "pinia";
-import { reactive, ref } from "vue";
-import { useRouter } from "vue-router";
-
 import { api } from "@/api";
 import { RoutesNames } from "@/router/routes-names";
 
-import { type SearchResultWord } from "@/api/search-rest/types";
-import { type DeepReadonly } from "vue";
-import { type SearchResultJpInfo } from "@/api/search-rest/types/search-result-jp-info";
-import { type ReadOnlyRequest } from "../types";
+import type { SearchResultWord } from "@/api/search-rest/types";
+import type { DeepReadonly } from "vue";
+import type { SearchResultJpInfo } from "@/api/search-rest/types/search-result-jp-info";
+import type { ReadOnlyRequest } from "../types";
 
 function emptySearchGrammar(): SearchResultJpInfo {
 	return {

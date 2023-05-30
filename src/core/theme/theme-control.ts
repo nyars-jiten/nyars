@@ -1,4 +1,3 @@
-import { ref } from "vue";
 import type { UserTheme } from "./types/user-theme";
 
 export const setTheme = (theme: UserTheme) => {
