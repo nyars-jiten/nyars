@@ -1,11 +1,13 @@
 import vue from "@vitejs/plugin-vue";
 import wasm from "vite-plugin-wasm";
-import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
+
+import locals from "@intlify/unplugin-vue-i18n/vite";
+import components from "unplugin-vue-components/vite";
+import auto from "unplugin-auto-import/vite";
 
 import { defineConfig } from "vite";
 import { fileURLToPath } from "url";
 
-// https://vitejs.dev/config/
 export default defineConfig({
 	resolve: {
 		alias: {
@@ -21,7 +23,11 @@ export default defineConfig({
 	plugins: [
 		vue(),
 		wasm(),
-		VueI18nPlugin({
+		components({ dts: true }),
+		auto({
+			imports: ["vue", "vue-router", "pinia", "vue-i18n"],
+		}),
+		locals({
 			compositionOnly: true,
 			fullInstall: true,
 		}),
