@@ -6,7 +6,7 @@
 	import TheMeanings from "./the-article/the-meanings.vue";
 	import TheReading from "./the-article/the-reading.vue";
 	import TheWords from "./editor/TheWords.vue";
-	import Input from "./editor/Input.vue";
+	import EditInput from "./editor/EditInput.vue";
 	import TextArea from "./editor/TextArea.vue";
 	type Props = { article: EntryKanji };
 	defineProps<Props>();
@@ -26,9 +26,9 @@
 						<span class="text-9xl">{{ article.entry.general.literal }}</span>
 						<span class="break-words">
 							<TextArea
+								v-model="article.entry.general.shortMeans"
 								type="text"
 								:rows="5"
-								v-model="article.entry.general.shortMeans"
 								name="short-means-input"
 							/>
 						</span>
@@ -49,7 +49,7 @@
 						<span class="text-sm text-gray-400">
 							{{ t(MessagesNames.Radical) }}
 						</span>
-						<Input
+						<EditInput
 							v-model="article.entry.general.literal"
 							name="literal-input"
 						/>
@@ -58,7 +58,7 @@
 						<span class="text-sm text-gray-400">
 							{{ t(MessagesNames.StrokeCount) }}
 						</span>
-						<Input
+						<EditInput
 							v-model="article.entry.general.strokeCount"
 							name="strokecount-input"
 						/>
@@ -67,7 +67,7 @@
 						<span class="text-sm text-gray-400">
 							{{ t(MessagesNames.Ids) }}
 						</span>
-						<Input v-model="article.entry.general.ids" name="ids-input" />
+						<EditInput v-model="article.entry.general.ids" name="ids-input" />
 					</p>
 				</div>
 
@@ -76,7 +76,7 @@
 						<span class="text-sm text-gray-400 dark:text-gray-400">
 							{{ t(MessagesNames.JIS) }}
 						</span>
-						<Input v-model="article.entry.general.jis" name="jis-input" />
+						<EditInput v-model="article.entry.general.jis" name="jis-input" />
 					</p>
 				</div>
 
@@ -103,24 +103,27 @@
 				>
 					<span class="text-sm text-gray-400">{{ t(MessagesNames.Note) }}</span>
 					<TextArea
-						:rows="4"
 						v-model="article.entry.general.note"
+						:rows="4"
 						name="note-input"
 					/>
 				</div>
 
 				<div class="flex flex-col gap-8">
+					<!-- Самостоятельные значения -->
 					<TheWords
 						:words="article.entry.standaloneMeanings"
 						:title="t(MessagesNames.StandaloneMeanings)"
 					/>
 
+					<!-- Составные значения -->
 					<TheMeanings
 						:meanings="article.entry.composedMeanings"
 						:title="t(MessagesNames.ComposedMeanings)"
 						:is-editor="true"
 					/>
 
+					<!-- Камбун -->
 					<TheMeanings
 						:meanings="article.entry.kanbunMeanings"
 						:title="t(MessagesNames.KanbunMeanings)"
