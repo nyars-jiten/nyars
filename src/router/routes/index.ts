@@ -9,7 +9,7 @@ import { pinia } from "@/stores";
 export const routes: Readonly<RouteRecordRaw[]> = [
 	{
 		path: "/",
-		component: () => import("@/views/TheSearch.vue"),
+		component: () => import("@/pages/TheSearch.vue"),
 		children: [
 			{
 				name: RoutesNames.SearchHome,
