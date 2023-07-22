@@ -54,7 +54,7 @@
 					</span>
 					<div>
 						<span>Источники: </span>
-						<Input
+						<EditInput
 							v-model="meaning.source"
 							name="source-edit-input"
 							placeholder="источники"
@@ -116,7 +116,7 @@
 </template>
 
 <script setup lang="ts">
-	import { bbCodesProcess } from "@/core/text/bb-code";
+	import { bbCodesProcess } from "@/utils/text/bb-code";
 	import { convert_to_kana } from "@nyars-jiten/jp-transcript";
 
 	import { RoutesNames } from "@/router/routes-names";
@@ -126,8 +126,8 @@
 	import { useSearch } from "@/stores/search";
 
 	import TheWords from "../editor/TheWords.vue";
-	import Input from "../editor/Input.vue";
-	import Button from "@/components/Button.vue";
+	import EditInput from "../editor/EditInput.vue";
+	import Button from "@/components/button.vue";
 	import EditableSpan from "./editable-span.vue";
 
 	type Props = { meanings: Meaning[]; title: string; isEditor?: boolean };

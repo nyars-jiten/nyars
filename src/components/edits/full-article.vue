@@ -14,7 +14,7 @@
 	import TextSplitted from "@/components/text-splitted.vue";
 	import ChangesPreview from "./ChangesPreview.vue";
 	import UserProfile from "./user-profile.vue";
-	import Button from "../Button.vue";
+	import Button from "@/components/button.vue";
 
 	import FormatFontSizeDecrease from "vue-material-design-icons/FormatFontSizeDecrease.vue";
 	import FormatFontSizeIncrease from "vue-material-design-icons/FormatFontSizeIncrease.vue";

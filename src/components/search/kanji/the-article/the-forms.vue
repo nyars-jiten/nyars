@@ -4,10 +4,7 @@
 			{{ t(MessagesNames.KanjiForm) }}
 		</span>
 		<div class="flex flex-row flex-wrap gap-2">
-			<div
-				v-for="(form) of forms"
-				class="flex flex-row items-start gap-4"
-			>
+			<div v-for="form of forms" class="flex flex-row items-start gap-4">
 				<div class="w-20">
 					<span v-if="form.literal.length <= 2" class="text-7xl">
 						{{ form.literal }}
@@ -28,7 +25,7 @@
 				<div class="flex flex-col gap-2">
 					<span
 						v-if="form.type !== null"
-						class="whitespace-nowrap rounded-md border border-accent-500 px-2 text-sm text-accent-500 hover:opacity-75"
+						class="border-accent-500 text-accent-500 whitespace-nowrap rounded-md border px-2 text-sm hover:opacity-75"
 					>
 						{{ t(`${MessagesNames.KanjiFormTypeName}.${form.type}.short`) }}
 					</span>
@@ -49,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-	import { unicodeIndexFromUTF16, unicodeIndexFromUTF8 } from "@/core/unicode";
+	import { unicodeIndexFromUTF16, unicodeIndexFromUTF8 } from "@/utils/unicode";
 	import { MessagesNames } from "@/locale/messages-names";
 	import { useI18n } from "vue-i18n";
 

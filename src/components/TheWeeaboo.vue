@@ -33,7 +33,7 @@
 	import { onMounted, reactive } from "vue";
 
 	import { api } from "@/api";
-	import { avatarUrl } from "@/core/avatar-url";
+	import { avatarUrl } from "@/utils/avatar-url";
 	import { MessagesNames } from "@/locale/messages-names";
 
 	import { type UserList } from "@/api/types";

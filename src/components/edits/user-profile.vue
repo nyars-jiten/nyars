@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-	import { avatarUrl } from "@/core/avatar-url";
+	import { avatarUrl } from "@/utils/avatar-url";
 
 	import type { UserEntry } from "@/api/edits-rest/types";
 

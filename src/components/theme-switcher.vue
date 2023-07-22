@@ -18,7 +18,7 @@
 		toggleTheme,
 		updateTheme,
 		userTheme,
-	} from "@/core/theme/theme-control";
+	} from "@/utils/theme/theme-control";
 
 	import { onMounted } from "vue";
 

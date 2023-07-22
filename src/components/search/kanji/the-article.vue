@@ -4,7 +4,7 @@
 	import { useI18n } from "vue-i18n";
 
 	import { EntryKanji } from "@/api/dictionary/kanji/types";
-	import { unicodeIndexFromUTF8, unicodeIndexFromUTF16 } from "@/core/unicode";
+	import { unicodeIndexFromUTF8, unicodeIndexFromUTF16 } from "@/utils/unicode";
 
 	import TheTags from "@/components/Tags.vue";
 	import ContentCopyIcon from "vue-material-design-icons/LinkVariant.vue";

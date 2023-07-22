@@ -16,7 +16,7 @@
 	import TheKanjis from "@/components/search/jp/the-article/the-kanjis.vue";
 	import MinusIcon from "vue-material-design-icons/Minus.vue";
 	import PlusIcon from "vue-material-design-icons/Plus.vue";
-	import Button from "@/components/Button.vue";
+	import Button from "@/components/button.vue";
 	import { MessagesNames } from "@/locale/messages-names";
 
 	type Props = { standalone: boolean };

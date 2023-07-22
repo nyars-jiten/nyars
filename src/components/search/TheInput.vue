@@ -14,7 +14,7 @@
 	import ChevronDown from "vue-material-design-icons/ChevronDown.vue";
 	import SearchIcon from "vue-material-design-icons/Magnify.vue";
 
-	import Button from "./Button.vue";
+	import Button from "@/components/button.vue";
 	import TheSuggs from "./TheSuggs.vue";
 	import TheHandwriting from "./TheHandwriting.vue";
 
