@@ -35,7 +35,7 @@ export const useKanSearch = defineStore("kanSearch", () => {
 		reset();
 
 		await push({
-			name: RoutesNames.SearchKanResults,
+			name: RoutesNames.SearchKanjiResults,
 			query: { request: (request.value = q) },
 		});
 

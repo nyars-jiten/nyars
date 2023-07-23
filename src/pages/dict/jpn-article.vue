@@ -117,7 +117,8 @@
 			class="flex flex-wrap gap-2 border border-gray-100 bg-white px-10 py-5 shadow-md dark:border-gray-600 md:rounded-md"
 		>
 			<img
-				v-for="image of content.images"
+				v-for="(image, ix) of content.images"
+				:key="ix"
 				:src="image.link"
 				:alt="image.title"
 				class="h-20 w-auto"
@@ -149,6 +150,7 @@
 			<div class="flex flex-col gap-4">
 				<div
 					v-for="satellite of content.satellites"
+					:key="satellite.key"
 					class="flex gap-4 rounded-md border border-gray-200 px-4 py-2 dark:border-gray-600"
 				>
 					<div class="contents" @click="toggleStatus(satellite)">
@@ -171,6 +173,7 @@
 		>
 			<ShortArticle
 				v-for="value of content.edits"
+				:key="value.id"
 				:article="value"
 				class="border-b border-gray-100 py-2 first:pt-0 last:border-none last:pb-0 dark:border-gray-700"
 			/>

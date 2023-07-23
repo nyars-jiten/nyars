@@ -11,7 +11,7 @@
 
 	onBeforeMount(() => {
 		const { mode } = storeToRefs(useSearch());
-		mode.value = SearchType.Kan;
+		mode.value = SearchType.Kanji;
 	});
 </script>
 

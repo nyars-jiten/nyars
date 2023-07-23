@@ -1,3 +1,4 @@
+<!-- TODO: deprecated -->
 <script setup lang="ts">
 	import BestUsers from "@/components/best-users.vue";
 	import TotalStats from "@/components/total-stats.vue";

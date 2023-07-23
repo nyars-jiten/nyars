@@ -25,6 +25,7 @@
 		>
 			<FullArticle
 				v-for="article of articles"
+				:key="article.id"
 				:article="article"
 				class="px-2 pb-2 shadow"
 			/>

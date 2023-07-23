@@ -32,7 +32,7 @@ export const useSearch = defineStore("search", () => {
 		updateRequest(params);
 		updateMode(params);
 
-		if (mode.value == SearchType.Kan) {
+		if (mode.value == SearchType.Kanji) {
 			return await searchKan({ request: request.value });
 		}
 

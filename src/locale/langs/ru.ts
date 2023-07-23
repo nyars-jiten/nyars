@@ -17,11 +17,11 @@ export const ru = {
 	[MessagesNames.SearchIn]: "Искать",
 	[MessagesNames.SearchInput]: {
 		[SearchType.Jpn]: "Японское, русское или английское слово",
-		[SearchType.Kan]: "Японское слово или кандзи",
+		[SearchType.Kanji]: "Японское слово или кандзи",
 	},
 
 	[MessagesNames.SearchWhat]: {
-		[SearchType.Kan]: { badge: "字", short: "кандзи" },
+		[SearchType.Kanji]: { badge: "字", short: "кандзи" },
 		[SearchType.Jpn]: { badge: "詞", short: "слова" },
 	},
 	[MessagesNames.SearchInfoPre]:

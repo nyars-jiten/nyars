@@ -63,7 +63,7 @@ export const useJapSearch = defineStore("japSearch", () => {
 		resetResults();
 
 		await push({
-			name: RoutesNames.SearchJapResults,
+			name: RoutesNames.SearchJpnResults,
 			query: { request: (request.value = q) },
 		});
 
