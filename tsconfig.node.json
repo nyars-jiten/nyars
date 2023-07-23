@@ -1,10 +1,17 @@
 {
-	"extends": "@tsconfig/node20/tsconfig.json",
-	"include": ["vite.config.ts"],
-	"compilerOptions": {
-		"composite": true,
-		"types": ["node", "vite/client"],
-		"module": "ESNext",
-		"moduleResolution": "Node"
-	}
+  "extends": "@tsconfig/node20/tsconfig.json",
+  "include": [
+    "vite.config.*",
+    "vitest.config.*",
+    "cypress.config.*",
+    "nightwatch.conf.*",
+    "playwright.config.*"
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "module": "ESNext",
+    "types": [
+      "node"
+    ]
+  }
 }
