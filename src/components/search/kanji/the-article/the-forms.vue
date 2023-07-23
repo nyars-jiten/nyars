@@ -1,3 +1,21 @@
+<script setup lang="ts">
+	import { unicodeIndexFromUTF16, unicodeIndexFromUTF8 } from "@/utils/unicode";
+	import { MessagesNames } from "@/locale/messages-names";
+	import { useI18n } from "vue-i18n";
+
+	import type { KanjiForm } from "@/api/dictionary/kanji/types";
+
+	type Props = { forms: KanjiForm[] };
+
+	defineProps<Props>();
+
+	const { t } = useI18n();
+
+	function splitPaths(data: string) {
+		return data !== null ? data.split("|") : "";
+	}
+</script>
+
 <template>
 	<div v-show="forms.length > 0" class="flex flex-col gap-4 rounded-md">
 		<span class="text-sm text-gray-400 dark:text-gray-400">
@@ -44,21 +62,3 @@
 		</div>
 	</div>
 </template>
-
-<script setup lang="ts">
-	import { unicodeIndexFromUTF16, unicodeIndexFromUTF8 } from "@/utils/unicode";
-	import { MessagesNames } from "@/locale/messages-names";
-	import { useI18n } from "vue-i18n";
-
-	import type { KanjiForm } from "@/api/dictionary/kanji/types";
-
-	type Props = { forms: KanjiForm[] };
-
-	defineProps<Props>();
-
-	const { t } = useI18n();
-
-	function splitPaths(data: string) {
-		return data !== null ? data.split("|") : "";
-	}
-</script>

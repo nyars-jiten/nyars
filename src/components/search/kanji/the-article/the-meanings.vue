@@ -1,3 +1,43 @@
+<script setup lang="ts">
+	import { bbCodesProcess } from "@/utils/text/bb-code";
+	import { convert_to_kana } from "@nyars-jiten/jp-transcript";
+
+	import { RoutesNames } from "@/router/routes-names";
+
+	import { KanjiWord, Meaning } from "@/api/dictionary/kanji/types";
+	import { SearchType } from "@/api/types/search/search-type";
+	import { useSearch } from "@/stores/search";
+
+	import TheWords from "../editor/TheWords.vue";
+	import EditInput from "../editor/EditInput.vue";
+	import Button from "@/components/button.vue";
+	import EditableSpan from "./editable-span.vue";
+
+	type Props = { meanings: Meaning[]; title: string; isEditor?: boolean };
+
+	withDefaults(defineProps<Props>(), { isEditor: false });
+
+	function exists({ wid }: KanjiWord) {
+		return wid.length >= 1;
+	}
+
+	const { searchResults } = useSearch();
+
+	// function editReadingByIndex(meaningId: number, readingId: number) {
+	// 	//
+	// }
+	function addWord(words: KanjiWord[]) {
+		words.push({
+			wid: "",
+			word: "",
+			reading: "",
+			meaning: "",
+			nsR: false,
+			nsM: false,
+		});
+	}
+</script>
+
 <template>
 	<div class="flex flex-col gap-4">
 		<div class="text-accent-500 rounded-md">
@@ -114,43 +154,3 @@
 		</template>
 	</div>
 </template>
-
-<script setup lang="ts">
-	import { bbCodesProcess } from "@/utils/text/bb-code";
-	import { convert_to_kana } from "@nyars-jiten/jp-transcript";
-
-	import { RoutesNames } from "@/router/routes-names";
-
-	import { KanjiWord, Meaning } from "@/api/dictionary/kanji/types";
-	import { SearchType } from "@/api/types/search/search-type";
-	import { useSearch } from "@/stores/search";
-
-	import TheWords from "../editor/TheWords.vue";
-	import EditInput from "../editor/EditInput.vue";
-	import Button from "@/components/button.vue";
-	import EditableSpan from "./editable-span.vue";
-
-	type Props = { meanings: Meaning[]; title: string; isEditor?: boolean };
-
-	withDefaults(defineProps<Props>(), { isEditor: false });
-
-	function exists({ wid }: KanjiWord) {
-		return wid.length >= 1;
-	}
-
-	const { searchResults } = useSearch();
-
-	// function editReadingByIndex(meaningId: number, readingId: number) {
-	// 	//
-	// }
-	function addWord(words: KanjiWord[]) {
-		words.push({
-			wid: "",
-			word: "",
-			reading: "",
-			meaning: "",
-			nsR: false,
-			nsM: false,
-		});
-	}
-</script>

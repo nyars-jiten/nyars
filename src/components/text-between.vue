@@ -1,9 +1,3 @@
-<template>
-	<span :class="`before:content-['${before}'] after:content-['${after}']`">
-		<slot />
-	</span>
-</template>
-
 <script setup lang="ts">
 	type Props = {
 		before?: string;
@@ -15,3 +9,9 @@
 		before: "「",
 	});
 </script>
+
+<template>
+	<span :class="`before:content-['${before}'] after:content-['${after}']`">
+		<slot />
+	</span>
+</template>

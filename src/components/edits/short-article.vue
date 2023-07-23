@@ -1,3 +1,36 @@
+<script setup lang="ts">
+	import { computed, ref } from "vue";
+	import { useI18n } from "vue-i18n";
+
+	import { StatusVariant } from "@/api/edits-rest/types/status-variant";
+	import { formatDistanceToNow } from "@/locale/formatDistanceToNow";
+	import { MessagesNames } from "@/locale/messages-names";
+
+	import TextBetween from "@/components/text-between.vue";
+	import ChangesPreview from "./ChangesPreview.vue";
+	import UserProfile from "./user-profile.vue";
+
+	import type { EditEntry } from "@/api/edits-rest/types";
+
+	type Props = { article: EditEntry };
+
+	const props = defineProps<Props>();
+
+	const { t } = useI18n();
+
+	const isShowApprover = computed(
+		() =>
+			props.article.approver &&
+			props.article.status != StatusVariant.AutoAccepted,
+	);
+
+	const isChangesVisible = ref(false);
+
+	function toggleChanges() {
+		isChangesVisible.value = !isChangesVisible.value;
+	}
+</script>
+
 <template>
 	<section>
 		<div
@@ -35,36 +68,3 @@
 		</div>
 	</section>
 </template>
-
-<script setup lang="ts">
-	import { computed, ref } from "vue";
-	import { useI18n } from "vue-i18n";
-
-	import { StatusVariant } from "@/api/edits-rest/types/status-variant";
-	import { formatDistanceToNow } from "@/locale/formatDistanceToNow";
-	import { MessagesNames } from "@/locale/messages-names";
-
-	import TextBetween from "@/components/text-between.vue";
-	import ChangesPreview from "./ChangesPreview.vue";
-	import UserProfile from "./user-profile.vue";
-
-	import type { EditEntry } from "@/api/edits-rest/types";
-
-	type Props = { article: EditEntry };
-
-	const props = defineProps<Props>();
-
-	const { t } = useI18n();
-
-	const isShowApprover = computed(
-		() =>
-			props.article.approver &&
-			props.article.status != StatusVariant.AutoAccepted,
-	);
-
-	const isChangesVisible = ref(false);
-
-	function toggleChanges() {
-		isChangesVisible.value = !isChangesVisible.value;
-	}
-</script>

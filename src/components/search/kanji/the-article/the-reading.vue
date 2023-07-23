@@ -1,3 +1,45 @@
+<script setup lang="ts">
+	import { Reading } from "@/api/dictionary/kanji/types";
+	import { convert_to_kana } from "@nyars-jiten/jp-transcript";
+	import { useI18n } from "vue-i18n";
+
+	import { MessagesNames } from "@/locale/messages-names";
+
+	// import EditableSpan from "./editable-span.vue";
+	import EditInput from "../editor/EditInput.vue";
+	import Button from "@/components/button.vue";
+	import Multiselect from "vue-multiselect";
+
+	type Props = { readings: Reading[]; type: string; isEditor: boolean };
+	const props = defineProps<Props>();
+
+	const { t } = useI18n();
+
+	const optionsList = [
+		"shou",
+		"chuu",
+		"kou",
+		"kanon",
+		"touon",
+		"goon",
+		"kanyoon",
+		"souon",
+		"gai",
+	];
+
+	function customLabel(option: string) {
+		return t(`${MessagesNames.KanjiReadingTagName}.${option}.full`);
+	}
+
+	function addReading() {
+		props.readings.push({
+			value: "",
+			tags: [],
+			source: "",
+		});
+	}
+</script>
+
 <template>
 	<div
 		v-if="readings.length > 0 || isEditor"
@@ -60,47 +102,5 @@
 		</div>
 	</div>
 </template>
-
-<script setup lang="ts">
-	import { Reading } from "@/api/dictionary/kanji/types";
-	import { convert_to_kana } from "@nyars-jiten/jp-transcript";
-	import { useI18n } from "vue-i18n";
-
-	import { MessagesNames } from "@/locale/messages-names";
-
-	// import EditableSpan from "./editable-span.vue";
-	import EditInput from "../editor/EditInput.vue";
-	import Button from "@/components/button.vue";
-	import Multiselect from "vue-multiselect";
-
-	type Props = { readings: Reading[]; type: string; isEditor: boolean };
-	const props = defineProps<Props>();
-
-	const { t } = useI18n();
-
-	const optionsList = [
-		"shou",
-		"chuu",
-		"kou",
-		"kanon",
-		"touon",
-		"goon",
-		"kanyoon",
-		"souon",
-		"gai",
-	];
-
-	function customLabel(option: string) {
-		return t(`${MessagesNames.KanjiReadingTagName}.${option}.full`);
-	}
-
-	function addReading() {
-		props.readings.push({
-			value: "",
-			tags: [],
-			source: "",
-		});
-	}
-</script>
 
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>

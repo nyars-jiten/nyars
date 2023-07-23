@@ -1,3 +1,8 @@
+<script setup lang="ts">
+	import BestUsers from "@/components/best-users.vue";
+	import TotalStats from "@/components/total-stats.vue";
+</script>
+
 <template>
 	<main class="container my-20 mx-auto max-w-4xl">
 		<h1 class="mb-10 text-center text-4xl font-medium">На этой неделе</h1>
@@ -33,8 +38,3 @@
 		</Suspense>
 	</main>
 </template>
-
-<script setup lang="ts">
-	import BestUsers from "@/components/best-users.vue";
-	import TotalStats from "@/components/total-stats.vue";
-</script>

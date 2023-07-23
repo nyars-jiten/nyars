@@ -1,3 +1,23 @@
+<script setup lang="ts">
+	import { type KanjiWord } from "@/api/dictionary/kanji/types";
+	import Button from "@/components/button.vue";
+	import PanelBody from "../../PanelBody.vue";
+	import EditInput from "./EditInput.vue";
+	import TextArea from "./TextArea.vue";
+	type Props = { words: KanjiWord[]; title: string };
+	const props = defineProps<Props>();
+	function addWord() {
+		props.words.push({
+			wid: "",
+			word: "",
+			reading: "",
+			meaning: "",
+			nsR: false,
+			nsM: false,
+		});
+	}
+</script>
+
 <template>
 	<PanelBody>
 		<div class="text-accent-500 rounded-md pb-5">
@@ -52,23 +72,3 @@
 		<Button @click="addWord" class="w-full font-medium">+ слово</Button>
 	</PanelBody>
 </template>
-
-<script setup lang="ts">
-	import { type KanjiWord } from "@/api/dictionary/kanji/types";
-	import Button from "@/components/button.vue";
-	import PanelBody from "../../PanelBody.vue";
-	import EditInput from "./EditInput.vue";
-	import TextArea from "./TextArea.vue";
-	type Props = { words: KanjiWord[]; title: string };
-	const props = defineProps<Props>();
-	function addWord() {
-		props.words.push({
-			wid: "",
-			word: "",
-			reading: "",
-			meaning: "",
-			nsR: false,
-			nsM: false,
-		});
-	}
-</script>

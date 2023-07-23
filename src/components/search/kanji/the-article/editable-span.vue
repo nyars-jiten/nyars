@@ -1,16 +1,3 @@
-<template>
-	<Component
-		:is="block"
-		class="px-1"
-		contenteditable="true"
-		@blur="
-			$emit('update:modelValue', ($event!.target as HTMLElement).innerText)
-		"
-	>
-		{{ modelValue }}
-	</Component>
-</template>
-
 <script setup lang="ts">
 	import "vue";
 
@@ -23,3 +10,16 @@
 		block: "span",
 	});
 </script>
+
+<template>
+	<Component
+		:is="block"
+		class="px-1"
+		contenteditable="true"
+		@blur="
+			$emit('update:modelValue', ($event!.target as HTMLElement).innerText)
+		"
+	>
+		{{ modelValue }}
+	</Component>
+</template>

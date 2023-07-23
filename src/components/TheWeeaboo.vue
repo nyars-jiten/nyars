@@ -1,3 +1,22 @@
+<script setup lang="ts">
+	import { useI18n } from "vue-i18n";
+	import { onMounted, reactive } from "vue";
+
+	import { api } from "@/api";
+	import { avatarUrl } from "@/utils/avatar-url";
+	import { MessagesNames } from "@/locale/messages-names";
+
+	import { type UserList } from "@/api/types";
+
+	const { t } = useI18n();
+
+	const users = reactive<UserList>([]);
+
+	onMounted(async () => {
+		users.push(...(await api.dictionaryJpBestUsers()));
+	});
+</script>
+
 <template>
 	<section class="flex flex-wrap">
 		<div
@@ -27,22 +46,3 @@
 		</div>
 	</section>
 </template>
-
-<script setup lang="ts">
-	import { useI18n } from "vue-i18n";
-	import { onMounted, reactive } from "vue";
-
-	import { api } from "@/api";
-	import { avatarUrl } from "@/utils/avatar-url";
-	import { MessagesNames } from "@/locale/messages-names";
-
-	import { type UserList } from "@/api/types";
-
-	const { t } = useI18n();
-
-	const users = reactive<UserList>([]);
-
-	onMounted(async () => {
-		users.push(...(await api.dictionaryJpBestUsers()));
-	});
-</script>

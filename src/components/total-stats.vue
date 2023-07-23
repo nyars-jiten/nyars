@@ -1,3 +1,20 @@
+<script setup lang="ts">
+	import { api } from "@/api";
+	import { reactive } from "vue";
+	import { useI18n } from "vue-i18n";
+
+	import { MessagesNames } from "@/locale/messages-names";
+
+	const stats = reactive(await api.statistics.total());
+
+	const { t } = useI18n();
+
+	function format(value: number) {
+		const formatter = Intl.NumberFormat("en", { notation: "compact" });
+		return formatter.format(value);
+	}
+</script>
+
 <template>
 	<section>
 		<div class="-m-4 flex flex-wrap text-center">
@@ -20,20 +37,3 @@
 		</div>
 	</section>
 </template>
-
-<script setup lang="ts">
-	import { api } from "@/api";
-	import { reactive } from "vue";
-	import { useI18n } from "vue-i18n";
-
-	import { MessagesNames } from "@/locale/messages-names";
-
-	const stats = reactive(await api.statistics.total());
-
-	const { t } = useI18n();
-
-	function format(value: number) {
-		const formatter = Intl.NumberFormat("en", { notation: "compact" });
-		return formatter.format(value);
-	}
-</script>

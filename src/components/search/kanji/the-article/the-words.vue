@@ -1,6 +1,27 @@
+<script setup lang="ts">
+	import { bbCodesProcess } from "@/utils/text/bb-code";
+	import { convert_to_kana } from "@nyars-jiten/jp-transcript";
+
+	import { type KanjiWord } from "@/api/dictionary/kanji/types";
+
+	import { RoutesNames } from "@/router/routes-names";
+	import { useSearch } from "@/stores/search";
+	import { SearchType } from "@/api/types/search/search-type";
+
+	type Props = { words: KanjiWord[]; title: string };
+
+	defineProps<Props>();
+
+	const { searchResults } = useSearch();
+
+	function exists({ wid }: KanjiWord) {
+		return wid.length >= 1;
+	}
+</script>
+
 <template>
 	<div class="flex flex-col gap-4">
-		<div class="text-accent-500 rounded-md">
+		<div class="rounded-md text-accent-500">
 			{{ title }}
 		</div>
 		<div>
@@ -38,24 +59,3 @@
 		</div>
 	</div>
 </template>
-
-<script setup lang="ts">
-	import { bbCodesProcess } from "@/utils/text/bb-code";
-	import { convert_to_kana } from "@nyars-jiten/jp-transcript";
-
-	import { type KanjiWord } from "@/api/dictionary/kanji/types";
-
-	import { RoutesNames } from "@/router/routes-names";
-	import { useSearch } from "@/stores/search";
-	import { SearchType } from "@/api/types/search/search-type";
-
-	type Props = { words: KanjiWord[]; title: string };
-
-	defineProps<Props>();
-
-	const { searchResults } = useSearch();
-
-	function exists({ wid }: KanjiWord) {
-		return wid.length >= 1;
-	}
-</script>

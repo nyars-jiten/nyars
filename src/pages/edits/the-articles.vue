@@ -1,3 +1,19 @@
+<script setup lang="ts">
+	import { api } from "@/api";
+	import { onMounted, reactive } from "vue";
+
+	import { EditList } from "@/api/edits-rest/types";
+
+	import FullArticle from "@/components/edits/full-article.vue";
+	import TheWeeaboo from "@/components/TheWeeaboo.vue";
+
+	const articles = reactive<EditList>([]);
+
+	onMounted(async () => {
+		articles.push(...(await api.edits.list({ n: 25, p: 0, statuses: [] })));
+	});
+</script>
+
 <template>
 	<section class="flex flex-col gap-10">
 		<TheWeeaboo
@@ -15,19 +31,3 @@
 		</section>
 	</section>
 </template>
-
-<script setup lang="ts">
-	import { api } from "@/api";
-	import { onMounted, reactive } from "vue";
-
-	import { EditList } from "@/api/edits-rest/types";
-
-	import FullArticle from "@/components/edits/full-article.vue";
-	import TheWeeaboo from "@/components/TheWeeaboo.vue";
-
-	const articles = reactive<EditList>([]);
-
-	onMounted(async () => {
-		articles.push(...(await api.edits.list({ n: 25, p: 0, statuses: [] })));
-	});
-</script>

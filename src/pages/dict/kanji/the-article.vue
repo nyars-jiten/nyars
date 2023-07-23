@@ -1,10 +1,3 @@
-<template>
-	<section class="flex flex-col gap-4">
-		<ArticleEditor v-if="editor" :article="article" />
-		<TheArticle v-else :article="article" :standalone="standalone" />
-	</section>
-</template>
-
 <script setup lang="ts">
 	import { api } from "@/api";
 
@@ -69,3 +62,10 @@
 		article.value = await api.dictionaryKanjiEntries({ kid: articleId });
 	});
 </script>
+
+<template>
+	<section class="flex flex-col gap-4">
+		<ArticleEditor v-if="editor" :article="article" />
+		<TheArticle v-else :article="article" :standalone="standalone" />
+	</section>
+</template>

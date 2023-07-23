@@ -1,3 +1,12 @@
+<script setup lang="ts">
+	type Emits = {
+		(event: "update:modelValue"): void;
+	};
+	type Props = { modelValue: string | number; rows: number };
+	defineEmits<Emits>();
+	defineProps<Props>();
+</script>
+
 <template>
 	<textarea
 		id="message"
@@ -7,12 +16,3 @@
 		@input="$emit('update:modelValue', (<HTMLInputElement>$event.target).value)"
 	/>
 </template>
-
-<script setup lang="ts">
-	type Emits = {
-		(event: "update:modelValue"): void;
-	};
-	type Props = { modelValue: string | number; rows: number };
-	defineEmits<Emits>();
-	defineProps<Props>();
-</script>
