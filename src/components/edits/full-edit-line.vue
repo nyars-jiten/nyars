@@ -12,9 +12,9 @@
 
 	import TextBetween from "@/components/text-between.vue";
 	import TextSplitted from "@/components/text-splitted.vue";
-	import ChangesPreview from "./ChangesPreview.vue";
+	import ChangesPreview from "./changes-preview.vue";
 	import UserProfile from "./user-profile.vue";
-	import Button from "@/components/button.vue";
+	import Button from "@/components/generic-button.vue";
 
 	import FormatFontSizeDecrease from "vue-material-design-icons/FormatFontSizeDecrease.vue";
 	import FormatFontSizeIncrease from "vue-material-design-icons/FormatFontSizeIncrease.vue";
@@ -70,6 +70,7 @@
 				>
 					<TextSplitted
 						v-for="(_, w) in article.title"
+						:key="w"
 						class="font-header text-2xl"
 					>
 						{{ w }}

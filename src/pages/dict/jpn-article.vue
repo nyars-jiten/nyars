@@ -11,12 +11,12 @@
 	import { type ImageList } from "@/api/kotoba-rest";
 	import { type EditList } from "@/api/edits-rest/types/articles";
 
-	import ShortArticle from "@/components/edits/short-article.vue";
+	import ShortEditLine from "@/components/edits/short-edit-line.vue";
 	import Article from "@/components/search/jp/Article.vue";
 	import TheKanjis from "@/components/search/jp/the-article/the-kanjis.vue";
 	import MinusIcon from "vue-material-design-icons/Minus.vue";
 	import PlusIcon from "vue-material-design-icons/Plus.vue";
-	import Button from "@/components/button.vue";
+	import Button from "@/components/generic-button.vue";
 	import { MessagesNames } from "@/locale/messages-names";
 
 	type Props = { standalone: boolean };
@@ -171,7 +171,7 @@
 			v-if="content.edits.length > 0"
 			class="border border-gray-100 bg-white p-8 shadow-md dark:border-gray-700 dark:bg-gray-800 md:rounded-md"
 		>
-			<ShortArticle
+			<ShortEditLine
 				v-for="value of content.edits"
 				:key="value.id"
 				:article="value"

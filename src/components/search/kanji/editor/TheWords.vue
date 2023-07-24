@@ -1,6 +1,6 @@
 <script setup lang="ts">
 	import { type KanjiWord } from "@/api/dictionary/kanji/types";
-	import Button from "@/components/button.vue";
+	import Button from "@/components/generic-button.vue";
 	import PanelBody from "../../PanelBody.vue";
 	import EditInput from "./EditInput.vue";
 	import TextArea from "./TextArea.vue";

@@ -7,7 +7,7 @@
 
 	// import EditableSpan from "./editable-span.vue";
 	import EditInput from "../editor/EditInput.vue";
-	import Button from "@/components/button.vue";
+	import Button from "@/components/generic-button.vue";
 	import Multiselect from "vue-multiselect";
 
 	type Props = { readings: Reading[]; type: string; isEditor: boolean };

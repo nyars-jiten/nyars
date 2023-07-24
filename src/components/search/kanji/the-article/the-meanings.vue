@@ -10,7 +10,7 @@
 
 	import TheWords from "../editor/TheWords.vue";
 	import EditInput from "../editor/EditInput.vue";
-	import Button from "@/components/button.vue";
+	import Button from "@/components/generic-button.vue";
 	import EditableSpan from "./editable-span.vue";
 
 	type Props = { meanings: Meaning[]; title: string; isEditor?: boolean };

@@ -8,7 +8,7 @@
 	import MinusIcon from "vue-material-design-icons/Minus.vue";
 	import PlusIcon from "vue-material-design-icons/Plus.vue";
 	import LinkVariantIcon from "vue-material-design-icons/LinkVariant.vue";
-	import Button from "@/components/button.vue";
+	import Button from "@/components/generic-button.vue";
 
 	type Props = {
 		article: DeepReadonly<EntryJp>;

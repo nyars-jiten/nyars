@@ -17,11 +17,12 @@
 </script>
 
 <template>
-	<section class="flex gap-4 flex-col">
+	<section class="flex flex-col gap-4">
 		<div class="grid grid-cols-[1fr_auto_1fr] gap-4 px-2">
 			<PanelBody>
 				<span
-					v-for="v of changes.source"
+					v-for="(v, ix) of changes.source"
+					:key="ix"
 					class="select-text whitespace-pre-wrap"
 					:class="{ 'text-red-500': v.isDiffered }"
 				>
@@ -35,7 +36,8 @@
 
 			<PanelBody>
 				<span
-					v-for="(v) of changes.result"
+					v-for="(v, ix) of changes.result"
+					:key="ix"
 					class="select-text whitespace-pre-wrap"
 					:class="{ 'text-green-500': v.isDiffered }"
 				>
@@ -45,7 +47,7 @@
 		</div>
 
 		<div
-			class="select-text px-4 border-l-2 border-gray-200 dark:border-gray-700 mx-2 overflow-hidden"
+			class="mx-2 select-text overflow-hidden border-l-2 border-gray-200 px-4 dark:border-gray-700"
 		>
 			{{ changes.comment }}
 		</div>

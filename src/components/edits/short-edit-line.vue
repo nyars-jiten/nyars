@@ -7,7 +7,7 @@
 	import { MessagesNames } from "@/locale/messages-names";
 
 	import TextBetween from "@/components/text-between.vue";
-	import ChangesPreview from "./ChangesPreview.vue";
+	import ChangesPreview from "./changes-preview.vue";
 	import UserProfile from "./user-profile.vue";
 
 	import type { EditEntry } from "@/api/edits-rest/types";

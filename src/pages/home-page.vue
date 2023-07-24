@@ -27,7 +27,7 @@
 
 		<ul>
 			<li v-for="info in tm(String(MessagesNames.SearchExamples))">
-				👉
+				※
 				{{ rt(info.message) }}
 
 				<span
