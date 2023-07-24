@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
     "Vue.volar",
     "vue.vscode-typescript-vue-plugin",
     "bradlc.vscode-tailwindcss",
