@@ -1,5 +1,5 @@
 /* eslint-env node */
-require("@rushstack/eslint-patch/modern-module-resolution");
+require('@rushstack/eslint-patch/modern-module-resolution')
 
 /** @type {import('eslint/lib/shared/types').ConfigData} */
 module.exports = {
@@ -7,24 +7,33 @@ module.exports = {
   env: {
     browser: true,
     node: true,
-    es2022: true,
+    es2023: true
   },
   extends: [
-    "plugin:vue/vue3-recommended",
-    "eslint:recommended",
+    'plugin:vue/vue3-recommended',
+    'eslint:recommended',
 
     '@vue/eslint-config-typescript',
     '@vue/eslint-config-prettier/skip-formatting',
 
-    "plugin:tailwindcss/recommended",
+    'plugin:tailwindcss/recommended'
+    // '@vue/prettier'
   ],
-  plugins: ["tailwindcss"],
+  plugins: ['tailwindcss'],
   parserOptions: {
-    ecmaVersion: "latest",
+    ecmaVersion: 'latest'
   },
   rules: {
-    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    'linebreak-style': ['error', 'unix'],
+    'vue/multi-word-component-names': [
+      'error',
+      {
+        ignores: ['index', 'results']
+      }
+    ],
+
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
 
     // "@typescript-eslint/no-unused-vars": [
     // 	"warn",
@@ -34,9 +43,9 @@ module.exports = {
     // ],
   },
   globals: {
-    defineProps: "readonly",
-    defineEmits: "readonly",
-    defineExpose: "readonly",
-    withDefaults: "readonly",
-  },
-};
+    defineProps: 'readonly',
+    defineEmits: 'readonly',
+    defineExpose: 'readonly',
+    withDefaults: 'readonly'
+  }
+}

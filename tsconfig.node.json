@@ -5,9 +5,10 @@
     "vitest.config.*",
     "cypress.config.*",
     "nightwatch.conf.*",
-    "playwright.config.*"
+    "playwright.config.*",
   ],
   "compilerOptions": {
+    "moduleResolution": "Node",
     "composite": true,
     "module": "ESNext",
     "types": [
