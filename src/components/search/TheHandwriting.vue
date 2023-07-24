@@ -2,10 +2,10 @@
 	import { debounce } from "lodash";
 	import { computed, onMounted, ref } from "vue";
 
-	import { Canvas, Null } from "@/core/handwriting";
+	import { Canvas, Null } from "@/utils/handwriting";
 	import { useSearch } from "@/stores/search";
 
-	import { type Handwriting } from "@/core/handwriting";
+	import { type Handwriting } from "@/utils/handwriting";
 
 	import ArrowULeftBottom from "vue-material-design-icons/ArrowULeftBottom.vue";
 	import Eraser from "vue-material-design-icons/Eraser.vue";
@@ -70,7 +70,7 @@
 			<button
 				v-for="request of proposals"
 				type="button"
-				class="basis-2/4 rounded bg-white dark:bg-gray-800 border border-dotted border-gray-300 dark:border-gray-700 px-2 hover:bg-gray-300 hover:dark:bg-gray-700"
+				class="basis-2/4 rounded border border-dotted border-gray-300 bg-white px-2 hover:bg-gray-300 dark:border-gray-700 dark:bg-gray-800 hover:dark:bg-gray-700"
 				@click="onSelect(request)"
 			>
 				{{ request }}

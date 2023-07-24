@@ -1,7 +1,6 @@
 <script setup lang="ts">
 	import { ref } from "vue";
 	import { useI18n } from "vue-i18n";
-	import { convert_to_kana as convert } from "@nyars-jiten/jp-transcript";
 
 	import { RoutesNames } from "@/router/routes-names";
 	import { StatusVariant } from "@/api/edits-rest/types/status-variant";
@@ -13,9 +12,9 @@
 
 	import TextBetween from "@/components/text-between.vue";
 	import TextSplitted from "@/components/text-splitted.vue";
-	import ChangesPreview from "./ChangesPreview.vue";
+	import ChangesPreview from "./changes-preview.vue";
 	import UserProfile from "./user-profile.vue";
-	import Button from "../Button.vue";
+	import Button from "@/components/generic-button.vue";
 
 	import FormatFontSizeDecrease from "vue-material-design-icons/FormatFontSizeDecrease.vue";
 	import FormatFontSizeIncrease from "vue-material-design-icons/FormatFontSizeIncrease.vue";
@@ -71,9 +70,10 @@
 				>
 					<TextSplitted
 						v-for="(_, w) in article.title"
+						:key="w"
 						class="font-header text-2xl"
 					>
-						{{ convert(w) }}
+						{{ w }}
 					</TextSplitted>
 				</Component>
 

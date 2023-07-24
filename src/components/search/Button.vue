@@ -1,3 +1,9 @@
+<script setup lang="ts">
+	type Props = { disabled: boolean };
+
+	defineProps<Props>();
+</script>
+
 <template>
 	<button
 		:disabled="disabled"
@@ -11,9 +17,3 @@
 		<slot />
 	</button>
 </template>
-
-<script setup lang="ts">
-	type Props = { disabled: boolean };
-
-	defineProps<Props>();
-</script>

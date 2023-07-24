@@ -11,7 +11,7 @@
 
 	defineProps<Props>();
 
-	function unrevived(article: DeepReadonly<EntryJp>) {
+	function getStatusStyles(article: DeepReadonly<EntryJp>) {
 		if (article && article.isReviewed) return [];
 
 		return ["border-l-2", "border-l-orange-500", "dark:border-l-orange-500"];
@@ -20,14 +20,14 @@
 
 <template>
 	<article
-		class="rounded p-8 select-text border border-gray-100 dark:border-gray-700 bg-white shadow-md dark:bg-gray-800"
-		:class="unrevived(article)"
+		class="select-text rounded border border-gray-100 bg-white p-8 shadow-md dark:border-gray-700 dark:bg-gray-800"
+		:class="getStatusStyles(article)"
 	>
 		<ViewMode #default="{ state, toggle }">
 			<Words
 				:article="article"
 				:standalone="standalone"
-				class="mb-2 border-b border-gray-200 dark:border-gray-700 pb-2"
+				class="mb-2 border-b border-gray-200 pb-2 dark:border-gray-700"
 			/>
 
 			<Description
@@ -41,7 +41,7 @@
 				:article="article"
 				:toggle="toggle"
 				:details="state"
-				class="px-8 mt-2 border-t border-gray-200 dark:border-gray-700 py-2"
+				class="mt-2 border-t border-gray-200 px-8 py-2 dark:border-gray-700"
 			/>
 		</ViewMode>
 	</article>

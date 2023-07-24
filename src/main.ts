@@ -5,7 +5,7 @@ import { router } from "./router";
 import { locale } from "./locale";
 import { pinia } from "./stores";
 
-import App from "./TheApp.vue";
+import App from "./app.vue";
 
 const app = createApp(App);
 app.use(locale);

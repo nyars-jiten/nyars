@@ -1,19 +1,14 @@
-<template>
-	<section class="flex flex-col gap-4">
-		<TheArticle :article="article" :standalone="standalone" />
-	</section>
-</template>
-
 <script setup lang="ts">
 	import { api } from "@/api";
 
 	import { useRoute } from "vue-router";
 
 	import TheArticle from "@/components/search/kanji/the-article.vue";
+	import ArticleEditor from "@/components/search/kanji/ArticleEditor.vue";
 	import { onMounted, ref } from "vue";
 	import { EntryKanji } from "@/api/dictionary/kanji/types";
 
-	type Props = { standalone: boolean };
+	type Props = { standalone: boolean; editor: boolean };
 
 	defineProps<Props>();
 
@@ -67,3 +62,10 @@
 		article.value = await api.dictionaryKanjiEntries({ kid: articleId });
 	});
 </script>
+
+<template>
+	<section class="flex flex-col gap-4">
+		<ArticleEditor v-if="editor" :article="article" />
+		<TheArticle v-else :article="article" :standalone="standalone" />
+	</section>
+</template>

@@ -1,3 +1,18 @@
+<script setup lang="ts">
+	import {
+		toggleTheme,
+		updateTheme,
+		userTheme,
+	} from "@/utils/theme/theme-control";
+
+	import { onMounted } from "vue";
+
+	import WeatherNight from "vue-material-design-icons/WeatherNight.vue";
+	import WhiteBalanceSunny from "vue-material-design-icons/WhiteBalanceSunny.vue";
+
+	onMounted(() => updateTheme());
+</script>
+
 <template>
 	<button
 		type="button"
@@ -12,18 +27,3 @@
 		</span>
 	</button>
 </template>
-
-<script setup lang="ts">
-	import {
-		toggleTheme,
-		updateTheme,
-		userTheme,
-	} from "@/core/theme/theme-control";
-
-	import { onMounted } from "vue";
-
-	import WeatherNight from "vue-material-design-icons/WeatherNight.vue";
-	import WhiteBalanceSunny from "vue-material-design-icons/WhiteBalanceSunny.vue";
-
-	onMounted(() => updateTheme());
-</script>
