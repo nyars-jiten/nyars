@@ -1,1 +1,1 @@
-export type GoogleProposals = ["SUCCESS", [[string, string[]]]];
+export type GoogleProposals = ['SUCCESS', [[string, string[]]]]

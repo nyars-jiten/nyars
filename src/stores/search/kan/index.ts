@@ -1,57 +1,57 @@
-import { api } from "@/api";
-import { defineStore } from "pinia";
-import { useRouter } from "vue-router";
-import { reactive } from "vue";
+import { api } from '@/api'
+import { defineStore } from 'pinia'
+import { useRouter } from 'vue-router'
+import { reactive } from 'vue'
 
-import { RoutesNames } from "@/router/routes-names";
+import { RoutesNames } from '@/router/routes-names'
 
-import { type DeepReadonly } from "vue";
-import { type SearchResultKanji } from "@/api/search-rest/types/search-result-kanji";
-import { type ReadOnlyRequest } from "../types";
+import { type DeepReadonly } from 'vue'
+import { type SearchResultKanji } from '@/api/search-rest/types/search-result-kanji'
+import { type ReadOnlyRequest } from '../types'
 
 function emptySearchKanjiResults(): SearchResultKanji & { updatedAt: Date } {
-	return {
-		result: [],
-		updatedAt: new Date(),
-	};
+  return {
+    result: [],
+    updatedAt: new Date()
+  }
 }
 
-export const useKanSearch = defineStore("kanSearch", () => {
-	const { push } = useRouter();
+export const useKanSearch = defineStore('kanSearch', () => {
+  const { push } = useRouter()
 
-	const request = reactive({
-		value: "",
-	});
+  const request = reactive({
+    value: ''
+  })
 
-	const results = reactive(emptySearchKanjiResults());
+  const results = reactive(emptySearchKanjiResults())
 
-	function reset() {
-		results.result = [];
-	}
+  function reset() {
+    results.result = []
+  }
 
-	async function search({ request: q }: ReadOnlyRequest) {
-		// if (request.value == q) return false;
+  async function search({ request: q }: ReadOnlyRequest) {
+    // if (request.value == q) return false;
 
-		reset();
+    reset()
 
-		await push({
-			name: RoutesNames.SearchKanjiResults,
-			query: { request: (request.value = q) },
-		});
+    await push({
+      name: RoutesNames.SearchKanjiResults,
+      query: { request: (request.value = q) }
+    })
 
-		const response = await api.search.searchKanji({
-			request: (request.value = q),
-			page: 0,
-		});
+    const response = await api.search.searchKanji({
+      request: (request.value = q),
+      page: 0
+    })
 
-		results.result = response.result;
+    results.result = response.result
 
-		return true;
-	}
+    return true
+  }
 
-	return {
-		request: request as DeepReadonly<typeof request>,
-		results: results as Readonly<ReturnType<typeof emptySearchKanjiResults>>,
-		search,
-	};
-});
+  return {
+    request: request as DeepReadonly<typeof request>,
+    results: results as Readonly<ReturnType<typeof emptySearchKanjiResults>>,
+    search
+  }
+})

@@ -1,4 +1,4 @@
 export type Reading = {
-	value: string;
-	tags: string[];
-};
+  value: string
+  tags: string[]
+}

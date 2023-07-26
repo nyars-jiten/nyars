@@ -1,7 +1,7 @@
 export const enum StatusVariant {
-	New = 1,
-	Declined,
-	Accepted,
-	AutoAccepted,
-	Reverted,
+  New = 1,
+  Declined,
+  Accepted,
+  AutoAccepted,
+  Reverted
 }

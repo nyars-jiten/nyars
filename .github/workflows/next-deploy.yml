@@ -2,8 +2,8 @@ name: Deploy next
 
 on:
   push:
-    branches: ["next"]
-    
+    branches: ['next']
+
   workflow_dispatch:
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: latest
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - name: build
         run: |

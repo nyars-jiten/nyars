@@ -1,5 +1,5 @@
 export const enum KanjiIndexType {
-	Dictionary,
-	Classification,
-	Codepoint,
+  Dictionary,
+  Classification,
+  Codepoint
 }

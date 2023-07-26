@@ -1,1 +1,1 @@
-export type TagVariant = "Fld" | "Dial" | "Misc";
+export type TagVariant = 'Fld' | 'Dial' | 'Misc'

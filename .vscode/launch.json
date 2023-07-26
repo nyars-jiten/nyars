@@ -1,28 +1,28 @@
 {
-	// Use IntelliSense to learn about possible attributes.
-	// Hover to view descriptions of existing attributes.
-	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"request": "launch",
-			"name": "Dev Edge",
-			"type": "msedge",
-			"url": "http://localhost:8080",
-			"webRoot": "${workspaceFolder}/src",
-			"pauseForSourceMap": false
-		},
-		{
-			"request": "launch",
-			"name": "Dev server",
-			"type": "node-terminal",
-			"command": "pnpm dev"
-		}
-	],
-	"compounds": [
-		{
-			"name": "Dev",
-			"configurations": ["Dev server", "Dev Edge"]
-		}
-	]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "request": "launch",
+      "name": "Dev Edge",
+      "type": "msedge",
+      "url": "http://localhost:8080",
+      "webRoot": "${workspaceFolder}/src",
+      "pauseForSourceMap": false
+    },
+    {
+      "request": "launch",
+      "name": "Dev server",
+      "type": "node-terminal",
+      "command": "pnpm dev"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Dev",
+      "configurations": ["Dev server", "Dev Edge"]
+    }
+  ]
 }

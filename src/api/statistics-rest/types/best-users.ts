@@ -1,4 +1,4 @@
-import type { Pagable } from "@/api/types/pagable";
-import type { BestUser } from "./best-user";
+import type { Pagable } from '@/api/types/pagable'
+import type { BestUser } from './best-user'
 
-export type BestUsers = Pagable<BestUser>;
+export type BestUsers = Pagable<BestUser>

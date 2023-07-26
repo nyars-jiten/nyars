@@ -7,84 +7,78 @@
  * @returns HTML text with processed BB-codes
  */
 export function bbCodesProcess(value: string) {
-	const result = value
-		.replace(/\[i\](.*?)\[\/i\]/gim, "<em>$1</em>")
-		.replace(/\[p\](.*?)\[\/p\]/gim, "<em>$1</em>")
-		.replace(/\\([\n,;])/gim, "$1")
-		.replace(/⌈/gim, "")
-		.replace(
-			/\[ref=?\](.*?)\[\/ref\]/gim,
-			"<a class=\"underline underline-offset-4 decoration-dotted hover:text-accent-500\" href='/s/jp?request=$1'>$1</a>",
-		)
-		.replace(
-			/\[ref=([a-zA-Z\d]{4,7})\](.*?)\[\/ref\]/gim,
-			"<a class=\"underline underline-offset-4 decoration-dotted hover:text-accent-500\" href='/jp/$1'>$2</a>",
-		)
-		.replace(/\[sub\](.*?)\[\/sub\]/gim, "<sub>$1</sub>")
-		.replace(/\[sup\](.*?)\[\/sup\]/gim, "<sup>$1</sup>")
-		.replace(/{~(.*?)}/gim, "<em><strong>～$1</strong></em>") // {～する}
-		.replace(/{\.\.\.(.*?)~(.*?)}/gim, "<em><strong>…$1～$2</strong></em>") // {…to～shite}
-		.replace(/(.\u0301)/gim, "<span>$1</span>")
-		.replace(/\['\](.*?)\[\/'\]/gim, "<span>$1&#x301;</span>");
+  const result = value
+    .replace(/\[i\](.*?)\[\/i\]/gim, '<em>$1</em>')
+    .replace(/\[p\](.*?)\[\/p\]/gim, '<em>$1</em>')
+    .replace(/\\([\n,;])/gim, '$1')
+    .replace(/⌈/gim, '')
+    .replace(
+      /\[ref=?\](.*?)\[\/ref\]/gim,
+      '<a class="underline underline-offset-4 decoration-dotted hover:text-accent-500" href=\'/s/jp?request=$1\'>$1</a>'
+    )
+    .replace(
+      /\[ref=([a-zA-Z\d]{4,7})\](.*?)\[\/ref\]/gim,
+      '<a class="underline underline-offset-4 decoration-dotted hover:text-accent-500" href=\'/jp/$1\'>$2</a>'
+    )
+    .replace(/\[sub\](.*?)\[\/sub\]/gim, '<sub>$1</sub>')
+    .replace(/\[sup\](.*?)\[\/sup\]/gim, '<sup>$1</sup>')
+    .replace(/{~(.*?)}/gim, '<em><strong>～$1</strong></em>') // {～する}
+    .replace(/{\.\.\.(.*?)~(.*?)}/gim, '<em><strong>…$1～$2</strong></em>') // {…to～shite}
+    .replace(/(.\u0301)/gim, '<span>$1</span>')
+    .replace(/\['\](.*?)\[\/'\]/gim, '<span>$1&#x301;</span>')
 
-	return cleanHtml(result);
+  return cleanHtml(result)
 }
 
 // BB-codes used in a entry examples, such as furigana
 export function examplesBbCodesProcess(rawText: string) {
-	let htmlText = rawText.replace(
-		/([一-龯]+)《(.+?)》/gim,
-		"<ruby>$1<rt>$2</rt></ruby>",
-	);
+  let htmlText = rawText.replace(/([一-龯]+)《(.+?)》/gim, '<ruby>$1<rt>$2</rt></ruby>')
 
-	htmlText = htmlText.replace(
-		/\[([^|]*)\|([^\]]*)\]/gim,
-		furiganaReplacerBracketsToRuby,
-	);
+  htmlText = htmlText.replace(/\[([^|]*)\|([^\]]*)\]/gim, furiganaReplacerBracketsToRuby)
 
-	return cleanHtml(htmlText);
+  return cleanHtml(htmlText)
 }
 
 // replaces japanese 《reading》 brackets with a furigana ruby-tags
 function furiganaReplacerBracketsToRuby(_: string, p1: string, p2: string) {
-	let ruby = "";
-	const readings = p2.split("|");
-	if (readings.length === 1) {
-		ruby = `<ruby>${p1}<rp>（</rp><rt>${readings[0]}</rt><rp>）</rp></ruby>`;
-	} else {
-		for (let i = 0; i < p1.length; i++) {
-			const currentKanji = p1.charAt(i);
-			const currentReading = i < readings.length ? readings[i] : "";
-			ruby += `<ruby>${currentKanji}<rp>（</rp><rt>${currentReading}</rt><rp>）</rp></ruby>`;
-		}
-	}
-	return ruby;
+  let ruby = ''
+  const readings = p2.split('|')
+  if (readings.length === 1) {
+    ruby = `<ruby>${p1}<rp>（</rp><rt>${readings[0]}</rt><rp>）</rp></ruby>`
+  } else {
+    for (let i = 0; i < p1.length; i++) {
+      const currentKanji = p1.charAt(i)
+      const currentReading = i < readings.length ? readings[i] : ''
+      ruby += `<ruby>${currentKanji}<rp>（</rp><rt>${currentReading}</rt><rp>）</rp></ruby>`
+    }
+  }
+  return ruby
 }
 
 // html sanitazer for a user input
 function cleanHtml(html: string) {
-	return html;
-	// return sanitizeHtml(html.trim(), {
-	// 	allowedTags: [
-	// 		"em",
-	// 		"a",
-	// 		"sub",
-	// 		"sup",
-	// 		"strong",
-	// 		"span",
-	// 		"rt",
-	// 		"ruby",
-	// 		"rp",
-	// 	],
-	// 	allowedAttributes: {
-	// 		a: ["href"],
-	// 		span: ["style"],
-	// 		rt: ["style"],
-	// 	},
-	// 	allowedStyles: {
-	// 		"*": {
-	// 			"font-family": [/^[\s\S]*$/],
-	// 		},
-	// 	},
-	// });
+  return html
+  // return sanitizeHtml(html.trim(), {
+  // 	allowedTags: [
+  // 		"em",
+  // 		"a",
+  // 		"sub",
+  // 		"sup",
+  // 		"strong",
+  // 		"span",
+  // 		"rt",
+  // 		"ruby",
+  // 		"rp",
+  // 	],
+  // 	allowedAttributes: {
+  // 		a: ["href"],
+  // 		span: ["style"],
+  // 		rt: ["style"],
+  // 	},
+  // 	allowedStyles: {
+  // 		"*": {
+  // 			"font-family": [/^[\s\S]*$/],
+  // 		},
+  // 	},
+  // });
 }

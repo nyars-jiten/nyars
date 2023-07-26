@@ -1,49 +1,49 @@
 <script setup lang="ts">
-	import { useRoute } from "vue-router";
-	import { onBeforeMount, watch } from "vue";
+import { useRoute } from 'vue-router'
+import { onBeforeMount, watch } from 'vue'
 
-	import { useSearch } from "@/stores/search";
+import { useSearch } from '@/stores/search'
 
-	import TheInput from "@/components/search/TheInput.vue";
-	import { storeToRefs } from "pinia";
-	import { SearchType } from "@/api/types/search/search-type";
+import TheInput from '@/components/search/TheInput.vue'
+import { storeToRefs } from 'pinia'
+import { SearchType } from '@/api/types/search/search-type'
 
-	onBeforeMount(() => {
-		const { query } = useRoute();
-		const { mode } = storeToRefs(useSearch());
+onBeforeMount(() => {
+  const { query } = useRoute()
+  const { mode } = storeToRefs(useSearch())
 
-		const { request } = query;
-		if (typeof request !== "string") {
-			mode.value = SearchType.Jpn;
-			return;
-		}
+  const { request } = query
+  if (typeof request !== 'string') {
+    mode.value = SearchType.Jpn
+    return
+  }
 
-		const { searchResults } = useSearch();
+  const { searchResults } = useSearch()
 
-		const cancel = watch(mode, async () => {
-			cancel();
+  const cancel = watch(mode, async () => {
+    cancel()
 
-			await searchResults({ request });
-		});
-	});
+    await searchResults({ request })
+  })
+})
 </script>
 
 <template>
-	<section class="flex flex-col gap-10">
-		<TheInput />
+  <section class="flex flex-col gap-10">
+    <TheInput />
 
-		<RouterView v-slot="{ Component }">
-			<Transition
-				enter-active-class="duration-300 ease-out"
-				enter-from-class="transform opacity-0 translate-y-5"
-				enter-to-class="opacity-100 translate-y-0"
-				leave-active-class="duration-150 ease-in"
-				leave-from-class="opacity-100 translate-y-0"
-				leave-to-class="transform opacity-0 translate-y-5"
-				mode="out-in"
-			>
-				<Component :is="Component" />
-			</Transition>
-		</RouterView>
-	</section>
+    <RouterView v-slot="{ Component }">
+      <Transition
+        enter-active-class="duration-300 ease-out"
+        enter-from-class="transform opacity-0 translate-y-5"
+        enter-to-class="opacity-100 translate-y-0"
+        leave-active-class="duration-150 ease-in"
+        leave-from-class="opacity-100 translate-y-0"
+        leave-to-class="transform opacity-0 translate-y-5"
+        mode="out-in"
+      >
+        <Component :is="Component" />
+      </Transition>
+    </RouterView>
+  </section>
 </template>

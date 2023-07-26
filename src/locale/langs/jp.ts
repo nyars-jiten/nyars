@@ -1,1 +1,1 @@
-export const jp = {};
+export const jp = {}

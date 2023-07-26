@@ -1,3 +1,3 @@
-import type { Tag } from "./tag";
+import type { Tag } from './tag'
 
-export type Tags = Tag[];
+export type Tags = Tag[]

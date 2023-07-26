@@ -6,10 +6,10 @@
 
 ## Development
 
-What       | How
----------- | --------------------
-debug      | Press `F5` in VSCode
-dev server | cmd: `pnpm dev`
-build      | cmd: `pnpm build`
+| What       | How                  |
+| ---------- | -------------------- |
+| debug      | Press `F5` in VSCode |
+| dev server | cmd: `pnpm dev`      |
+| build      | cmd: `pnpm build`    |
 
 [Icons from](https://icones.js.org/collection/ic)

@@ -1,3 +1,3 @@
-export * from "./canvas";
-export * from "./handwriting";
-export * from "./null";
+export * from './canvas'
+export * from './handwriting'
+export * from './null'

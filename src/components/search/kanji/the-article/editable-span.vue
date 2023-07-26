@@ -1,25 +1,23 @@
 <script setup lang="ts">
-	import "vue";
+import 'vue'
 
-	type Props = {
-		block?: "div" | "span";
-		modelValue: any;
-	};
+type Props = {
+  block?: 'div' | 'span'
+  modelValue: any
+}
 
-	withDefaults(defineProps<Props>(), {
-		block: "span",
-	});
+withDefaults(defineProps<Props>(), {
+  block: 'span'
+})
 </script>
 
 <template>
-	<Component
-		:is="block"
-		class="px-1"
-		contenteditable="true"
-		@blur="
-			$emit('update:modelValue', ($event!.target as HTMLElement).innerText)
-		"
-	>
-		{{ modelValue }}
-	</Component>
+  <Component
+    :is="block"
+    class="px-1"
+    contenteditable="true"
+    @blur="$emit('update:modelValue', ($event!.target as HTMLElement).innerText)"
+  >
+    {{ modelValue }}
+  </Component>
 </template>

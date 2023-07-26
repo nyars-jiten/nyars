@@ -1,13 +1,13 @@
 <script setup lang="ts">
-	import { ref } from "vue";
+import { ref } from 'vue'
 
-	const state = ref(false);
+const state = ref(false)
 
-	function toggle() {
-		state.value = !state.value;
-	}
+function toggle() {
+  state.value = !state.value
+}
 </script>
 
 <template>
-	<slot :state="state" :toggle="toggle" />
+  <slot :state="state" :toggle="toggle" />
 </template>

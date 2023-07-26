@@ -1,7 +1,7 @@
 // import { router } from "@/router";
-import { createPinia } from "pinia";
+import { createPinia } from 'pinia'
 
-export const pinia = createPinia();
+export const pinia = createPinia()
 
 // pinia.use(({ store }) => {
 // 	store.router = router;

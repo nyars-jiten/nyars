@@ -1,7 +1,7 @@
 export const enum ReferenceVariant {
-	See,
-	SeeAlso,
-	Ant,
-	Cf,
-	Abbr,
+  See,
+  SeeAlso,
+  Ant,
+  Cf,
+  Abbr
 }

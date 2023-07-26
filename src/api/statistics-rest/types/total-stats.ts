@@ -1,4 +1,4 @@
 export type TotalStats = {
-	added: number;
-	verified: number;
-};
+  added: number
+  verified: number
+}

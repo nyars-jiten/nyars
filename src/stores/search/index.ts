@@ -1,49 +1,49 @@
-import { ref } from "vue";
-import { defineStore } from "pinia";
+import { ref } from 'vue'
+import { defineStore } from 'pinia'
 
-import { SearchType } from "@/api/types/search/search-type";
-import { useJapSearch } from "./jpn";
+import { SearchType } from '@/api/types/search/search-type'
+import { useJapSearch } from './jpn'
 
-import { useKanSearch } from "./kan";
-import { ReadOnlyRequest } from "./types";
+import { useKanSearch } from './kan'
+import { ReadOnlyRequest } from './types'
 
-export const useSearch = defineStore("search", () => {
-	const { searchSuggestions: japSs } = useJapSearch();
-	const { searchResults: searchJap } = useJapSearch();
+export const useSearch = defineStore('search', () => {
+  const { searchSuggestions: japSs } = useJapSearch()
+  const { searchResults: searchJap } = useJapSearch()
 
-	const { search: searchKan } = useKanSearch();
+  const { search: searchKan } = useKanSearch()
 
-	const mode = ref(SearchType.None);
-	const request = ref("");
+  const mode = ref(SearchType.None)
+  const request = ref('')
 
-	function updateRequest(params?: ReadOnlyRequest) {
-		if (params?.request) {
-			request.value = params.request;
-		}
-	}
+  function updateRequest(params?: ReadOnlyRequest) {
+    if (params?.request) {
+      request.value = params.request
+    }
+  }
 
-	function updateMode(params?: ReadOnlyRequest) {
-		if (params?.mode) {
-			mode.value = params.mode;
-		}
-	}
+  function updateMode(params?: ReadOnlyRequest) {
+    if (params?.mode) {
+      mode.value = params.mode
+    }
+  }
 
-	async function searchResults(params?: ReadOnlyRequest) {
-		updateRequest(params);
-		updateMode(params);
+  async function searchResults(params?: ReadOnlyRequest) {
+    updateRequest(params)
+    updateMode(params)
 
-		if (mode.value == SearchType.Kanji) {
-			return await searchKan({ request: request.value });
-		}
+    if (mode.value == SearchType.Kanji) {
+      return await searchKan({ request: request.value })
+    }
 
-		return await searchJap({ request: request.value });
-	}
+    return await searchJap({ request: request.value })
+  }
 
-	async function searchSuggestions(params?: ReadOnlyRequest) {
-		updateRequest(params);
+  async function searchSuggestions(params?: ReadOnlyRequest) {
+    updateRequest(params)
 
-		await japSs({ request: request.value });
-	}
+    await japSs({ request: request.value })
+  }
 
-	return { mode, request, searchSuggestions, searchResults };
-});
+  return { mode, request, searchSuggestions, searchResults }
+})

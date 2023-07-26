@@ -1,7 +1,7 @@
-import type { Tag } from "./tag";
+import type { Tag } from './tag'
 
 export type Reading = {
-	value: string;
-	tag?: Tag;
-	pitch: string;
-};
+  value: string
+  tag?: Tag
+  pitch: string
+}

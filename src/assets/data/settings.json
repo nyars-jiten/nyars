@@ -1,25 +1,25 @@
 [
-	{
-		"category": "main",
-		"items": [
-			{
-				"title": "theme",
-				"description": "",
-				"type": "bool",
-				"default": false
-			}
-		]
-	},
-	{
-		"category": "dictionary",
-		"items": [
-			{
-				"title": "header-font",
-				"description": "",
-				"type": "list",
-				"values": ["Yuji Syuku", "Kosugi"],
-				"default": "Kosugi"
-			}
-		]
-	}
+  {
+    "category": "main",
+    "items": [
+      {
+        "title": "theme",
+        "description": "",
+        "type": "bool",
+        "default": false
+      }
+    ]
+  },
+  {
+    "category": "dictionary",
+    "items": [
+      {
+        "title": "header-font",
+        "description": "",
+        "type": "list",
+        "values": ["Yuji Syuku", "Kosugi"],
+        "default": "Kosugi"
+      }
+    ]
+  }
 ]

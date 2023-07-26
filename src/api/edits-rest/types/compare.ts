@@ -1,7 +1,7 @@
-import type { CompareEntry } from "./compare-entry";
+import type { CompareEntry } from './compare-entry'
 
 export type Compare = {
-	source: CompareEntry[];
-	result: CompareEntry[];
-	comment: string;
-};
+  source: CompareEntry[]
+  result: CompareEntry[]
+  comment: string
+}

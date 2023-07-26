@@ -1,4 +1,4 @@
 export type CompareEntry = {
-	value: string;
-	isDiffered: boolean;
-};
+  value: string
+  isDiffered: boolean
+}

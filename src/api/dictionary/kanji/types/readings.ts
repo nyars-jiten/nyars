@@ -1,8 +1,8 @@
-import type { Reading } from "./reading";
+import type { Reading } from './reading'
 
 export type Readings = {
-	onyomi: Reading[];
-	kunyomi: Reading[];
-	nanori: Reading[];
-	other: Reading[];
-};
+  onyomi: Reading[]
+  kunyomi: Reading[]
+  nanori: Reading[]
+  other: Reading[]
+}

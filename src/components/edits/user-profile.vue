@@ -1,19 +1,19 @@
 <script setup lang="ts">
-	import { avatarUrl } from "@/utils/avatar-url";
+import { avatarUrl } from '@/utils/avatar-url'
 
-	import type { UserEntry } from "@/api/edits-rest/types";
+import type { UserEntry } from '@/api/edits-rest/types'
 
-	type Props = { user: UserEntry };
+type Props = { user: UserEntry }
 
-	defineProps<Props>();
+defineProps<Props>()
 </script>
 
 <template>
-	<span class="flex items-center gap-2 leading-none">
-		<img class="h-6 rounded-full shadow" :src="avatarUrl(user.avatar).href" />
+  <span class="flex items-center gap-2 leading-none">
+    <img class="h-6 rounded-full shadow" :src="avatarUrl(user.avatar).href" />
 
-		<span class="whitespace-nowrap">
-			{{ user.username }}
-		</span>
-	</span>
+    <span class="whitespace-nowrap">
+      {{ user.username }}
+    </span>
+  </span>
 </template>

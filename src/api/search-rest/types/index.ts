@@ -1,2 +1,2 @@
-export * from "./search-result-kanji";
-export * from "./search-result-word";
+export * from './search-result-kanji'
+export * from './search-result-word'

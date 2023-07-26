@@ -1,7 +1,7 @@
-import { KanjiImageStyle } from "./kanji-image-style";
+import { KanjiImageStyle } from './kanji-image-style'
 
 export type KanjiImage = {
-	style: KanjiImageStyle;
-	data: string;
-	viewBox: string;
-};
+  style: KanjiImageStyle
+  data: string
+  viewBox: string
+}

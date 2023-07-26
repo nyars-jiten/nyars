@@ -1,5 +1,5 @@
 export enum SearchType {
-	None = "",
-	Jpn = "jp",
-	Kanji = "kanji",
+  None = '',
+  Jpn = 'jp',
+  Kanji = 'kanji'
 }
