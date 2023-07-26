@@ -1,10 +1,9 @@
 {
-	"tabWidth": 2,
-	"useTabs": true,
-	"endOfLine": "lf",
-	"semi": true,
-	"arrowParens": "avoid",
-	"htmlWhitespaceSensitivity": "css",
-	"vueIndentScriptAndStyle": true,
-	"trailingComma": "all"
+  "$schema": "https://json.schemastore.org/prettierrc",
+  "semi": false,
+  "tabWidth": 2,
+  "singleQuote": true,
+  "printWidth": 100,
+  "trailingComma": "none",
+  "endOfLine": "lf"
 }

@@ -1,10 +1,20 @@
 {
+  "extends": "@tsconfig/node20/tsconfig.json",
+  "include": [
+    "vite.config.*",
+    "vitest.config.*",
+    "cypress.config.*",
+    "nightwatch.conf.*",
+    "playwright.config.*",
+    "postcss.config.*",
+    ".eslintrc.*"
+  ],
   "compilerOptions": {
+    "moduleResolution": "Node",
     "composite": true,
     "module": "ESNext",
-    "moduleResolution": "Node",
-    "forceConsistentCasingInFileNames": true,
-    "strict": true
-  },
-  "include": ["vite.config.ts"]
+    "types": [
+      "node"
+    ]
+  }
 }
