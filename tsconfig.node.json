@@ -6,6 +6,8 @@
     "cypress.config.*",
     "nightwatch.conf.*",
     "playwright.config.*",
+    "postcss.config.*",
+    ".eslintrc.*"
   ],
   "compilerOptions": {
     "moduleResolution": "Node",

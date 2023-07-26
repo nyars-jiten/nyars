@@ -9,7 +9,11 @@ import auto from 'unplugin-auto-import/vite'
 import icons from 'unplugin-icons/vite'
 import resolver from 'unplugin-icons/resolver'
 
-import { VueUseComponentsResolver, HeadlessUiResolver } from 'unplugin-vue-components/resolvers'
+import {
+  VueUseComponentsResolver,
+  HeadlessUiResolver,
+  VueUseDirectiveResolver
+} from 'unplugin-vue-components/resolvers'
 
 import { defineConfig } from 'vite'
 import { fileURLToPath } from 'node:url'
@@ -32,16 +36,29 @@ export default defineConfig({
       routesFolder: 'src/pages',
       dts: './src/typings/auto-router.d.ts'
     }),
-    vue(),
+    vue({
+      script: {
+        defineModel: true,
+        propsDestructure: true
+      }
+    }),
     wasm(),
     icons({ autoInstall: true }),
     components({
       dts: './src/typings/auto-components.d.ts',
-      resolvers: [VueUseComponentsResolver(), HeadlessUiResolver(), resolver({ prefix: '' })]
+      resolvers: [
+        VueUseComponentsResolver(),
+        HeadlessUiResolver(),
+        VueUseDirectiveResolver(),
+        resolver({ prefix: '' })
+      ]
     }),
     auto({
       imports: [
         'vue',
+        {
+          vue: ['defineModel']
+        },
         VueRouterAutoImports,
         {
           'vue-router/auto': ['useLink']

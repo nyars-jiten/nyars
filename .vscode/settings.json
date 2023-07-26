@@ -1,35 +1,16 @@
 {
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
+    "source.fixAll.eslint": true
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "files.insertFinalNewline": true,
-  "[vue]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   // "explorer.excludeGitIgnore": true,
   "eslint.format.enable": true,
   "editor.detectIndentation": false,
   "files.refactoring.autoSave": false,
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue"
-  ],
-  "typescript.preferences.autoImportFileExcludePatterns": [
-    "vue-router"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue"],
+  "typescript.preferences.autoImportFileExcludePatterns": ["vue-router"],
   "files.eol": "\n"
 }
