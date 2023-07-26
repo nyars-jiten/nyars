@@ -1,6 +1,6 @@
 # File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
-# Created by https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,node,vuejs
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode,node,vuejs
+# Created by https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,node,vue,vuejs
+# Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode,node,vue,vuejs
 
 ### Node ###
 # Logs
@@ -161,11 +161,16 @@ dist
 .history
 .ionide
 
-# Support for Project snippet scope
-.vscode/*.code-snippets
+### Vue ###
+# gitignore template for Vue.js projects
+#
+# Recommended template: Node.gitignore
 
-# Ignore code-workspaces
-*.code-workspace
+# TODO: where does this rule come from?
+docs/_book
+
+# TODO: where does this rule come from?
+test/
 
 ### Vuejs ###
 # Recommended template: Node.gitignore
@@ -200,7 +205,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,node,vuejs
+# End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,node,vue,vuejs
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
 
