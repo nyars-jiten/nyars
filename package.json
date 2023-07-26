@@ -10,8 +10,9 @@
     "preview": "vite preview --port 8080",
     "lint": "eslint --ignore-path .gitignore .",
     "lint:fix": "pnpm lint --fix",
+    "pretty": "pnpm prettier --ignore-path .gitignore .",
+    "pretty:fix": "pnpm pretty --write",
     "lint-report": "pnpm lint --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif",
-    "pretty": "pnpm prettier --ignore-path .gitignore --write ."
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.14",
