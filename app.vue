@@ -4,9 +4,7 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'НЯРС — Новый японско-русский словарь',
-      charset: 'utf-8',
-      viewport: 'width=device-width, initial-scale=1'
+      content: 'НЯРС — Новый японско-русский словарь'
     }
   ],
   link: [

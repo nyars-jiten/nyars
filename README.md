@@ -6,10 +6,46 @@
 
 ## Development
 
-What       | How
----------- | --------------------
-debug      | Press `F5` in VSCode
-dev server | cmd: `pnpm dev`
-build      | cmd: `pnpm build`
-
 [Icons from](https://icones.js.org/collection/ic)
+
+## Nuxt                              
+
+##### DevTools (in the browser):
+
+press `Shift + Alt + D` in the browser
+
+##### Installation:
+
+```bash
+$ pnpm i
+```
+##### Dev server:
+
+```bash
+$ pnpm dev
+```
+##### Upgrade:
+
+```properties
+$ npx nuxi upgrade
+```
+**NB!** Don't use this for upgrading: <span style="color:red">pnpm up -D nuxt</span>
+
+##### Check ts errors:
+
+```properties
+$ npx nuxi typecheck
+```
+
+<details open>
+  <summary>Possible problems</summary>
+  
+  #### Cannot find name 'defineNuxtConfig'.ts(2304)
+
+  Delete the `node_modules` folder and do:
+  
+  ```bash
+  $ pnpm i
+  ```
+  Then `F1 + Volar: Restart Vue server`
+</details>
