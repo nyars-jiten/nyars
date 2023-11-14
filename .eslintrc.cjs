@@ -50,7 +50,8 @@ module.exports = {
         ignoreUrls: true,
         ignoreRegExpLiterals: true
       }
-    ]
+    ],
+    'import/no-extraneous-dependencies': 'off' // TODO: after delete 'import colors' in nuxt config delete this line
   },
   globals: {
     defineProps: 'readonly',

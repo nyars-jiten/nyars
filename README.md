@@ -24,6 +24,14 @@ $ pnpm i
 ```bash
 $ pnpm dev
 ```
+
+##### After run dev server:
+
+| What            | Url                              |
+|-----------------|----------------------------------|
+| main page       | http://localhost:8080/           |
+| tailwind styles | http://localhost:8080/_tailwind/ |
+
 ##### Upgrade:
 
 ```properties
@@ -37,8 +45,8 @@ $ npx nuxi upgrade
 $ npx nuxi typecheck
 ```
 
-<details open>
-  <summary>Possible problems</summary>
+<details>
+  <summary>Possible problems:</summary>
   
   #### Cannot find name 'defineNuxtConfig'.ts(2304)
 
@@ -48,4 +56,8 @@ $ npx nuxi typecheck
   $ pnpm i
   ```
   Then `F1 + Volar: Restart Vue server`
+
+  #### [Vue Router warn]: No match found for location with path "/_tailwind/"
+  
+  Probably just ignore this for now, tailwind viewer page still works fine with this warning, but impossible view this page from nuxt devtools ("404 not found"). Check this [issue](https://github.com/nuxt-modules/tailwindcss/issues/459). 
 </details>
