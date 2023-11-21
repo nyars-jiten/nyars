@@ -15,6 +15,7 @@ export default defineNuxtConfig({
   // pages: true, TODO: maybe is needed?
   modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', 'nuxt-headlessui', '@nuxtjs/i18n'],
   tailwindcss: {
+    exposeConfig: true,
     config: {
       darkMode: 'class',
       theme: {
