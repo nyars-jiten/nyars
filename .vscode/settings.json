@@ -8,9 +8,4 @@
   "nuxtr.piniaFiles.defaultTemplate": "setup",
   "nuxtr.vueFiles.firstTag": "script",
   "nuxtr.vueFiles.style.addStyleTag": false,
-  // prettier-eslint
-  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
-  "editor.formatOnPaste": false, 
-  "editor.formatOnType": false,
-  "vs-code-prettier-eslint.prettierLast": false // set as "true" to run 'prettier' last not first
 }

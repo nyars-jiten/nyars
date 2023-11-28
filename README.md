@@ -74,3 +74,16 @@ $ npx nuxi typecheck
   The extension requires a `tailwind.config.js` file that is not in the project. You have to run the project (this will create `.nuxt/tailwind.config.d.ts`) and then the autocomplete should work.
 
 </details>
+
+<details>
+  <summary>Wiki:</summary>
+
+  #### Why isn't Prettier on the repo?
+  
+  Because of this: [issue](https://github.com/prettier/prettier-vscode/issues/352)
+  Because Prettier is adding a lot of dependencies: `"prettier"`, `"eslint-plugin-prettier"`, `"eslint-config-prettier"`
+  Because Prettier conflicts with another eslint plugins.
+  Because all Prettier settings available in eslint plugins.
+  Because antfu don't use Prettier: [link](https://antfu.me/posts/why-not-prettier)
+
+</details>

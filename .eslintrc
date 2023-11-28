@@ -14,13 +14,33 @@
     "eslint:recommended",
     "@nuxtjs/eslint-config-typescript",
     "plugin:@typescript-eslint/recommended",
-    "plugin:vue/vue3-strongly-recommended", // https://eslint.vuejs.org/user-guide/
-    "plugin:prettier/recommended" // https://github.com/prettier/eslint-plugin-prettier
+    "plugin:vue/vue3-strongly-recommended" // https://eslint.vuejs.org/user-guide/
   ],
   "plugins": [
     "@typescript-eslint"
   ],
   "rules": {
-    "no-multiple-empty-lines": ["error", { "max": 2 }]
-  }
+    // Global
+    "linebreak-style": ["error", "unix"],
+    // Vue.js 
+    "vue/script-indent": ["error", 2, { "baseIndent": 1 }],
+    "vue/html-self-closing": ["error", {
+      "html": {
+        "void": "never",
+        "normal": "never",
+        "component": "always"
+      },
+      "svg": "never",
+      "math": "never"
+    }],
+    "vue/multi-word-component-names": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.vue"],
+      "rules": {
+        "indent": "off"
+      }
+    }
+  ]
 }
