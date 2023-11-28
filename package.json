@@ -8,15 +8,18 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint --ext .js,.vue,.ts,.tsx --ignore-path .gitignore ."
+    "lint": "eslint --ext .js,.vue,.ts,.tsx --ignore-path .gitignore .",
+    "lint:fix": "lint --fix"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/eslint-module": "^4.1.0",
+    "@nuxtjs/tailwindcss": "^6.10.1",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
     "eslint": "^8.54.0",
+    "eslint-plugin-tailwindcss": "^3.13.0",
     "eslint-plugin-vue": "^9.18.1",
     "nuxt": "^3.8.2",
     "typescript": "^5.3.2",

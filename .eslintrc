@@ -14,7 +14,8 @@
     "eslint:recommended",
     "@nuxtjs/eslint-config-typescript",
     "plugin:@typescript-eslint/recommended",
-    "plugin:vue/vue3-strongly-recommended" // https://eslint.vuejs.org/user-guide/
+    "plugin:vue/vue3-strongly-recommended", // https://eslint.vuejs.org/user-guide/
+    "plugin:tailwindcss/recommended"
   ],
   "plugins": [
     "@typescript-eslint"
@@ -33,7 +34,15 @@
       "svg": "never",
       "math": "never"
     }],
-    "vue/multi-word-component-names": "off"
+    "vue/multi-word-component-names": "off",
+    "vue/padding-line-between-blocks": ["error", "always"],
+    "vue/block-order": ["error", {
+      "order": [ "script", "template", "style" ]
+    }],
+    "vue/block-lang": ["error", {
+      "script": { "lang": "ts" }
+    }],
+    "vue/component-api-style": ["error", ["script-setup"]]
   },
   "overrides": [
     {

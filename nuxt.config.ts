@@ -10,7 +10,10 @@ export default defineNuxtConfig({
     },
     rootId: 'nyars'
   },
-  modules: ['@nuxtjs/eslint-module'],
+  modules: [
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/tailwindcss'
+  ],
   typescript: {
     strict: true,
     typeCheck: true,
