@@ -11,9 +11,7 @@ export default defineNuxtConfig({
     },
     rootId: 'nyars'
   },
-  modules: [
-    '@nuxtjs/eslint-module'
-  ],
+  modules: ['@nuxtjs/eslint-module'],
   typescript: {
     strict: true,
     typeCheck: true,
