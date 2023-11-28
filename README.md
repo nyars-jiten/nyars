@@ -1,68 +1,75 @@
-# NYARS THE DICTIONARY
+# Nuxt 3 Minimal Starter
 
-[![Discord](https://img.shields.io/discord/564319699152666624?style=for-the-badge&label=Discord%20server)](https://discord.gg/u7H5nsPWVB)
+Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-![Downdetector](https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fnyars.org%2F)
+## Setup
 
-## Development
-
-[Icons from](https://icones.js.org/collection/ic)
-
-## Nuxt                              
-
-##### DevTools (in the browser):
-
-press `Shift + Alt + D` in the browser
-
-##### Installation:
+Make sure to install the dependencies:
 
 ```bash
-$ pnpm i
+# npm
+npm install
+
+# pnpm
+pnpm install
+
+# yarn
+yarn install
+
+# bun
+bun install
 ```
-##### Dev server:
+
+## Development Server
+
+Start the development server on `http://localhost:3000`:
 
 ```bash
-$ pnpm dev
+# npm
+npm run dev
+
+# pnpm
+pnpm run dev
+
+# yarn
+yarn dev
+
+# bun
+bun run dev
 ```
 
-##### After run dev server:
+## Production
 
-| What            | Url                              |
-|-----------------|----------------------------------|
-| main page       | http://localhost:8080/           |
-| tailwind styles | http://localhost:8080/_tailwind/ |
+Build the application for production:
 
-##### Upgrade:
+```bash
+# npm
+npm run build
 
-```properties
-$ npx nuxi upgrade
-```
-**NB!** Don't use this for upgrading: pnpm up -D nuxt
+# pnpm
+pnpm run build
 
-##### Check ts errors:
+# yarn
+yarn build
 
-```properties
-$ npx nuxi typecheck
+# bun
+bun run build
 ```
 
-<details>
-  <summary>Possible problems:</summary>
-  
-  #### Cannot find name 'defineNuxtConfig'.ts(2304)
+Locally preview production build:
 
-  Delete the `node_modules` folder and do:
-  
-  ```bash
-  $ pnpm i
-  ```
-  Then `F1 + Volar: Restart Vue server`
+```bash
+# npm
+npm run preview
 
-  #### [Vue Router warn]: No match found for location with path "/_tailwind/"
-  
-  Probably just ignore this for now, tailwind viewer page still works fine with this warning, but impossible view this page from nuxt devtools ("404 not found"). Check this [issue](https://github.com/nuxt-modules/tailwindcss/issues/459).
+# pnpm
+pnpm run preview
 
-  #### Tailwind CSS IntelliSense extension didn't work
+# yarn
+yarn preview
 
-  The extension requires a `tailwind.config.js` file that is not in the project. You have to run the project (this will create `.nuxt/tailwind.config.d.ts`) and then the autocomplete should work.
+# bun
+bun run preview
+```
 
-</details>
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
