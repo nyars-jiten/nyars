@@ -1,4 +1,3 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
   devServer: {
@@ -18,3 +17,4 @@ export default defineNuxtConfig({
     shim: false
   }
 })
+// https://nuxt.com/docs/api/configuration/nuxt-config

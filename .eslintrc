@@ -1,6 +1,26 @@
 {
-    "extends": [
-        "@nuxtjs/eslint-config-typescript",
-        "plugin:prettier/recommended" // https://github.com/prettier/eslint-plugin-prettier
-    ]
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2023": true
+  },
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    "ecmaVersion": "latest"
+  },
+  "extends": [
+    "eslint:recommended",
+    "@nuxtjs/eslint-config-typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:vue/vue3-strongly-recommended", // https://eslint.vuejs.org/user-guide/
+    "plugin:prettier/recommended" // https://github.com/prettier/eslint-plugin-prettier
+  ],
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "no-multiple-empty-lines": ["error", { "max": 2 }]
+  }
 }
