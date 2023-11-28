@@ -1,0 +1,9 @@
+{
+	"recommendations": [
+		"Vue.volar",
+		"vue.vscode-typescript-vue-plugin",
+		"rvest.vs-code-prettier-eslint",
+		"bradlc.vscode-tailwindcss",
+		"Nuxtr.nuxtr-vscode"
+	]
+}
