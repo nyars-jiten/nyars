@@ -1,0 +1,9 @@
+{
+  // Global
+  "files.insertFinalNewline": true,
+  // Nuxtr
+  "nuxtr.defaultPackageManager": "pnpm",
+  "nuxtr.piniaFiles.defaultTemplate": "setup",
+  "nuxtr.vueFiles.firstTag": "script",
+  "nuxtr.vueFiles.style.addStyleTag": false,
+}
