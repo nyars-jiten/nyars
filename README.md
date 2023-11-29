@@ -69,10 +69,6 @@ $ npx nuxi typecheck
   
   Probably just ignore this for now, tailwind viewer page still works fine with this warning, but impossible view this page from nuxt devtools ("404 not found"). Check this [issue](https://github.com/nuxt-modules/tailwindcss/issues/459).
 
-  #### Tailwind CSS IntelliSense extension didn't work
-
-  The extension requires a `tailwind.config.js` file that is not in the project. You have to run the project (this will create `.nuxt/tailwind.config.d.ts`) and then the autocomplete should work.
-
 </details>
 
 <details>
