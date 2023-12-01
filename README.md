@@ -69,6 +69,12 @@ $ npx nuxi typecheck
   
   Probably just ignore this for now, tailwind viewer page still works fine with this warning, but impossible view this page from nuxt devtools ("404 not found"). Check this [issue](https://github.com/nuxt-modules/tailwindcss/issues/459).
 
+  #### Autoimports don't have IDE support
+
+  Run `npx nuxi prepare`
+
+  Or run project (`pnpm dev`) and then run `Developer: Reload Window`
+
 </details>
 
 <details>

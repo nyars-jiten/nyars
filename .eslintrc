@@ -23,6 +23,11 @@
   "rules": {
     // Global
     "linebreak-style": ["error", "unix"],
+    "space-before-function-paren": ["error", {
+      "anonymous": "always",
+      "named": "never",
+      "asyncArrow": "always"
+    }],
     // Vue.js 
     "vue/script-indent": ["error", 2, { "baseIndent": 1 }],
     "vue/html-self-closing": ["error", {

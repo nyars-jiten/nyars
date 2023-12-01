@@ -28,7 +28,8 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon-96x96.png' },
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
         { rel: 'application/manifest+json', href: '/manifest.json' }
-      ]
+      ],
+      noscript: [{ children: 'This app requires javascript to work' }]
     },
     rootId: 'nyars'
   },
