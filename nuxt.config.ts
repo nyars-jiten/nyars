@@ -36,7 +36,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+    '@nuxtjs/google-fonts'
   ],
   i18n: {
     vueI18n: './locale/i18n.config.ts',
@@ -48,6 +49,15 @@ export default defineNuxtConfig({
     }],
     strategy: 'no_prefix',
     lazy: true
+  },
+  googleFonts: {
+    families: {
+      'Exo+2': {
+        wght: [400, 500, 600, 700, 800, 900]
+      },
+      'Noto+Sans+JP': true
+    },
+    display: 'swap'
   },
   typescript: {
     strict: true,
