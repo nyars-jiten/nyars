@@ -4,6 +4,7 @@
 		"vue.vscode-typescript-vue-plugin",
 		"dbaeumer.vscode-eslint", //also if you want add shortcut for "ESLint: Fix all auto-fixable Problems"
 		"bradlc.vscode-tailwindcss",
-		"Nuxtr.nuxtr-vscode"
+		"Nuxtr.nuxtr-vscode", //for code generation
+		"antfu.goto-alias" //for better auto-import support in IDE
 	]
 }

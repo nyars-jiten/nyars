@@ -35,8 +35,20 @@ export default defineNuxtConfig({
   },
   modules: [
     '@nuxtjs/eslint-module',
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/i18n'
   ],
+  i18n: {
+    vueI18n: './locale/i18n.config.ts',
+    langDir: 'locale',
+    defaultLocale: 'ru',
+    locales: [{
+      code: 'ru',
+      file: 'ru.json'
+    }],
+    strategy: 'no_prefix',
+    lazy: true
+  },
   typescript: {
     strict: true,
     typeCheck: true,
