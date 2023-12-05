@@ -1,8 +1,10 @@
 {
-  "header": {
-		"home": "Главная",
-		"edits": "Правки",
-		"bugTracker": "Багтрекер",
-		"download": "Скачать"
+  "components": {
+		"header": {
+			"home": "Главная",
+			"edits": "Правки",
+			"bugTracker": "Багтрекер",
+			"download": "Скачать"
+		}
 	}
 }

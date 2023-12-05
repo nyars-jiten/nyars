@@ -47,7 +47,15 @@
     "vue/block-lang": ["error", {
       "script": { "lang": "ts" }
     }],
-    "vue/component-api-style": ["error", ["script-setup"]]
+    "vue/component-api-style": ["error", ["script-setup"]],
+    "vue/no-v-text": "error",
+    "vue/no-restricted-html-elements": [
+      "error",
+      {
+        "element": "a",
+        "message": "Use <NuxtLink> that a drop-in replacement for both Vue Router's <RouterLink> component and HTML's <a> tag"
+      }
+    ]
   },
   "overrides": [
     {
