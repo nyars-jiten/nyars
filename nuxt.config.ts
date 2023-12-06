@@ -37,7 +37,8 @@ export default defineNuxtConfig({
     '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
-    '@nuxtjs/google-fonts'
+    '@nuxtjs/google-fonts',
+    'nuxt-icons' // https://nuxt.com/modules/icons
   ],
   i18n: {
     vueI18n: './locale/i18n.config.ts',

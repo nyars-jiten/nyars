@@ -6,7 +6,7 @@
 
 ## Development
 
-[Icons from](https://icones.js.org/collection/ic)
+Find icons and download as svg file from [here](https://icon-sets.iconify.design/)
 
 ## Nuxt
 
