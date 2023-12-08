@@ -1,7 +1,6 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   devServer: {
-    host: '0.0.0.0',
     port: 8080
   },
   app: {
@@ -32,6 +31,9 @@ export default defineNuxtConfig({
       noscript: [{ children: 'This app requires javascript to work' }]
     },
     rootId: 'nyars'
+  },
+  imports: {
+    dirs: ['types']
   },
   modules: [
     '@nuxtjs/eslint-module',
