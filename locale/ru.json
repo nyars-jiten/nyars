@@ -5,6 +5,19 @@
 			"edits": "Правки",
 			"bugTracker": "Багтрекер",
 			"download": "Скачать"
+		},
+		"searchInput": {
+			"mode": {
+				"words": "Слова",
+				"kanji": "Кандзи"
+			},
+			"placeholder": {
+				"words": "Японское, русское или английское слово",
+				"kanji": "Японское слово или кандзи"
+			},
+			"modeSettings": {
+				"headerText": "Искать:"
+			}
 		}
 	}
 }

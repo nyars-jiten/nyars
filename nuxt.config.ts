@@ -33,7 +33,7 @@ export default defineNuxtConfig({
     rootId: 'nyars'
   },
   imports: {
-    dirs: ['types']
+    dirs: ['types/**']
   },
   modules: [
     '@nuxtjs/eslint-module',
@@ -41,7 +41,8 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxtjs/google-fonts',
     'nuxt-icons', // https://nuxt.com/modules/icons
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    'nuxt-headlessui'
   ],
   i18n: {
     vueI18n: './locale/i18n.config.ts',

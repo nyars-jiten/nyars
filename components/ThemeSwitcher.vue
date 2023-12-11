@@ -17,10 +17,10 @@
     @click="toggleTheme"
   >
     <span v-if="getSettings().theme === 'light'">
-      <nuxt-icon class="text-2xl [&_svg]:m-0" name="whiteBalanceSunny" />
+      <nuxt-icon class="text-2xl" name="whiteBalanceSunny" />
     </span>
     <span v-else>
-      <nuxt-icon class="text-2xl [&_svg]:m-0" name="weatherNight" />
+      <nuxt-icon class="text-2xl" name="weatherNight" />
     </span>
   </button>
 </template>
