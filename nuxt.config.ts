@@ -40,7 +40,8 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
     '@nuxtjs/google-fonts',
-    'nuxt-icons' // https://nuxt.com/modules/icons
+    'nuxt-icons', // https://nuxt.com/modules/icons
+    '@pinia/nuxt'
   ],
   i18n: {
     vueI18n: './locale/i18n.config.ts',
