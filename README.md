@@ -94,7 +94,7 @@ $ npx nuxi typecheck
 
   Then add file to the folder `assets/icons`
 
-  After all you can use it (default width/heigh is 24/24 px and behavior as font)
+  After all you can use it (default behavior as font)
   
   ```html
   <IconMagnify class="text-3xl !m-1" /> <!-- icon as font, if need change margin use !important -->

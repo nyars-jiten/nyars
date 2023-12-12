@@ -35,6 +35,12 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['types/**']
   },
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false
+    }
+  ],
   modules: [
     '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss',

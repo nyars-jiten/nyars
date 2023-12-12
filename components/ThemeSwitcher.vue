@@ -17,10 +17,10 @@
     @click="toggleTheme"
   >
     <span v-if="getSettings().theme === 'light'">
-      <IconWhiteBalanceSunny />
+      <IconWhiteBalanceSunny class="!m-0 text-2xl" />
     </span>
     <span v-else>
-      <IconWeatherNight />
+      <IconWeatherNight class="!m-0 text-2xl" />
     </span>
   </button>
 </template>
