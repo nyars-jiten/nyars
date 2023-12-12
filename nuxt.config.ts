@@ -48,7 +48,8 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@pinia/nuxt',
     'nuxt-headlessui',
-    'nuxt-svgo'
+    'nuxt-svgo',
+    'nuxt-lodash'
   ],
   i18n: {
     vueI18n: './locale/i18n.config.ts',
@@ -72,6 +73,9 @@ export default defineNuxtConfig({
   },
   svgo: {
     componentPrefix: 'icon'
+  },
+  lodash: {
+    prefix: 'useLodash'
   },
   typescript: {
     strict: true,

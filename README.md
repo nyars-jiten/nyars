@@ -100,7 +100,11 @@ $ npx nuxi typecheck
   <IconMagnify class="text-3xl !m-1" /> <!-- icon as font, if need change margin use !important -->
   <IconMagnify class="h-5 w-5" :font-controlled="false" /> <!-- icon as normal svg -->
   ```
-  
+
+  #### Why pages on dev server is very slow?
+
+  Because lodash loads all functions, see this [issue](https://github.com/cipami/nuxt-lodash/issues/53). On production mode this problem does not exist.
+
 </details>
 
 ⡏⠉⠉⠉⠉⠉⠉⠋⠉⠉⠉⠉⠉⠉⠋⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠙⠉⠉⠉⠹
