@@ -6,10 +6,6 @@
 
 ## Development
 
-Find icons and download as svg file from [here](https://icon-sets.iconify.design/)
-
-## Nuxt
-
 Make sure to use an even numbered version of Node.js (18, 20, etc.)
 
 ##### Check Node.js version:
@@ -92,6 +88,19 @@ $ npx nuxi typecheck
   
   Because antfu don't use Prettier: [link](https://antfu.me/posts/why-not-prettier)
 
+  #### How to use icons?
+
+  Find the icons you want and download as an svg file from [here](https://icon-sets.iconify.design/)
+
+  Then add file to the folder `assets/icons`
+
+  After all you can use it (default width/heigh is 24/24 px and behavior as font)
+  
+  ```html
+  <IconMagnify class="text-3xl !m-1" /> <!-- icon as font, if need change margin use !important -->
+  <IconMagnify class="h-5 w-5" :font-controlled="false" /> <!-- icon as normal svg -->
+  ```
+  
 </details>
 
 ⡏⠉⠉⠉⠉⠉⠉⠋⠉⠉⠉⠉⠉⠉⠋⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠙⠉⠉⠉⠹

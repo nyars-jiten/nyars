@@ -14,8 +14,8 @@
         <span class="hidden md:block">
           {{ $t(`components.searchInput.mode.${searchStore.mode}`) }}
         </span>
-        <nuxt-icon v-show="showModeSettings" class="text-2xl text-ns-gray-400" name="chevronUp" />
-        <nuxt-icon v-show="!showModeSettings" class="text-2xl text-ns-gray-400" name="chevronDown" />
+        <IconChevronUp v-show="showModeSettings" class="text-ns-gray-400" />
+        <IconChevronDown v-show="!showModeSettings" class="text-ns-gray-400" />
       </button>
       <div class="group relative z-20 grow">
         <input
@@ -27,10 +27,10 @@
         <!-- TheSuggs -->
       </div>
       <button class="p-4 text-xl opacity-100 duration-75 ease-in-out hover:bg-ns-gray-100 hover:opacity-75 dark:hover:bg-ns-gray-700">
-        <nuxt-icon class="text-2xl" name="magnify" />
+        <IconMagnify />
       </button>
       <button class="p-4 text-xl opacity-100 duration-75 ease-in-out hover:bg-ns-gray-100 hover:opacity-75 dark:hover:bg-ns-gray-700">
-        <nuxt-icon class="text-2xl" name="draw" />
+        <IconDraw />
       </button>
       <!-- <Transition
         enter-active-class="duration-150 ease-out"

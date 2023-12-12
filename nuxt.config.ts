@@ -40,9 +40,9 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
     '@nuxtjs/google-fonts',
-    'nuxt-icons', // https://nuxt.com/modules/icons
     '@pinia/nuxt',
-    'nuxt-headlessui'
+    'nuxt-headlessui',
+    'nuxt-svgo'
   ],
   i18n: {
     vueI18n: './locale/i18n.config.ts',
@@ -63,6 +63,9 @@ export default defineNuxtConfig({
       'Noto+Sans+JP': true
     },
     display: 'swap'
+  },
+  svgo: {
+    componentPrefix: 'icon'
   },
   typescript: {
     strict: true,
