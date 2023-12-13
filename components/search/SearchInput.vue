@@ -14,10 +14,10 @@
   <section class="relative rounded-md bg-white shadow-md dark:bg-ns-gray-800">
     <div :class="`relative flex items-stretch border dark:border-ns-gray-700 ${showSearchSettings ? 'rounded-t-md': 'rounded-md'}`">
       <button
-        class="flex items-center p-4 capitalize opacity-100 duration-75 ease-in-out hover:bg-ns-gray-100 hover:opacity-75 dark:text-ns-gray-400 dark:hover:bg-ns-gray-700"
+        :class="`flex items-center p-4 capitalize opacity-100 duration-75 ease-in-out hover:bg-ns-gray-100 hover:opacity-75 dark:text-ns-gray-400 dark:hover:bg-ns-gray-700 ${showSearchSettings ? 'rounded-tl-md': 'rounded-l-md'}`"
         @click.stop="showSearchSettings = !showSearchSettings"
       >
-        <span class="hidden md:block">
+        <span class="hidden sm:block">
           {{ $t(`components.searchInput.mode.${searchStore.mode}`) }}
         </span>
         <IconChevronUp v-show="showSearchSettings" class="!m-0 text-2xl text-ns-gray-400" />
@@ -32,7 +32,7 @@
         >
         <LazySuggestions />
       </div>
-      <button class="p-4 text-xl opacity-100 duration-75 ease-in-out hover:bg-ns-gray-100 hover:opacity-75 dark:hover:bg-ns-gray-700">
+      <button class="rounded-r-md p-4 text-xl opacity-100 duration-75 ease-in-out hover:bg-ns-gray-100 hover:opacity-75 dark:hover:bg-ns-gray-700">
         <IconMagnify class="!m-0 text-2xl" />
       </button>
     </div>
