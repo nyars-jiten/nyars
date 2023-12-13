@@ -49,7 +49,8 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'nuxt-headlessui',
     'nuxt-svgo',
-    'nuxt-lodash'
+    'nuxt-lodash',
+    '@vueuse/nuxt'
   ],
   i18n: {
     vueI18n: './locale/i18n.config.ts',
