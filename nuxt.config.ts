@@ -32,6 +32,12 @@ export default defineNuxtConfig({
     },
     rootId: 'nyars'
   },
+  runtimeConfig: {
+    public: {
+      apiUrl: '',
+      baseUrl: ''
+    }
+  },
   imports: {
     dirs: ['types/**']
   },

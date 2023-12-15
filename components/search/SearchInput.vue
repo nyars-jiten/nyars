@@ -30,7 +30,7 @@
           class="peer h-full w-full text-center text-xl outline-none focus-within:bg-ns-gray-100 group-focus-within:bg-ns-gray-100 dark:bg-ns-gray-800 dark:focus-within:bg-ns-gray-700 dark:group-focus-within:bg-ns-gray-700"
           :placeholder="$t('components.searchInput.placeholder.words')"
         >
-        <LazySuggestions />
+        <LazySuggestions v-if="searchStore.mode === 'words'" />
       </div>
       <button class="rounded-r-md p-4 text-xl opacity-100 duration-75 ease-in-out hover:bg-ns-gray-100 hover:opacity-75 dark:hover:bg-ns-gray-700">
         <IconMagnify class="!m-0 text-2xl" />
