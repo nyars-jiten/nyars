@@ -13,6 +13,18 @@ export const useSearchRepository = () => {
         }
       })
     }
+
+    static getJpnEntries(input: string, number = 20, page = 0): Promise<JpnEntriesSearchResult> {
+      return this._fetch<JpnEntriesSearchResult>(`${this._path}/jap`, {
+        params: {
+          r: input,
+          n: number,
+          p: page,
+          exact: false,
+          hasParser: true
+        }
+      })
+    }
   }
 
   return SearchRepository
