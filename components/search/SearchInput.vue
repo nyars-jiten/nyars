@@ -18,7 +18,7 @@
         @click.stop="showSearchSettings = !showSearchSettings"
       >
         <span class="hidden sm:block">
-          {{ $t(`components.searchInput.mode.${searchStore.mode}`) }}
+          {{ $t(`components.searchGroup.general.mode.${searchStore.mode}`) }}
         </span>
         <IconChevronUp v-show="showSearchSettings" class="!m-0 text-2xl text-ns-gray-400" />
         <IconChevronDown v-show="!showSearchSettings" class="!m-0 text-2xl text-ns-gray-400" />
@@ -28,7 +28,7 @@
           v-model="searchStore.searchQuery"
           type="text"
           class="peer h-full w-full text-center text-xl outline-none focus-within:bg-ns-gray-100 group-focus-within:bg-ns-gray-100 dark:bg-ns-gray-800 dark:focus-within:bg-ns-gray-700 dark:group-focus-within:bg-ns-gray-700"
-          :placeholder="$t('components.searchInput.placeholder.words')"
+          :placeholder="$t(`components.searchGroup.searchInput.placeholder.${searchStore.mode}`)"
         >
         <LazySuggestions v-if="searchStore.mode === 'words'" />
       </div>

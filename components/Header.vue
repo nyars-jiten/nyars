@@ -10,7 +10,7 @@
         </div>
         <nav class="flex flex-wrap items-center justify-center gap-7 text-base dark:text-ns-gray-300 [&>*]:duration-150 [&>*]:ease-in-out">
           <NuxtLink to="/" class="hover:text-ns-500">
-            {{ $t('components.header.home') }}
+            {{ $t('components.header.main') }}
           </NuxtLink>
 
           <NuxtLink to="/" class="hover:text-ns-500">

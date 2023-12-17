@@ -5,17 +5,17 @@
 <template>
   <div class="flex w-full flex-col gap-2 rounded-b-md border-x border-b p-4 text-sm leading-relaxed dark:border-ns-gray-700">
     <span class="text-ns-gray-500">
-      {{ $t('components.searchInput.modeSettings.headerText') }}
+      {{ $t('components.searchGroup.searchSettings.headerText') }}
     </span>
     <div class="flex flex-row gap-2">
       <div value="words">
         <Button :disabled="searchStore.mode === 'words'" @click="searchStore.mode = 'words'">
-          {{ $t('components.searchInput.mode.words') }}
+          {{ $t('components.searchGroup.general.mode.words') }}
         </Button>
       </div>
       <div value="kanji">
         <Button :disabled="searchStore.mode === 'kanji'" @click="searchStore.mode = 'kanji'">
-          {{ $t('components.searchInput.mode.kanji') }}
+          {{ $t('components.searchGroup.general.mode.kanji') }}
         </Button>
       </div>
     </div>
