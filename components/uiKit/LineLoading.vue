@@ -8,7 +8,7 @@
     height: 0.5px;
     position: relative;
     overflow: hidden;
-    background-color: #ddd;
+    background-color: #52525B;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
@@ -20,7 +20,7 @@
     left: -50%;
     height: 3px;
     width: 40%;
-    background-color: #0EB67B;
+    background-color: #6aa3ab;
     -webkit-animation: lineAnim 1.5s linear infinite;
     -moz-animation: lineAnim 1.5s linear infinite;
     animation: lineAnim 1.5s linear infinite;

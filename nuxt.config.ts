@@ -56,7 +56,8 @@ export default defineNuxtConfig({
     'nuxt-headlessui',
     'nuxt-svgo',
     'nuxt-lodash',
-    '@vueuse/nuxt'
+    '@vueuse/nuxt',
+    '@nuxtjs/html-validator'
   ],
   i18n: {
     vueI18n: './locale/i18n.config.ts',

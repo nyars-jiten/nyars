@@ -1,10 +1,10 @@
 import { useApiFetch } from '../apiFetch'
 
 export const useJpnEntryRepository = () => {
-  abstract class JpnEntryRepository {
-    private static _path = '/dictionary/jap'
-    private static _fetch = useApiFetch()
-  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _path = '/dictionary/jap'
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _fetch = useApiFetch()
 
-  return JpnEntryRepository
+  return {}
 }
