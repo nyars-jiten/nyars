@@ -20,7 +20,7 @@
     left: -50%;
     height: 3px;
     width: 40%;
-    background-color: #6aa3ab;
+    background-color: var(--ns-500);
     -webkit-animation: lineAnim 1.5s linear infinite;
     -moz-animation: lineAnim 1.5s linear infinite;
     animation: lineAnim 1.5s linear infinite;

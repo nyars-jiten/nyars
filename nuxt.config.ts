@@ -28,7 +28,10 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
         { rel: 'application/manifest+json', href: '/manifest.json' }
       ],
-      noscript: [{ children: 'This app requires javascript to work' }]
+      noscript: [{ children: 'This app requires javascript to work' }],
+      bodyAttrs: {
+        class: 'min-h-screen select-none bg-ns-gray-100 text-ns-gray-700 dark:bg-ns-gray-900 dark:text-ns-gray-300'
+      }
     },
     rootId: 'nyars'
   },
@@ -62,10 +65,10 @@ export default defineNuxtConfig({
   i18n: {
     vueI18n: './locale/i18n.config.ts',
     langDir: 'locale',
-    defaultLocale: 'ru',
+    defaultLocale: 'rus',
     locales: [{
-      code: 'ru',
-      file: 'ru.json'
+      code: 'rus',
+      file: 'rus.json'
     }],
     strategy: 'no_prefix',
     lazy: true

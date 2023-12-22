@@ -1,9 +1,9 @@
-import ru from './ru.json'
+import rus from './rus.json'
 
 export default defineI18nConfig(() => ({
   legacy: false,
-  locale: 'en',
+  locale: 'rus',
   messages: {
-    ru
+    rus
   }
 }))
