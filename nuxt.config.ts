@@ -37,8 +37,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiUrl: '',
-      baseUrl: ''
+      apiUrl: 'https://next.nyars.org/api',
+      baseUrl: 'https://next.nyars.org'
     }
   },
   imports: {
