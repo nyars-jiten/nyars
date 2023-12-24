@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 :root {
-  --ns-500: #6aa3ab;
   --ns-gray-300: rgb(212 212 216);
   --ns-gray-700: rgb(63 63 70);
   --ns-gray-800: rgb(39 39 42);
@@ -29,9 +28,6 @@ html.dark::-webkit-scrollbar-thumb:hover {
   border-radius: 10px;
   background-color: #39393F;
 }
-
-/* ---------------------------- */
-
 
 html.light::-webkit-scrollbar-track {
   border-radius: 10px;

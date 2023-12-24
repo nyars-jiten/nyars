@@ -1,14 +1,13 @@
 <template>
-  <div></div>
+  <div class="h-[1px] bg-ns-gray-100 before:bg-ns-500 dark:h-[0.5px] dark:bg-ns-gray-700">
+  </div>
 </template>
 
 <style scoped>
   div {
     width: 100%;
-    height: 0.5px;
     position: relative;
     overflow: hidden;
-    background-color: #52525B;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
@@ -20,7 +19,6 @@
     left: -50%;
     height: 3px;
     width: 40%;
-    background-color: var(--ns-500);
     -webkit-animation: lineAnim 1.5s linear infinite;
     -moz-animation: lineAnim 1.5s linear infinite;
     animation: lineAnim 1.5s linear infinite;
