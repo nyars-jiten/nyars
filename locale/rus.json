@@ -69,5 +69,12 @@
 				}
 			}
 		}
+	},
+	"models": {
+		"userRating": {
+			"weekRating": "рейтинг",
+			"summaryWeekJapNew": "новых статей",
+			"summaryWeekJapEdit": "исправлений"
+		}
 	}
 }

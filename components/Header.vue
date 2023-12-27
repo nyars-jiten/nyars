@@ -13,7 +13,7 @@
             {{ $t('components.header.main') }}
           </NuxtLink>
 
-          <NuxtLink to="/" class="hover:text-ns-500">
+          <NuxtLink :to="{name: 'Edits'}" class="hover:text-ns-500">
             {{ $t('components.header.edits') }}
           </NuxtLink>
 
@@ -21,6 +21,7 @@
             to="https://github.com/nyars-jiten/nyars/issues"
             class="hover:text-ns-500"
             target="_blank"
+            external
           >
             {{ $t('components.header.bugTracker') }}
           </NuxtLink>

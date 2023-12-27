@@ -38,7 +38,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiUrl: 'https://beta.nyars.org/api',
-      baseUrl: 'https://beta.nyars.org'
+      baseUrl: 'https://beta.nyars.org',
+      imageUrl: 'https://next.nyars.org/upload/avatars/' // delete in prod
     }
   },
   imports: {
@@ -60,7 +61,8 @@ export default defineNuxtConfig({
     'nuxt-svgo',
     'nuxt-lodash',
     '@vueuse/nuxt',
-    '@nuxtjs/html-validator'
+    '@nuxtjs/html-validator',
+    'nuxt-typed-router'
   ],
   i18n: {
     vueI18n: './locale/i18n.config.ts',
