@@ -4,7 +4,17 @@
     'users',
     () => api.jpnEntryRepository.getWeeklyTopUsers(),
     {
-      default: (): User[] => []
+      default: () => [],
+      transform: (users) => {
+        return users.map((user) => ({
+          id: user.id,
+          avatar: user.avatar,
+          username: user.username,
+          weekRating: user.userRating?.weekRating,
+          jpnNew: user.userRating?.summary.week.japNew,
+          jpnEdit: user.userRating?.summary.week.japEdit
+        }))
+      }
     }
   )
 </script>
@@ -23,13 +33,13 @@
         </h2>
         <div class="grid grid-cols-[1fr_min-content] gap-x-4">
           <div>{{ $t('models.userRating.weekRating') }}</div>
-          <div>{{ user.userRating.weekRating }}</div>
+          <div>{{ user.weekRating }}</div>
 
           <div>{{ $t('models.userRating.summaryWeekJapNew') }}</div>
-          <div>{{ user.userRating.summary.week.japNew }}</div>
+          <div>{{ user.jpnNew }}</div>
 
           <div>{{ $t('models.userRating.summaryWeekJapEdit') }}</div>
-          <div>{{ user.userRating.summary.week.japEdit }}</div>
+          <div>{{ user.jpnEdit }}</div>
         </div>
       </div>
     </div>

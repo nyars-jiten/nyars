@@ -49,23 +49,31 @@ module.exports = {
             kanyoon: colors.slate,
             gai: colors.blue
           },
-          'status-variant': {
+          // See types/models/edit/editStatus
+          'edit-status': {
             1: '#1d90b3', // New
             2: '#b31d1d', // Declined
             3: '#1db336', // Accepted
             4: '#b3b3b3', // Auto-accepted
             5: '#aa1db3' // Reverted
           },
-          'type-variant': {
-            1: '#1db336', // New
+          // See types/models/edit/editType
+          'edit-type': {
+            1: '#1db336', // Create
             2: '#1d90b3', // Edit
             3: '#b31d1d', // Delete
-            4: '#a520c7', // Transfer
-            5: '#aa1db3' // Reverted
+            4: '#a520c7' // Transfer
           }
         }
       }
     }
   },
-  plugins: []
+  plugins: [],
+  safelist: [
+    { pattern: /border-ns-edit-status-/ },
+    { pattern: /text-ns-edit-status-/ },
+    { pattern: /text-ns-edit-type-/ },
+    { pattern: /text-ns-tag-/ },
+    { pattern: /border-ns-tag-/ }
+  ]
 }

@@ -6,6 +6,6 @@ export interface User {
   access: number
   avatar: string
   isBot: boolean
-  userRating: UserRating
+  userRating: UserRating|null
   createdDate: Date
 }

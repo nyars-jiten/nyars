@@ -3,12 +3,12 @@
     disabled: boolean
   }
 
-  const props = defineProps<Props>()
+  defineProps<Props>()
 </script>
 
 <template>
   <button
-    :disabled="props.disabled"
+    :disabled="disabled"
     :class="`flex items-center gap-2 rounded-md px-3 py-1 capitalize
       ${disabled
         ? 'bg-ns-400 dark:bg-ns-700'

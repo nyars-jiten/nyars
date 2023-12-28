@@ -9,14 +9,14 @@
     </span>
     <div class="flex flex-row gap-2">
       <div value="words">
-        <Button :disabled="searchStore.mode === 'words'" @click="searchStore.mode = 'words'">
+        <SearchButton :disabled="searchStore.mode === 'words'" @click="searchStore.mode = 'words'">
           {{ $t('components.searchGroup.general.mode.words') }}
-        </Button>
+        </SearchButton>
       </div>
       <div value="kanji">
-        <Button :disabled="searchStore.mode === 'kanji'" @click="searchStore.mode = 'kanji'">
+        <SearchButton :disabled="searchStore.mode === 'kanji'" @click="searchStore.mode = 'kanji'">
           {{ $t('components.searchGroup.general.mode.kanji') }}
-        </Button>
+        </SearchButton>
       </div>
     </div>
   </div>
