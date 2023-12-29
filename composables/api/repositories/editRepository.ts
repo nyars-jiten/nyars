@@ -14,5 +14,9 @@ export const useEditRepository = () => {
     })
   }
 
-  return { getEdits }
+  const getCompare = (editId: number): Promise<EditCompare> => {
+    return fetch<EditCompare>(`${path}/${editId}/compare`)
+  }
+
+  return { getEdits, getCompare }
 }

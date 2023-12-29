@@ -55,5 +55,6 @@
         </div>
       </div>
     </div>
+    <LazyChangesPreview v-if="isChangesVisible" :edit-id="edit.id" class="m-2 rounded-md" />
   </section>
 </template>
