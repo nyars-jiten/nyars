@@ -5,9 +5,37 @@
 
   const settings = ref(null)
 
+  const input = ref<HTMLInputElement>()
+
   onClickOutside(settings, () => {
     showSearchSettings.value = false
   }, { capture: false })
+
+  const search = async () => {
+    if (searchStore.searchQuery.length === 0) {
+      return
+    }
+
+    switch (searchStore.mode) {
+      case 'words':
+        await navigateTo({ name: 'search-JpnEntries', query: { r: searchStore.searchQuery } })
+        break
+      case 'kanji':
+        await navigateTo({ name: 'search-KanjiEntries', query: { r: searchStore.searchQuery } })
+        break
+    }
+  }
+
+  const searchEnter = async () => {
+    const currentSuggestion = searchStore.currentSuggestion
+    if (currentSuggestion !== -1) {
+      searchStore.searchQuery = (await searchStore.getSuggestions)[currentSuggestion]
+      await navigateTo({ name: 'search-JpnEntries', query: { r: searchStore.searchQuery } })
+    } else {
+      search()
+    }
+    input.value?.blur()
+  }
 </script>
 
 <template>
@@ -25,14 +53,22 @@
       </button>
       <div class="group relative z-20 grow">
         <input
+          ref="input"
           v-model="searchStore.searchQuery"
           type="text"
           class="peer h-full w-full text-center text-xl outline-none focus-within:bg-ns-gray-100 group-focus-within:bg-ns-gray-100 dark:bg-ns-gray-800 dark:focus-within:bg-ns-gray-700 dark:group-focus-within:bg-ns-gray-700"
           :placeholder="$t(`components.searchGroup.searchInput.placeholder.${searchStore.mode}`)"
+          @keydown.enter="searchEnter"
+          @keydown.prevent.up="searchStore.setCurrentSuggestion('up')"
+          @keydown.prevent.down="searchStore.setCurrentSuggestion('down')"
+          @blur="searchStore.setCurrentSuggestion('reset')"
         >
         <LazySuggestions v-if="searchStore.mode === 'words'" />
       </div>
-      <button class="rounded-r-md p-4 text-xl opacity-100 duration-75 ease-in-out hover:bg-ns-gray-100 hover:opacity-75 dark:hover:bg-ns-gray-700">
+      <button
+        class="rounded-r-md p-4 text-xl opacity-100 duration-75 ease-in-out hover:bg-ns-gray-100 hover:opacity-75 dark:hover:bg-ns-gray-700"
+        @click="search"
+      >
         <IconMagnify class="!m-0 text-2xl" />
       </button>
     </div>

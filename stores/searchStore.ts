@@ -3,6 +3,36 @@ export const useSearchStore = defineStore('searchStore', () => {
 
   const searchQuery = ref('')
 
+  const currentSuggestion = ref(-1)
+
+  const setCurrentSuggestion = async (action: 'up'|'down'|'reset') => {
+    if (action === 'reset') {
+      currentSuggestion.value = -1
+      return
+    }
+
+    const suggestionsLength = (await getSuggestions.value).length
+
+    if (suggestionsLength === 0) {
+      return
+    }
+
+    if (action === 'up' && currentSuggestion.value - 1 < 0) {
+      currentSuggestion.value = suggestionsLength - 1
+      return
+    }
+    if (action === 'down' && currentSuggestion.value + 1 === suggestionsLength) {
+      currentSuggestion.value = 0
+      return
+    }
+
+    if (action === 'up') {
+      currentSuggestion.value--
+      return
+    }
+    currentSuggestion.value++
+  }
+
   const suggestionsCache = ref<Map<string, string[]>>(new Map().set('', []))
 
   const getSuggestions = computed(async () => {
@@ -24,5 +54,5 @@ export const useSearchStore = defineStore('searchStore', () => {
     suggestionsCache.value.set(searchQuery, response)
   }
 
-  return { mode, searchQuery, suggestionsCache, getSuggestions, setSuggestions }
+  return { mode, searchQuery, currentSuggestion, setCurrentSuggestion, suggestionsCache, getSuggestions, setSuggestions }
 })

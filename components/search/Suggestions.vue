@@ -1,13 +1,7 @@
 <script setup lang="ts">
-  // interface Emits {
-  //   (e: 'onSelected'): void;
-  // }
-
-  // const emit = defineEmits<Emits>()
-
   const searchStore = useSearchStore()
 
-  const { searchQuery, getSuggestions } = storeToRefs(searchStore)
+  const { searchQuery, getSuggestions, currentSuggestion } = storeToRefs(searchStore)
 
   const debouncedQuery = refDebounced(searchQuery, 500)
 
@@ -18,6 +12,11 @@
       watch: [debouncedQuery]
     }
   )
+
+  const search = async (suggestion: string) => {
+    searchQuery.value = suggestion
+    await navigateTo({ name: 'search-JpnEntries', query: { r: searchQuery.value } })
+  }
 </script>
 
 <template>
@@ -29,13 +28,20 @@
     </div>
     <div v-else>
       <button
-        v-for="suggestion of suggestions"
+        v-for="(suggestion, index) of suggestions"
         :key="suggestion"
         type="button"
-        class="block min-w-full border-t border-ns-gray-300 px-4 py-2 text-left hover:bg-white dark:border-ns-gray-600 dark:bg-ns-gray-700 dark:hover:bg-ns-gray-600"
+        :class="`block min-w-full border-t border-ns-gray-300 px-4 py-2 text-left hover:bg-white dark:border-ns-gray-600 dark:bg-ns-gray-700 dark:hover:bg-ns-gray-600 ${currentSuggestion === index ? 'bg-white dark:bg-[#52525B]': ''}`"
+        @click="search(suggestion)"
       >
         {{ suggestion }}
       </button>
     </div>
   </div>
 </template>
+
+<!-- TODO:
+      `dark:bg-[#52525B]` instead of `dark:bg-ns-gray-600` because for some unknown reason it just doesn't want to work
+      for light theme everything is ok
+      for other colors (e.g. red) in dark theme everything is ok too
+-->

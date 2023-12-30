@@ -7,6 +7,20 @@
     [1], // Парсинг форм слова, предложений и текстов
     [1, 2] // Поиск по шаблону
   ]
+
+  const searchStore = useSearchStore()
+
+  const { t } = useI18n()
+
+  const getExample = (exampleType: number, exampleIndex: number) => {
+    return t(`pages.main.infoExamples.${exampleType}.searchExamples.${exampleIndex}`)
+  }
+
+  const search = (example: string) => {
+    searchStore.searchQuery = example
+    searchStore.mode = 'words'
+    navigateTo({ name: 'search-JpnEntries', query: { r: example } })
+  }
 </script>
 
 <template>
@@ -24,8 +38,11 @@
           :key="searchExample"
           class="whitespace-nowrap before:text-ns-gray-200 before:content-['「'] after:text-ns-gray-200 after:content-['」・'] last:after:content-['」'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700"
         >
-          <button class="underline decoration-dotted underline-offset-4 hover:text-ns-500">
-            {{ $t(`pages.main.infoExamples.${i+1}.searchExamples.${searchExample}`) }}
+          <button
+            class="underline decoration-dotted underline-offset-4 hover:text-ns-500"
+            @click="search(getExample(i+1, searchExample))"
+          >
+            {{ getExample(i+1, searchExample) }}
           </button>
         </span>
       </li>

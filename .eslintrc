@@ -30,7 +30,10 @@
     }],
     "arrow-parens": ["error", "always"],
     // Vue.js 
-    "vue/script-indent": ["error", 2, { "baseIndent": 1 }],
+    "vue/script-indent": ["error", 2, { 
+      "baseIndent": 1,
+      "switchCase": 1 
+    }],
     "vue/html-self-closing": ["error", {
       "html": {
         "void": "never",

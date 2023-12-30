@@ -33,7 +33,8 @@ export default defineNuxtConfig({
         class: 'min-h-screen select-none bg-ns-gray-100 text-ns-gray-700 dark:bg-ns-gray-900 dark:text-ns-gray-300'
       }
     },
-    rootId: 'nyars'
+    rootId: 'nyars',
+    pageTransition: { name: 'page', mode: 'out-in' }
   },
   runtimeConfig: {
     public: {
@@ -51,6 +52,20 @@ export default defineNuxtConfig({
       pathPrefix: false
     }
   ],
+  hooks: {
+    'pages:extend'(pages) {
+      pages.push({
+        name: 'search-JpnEntries',
+        path: '/s/jpn',
+        file: '~/pages/search/JpnEntries.vue'
+      })
+      pages.push({
+        name: 'search-KanjiEntries',
+        path: '/s/kanji',
+        file: '~/pages/search/KanjiEntries.vue'
+      })
+    }
+  },
   modules: [
     '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss',
