@@ -40,7 +40,8 @@ export default defineNuxtConfig({
     public: {
       apiUrl: 'https://beta.nyars.org/api',
       baseUrl: 'https://beta.nyars.org',
-      imageUrl: 'https://next.nyars.org/upload/avatars/' // delete in prod
+      imageUrl: 'https://next.nyars.org/upload/avatars/', // delete in prod
+      discordUrl: 'https://discord.gg/u7H5nsPWVB'
     }
   },
   imports: {

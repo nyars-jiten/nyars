@@ -1,5 +1,5 @@
 export interface Sense {
-  tags: Tag[]|null
+  tags: Tag[]
   value: string|null
   readonly examples: Example[]|null
   references: Reference[]|null

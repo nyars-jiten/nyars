@@ -27,7 +27,7 @@
         <span :class="`grow whitespace-nowrap text-right text-ns-edit-status-${edit.status}`">
           {{ $t(`models.edit.status.${edit.status}`) }}
         </span>
-        <EditUserProfile v-if="edit.status !== EditStatus.AutoAccepted" :user="edit.approver" />
+        <EditUserProfile v-if="edit.status !== EditStatus.AutoAccepted && edit.approver !== null" :user="edit.approver" />
       </div>
 
       <div class="flex pt-2">

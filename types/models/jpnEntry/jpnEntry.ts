@@ -1,5 +1,5 @@
 export interface JpnEntry {
-  wid: string|null
+  wid: string
   externalEntry: string|null
   isReviewed: boolean
   isUnconfirmed: boolean

@@ -17,6 +17,13 @@
     searchQuery.value = suggestion
     await navigateTo({ name: 'search-JpnEntries', query: { r: searchQuery.value } })
   }
+
+  const getStyles = (index: number) => {
+    if (currentSuggestion.value === index) {
+      return 'block min-w-full border-t border-ns-gray-300 px-4 py-2 text-left bg-white dark:border-ns-gray-600 dark:bg-ns-gray-600'
+    }
+    return 'block min-w-full border-t border-ns-gray-300 px-4 py-2 text-left hover:bg-white dark:border-ns-gray-600 dark:bg-ns-gray-700 dark:hover:bg-ns-gray-600'
+  }
 </script>
 
 <template>
@@ -31,7 +38,7 @@
         v-for="(suggestion, index) of suggestions"
         :key="suggestion"
         type="button"
-        :class="`block min-w-full border-t border-ns-gray-300 px-4 py-2 text-left hover:bg-white dark:border-ns-gray-600 dark:bg-ns-gray-700 dark:hover:bg-ns-gray-600 ${currentSuggestion === index ? 'bg-white dark:bg-[#52525B]': ''}`"
+        :class="getStyles(index)"
         @click="search(suggestion)"
       >
         {{ suggestion }}
@@ -39,9 +46,3 @@
     </div>
   </div>
 </template>
-
-<!-- TODO:
-      `dark:bg-[#52525B]` instead of `dark:bg-ns-gray-600` because for some unknown reason it just doesn't want to work
-      for light theme everything is ok
-      for other colors (e.g. red) in dark theme everything is ok too
--->

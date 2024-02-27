@@ -1,6 +1,6 @@
 export interface JpnEntryContent {
   words: Word[]|null
-  meanings: Meaning[]|null
-  tags: string[]|null
+  meanings: Meaning[]
+  tags: string[]
   externalEntry: string|null
 }

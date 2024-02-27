@@ -39,7 +39,7 @@ $ pnpm dev
 ##### Upgrade:
 
 ```properties
-$ npx nuxi upgrade
+$ npx nuxi upgrade --force
 ```
 **NB!** Don't use this for upgrading: pnpm up -D nuxt
 

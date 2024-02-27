@@ -1,5 +1,5 @@
 export interface LangMeaning {
-  lang: 'rus'|'jpn'|'eng'|'lat'|null
-  senses: Sense[]|null
-  note: string|null
+  lang: 'rus'|'jpn'|'eng'|'lat'
+  senses: Sense[]
+  note: string
 }

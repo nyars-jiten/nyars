@@ -1,4 +1,4 @@
 export interface Meaning {
-  pos: string[]|null
-  langMeanings: LangMeaning[]|null
+  pos: string[]
+  langMeanings: LangMeaning[]
 }

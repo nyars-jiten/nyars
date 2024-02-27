@@ -12,7 +12,7 @@ export interface Edit {
   type: EditType
   status: EditStatus
   author: User
-  approver: User
+  approver: User | null
   commentsCount: number
   createdDate: Date
   modifiedDate: Date

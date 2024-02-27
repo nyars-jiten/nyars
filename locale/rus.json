@@ -100,6 +100,444 @@
 				"пример"
 			],
 			"createdDate": "создана"
+		},
+		"jpnEntry": {
+			"language": {
+				"rus": "рус",
+				"jpn": "япо",
+				"eng": "анг",
+				"lat": "лат"
+			}
+		},
+		"tags": {
+			"kinf": {
+				"ateji": {
+					"short": "атэдзи",
+					"full": "атэдзи (фонетическое использование кандзи)"
+				},
+				"jK": {
+					"short": "дзк",
+					"full": "дзюкудзикун (подобранный по смыслу кандзи с нестандартным чтением)"
+				},
+				"mK": { 
+					"short": "ошиб", 
+					"full": "неправильное, ошибочное написание" 
+				},
+				"io": { 
+					"short": "н.ок.", 
+					"full": "нестандартная запись окуриганы" 
+				},
+				"iK": { 
+					"short": "△", 
+					"full": "нестандартная/редкая запись кандзи" 
+				},
+				"oK": { 
+					"short": "◇", 
+					"full": "устаревшее написание, кюдзитай формы" 
+				}
+			},
+			"rinf": {
+				"rk": { 
+					"short": "редк", 
+					"full": "(более) редкое чтение" 
+				},
+				"gikun": {
+					"short": "гикун",
+					"full": "гикун (чтение по смыслу) или дзюкудзикун (особенное чтение)"
+				},
+				"oik": { 
+					"short": "△", 
+					"full": "нестандартная запись каной" 
+				},
+				"uK": { 
+					"short": "об.К.", 
+					"full": "обычно записывается кандзи" 
+				},
+				"rm": { 
+					"short": "ошиб", 
+					"full": "ошибочное, неправильное чтение" 
+				},
+				"ok": {
+					"short": "◇",
+					"full": "старая орфография (кю-канадзукай) или архаичное чтение"
+				}
+			},
+			"common" : {
+				"short": "common"
+			},
+			"jlpt": { 
+				"short": "JLPT" 
+			},
+			"pos": {
+				"adv-to": { 
+					"short": "adv-to", 
+					"full": "adverb taking the `to' particle" 
+				},
+				"n-adv": { 
+					"short": "n-adv", 
+					"full": "adverbial noun (fukushitekimeishi)" 
+				},
+				"adj-nari": {
+					"short": "adj-nari",
+					"full": "archaic/formal form of na-adjective"
+				},
+				"aux": { 
+					"short": "aux", 
+					"full": "auxiliary" 
+				},
+				"aux-adj": { 
+					"short": "aux-adj", 
+					"full": "auxiliary adjective" 
+				},
+				"aux-v": { 
+					"short": "aux-v", 
+					"full": "auxiliary verb" 
+				},
+				"conj": { 
+					"short": "conj", 
+					"full": "conjunction" 
+				},
+				"ctr": { 
+					"short": "ctr", 
+					"full": "counter"
+				},
+				"exp": { 
+					"short": "exp", 
+					"full": "expressions (phrases, clauses, etc.)"
+				},
+				"v5aru": { 
+					"short": "v5aru", 
+					"full": "Godan verb - -aru special class"
+				},
+				"v5k-s": { 
+					"short": "v5k-s", 
+					"full": "Godan verb - Iku/Yuku special class"
+				},
+				"v5uru": {
+					"short": "v5uru",
+					"full": "Godan verb - Uru old class verb (old form of Eru)"
+				},
+				"v5b": { 
+					"short": "v5b", 
+					"full": "Godan verb with `bu' ending"
+				},
+				"v5g": { 
+					"short": "v5g", 
+					"full": "Godan verb with `gu' ending" 
+				},
+				"v5k": { 
+					"short": "v5k", 
+					"full": "Godan verb with `ku' ending"
+				},
+				"v5m": { 
+					"short": "v5m", 
+					"full": "Godan verb with `mu' ending"
+				},
+				"v5n": { 
+					"short": "v5n", 
+					"full": "Godan verb with `nu' ending" 
+				},
+				"v5r": { 
+					"short": "v5r", 
+					"full": "Godan verb with `ru' ending" 
+				},
+				"v5r-i": {
+					"short": "v5r-i",
+					"full": "Godan verb with `ru' ending (irregular verb)"
+				},
+				"v5s": { 
+					"short": "v5s", 
+					"full": "Godan verb with `su' ending" 
+				},
+				"v5t": { 
+					"short": "v5t", 
+					"full": "Godan verb with `tsu' ending" 
+				},
+				"v5u": { 
+					"short": "v5u", 
+					"full": "Godan verb with `u' ending" 
+				},
+				"v5u-s": {
+					"short": "v5u-s",
+					"full": "Godan verb with `u' ending (special class)"
+				},
+				"v1": { 
+					"short": "v1", 
+					"full": "Ichidan verb" 
+				},
+				"v1-s": { 
+					"short": "v1-s", 
+					"full": "Ichidan verb - kureru special class" 
+				},
+				"vz": {
+					"short": "vz",
+					"full": "Ichidan verb - zuru verb (alternative form of -jiru verbs)"
+				},
+				"int": { 
+					"short": "int", 
+					"full": "interjection (kandoushi)" 
+				},
+				"vn": { 
+					"short": "vn", 
+					"full": "irregular nu verb" 
+				},
+				"vr": { 
+					"short": "vr", 
+					"full": "irregular ru verb, plain form ends with -ri"
+				},
+				"vk": { 
+					"short": "vk", 
+					"full": "Kuru verb - special class"
+				},
+				"v2b-s": {
+					"short": "v2b-s",
+					"full": "Nidan verb (lower class) with `bu' ending (archaic)"
+				},
+				"v2d-s": {
+					"short": "v2d-s",
+					"full": "Nidan verb (lower class) with `dzu' ending (archaic)"
+				},
+				"v2g-s": {
+					"short": "v2g-s",
+					"full": "Nidan verb (lower class) with `gu' ending (archaic)"
+				},
+				"v2h-s": {
+					"short": "v2h-s",
+					"full": "Nidan verb (lower class) with `hu/fu' ending (archaic)"
+				},
+				"v2k-s": {
+					"short": "v2k-s",
+					"full": "Nidan verb (lower class) with `ku' ending (archaic)"
+				},
+				"v2m-s": {
+					"short": "v2m-s",
+					"full": "Nidan verb (lower class) with `mu' ending (archaic)"
+				},
+				"v2n-s": {
+					"short": "v2n-s",
+					"full": "Nidan verb (lower class) with `nu' ending (archaic)"
+				},
+				"v2r-s": {
+					"short": "v2r-s",
+					"full": "Nidan verb (lower class) with `ru' ending (archaic)"
+				},
+				"v2s-s": {
+					"short": "v2s-s",
+					"full": "Nidan verb (lower class) with `su' ending (archaic)"
+				},
+				"v2t-s": {
+					"short": "v2t-s",
+					"full": "Nidan verb (lower class) with `tsu' ending (archaic)"
+				},
+				"v2w-s": {
+					"short": "v2w-s",
+					"full": "Nidan verb (lower class) with `u' ending and `we' conjugation (archaic)"
+				},
+				"v2y-s": {
+					"short": "v2y-s",
+					"full": "Nidan verb (lower class) with `yu' ending (archaic)"
+				},
+				"v2z-s": {
+					"short": "v2z-s",
+					"full": "Nidan verb (lower class) with `zu' ending (archaic)"
+				},
+				"v2b-k": {
+					"short": "v2b-k",
+					"full": "Nidan verb (upper class) with `bu' ending (archaic)"
+				},
+				"v2d-k": {
+					"short": "v2d-k",
+					"full": "Nidan verb (upper class) with `dzu' ending (archaic)"
+				},
+				"v2g-k": {
+					"short": "v2g-k",
+					"full": "Nidan verb (upper class) with `gu' ending (archaic)"
+				},
+				"v2h-k": {
+					"short": "v2h-k",
+					"full": "Nidan verb (upper class) with `hu/fu' ending (archaic)"
+				},
+				"v2k-k": {
+					"short": "v2k-k",
+					"full": "Nidan verb (upper class) with `ku' ending (archaic)"
+				},
+				"v2m-k": {
+					"short": "v2m-k",
+					"full": "Nidan verb (upper class) with `mu' ending (archaic)"
+				},
+				"v2r-k": {
+					"short": "v2r-k",
+					"full": "Nidan verb (upper class) with `ru' ending (archaic)"
+				},
+				"v2t-k": {
+					"short": "v2t-k",
+					"full": "Nidan verb (upper class) with `tsu' ending (archaic)"
+				},
+				"v2y-k": {
+					"short": "v2y-k",
+					"full": "Nidan verb (upper class) with `yu' ending (archaic)"
+				},
+				"v2a-s": { 
+					"short": "v2a-s", 
+					"full": "Nidan verb with 'u' ending (archaic)"
+				},
+				"n-t": { 
+					"short": "n-t", 
+					"full": "noun (temporal) (jisoumeishi)" 
+				},
+				"vs": {
+					"short": "vs",
+					"full": "noun or participle which takes the aux. verb suru"
+				},
+				"adj-f": { 
+					"short": "adj-f", 
+					"full": "noun or verb acting prenominally"
+				},
+				"n-pref": { 
+					"short": "n-pref", 
+					"full": "noun, used as a prefix"
+				},
+				"n-suf": { 
+					"short": "n-suf", 
+					"full": "noun, used as a suffix"
+				},
+				"adj-no": {
+					"short": "adj-no",
+					"full": "nouns which may take the genitive case particle `no'"
+				},
+				"adj-pn": { 
+					"short": "adj-pn", 
+					"full": "pre-noun adjectival (rentaishi)"
+				},
+				"vs-c": { 
+					"short": "vs-c",
+					"full": "su verb - precursor to the modern suru"
+				},
+				"vs-i": { 
+					"short": "vs-i", 
+					"full": "suru verb - included"
+				},
+				"vs-s": { 
+					"short": "vs-s", 
+					"full": "suru verb - special class"
+				},
+				"v-unspec": { 
+					"short": "v-unspec",
+					"full": "verb unspecified"
+				},
+				"v4b": { 
+					"short": "v4b", 
+					"full": "Yodan verb with `bu' ending (archaic)" 
+				},
+				"v4g": { 
+					"short": "v4g", 
+					"full": "Yodan verb with `gu' ending (archaic)"
+				},
+				"v4h": { 
+					"short": "v4h", 
+					"full": "Yodan verb with `hu/fu' ending (archaic)" 
+				},
+				"v4k": { 
+					"short": "v4k", 
+					"full": "Yodan verb with `ku' ending (archaic)" 
+				},
+				"v4m": { 
+					"short": "v4m", 
+					"full": "Yodan verb with `mu' ending (archaic)" 
+				},
+				"v4n": { 
+					"short": "v4n", 
+					"full": "Yodan verb with `nu' ending (archaic)" 
+				},
+				"v4r": { 
+					"short": "v4r", 
+					"full": "Yodan verb with `ru' ending (archaic)" 
+				},
+				"v4s": { 
+					"short": "v4s", 
+					"full": "Yodan verb with `su' ending (archaic)" 
+				},
+				"v4t": { 
+					"short": "v4t", 
+					"full": "Yodan verb with `tsu' ending (archaic)" 
+				},
+				"adj-ix": {
+					"short": "ий-прил.",
+					"full": "и-прилагательное (предикативное) ёй/ий"
+				},
+				"n-pr": { 
+					"short": "сущ.-собств.", 
+					"full": "имя собственное" 
+				},
+				"adj-kari": {
+					"short": "кари-прил.",
+					"full": "кари-прилагательное (предикативное вспомогательное архаичное)"
+				},
+				"adj-ku": {
+					"short": "ку-прил.",
+					"full": "ку-прилагательное (предикативное архаичное)"
+				},
+				"pn": { 
+					"short": "местоим.", 
+					"full": "местоимение" 
+				},
+				"adj-na": {
+					"short": "на-прил.",
+					"full": "на-прилагательное (полупредикативное)"
+				},
+				"adv": { 
+					"short": "нар.", 
+					"full": "наречие" 
+				},
+				"unc": { 
+					"short": "некл.", 
+					"full": "не классифицировано" 
+				},
+				"vi": { 
+					"short": "неперех.-глаг.", 
+					"full": "непереходный глагол" 
+				},
+				"vt": { 
+					"short": "перех.-глаг.", 
+					"full": "переходный глагол" 
+				},
+				"adj-i": { 
+					"short": "и-прил.", 
+					"full": "прилагательное" 
+				},
+				"pref": { 
+					"short": "прист.", 
+					"full": "приставка" 
+				},
+				"cop-da": { 
+					"short": "связка", 
+					"full": "связка" 
+				},
+				"adj-shiku": {
+					"short": "сику-прил.",
+					"full": "сику-прилагательное (предикативное архаичное)"
+				},
+				"suf": { 
+					"short": "суфф.", 
+					"full": "суффикс" 
+				},
+				"n": { 
+					"short": "сущ.", 
+					"full": "существительное (общее, нарицательное)" 
+				},
+				"adj-t": {
+					"short": "тари-прил.",
+					"full": "тари-прилагательное (полупредикативное архаичное / непредикативное)"
+				},
+				"prt": { 
+					"short": "частица", 
+					"full": "частица" 
+				},
+				"num": { 
+					"short": "числ.", 
+					"full": "числительное" 
+				}
+			}
 		}
 	},
 	"timeAgo": {  
@@ -113,7 +551,7 @@
 		"lastMonth": "в прошлом месяце",
 		"nextMonth": "в следующем месяце",
 		"lastYear": "в прошлом году",
-    "nextYear": "в слудующем году",
+    "nextYear": "в следующем году",
 		"second": [
 			"секунду",
 			"секунды",
