@@ -68,6 +68,14 @@
 					}
 				}
 			}
+		},
+		"notFound": {
+			"message": "Похоже, что такой страницы не существует."
+		},
+		"jpnEntry": {
+			"satelliteButtonOpen": "раскрыть",
+			"satelliteButtonClose": "свернуть",
+			"editsTitle": "История правок"
 		}
 	},
 	"models": {
@@ -171,7 +179,7 @@
 			"pos": {
 				"adv-to": { 
 					"short": "adv-to", 
-					"full": "adverb taking the `to' particle" 
+					"full": "adverb taking the 'to' particle" 
 				},
 				"n-adv": { 
 					"short": "n-adv", 
@@ -219,47 +227,47 @@
 				},
 				"v5b": { 
 					"short": "v5b", 
-					"full": "Godan verb with `bu' ending"
+					"full": "Godan verb with 'bu' ending"
 				},
 				"v5g": { 
 					"short": "v5g", 
-					"full": "Godan verb with `gu' ending" 
+					"full": "Godan verb with 'gu' ending" 
 				},
 				"v5k": { 
 					"short": "v5k", 
-					"full": "Godan verb with `ku' ending"
+					"full": "Godan verb with 'ku' ending"
 				},
 				"v5m": { 
 					"short": "v5m", 
-					"full": "Godan verb with `mu' ending"
+					"full": "Godan verb with 'mu' ending"
 				},
 				"v5n": { 
 					"short": "v5n", 
-					"full": "Godan verb with `nu' ending" 
+					"full": "Godan verb with 'nu' ending" 
 				},
 				"v5r": { 
 					"short": "v5r", 
-					"full": "Godan verb with `ru' ending" 
+					"full": "Godan verb with 'ru' ending" 
 				},
 				"v5r-i": {
 					"short": "v5r-i",
-					"full": "Godan verb with `ru' ending (irregular verb)"
+					"full": "Godan verb with 'ru' ending (irregular verb)"
 				},
 				"v5s": { 
 					"short": "v5s", 
-					"full": "Godan verb with `su' ending" 
+					"full": "Godan verb with 'su' ending" 
 				},
 				"v5t": { 
 					"short": "v5t", 
-					"full": "Godan verb with `tsu' ending" 
+					"full": "Godan verb with 'tsu' ending" 
 				},
 				"v5u": { 
 					"short": "v5u", 
-					"full": "Godan verb with `u' ending" 
+					"full": "Godan verb with 'u' ending" 
 				},
 				"v5u-s": {
 					"short": "v5u-s",
-					"full": "Godan verb with `u' ending (special class)"
+					"full": "Godan verb with 'u' ending (special class)"
 				},
 				"v1": { 
 					"short": "v1", 
@@ -291,91 +299,91 @@
 				},
 				"v2b-s": {
 					"short": "v2b-s",
-					"full": "Nidan verb (lower class) with `bu' ending (archaic)"
+					"full": "Nidan verb (lower class) with 'bu' ending (archaic)"
 				},
 				"v2d-s": {
 					"short": "v2d-s",
-					"full": "Nidan verb (lower class) with `dzu' ending (archaic)"
+					"full": "Nidan verb (lower class) with 'dzu' ending (archaic)"
 				},
 				"v2g-s": {
 					"short": "v2g-s",
-					"full": "Nidan verb (lower class) with `gu' ending (archaic)"
+					"full": "Nidan verb (lower class) with 'gu' ending (archaic)"
 				},
 				"v2h-s": {
 					"short": "v2h-s",
-					"full": "Nidan verb (lower class) with `hu/fu' ending (archaic)"
+					"full": "Nidan verb (lower class) with 'hu/fu' ending (archaic)"
 				},
 				"v2k-s": {
 					"short": "v2k-s",
-					"full": "Nidan verb (lower class) with `ku' ending (archaic)"
+					"full": "Nidan verb (lower class) with 'ku' ending (archaic)"
 				},
 				"v2m-s": {
 					"short": "v2m-s",
-					"full": "Nidan verb (lower class) with `mu' ending (archaic)"
+					"full": "Nidan verb (lower class) with 'mu' ending (archaic)"
 				},
 				"v2n-s": {
 					"short": "v2n-s",
-					"full": "Nidan verb (lower class) with `nu' ending (archaic)"
+					"full": "Nidan verb (lower class) with 'nu' ending (archaic)"
 				},
 				"v2r-s": {
 					"short": "v2r-s",
-					"full": "Nidan verb (lower class) with `ru' ending (archaic)"
+					"full": "Nidan verb (lower class) with 'ru' ending (archaic)"
 				},
 				"v2s-s": {
 					"short": "v2s-s",
-					"full": "Nidan verb (lower class) with `su' ending (archaic)"
+					"full": "Nidan verb (lower class) with 'su' ending (archaic)"
 				},
 				"v2t-s": {
 					"short": "v2t-s",
-					"full": "Nidan verb (lower class) with `tsu' ending (archaic)"
+					"full": "Nidan verb (lower class) with 'tsu' ending (archaic)"
 				},
 				"v2w-s": {
 					"short": "v2w-s",
-					"full": "Nidan verb (lower class) with `u' ending and `we' conjugation (archaic)"
+					"full": "Nidan verb (lower class) with 'u' ending and 'we' conjugation (archaic)"
 				},
 				"v2y-s": {
 					"short": "v2y-s",
-					"full": "Nidan verb (lower class) with `yu' ending (archaic)"
+					"full": "Nidan verb (lower class) with 'yu' ending (archaic)"
 				},
 				"v2z-s": {
 					"short": "v2z-s",
-					"full": "Nidan verb (lower class) with `zu' ending (archaic)"
+					"full": "Nidan verb (lower class) with 'zu' ending (archaic)"
 				},
 				"v2b-k": {
 					"short": "v2b-k",
-					"full": "Nidan verb (upper class) with `bu' ending (archaic)"
+					"full": "Nidan verb (upper class) with 'bu' ending (archaic)"
 				},
 				"v2d-k": {
 					"short": "v2d-k",
-					"full": "Nidan verb (upper class) with `dzu' ending (archaic)"
+					"full": "Nidan verb (upper class) with 'dzu' ending (archaic)"
 				},
 				"v2g-k": {
 					"short": "v2g-k",
-					"full": "Nidan verb (upper class) with `gu' ending (archaic)"
+					"full": "Nidan verb (upper class) with 'gu' ending (archaic)"
 				},
 				"v2h-k": {
 					"short": "v2h-k",
-					"full": "Nidan verb (upper class) with `hu/fu' ending (archaic)"
+					"full": "Nidan verb (upper class) with 'hu/fu' ending (archaic)"
 				},
 				"v2k-k": {
 					"short": "v2k-k",
-					"full": "Nidan verb (upper class) with `ku' ending (archaic)"
+					"full": "Nidan verb (upper class) with 'ku' ending (archaic)"
 				},
 				"v2m-k": {
 					"short": "v2m-k",
-					"full": "Nidan verb (upper class) with `mu' ending (archaic)"
+					"full": "Nidan verb (upper class) with 'mu' ending (archaic)"
 				},
 				"v2r-k": {
 					"short": "v2r-k",
-					"full": "Nidan verb (upper class) with `ru' ending (archaic)"
+					"full": "Nidan verb (upper class) with 'ru' ending (archaic)"
 				},
 				"v2t-k": {
 					"short": "v2t-k",
-					"full": "Nidan verb (upper class) with `tsu' ending (archaic)"
+					"full": "Nidan verb (upper class) with 'tsu' ending (archaic)"
 				},
 				"v2y-k": {
 					"short": "v2y-k",
-					"full": "Nidan verb (upper class) with `yu' ending (archaic)"
+					"full": "Nidan verb (upper class) with 'yu' ending (archaic)"
 				},
 				"v2a-s": { 
 					"short": "v2a-s", 
@@ -403,7 +411,7 @@
 				},
 				"adj-no": {
 					"short": "adj-no",
-					"full": "nouns which may take the genitive case particle `no'"
+					"full": "nouns which may take the genitive case particle 'no'"
 				},
 				"adj-pn": { 
 					"short": "adj-pn", 
@@ -427,39 +435,39 @@
 				},
 				"v4b": { 
 					"short": "v4b", 
-					"full": "Yodan verb with `bu' ending (archaic)" 
+					"full": "Yodan verb with 'bu' ending (archaic)" 
 				},
 				"v4g": { 
 					"short": "v4g", 
-					"full": "Yodan verb with `gu' ending (archaic)"
+					"full": "Yodan verb with 'gu' ending (archaic)"
 				},
 				"v4h": { 
 					"short": "v4h", 
-					"full": "Yodan verb with `hu/fu' ending (archaic)" 
+					"full": "Yodan verb with 'hu/fu' ending (archaic)" 
 				},
 				"v4k": { 
 					"short": "v4k", 
-					"full": "Yodan verb with `ku' ending (archaic)" 
+					"full": "Yodan verb with 'ku' ending (archaic)" 
 				},
 				"v4m": { 
 					"short": "v4m", 
-					"full": "Yodan verb with `mu' ending (archaic)" 
+					"full": "Yodan verb with 'mu' ending (archaic)" 
 				},
 				"v4n": { 
 					"short": "v4n", 
-					"full": "Yodan verb with `nu' ending (archaic)" 
+					"full": "Yodan verb with 'nu' ending (archaic)" 
 				},
 				"v4r": { 
 					"short": "v4r", 
-					"full": "Yodan verb with `ru' ending (archaic)" 
+					"full": "Yodan verb with 'ru' ending (archaic)" 
 				},
 				"v4s": { 
 					"short": "v4s", 
-					"full": "Yodan verb with `su' ending (archaic)" 
+					"full": "Yodan verb with 'su' ending (archaic)" 
 				},
 				"v4t": { 
 					"short": "v4t", 
-					"full": "Yodan verb with `tsu' ending (archaic)" 
+					"full": "Yodan verb with 'tsu' ending (archaic)" 
 				},
 				"adj-ix": {
 					"short": "ий-прил.",
@@ -536,6 +544,666 @@
 				"num": { 
 					"short": "числ.", 
 					"full": "числительное" 
+				}
+			},
+			"fld": {
+				"audio-visual": { 
+					"short": "audio-visual", 
+					"full": "audvid" 
+				},
+				"horse": { 
+					"short": "horse", 
+					"full": "horse-racing" 
+				},
+				"aviat": { 
+					"short": "авиа.", 
+					"full": "авиация" 
+				},
+				"auto": { 
+					"short": "авто.", 
+					"full": "автомобильный термин" 
+				},
+				"alp": { 
+					"short": "альп.", 
+					"full": "альпинизм" 
+				},
+				"anat": { 
+					"short": "анат.", 
+					"full": "анатомия" 
+				},
+				"archeol": { 
+					"short": "археол.", 
+					"full": "археология" 
+				},
+				"archit": { 
+					"short": "архит.", 
+					"full": "архитектура и строительство" 
+				},
+				"astron": { 
+					"short": "астр.", 
+					"full": "астрономия" 
+				},
+				"baseb": { 
+					"short": "бейс.", 
+					"full": "бейсбол" 
+				},
+				"biol": { 
+					"short": "биол.", 
+					"full": "биология" 
+				},
+				"biochem": { 
+					"short": "биохим.", 
+					"full": "биохимия" 
+				},
+				"exch": { 
+					"short": "бирж.", 
+					"full": "биржевой термин"
+				},
+				"MA": { 
+					"short": "б.и.", 
+					"full": "боевые искусства" 
+				},
+				"bot": { 
+					"short": "бот.", 
+					"full": "ботаника" 
+				},
+				"buddh": { 
+					"short": "буд.", 
+					"full": "буддизм" 
+				},
+				"bkpg": { 
+					"short": "бухг.", 
+					"full": "бухгалтерский учёт" 
+				},
+				"vet": { 
+					"short": "вет.", 
+					"full": "ветеринария" 
+				},
+				"mil": { 
+					"short": "воен.", 
+					"full": "военный термин" 
+				},
+				"aero": { 
+					"short": "возд.", 
+					"full": "воздухоплавание" 
+				},
+				"volcan": { 
+					"short": "вулк.", 
+					"full": "вулканология" 
+				},
+				"comp": { 
+					"short": "выч.", 
+					"full": "вычислительная техника" 
+				},
+				"genet": { 
+					"short": "ген.", 
+					"full": "генетика" 
+				},
+				"geogr": { 
+					"short": "геогр.", 
+					"full": "география" 
+				},
+				"geol": { 
+					"short": "геол.", 
+					"full": "геология" 
+				},
+				"geom": { 
+					"short": "геом.", 
+					"full": "геометрия" 
+				},
+				"go": { 
+					"short": "го", 
+					"full": "го (игра)" 
+				},
+				"mining": { 
+					"short": "горн.", 
+					"full": "горное дело" 
+				},
+				"gramm": { 
+					"short": "грам.", 
+					"full": "грамматика" 
+				},
+				"bus": { 
+					"short": "бизн.", 
+					"full": "деловая лексика" 
+				},
+				"grmyth": { 
+					"short": "гр.миф.", 
+					"full": "древнегреческая мифология" 
+				},
+				"rail": { 
+					"short": "ж.-д.", 
+					"full": "железнодорожный термин" 
+				},
+				"zool": { 
+					"short": "зоол.", 
+					"full": "зоология" 
+				},
+				"art": { 
+					"short": "иск.", 
+					"full": "искусство, эстетика" 
+				},
+				"hyst": { 
+					"short": "ист.", 
+					"full": "история" 
+				},
+				"hystjp": { 
+					"short": "ист.яп.", 
+					"full": "история Японии" 
+				},
+				"ichth": { 
+					"short": "ихт.", 
+					"full": "ихтиология" 
+				},
+				"chn-hyst": { 
+					"short": "история Китая", 
+					"full": "кит.ист." 
+				},
+				"China": { 
+					"short": "кит.", 
+					"full": "Китай" 
+				},
+				"vidg": { 
+					"short": "игр.", 
+					"full": "компьютерные игры" 
+				},
+				"cond": { 
+					"short": "конд.", 
+					"full": "кондиционирование" 
+				},
+				"shipbuild": {
+					"short": "корабл.",
+					"full": "кораблестроение и судостроение, устройство корабля [судна]"
+				},
+				"cosm": { 
+					"short": "косм.", 
+					"full": "космонавтика" 
+				},
+				"cryst": { 
+					"short": "крист.", 
+					"full": "кристаллография" 
+				},
+				"food": { 
+					"short": "кул.", 
+					"full": "кулинария" 
+				},
+				"kyūdō": { 
+					"short": "кюдо", 
+					"full": "кюдо" 
+				},
+				"ling": { 
+					"short": "лингв.", 
+					"full": "лингвистика" 
+				},
+				"lit": { 
+					"short": "лит.", 
+					"full": "литература" 
+				},
+				"logic": { 
+					"short": "лог.", 
+					"full": "логика" 
+				},
+				"mahj": { 
+					"short": "мадж.", 
+					"full": "маджонг" 
+				},
+				"math": { 
+					"short": "мат.", 
+					"full": "математика" 
+				},
+				"mech": { 
+					"short": "машин.", 
+					"full": "машиностроение" 
+				},
+				"med": { 
+					"short": "мед.", 
+					"full": "медицина" 
+				},
+				"metall": { 
+					"short": "мет.", 
+					"full": "металлургия" 
+				},
+				"met": { 
+					"short": "метео", 
+					"full": "метеорология, климат, погода" 
+				},
+				"mycol": { 
+					"short": "микол.", 
+					"full": "микология" 
+				},
+				"mineral": { 
+					"short": "мин.", 
+					"full": "минералогия" 
+				},
+				"myth": { 
+					"short": "миф.", 
+					"full": "мифология" 
+				},
+				"nav": { 
+					"short": "мор.", 
+					"full": "морской термин" 
+				},
+				"music": { 
+					"short": "муз.", 
+					"full": "музыка" 
+				},
+				"petroleum": { 
+					"short": "нефт.пром.", 
+					"full": "нефтепромысловое дело" 
+				},
+				"optics": { 
+					"short": "опт.", 
+					"full": "оптика" 
+				},
+				"ornith": { 
+					"short": "орнит.", 
+					"full": "орнитология" 
+				},
+				"paleo": { 
+					"short": "палеонт.", 
+					"full": "палеонтология" 
+				},
+				"pathol": { 
+					"short": "патол.", 
+					"full": "патология" 
+				},
+				"print": { 
+					"short": "полигр.", 
+					"full": "полиграфия, типография" 
+				},
+				"polit": { 
+					"short": "полит.", 
+					"full": "политика" 
+				},
+				"psych": { 
+					"short": "псих.", 
+					"full": "психология, психиатрия" 
+				},
+				"bee": { 
+					"short": "пчел.", 
+					"full": "пчеловодство" 
+				},
+				"radio": { 
+					"short": "радио", 
+					"full": "радио" 
+				},
+				"rlc": { 
+					"short": "рлк", 
+					"full": "радиолокация" 
+				},
+				"relig": { 
+					"short": "рел.", 
+					"full": "религия" 
+				},
+				"rhetor": { 
+					"short": "ритор", 
+					"full": "риторика" 
+				},
+				"fish": { 
+					"short": "рыб.", 
+					"full": "рыболовство" 
+				},
+				"gardn": { 
+					"short": "сад.", 
+					"full": "садоводство" 
+				},
+				"comm": { 
+					"short": "свз.", 
+					"full": "связь" 
+				},
+				"shogi": { 
+					"short": "сёги", 
+					"full": "сёги" 
+				},
+				"agric": { 
+					"short": "с/х.", 
+					"full": "сельское хозяйство" 
+				},
+				"Shinto": { 
+					"short": "синт.", 
+					"full": "синтоизм" 
+				},
+				"sports": { 
+					"short": "спорт.", 
+					"full": "спортивный термин" 
+				},
+				"stat": { 
+					"short": "стат.", 
+					"full": "статистика" 
+				},
+				"sumo": { 
+					"short": "сумо", 
+					"full": "сумо" 
+				},
+				"theatre": { 
+					"short": "театр", 
+					"full": "театр" 
+				},
+				"Jptheatre": { 
+					"short": "театр.яп.", 
+					"full": "театр Японии" 
+				},
+				"textile": { 
+					"short": "текст.", 
+					"full": "текстильная промышленность" 
+				},
+				"telec": { 
+					"short": "телеком.", 
+					"full": "телекоммуникации" 
+				},
+				"engr": { 
+					"short": "тех.", 
+					"full": "техника" 
+				},
+				"tradem": { 
+					"short": "торг.", 
+					"full": "торговый знак" 
+				},
+				"chn-med": { 
+					"short": "кит.мед.", 
+					"full": "традиционная китайская медицина" 
+				},
+				"fantasy": { 
+					"short": "фант.", 
+					"full": "фантастика, фэнтези" 
+				},
+				"pharm": { 
+					"short": "фарм.", 
+					"full": "фармацевтика" 
+				},
+				"physics": { 
+					"short": "физ.", 
+					"full": "физика" 
+				},
+				"physiol": { 
+					"short": "физиол.", 
+					"full": "физиология" 
+				},
+				"phil": { 
+					"short": "филос.", 
+					"full": "философия" 
+				},
+				"finc": { 
+					"short": "фин.", 
+					"full": "финансы" 
+				},
+				"photo": { 
+					"short": "фото", 
+					"full": "фотография" 
+				},
+				"hanaf": { 
+					"short": "ханафуда", 
+					"full": "ханафуда" 
+				},
+				"chem": { 
+					"short": "хим.", 
+					"full": "химия" 
+				},
+				"Christn": { 
+					"short": "христ.", 
+					"full": "христианство"
+				},
+				"paper": { 
+					"short": "целл.бум.", 
+					"full": "целлюлозно-бумажная промышленность"
+				},
+				"chess": { 
+					"short": "шахм.", 
+					"full": "шахматы" 
+				},
+				"ecol": { 
+					"short": "экол.", 
+					"full": "экология" 
+				},
+				"econ": { 
+					"short": "экон.", 
+					"full": "экономика" 
+				},
+				"electr": { 
+					"short": "элн.", 
+					"full": "электроника" 
+				},
+				"elec": { 
+					"short": "эл.", 
+					"full": "электротехника" 
+				},
+				"embryo": { 
+					"short": "эмбриол.", 
+					"full": "эмбриология" 
+				},
+				"ent": { 
+					"short": "энт.", 
+					"full": "энтомология"
+				},
+				"law": { 
+					"short": "юр.", 
+					"full": "юридический термин"
+				},
+				"nucl": { 
+					"short": "ядрн", 
+					"full": "ядерная физика, ядерная энергия" 
+				}
+			},
+			"misc": {
+				"ama": { 
+					"short": "ама", 
+					"full": "Диалект Амакуса" 
+				},
+				"ktb": { 
+					"short": "кант.", 
+					"full": "Диалект Канто" 
+				},
+				"kyb": { 
+					"short": "киот.", 
+					"full": "Диалект Киото" 
+				},
+				"kyu": { 
+					"short": "кюсю", 
+					"full": "Диалект Кюсю" 
+				},
+				"nab": { 
+					"short": "наг.", 
+					"full": "Диалект Нагано" 
+				},
+				"tsb": { 
+					"short": "тоса", 
+					"full": "Диалект Тоса" 
+				},
+				"thb": { 
+					"short": "тох.", 
+					"full": "Диалект Тохоку" 
+				},
+				"hob": { 
+					"short": "хок.", 
+					"full": "Диалект Хоккайдо" 
+				},
+				"tsug": { 
+					"short": "цуг.", 
+					"full": "Диалект Цугару" 
+				},
+				"ksb": { 
+					"short": "канс.", 
+					"full": "Кансайский диалект" 
+				},
+				"osb": { 
+					"short": "ос.", 
+					"full": "Осакский диалект" 
+				},
+				"rkb": { 
+					"short": "рюкю", 
+					"full": "Рюкюский язык (диалект)" 
+				},
+				"net-sl": { 
+					"short": "net-sl", 
+					"full": "Internet slang" 
+				},
+				"arch": { 
+					"short": "арх.", 
+					"full": "архаизм" 
+				},
+				"wasei": { 
+					"short": "васэй", 
+					"full": "васэй" 
+				},
+				"pol": { 
+					"short": "вежл.", 
+					"full": "вежливое" 
+				},
+				"vulg": { 
+					"short": "вульг.", 
+					"full": "вульгарное" 
+				},
+				"X": { 
+					"short": "18+", 
+					"full": "грубое или пошлое" 
+				},
+				"chn": { 
+					"short": "дет.", 
+					"full": "детское" 
+				},
+				"yoji": { 
+					"short": "ёдзи", 
+					"full": "ёдзидзюкуго" 
+				},
+				"fem": { 
+					"short": "жен.", 
+					"full": "женское" 
+				},
+				"id": { 
+					"short": "ид.", 
+					"full": "идиома" 
+				},
+				"kigo": { 
+					"short": "киго", 
+					"full": "киго" 
+				},
+				"kigo-spring": { 
+					"short": "киго-весна", 
+					"full": "киго-весна" 
+				},
+				"kigo-winter": { 
+					"short": "киго-зима", 
+					"full": "киго-зима" 
+				},
+				"kigo-summer": { 
+					"short": "киго-лето", 
+					"full": "киго-лето" 
+				},
+				"kigo-autumn": { 
+					"short": "киго-осень", 
+					"full": "киго-осень" 
+				},
+				"literary": { 
+					"short": "кн.", 
+					"full": "книжное" 
+				},
+				"obsc": { 
+					"short": "мал.изв.", 
+					"full": "малоизвестное" 
+				},
+				"m-sl": { 
+					"short": "манга", 
+					"full": "манга" 
+				},
+				"male": { 
+					"short": "муж.", 
+					"full": "мужское" 
+				},
+				"male-sl": { 
+					"short": "муж-сленг", 
+					"full": "мужской сленг" 
+				},
+				"unc-misc": { 
+					"short": "некл.", 
+					"full": "неклассифицированное" 
+				},
+				"sens": { 
+					"short": "обид.", 
+					"full": "обидное" 
+				},
+				"uk": { 
+					"short": "об.к.", 
+					"full": "обычно записывается каной" 
+				},
+				"on-mim": { 
+					"short": "оном.", 
+					"full": "ономатопея" 
+				},
+				"derog": { 
+					"short": "оск.", 
+					"full": "оскорбительное" 
+				},
+				"figur": { 
+					"short": "перен.", 
+					"full": "переносное значение" 
+				},
+				"proverb": { 
+					"short": "посл.", 
+					"full": "пословица" 
+				},
+				"hon": { 
+					"short": "почтит.", 
+					"full": "почтительное" 
+				},
+				"poet": { 
+					"short": "поэт.", 
+					"full": "поэтичное" 
+				},
+				"col": { 
+					"short": "разг.", 
+					"full": "разговорное" 
+				},
+				"rare": { 
+					"short": "редк.", 
+					"full": "редкое" 
+				},
+				"court": {
+					"short": "придвор.",
+					"full": "секретный язык придворных дам периода Муромати"
+				},
+				"hum": { 
+					"short": "скром.", 
+					"full": "скромное" 
+				},
+				"sl": { 
+					"short": "сленг", 
+					"full": "сленговое" 
+				},
+				"abbr": { 
+					"short": "сокр.", 
+					"full": "сокращение" 
+				},
+				"ek": { 
+					"short": "тк", 
+					"full": "только кана" 
+				},
+				"eK": { 
+					"short": "тК", 
+					"full": "только кандзи" 
+				},
+				"obs": { 
+					"short": "уст.", 
+					"full": "устаревшее" 
+				},
+				"fam": { 
+					"short": "фам.", 
+					"full": "фамильярное" 
+				},
+				"quote": { 
+					"short": "цит.", 
+					"full": "цитата" 
+				},
+				"joc": { 
+					"short": "шутл.", 
+					"full": "шутливое" 
+				},
+				"euph": { 
+					"short": "эвф.", 
+					"full": "эвфемизм" 
+				},
+				"epist": { 
+					"short": "эпист.", 
+					"full": "эпистолярный стиль" 
 				}
 			}
 		}

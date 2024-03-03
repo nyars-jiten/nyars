@@ -35,11 +35,23 @@
                     :key="tagIndex"
                   >
                     <span v-for="value of tag.values" :key="value" class="pl-1 after:content-[','] first:pl-0 last:after:content-none">
-                      {{ value }}
+                      {{ $t(`models.tags.fld.${value}.short`) }}
                     </span>
                   </div>
                 </div>
-                <span class="whitespace-pre-wrap">{{ sense.value }}</span>
+                <!-- TODO: DELETE V-HTML -->
+                <!-- eslint-disable-next-line vue/no-v-html -->
+                <span class="whitespace-pre-wrap" v-html="bbCodesToHtml(sense.value)"></span>
+                <span v-if="sense.tags.some(t => t.type === 'Misc')" class="italic text-ns-gray-400">
+                  <div
+                    v-for="(tag, tagIndex) of sense.tags.filter(t => t.type === 'Misc')"
+                    :key="tagIndex"
+                  >
+                    <span v-for="value of tag.values" :key="value" class="pl-1 after:content-[','] first:before:content-['('] last:after:content-[')']">
+                      {{ $t(`models.tags.misc.${value}.full`) }}
+                    </span>
+                  </div>
+                </span>
               </div>
             </div>
           </div>

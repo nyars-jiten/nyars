@@ -7,6 +7,9 @@
       default: (): Edit[] => []
     }
   )
+  useHead({
+    title: 'Правки'
+  })
 </script>
 
 <template>

@@ -12,7 +12,7 @@
   <section :class="`border-l-2 px-2 pb-2 shadow border-ns-edit-status-${edit.status}`">
     <div class="p-2">
       <div class="flex items-center gap-4">
-        <NuxtLink to="/" class="truncate">
+        <NuxtLink :to="{name: 'jpn-wid', params: {wid: edit.identifier}}" class="truncate">
           <div class="truncate">
             <span
               v-for="(_,w) in edit.title"

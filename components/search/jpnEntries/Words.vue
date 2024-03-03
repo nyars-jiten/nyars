@@ -8,7 +8,7 @@
 
 <template>
   <div class="flex items-start gap-4">
-    <NuxtLink to="/" class="flex grow flex-col hover:text-ns-500">
+    <NuxtLink :to="{name: 'jpn-wid', params: {wid: jpnEntry.wid}}" class="flex grow flex-col hover:text-ns-500">
       <div
         v-for="(word, wordIndex) of jpnEntry.entry.words"
         :key="wordIndex"

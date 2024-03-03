@@ -8,5 +8,9 @@ export const useJpnEntryRepository = () => {
     return fetch<User[]>(`${path}/stats-user`)
   }
 
-  return { getWeeklyTopUsers }
+  const getJpnEntry = (wid: string): Promise<JpnEntry> => {
+    return fetch<JpnEntry>(`${path}/entries/${wid}`)
+  }
+
+  return { getWeeklyTopUsers, getJpnEntry }
 }

@@ -18,5 +18,15 @@ export const useEditRepository = () => {
     return fetch<EditCompare>(`${path}/${editId}/compare`)
   }
 
-  return { getEdits, getCompare }
+  // TODO change type to DictionaryType
+  const getEditsEntry = (entryId: string, dictionary: number, page = 0, count = 25) => {
+    return fetch<Edit[]>(`${path}/by-entry/${dictionary}/${entryId}`, {
+      params: {
+        p: page,
+        c: count
+      }
+    })
+  }
+
+  return { getEdits, getCompare, getEditsEntry }
 }

@@ -1,7 +1,7 @@
 {
 	"recommendations": [
 		"Vue.volar",
-		"vue.vscode-typescript-vue-plugin",
+		"vscode.typescript-language-features",
 		"dbaeumer.vscode-eslint", //also if you want add shortcut for "ESLint: Fix all auto-fixable Problems"
 		"bradlc.vscode-tailwindcss",
 		"Nuxtr.nuxtr-vscode", //for code generation

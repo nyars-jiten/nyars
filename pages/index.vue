@@ -41,6 +41,7 @@
           class="whitespace-nowrap before:text-ns-gray-200 before:content-['「'] after:text-ns-gray-200 after:content-['」・'] last:after:content-['」'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700"
         >
           <button
+            type="button"
             class="underline decoration-dotted underline-offset-4 hover:text-ns-500"
             @click="search(getExample(i+1, searchExample))"
           >
