@@ -63,7 +63,8 @@
 
 <template>
   <div class="flex flex-col gap-4">
-    <JpnEntryPreview v-if="jpnEntry" :jpn-entry="jpnEntry" />
+    <JpnEntry v-if="jpnEntry" :jpn-entry="jpnEntry" />
+    <NotFound v-else />
     <div v-if="images.length > 0" class="rounded border border-ns-gray-100 bg-white p-8 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800">
       <img
         :src="images[0].link"
