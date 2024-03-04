@@ -5,7 +5,7 @@
     <img
       src="@/assets/img/error.webp"
       alt="error-image"
-      class="h-48 w-48"
+      class="size-48"
     >
   </div>
 </template>

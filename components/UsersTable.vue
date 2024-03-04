@@ -20,10 +20,10 @@
 </script>
 
 <template>
-  <section class="flex flex-wrap border border-ns-gray-100 bg-white p-8 shadow-md md:rounded-md dark:border-ns-gray-700 dark:bg-ns-gray-800">
+  <section class="flex flex-wrap border border-ns-gray-100 bg-white p-8 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800 md:rounded-md">
     <div v-for="user of users" :key="user.id" class="flex p-4 md:w-1/3">
       <img
-        class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-ns-gray-200 object-center"
+        class="inline-flex size-12 items-center justify-center rounded-full bg-ns-gray-200 object-center"
         :src="useAvatar(user.avatar).href"
         :alt="user.username"
       >

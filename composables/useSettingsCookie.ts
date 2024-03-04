@@ -1,5 +1,8 @@
 export const useSettingsCookie = () => {
-  const cookie = useNyarsCookie<number>('settings', {
+  const cookie = useCookie('settings', {
+    maxAge: 400 * 24 * 60 * 60, // 400 days is Google Chrome limitation
+    path: '/',
+    watch: 'shallow',
     default: () => 0
   })
 

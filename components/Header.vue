@@ -5,7 +5,7 @@
         <div class="mr-8 border-r border-ns-gray-100 py-1 pr-8 dark:border-ns-gray-600">
           <NuxtLink
             to="/"
-            class="flex h-10 w-10 items-center rounded-full bg-ns-logo-light bg-cover font-medium dark:bg-ns-logo-dark"
+            class="flex size-10 items-center rounded-full bg-ns-logo-light bg-cover font-medium dark:bg-ns-logo-dark"
           />
         </div>
         <nav class="flex flex-wrap items-center justify-center gap-7 text-base dark:text-ns-gray-300 [&>*]:duration-150 [&>*]:ease-in-out">

@@ -38,5 +38,5 @@ export const getMessages = () => {
     invalid: 'bruh'
   }
 
-  return I18N_MESSAGES
+  return I18N_MESSAGES as UseTimeAgoMessages<string>
 }

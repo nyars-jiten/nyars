@@ -5,7 +5,7 @@
     <img
       src="@/assets/img/404.webp"
       alt="404-image"
-      class="h-48 w-48"
+      class="size-48"
     >
   </div>
 </template>

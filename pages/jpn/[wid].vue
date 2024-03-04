@@ -72,7 +72,7 @@
       >
       <span class="select-text">{{ images[0].title }}</span>
     </div>
-    <div v-if="satellites.length > 0" class="border border-ns-gray-100 bg-white p-8 shadow-md md:rounded-md dark:border-ns-gray-700 dark:bg-ns-gray-800">
+    <div v-if="satellites.length > 0" class="border border-ns-gray-100 bg-white p-8 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800 md:rounded-md">
       <div class="pb-4">
         <button
           type="button"
@@ -91,7 +91,7 @@
         />
       </div>
     </div>
-    <div v-if="edits.length > 0" class="flex flex-col gap-2 border border-ns-gray-100 bg-white p-8 shadow-md md:rounded-md dark:border-ns-gray-700 dark:bg-ns-gray-800">
+    <div v-if="edits.length > 0" class="flex flex-col gap-2 border border-ns-gray-100 bg-white p-8 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800 md:rounded-md">
       <span class="pb-2 text-ns-gray-400">
         {{ $t('pages.jpnEntry.editsTitle') }}
       </span>
