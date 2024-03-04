@@ -41,7 +41,6 @@ $ pnpm dev
 ```properties
 $ npx nuxi upgrade --force
 ```
-**NB!** Don't use this for upgrading: pnpm up -D nuxt
 
 ##### Check ts errors:
 
