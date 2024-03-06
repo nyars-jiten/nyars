@@ -1,0 +1,72 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2023": true
+  },
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    "ecmaVersion": "latest"
+  },
+  "extends": [
+    "eslint:recommended",
+    "@nuxtjs/eslint-config-typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:vue/vue3-strongly-recommended", // https://eslint.vuejs.org/user-guide/
+    "plugin:tailwindcss/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
+    // Global
+    "linebreak-style": ["error", "unix"],
+    "space-before-function-paren": ["error", {
+      "anonymous": "always",
+      "named": "never",
+      "asyncArrow": "always"
+    }],
+    "arrow-parens": ["error", "always"],
+    // Vue.js 
+    "vue/script-indent": ["error", 2, { 
+      "baseIndent": 1,
+      "switchCase": 1 
+    }],
+    "vue/html-self-closing": ["error", {
+      "html": {
+        "void": "never",
+        "normal": "never",
+        "component": "always"
+      },
+      "svg": "never",
+      "math": "never"
+    }],
+    "vue/multi-word-component-names": "off",
+    "vue/padding-line-between-blocks": ["error", "always"],
+    "vue/block-order": ["error", {
+      "order": [ "script", "template", "style" ]
+    }],
+    "vue/block-lang": ["error", {
+      "script": { "lang": "ts" }
+    }],
+    "vue/component-api-style": ["error", ["script-setup"]],
+    "vue/no-v-text": "error",
+    "vue/no-restricted-html-elements": [
+      "error",
+      {
+        "element": "a",
+        "message": "Use <NuxtLink> that a drop-in replacement for both Vue Router's <RouterLink> component and HTML's <a> tag"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["*.vue"],
+      "rules": {
+        "indent": "off"
+      }
+    }
+  ]
+}

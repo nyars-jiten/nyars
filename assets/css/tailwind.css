@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ns-gray-300: rgb(212 212 216);
+  --ns-gray-700: rgb(63 63 70);
+  --ns-gray-800: rgb(39 39 42);
+}
+
+html.dark::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: var(--ns-gray-800);
+}
+
+html.dark::-webkit-scrollbar {
+  width: 12px;
+  /* width: 0.6em; */
+  background-color: var(--ns-gray-800);
+}
+
+html.dark::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--ns-gray-700);
+}
+
+html.dark::-webkit-scrollbar-thumb:hover {
+  border-radius: 10px;
+  background-color: #39393F;
+}
+
+html.light::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: white;
+}
+
+html.light::-webkit-scrollbar {
+  width: 12px;
+  /* width: 0.6em; */
+  background-color: white;
+}
+
+html.light::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #C1C1C1;
+}
+
+html.light::-webkit-scrollbar-thumb:hover {
+  border-radius: 10px;
+  background-color: #A8A8A8;
+}
+
+@layer components {
+  .btn-generic {
+    @apply inline-flex items-center gap-2 whitespace-nowrap rounded border border-ns-gray-300 bg-white px-2 py-1 text-xs font-medium uppercase shadow hover:bg-ns-gray-300 focus:outline-none dark:border-ns-gray-600 dark:bg-ns-gray-700 hover:dark:bg-ns-gray-600;
+  }
+}
