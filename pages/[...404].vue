@@ -3,7 +3,7 @@
     <span class="text-5xl text-ns-500">404</span>
     <span class="">{{ $t('pages.notFound.noPage') }}</span>
     <img
-      src="@/assets/img/404.webp"
+      src="@/assets/img/404.png"
       alt="404-image"
       class="size-48"
     >

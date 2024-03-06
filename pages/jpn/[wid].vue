@@ -1,32 +1,32 @@
 <script setup lang="ts">
-  const route = useRoute('jpn-wid')
+  const wid = useRoute('jpn-wid').params.wid
 
   const api = useApi()
 
   const { data: jpnEntry } = await useAsyncData(
     'jpnEntry',
-    () => api.jpnEntryRepository.getJpnEntry(route.params.wid)
+    () => api.jpnEntryRepository.getJpnEntry(wid)
   )
 
   const { data: images } = await useLazyAsyncData(
-    'jpnEntryImages',
-    () => api.kotobaRepository.getImages(route.params.wid, 0),
+    `jpnEntryImages-${wid}`,
+    () => api.kotobaRepository.getImages(wid, 0),
     {
       default: (): Image[] => []
     }
   )
 
   const { data: edits } = await useLazyAsyncData(
-    'jpnEntryEdits',
-    () => api.editRepository.getEditsEntry(route.params.wid, 0),
+    `jpnEntryEdits-${wid}`,
+    () => api.editRepository.getEditsEntry(wid, 0),
     {
       default: (): Edit[] => []
     }
   )
 
   const { data: satellites } = await useLazyAsyncData(
-    'jpnEntrySatellites',
-    () => api.satelliteRepository.getSatellites(route.params.wid),
+    `jpnEntrySatellites-${wid}`,
+    () => api.satelliteRepository.getSatellites(wid),
     {
       default: (): SatelliteData[] => []
     }

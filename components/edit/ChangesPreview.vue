@@ -8,7 +8,7 @@
   const api = useApi()
 
   const { data: compare } = await useLazyAsyncData(
-    'compare',
+    `compare-${props.editId}`,
     () => api.editRepository.getCompare(props.editId),
     {
       default: (): EditCompare => {
