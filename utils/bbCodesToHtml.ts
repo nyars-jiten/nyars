@@ -1,6 +1,6 @@
 export default (rawString: string|null) => {
   if (rawString === null) {
-    return
+    return ''
   }
   const result = rawString
     .replace(/\[i\](.*?)\[\/i\]/gim, '<em>$1</em>')

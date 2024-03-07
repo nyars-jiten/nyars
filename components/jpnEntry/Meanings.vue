@@ -5,9 +5,38 @@
 
   defineProps<Props>()
 
+  const { t } = useI18n()
+
   const route = useRoute('jpn-wid')
 
   const isPreview = !route.params.wid
+
+  const bbCodesWithTagsToHTML = (sense: string|null, tags: Tag[]) => {
+    if (tags.length === 0) {
+      return bbCodesToHtml(sense)
+    }
+
+    let tagsFld = ''
+    let tagsMisc = ''
+
+    for (const tag of tags) {
+      if (tag.type === 'Fld') {
+        for (const value of tag.values ?? []) {
+          tagsFld += `<span class="pl-1 after:content-[','] first:pl-0 last:mr-2 last:after:content-none">${t(`models.tags.fld.${value}.short`)}</span>`
+        }
+      }
+      if (tag.type === 'Misc') {
+        for (const value of tag.values ?? []) {
+          tagsMisc += `<span class="pl-1 after:content-[','] first:before:content-['('] last:after:content-[')']">${t(`models.tags.misc.${value}.full`)}</span>`
+        }
+      }
+    }
+    return (
+      `<span class="italic text-green-600">${tagsFld}</span>` +
+      bbCodesToHtml(sense) +
+      `<span class="italic text-ns-gray-400">${tagsMisc}</span>`
+    )
+  }
 </script>
 
 <template>
@@ -33,31 +62,9 @@
                 <span v-if="lang.senses.length > 1" class="min-w-[30px] text-center text-ns-gray-400">
                   {{ senseIndex + 1 }}
                 </span>
-                <div class="flex">
-                  <div v-if="sense.tags.some(t => t.type === 'Fld')" class="mr-1 italic text-green-600">
-                    <div
-                      v-for="(tag, tagIndex) of sense.tags.filter(t => t.type === 'Fld')"
-                      :key="tagIndex"
-                    >
-                      <span v-for="value of tag.values" :key="value" class="pl-1 after:content-[','] first:pl-0 last:after:content-none">
-                        {{ $t(`models.tags.fld.${value}.short`) }}
-                      </span>
-                    </div>
-                  </div>
-                  <!-- TODO: DELETE V-HTML -->
-                  <!-- eslint-disable-next-line vue/no-v-html -->
-                  <span class="whitespace-pre-wrap" v-html="bbCodesToHtml(sense.value)"></span>
-                  <span v-if="sense.tags.some(t => t.type === 'Misc')" class="italic text-ns-gray-400">
-                    <div
-                      v-for="(tag, tagIndex) of sense.tags.filter(t => t.type === 'Misc')"
-                      :key="tagIndex"
-                    >
-                      <span v-for="value of tag.values" :key="value" class="pl-1 after:content-[','] first:before:content-['('] last:after:content-[')']">
-                        {{ $t(`models.tags.misc.${value}.full`) }}
-                      </span>
-                    </div>
-                  </span>
-                </div>
+                <!-- TODO: DELETE V-HTML -->
+                <!-- eslint-disable-next-line vue/no-v-html -->
+                <span class="whitespace-pre-wrap" v-html="bbCodesWithTagsToHTML(sense.value, sense.tags)"></span>
               </div>
               <div v-if="!isPreview" class="my-1 ml-7">
                 <ul v-for="(reference, referenceIndex) of sense.references" :key="referenceIndex">
