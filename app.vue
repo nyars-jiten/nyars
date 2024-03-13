@@ -38,6 +38,7 @@
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+    <LazyNotifications />
   </div>
 </template>
 

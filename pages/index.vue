@@ -1,4 +1,8 @@
 <script setup lang="ts">
+  definePageMeta({
+    name: 'Home'
+  })
+
   const infoExamples = [
     // Кол-во примеров:
     [1, 2], // Поиск по японским словам
@@ -27,12 +31,12 @@
 
 <template>
   <section
-    class="flex select-text flex-col gap-4 border border-ns-gray-100 bg-white p-10 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800 md:rounded-md"
+    class="flex select-text flex-col gap-4 rounded-md border border-ns-gray-100 bg-white px-2 py-6 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800 sm:px-5 md:px-8"
   >
     <div class="indent-10">
       {{ $t('pages.main.infoNyars') }}
     </div>
-    <ul>
+    <ul class="flex flex-col gap-1">
       <li v-for="(searchExamples, i) in infoExamples" :key="i">
         → {{ $t(`pages.main.infoExamples.${i+1}.text`) }}
         <span

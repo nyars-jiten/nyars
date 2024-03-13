@@ -7,6 +7,11 @@
       default: (): Edit[] => []
     }
   )
+  definePageMeta({
+    name: 'Edits',
+    path: '/edits'
+  })
+
   useHead({
     title: 'Правки'
   })
