@@ -28,7 +28,7 @@
     `jpnEntrySatellites-${wid}`,
     () => api.satelliteRepository.getSatellites(wid),
     {
-      default: (): SatelliteData[] => []
+      default: (): SatelliteData[][] => [[]]
     }
   )
 
@@ -84,8 +84,8 @@
       </div>
       <div class="flex flex-col gap-4">
         <Satellite
-          v-for="satelliteData of satellites"
-          :key="satelliteData.key"
+          v-for="(satelliteData, index) of satellites"
+          :key="index"
           :satellite-data="satelliteData"
           :show-data="showData"
         />
