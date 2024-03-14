@@ -26,6 +26,9 @@
       { rel: 'application/manifest+json', href: '/manifest.json' }
     ],
     noscript: [{ children: 'This app requires javascript to work' }],
+    htmlAttrs: {
+      lang: 'ru'
+    },
     bodyAttrs: {
       class: 'min-h-screen select-none bg-ns-gray-100 text-ns-gray-700 dark:bg-ns-gray-900 dark:text-ns-gray-300'
     }
