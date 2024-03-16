@@ -92,14 +92,14 @@
                   </li>
                 </ul>
               </div>
-              <PanelBody v-if="!isPreview && sense.examples?.length" class="mx-6 my-2">
-                <p v-for="(example, exampleIndex) of sense.examples" :key="exampleIndex">
+              <div v-if="!isPreview && sense.examples?.length" :class="`${lang.senses.length > 1 ? 'ml-8':'ml-1'}`">
+                <div v-for="(example, exampleIndex) of sense.examples" :key="exampleIndex" class="border-l-2 border-ns-gray-200 pl-2 text-neutral-500 dark:border-ns-gray-700">
                   <!-- TODO: DELETE V-HTML -->
                   <!-- eslint-disable-next-line vue/no-v-html -->
                   <span class="whitespace-pre-wrap" v-html="furiganaToHtml(example.value)"></span>
                   {{ example.translation }}
-                </p>
-              </PanelBody>
+                </div>
+              </div>
             </div>
           </div>
         </div>

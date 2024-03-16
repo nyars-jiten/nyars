@@ -11,17 +11,17 @@
 </script>
 
 <template>
-  <div class="flex items-start gap-4">
+  <div class="flex flex-col items-start gap-3 pl-4">
     <NuxtLink
       :to="{name: 'jpn-wid', params: {wid: jpnEntry.wid}}"
-      :class="`flex grow flex-col ${isPreview?'hover:text-ns-500':'pointer-events-none'}`"
+      :class="`flex flex-col break-all ${isPreview?'hover:text-ns-500':'pointer-events-none'}`"
     >
       <div
         v-for="(word, wordIndex) of jpnEntry.entry.words"
         :key="wordIndex"
         class="text-2xl"
       >
-        <ul v-show="word.writings?.length" class="inline before:text-ns-gray-200 before:content-['【'] after:text-ns-gray-200 after:content-['】'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
+        <ul v-show="word.writings?.length" class="inline before:-ml-3 before:text-ns-gray-200 before:content-['【'] after:text-ns-gray-200 after:content-['】'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
           <li
             v-for="(writing, writingIndex) of word.writings"
             :key="writingIndex"
