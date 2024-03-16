@@ -23,7 +23,7 @@
           :alt="user.username"
         >
         <IconAccount v-else class="!m-0 text-3xl" />
-        <span class="inline-block max-w-20 overflow-hidden text-ellipsis min-[380px]:max-w-32 sm:max-w-40">
+        <span class="inline-block max-w-20 truncate min-[380px]:max-w-32 sm:max-w-40">
           {{ user ? user.username : $t('components.header.profileMenu.unknownUser') }}
         </span>
         <IconChevronDown class="!m-0 text-xl text-ns-gray-400 duration-[0.2s] ease-out group-hover:rotate-[-180deg]" />

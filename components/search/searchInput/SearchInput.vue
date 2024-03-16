@@ -76,16 +76,6 @@
         <IconMagnify class="!m-0 text-2xl" />
       </button>
     </div>
-    <Transition
-      enter-active-class="duration-200 ease-out"
-      enter-from-class="max-h-0"
-      enter-to-class="max-h-56"
-      leave-active-class="duration-200 ease-in"
-      leave-from-class="max-h-56"
-      leave-to-class=" max-h-0"
-      mode="in-out"
-    >
-      <LazySearchSettings v-if="showSearchSettings" ref="settings" />
-    </Transition>
+    <LazySearchSettings v-if="showSearchSettings" ref="settings" />
   </section>
 </template>

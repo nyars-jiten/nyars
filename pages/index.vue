@@ -1,8 +1,4 @@
 <script setup lang="ts">
-  definePageMeta({
-    name: 'Home'
-  })
-
   const infoExamples = [
     // Кол-во примеров:
     [1, 2], // Поиск по японским словам

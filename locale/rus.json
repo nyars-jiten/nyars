@@ -55,6 +55,11 @@
 			"searchSettings": {
 				"headerText": "Искать:"
 			}
+		},
+		"editGroup": {
+			"changesPreview": {
+				"comment": "Обоснование:"
+			}
 		}
 	},
 	"pages": {

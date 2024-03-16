@@ -15,7 +15,6 @@ html.dark ::-webkit-scrollbar-track {
 
 html.dark ::-webkit-scrollbar {
   width: 12px;
-  /* width: 0.6em; */
   background-color: var(--ns-gray-800);
 }
 
@@ -36,7 +35,6 @@ html.light ::-webkit-scrollbar-track {
 
 html.light ::-webkit-scrollbar {
   width: 12px;
-  /* width: 0.6em; */
   background-color: white;
 }
 
