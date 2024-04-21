@@ -4,7 +4,7 @@
     path: '/login'
   })
 
-  const api = useApi()
+  const { clientRegister, clientLogin } = useApi(userRepository)
 
   const notificationStore = useNotificationStore()
   const userStore = useUserStore()
@@ -23,11 +23,11 @@
     let authError: AuthError|null = null
 
     if (isRegister.value) {
-      const { data, error } = await api.userRepository.clientRegister(login.value, password.value)
+      const { data, error } = await clientRegister(login.value, password.value)
       user = data
       authError = error
     } else {
-      const { data, error } = await api.userRepository.clientLogin(login.value, password.value)
+      const { data, error } = await clientLogin(login.value, password.value)
       user = data
       authError = error
     }

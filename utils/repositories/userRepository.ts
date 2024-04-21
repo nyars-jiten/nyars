@@ -1,8 +1,7 @@
-import { useApiFetch } from '../apiFetch'
+import type { $Fetch, NitroFetchRequest } from 'nitropack'
 
-export const useUserRepository = () => {
+export const userRepository = <T>(fetch: $Fetch<T, NitroFetchRequest>) => {
   const path = '/users'
-  const fetch = useApiFetch()
 
   const clientLogin = (username: string, password: string) => {
     return fetch<User>(`${path}/auth`, {

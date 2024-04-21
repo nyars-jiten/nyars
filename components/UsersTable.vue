@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  const api = useApi()
+  const { getWeeklyTopUsers } = useApi(jpnEntryRepository)
   const { data: users } = await useLazyAsyncData(
     'users',
-    () => api.jpnEntryRepository.getWeeklyTopUsers(),
+    () => getWeeklyTopUsers(),
     {
       default: () => [],
       transform: (users) => {

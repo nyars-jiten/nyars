@@ -1,8 +1,7 @@
-import { useApiFetch } from '../apiFetch'
+import type { $Fetch, NitroFetchRequest } from 'nitropack'
 
-export const useSatelliteRepository = () => {
+export const satelliteRepository = <T>(fetch: $Fetch<T, NitroFetchRequest>) => {
   const path = '/Satellites'
-  const fetch = useApiFetch()
 
   const getSatellites = (entryId: string): Promise<SatelliteData[][]> => {
     return fetch<SatelliteData[][]>(`${path}/${entryId}`)

@@ -49,8 +49,8 @@ export const useSearchStore = defineStore('searchStore', () => {
       suggestionsCache.value.clear()
       suggestionsCache.value.set('', [])
     }
-    const api = useApi()
-    const response = await api.searchRepository.getSuggestions(searchQuery)
+    const { getSuggestions } = useApi(searchRepository)
+    const response = await getSuggestions(searchQuery)
     suggestionsCache.value.set(searchQuery, response)
   }
 

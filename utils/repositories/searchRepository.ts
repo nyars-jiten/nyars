@@ -1,8 +1,7 @@
-import { useApiFetch } from '../apiFetch'
+import type { $Fetch, NitroFetchRequest } from 'nitropack'
 
-export const useSearchRepository = () => {
+export const searchRepository = <T>(fetch: $Fetch<T, NitroFetchRequest>) => {
   const path = '/Search'
-  const fetch = useApiFetch()
 
   const getSuggestions = (input: string, number = 10): Promise<string[]> => {
     return fetch<string[]>(`${path}/preview`, {

@@ -11,11 +11,11 @@
   mode.value = 'words'
   searchQuery.value = requestQuery.value
 
-  const api = useApi()
+  const { getJpnEntries } = useApi(searchRepository)
 
   const { pending, data: jpnEntriesSearchResult } = await useLazyAsyncData(
     'jpnEntriesSearchResult',
-    () => api.searchRepository.getJpnEntries(requestQuery.value),
+    () => getJpnEntries(requestQuery.value),
     {
       watch: [requestQuery]
     }
