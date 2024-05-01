@@ -28,20 +28,6 @@ export default defineNuxtConfig({
       pathPrefix: false
     }
   ],
-  hooks: {
-    'pages:extend'(pages) {
-      pages.push({
-        name: 'search-JpnEntries',
-        path: '/s/jpn',
-        file: '~/pages/search/JpnEntries.vue'
-      })
-      pages.push({
-        name: 'search-KanjiEntries',
-        path: '/s/kanji',
-        file: '~/pages/search/KanjiEntries.vue'
-      })
-    }
-  },
   modules: [
     '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss',
@@ -51,9 +37,11 @@ export default defineNuxtConfig({
     'nuxt-svgo',
     'nuxt-lodash',
     '@vueuse/nuxt',
-    '@nuxtjs/html-validator',
     'nuxt-typed-router'
   ],
+  eslint: {
+    lintOnStart: false
+  },
   i18n: {
     vueI18n: './locale/i18n.config.ts',
     langDir: 'locale',

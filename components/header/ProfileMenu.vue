@@ -26,7 +26,7 @@
         <span class="inline-block max-w-20 truncate min-[380px]:max-w-32 sm:max-w-40">
           {{ user ? user.username : $t('components.header.profileMenu.unknownUser') }}
         </span>
-        <IconChevronDown class="!m-0 text-xl text-ns-gray-400 duration-[0.2s] ease-out group-hover:rotate-[-180deg]" />
+        <IconChevronDown class="!m-0 text-xl text-ns-gray-400 duration-[0.2s] ease-out group-hover:-rotate-180" />
       </NuxtLink>
       <div class="absolute right-0 hidden w-[180px] group-hover:inline lg:left-1/2 lg:ml-[-90px]">
         <div class="flex flex-col gap-1 rounded-md border border-ns-gray-200 bg-white p-2 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800">

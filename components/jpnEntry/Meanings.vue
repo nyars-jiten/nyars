@@ -8,8 +8,16 @@
   const { t } = useI18n()
 
   const route = useRoute('jpn-wid')
+  const searchStore = useSearchStore()
 
   const isPreview = !route.params.wid
+
+  const clickOnTooltip = (e: Event) => {
+    const tag = (e.target as HTMLElement).dataset.tag
+    if (tag) {
+      searchStore.searchQuery = '#' + tag
+    }
+  }
 
   const bbCodesWithTagsToHTML = (sense: string|null, tags: Tag[]) => {
     if (tags.length === 0) {
@@ -22,7 +30,16 @@
     for (const tag of tags) {
       if (tag.type === 'Fld') {
         for (const value of tag.values ?? []) {
-          tagsFld += `<span class="pl-1 after:content-[','] first:pl-0 last:mr-2 last:after:content-none">${t(`models.tags.fld.${value}.short`)}</span>`
+          /* eslint-disable vue/script-indent */
+          tagsFld += `<span data-tag="${value}" class="group relative cursor-pointer pl-1 after:content-[','] first:pl-0 last:mr-2 last:after:content-none">` +
+                        t(`models.tags.fld.${value}.short`) +
+                        '<div class="absolute hidden z-20 left-1/2 translate-x-[-50%] bottom-full pb-1 group-hover:inline">' +
+                          '<div class="flex items-center justify-center px-3 py-1.5 rounded-md border border-ns-gray-200 bg-white shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800">' +
+                            `<span class="leading-[75%] pb-[4px] text-nowrap">${t(`models.tags.fld.${value}.full`)}</span>` +
+                          '</div>' +
+                        '</div>' +
+                      '</span>'
+          /* eslint-enable vue/script-indent */
         }
       }
       if (tag.type === 'Misc') {
@@ -64,7 +81,7 @@
                 </span>
                 <!-- TODO: DELETE V-HTML -->
                 <!-- eslint-disable-next-line vue/no-v-html -->
-                <span class="whitespace-pre-wrap" v-html="bbCodesWithTagsToHTML(sense.value, sense.tags)"></span>
+                <span class="whitespace-pre-wrap" @click="clickOnTooltip" v-html="bbCodesWithTagsToHTML(sense.value, sense.tags)"></span>
               </div>
               <div v-if="!isPreview" class="my-1 ml-7">
                 <ul v-for="(reference, referenceIndex) of sense.references" :key="referenceIndex">

@@ -23,8 +23,12 @@
 </script>
 
 <template>
-  <div>
-    <section v-if="!pending" class="flex flex-col gap-5">
+  <div class="flex flex-col gap-5">
+    <div v-if="pending" class="flex gap-3 pl-3">
+      <Spinner />
+      <TextLoading text="Идёт поиск" />
+    </div>
+    <section v-else class="flex flex-col gap-5">
       <LazyGrammarParser
         v-if="jpnEntriesSearchResult?.info.parsedGrammar.length"
         :parsed-words="jpnEntriesSearchResult?.info.parsedGrammar"
