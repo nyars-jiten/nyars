@@ -55,7 +55,7 @@
         </div>
       </div>
     </li>
-    <li v-if="user?.role === 'Admin'" class="group relative">
+    <li v-show="user?.role === 'Admin'" class="group relative">
       <NuxtLink to="/" class="flex items-center [@media(hover:none)]:pointer-events-none">
         <span class="group-hover:text-ns-500">{{ $t('components.header.navigation[2].title') }}</span>
         <IconChevronDown class="!m-0 text-xl text-ns-gray-400 duration-[0.2s] ease-out group-hover:-rotate-180 group-hover:text-ns-500" />

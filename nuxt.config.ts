@@ -51,7 +51,10 @@ export default defineNuxtConfig({
       file: 'rus.json'
     }],
     strategy: 'no_prefix',
-    lazy: true
+    lazy: true,
+    detectBrowserLanguage: {
+      useCookie: false
+    }
   },
   googleFonts: {
     families: {

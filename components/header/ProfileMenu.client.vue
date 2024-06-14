@@ -15,7 +15,7 @@
 <template>
   <div class="flex flex-wrap items-center justify-center gap-2 text-base">
     <div class="group relative">
-      <NuxtLink to="/" class="flex items-center gap-2 rounded-md p-1.5 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700 [@media(hover:none)]:pointer-events-none">
+      <NuxtLink to="/" :class="`flex items-center ${user ? 'gap-2':'gap-0'} rounded-md p-1.5 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700 [@media(hover:none)]:pointer-events-none`">
         <img
           v-if="user"
           class="size-9 rounded-full object-center"
@@ -24,7 +24,7 @@
         >
         <IconAccount v-else class="!m-0 text-3xl" />
         <span class="inline-block max-w-20 truncate min-[380px]:max-w-32 sm:max-w-40">
-          {{ user ? user.username : $t('components.header.profileMenu.unknownUser') }}
+          {{ user ? user.username : '' }}
         </span>
         <IconChevronDown class="!m-0 text-xl text-ns-gray-400 duration-[0.2s] ease-out group-hover:-rotate-180" />
       </NuxtLink>

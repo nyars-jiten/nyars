@@ -26,7 +26,7 @@
   <div class="flex flex-col gap-5">
     <div v-if="pending" class="flex gap-3 pl-3">
       <Spinner />
-      <TextLoading text="Идёт поиск" />
+      <TextLoading :text="$t('components.uiKit.textLoading')" />
     </div>
     <section v-else class="flex flex-col gap-5">
       <LazyGrammarParser

@@ -31,11 +31,11 @@
       if (tag.type === 'Fld') {
         for (const value of tag.values ?? []) {
           /* eslint-disable vue/script-indent */
-          tagsFld += `<span data-tag="${value}" class="group relative cursor-pointer pl-1 after:content-[','] first:pl-0 last:mr-2 last:after:content-none">` +
+          tagsFld += '<span class="group relative cursor-pointer pl-1 after:content-[\',\'] first:pl-0 last:mr-2 last:after:content-none">' +
                         t(`models.tags.fld.${value}.short`) +
-                        '<div class="absolute hidden z-20 left-1/2 translate-x-[-50%] bottom-full pb-1 group-hover:inline">' +
+                        '<div class="absolute hidden z-20 left-1/2 translate-x-[-50%] bottom-full pb-1 group-hover:block">' +
                           '<div class="flex items-center justify-center px-3 py-1.5 rounded-md border border-ns-gray-200 bg-white shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800">' +
-                            `<span class="leading-[75%] pb-[4px] text-nowrap">${t(`models.tags.fld.${value}.full`)}</span>` +
+                            `<span class="text-center leading-tight pb-[4px] text-wrap xl:text-nowrap xl:leading-[75%]">${t(`models.tags.fld.${value}.full`)}</span>` +
                           '</div>' +
                         '</div>' +
                       '</span>'

@@ -31,7 +31,6 @@
 				}
 			],
 			"profileMenu": {
-				"unknownUser": "Анон",
 				"profile": "Профиль",
 				"settings": "Настройки",
 				"login": "Войти",
@@ -60,6 +59,14 @@
 			"changesPreview": {
 				"comment": "Обоснование:"
 			}
+		},
+		"statistics": {
+			"weeklyActiveUser": {
+				"jpnAuto": "авто(нов./исп.)"
+			}
+		},
+		"uiKit": {
+			"textLoading": "Идёт поиск"
 		}
 	},
 	"pages": {
@@ -132,7 +139,8 @@
 		"userRating": {
 			"weekRating": "рейтинг",
 			"summaryWeekJapNew": "новых статей",
-			"summaryWeekJapEdit": "исправлений"
+			"summaryWeekJapEdit": "исправлений",
+			"summaryWeekApproved": "проверок"
 		},
 		"edit": {
 			"type": {
