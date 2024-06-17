@@ -1,11 +1,11 @@
 export const useSearchStore = defineStore('searchStore', () => {
-  const mode = ref<'words'|'kanji'>('words')
+  const mode = ref<'words' | 'kanji'>('words')
 
   const searchQuery = ref('')
 
   const currentSuggestion = ref(-1)
 
-  const setCurrentSuggestion = async (action: 'up'|'down'|'reset') => {
+  const setCurrentSuggestion = async (action: 'up' | 'down' | 'reset') => {
     if (action === 'reset') {
       currentSuggestion.value = -1
       return

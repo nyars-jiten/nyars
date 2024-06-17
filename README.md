@@ -48,6 +48,12 @@ $ npx nuxi upgrade --force
 $ npx nuxi typecheck
 ```
 
+##### View current eslint rules:
+
+```properties
+$ npx @eslint/config-inspector
+```
+
 <details>
   <summary>Possible problems:</summary>
   

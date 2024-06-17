@@ -19,7 +19,7 @@
     }
   }
 
-  const bbCodesWithTagsToHTML = (sense: string|null, tags: Tag[]) => {
+  const bbCodesWithTagsToHTML = (sense: string | null, tags: Tag[]) => {
     if (tags.length === 0) {
       return bbCodesToHtml(sense)
     }
@@ -30,15 +30,17 @@
     for (const tag of tags) {
       if (tag.type === 'Fld') {
         for (const value of tag.values ?? []) {
+          /* eslint-disable @stylistic/indent-binary-ops */
           /* eslint-disable vue/script-indent */
-          tagsFld += '<span class="group relative cursor-pointer pl-1 after:content-[\',\'] first:pl-0 last:mr-2 last:after:content-none">' +
-                        t(`models.tags.fld.${value}.short`) +
-                        '<div class="absolute hidden z-20 left-1/2 translate-x-[-50%] bottom-full pb-1 group-hover:block">' +
-                          '<div class="flex items-center justify-center px-3 py-1.5 rounded-md border border-ns-gray-200 bg-white shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800">' +
-                            `<span class="text-center leading-tight pb-[4px] text-wrap xl:text-nowrap xl:leading-[75%]">${t(`models.tags.fld.${value}.full`)}</span>` +
-                          '</div>' +
-                        '</div>' +
-                      '</span>'
+          tagsFld += '<span class="group relative cursor-pointer pl-1 after:content-[\',\'] first:pl-0 last:mr-2 last:after:content-none">'
+                        + t(`models.tags.fld.${value}.short`)
+                        + '<div class="absolute hidden z-20 left-1/2 translate-x-[-50%] bottom-full pb-1 group-hover:block">'
+                          + '<div class="flex items-center justify-center px-3 py-1.5 rounded-md border border-ns-gray-200 bg-white shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800">'
+                            + `<span class="text-center leading-tight pb-[4px] text-wrap xl:text-nowrap xl:leading-[75%]">${t(`models.tags.fld.${value}.full`)}</span>`
+                          + '</div>'
+                        + '</div>'
+                      + '</span>'
+          /* eslint-enable @stylistic/indent-binary-ops */
           /* eslint-enable vue/script-indent */
         }
       }
@@ -49,9 +51,9 @@
       }
     }
     return (
-      `<span class="italic text-green-600">${tagsFld}</span>` +
-      bbCodesToHtml(sense) +
-      `<span class="italic text-ns-gray-400">${tagsMisc}</span>`
+      `<span class="italic text-green-600">${tagsFld}</span>`
+      + bbCodesToHtml(sense)
+      + `<span class="italic text-ns-gray-400">${tagsMisc}</span>`
     )
   }
 </script>

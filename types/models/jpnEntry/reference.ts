@@ -1,6 +1,6 @@
 export interface Reference {
-  value: string|null
-  target: string|null
+  value: string | null
+  target: string | null
   /** синоним | частичный синоним | антоним | сравни | сокращение от */
-  referenceType: 0|1|2|3|4
+  referenceType: 0 | 1 | 2 | 3 | 4
 }

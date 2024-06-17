@@ -3,12 +3,12 @@
     position: number
     avatar: string
     username: string
-    weekRating: number|undefined
-    jpnNew: number|undefined
-    jpnEdit: number|undefined
-    jpnNewAuto: number|undefined
-    jpnEditAuto: number|undefined
-    approved: number|undefined
+    weekRating: number | undefined
+    jpnNew: number | undefined
+    jpnEdit: number | undefined
+    jpnNewAuto: number | undefined
+    jpnEditAuto: number | undefined
+    approved: number | undefined
   }
 
   defineProps<Props>()

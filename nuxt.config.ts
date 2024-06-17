@@ -29,7 +29,7 @@ export default defineNuxtConfig({
     }
   ],
   modules: [
-    '@nuxtjs/eslint-module',
+    '@nuxt/eslint',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
     '@nuxtjs/google-fonts',
@@ -40,7 +40,11 @@ export default defineNuxtConfig({
     'nuxt-typed-router'
   ],
   eslint: {
-    lintOnStart: false
+    // checker: true,
+    config: {
+      stylistic: true,
+      standalone: false
+    }
   },
   i18n: {
     vueI18n: './locale/i18n.config.ts',

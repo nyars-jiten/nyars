@@ -1,5 +1,5 @@
 export const useUserStore = defineStore('userStore', () => {
-  const user = ref<User|null>(null)
+  const user = ref<User | null>(null)
 
   const { serverGetCurrentUser } = useApi(userRepository)
 

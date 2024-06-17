@@ -1,4 +1,4 @@
-export default (rawString: string|null) => {
+export default (rawString: string | null) => {
   if (rawString === null) {
     return
   }

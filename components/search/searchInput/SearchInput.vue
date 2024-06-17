@@ -31,7 +31,8 @@
     if (currentSuggestion !== -1) {
       searchStore.searchQuery = (await searchStore.getSuggestions)[currentSuggestion]
       await navigateTo({ name: 'search-JpnEntries', query: { r: searchStore.searchQuery } })
-    } else {
+    }
+    else {
       search()
     }
     input.value?.blur()

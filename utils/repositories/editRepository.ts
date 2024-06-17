@@ -3,7 +3,7 @@ import type { $Fetch, NitroFetchRequest } from 'nitropack'
 export const editRepository = <T>(fetch: $Fetch<T, NitroFetchRequest>) => {
   const path = '/Edits'
 
-  const getEdits = (number = 25, page = 0, statuses: number|null = null): Promise<Edit[]> => {
+  const getEdits = (number = 25, page = 0, statuses: number | null = null): Promise<Edit[]> => {
     return fetch<Edit[]>(path, {
       params: {
         n: number,

@@ -19,14 +19,15 @@
       return
     }
 
-    let user: User|null = null
-    let authError: AuthError|null = null
+    let user: User | null = null
+    let authError: AuthError | null = null
 
     if (isRegister.value) {
       const { data, error } = await clientRegister(login.value, password.value)
       user = data
       authError = error
-    } else {
+    }
+    else {
       const { data, error } = await clientLogin(login.value, password.value)
       user = data
       authError = error

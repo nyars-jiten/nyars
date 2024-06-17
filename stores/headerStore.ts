@@ -6,7 +6,8 @@ export const useHeaderStore = defineStore('headerStore', () => {
 
     if (showHamburgerMenu.value) {
       document.documentElement.classList.add('overflow-hidden')
-    } else {
+    }
+    else {
       document.documentElement.classList.remove('overflow-hidden')
     }
   }

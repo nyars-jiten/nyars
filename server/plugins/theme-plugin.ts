@@ -3,7 +3,8 @@ export default defineNitroPlugin((nitroApp) => {
     const cookie = parseCookies(event)
     if (cookie?.settings === '1') {
       html.htmlAttrs.push(' class="dark"')
-    } else {
+    }
+    else {
       html.htmlAttrs.push(' class="light"')
     }
   })

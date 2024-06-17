@@ -1,4 +1,4 @@
 export interface Writing {
-  value: string|null
-  tag: Tag|null
+  value: string | null
+  tag: Tag | null
 }

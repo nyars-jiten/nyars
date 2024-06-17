@@ -1,6 +1,6 @@
 import type { RouterConfig } from '@nuxt/schema'
 
-export default <RouterConfig> {
+export default {
   routes: (_routes) => {
     const routes = [
       {
@@ -16,4 +16,4 @@ export default <RouterConfig> {
     ]
     return _routes.concat(routes)
   }
-}
+} as RouterConfig

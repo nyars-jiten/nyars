@@ -1,4 +1,4 @@
 export interface Satellite {
   title: string
-  lang: 'rus'|'eng'|'jap'
+  lang: 'rus' | 'eng' | 'jap'
 }
