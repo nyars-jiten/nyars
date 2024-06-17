@@ -1,4 +1,9 @@
 <script setup lang="ts">
+  definePageMeta({
+    name: 'search-JpnEntries',
+    path: '/s/jpn'
+  })
+
   const route = useRoute()
 
   const requestQuery = computed(() => {

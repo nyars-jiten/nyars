@@ -13,7 +13,7 @@
           <IconHamburgerMenu class="!m-0 text-2xl text-ns-gray-500 dark:text-ns-gray-300" />
         </div>
         <NuxtLink
-          to="/"
+          :to="{name: 'Home'}"
           class="relative flex items-center gap-1.5 rounded-md p-1.5 after:absolute after:-right-2 after:h-5/6 after:border-r after:border-ns-gray-200 after:content-[''] hover:bg-ns-gray-100 after:dark:border-ns-gray-600 dark:hover:bg-ns-gray-700"
           @click="headerStore.closeHamburgerMenu"
         >
