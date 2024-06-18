@@ -31,7 +31,7 @@
     "nuxt-typed-router": "^3.6.4",
     "pinia": "^2.1.7",
     "typescript": "^5.4.5",
-    "typescript-eslint": "^7.13.0",
+    "typescript-eslint": "8.0.0-alpha.30",
     "vite-plugin-eslint2": "^4.4.0",
     "vue": "^3.4.29",
     "vue-eslint-parser": "^9.4.3",
