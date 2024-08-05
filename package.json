@@ -27,7 +27,7 @@
     "eslint": "^8.57.0",
     "eslint-plugin-tailwindcss": "^3.14.3",
     "eslint-plugin-vue": "^9.22.0",
-    "nuxt": "^3.8.2",
+    "nuxt": "^3.12.4",
     "nuxt-lodash": "^2.5.3",
     "nuxt-svgo": "^3.7.0",
     "nuxt-typed-router": "^3.6.1",
