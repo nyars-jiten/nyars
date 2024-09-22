@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     host: '0.0.0.0',
     port: 8080
   },
+  compatibilityDate: '2024-09-22',
   app: {
     rootId: 'nyars',
     pageTransition: { name: 'page', mode: 'out-in' }
