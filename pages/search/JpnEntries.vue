@@ -1,4 +1,9 @@
 <script setup lang="ts">
+  definePageMeta({
+    name: 'search-JpnEntries',
+    path: '/s/jpn'
+  })
+
   const route = useRoute()
 
   const requestQuery = computed(() => {
@@ -11,11 +16,11 @@
   mode.value = 'words'
   searchQuery.value = requestQuery.value
 
-  const api = useApi()
+  const { getJpnEntries } = useApi(searchRepository)
 
   const { pending, data: jpnEntriesSearchResult } = await useLazyAsyncData(
     'jpnEntriesSearchResult',
-    () => api.searchRepository.getJpnEntries(requestQuery.value),
+    () => getJpnEntries(requestQuery.value),
     {
       watch: [requestQuery]
     }
@@ -23,8 +28,12 @@
 </script>
 
 <template>
-  <div>
-    <section v-if="!pending" class="flex flex-col gap-5">
+  <div class="flex flex-col gap-5">
+    <div v-if="pending" class="flex gap-3 pl-3">
+      <Spinner />
+      <TextLoading :text="$t('components.uiKit.textLoading')" />
+    </div>
+    <section v-else class="flex flex-col gap-5">
       <LazyGrammarParser
         v-if="jpnEntriesSearchResult?.info.parsedGrammar.length"
         :parsed-words="jpnEntriesSearchResult?.info.parsedGrammar"

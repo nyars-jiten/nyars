@@ -1,16 +1,19 @@
 <script setup lang="ts">
   const wid = useRoute('jpn-wid').params.wid
 
-  const api = useApi()
+  const { getJpnEntry } = useApi(jpnEntryRepository)
+  const { getImages } = useApi(kotobaRepository)
+  const { getEditsEntry } = useApi(editRepository)
+  const { getSatellites } = useApi(satelliteRepository)
 
   const { data: jpnEntry } = await useAsyncData(
     'jpnEntry',
-    () => api.jpnEntryRepository.getJpnEntry(wid)
+    () => getJpnEntry(wid)
   )
 
   const { data: images } = await useLazyAsyncData(
     `jpnEntryImages-${wid}`,
-    () => api.kotobaRepository.getImages(wid, 0),
+    () => getImages(wid, 0),
     {
       default: (): Image[] => []
     }
@@ -18,7 +21,7 @@
 
   const { data: edits } = await useLazyAsyncData(
     `jpnEntryEdits-${wid}`,
-    () => api.editRepository.getEditsEntry(wid, 0),
+    () => getEditsEntry(wid, 0),
     {
       default: (): Edit[] => []
     }
@@ -26,9 +29,9 @@
 
   const { data: satellites } = await useLazyAsyncData(
     `jpnEntrySatellites-${wid}`,
-    () => api.satelliteRepository.getSatellites(wid),
+    () => getSatellites(wid),
     {
-      default: (): SatelliteData[] => []
+      default: (): SatelliteData[][] => [[]]
     }
   )
 
@@ -72,7 +75,7 @@
       >
       <span class="select-text">{{ images[0].title }}</span>
     </div>
-    <div v-if="satellites.length > 0" class="border border-ns-gray-100 bg-white p-8 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800 md:rounded-md">
+    <div v-if="satellites.length > 0 && satellites[0].length > 0" class="border border-ns-gray-100 bg-white p-8 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800 md:rounded-md">
       <div class="pb-4">
         <button
           type="button"
@@ -84,8 +87,8 @@
       </div>
       <div class="flex flex-col gap-4">
         <Satellite
-          v-for="satelliteData of satellites"
-          :key="satelliteData.key"
+          v-for="(satelliteData, index) of satellites"
+          :key="index"
           :satellite-data="satelliteData"
           :show-data="showData"
         />

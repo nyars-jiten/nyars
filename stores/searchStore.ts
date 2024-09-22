@@ -1,11 +1,11 @@
 export const useSearchStore = defineStore('searchStore', () => {
-  const mode = ref<'words'|'kanji'>('words')
+  const mode = ref<'words' | 'kanji'>('words')
 
   const searchQuery = ref('')
 
   const currentSuggestion = ref(-1)
 
-  const setCurrentSuggestion = async (action: 'up'|'down'|'reset') => {
+  const setCurrentSuggestion = async (action: 'up' | 'down' | 'reset') => {
     if (action === 'reset') {
       currentSuggestion.value = -1
       return
@@ -49,8 +49,8 @@ export const useSearchStore = defineStore('searchStore', () => {
       suggestionsCache.value.clear()
       suggestionsCache.value.set('', [])
     }
-    const api = useApi()
-    const response = await api.searchRepository.getSuggestions(searchQuery)
+    const { getSuggestions } = useApi(searchRepository)
+    const response = await getSuggestions(searchQuery)
     suggestionsCache.value.set(searchQuery, response)
   }
 

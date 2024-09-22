@@ -1,4 +1,4 @@
 export interface JpnEntriesSearchResult {
   info: SearchResultJpnInfo
-  readonly result: JpnEntry[]|null
+  readonly result: JpnEntry[] | null
 }

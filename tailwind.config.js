@@ -16,8 +16,8 @@ module.exports = {
       },
       // All custom classes start with prefix "ns" (Nyars)
       backgroundImage: {
-        'ns-logo-light': "url('/favicon-96x96.png')",
-        'ns-logo-dark': "url('/favicon-dark-96x96.png')"
+        'ns-logo-light': `url('/favicon-96x96.png')`,
+        'ns-logo-dark': `url('/favicon-dark-96x96.png')`
       },
       colors: {
         ns: {

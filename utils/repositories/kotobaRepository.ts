@@ -1,8 +1,7 @@
-import { useApiFetch } from '../apiFetch'
+import type { $Fetch, NitroFetchRequest } from 'nitropack'
 
-export const useKotobaRepository = () => {
+export const kotobaRepository = <T>(fetch: $Fetch<T, NitroFetchRequest>) => {
   const path = '/Kotoba'
-  const fetch = useApiFetch()
 
   // TODO change type to DictionaryType
   const getImages = (entryId: string, dictionary: number): Promise<Image[]> => {

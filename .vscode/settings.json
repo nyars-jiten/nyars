@@ -8,4 +8,10 @@
   "nuxtr.piniaFiles.defaultTemplate": "setup",
   "nuxtr.vueFiles.firstTag": "script",
   "nuxtr.vueFiles.style.addStyleTag": false,
+  // Lint
+  "eslint.useFlatConfig": true,
+  "eslint.validate": [
+    "javascript",
+    "vue"
+  ]
 }

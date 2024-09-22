@@ -8,46 +8,57 @@
   --ns-gray-800: rgb(39 39 42);
 }
 
-html.dark::-webkit-scrollbar-track {
+html.dark ::-webkit-scrollbar-track {
   border-radius: 10px;
   background-color: var(--ns-gray-800);
 }
 
-html.dark::-webkit-scrollbar {
+html.dark ::-webkit-scrollbar {
   width: 12px;
-  /* width: 0.6em; */
   background-color: var(--ns-gray-800);
 }
 
-html.dark::-webkit-scrollbar-thumb {
+html.dark ::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: var(--ns-gray-700);
 }
 
-html.dark::-webkit-scrollbar-thumb:hover {
+html.dark ::-webkit-scrollbar-thumb:hover {
   border-radius: 10px;
   background-color: #39393F;
 }
 
-html.light::-webkit-scrollbar-track {
+html.light ::-webkit-scrollbar-track {
   border-radius: 10px;
   background-color: white;
 }
 
-html.light::-webkit-scrollbar {
+html.light ::-webkit-scrollbar {
   width: 12px;
-  /* width: 0.6em; */
   background-color: white;
 }
 
-html.light::-webkit-scrollbar-thumb {
+html.light ::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #C1C1C1;
 }
 
-html.light::-webkit-scrollbar-thumb:hover {
+html.light ::-webkit-scrollbar-thumb:hover {
   border-radius: 10px;
   background-color: #A8A8A8;
+}
+
+html.light ::-webkit-scrollbar-corner {
+  background-color: white;
+}
+
+html.dark ::-webkit-scrollbar-corner {
+  background-color: var(--ns-gray-800);
+}
+
+::selection {
+  background: #6aa3ab;
+  color: white;
 }
 
 @layer components {

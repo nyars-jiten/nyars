@@ -3,9 +3,9 @@
     <span class="text-5xl text-ns-500">404</span>
     <span>{{ $t('pages.notFound.noEntry') }}</span>
     <img
-      src="@/assets/img/error.webp"
-      alt="error-image"
-      class="size-48"
+      src="@/assets/img/404.png"
+      alt="404-image"
+      class="size-72"
     >
   </div>
 </template>

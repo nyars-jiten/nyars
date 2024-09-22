@@ -1,10 +1,42 @@
 {
   "components": {
 		"header": {
-			"main": "Главная",
-			"edits": "Правки",
-			"bugTracker": "Багтрекер",
-			"download": "Скачать"
+			"nyars": "НЯРС",
+			"navigation": [
+				{
+					"title": "Словарь",
+					"pages": {
+						"edits": "Правки",
+						"statistics": "Статистика",
+						"documentation": "Документация",
+						"download": "Скачать",
+						"github": "Багтрекер"
+					}
+				},
+				{
+					"title": "Добавить",
+					"pages": {
+						"jpnEditor": "Добавить слово",
+						"exampleEditor": "Добавить пример",
+						"kanjiEditor": "Добавить кандзи"
+					}
+				},
+				{
+					"title": "Админка",
+					"pages": {
+						"ocr": "Оцифровка",
+						"tags": "Теги",
+						"fields": "Тематики"
+					}
+				}
+			],
+			"profileMenu": {
+				"profile": "Профиль",
+				"settings": "Настройки",
+				"login": "Войти",
+				"exit": "Выйти",
+				"themeSwitcher": "Смена темы"
+			}
 		},
 		"searchGroup": {
 			"general": {
@@ -22,6 +54,19 @@
 			"searchSettings": {
 				"headerText": "Искать:"
 			}
+		},
+		"editGroup": {
+			"changesPreview": {
+				"comment": "Обоснование:"
+			}
+		},
+		"statistics": {
+			"weeklyActiveUser": {
+				"jpnAuto": "авто(нов./исп.)"
+			}
+		},
+		"uiKit": {
+			"textLoading": "Идёт поиск"
 		}
 	},
 	"pages": {
@@ -77,13 +122,25 @@
 			"satelliteButtonOpen": "раскрыть",
 			"satelliteButtonClose": "свернуть",
 			"editsTitle": "История правок"
+		},
+		"login": {
+			"titleLogin": "Войти",
+			"titleRegister": "Регистрация",
+			"login": "Логин",
+			"password": "Пароль",
+			"noAccount": "Ещё нет аккаунта?",
+			"buttonLogin": "Вход",
+			"buttonRegister": "Зарегистрироваться",
+			"or": "или",
+			"discordOAuth": "Войти через Discord"
 		}
 	},
 	"models": {
 		"userRating": {
 			"weekRating": "рейтинг",
 			"summaryWeekJapNew": "новых статей",
-			"summaryWeekJapEdit": "исправлений"
+			"summaryWeekJapEdit": "исправлений",
+			"summaryWeekApproved": "проверок"
 		},
 		"edit": {
 			"type": {

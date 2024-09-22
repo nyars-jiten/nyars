@@ -1,8 +1,7 @@
-import { useApiFetch } from '../apiFetch'
+import type { $Fetch, NitroFetchRequest } from 'nitropack'
 
-export const useJpnEntryRepository = () => {
+export const jpnEntryRepository = <T>(fetch: $Fetch<T, NitroFetchRequest>) => {
   const path = '/dictionary/jap'
-  const fetch = useApiFetch()
 
   const getWeeklyTopUsers = (): Promise<User[]> => {
     return fetch<User[]>(`${path}/stats-user`)

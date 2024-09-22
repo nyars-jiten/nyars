@@ -7,13 +7,13 @@
 </script>
 
 <template>
-  <span class="flex items-center gap-2 leading-none">
+  <span class="flex items-center gap-1.5">
     <img
-      class="h-6 rounded-full shadow"
+      class="h-6 rounded-full object-center"
       :src="useAvatar(user.avatar).href"
       :alt="user.username"
     >
-    <span class="whitespace-nowrap">
+    <span class="inline-block max-w-36 truncate">
       {{ user.username }}
     </span>
   </span>

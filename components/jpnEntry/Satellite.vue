@@ -1,6 +1,6 @@
 <script setup lang="ts">
   interface Props {
-    satelliteData: SatelliteData
+    satelliteData: SatelliteData[]
     showData: boolean
   }
 
@@ -24,19 +24,26 @@
 
 <template>
   <div
+    v-if="satelliteData.length > 0"
     :class="`flex ${localShowData?'flex-col-reverse':''} gap-4 select-text rounded-md border border-ns-gray-200 px-4 py-2 dark:border-ns-gray-600`"
     @click="toggleShowData"
   >
     <div class="contents">
       <div v-if="!localShowData" class="grow">
-        {{ satelliteData.body.split(/\n/)[0] }}
+        {{ satelliteData[0].body.split(/\n/)[0] }}
       </div>
       <div v-if="localShowData" class="grow whitespace-pre-wrap">
-        {{ satelliteData.body }}
+        <div
+          v-for="satellite of satelliteData"
+          :key="satellite.key"
+          class="mb-3 grow whitespace-pre-wrap border-b border-ns-gray-200 pb-3 last:mb-0 last:border-none last:pb-0 dark:border-ns-gray-600"
+        >
+          {{ satellite.body }}
+        </div>
       </div>
     </div>
     <div class="italic">
-      {{ satelliteData.satellite.title }}
+      {{ satelliteData[0].satellite.title }}
     </div>
   </div>
 </template>

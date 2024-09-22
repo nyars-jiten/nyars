@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[1px] bg-ns-gray-100 before:bg-ns-500 dark:h-[0.5px] dark:bg-ns-gray-700">
+  <div class="h-px bg-ns-gray-100 before:bg-ns-500 dark:h-[0.5px] dark:bg-ns-gray-700">
   </div>
 </template>
 

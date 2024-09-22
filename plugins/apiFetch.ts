@@ -1,4 +1,4 @@
-export const useApiFetch = () => {
+export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig()
 
   const apiFetch = $fetch.create({
@@ -8,5 +8,9 @@ export const useApiFetch = () => {
       Accept: 'application/json'
     }
   })
-  return apiFetch
-}
+  return {
+    provide: {
+      apiFetch
+    }
+  }
+})

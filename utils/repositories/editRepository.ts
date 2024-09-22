@@ -1,10 +1,9 @@
-import { useApiFetch } from '../apiFetch'
+import type { $Fetch, NitroFetchRequest } from 'nitropack'
 
-export const useEditRepository = () => {
+export const editRepository = <T>(fetch: $Fetch<T, NitroFetchRequest>) => {
   const path = '/Edits'
-  const fetch = useApiFetch()
 
-  const getEdits = (number = 25, page = 0, statuses: number|null = null): Promise<Edit[]> => {
+  const getEdits = (number = 25, page = 0, statuses: number | null = null): Promise<Edit[]> => {
     return fetch<Edit[]>(path, {
       params: {
         n: number,
