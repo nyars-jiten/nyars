@@ -1,7 +1,7 @@
-export  interface SearchRequest {
-  query: string;
+export interface V2SearchRequest {
+  query: string
 }
 
-export  interface SearchResponse {
-  result: EntryJp[];
+export interface V2SearchResponse {
+  result: V2EntryJp[]
 }
