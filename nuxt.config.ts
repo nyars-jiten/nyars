@@ -1,7 +1,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   devServer: {
-    host: '0.0.0.0',
+    // host: '0.0.0.0',
     port: 8080
   },
   compatibilityDate: '2024-09-22',
@@ -38,8 +38,14 @@ export default defineNuxtConfig({
     'nuxt-svgo',
     'nuxt-lodash',
     '@vueuse/nuxt',
-    'nuxt-typed-router'
+    'nuxt-typed-router',
+    '@nuxt/icon'
   ],
+  icon: {
+    serverBundle: {
+      collections: ['uil']
+    }
+  },
   eslint: {
     // checker: true,
     config: {

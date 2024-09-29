@@ -30,7 +30,7 @@
       lang: 'ru'
     },
     bodyAttrs: {
-      class: 'min-h-screen select-none bg-ns-gray-100 text-ns-gray-700 dark:bg-ns-gray-900 dark:text-ns-gray-300'
+      class: 'min-h-dvh select-none bg-ns-gray-100 text-ns-gray-700 dark:bg-neutral-900 dark:text-gray-300'
     }
   })
 </script>

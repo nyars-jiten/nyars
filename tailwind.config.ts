@@ -1,8 +1,8 @@
 import defaultTheme from 'tailwindcss/defaultTheme'
 import colors from 'tailwindcss/colors'
+import type { Config } from 'tailwindcss'
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [],
   darkMode: 'class',
   theme: {
@@ -76,4 +76,4 @@ module.exports = {
     { pattern: /text-ns-tag-/ },
     { pattern: /border-ns-tag-/ }
   ]
-}
+} satisfies Config

@@ -15,6 +15,7 @@
     "@eslint/js": "^9.11.0",
     "@nuxt/devtools": "^1.5.0",
     "@nuxt/eslint": "^0.5.7",
+    "@nuxt/icon": "^1.5.2",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/i18n": "npm:@nuxtjs/i18n-edge@8.3.1-28617338.6223696",
     "@nuxtjs/i18n-edge": "8.3.1-28617338.6223696",
@@ -37,5 +38,8 @@
     "vue-eslint-parser": "^9.4.3",
     "vue-router": "^4.4.5",
     "vue-tsc": "^2.1.6"
+  },
+  "dependencies": {
+    "tailwind-variants": "^0.2.1"
   }
 }
