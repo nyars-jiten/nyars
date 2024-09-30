@@ -9,7 +9,7 @@ const isPreview = !route.params.wid
 </script>
 
 <template>
-  <div>
+  <div class="space-y-4">
     <div v-for="(meaning, meaningIndex) of meanings" :key="meaningIndex">
       <div v-show="meanings.length > 1 || !isPreview" class="mb-2 border-b border-ns-gray-200 pb-2 pl-2 text-sm dark:border-ns-gray-700">
         <span
@@ -21,7 +21,7 @@ const isPreview = !route.params.wid
         </span>
       </div>
 
-      <div class="flex w-11/12 flex-col">
+      <div class="flex w-11/12 flex-col space-y-4">
         <Sense
           v-for="(sense, senseIndex) of meaning.senses"
           :key="senseIndex"
@@ -30,6 +30,7 @@ const isPreview = !route.params.wid
           :is-preview="isPreview"
           class="flex flex-col"
         />
+
         <div v-if="meaning.note.length > 0" class="flex flex-col">
           <div class="flex">
             <span class="min-w-[30px] text-center text-ns-gray-400">

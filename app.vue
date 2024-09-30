@@ -30,19 +30,19 @@ useHead({
     lang: 'ru',
   },
   bodyAttrs: {
-    class: 'min-h-dvh select-none bg-ns-gray-100 text-ns-gray-700 dark:bg-neutral-900 dark:text-gray-300',
+    class: 'min-h-dvh bg-ns-gray-100 text-ns-gray-700 dark:bg-neutral-900 dark:text-gray-300',
   },
 })
 </script>
 
 <template>
-  <div>
-    <NuxtLoadingIndicator color="#6aa3ab" :height="2" :throttle="0" />
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-    <LazyNotifications />
-  </div>
+  <NuxtLoadingIndicator color="#6aa3ab" :height="2" :throttle="0" />
+
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
+
+  <LazyNotifications />
 </template>
 
 <style>

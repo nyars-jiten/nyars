@@ -12,8 +12,9 @@ const isPreview = !route.params.wid
 
 <template>
   <div class="flex cursor-text flex-col items-start gap-3 pl-4">
+    <!-- TODO: bruh -->
     <NuxtLink
-      :to="{ name: 'jpn-wid', params: { wid: jpnEntry.wid } }"
+      :to="{ name: 'jpn-wid', params: { wid: isPreview ? 'bruh' : jpnEntry.wid } }"
       :class="`flex flex-col break-all ${isPreview ? 'hover:text-ns-500' : 'pointer-events-none'}`"
     >
       <div
@@ -32,39 +33,50 @@ const isPreview = !route.params.wid
             </li>
           </ul>
         </div>
-        <ul v-show="word.writings?.length" class="inline before:-ml-3 before:text-ns-gray-200 before:content-['【'] after:text-ns-gray-200 after:content-['】'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
+
+        <!-- <ul v-show="word.writings?.length" class="inline before:-ml-3 before:text-ns-gray-200 before:content-['【'] after:text-ns-gray-200 after:content-['】'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
           <li
             v-for="(writing, writingIndex) of word.writings"
             :key="writingIndex"
-            class="inline-flex flex-wrap items-baseline before:text-ns-gray-200 after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
+            class="inline-flex flex-wrap items-baseline gap-2 before:text-ns-gray-200 after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
           >
-            {{ writing.value }}
-            <span
-              v-for="(tag, tagIndex) of writing.tags"
-              :key="tagIndex"
-              class="inline align-text-bottom text-sm italic text-fuchsia-700"
-            >
-              {{ tag.engShort }}
+            <span>
+              {{ writing.value }}
+            </span>
+
+            <span class="space-x-2">
+              <small
+                v-for="(tag, tagIndex) of writing.tags"
+                :key="tagIndex"
+                class="inline align-text-top text-sm italic text-fuchsia-700"
+              >
+                {{ tag.engShort }}
+              </small>
             </span>
           </li>
-        </ul>
+        </ul> -->
+        <!--
         <ul class="inline">
           <li
             v-for="(reading, readingIndex) of word.readings"
             :key="readingIndex"
-            class="inline-flex flex-wrap items-baseline after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
+            class="inline-flex flex-wrap items-baseline gap-2 after:text-neutral-300 after:content-['・'] last:after:content-none dark:after:text-neutral-700"
           >
-            {{ reading.transcription?.kana }}
+            <span>
+              {{ reading.transcription?.kana }}
+            </span>
 
-            <span
-              v-for="(tag, tagIndex) of reading.tags"
-              :key="tagIndex"
-              class="align-text-top text-sm italic text-fuchsia-700"
-            >
-              {{ tag.engShort }}
+            <span class="space-x-2 leading-none">
+              <small
+                v-for="(tag, tagIndex) of reading.tags"
+                :key="tagIndex"
+                class="align-text-top text-sm italic text-fuchsia-700"
+              >
+                {{ tag.engShort }}
+              </small>
             </span>
           </li>
-        </ul>
+        </ul> -->
       </div>
     </NuxtLink>
     <LazyTags :tags="jpnEntry.tags" />

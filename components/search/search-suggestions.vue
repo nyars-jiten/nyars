@@ -3,24 +3,23 @@ import { faker } from '@faker-js/faker'
 
 const request = useSearchRequest()
 
-const { data, refresh } = await useLazyAsyncData(`search-suggestions-${request.value}`, () => {
-  return Promise.resolve(
+const { data, refresh } = await useLazyAsyncData(`search-suggestions-${request.value}`, () =>
+  Promise.resolve(
     Array.from({ length: faker.number.int({ max: 7 }) }).map(() => ({
       uuid: faker.string.uuid(),
       value: faker.lorem.sentence(),
     })),
-  )
-}, {
+  ), {
   server: false,
   default: () => [],
 })
 
 watchDebounced(request, (request) => {
   if (request.length < 3) {
-    return
+    return Promise.resolve()
   }
 
-  refresh()
+  return refresh()
 }, { debounce: 350 })
 </script>
 

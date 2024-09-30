@@ -9,15 +9,16 @@ defineProps<Props>()
 </script>
 
 <template>
-  <div>
-    <div class="flex">
+  <div class="space-y-2">
+    <div class="space-x-2">
       <span v-if="ix !== ''" class="min-w-[30px] text-center text-ns-gray-400">
         {{ ix }}
       </span>
 
       <span v-for="(tag, i) of sense.fieldTags" :key="i" class="italic text-green-600">
-        <span class="group relative cursor-pointer pl-1 after:content-[\',\'] first:pl-0 last:mr-2 last:after:content-none">
+        <span class="group relative cursor-pointer after:content-[\',\'] last:after:content-none">
           {{ tag.engShort }}
+
           <div class="absolute bottom-full left-1/2 z-20 hidden -translate-x-1/2 pb-1 group-hover:block">
             <div class="flex items-center justify-center rounded-md border border-ns-gray-200 bg-white px-3 py-1.5 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800">
               <span class="text-wrap pb-[4px] text-center leading-tight xl:text-nowrap xl:leading-[75%]">
@@ -30,18 +31,20 @@ defineProps<Props>()
 
       <Content :content="sense.content" />
 
-      <span class="italic">
+      <span class="space-x-2 italic">
         <span
           v-for="(tag, i) of sense.metaTags.concat(sense.dialectTags)"
           :key="i"
-          class="pl-1 after:content-[','] first:before:content-['('] last:after:content-[')']"
+          class="after:content-[','] first:before:content-['('] last:after:content-[')']"
         >
           {{ tag.ru }}
         </span>
       </span>
     </div>
 
-    <div v-if="!isPreview" class="my-1 ml-7">
+    <!--  -->
+
+    <div v-if="!isPreview && sense.intRefs.length > 0" class="ml-7">
       <ul v-for="(reference, referenceIndex) of sense.intRefs" :key="referenceIndex">
         <li>
           <span class="text-xs">
@@ -73,7 +76,7 @@ defineProps<Props>()
 
     <!-- <div v-if="!isPreview && sense.examples?.length" :class="`${meaning.senses.length > 1 ? 'ml-8':'ml-1'}`"> -->
     <div v-if="!isPreview && sense.examples?.length" class="ml-8">
-      <div v-for="(example, exampleIndex) of sense.examples" :key="exampleIndex" class="border-l-2 border-ns-gray-200 pl-2 text-neutral-500 dark:border-ns-gray-700">
+      <div v-for="(example, exampleIndex) of sense.examples" :key="exampleIndex" class="space-x-2 border-l-2 border-ns-gray-200 pl-2 text-neutral-500  dark:border-ns-gray-700">
         <Content :content="example.sentence" />
         <Content :content="example.translation" />
       </div>

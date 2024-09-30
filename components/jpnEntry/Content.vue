@@ -1,12 +1,15 @@
 <script setup lang="ts">
 interface Props {
   content: V2Content[]
+  breakLine?: boolean
 }
 
-defineProps<Props>()
+withDefaults(defineProps<Props>(), {
+  breakLine: true,
+})
 
 const tagsMap: Record<string, string> = {
-  i: 'italic',
+  i: 'italic text-gray-500 text-sm',
   p: 'italic',
   comp: 'font-bold italic',
   hide: 'hidden',
@@ -21,10 +24,16 @@ function getStyle(tag: string): string {
 <template>
   <span>
     <template v-for="(item, i) in content" :key="i">
-      <Content v-if="item.content" :content="item.content" :class="getStyle(item.tag)" />
+      <Content v-if="item.content" :content="item.content" :class="getStyle(item.tag)" :break-line="breakLine" />
+
       <sup v-else-if="item.tag === 'sup'">{{ item.value }}</sup>
+
       <sub v-else-if="item.tag === 'sub'">{{ item.value }}</sub>
-      <br v-else-if="item.tag === 'br'">
+
+      <template v-else-if="item.tag === 'br'">
+        <br v-if="breakLine">
+      </template>
+
       <span v-else :class="getStyle(item.tag)">
         {{ item.value }}
       </span>

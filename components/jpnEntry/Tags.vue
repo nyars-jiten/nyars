@@ -25,12 +25,13 @@ const tags: Tag[] = props.tags.map((fullTag) => {
 function search(tag: string) {
   searchStore.searchQuery = `#${tag}`
   searchStore.mode = 'words'
-  navigateTo({ name: 'search-JpnEntries', query: { r: `#${tag}` } })
+
+  return navigateTo({ name: 'search-JpnEntries', query: { r: `#${tag}` } })
 }
 </script>
 
 <template>
-  <div v-if="props.tags.length > 0" class="flex flex-wrap items-start gap-2">
+  <div v-if="props.tags.length > 0" class="flex flex-wrap items-start justify-end gap-2">
     <button
       v-for="tag of tags"
       :key="tag.full"
@@ -39,8 +40,9 @@ function search(tag: string) {
       @click="search(tag.full)"
     >
       <span :class="`px-2 font-medium uppercase text-ns-tag-${tag.name}-500`">
-        {{ $t(`models.tags.${tag.name}.short`) }}
+        {{ tag.name }}
       </span>
+
       <span v-if="tag.level" :class="`border-l border-ns-tag-${tag.name}-500 text-ns-tag-${tag.name}-500 px-2 uppercase`">
         {{ tag.level }}
       </span>
