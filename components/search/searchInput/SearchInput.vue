@@ -1,50 +1,50 @@
 <script setup lang="ts">
-  const searchStore = useSearchStore()
+const searchStore = useSearchStore()
 
-  const showSearchSettings = ref(false)
+const showSearchSettings = ref(false)
 
-  const settings = ref(null)
+const settings = ref(null)
 
-  const input = ref<HTMLInputElement>()
+const input = ref<HTMLInputElement>()
 
-  onClickOutside(settings, () => {
-    showSearchSettings.value = false
-  }, { capture: false })
+onClickOutside(settings, () => {
+  showSearchSettings.value = false
+}, { capture: false })
 
-  const search = async () => {
-    if (searchStore.searchQuery.length === 0) {
-      return
-    }
-
-    switch (searchStore.mode) {
-      case 'words':
-        await navigateTo({ name: 'search-JpnEntries', query: { r: searchStore.searchQuery } })
-        break
-      case 'kanji':
-        await navigateTo({ name: 'search-KanjiEntries', query: { r: searchStore.searchQuery } })
-        break
-    }
+async function search() {
+  if (searchStore.searchQuery.length === 0) {
+    return
   }
 
-  const searchEnter = async () => {
-    const currentSuggestion = searchStore.currentSuggestion
-    if (currentSuggestion !== -1) {
-      searchStore.searchQuery = (await searchStore.getSuggestions)[currentSuggestion]
+  switch (searchStore.mode) {
+    case 'words':
       await navigateTo({ name: 'search-JpnEntries', query: { r: searchStore.searchQuery } })
-    }
-    else {
-      search()
-    }
-    input.value?.blur()
+      break
+    case 'kanji':
+      await navigateTo({ name: 'search-KanjiEntries', query: { r: searchStore.searchQuery } })
+      break
   }
+}
+
+async function searchEnter() {
+  const currentSuggestion = searchStore.currentSuggestion
+  if (currentSuggestion !== -1) {
+    searchStore.searchQuery = (await searchStore.getSuggestions)[currentSuggestion]
+    await navigateTo({ name: 'search-JpnEntries', query: { r: searchStore.searchQuery } })
+  }
+  else {
+    search()
+  }
+  input.value?.blur()
+}
 </script>
 
 <template>
   <section class="relative rounded-md bg-white shadow-md dark:bg-ns-gray-800">
-    <div :class="`relative flex items-stretch border dark:border-ns-gray-700 ${showSearchSettings ? 'rounded-t-md': 'rounded-md'}`">
+    <div :class="`relative flex items-stretch border dark:border-ns-gray-700 ${showSearchSettings ? 'rounded-t-md' : 'rounded-md'}`">
       <button
         type="button"
-        :class="`flex items-center p-4 capitalize opacity-100 duration-75 ease-in-out hover:bg-ns-gray-100 hover:opacity-75 dark:text-ns-gray-400 dark:hover:bg-ns-gray-700 ${showSearchSettings ? 'rounded-tl-md': 'rounded-l-md'}`"
+        :class="`flex items-center p-4 capitalize opacity-100 duration-75 ease-in-out hover:bg-ns-gray-100 hover:opacity-75 dark:text-ns-gray-400 dark:hover:bg-ns-gray-700 ${showSearchSettings ? 'rounded-tl-md' : 'rounded-l-md'}`"
         @click.stop="showSearchSettings = !showSearchSettings"
       >
         <span class="hidden sm:block">

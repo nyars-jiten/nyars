@@ -1,6 +1,6 @@
 import type { $Fetch, NitroFetchRequest } from 'nitropack'
 
-export const jpnEntryRepository = <T>(fetch: $Fetch<T, NitroFetchRequest>) => {
+export function jpnEntryRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
   const path = '/dictionary/jap'
 
   const getWeeklyTopUsers = (): Promise<User[]> => {

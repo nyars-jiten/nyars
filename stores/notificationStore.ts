@@ -8,7 +8,7 @@ export const useNotificationStore = defineStore('notificationStore', () => {
     const { ready } = useTimeout(5000, { controls: true })
     notifications.value.push({
       message,
-      isHidden: ready
+      isHidden: ready,
     })
   }
   return { notifications, createNotification }

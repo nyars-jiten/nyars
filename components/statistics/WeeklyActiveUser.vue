@@ -1,18 +1,18 @@
 <script setup lang="ts">
-  interface Props {
-    position: number
-    avatar: string
-    username: string
-    weekRating: number
-    jpnNew: number
-    jpnEdit: number
-    jpnNewAuto: number
-    jpnEditAuto: number
-    approved: number
-  }
+interface Props {
+  position: number
+  avatar: string
+  username: string
+  weekRating: number
+  jpnNew: number
+  jpnEdit: number
+  jpnNewAuto: number
+  jpnEditAuto: number
+  approved: number
+}
 
-  const props = defineProps<Props>()
-  const avatar = computed(() => useAvatar(props.avatar).href)
+const props = defineProps<Props>()
+const avatar = computed(() => useAvatar(props.avatar).href)
 </script>
 
 <template>

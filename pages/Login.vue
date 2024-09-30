@@ -1,44 +1,44 @@
 <script setup lang="ts">
-  definePageMeta({
-    name: 'Login',
-    path: '/login'
-  })
+definePageMeta({
+  name: 'Login',
+  path: '/login',
+})
 
-  const { clientRegister, clientLogin } = useApi(userRepository)
+const { clientRegister, clientLogin } = useApi(userRepository)
 
-  const notificationStore = useNotificationStore()
-  const userStore = useUserStore()
+const notificationStore = useNotificationStore()
+const userStore = useUserStore()
 
-  const isRegister = ref(false)
+const isRegister = ref(false)
 
-  const login = ref('')
-  const password = ref('')
+const login = ref('')
+const password = ref('')
 
-  const clickAuth = async () => {
-    if (login.value === '' || password.value === '') {
-      return
-    }
-
-    let user: User | null = null
-    let authError: AuthError | null = null
-
-    if (isRegister.value) {
-      const { data, error } = await clientRegister(login.value, password.value)
-      user = data
-      authError = error
-    }
-    else {
-      const { data, error } = await clientLogin(login.value, password.value)
-      user = data
-      authError = error
-    }
-    if (authError !== null) {
-      notificationStore.createNotification(authError.text)
-      return
-    }
-    userStore.user = user
-    navigateTo('/')
+async function clickAuth() {
+  if (login.value === '' || password.value === '') {
+    return
   }
+
+  let user: User | null = null
+  let authError: AuthError | null = null
+
+  if (isRegister.value) {
+    const { data, error } = await clientRegister(login.value, password.value)
+    user = data
+    authError = error
+  }
+  else {
+    const { data, error } = await clientLogin(login.value, password.value)
+    user = data
+    authError = error
+  }
+  if (authError !== null) {
+    notificationStore.createNotification(authError.text)
+    return
+  }
+  userStore.user = user
+  navigateTo('/')
+}
 </script>
 
 <template>

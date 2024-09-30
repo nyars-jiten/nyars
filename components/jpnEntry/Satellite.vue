@@ -1,31 +1,31 @@
 <script setup lang="ts">
-  interface Props {
-    satelliteData: SatelliteData[]
-    showData: boolean
+interface Props {
+  satelliteData: SatelliteData[]
+  showData: boolean
+}
+
+const props = defineProps<Props>()
+
+const selectedText = useTextSelection()
+
+const localShowData = ref(props.showData)
+
+function toggleShowData() {
+  if (selectedText.text.value.length > 0) {
+    return
   }
+  localShowData.value = !localShowData.value
+}
 
-  const props = defineProps<Props>()
-
-  const selectedText = useTextSelection()
-
-  const localShowData = ref(props.showData)
-
-  const toggleShowData = () => {
-    if (selectedText.text.value.length > 0) {
-      return
-    }
-    localShowData.value = !localShowData.value
-  }
-
-  watch(() => props.showData, (newShowData) => {
-    localShowData.value = newShowData
-  })
+watch(() => props.showData, (newShowData) => {
+  localShowData.value = newShowData
+})
 </script>
 
 <template>
   <div
     v-if="satelliteData.length > 0"
-    :class="`flex ${localShowData?'flex-col-reverse':''} gap-4 select-text rounded-md border border-ns-gray-200 px-4 py-2 dark:border-ns-gray-600`"
+    :class="`flex ${localShowData ? 'flex-col-reverse' : ''} gap-4 select-text rounded-md border border-ns-gray-200 px-4 py-2 dark:border-ns-gray-600`"
     @click="toggleShowData"
   >
     <div class="contents">

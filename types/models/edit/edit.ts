@@ -1,6 +1,6 @@
 import type { DictionaryType } from './dictionaryType'
-import type { EditType } from './editType'
 import type { EditStatus } from './editStatus'
+import type { EditType } from './editType'
 
 export interface Edit {
   id: number

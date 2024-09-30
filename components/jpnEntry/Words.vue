@@ -1,20 +1,20 @@
 <script setup lang="ts">
-  interface Props {
-    jpnEntry: V2EntryJp
-  }
+interface Props {
+  jpnEntry: V2EntryJp
+}
 
-  defineProps<Props>()
+defineProps<Props>()
 
-  const route = useRoute('jpn-wid')
+const route = useRoute('jpn-wid')
 
-  const isPreview = !route.params.wid
+const isPreview = !route.params.wid
 </script>
 
 <template>
   <div class="flex cursor-text flex-col items-start gap-3 pl-4">
     <NuxtLink
-      :to="{name: 'jpn-wid', params: {wid: jpnEntry.wid}}"
-      :class="`flex flex-col break-all ${isPreview?'hover:text-ns-500':'pointer-events-none'}`"
+      :to="{ name: 'jpn-wid', params: { wid: jpnEntry.wid } }"
+      :class="`flex flex-col break-all ${isPreview ? 'hover:text-ns-500' : 'pointer-events-none'}`"
     >
       <div
         v-for="(word, wordIndex) of jpnEntry.words"

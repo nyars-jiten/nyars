@@ -3,11 +3,13 @@
   "prettier.enable": false,
   "eslint.format.enable": true,
   "editor.formatOnSave": false,
+
   // Auto fix
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never"
   },
+
   // Silent the stylistic rules in you IDE, but still auto fix them
   "eslint.rules.customizations": [
     {
@@ -61,6 +63,7 @@
       "fixable": true
     }
   ],
+
   // Enable eslint for all supported languages
   "eslint.validate": [
     "javascript",
@@ -85,11 +88,11 @@
     "pcss",
     "postcss"
   ],
-  // 
+
   "files.associations": {
     "*.css": "tailwindcss"
   },
-  // 
+
   "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
@@ -117,7 +120,7 @@
   "[toml]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
-  // 
+
   "tailwindCSS.experimental.classRegex": [
     [
       "tv\\(([^)]*)\\)",
@@ -128,26 +131,34 @@
       "(?:'|\"|`)([^']*)(?:'|\"|`)"
     ]
   ],
-  // 
+
   "typescript.tsdk": "node_modules\\typescript\\lib",
-  // 
+
   "npm.packageManager": "bun",
+
   // Global
   "files.insertFinalNewline": true,
   "editor.tabSize": 2,
   "files.eol": "\n",
+
   // Nuxt
   "nuxtr.defaultPackageManager": "Bun",
   "nuxtr.piniaFiles.defaultTemplate": "setup",
   "nuxtr.vueFiles.firstTag": "script",
   "nuxtr.vueFiles.style.addStyleTag": false,
+
   // Spell
   "cSpell.language": "en,ru",
   "cSpell.words": [
     "dedupe",
     "furigana",
     "nitropack",
+    "Noto",
     "nuxt",
-    "nyars"
-  ],
+    "nuxtjs",
+    "nyars",
+    "pinia",
+    "vueuse",
+    "wght"
+  ]
 }

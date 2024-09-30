@@ -1,6 +1,6 @@
 import type { $Fetch, NitroFetchRequest } from 'nitropack'
 
-export const editRepository = <T>(fetch: $Fetch<T, NitroFetchRequest>) => {
+export function editRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
   const path = '/Edits'
 
   const getEdits = (number = 25, page = 0, statuses: number | null = null): Promise<Edit[]> => {
@@ -8,8 +8,8 @@ export const editRepository = <T>(fetch: $Fetch<T, NitroFetchRequest>) => {
       params: {
         n: number,
         p: page,
-        statuses
-      }
+        statuses,
+      },
     })
   }
 
@@ -22,8 +22,8 @@ export const editRepository = <T>(fetch: $Fetch<T, NitroFetchRequest>) => {
     return fetch<Edit[]>(`${path}/by-entry/${dictionary}/${entryId}`, {
       params: {
         p: page,
-        c: count
-      }
+        c: count,
+      },
     })
   }
 

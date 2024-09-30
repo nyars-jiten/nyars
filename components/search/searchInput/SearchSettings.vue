@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  const searchStore = useSearchStore()
+const searchStore = useSearchStore()
 </script>
 
 <template>

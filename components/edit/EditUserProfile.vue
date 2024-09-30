@@ -1,11 +1,11 @@
 <script setup lang="ts">
-  interface Props {
-    user: User
-  }
+interface Props {
+  user: User
+}
 
-  const props = defineProps<Props>()
+const props = defineProps<Props>()
 
-  const avatar = computed(() => useAvatar(props.user.avatar).href)
+const avatar = computed(() => useAvatar(props.user.avatar).href)
 </script>
 
 <template>

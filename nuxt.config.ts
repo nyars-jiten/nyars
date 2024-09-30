@@ -2,32 +2,32 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   devServer: {
     // host: '0.0.0.0',
-    port: 8080
+    port: 8080,
   },
   compatibilityDate: '2024-09-22',
   app: {
     rootId: 'nyars',
-    pageTransition: { name: 'page', mode: 'out-in' }
+    pageTransition: { name: 'page', mode: 'out-in' },
   },
   runtimeConfig: {
     public: {
       apiUrl: '',
       baseUrl: '',
       imageUrl: '',
-      discordUrl: ''
-    }
+      discordUrl: '',
+    },
   },
   imports: {
     dirs: [
       'types/**',
-      'utils/**'
-    ]
+      'utils/**',
+    ],
   },
   components: [
     {
       path: '~/components',
-      pathPrefix: false
-    }
+      pathPrefix: false,
+    },
   ],
   modules: [
     '@nuxt/eslint',
@@ -39,14 +39,12 @@ export default defineNuxtConfig({
     'nuxt-lodash',
     '@vueuse/nuxt',
     'nuxt-typed-router',
-    '@nuxt/icon'
+    '@nuxt/icon',
   ],
   eslint: {
-    // checker: true,
     config: {
-      stylistic: true,
-      standalone: false
-    }
+      standalone: false,
+    },
   },
   i18n: {
     vueI18n: './locale/i18n.config.ts',
@@ -54,33 +52,33 @@ export default defineNuxtConfig({
     defaultLocale: 'rus',
     locales: [{
       code: 'rus',
-      file: 'rus.json'
+      file: 'rus.json',
     }],
     strategy: 'no_prefix',
     lazy: true,
     detectBrowserLanguage: {
-      useCookie: false
-    }
+      useCookie: false,
+    },
   },
   googleFonts: {
     families: {
       'Exo+2': {
-        wght: [400, 500, 600, 700, 800, 900]
+        wght: [400, 500, 600, 700, 800, 900],
       },
-      'Noto+Sans+JP': true
+      'Noto+Sans+JP': true,
     },
-    display: 'swap'
+    display: 'swap',
   },
   svgo: {
-    componentPrefix: 'icon'
+    componentPrefix: 'icon',
   },
   lodash: {
-    prefix: 'useLodash'
+    prefix: 'useLodash',
   },
   typescript: {
     strict: true,
     typeCheck: true,
-    shim: false
-  }
+    shim: false,
+  },
 })
 // https://nuxt.com/docs/api/configuration/nuxt-config

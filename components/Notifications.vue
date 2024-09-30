@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  const { notifications } = storeToRefs(useNotificationStore())
+const { notifications } = storeToRefs(useNotificationStore())
 </script>
 
 <template>

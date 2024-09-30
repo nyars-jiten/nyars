@@ -1,9 +1,9 @@
-import { string, array, type TypeOf, type } from 'io-ts'
+import { array, string, type, type TypeOf } from 'io-ts'
 
 export const CreateArticleJpn = type({
   body: string,
   reading: string,
-  writing: string
+  writing: string,
 })
 
 const CreateArticleJpnList = array(CreateArticleJpn)
@@ -122,5 +122,5 @@ export enum V2ReferenceType {
   PartialSynonym,
   Antonym,
   Confer,
-  Abbreviation
+  Abbreviation,
 }

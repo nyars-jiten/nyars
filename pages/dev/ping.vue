@@ -1,22 +1,22 @@
 <script setup lang="ts">
-  const resTimeOrg = ref('')
-  const resTimeMoe = ref('')
+const resTimeOrg = ref('')
+const resTimeMoe = ref('')
 
-  const fetchPing = async (url: string) => {
-    const tmsStart = new Date()
-    await $fetch<string>(url)
-    const tmsEnd = new Date()
+async function fetchPing(url: string) {
+  const tmsStart = new Date()
+  await $fetch<string>(url)
+  const tmsEnd = new Date()
 
-    return Math.abs(tmsEnd.getTime() - tmsStart.getTime())
-  }
+  return Math.abs(tmsEnd.getTime() - tmsStart.getTime())
+}
 
-  onMounted(async () => {
-    const orgTime = await fetchPing('https://beta.nyars.org/api/ping')
-    const moeTime = await fetchPing('http://beta.nyars.moe/api/ping')
+onMounted(async () => {
+  const orgTime = await fetchPing('https://beta.nyars.org/api/ping')
+  const moeTime = await fetchPing('http://beta.nyars.moe/api/ping')
 
-    resTimeOrg.value = `${orgTime}ms`
-    resTimeMoe.value = `${moeTime}ms`
-  })
+  resTimeOrg.value = `${orgTime}ms`
+  resTimeMoe.value = `${moeTime}ms`
+})
 </script>
 
 <template>

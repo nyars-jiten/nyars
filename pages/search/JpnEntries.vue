@@ -1,30 +1,30 @@
 <script setup lang="ts">
-  definePageMeta({
-    name: 'search-JpnEntries',
-    path: '/s/jpn'
-  })
+definePageMeta({
+  name: 'search-JpnEntries',
+  path: '/s/jpn',
+})
 
-  const route = useRoute()
+const route = useRoute()
 
-  const requestQuery = computed(() => {
-    return route.query.r as string
-  })
+const requestQuery = computed(() => {
+  return route.query.r as string
+})
 
-  const searchStore = useSearchStore()
-  const { mode, searchQuery } = storeToRefs(searchStore)
+const searchStore = useSearchStore()
+const { mode, searchQuery } = storeToRefs(searchStore)
 
-  mode.value = 'words'
-  searchQuery.value = requestQuery.value
+mode.value = 'words'
+searchQuery.value = requestQuery.value
 
-  const { getJpnEntries } = useApi(searchRepository)
+const { getJpnEntries } = useApi(searchRepository)
 
-  const { pending, data: jpnEntriesSearchResult } = await useLazyAsyncData(
-    'jpnEntriesSearchResult',
-    () => getJpnEntries(requestQuery.value),
-    {
-      watch: [requestQuery]
-    }
-  )
+const { pending, data: jpnEntriesSearchResult } = await useLazyAsyncData(
+  'jpnEntriesSearchResult',
+  () => getJpnEntries(requestQuery.value),
+  {
+    watch: [requestQuery],
+  },
+)
 </script>
 
 <template>

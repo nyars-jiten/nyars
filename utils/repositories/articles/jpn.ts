@@ -1,7 +1,7 @@
+import type { Decoder } from 'io-ts'
+import type { $Fetch, NitroFetchRequest } from 'nitropack'
 import { either, task, taskEither } from 'fp-ts'
 import { pipe } from 'fp-ts/lib/function'
-import { type Decoder } from 'io-ts'
-import type { $Fetch, NitroFetchRequest } from 'nitropack'
 import type { ApiError } from '~/types/models/api/error'
 import type { CreateArticleJpn } from '~/types/models/articles/jpn'
 
@@ -9,7 +9,7 @@ export async function sanity<I, A>(getter: () => Promise<I>, codec: Decoder<I, A
   return pipe(
     taskEither.tryCatch(getter, either.toError),
     taskEither.flatMapEither(codec.decode),
-    taskEither.getOrElse(() => task.of(or()))
+    taskEither.getOrElse(() => task.of(or())),
   )
 }
 

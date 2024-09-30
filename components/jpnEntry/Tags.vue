@@ -1,32 +1,32 @@
 <script setup lang="ts">
-  interface Tag {
-    name: string
-    level: string
-    full: string
+interface Tag {
+  name: string
+  level: string
+  full: string
+}
+
+interface Props {
+  tags: V2Tag[]
+}
+
+const props = defineProps<Props>()
+
+const searchStore = useSearchStore()
+
+const tags: Tag[] = props.tags.map((fullTag) => {
+  const [name, ...rest] = fullTag.eng.split('-')
+  return {
+    name,
+    level: rest.join('-'),
+    full: fullTag.eng,
   }
+})
 
-  interface Props {
-    tags: V2Tag[]
-  }
-
-  const props = defineProps<Props>()
-
-  const searchStore = useSearchStore()
-
-  const tags: Tag[] = props.tags.map((fullTag) => {
-    const [name, ...rest] = fullTag.eng.split('-')
-    return {
-      name,
-      level: rest.join('-'),
-      full: fullTag.eng
-    }
-  })
-
-  const search = (tag: string) => {
-    searchStore.searchQuery = `#${tag}`
-    searchStore.mode = 'words'
-    navigateTo({ name: 'search-JpnEntries', query: { r: `#${tag}` } })
-  }
+function search(tag: string) {
+  searchStore.searchQuery = `#${tag}`
+  searchStore.mode = 'words'
+  navigateTo({ name: 'search-JpnEntries', query: { r: `#${tag}` } })
+}
 </script>
 
 <template>

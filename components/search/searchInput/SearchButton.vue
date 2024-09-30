@@ -1,9 +1,9 @@
 <script setup lang="ts">
-  interface Props {
-    disabled: boolean
-  }
+interface Props {
+  disabled: boolean
+}
 
-  defineProps<Props>()
+defineProps<Props>()
 </script>
 
 <template>
@@ -16,6 +16,6 @@
         : 'bg-ns-gray-100 dark:bg-ns-gray-700 hover:opacity-75'
     }`"
   >
-    <slot></slot>
+    <slot />
   </button>
 </template>

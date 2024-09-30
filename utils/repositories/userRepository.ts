@@ -1,6 +1,6 @@
 import type { $Fetch, NitroFetchRequest } from 'nitropack'
 
-export const userRepository = <T>(fetch: $Fetch<T, NitroFetchRequest>) => {
+export function userRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
   const path = '/users'
 
   const clientLogin = (username: string, password: string) => {
@@ -8,8 +8,8 @@ export const userRepository = <T>(fetch: $Fetch<T, NitroFetchRequest>) => {
       method: 'POST',
       body: {
         username,
-        password
-      }
+        password,
+      },
     })
       .then((user) => {
         return { data: user, error: null }
@@ -24,8 +24,8 @@ export const userRepository = <T>(fetch: $Fetch<T, NitroFetchRequest>) => {
       method: 'POST',
       body: {
         username,
-        password
-      }
+        password,
+      },
     })
       .then((user) => {
         return { data: user, error: null }

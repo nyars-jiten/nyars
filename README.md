@@ -56,18 +56,18 @@ $ npx @eslint/config-inspector
 
 <details>
   <summary>Possible problems:</summary>
-  
+
   #### Cannot find name 'defineNuxtConfig'.ts(2304)
 
   Delete the `node_modules` folder and do:
-  
+
   ```bash
   $ pnpm i
   ```
   Then `F1 + Volar: Restart Vue server`
 
   #### [Vue Router warn]: No match found for location with path "/_tailwind/"
-  
+
   Probably just ignore this for now, tailwind viewer page still works fine with this warning, but impossible view this page from nuxt devtools ("404 not found"). Check this [issue](https://github.com/nuxt-modules/tailwindcss/issues/459).
 
   #### Autoimports don't have IDE support
@@ -82,15 +82,15 @@ $ npx @eslint/config-inspector
   <summary>Wiki:</summary>
 
   #### Why isn't Prettier on the repo?
-  
+
   Because of this: [issue](https://github.com/prettier/prettier-vscode/issues/352)
-  
+
   Because Prettier is adding a lot of dependencies: `"prettier"`, `"eslint-plugin-prettier"`, `"eslint-config-prettier"`
-  
+
   Because Prettier conflicts with another eslint plugins.
-  
+
   Because all Prettier settings available in eslint plugins.
-  
+
   Because antfu don't use Prettier: [link](https://antfu.me/posts/why-not-prettier)
 
   #### How to use icons? :trollface:
@@ -100,7 +100,7 @@ $ npx @eslint/config-inspector
   Then add file to the folder `assets/icons`
 
   After all you can use it (default behavior as font)
-  
+
   ```html
   <IconMagnify class="text-3xl !m-1" /> <!-- icon as font, if need change margin use !important -->
   <IconMagnify class="h-5 w-5" :font-controlled="false" /> <!-- icon as normal svg -->

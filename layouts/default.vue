@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  const userStore = useUserStore()
+const userStore = useUserStore()
 
-  await useAsyncData('initUser', userStore.initUser)
+await useAsyncData('initUser', userStore.initUser)
 </script>
 
 <template>
@@ -10,7 +10,7 @@
     <div class="px-2">
       <section class="container mx-auto my-10 flex max-w-4xl flex-col gap-10 md:leading-relaxed">
         <SearchInput />
-        <slot></slot>
+        <slot />
       </section>
     </div>
   </div>

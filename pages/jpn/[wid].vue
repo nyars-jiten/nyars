@@ -1,62 +1,62 @@
 <script setup lang="ts">
-  // const wid = useRoute('jpn-wid').params.wid
+// const wid = useRoute('jpn-wid').params.wid
 
-  const wid = useRouteParams('wid', '0' as string)
+const wid = useRouteParams('wid', '0' as string)
 
-  // const { getJpnEntry } = useApi(jpnEntryRepository)
-  const { get } = useJpnArticles()
-  // const { getImages } = useApi(kotobaRepository)
-  // const { getEditsEntry } = useApi(editRepository)
-  // const { getSatellites } = useApi(satelliteRepository)
+// const { getJpnEntry } = useApi(jpnEntryRepository)
+const { get } = useJpnArticles()
+// const { getImages } = useApi(kotobaRepository)
+// const { getEditsEntry } = useApi(editRepository)
+// const { getSatellites } = useApi(satelliteRepository)
 
-  const { data: jpnEntry } = await useAsyncData(`jpn-article-${wid.value}`, () => get(wid.value), {
-    default: () => ({
-      wid: '0000',
-      status: {
-        isReviewed: false,
-        isUnconfirmed: false,
-        isArchaic: false,
-        isDialect: false,
-        isProper: false
-      },
-      externalEntry: '',
-      title: '',
-      tags: [],
-      words: [],
-      meanings: []
-    } satisfies V2EntryJp)
-  })
+const { data: jpnEntry } = await useAsyncData(`jpn-article-${wid.value}`, () => get(wid.value), {
+  default: () => ({
+    wid: '0000',
+    status: {
+      isReviewed: false,
+      isUnconfirmed: false,
+      isArchaic: false,
+      isDialect: false,
+      isProper: false,
+    },
+    externalEntry: '',
+    title: '',
+    tags: [],
+    words: [],
+    meanings: [],
+  } satisfies V2EntryJp),
+})
 
-  // const { data: images } = await useLazyAsyncData(
-  //   `jpnEntryImages-${wid}`,
-  //   () => getImages(wid, 0),
-  //   {
-  //     default: (): Image[] => []
-  //   }
-  // )
+// const { data: images } = await useLazyAsyncData(
+//   `jpnEntryImages-${wid}`,
+//   () => getImages(wid, 0),
+//   {
+//     default: (): Image[] => []
+//   }
+// )
 
-  // const { data: edits } = await useLazyAsyncData(
-  //   `jpnEntryEdits-${wid}`,
-  //   () => getEditsEntry(wid, 0),
-  //   {
-  //     default: (): Edit[] => []
-  //   }
-  // )
+// const { data: edits } = await useLazyAsyncData(
+//   `jpnEntryEdits-${wid}`,
+//   () => getEditsEntry(wid, 0),
+//   {
+//     default: (): Edit[] => []
+//   }
+// )
 
-  // const { data: satellites } = await useLazyAsyncData(
-  //   `jpnEntrySatellites-${wid}`,
-  //   () => getSatellites(wid),
-  //   {
-  //     default: (): SatelliteData[][] => [[]]
-  //   }
-  // )
+// const { data: satellites } = await useLazyAsyncData(
+//   `jpnEntrySatellites-${wid}`,
+//   () => getSatellites(wid),
+//   {
+//     default: (): SatelliteData[][] => [[]]
+//   }
+// )
 
-  definePageMeta({
-    layout: 'desktop'
-  })
+definePageMeta({
+  layout: 'desktop',
+})
 
-  // const showData = ref(false)
-  useHead({ title: jpnEntry.value.title })
+// const showData = ref(false)
+useHead({ title: jpnEntry.value.title })
 </script>
 
 <template>

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-  definePageMeta({
-    name: 'Statistics',
-    path: '/statistics'
-  })
+definePageMeta({
+  name: 'Statistics',
+  path: '/statistics',
+})
 
-  useHead({
-    title: 'Статистика'
-  })
+useHead({
+  title: 'Статистика',
+})
 </script>
 
 <template>

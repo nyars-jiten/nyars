@@ -1,11 +1,11 @@
 <script setup lang="ts">
-  interface Props {
-    sense: V2Sense
-    ix: string
-    isPreview: boolean
-  }
+interface Props {
+  sense: V2Sense
+  ix: string
+  isPreview: boolean
+}
 
-  defineProps<Props>()
+defineProps<Props>()
 </script>
 
 <template>
@@ -32,7 +32,7 @@
 
       <span class="italic">
         <span
-          v-for="(tag,i) of sense.metaTags.concat(sense.dialectTags)"
+          v-for="(tag, i) of sense.metaTags.concat(sense.dialectTags)"
           :key="i"
           class="pl-1 after:content-[','] first:before:content-['('] last:after:content-[')']"
         >
@@ -54,7 +54,7 @@
 
           <NuxtLink
             v-if="reference.target !== null && reference.target.length === 4"
-            :to="{name: 'jpn-wid', params: {wid: reference.target}}"
+            :to="{ name: 'jpn-wid', params: { wid: reference.target } }"
             class="text-ns-500 underline decoration-dotted underline-offset-4"
           >
             {{ reference.value }}
@@ -62,7 +62,7 @@
 
           <NuxtLink
             v-else
-            :to="{name: 'search-JpnEntries', query: {r: reference.value}}"
+            :to="{ name: 'search-JpnEntries', query: { r: reference.value } }"
             class="text-ns-500 underline decoration-dotted underline-offset-4"
           >
             {{ reference.value }}

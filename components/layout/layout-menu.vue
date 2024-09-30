@@ -1,27 +1,27 @@
 <script setup lang="ts">
-  import { tv } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-  // const { user } = storeToRefs(useUserStore())
+// const { user } = storeToRefs(useUserStore())
 
-  const link = tv({
-    base: 'flex items-center justify-start gap-2 rounded-md px-3 py-1.5 leading-none transition-colors hover:bg-zinc-800 hover:text-zinc-400'
-  })
+const link = tv({
+  base: 'flex items-center justify-start gap-2 rounded-md px-3 py-1.5 leading-none transition-colors hover:bg-zinc-800 hover:text-zinc-400',
+})
 </script>
 
 <template>
   <ul class="space-y-4">
     <li class="space-y-1">
-      <NuxtLink :to="{name:'Home'}" :class="link()">
+      <NuxtLink :to="{ name: 'Home' }" :class="link()">
         <Icon name="ic:baseline-home" />
         <span>{{ $t('components.header.navigation[0].pages.home') }}</span>
       </NuxtLink>
 
-      <NuxtLink :to="{name:'Edits'}" :class="link()">
+      <NuxtLink :to="{ name: 'Edits' }" :class="link()">
         <Icon name="ic:baseline-plus-minus-alt" />
         <span>{{ $t('components.header.navigation[0].pages.edits') }}</span>
       </NuxtLink>
 
-      <NuxtLink :to="{name: 'Statistics'}" :class="link()">
+      <NuxtLink :to="{ name: 'Statistics' }" :class="link()">
         <Icon name="ic:baseline-auto-graph" />
         <span>{{ $t('components.header.navigation[0].pages.statistics') }}</span>
       </NuxtLink>
@@ -88,7 +88,7 @@
     </li>
 
     <li class="space-y-1">
-      <NuxtLink :to="{name: 'jpn-wid', params: {wid: 0}}" :class="link()">
+      <NuxtLink :to="{ name: 'jpn-wid', params: { wid: 0 } }" :class="link()">
         <Icon name="uil:github" />
         <span>suda</span>
       </NuxtLink>

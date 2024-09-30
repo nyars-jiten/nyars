@@ -1,9 +1,9 @@
-version: "3.8"
+version: '3.8'
 services:
   nyars:
     build:
       context: .
     ports:
-      - "8080:8080"
+      - '8080:8080'
     env_file:
       - .env

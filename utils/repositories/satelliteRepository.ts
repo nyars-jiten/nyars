@@ -1,6 +1,6 @@
 import type { $Fetch, NitroFetchRequest } from 'nitropack'
 
-export const satelliteRepository = <T>(fetch: $Fetch<T, NitroFetchRequest>) => {
+export function satelliteRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
   const path = '/Satellites'
 
   const getSatellites = (entryId: string): Promise<SatelliteData[][]> => {

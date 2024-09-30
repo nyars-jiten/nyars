@@ -1,4 +1,4 @@
-export const getTranslation = (number: number) => {
+export function getTranslation(number: number) {
   number %= 100
   if (number >= 5 && number <= 20) {
     return 2

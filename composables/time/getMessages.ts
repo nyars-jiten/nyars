@@ -1,13 +1,13 @@
 import type { UseTimeAgoMessages, UseTimeAgoUnitNamesDefault } from '@vueuse/core'
 import { getTranslation } from './getTranslation'
 
-export const getMessages = () => {
+export function getMessages() {
   const { t } = useI18n()
 
   const I18N_MESSAGES: UseTimeAgoMessages<UseTimeAgoUnitNamesDefault> = {
     justNow: t('timeAgo.justNow'),
-    past: (n) => (n.match(/\d/) ? t('timeAgo.ago', [n]) : n),
-    future: (n) => (n.match(/\d/) ? t('timeAgo.in', [n]) : n),
+    past: n => (n.match(/\d/) ? t('timeAgo.ago', [n]) : n),
+    future: n => (n.match(/\d/) ? t('timeAgo.in', [n]) : n),
     month: (n, past) =>
       n === 1
         ? past
@@ -32,10 +32,10 @@ export const getMessages = () => {
           ? t('timeAgo.lastWeek')
           : t('timeAgo.nextWeek')
         : `${n} ${t(`timeAgo.week.${getTranslation(n)}`, n)}`,
-    hour: (n) => `${n} ${t(`timeAgo.hour.${getTranslation(n)}`, n)}`,
-    minute: (n) => `${n} ${t(`timeAgo.minute.${getTranslation(n)}`, n)}`,
-    second: (n) => `${n} ${t(`timeAgo.second.${getTranslation(n)}`, n)}`,
-    invalid: 'bruh'
+    hour: n => `${n} ${t(`timeAgo.hour.${getTranslation(n)}`, n)}`,
+    minute: n => `${n} ${t(`timeAgo.minute.${getTranslation(n)}`, n)}`,
+    second: n => `${n} ${t(`timeAgo.second.${getTranslation(n)}`, n)}`,
+    invalid: 'bruh',
   }
 
   return I18N_MESSAGES as UseTimeAgoMessages<string>

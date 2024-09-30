@@ -1,13 +1,13 @@
 <script setup lang="ts">
-  const { getSettings, setSettings } = useSettingsCookie()
+const { getSettings, setSettings } = useSettingsCookie()
 
-  const toggleTheme = () => {
-    if (getSettings().theme === 'light') {
-      setSettings({ theme: 'dark' })
-      return
-    }
-    setSettings({ theme: 'light' })
+function toggleTheme() {
+  if (getSettings().theme === 'light') {
+    setSettings({ theme: 'dark' })
+    return
   }
+  setSettings({ theme: 'light' })
+}
 </script>
 
 <template>

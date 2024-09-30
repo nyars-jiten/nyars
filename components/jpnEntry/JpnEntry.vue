@@ -1,19 +1,19 @@
 <script setup lang="ts">
-  interface Props {
-    jpnEntry: V2EntryJp
-  }
+interface Props {
+  jpnEntry: V2EntryJp
+}
 
-  defineProps<Props>()
+defineProps<Props>()
 
-  // const getStyles = () => {
-  //   if (props.jpnEntry.status.isUnconfirmed) {
-  //     return 'border-l-2 border-l-red-700 dark:border-l-red-700'
-  //   }
-  //   if (props.jpnEntry.status.isReviewed === false) {
-  //     return 'border-l-2 border-l-orange-500 dark:border-l-orange-500'
-  //   }
-  //   return ''
-  // }
+// const getStyles = () => {
+//   if (props.jpnEntry.status.isUnconfirmed) {
+//     return 'border-l-2 border-l-red-700 dark:border-l-red-700'
+//   }
+//   if (props.jpnEntry.status.isReviewed === false) {
+//     return 'border-l-2 border-l-orange-500 dark:border-l-orange-500'
+//   }
+//   return ''
+// }
 </script>
 
 <template>

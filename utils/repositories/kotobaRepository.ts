@@ -1,6 +1,6 @@
 import type { $Fetch, NitroFetchRequest } from 'nitropack'
 
-export const kotobaRepository = <T>(fetch: $Fetch<T, NitroFetchRequest>) => {
+export function kotobaRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
   const path = '/Kotoba'
 
   // TODO change type to DictionaryType
@@ -8,8 +8,8 @@ export const kotobaRepository = <T>(fetch: $Fetch<T, NitroFetchRequest>) => {
     return fetch<Image[]>(`${path}/entry-images`, {
       params: {
         id: entryId,
-        dict: dictionary
-      }
+        dict: dictionary,
+      },
     })
   }
 

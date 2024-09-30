@@ -1,7 +1,6 @@
 <script setup lang="ts">
-  const request = useSearchRequest()
-  const mode = useSearchMode()
-
+const request = useSearchRequest()
+const mode = useSearchMode()
 </script>
 
 <template>

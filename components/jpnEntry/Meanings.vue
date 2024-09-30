@@ -1,12 +1,11 @@
 <script setup lang="ts">
-  interface Props {
-    meanings: V2EntryJp['meanings']
-  }
+interface Props {
+  meanings: V2EntryJp['meanings']
+}
 
-  const route = useRoute('jpn-wid')
-  const isPreview = !route.params.wid
-
-  defineProps<Props>()
+defineProps<Props>()
+const route = useRoute('jpn-wid')
+const isPreview = !route.params.wid
 </script>
 
 <template>

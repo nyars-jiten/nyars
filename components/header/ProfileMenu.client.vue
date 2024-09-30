@@ -1,21 +1,21 @@
 <script setup lang="ts">
-  const { clientLogout } = useApi(userRepository)
+const { clientLogout } = useApi(userRepository)
 
-  const { user } = storeToRefs(useUserStore())
+const { user } = storeToRefs(useUserStore())
 
-  const logout = async () => {
-    await clientLogout()
+async function logout() {
+  await clientLogout()
 
-    user.value = null
+  user.value = null
 
-    navigateTo('/')
-  }
+  navigateTo('/')
+}
 </script>
 
 <template>
   <div class="flex flex-wrap items-center justify-center gap-2 text-base">
     <div class="group relative">
-      <NuxtLink to="/" :class="`flex items-center ${user ? 'gap-2':'gap-0'} rounded-md p-1.5 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700 [@media(hover:none)]:pointer-events-none`">
+      <NuxtLink to="/" :class="`flex items-center ${user ? 'gap-2' : 'gap-0'} rounded-md p-1.5 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700 [@media(hover:none)]:pointer-events-none`">
         <img
           v-if="user"
           class="size-9 rounded-full object-center"
@@ -36,7 +36,7 @@
           <NuxtLink to="/" class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
             <span>{{ $t('components.header.profileMenu.settings') }}</span>
           </NuxtLink>
-          <NuxtLink v-if="!user" :to="{name: 'Login'}" class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
+          <NuxtLink v-if="!user" :to="{ name: 'Login' }" class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
             <span>{{ $t('components.header.profileMenu.login') }}</span>
           </NuxtLink>
           <button

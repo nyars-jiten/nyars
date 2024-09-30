@@ -19,6 +19,6 @@ export const useHeaderStore = defineStore('headerStore', () => {
   return {
     showHamburgerMenu,
     toggleHamburgerMenu,
-    closeHamburgerMenu
+    closeHamburgerMenu,
   }
 })

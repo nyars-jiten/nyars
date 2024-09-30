@@ -4,6 +4,6 @@ export default defineI18nConfig(() => ({
   legacy: false,
   locale: 'rus',
   messages: {
-    rus
-  }
+    rus,
+  },
 }))

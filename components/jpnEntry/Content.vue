@@ -1,21 +1,21 @@
 <script setup lang="ts">
-  interface Props {
-    content: V2Content[]
-  }
+interface Props {
+  content: V2Content[]
+}
 
-  const tagsMap: Record<string, string> = {
-    i: 'italic',
-    p: 'italic',
-    comp: 'font-bold italic',
-    hide: 'hidden',
-    ref: 'text-indigo-300' // TODO: routing logic
-  }
+defineProps<Props>()
 
-  function getStyle(tag: string): string {
-    return tagsMap[tag] ?? ''
-  }
+const tagsMap: Record<string, string> = {
+  i: 'italic',
+  p: 'italic',
+  comp: 'font-bold italic',
+  hide: 'hidden',
+  ref: 'text-indigo-300', // TODO: routing logic
+}
 
-  defineProps<Props>()
+function getStyle(tag: string): string {
+  return tagsMap[tag] ?? ''
+}
 </script>
 
 <template>

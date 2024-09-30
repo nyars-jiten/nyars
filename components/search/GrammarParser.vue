@@ -1,18 +1,18 @@
 <script setup lang="ts">
-  interface Props {
-    parsedWords: ParsedWord[]
-  }
+interface Props {
+  parsedWords: ParsedWord[]
+}
 
-  defineProps<Props>()
+defineProps<Props>()
 
-  // const config = useRuntimeConfig()
+// const config = useRuntimeConfig()
 
-  const searchStore = useSearchStore()
+const searchStore = useSearchStore()
 
-  const search = (word: string) => {
-    searchStore.searchQuery = word
-    navigateTo({ name: 'search-JpnEntries', query: { r: word } })
-  }
+function search(word: string) {
+  searchStore.searchQuery = word
+  navigateTo({ name: 'search-JpnEntries', query: { r: word } })
+}
 </script>
 
 <template>

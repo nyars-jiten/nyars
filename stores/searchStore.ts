@@ -5,6 +5,27 @@ export const useSearchStore = defineStore('searchStore', () => {
 
   const currentSuggestion = ref(-1)
 
+  const suggestionsCache = ref<Map<string, string[]>>(new Map().set('', []))
+
+  const setSuggestions = async (searchQuery: string) => {
+    if (suggestionsCache.value.size > 1_000) {
+      suggestionsCache.value.clear()
+      suggestionsCache.value.set('', [])
+    }
+    const { getSuggestions } = useApi(searchRepository)
+    const response = await getSuggestions(searchQuery)
+    suggestionsCache.value.set(searchQuery, response)
+  }
+
+  const getSuggestions = computed(async () => {
+    const cachedValue = suggestionsCache.value.get(searchQuery.value)
+    if (cachedValue) {
+      return cachedValue
+    }
+    await setSuggestions(searchQuery.value)
+    return suggestionsCache.value.get(searchQuery.value) as string[]
+  })
+
   const setCurrentSuggestion = async (action: 'up' | 'down' | 'reset') => {
     if (action === 'reset') {
       currentSuggestion.value = -1
@@ -31,27 +52,6 @@ export const useSearchStore = defineStore('searchStore', () => {
       return
     }
     currentSuggestion.value++
-  }
-
-  const suggestionsCache = ref<Map<string, string[]>>(new Map().set('', []))
-
-  const getSuggestions = computed(async () => {
-    const cachedValue = suggestionsCache.value.get(searchQuery.value)
-    if (cachedValue) {
-      return cachedValue
-    }
-    await setSuggestions(searchQuery.value)
-    return suggestionsCache.value.get(searchQuery.value) as string[]
-  })
-
-  const setSuggestions = async (searchQuery: string) => {
-    if (suggestionsCache.value.size > 1_000) {
-      suggestionsCache.value.clear()
-      suggestionsCache.value.set('', [])
-    }
-    const { getSuggestions } = useApi(searchRepository)
-    const response = await getSuggestions(searchQuery)
-    suggestionsCache.value.set(searchQuery, response)
   }
 
   return { mode, searchQuery, currentSuggestion, setCurrentSuggestion, suggestionsCache, getSuggestions, setSuggestions }

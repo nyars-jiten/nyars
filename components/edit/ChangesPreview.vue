@@ -1,26 +1,26 @@
 <script setup lang="ts">
-  interface Props {
-    editId: number
-    isTypeCreate: boolean
-  }
+interface Props {
+  editId: number
+  isTypeCreate: boolean
+}
 
-  const props = defineProps<Props>()
+const props = defineProps<Props>()
 
-  const { getCompare } = useApi(editRepository)
+const { getCompare } = useApi(editRepository)
 
-  const { data: compare } = await useLazyAsyncData(
-    `compare-${props.editId}`,
-    () => getCompare(props.editId),
-    {
-      default: (): EditCompare => {
-        return {
-          source: [],
-          result: [],
-          comment: ''
-        }
+const { data: compare } = await useLazyAsyncData(
+  `compare-${props.editId}`,
+  () => getCompare(props.editId),
+  {
+    default: (): EditCompare => {
+      return {
+        source: [],
+        result: [],
+        comment: '',
       }
-    }
-  )
+    },
+  },
+)
 </script>
 
 <template>
@@ -33,19 +33,19 @@
         <span
           v-for="(text, index) of compare.source"
           :key="index"
-          :class="`select-text whitespace-pre-wrap ${text.value.length > 25 ? 'break-all':''} ${text.isDiffered ? 'text-red-500':''}`"
+          :class="`select-text whitespace-pre-wrap ${text.value.length > 25 ? 'break-all' : ''} ${text.isDiffered ? 'text-red-500' : ''}`"
         >
           {{ text.value }}
         </span>
       </div>
       <div v-if="!isTypeCreate" class="flex flex-col items-center justify-evenly">
-        <div class="after:content-['↓'] sm:after:content-['⟶']"></div>
+        <div class="after:content-['↓'] sm:after:content-['⟶']" />
       </div>
       <div class="select-text rounded-md border border-ns-gray-200 px-4 py-2 dark:border-ns-gray-600">
         <span
           v-for="(text, index) of compare.result"
           :key="index"
-          :class="`select-text whitespace-pre-wrap ${text.value.length > 25 ? 'break-all':''} ${text.isDiffered ? 'text-green-500':''}`"
+          :class="`select-text whitespace-pre-wrap ${text.value.length > 25 ? 'break-all' : ''} ${text.isDiffered ? 'text-green-500' : ''}`"
         >
           {{ text.value }}
         </span>

@@ -16,7 +16,7 @@
     <div class="grid grow grid-cols-[auto_1fr] items-start gap-8">
       <LayoutMenu />
 
-      <slot></slot>
+      <slot />
     </div>
   </div>
 </template>

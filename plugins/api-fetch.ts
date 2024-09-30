@@ -5,13 +5,13 @@ export default defineNuxtPlugin(() => {
     baseURL: config.public.apiUrl,
     // credentials: 'include',
     headers: {
-      Accept: 'application/json'
-    }
+      Accept: 'application/json',
+    },
   })
 
   return {
     provide: {
-      apiFetch
-    }
+      apiFetch,
+    },
   }
 })
