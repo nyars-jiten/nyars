@@ -6,7 +6,7 @@
   const tagsMap: Record<string, string> = {
     'i': 'italic',
     'p': 'italic',
-    'comp': 'bold',
+    'comp': 'font-bold italic',
     'hide': 'hidden',
     'ref': 'text-indigo-300', // TODO: routing logic
   }
