@@ -41,11 +41,6 @@ export default defineNuxtConfig({
     'nuxt-typed-router',
     '@nuxt/icon'
   ],
-  icon: {
-    serverBundle: {
-      collections: ['uil']
-    }
-  },
   eslint: {
     // checker: true,
     config: {

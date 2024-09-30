@@ -38,11 +38,11 @@
         v-if="jpnEntriesSearchResult?.info.parsedGrammar.length"
         :parsed-words="jpnEntriesSearchResult?.info.parsedGrammar"
       />
-      <JpnEntry
+      <!-- <JpnEntry
         v-for="jpnEntry of jpnEntriesSearchResult?.result"
         :key="jpnEntry.wid"
         :jpn-entry="jpnEntry"
-      />
+      /> -->
     </section>
   </div>
 </template>

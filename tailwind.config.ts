@@ -1,12 +1,17 @@
 import defaultTheme from 'tailwindcss/defaultTheme'
 import colors from 'tailwindcss/colors'
 import type { Config } from 'tailwindcss'
-
+// defaultTheme.transitionProperty.colors
 export default {
   content: [],
   darkMode: 'class',
   theme: {
     extend: {
+      transitionProperty: {
+        // https://github.com/tailwindlabs/tailwindcss/pull/10604
+        DEFAULT: [defaultTheme.transitionProperty.DEFAULT, 'outline-color'].join(', '),
+        colors: [defaultTheme.transitionProperty.colors, 'outline-color'].join(', ')
+      },
       fontFamily: {
         sans: [
           '"Exo 2"',
@@ -68,12 +73,4 @@ export default {
       }
     }
   },
-  plugins: [],
-  safelist: [
-    { pattern: /border-ns-edit-status-/ },
-    { pattern: /text-ns-edit-status-/ },
-    { pattern: /text-ns-edit-type-/ },
-    { pattern: /text-ns-tag-/ },
-    { pattern: /border-ns-tag-/ }
-  ]
 } satisfies Config

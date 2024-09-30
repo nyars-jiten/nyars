@@ -1,81 +1,76 @@
 <script setup lang="ts">
-  const wid = useRoute('jpn-wid').params.wid
+  // const wid = useRoute('jpn-wid').params.wid
 
-  const { getJpnEntry } = useApi(jpnEntryRepository)
-  const { getImages } = useApi(kotobaRepository)
-  const { getEditsEntry } = useApi(editRepository)
-  const { getSatellites } = useApi(satelliteRepository)
+  const wid = useRouteParams('wid', '0' as string)
 
-  const { data: jpnEntry } = await useAsyncData(
-    'jpnEntry',
-    () => getJpnEntry(wid)
-  )
+  // const { getJpnEntry } = useApi(jpnEntryRepository)
+  const { get } = useJpnArticles()
+  // const { getImages } = useApi(kotobaRepository)
+  // const { getEditsEntry } = useApi(editRepository)
+  // const { getSatellites } = useApi(satelliteRepository)
 
-  const { data: images } = await useLazyAsyncData(
-    `jpnEntryImages-${wid}`,
-    () => getImages(wid, 0),
-    {
-      default: (): Image[] => []
-    }
-  )
+  const { data: jpnEntry } = await useAsyncData(`jpn-article-${wid.value}`, () => get(wid.value), {
+    default: () => ({
+      wid: '0000',
+      status: {
+        isReviewed: false,
+        isUnconfirmed: false,
+        isArchaic: false,
+        isDialect: false,
+        isProper: false
+      },
+      externalEntry: '',
+      title: '',
+      tags: [],
+      words: [],
+      meanings: []
+    } satisfies V2EntryJp)
+  })
 
-  const { data: edits } = await useLazyAsyncData(
-    `jpnEntryEdits-${wid}`,
-    () => getEditsEntry(wid, 0),
-    {
-      default: (): Edit[] => []
-    }
-  )
+  // const { data: images } = await useLazyAsyncData(
+  //   `jpnEntryImages-${wid}`,
+  //   () => getImages(wid, 0),
+  //   {
+  //     default: (): Image[] => []
+  //   }
+  // )
 
-  const { data: satellites } = await useLazyAsyncData(
-    `jpnEntrySatellites-${wid}`,
-    () => getSatellites(wid),
-    {
-      default: (): SatelliteData[][] => [[]]
-    }
-  )
+  // const { data: edits } = await useLazyAsyncData(
+  //   `jpnEntryEdits-${wid}`,
+  //   () => getEditsEntry(wid, 0),
+  //   {
+  //     default: (): Edit[] => []
+  //   }
+  // )
 
-  const showData = ref(false)
-
-  const createTitle = () => {
-    if (!jpnEntry.value) {
-      return ''
-    }
-    const { writings, readings } = jpnEntry.value.entry.words[0]
-
-    if (writings.length === 0) {
-      return readings[0].value
-    }
-    if (writings.length > 0) {
-      return writings[0].value
-    }
-    return ''
-  }
+  // const { data: satellites } = await useLazyAsyncData(
+  //   `jpnEntrySatellites-${wid}`,
+  //   () => getSatellites(wid),
+  //   {
+  //     default: (): SatelliteData[][] => [[]]
+  //   }
+  // )
 
   definePageMeta({
-    validate: (route) => {
-      const param = (route.params as { wid: unknown }).wid
-      return typeof param === 'string' && /^[a-zA-Z0-9]{4}$/.test(param)
-    },
-    alias: ['/dict/jp/:wid', '/jp/:wid'] // TODO: DELETE THIS IN FUTURE
+    layout: 'desktop'
   })
-  useHead({
-    title: `${createTitle()}`
-  })
+
+  // const showData = ref(false)
+  useHead({ title: jpnEntry.value.title })
 </script>
 
 <template>
-  <div class="flex flex-col gap-4">
+  <UiBlock :active="true">
     <JpnEntry v-if="jpnEntry" :jpn-entry="jpnEntry" />
-    <NotFound v-else />
-    <div v-if="images.length > 0" class="rounded border border-ns-gray-100 bg-white p-8 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800">
+    <!-- <NotFound v-else /> -->
+    <!-- <div v-if="images.length > 0" class="rounded border border-ns-gray-100 bg-white p-8 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800">
       <img
         :src="images[0].link"
         :alt="images[0].title"
       >
       <span class="select-text">{{ images[0].title }}</span>
-    </div>
-    <div v-if="satellites.length > 0 && satellites[0].length > 0" class="border border-ns-gray-100 bg-white p-8 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800 md:rounded-md">
+    </div> -->
+    <!-- <div v-if="satellites.length > 0 && satellites[0].length > 0" class="border border-ns-gray-100 bg-white p-8 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800 md:rounded-md">
       <div class="pb-4">
         <button
           type="button"
@@ -103,6 +98,6 @@
         :key="edit.id"
         :edit="edit"
       />
-    </div>
-  </div>
+    </div> -->
+  </UiBlock>
 </template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
   interface Props {
-    jpnEntry: JpnEntry
+    jpnEntry: V2EntryJp
   }
 
   defineProps<Props>()
@@ -17,7 +17,7 @@
       :class="`flex flex-col break-all ${isPreview?'hover:text-ns-500':'pointer-events-none'}`"
     >
       <div
-        v-for="(word, wordIndex) of jpnEntry.entry.words"
+        v-for="(word, wordIndex) of jpnEntry.words"
         :key="wordIndex"
         class="text-2xl"
       >
@@ -29,11 +29,11 @@
           >
             {{ writing.value }}
             <span
-              v-for="(tag, tagIndex) of writing.tag?.values"
+              v-for="(tag, tagIndex) of writing.tags"
               :key="tagIndex"
               class="inline align-text-bottom text-sm italic text-fuchsia-700"
             >
-              {{ $t(`models.tags.kinf.${tag}.short`) }}
+              {{ tag.engShort }}
             </span>
           </li>
         </ul>
@@ -43,18 +43,19 @@
             :key="readingIndex"
             class="inline-flex flex-wrap items-baseline after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
           >
-            {{ reading.value }}
+            {{ reading.transcription?.kana }}
+
             <span
-              v-for="(tag, tagIndex) of reading.tag?.values"
+              v-for="(tag, tagIndex) of reading.tags"
               :key="tagIndex"
               class="align-text-top text-sm italic text-fuchsia-700"
             >
-              {{ $t(`models.tags.rinf.${tag}.short`) }}
+              {{ tag.engShort }}
             </span>
           </li>
         </ul>
       </div>
     </NuxtLink>
-    <LazyTags :tags="jpnEntry.entry.tags" />
+    <LazyTags :tags="jpnEntry.tags" />
   </div>
 </template>

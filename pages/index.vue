@@ -70,9 +70,9 @@
 </script>
 
 <template>
-  <section class="grid grid-cols-[3fr_1fr] gap-8 p-4">
+  <section class="grid grid-cols-[1fr_auto] gap-8">
     <div class="grow space-y-8">
-      <UiBlock class="space-y-4">
+      <UiBlock class="space-y-4" size="large" :active="true">
         <div class="indent-10">
           {{ $t('pages.main.infoNyars') }}
         </div>
@@ -106,7 +106,7 @@
         </i18n-t>
       </UiBlock>
 
-      <UiBlock class="space-y-4">
+      <UiBlock class="space-y-4" size="large" :active="true">
         <h1 class="text-3xl font-bold">
           activity
         </h1>
@@ -123,8 +123,7 @@
 
     <div class="space-y-8">
       <div>
-      <UsersTable />
-        
+        <UsersTable />
       </div>
 
       <hr class="border-neutral-800">

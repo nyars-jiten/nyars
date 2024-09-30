@@ -6,19 +6,20 @@
 				{
 					"title": "Словарь",
 					"pages": {
+						"home": "Главная",
 						"edits": "Правки",
 						"statistics": "Статистика",
 						"documentation": "Документация",
 						"download": "Скачать",
-						"github": "Багтрекер"
+						"github": "Баг-трекер"
 					}
 				},
 				{
 					"title": "Добавить",
 					"pages": {
-						"jpnEditor": "Добавить слово",
-						"exampleEditor": "Добавить пример",
-						"kanjiEditor": "Добавить кандзи"
+						"jpnEditor": "слово",
+						"exampleEditor": "пример",
+						"kanjiEditor": "кандзи"
 					}
 				},
 				{

@@ -131,19 +131,21 @@
   // 
   "typescript.tsdk": "node_modules\\typescript\\lib",
   // 
-  "npm.packageManager": "pnpm",
+  "npm.packageManager": "bun",
   // Global
   "files.insertFinalNewline": true,
   "editor.tabSize": 2,
   "files.eol": "\n",
   // Nuxt
-  "nuxtr.defaultPackageManager": "pnpm",
+  "nuxtr.defaultPackageManager": "Bun",
   "nuxtr.piniaFiles.defaultTemplate": "setup",
   "nuxtr.vueFiles.firstTag": "script",
   "nuxtr.vueFiles.style.addStyleTag": false,
   // Spell
   "cSpell.language": "en,ru",
   "cSpell.words": [
+    "dedupe",
+    "furigana",
     "nitropack",
     "nuxt",
     "nyars"

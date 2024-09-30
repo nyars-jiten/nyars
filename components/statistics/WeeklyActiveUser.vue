@@ -3,12 +3,12 @@
     position: number
     avatar: string
     username: string
-    weekRating: number | undefined
-    jpnNew: number | undefined
-    jpnEdit: number | undefined
-    jpnNewAuto: number | undefined
-    jpnEditAuto: number | undefined
-    approved: number | undefined
+    weekRating: number
+    jpnNew: number
+    jpnEdit: number
+    jpnNewAuto: number
+    jpnEditAuto: number
+    approved: number
   }
 
   const props = defineProps<Props>()
@@ -16,30 +16,77 @@
 </script>
 
 <template>
-  <section class="space-y-4 outline outline-1 shadow-md rounded-md outline-neutral-800 p-4">
-    <div class="flex grow items-center sm:grow-0">
-      <img
-        class="mr-4 inline-flex size-12 items-center justify-center rounded-full bg-ns-gray-200 object-center"
-        :src="avatar"
-        :alt="username"
-      >
+  <UiBlock class="group" :hover="true">
+    <div class="space-y-4 overflow-hidden">
+      <div class="flex grow items-center gap-4">
+        <img
+          class="inline-flex size-12 items-center justify-center rounded-full border border-neutral-800 object-center shadow-md transition-colors group-hover:border-neutral-700 group-hover:hover:border-neutral-600"
+          :src="avatar"
+          :alt="username"
+        >
 
-      <div class="flex min-w-32 max-w-96 flex-col sm:w-40">
-        <span class="w-full truncate">{{ username }}</span>
-        <small>{{ $t('models.userRating.weekRating') }} <span class="text-violet-300">{{ weekRating }}</span></small>
+        <div class="flex flex-col gap-1 leading-none">
+          <span class="w-full truncate">
+            {{ username }}
+          </span>
+
+          <span class="space-x-2 truncate">
+            <small>
+              {{ $t('models.userRating.weekRating') }}
+            </small>
+
+            <span class="truncate text-violet-300">
+              {{ weekRating }}
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1 leading-none">
+          <WeeklyActivityLine :values="[jpnNew]">
+            <template #name>
+              {{ $t('models.userRating.summaryWeekJapNew') }}
+            </template>
+
+            <template #value>
+              {{ jpnNew }}
+            </template>
+          </WeeklyActivityLine>
+
+          <WeeklyActivityLine :values="[jpnEdit]">
+            <template #name>
+              {{ $t('models.userRating.summaryWeekJapEdit') }}
+            </template>
+
+            <template #value>
+              {{ jpnEdit }}
+            </template>
+          </WeeklyActivityLine>
+        </div>
+
+        <div class="grid grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1 leading-none">
+          <WeeklyActivityLine :values="[approved]">
+            <template #name>
+              {{ $t('models.userRating.summaryWeekApproved') }}
+            </template>
+
+            <template #value>
+              {{ approved }}
+            </template>
+          </WeeklyActivityLine>
+
+          <WeeklyActivityLine :values="[jpnNewAuto, jpnEditAuto]">
+            <template #name>
+              {{ $t('components.statistics.weeklyActiveUser.jpnAuto') }}
+            </template>
+
+            <template #value>
+              {{ jpnNewAuto }}<small class="text-neutral-300">/</small>{{ jpnEditAuto }}
+            </template>
+          </WeeklyActivityLine>
+        </div>
       </div>
     </div>
-
-    <div class="grid grid-cols-2 gap-4">
-      <div class="grid grid-cols-[auto_1fr] gap-x-2">
-        <span class="">  {{ $t('models.userRating.summaryWeekJapNew') }}</span> <span class="text-amber-300">{{ jpnNew }}</span>
-        <span class="">  {{ $t('models.userRating.summaryWeekJapEdit') }}</span> <span class="text-amber-300">{{ jpnEdit }}</span>
-      </div>
-
-      <div class="grid grid-cols-[auto_1fr] gap-x-2">
-        <span class="">  {{ $t('models.userRating.summaryWeekApproved') }}</span> <span class="text-amber-300">{{ approved }}</span>
-        <span class="">  {{ $t('components.statistics.weeklyActiveUser.jpnAuto') }}</span> <span class="text-amber-300">{{ jpnNewAuto }}/{{ jpnEditAuto }}</span>
-      </div>
-    </div>
-  </section>
+  </UiBlock>
 </template>

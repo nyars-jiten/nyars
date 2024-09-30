@@ -6,7 +6,7 @@
   }
 
   interface Props {
-    tags: string[]
+    tags: V2Tag[]
   }
 
   const props = defineProps<Props>()
@@ -14,11 +14,11 @@
   const searchStore = useSearchStore()
 
   const tags: Tag[] = props.tags.map((fullTag) => {
-    const [name, ...rest] = fullTag.split('-')
+    const [name, ...rest] = fullTag.eng.split('-')
     return {
       name,
       level: rest.join('-'),
-      full: fullTag
+      full: fullTag.eng
     }
   })
 

@@ -1,22 +1,40 @@
+import { string, array, type TypeOf, type } from 'io-ts'
+
+export const CreateArticleJpn = type({
+  body: string,
+  reading: string,
+  writing: string
+})
+
+const CreateArticleJpnList = array(CreateArticleJpn)
+
+export type CreateArticleJpn = TypeOf<typeof CreateArticleJpn>
+export type CreateArticleJpnList = TypeOf<typeof CreateArticleJpnList>
+
 export interface V2EntryJpResponse {
   entry: V2EntryJp
+}
+
+export interface JpnSearchResponse {
+  result: V2EntryJp[]
 }
 
 export interface V2EntryJp {
   wid: string
   status: V2Status
-  external_entry: string
+  externalEntry: string
+  title: string
   tags: V2Tag[]
   words: V2Word[]
   meanings: V2Meaning[]
 }
 
 export interface V2Status {
-  is_reviewed: boolean
-  is_unconfirmed: boolean
-  is_archaic: boolean
-  is_dialect: boolean
-  is_proper: boolean
+  isReviewed: boolean
+  isUnconfirmed: boolean
+  isArchaic: boolean
+  isDialect: boolean
+  isProper: boolean
 }
 
 export interface V2Word {
@@ -55,21 +73,21 @@ export interface V2Meaning {
 export interface V2Sense {
   content: V2Content[]
   examples: V2Example[]
-  int_refs: V2InternalReference[]
-  ext_refs: V2ExternalReference[]
-  loan_sources: V2LoanSource[]
-  field_tags: V2Tag[]
-  dialect_tags: V2Tag[]
-  meta_tags: V2Tag[]
-  is_rare: boolean
-  sub_senses: V2Sense[]
+  intRefs: V2InternalReference[]
+  extRefs: V2ExternalReference[]
+  loanSources: V2LoanSource[]
+  fieldTags: V2Tag[]
+  dialectTags: V2Tag[]
+  metaTags: V2Tag[]
+  isRare: boolean
+  subSenses: V2Sense[]
 }
 
 export interface V2Tag {
   eng: string
-  eng_short: string
+  engShort: string
   ru: string
-  ru_short: string
+  ruShort: string
 }
 
 export interface V2LoanSource {
@@ -80,7 +98,7 @@ export interface V2LoanSource {
 export interface V2InternalReference {
   value: string
   target: string
-  reference_type: V2ReferenceType
+  referenceType: V2ReferenceType
 }
 
 export interface V2ExternalReference {

@@ -40,7 +40,7 @@
 </script>
 
 <template>
-  <section class="rounded-md border-l-2 px-2 py-1 shadow-md outline outline-1 outline-neutral-700" :class="mark({ border: edit.status })">
+  <section class="rounded-md border-l-2 px-4 py-1 leading-none shadow-md outline-dashed outline-1 outline-neutral-700 transition-colors hover:bg-neutral-700 hover:outline-neutral-600" :class="mark({ border: edit.status })">
     <div class="flex flex-col items-center gap-3 py-1 hover:cursor-pointer md:grid md:grid-cols-[40%_60%] md:gap-0" @click="toggleChanges()">
       <NuxtLink
         :to="{name: 'jpn-wid', params: {wid: edit.identifier}}"
@@ -66,9 +66,10 @@
 
       <div class="flex items-center gap-2">
         <span>#{{ edit.id }}</span>
-        <span class="italic text-neutral-500">
+        
+        <i class="text-neutral-500">
           {{ $t(`models.edit.dictionary.${edit.dictionary}`) }}
-        </span>
+        </i>
 
         <span :class="`italic text-ns-edit-type-${edit.type}`">
           {{ $t(`models.edit.type.${edit.type}`) }}
