@@ -21,6 +21,17 @@
         :key="wordIndex"
         class="text-2xl"
       >
+        <div class="mb-2 ml-6">
+          <ul v-show="word.furigana?.length" class="inline before:-ml-3 dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
+            <li
+              v-for="(furigana, fi) of word.furigana"
+              :key="fi"
+              class="inline-flex flex-wrap items-baseline before:text-ns-gray-200 after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
+            >
+              <Furigana :furigana="furigana" />
+            </li>
+          </ul>
+        </div>
         <ul v-show="word.writings?.length" class="inline before:-ml-3 before:text-ns-gray-200 before:content-['【'] after:text-ns-gray-200 after:content-['】'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
           <li
             v-for="(writing, writingIndex) of word.writings"

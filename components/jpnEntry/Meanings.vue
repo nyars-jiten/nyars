@@ -23,13 +23,13 @@
       </div>
 
       <div class="flex w-11/12 flex-col">
-        <Sense 
-          v-for="(sense, senseIndex) of meaning.senses" 
-          :key="senseIndex"  
+        <Sense
+          v-for="(sense, senseIndex) of meaning.senses"
+          :key="senseIndex"
           :sense="sense"
           :ix="meaning.senses.length > 1 || sense.subSenses.length > 0 ? `${senseIndex + 1}` : ''"
-          :isPreview="isPreview"
-          class="flex flex-col" 
+          :is-preview="isPreview"
+          class="flex flex-col"
         />
         <div v-if="meaning.note.length > 0" class="flex flex-col">
           <div class="flex">

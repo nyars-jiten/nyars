@@ -5,8 +5,6 @@
     isPreview: boolean
   }
 
-  const searchStore = useSearchStore()
-
   defineProps<Props>()
 </script>
 
@@ -20,9 +18,9 @@
       <span v-for="(tag, i) of sense.fieldTags" :key="i" class="italic text-green-600">
         <span class="group relative cursor-pointer pl-1 after:content-[\',\'] first:pl-0 last:mr-2 last:after:content-none">
           {{ tag.engShort }}
-          <div class="absolute hidden z-20 left-1/2 translate-x-[-50%] bottom-full pb-1 group-hover:block">
-            <div class="flex items-center justify-center px-3 py-1.5 rounded-md border border-ns-gray-200 bg-white shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800">
-              <span class="text-center leading-tight pb-[4px] text-wrap xl:text-nowrap xl:leading-[75%]">
+          <div class="absolute bottom-full left-1/2 z-20 hidden -translate-x-1/2 pb-1 group-hover:block">
+            <div class="flex items-center justify-center rounded-md border border-ns-gray-200 bg-white px-3 py-1.5 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800">
+              <span class="text-wrap pb-[4px] text-center leading-tight xl:text-nowrap xl:leading-[75%]">
                 {{ tag.ru }}
               </span>
             </div>
@@ -33,9 +31,9 @@
       <Content :content="sense.content" />
 
       <span class="italic">
-        <span 
-          v-for="(tag,i) of sense.metaTags.concat(sense.dialectTags)" 
-          :key="i" 
+        <span
+          v-for="(tag,i) of sense.metaTags.concat(sense.dialectTags)"
+          :key="i"
           class="pl-1 after:content-[','] first:before:content-['('] last:after:content-[')']"
         >
           {{ tag.ru }}
@@ -81,14 +79,13 @@
       </div>
     </div>
 
-    <Sense 
-      v-for="(subsense, subsenseIndex) of sense.subSenses" 
-      :key="subsenseIndex"  
+    <Sense
+      v-for="(subsense, subsenseIndex) of sense.subSenses"
+      :key="subsenseIndex"
       :sense="subsense"
       :ix="`${ix}.${subsenseIndex + 1}`"
-      :isPreview="isPreview"
-      class="flex flex-col ml-6" 
+      :is-preview="isPreview"
+      class="ml-6 flex flex-col"
     />
   </div>
 </template>
-
