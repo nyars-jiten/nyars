@@ -78,15 +78,11 @@
               {{ senseIndex + 1 }}
             </span>
 
-            <span>
-              {{ sense.content }}
-            </span>
-            <!-- TODO: DELETE V-HTML -->
-            <!-- eslint-disable-next-line vue/no-v-html -->
-            <!-- <span class="whitespace-pre-wrap" @click="clickOnTooltip" v-html="bbCodesWithTagsToHTML(sense.value, sense.tags)"></span> -->
+            <Content :content="sense.content" />
           </div>
 
           <div v-if="!isPreview" class="my-1 ml-7">
+            {{ sense.intRefs }}
             <ul v-for="(reference, referenceIndex) of sense.intRefs" :key="referenceIndex">
               <li>
                 <span class="text-xs">
@@ -118,11 +114,18 @@
 
           <div v-if="!isPreview && sense.examples?.length" :class="`${meaning.senses.length > 1 ? 'ml-8':'ml-1'}`">
             <div v-for="(example, exampleIndex) of sense.examples" :key="exampleIndex" class="border-l-2 border-ns-gray-200 pl-2 text-neutral-500 dark:border-ns-gray-700">
-              <!-- TODO: DELETE V-HTML -->
-              <!-- eslint-disable-next-line vue/no-v-html -->
-              <!-- <span class="whitespace-pre-wrap" v-html="furiganaToHtml(example.value)"></span> -->
-              {{ example.translation }}
+              <Content :content="example.sentence" />
+              <Content :content="example.translation" />
             </div>
+          </div>
+        </div>
+        <div v-if="meaning.note.length > 0" class="flex flex-col">
+          <div class="flex">
+            <span class="min-w-[30px] text-center text-ns-gray-400">
+              ※
+            </span>
+
+            <Content :content="meaning.note" />
           </div>
         </div>
       </div>
