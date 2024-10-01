@@ -28,5 +28,5 @@ COPY package.json /usr/src/app/
 # run the app
 USER bun
 EXPOSE 3000/tcp
-ENV NUXT_HOST=0.0.0.0
-ENTRYPOINT ["sh", "-c", "bun run /usr/src/app/.output/server/index.mjs --host $NUXT_HOST"]
+ENV HOST=0.0.0.0 PORT=8080 NODE_ENV=production
+ENTRYPOINT ["sh", "-c", "bun run /usr/src/app/.output/server/index.mjs"]

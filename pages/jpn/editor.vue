@@ -197,7 +197,7 @@ function buttons() {
 
         <div>
           <UiButton type="button" icon="material-symbols:save" @click="save">
-            save
+            {{ $t('pages.editor.save') }}
           </UiButton>
         </div>
       </section>
@@ -205,29 +205,29 @@ function buttons() {
       <div :active="false" class="flex grow flex-col gap-4">
         <UiInput ref="writingRef" v-model="writing" :multiline="true" :rows="writingRows">
           <template #hint>
-            writing
+            {{ $t('pages.editor.writing') }}
           </template>
         </UiInput>
 
         <UiInput ref="readingRef" v-model="reading" :multiline="true" :rows="readingRows">
           <template #hint>
-            reading
+            {{ $t('pages.editor.reading') }}
           </template>
         </UiInput>
 
         <UiInput ref="bodyRef" v-model="body" :multiline="true" class="grow">
           <template #hint>
-            body
+            {{ $t('pages.editor.body') }}
           </template>
         </UiInput>
       </div>
     </div>
 
     <UiBlock class="space-y-4">
-      <h1 class="text-4xl">
-        Preview
+      <h1 class="text-2xl">
+        {{ $t('pages.editor.preview') }}
       </h1>
-
+      
       <JpnEntry v-if="!('code' in previewData)" :jpn-entry="previewData" />
     </UiBlock>
   </section>

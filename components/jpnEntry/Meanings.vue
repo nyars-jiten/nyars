@@ -5,7 +5,7 @@ interface Props {
 
 defineProps<Props>()
 const route = useRoute('jpn-wid')
-const isPreview = !route.params.wid
+const isPreview = false
 </script>
 
 <template>
