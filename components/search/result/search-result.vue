@@ -23,10 +23,11 @@ const shortenedSenses = computed(() => {
       const curSense = curMeaning.senses[j]
       if (!curSense.isRare && res.data.length < 5) {
         res.data.push(curSense)
-      } else {
+      }
+      else {
         res.hidden++
       }
-    } 
+    }
   }
   return res
 })
@@ -39,17 +40,17 @@ const wid = defineModel<string | null>({ required: true })
     <UiBlock :hover="true" class="space-y-2">
       <header class="grid grid-cols-[1fr_auto] items-center justify-between gap-4 text-2xl">
         <span class="grow truncate">
-          <span v-for="{ furigana }, wIndex of article.words" :key="wIndex">
+          <!-- <span v-for="{ furigana }, wIndex of article.words" :key="wIndex">
             <span v-for="f, fIndex of furigana" :key="fIndex" class="after:content-['・'] last:after:content-none dark:after:text-gray-700">
               <Furigana :furigana="f" />
             </span>
-          </span>
+          </span> -->
         </span>
 
-        <Tags :tags="article.tags" />
+        <!-- <Tags :tags="article.tags" /> -->
       </header>
 
-      <section class="grid grid-cols-[auto_1fr] gap-x-2">
+      <!-- <section class="grid grid-cols-[auto_1fr] gap-x-2">
         <template v-for="sense, sIndex of shortenedSenses.data" :key="sIndex">
           <span v-if="shortenedSenses.data.length > 1" class="text-end text-violet-300">
             {{ 1 + sIndex }}
@@ -72,9 +73,10 @@ const wid = defineModel<string | null>({ required: true })
           </span>
         </template>
       </section>
+
       <span v-if="shortenedSenses.hidden > 0" class="italic text-gray-500 text-sm">
         <span>{{ $t('components.searchGroup.general.hiddenSenses', shortenedSenses.hidden ) }}</span>
-      </span>
+      </span> -->
     </UiBlock>
   </button>
 </template>

@@ -8,7 +8,6 @@ const { data, execute } = useAsyncData(`search-${request.value}`, () => api.sear
 })
 
 // TODO: debounce
-
 watch(request, () => execute)
 
 definePageMeta({
@@ -23,7 +22,7 @@ const article = computed(() => data.value?.result.find(x => x.wid === wid.value)
   <div class="grid grow grid-cols-[1fr_2fr] gap-8">
     <section class="space-y-4">
       <template v-for="result of data?.result" :key="result.wid">
-        <SearchResult :article="result" v-model="wid" />
+        <SearchResult v-model="wid" :article="result" />
       </template>
     </section>
 

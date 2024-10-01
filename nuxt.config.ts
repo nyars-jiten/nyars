@@ -41,6 +41,9 @@ export default defineNuxtConfig({
     'nuxt-typed-router',
     '@nuxt/icon',
   ],
+  icon: {
+    collections: ['material-symbols', 'tabler', 'ci', 'uil', 'mdi', 'ooui'],
+  },
   eslint: {
     config: {
       standalone: false,

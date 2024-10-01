@@ -67,64 +67,151 @@ async function save() {
 const writingRef = ref()
 const readingRef = ref()
 const bodyRef = ref()
+
+const element = ref({
+  target: ref('' as string),
+  selection: {
+    start: 0,
+    end: 0,
+  },
+})
+
+function insert(open: string, close?: string) {
+  let result = ''
+
+  result = element.value.target.slice(0, element.value.selection.start)
+  result += open
+
+  if (close) {
+    result += element.value.target.slice(element.value.selection.start, element.value.selection.end)
+    result += close
+    result += element.value.target.slice(element.value.selection.end)
+  }
+
+  else {
+    result += element.value.target.slice(element.value.selection.start)
+  }
+
+  element.value.target = result
+}
+
+onMounted(() => {
+  const refs = [
+    [writingRef, writing],
+    [readingRef, reading],
+    [bodyRef, body],
+  ]
+
+  for (const [r, v] of refs) {
+    const { focused } = useFocus(r.value.inputRef)
+
+    watch(focused, (focused) => {
+      // blur
+      if (focused === false) {
+        element.value = {
+          target: v,
+          selection: {
+            start: r.value.inputRef.selectionStart,
+            end: r.value.inputRef.selectionEnd,
+          },
+        }
+      }
+    })
+  }
+})
+
+function buttons() {
+  return [
+    [
+    // italic
+      {
+        icon: 'material-symbols:format-italic',
+        click: ['[i]', '[/i]'],
+      },
+      // works same as italic
+      {
+        name: '[p]',
+        click: ['[p]', '[/p]'],
+      },
+      // sub
+      {
+        icon: 'material-symbols:subscript',
+        click: ['[sub]', '[/sub]'],
+      },
+      // sup
+      {
+        icon: 'material-symbols:superscript',
+        click: ['[sup]', '[/sup]'],
+      },
+      // comp1
+      {
+        icon: 'uil:brackets-curly',
+        click: ['{~', '}'],
+      },
+      // кавычки
+      {
+        icon: 'ooui:markup',
+        click: ['«', '»'],
+      },
+    ],
+    [
+    // bracket-одна
+      {
+        icon: 'tabler:brackets-contain-start',
+        click: ['⌈'],
+      },
+      // ударение
+      {
+        // accent mark
+        icon: 'ooui:bigger',
+        click: ['\u0301'],
+      },
+    ],
+    // {
+    //   icon: 'material-symbols:tag',
+    //   click: [],
+    // }
+  ] as {
+    icon: string | undefined
+    name: string | undefined
+    click: [string] | [string, string]
+  }[][]
+}
 </script>
 
 <template>
   <section class="grid h-full grow grid-cols-2 gap-8">
     <div class="flex h-full flex-col gap-4">
       <section class="flex justify-between gap-4">
-        <div class="inline-flex flex-wrap gap-2">
-          
-        <!-- italic -->
-        <UiButton type="button" icon="ic:format-italic" />
-
-        <!-- works same as italic -->
-        <UiButton type="button" >[p]</UiButton>
-
-        <!-- sub -->
-        <UiButton type="button" icon="ic:subscript" >sub</UiButton>
-
-        <!-- sup -->
-        <UiButton type="button" icon="ic:superscript" >sup</UiButton>
-
-        <!-- comp1 -->
-        <UiButton type="button">{~suru}</UiButton>
-        <UiButton type="button">{~to...na}</UiButton>
-
-        <!-- bracket-одна -->
-        <UiButton type="button">⌈</UiButton>
-
-        <!-- кавычки -->
-        <UiButton type="button">« »</UiButton>
-
-        <!-- ударение -->
-        <UiButton type="button" icon="ic:format-letter-spacing-wide-rounded">accent</UiButton>
-
-        <!-- tag -->
-        <UiButton type="button" icon="ic:tag" >tag</UiButton>
+        <div class="inline-flex flex-wrap gap-8">
+          <span v-for="group, gIndex in buttons()" :key="gIndex" class="inline-flex flex-wrap gap-2">
+            <UiButton v-for="button, bIndex in group" :key="bIndex" type="button" :icon="button.icon" @click="insert.apply(null, button.click)">
+              {{ button.name }}
+            </UiButton>
+          </span>
         </div>
 
         <div>
-          <UiButton type="button" icon="ic:save" @click="save">
+          <UiButton type="button" icon="material-symbols:save" @click="save">
             save
           </UiButton>
         </div>
       </section>
 
       <div :active="false" class="flex grow flex-col gap-4">
-        <UiInput ref="writingRef" id="texta-writing" v-model="writing" :multiline="true" :rows="1">
+        <UiInput id="texta-writing" ref="writingRef" v-model="writing" :multiline="true" :rows="1">
           <template #hint>
             writing
           </template>
         </UiInput>
 
-        <UiInput ref="readingRef" id="reading-writing" v-model="reading" :multiline="true" :rows="1">
+        <UiInput id="reading-writing" ref="readingRef" v-model="reading" :multiline="true" :rows="1">
           <template #hint>
             reading
           </template>
         </UiInput>
 
-        <UiInput ref="bodyRef" id="body-writing" v-model="body" :multiline="true" class="grow">
+        <UiInput id="body-writing" ref="bodyRef" v-model="body" :multiline="true" class="grow">
           <template #hint>
             body
           </template>
