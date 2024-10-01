@@ -5,7 +5,6 @@ withDefaults(defineProps<Props>(), {
   fullHeight: false,
   rows: undefined,
   type: 'text',
-  id: '',
 })
 
 const slots = defineSlots<{ hint?: () => void }>()
@@ -48,7 +47,7 @@ defineExpose({ inputRef })
 
     <template v-else>
       <section class="flex h-full p-4" :class="styles()">
-        <textarea :id="id" ref="inputRef" v-model="model" :rows="rows" class="w-full bg-transparent focus:outline-none" type="text" />
+        <textarea ref="inputRef" v-model="model" :rows="rows" class="w-full bg-transparent outline-none" type="text" />
       </section>
     </template>
   </section>

@@ -9,7 +9,11 @@ definePageMeta({
 const { create, preview } = useJpnArticles()
 
 const writing = ref('')
+const writingRows = computed(() => writing.value.split('\n').length)
+
 const reading = ref('')
+const readingRows = computed(() => reading.value.split('\n').length)
+
 const body = ref('')
 
 const { data: previewData, execute: previewExecute } = useAsyncData(() => preview({
@@ -199,19 +203,19 @@ function buttons() {
       </section>
 
       <div :active="false" class="flex grow flex-col gap-4">
-        <UiInput id="texta-writing" ref="writingRef" v-model="writing" :multiline="true" :rows="1">
+        <UiInput ref="writingRef" v-model="writing" :multiline="true" :rows="writingRows">
           <template #hint>
             writing
           </template>
         </UiInput>
 
-        <UiInput id="reading-writing" ref="readingRef" v-model="reading" :multiline="true" :rows="1">
+        <UiInput ref="readingRef" v-model="reading" :multiline="true" :rows="readingRows">
           <template #hint>
             reading
           </template>
         </UiInput>
 
-        <UiInput id="body-writing" ref="bodyRef" v-model="body" :multiline="true" class="grow">
+        <UiInput ref="bodyRef" v-model="body" :multiline="true" class="grow">
           <template #hint>
             body
           </template>
