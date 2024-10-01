@@ -74,10 +74,34 @@ const bodyRef = ref()
     <div class="flex h-full flex-col gap-4">
       <section class="flex justify-between gap-4">
         <div class="inline-flex flex-wrap gap-2">
-          <!-- курсив -->
-          <!-- тег -->
+          
+        <!-- italic -->
+        <UiButton type="button" icon="ic:format-italic" />
 
-          <UiButton v-for="x of 10" :key="x" type="button" icon="ic:save" />
+        <!-- works same as italic -->
+        <UiButton type="button" >[p]</UiButton>
+
+        <!-- sub -->
+        <UiButton type="button" icon="ic:subscript" >sub</UiButton>
+
+        <!-- sup -->
+        <UiButton type="button" icon="ic:superscript" >sup</UiButton>
+
+        <!-- comp1 -->
+        <UiButton type="button">{~suru}</UiButton>
+        <UiButton type="button">{~to...na}</UiButton>
+
+        <!-- bracket-одна -->
+        <UiButton type="button">⌈</UiButton>
+
+        <!-- кавычки -->
+        <UiButton type="button">« »</UiButton>
+
+        <!-- ударение -->
+        <UiButton type="button" icon="ic:format-letter-spacing-wide-rounded">accent</UiButton>
+
+        <!-- tag -->
+        <UiButton type="button" icon="ic:tag" >tag</UiButton>
         </div>
 
         <div>
@@ -88,19 +112,19 @@ const bodyRef = ref()
       </section>
 
       <div :active="false" class="flex grow flex-col gap-4">
-        <UiInput ref="writingRef" v-model="writing" :multiline="true" :rows="1">
+        <UiInput ref="writingRef" id="texta-writing" v-model="writing" :multiline="true" :rows="1">
           <template #hint>
             writing
           </template>
         </UiInput>
 
-        <UiInput ref="readingRef" v-model="reading" :multiline="true" :rows="1">
+        <UiInput ref="readingRef" id="reading-writing" v-model="reading" :multiline="true" :rows="1">
           <template #hint>
             reading
           </template>
         </UiInput>
 
-        <UiInput ref="bodyRef" v-model="body" :multiline="true" class="grow">
+        <UiInput ref="bodyRef" id="body-writing" v-model="body" :multiline="true" class="grow">
           <template #hint>
             body
           </template>

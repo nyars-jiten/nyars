@@ -5,6 +5,7 @@ withDefaults(defineProps<Props>(), {
   fullHeight: false,
   rows: undefined,
   type: 'text',
+  id: '',
 })
 
 const slots = defineSlots<{ hint?: () => void }>()
@@ -15,6 +16,7 @@ const styles = tv({
 
 interface MultilineProps {
   multiline: true
+  id?: string
   rows?: number
   lines?: boolean
 }
@@ -24,9 +26,9 @@ interface SingleLineProps {
   type?: 'text' | 'number' | 'password'
 }
 
-  type Props = {
-    fullHeight?: boolean
-  } & (SingleLineProps | MultilineProps)
+type Props = {
+  fullHeight?: boolean
+} & (SingleLineProps | MultilineProps)
 
 const model = defineModel<string>({ required: true })
 
@@ -46,7 +48,7 @@ defineExpose({ inputRef })
 
     <template v-else>
       <section class="flex h-full p-4" :class="styles()">
-        <textarea ref="inputRef" v-model="model" :rows="rows" class="w-full bg-transparent focus:outline-none" type="text" />
+        <textarea :id="id" ref="inputRef" v-model="model" :rows="rows" class="w-full bg-transparent focus:outline-none" type="text" />
       </section>
     </template>
   </section>
