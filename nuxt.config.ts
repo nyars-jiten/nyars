@@ -9,6 +9,12 @@ export default defineNuxtConfig({
     rootId: 'nyars',
     pageTransition: { name: 'page', mode: 'out-in' },
   },
+  hooks: {
+    /** @see https://github.com/nuxt/cli/issues/169 */
+    close: () => {
+      process.exit()
+    }
+  },
   runtimeConfig: {
     public: {
       apiUrl: '',
