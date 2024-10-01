@@ -3,7 +3,33 @@ interface Props {
   article: V2EntryJp
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
+
+interface ShortenedSenses {
+  data: V2Sense[]
+  hidden: number
+}
+
+// Shorten the senses to show only the first 5 non-rare senses
+// and count the number of hidden senses
+const shortenedSenses = computed(() => {
+  const res = {
+    data: [] as V2Sense[],
+    hidden: 0,
+  } as ShortenedSenses
+  for (let i = 0; i < props.article.meanings.length; i++) {
+    const curMeaning = props.article.meanings[i]
+    for (let j = 0; j < curMeaning.senses.length; j++) {
+      const curSense = curMeaning.senses[j]
+      if (!curSense.isRare && res.data.length < 5) {
+        res.data.push(curSense)
+      } else {
+        res.hidden++
+      }
+    } 
+  }
+  return res
+})
 
 const wid = defineModel<string | null>({ required: true })
 </script>
@@ -24,8 +50,8 @@ const wid = defineModel<string | null>({ required: true })
       </header>
 
       <section class="grid grid-cols-[auto_1fr] gap-x-2">
-        <template v-for="sense, sIndex of article.meanings.flatMap(e => e.senses).toSpliced(10)" :key="sIndex">
-          <span class="text-end text-violet-300">
+        <template v-for="sense, sIndex of shortenedSenses.data" :key="sIndex">
+          <span v-if="shortenedSenses.data.length > 1" class="text-end text-violet-300">
             {{ 1 + sIndex }}
           </span>
 
@@ -46,6 +72,9 @@ const wid = defineModel<string | null>({ required: true })
           </span>
         </template>
       </section>
+      <span v-if="shortenedSenses.hidden > 0" class="italic text-gray-500 text-sm">
+        <span>{{ $t('components.searchGroup.general.hiddenSenses', shortenedSenses.hidden ) }}</span>
+      </span>
     </UiBlock>
   </button>
 </template>
