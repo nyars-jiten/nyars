@@ -418,7 +418,7 @@ const { data: users } = await useLazyAsyncData(
       Рейтинг за 7 дней
     </h1>
 
-    <section class="space-y-4">
+    <section class="max-lg:grid max-lg:grid-cols-2 max-lg:gap-4 max-md:block max-md:space-y-4 lg:space-y-4">
       <WeeklyActiveUser v-for="(user, index) of users" v-bind="{ position: index + 1, ...user }" :key="user.id" />
     </section>
   </section>

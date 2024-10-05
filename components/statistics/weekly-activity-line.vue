@@ -1,14 +1,15 @@
 <script setup lang="ts">
 interface Props {
   values: number[]
+  name: string
 }
 
 defineProps<Props>()
 </script>
 
 <template>
-  <small class="truncate">
-    <slot name="name" />
+  <small class="truncate" :title="name">
+    {{ name }}
   </small>
 
   <span>

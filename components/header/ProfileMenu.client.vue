@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { clientLogout } = useApi(userRepository)
 
-const { user } = storeToRefs(useUserStore())
+const { user } = useUserStore()
 
 async function logout() {
   await clientLogout()

@@ -28,11 +28,15 @@ useHead({
   noscript: [{ children: 'This app requires javascript to work' }],
   htmlAttrs: {
     lang: 'ru',
+    class: 'dark',
   },
   bodyAttrs: {
     class: 'min-h-dvh bg-ns-gray-100 text-ns-gray-700 dark:bg-neutral-900 dark:text-gray-300',
   },
 })
+
+const { initUser } = useUserStore()
+await initUser()
 </script>
 
 <template>

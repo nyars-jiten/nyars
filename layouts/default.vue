@@ -1,9 +1,3 @@
-<script setup lang="ts">
-const userStore = useUserStore()
-
-await useAsyncData('initUser', userStore.initUser)
-</script>
-
 <template>
   <div class="min-h-screen bg-ns-gray-100 text-ns-gray-700 dark:bg-ns-gray-900 dark:text-ns-gray-300">
     <Header />

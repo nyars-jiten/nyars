@@ -68,9 +68,9 @@ async function save() {
   console.log(data.value.code, data.value.message)
 }
 
-const writingRef = ref()
-const readingRef = ref()
-const bodyRef = ref()
+const writingRef = useTemplateRef('writingRef')
+const readingRef = useTemplateRef('readingRef')
+const bodyRef = useTemplateRef('bodyRef')
 
 const element = ref({
   target: ref('' as string),
@@ -107,15 +107,19 @@ onMounted(() => {
   ]
 
   for (const [r, v] of refs) {
+    // @ts-expect-error TODO
     const { focused } = useFocus(r.value.inputRef)
 
     watch(focused, (focused) => {
       // blur
       if (focused === false) {
         element.value = {
+          // @ts-expect-error TODO
           target: v,
           selection: {
+            // @ts-expect-error TODO
             start: r.value.inputRef.selectionStart,
+            // @ts-expect-error TODO
             end: r.value.inputRef.selectionEnd,
           },
         }
@@ -175,31 +179,25 @@ function buttons() {
     //   icon: 'material-symbols:tag',
     //   click: [],
     // }
-  ] as {
-    icon: string | undefined
-    name: string | undefined
-    click: [string] | [string, string]
-  }[][]
+  ] as (({ icon: string, name: undefined } | { icon: undefined, name: string }) & { click: [string] | [string, string] })[][]
 }
 </script>
 
 <template>
-  <section class="grid h-full grow grid-cols-2 gap-8">
+  <section class="grid h-full grow gap-8 xl:grid-cols-[1fr_auto_1fr]">
     <div class="flex h-full flex-col gap-4">
-      <section class="flex justify-between gap-4">
-        <div class="inline-flex flex-wrap gap-8">
-          <span v-for="group, gIndex in buttons()" :key="gIndex" class="inline-flex flex-wrap gap-2">
-            <UiButton v-for="button, bIndex in group" :key="bIndex" type="button" :icon="button.icon" @click="insert.apply(null, button.click)">
-              {{ button.name }}
+      <section class="flex items-start justify-between gap-4 max-md:flex-col">
+        <div class="inline-flex flex-wrap gap-x-8 gap-y-2">
+          <span v-for="group, index in buttons()" :key="index" class="inline-flex flex-wrap gap-2">
+            <UiButton v-for="{ name, icon, click } in group" :key="icon || name" type="button" :icon="icon" @click="insert.apply(null, click)">
+              {{ name }}
             </UiButton>
           </span>
         </div>
 
-        <div>
-          <UiButton type="button" icon="material-symbols:save" @click="save">
-            {{ $t('pages.editor.save') }}
-          </UiButton>
-        </div>
+        <UiButton class="items-start justify-center text-center max-md:w-full" type="button" icon="material-symbols:save" color="lime" @click="save">
+          {{ $t('pages.editor.save') }}
+        </UiButton>
       </section>
 
       <div :active="false" class="flex grow flex-col gap-4">
@@ -215,7 +213,7 @@ function buttons() {
           </template>
         </UiInput>
 
-        <UiInput ref="bodyRef" v-model="body" :multiline="true" class="grow">
+        <UiInput ref="bodyRef" v-model="body" :multiline="true" :rows="4" class="grow">
           <template #hint>
             {{ $t('pages.editor.body') }}
           </template>
@@ -223,12 +221,24 @@ function buttons() {
       </div>
     </div>
 
-    <UiBlock class="space-y-4">
+    <div class="hidden border-l border-neutral-800 xl:block" />
+
+    <div class="space-y-4 py-8 max-xl:hidden">
       <h1 class="text-2xl">
         {{ $t('pages.editor.preview') }}
       </h1>
-      
+
       <JpnEntry v-if="!('code' in previewData)" :jpn-entry="previewData" />
-    </UiBlock>
+    </div>
+
+    <span class="space-y-8 xl:hidden">
+      <h1 class="text-center text-4xl leading-none">
+        {{ $t('pages.editor.preview') }}
+      </h1>
+
+      <UiBlock>
+        <JpnEntry v-if="!('code' in previewData)" :jpn-entry="previewData" />
+      </UiBlock>
+    </span>
   </section>
 </template>

@@ -86,7 +86,8 @@
     "less",
     "scss",
     "pcss",
-    "postcss"
+    "postcss",
+    "tailwindcss"
   ],
 
   "files.associations": {
@@ -122,14 +123,8 @@
   },
 
   "tailwindCSS.experimental.classRegex": [
-    [
-      "tv\\(([^)]*)\\)",
-      "[\"'`]([^\"'`]*).*?[\"'`]"
-    ],
-    [
-      "tv\\(([^)]*)\\)",
-      "(?:'|\"|`)([^']*)(?:'|\"|`)"
-    ]
+    ["tv\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["tv\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
 
   "typescript.tsdk": "node_modules\\typescript\\lib",
@@ -162,6 +157,17 @@
     "pinia",
     "tabler",
     "vueuse",
-    "wght"
+    "wght",
+    "jyouyou",
+    "insatsu",
+    "jinmeiyou",
+    "jlpt",
+    "kanken",
+    "shou",
+    "chuu",
+    "kanon",
+    "souon",
+    "touon",
+    "kanyoon"
   ]
 }

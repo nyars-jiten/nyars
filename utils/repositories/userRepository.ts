@@ -3,11 +3,11 @@ import type { $Fetch, NitroFetchRequest } from 'nitropack'
 export function userRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
   const path = '/users'
 
-  const clientLogin = (username: string, password: string) => {
+  const clientLogin = (login: string, password: string) => {
     return fetch<User>(`${path}/auth`, {
       method: 'POST',
       body: {
-        username,
+        login,
         password,
       },
     })

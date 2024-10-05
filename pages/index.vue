@@ -4,44 +4,7 @@ definePageMeta({
   name: 'Home',
 })
 
-const edits = Array.from({ length: 10 }).map((_, id) => (
-  {
-    id,
-    dictionary: 4,
-    identifier: 'z5CW',
-    title: {
-      磁針航路: [
-        'じしんこうろ',
-      ],
-    } as Record<string, string[]>,
-    type: 2,
-    status: id % 4 + 1,
-    author: {
-      id: 1,
-      username: 'Ёко',
-      banned: false,
-      role: 'Admin',
-      access: 0,
-      avatar: 'f0eccae4-0bd2-4d77-9bc5-095cd90ba058.png',
-      isBot: false,
-      userRating: null,
-      createdDate: new Date('2020-10-12T21:35:20.538224Z'),
-    },
-    approver: {
-      id: 1,
-      username: 'Ёко',
-      banned: false,
-      role: 'Admin',
-      access: 0,
-      avatar: 'f0eccae4-0bd2-4d77-9bc5-095cd90ba058.png',
-      isBot: false,
-      userRating: null,
-      createdDate: new Date('2020-10-12T21:35:20.538224Z'),
-    },
-    commentsCount: 0,
-    createdDate: new Date('2024-09-28T09:18:31.723278Z'),
-    modifiedDate: new Date('2024-09-28T09:18:31.773633Z'),
-  } as Edit))
+const edits = [] as Edit[]
 
 const infoExamples = [
   // Кол-во примеров:
@@ -70,7 +33,7 @@ function search(example: string) {
 </script>
 
 <template>
-  <section class="grid grid-cols-[1fr_auto] gap-8">
+  <section class="grid grid-cols-[1fr_auto] gap-8 max-lg:grid-cols-1">
     <div class="grow space-y-8">
       <UiBlock class="space-y-4" size="large" :active="true">
         <div class="indent-10">
@@ -126,13 +89,13 @@ function search(example: string) {
         <UsersTable />
       </div>
 
-      <hr class="border-neutral-800">
+      <hr class="border-neutral-800 max-lg:hidden">
 
       <div>
         summary
       </div>
 
-      <hr class="border-neutral-800">
+      <hr class="border-neutral-800 max-lg:hidden">
 
       <div>
         comments

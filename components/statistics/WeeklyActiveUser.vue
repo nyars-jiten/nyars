@@ -13,6 +13,8 @@ interface Props {
 
 const props = defineProps<Props>()
 const avatar = computed(() => useAvatar(props.avatar).href)
+
+const { t } = useI18n()
 </script>
 
 <template>
@@ -32,7 +34,7 @@ const avatar = computed(() => useAvatar(props.avatar).href)
 
           <span class="space-x-2 truncate">
             <small>
-              {{ $t('models.userRating.weekRating') }}
+              {{ t('models.userRating.weekRating') }}
             </small>
 
             <span class="truncate text-violet-300">
@@ -44,21 +46,13 @@ const avatar = computed(() => useAvatar(props.avatar).href)
 
       <div class="grid grid-cols-2 gap-4">
         <div class="grid grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1 leading-none">
-          <WeeklyActivityLine :values="[jpnNew]">
-            <template #name>
-              {{ $t('models.userRating.summaryWeekJapNew') }}
-            </template>
-
+          <WeeklyActivityLine :values="[jpnNew]" :name="t('models.userRating.summaryWeekJapNew')">
             <template #value>
               {{ jpnNew }}
             </template>
           </WeeklyActivityLine>
 
-          <WeeklyActivityLine :values="[jpnEdit]">
-            <template #name>
-              {{ $t('models.userRating.summaryWeekJapEdit') }}
-            </template>
-
+          <WeeklyActivityLine :values="[jpnEdit]" :name="t('models.userRating.summaryWeekJapEdit')">
             <template #value>
               {{ jpnEdit }}
             </template>
@@ -66,21 +60,13 @@ const avatar = computed(() => useAvatar(props.avatar).href)
         </div>
 
         <div class="grid grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1 leading-none">
-          <WeeklyActivityLine :values="[approved]">
-            <template #name>
-              {{ $t('models.userRating.summaryWeekApproved') }}
-            </template>
-
+          <WeeklyActivityLine :values="[approved]" :name="t('models.userRating.summaryWeekApproved')">
             <template #value>
               {{ approved }}
             </template>
           </WeeklyActivityLine>
 
-          <WeeklyActivityLine :values="[jpnNewAuto, jpnEditAuto]">
-            <template #name>
-              {{ $t('components.statistics.weeklyActiveUser.jpnAuto') }}
-            </template>
-
+          <WeeklyActivityLine :values="[jpnNewAuto, jpnEditAuto]" :name="t('components.statistics.weeklyActiveUser.jpnAuto')">
             <template #value>
               {{ jpnNewAuto }}<small class="text-neutral-300">/</small>{{ jpnEditAuto }}
             </template>

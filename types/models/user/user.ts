@@ -1,11 +1,10 @@
 export interface User {
   id: number
+  login: string
   username: string
+  is_admin: boolean
+  is_bot: boolean
   banned: boolean
-  role: 'User' | 'Admin' | 'Moderator' | 'Admin, Moderator'
-  access: number
   avatar: string
-  isBot: boolean
-  userRating: UserRating | null
-  createdDate: Date
+  created_at: string
 }

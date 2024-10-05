@@ -1,3 +1,5 @@
+import { exit } from 'node:process'
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
   devServer: {
@@ -12,8 +14,8 @@ export default defineNuxtConfig({
   hooks: {
     /** @see https://github.com/nuxt/cli/issues/169 */
     close: () => {
-      process.exit()
-    }
+      exit()
+    },
   },
   runtimeConfig: {
     public: {
@@ -46,6 +48,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-typed-router',
     '@nuxt/icon',
+    '@vee-validate/nuxt',
   ],
   icon: {
     collections: ['material-symbols', 'tabler', 'ci', 'uil', 'mdi', 'ooui'],
@@ -53,6 +56,15 @@ export default defineNuxtConfig({
   eslint: {
     config: {
       standalone: false,
+    },
+  },
+  veeValidate: {
+    autoImports: true,
+    componentNames: {
+      // Form: 'VeeForm',
+      // Field: 'VeeField',
+      // FieldArray: 'VeeFieldArray',
+      // ErrorMessage: 'VeeErrorMessage',
     },
   },
   i18n: {

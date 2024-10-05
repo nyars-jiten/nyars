@@ -1,11 +1,13 @@
-export const useUserStore = defineStore('userStore', () => {
+export const useUserStore = createGlobalState(() => {
   const user = ref<User | null>(null)
 
-  // const { serverGetCurrentUser } = useApi(userRepository)
-
   const initUser = async () => {
-    return {}
-    // user.value = await serverGetCurrentUser()
+    const { current } = useUser()
+
+    const result = await current()
+    if ('code' in result === false) {
+      // user.value = result
+    }
   }
 
   return { user, initUser }

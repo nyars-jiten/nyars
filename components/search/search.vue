@@ -16,7 +16,7 @@ function search() {
 </script>
 
 <template>
-  <div class="inline-flex w-full items-center gap-4">
+  <div class="inline-flex items-center gap-4">
     <div class="inline-flex items-center gap-2">
       <button type="button" :class="button()">
         <Icon name="ic:baseline-text-fields" size="1.5rem" />

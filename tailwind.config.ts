@@ -25,6 +25,8 @@ export default {
         'ns-logo-dark': `url('/favicon-dark-96x96.png')`,
       },
       colors: {
+        // discord: '#5865F2',
+        discord: '#8c9eff',
         ns: {
           '100': '#e1edee',
           '200': '#c3dadd',

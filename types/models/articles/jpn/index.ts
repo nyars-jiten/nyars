@@ -88,6 +88,7 @@ export interface V2Tag {
   engShort: string
   ru: string
   ruShort: string
+  split?: string[]
 }
 
 export interface V2LoanSource {
