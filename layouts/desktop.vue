@@ -3,7 +3,7 @@
 
 <template>
   <div class="flex min-h-dvh flex-col space-y-8 p-4">
-    <div class="flex items-center justify-between gap-x-4">
+    <div class="sticky top-0 z-20 -m-4 flex items-center justify-between gap-x-4 bg-neutral-900/95 p-4">
       <div class="">
         <img src="/favicon-dark-96x96.png" alt="logo" class="h-12 w-fit">
       </div>
@@ -18,7 +18,7 @@
     </div>
 
     <div class="grid grow grid-cols-[auto_1fr] items-start gap-8 max-xl:gap-4">
-      <LayoutMenu class="sticky inset-y-4" />
+      <LayoutMenu class="sticky inset-y-24" />
 
       <slot />
     </div>

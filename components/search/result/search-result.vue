@@ -32,7 +32,7 @@ const shortenedSenses = computed(() => {
   return res
 })
 
-const wid = defineModel<string | null>({ required: true })
+const wid = useSearchRequest2()
 </script>
 
 <template>

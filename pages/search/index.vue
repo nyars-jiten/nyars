@@ -15,20 +15,24 @@ definePageMeta({
   layout: 'desktop',
 })
 
-const wid = ref(null as string | null)
+const wid = useSearchRequest2()
 const article = computed(() => data.value?.result.find(x => x.wid === wid.value))
+
+watch(wid, () => window.scrollTo(0, 0))
 </script>
 
 <template>
-  <div class="grid grow grid-cols-[1fr_2fr] items-start gap-8">
+  <div class="grid grow items-start gap-8 md:grid-cols-[1fr_2fr]">
     <section class="space-y-4">
       <template v-for="result of data?.result" :key="result.wid">
-        <SearchResult v-model="wid" :article="result" />
+        <SearchResult :article="result" />
       </template>
     </section>
 
-    <UiBlock class="">
+    <!-- <UiBlock> -->
+    <div class="py-4">
       <JpnEntry v-if="article" :jpn-entry="article" />
-    </UiBlock>
+    </div>
+    <!-- </UiBlock> -->
   </div>
 </template>

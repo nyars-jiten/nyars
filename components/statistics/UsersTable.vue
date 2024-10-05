@@ -414,7 +414,7 @@ const { data: users } = await useLazyAsyncData(
 
 <template>
   <section class="space-y-4">
-    <h1 class="text-center text-2xl">
+    <h1 class="text-center text-2xl max-lg:pb-4">
       Рейтинг за 7 дней
     </h1>
 

@@ -56,7 +56,7 @@ const styles = tv({
     </li>
 
     <li class="space-y-1">
-      <NuxtLink to="/jpn/editor" :class="styles()" class="text-indigo-300">
+      <NuxtLink to="/jpn/editor" :class="styles()" class="text-lime-300 transition-colors xl:text-indigo-300">
         <Icon size="1.5rem" name="ic:baseline-plus" />
 
         <span class="text-xs font-semibold uppercase">
@@ -64,7 +64,7 @@ const styles = tv({
         </span>
       </NuxtLink>
 
-      <NuxtLink to="/" :class="styles()" class="text-indigo-300">
+      <NuxtLink to="/" :class="styles()" class="text-amber-300 transition-colors xl:text-indigo-300">
         <Icon size="1.5rem" name="ic:baseline-plus" />
 
         <span class="text-xs font-semibold uppercase">
@@ -72,7 +72,7 @@ const styles = tv({
         </span>
       </NuxtLink>
 
-      <NuxtLink to="/" :class="styles()" class="text-indigo-300">
+      <NuxtLink to="/" :class="styles()" class="text-rose-300 transition-colors xl:text-indigo-300">
         <Icon size="1.5rem" name="ic:baseline-plus" />
 
         <span class="text-xs font-semibold uppercase">

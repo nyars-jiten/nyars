@@ -12,7 +12,12 @@ const button = tv({
   variants: {
     color: {
       discord: 'text-discord',
-      lime: 'text-lime-300/50',
+      lime: 'text-lime-300',
+      amber: 'text-amber-300',
+    },
+
+    active: {
+      true: 'bg-neutral-900 text-neutral-800 outline-neutral-800',
     },
   },
 })
@@ -23,11 +28,13 @@ interface Props {
   type?: 'button' | 'submit'
   icon?: string
   color?: V['color']
+  active?: V['active']
+  title?: string
 }
 </script>
 
 <template>
-  <button :type="type" :class="button({ color })">
+  <button :type="type" :class="button({ color, active })" :title="title">
     <Icon v-if="icon" :name="icon" size="1.5rem" />
     <slot />
   </button>

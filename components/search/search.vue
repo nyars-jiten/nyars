@@ -8,9 +8,9 @@ const button = tv({
   base: 'inline-flex items-center gap-2 rounded-md px-2 py-1.5 leading-none shadow-md outline-dashed outline-1 outline-zinc-800 transition-colors hover:bg-zinc-800 hover:text-zinc-400 hover:outline-transparent',
 })
 
-function search() {
+async function search() {
   if (request.value.length) {
-    return navigateTo({ name: 'search', query: { q: request.value } })
+    await navigateTo({ name: 'search', query: { q: `${request.value}` } })
   }
 }
 </script>
