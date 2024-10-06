@@ -16,7 +16,7 @@ definePageMeta({
 })
 
 const wid = useRouteArticle()
-const article = computedAsync(() => {
+const { data: article } = useAsyncData(() => {
   const result = data.value?.result.find(x => x.wid === wid.value)
   if (result) {
     return Promise.resolve(result)
@@ -27,7 +27,7 @@ const article = computedAsync(() => {
   }
 
   return Promise.resolve(null)
-})
+}, { watch: [wid] })
 
 watch(wid, () => window.scrollTo(0, 0))
 </script>
@@ -39,9 +39,7 @@ watch(wid, () => window.scrollTo(0, 0))
     </div>
 
     <UiBlock>
-      <div class="py-4">
-        <JpnEntry v-if="article" :jpn-entry="article" />
-      </div>
+      <JpnEntry v-if="article" :jpn-entry="article" />
     </UiBlock>
   </div>
 </template>
