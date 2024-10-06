@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { tv } from 'tailwind-variants'
 
-const request = useSearchRequest()
+const request = useRouteSearchRequest()
 // const mode = useSearchMode()
 
 const button = tv({

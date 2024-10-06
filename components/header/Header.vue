@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const headerStore = useHeaderStore()
+const { t } = useI18n()
 </script>
 
 <template>
@@ -19,7 +20,7 @@ const headerStore = useHeaderStore()
         >
           <div class="size-9 rounded-full bg-ns-logo-light bg-cover dark:bg-ns-logo-dark" />
           <span class="text-xl leading-snug text-ns-500 dark:text-white">
-            {{ $t('components.header.nyars') }}
+            {{ t('components.header.nyars') }}
           </span>
         </NuxtLink>
         <Navigation @click="headerStore.closeHamburgerMenu" />

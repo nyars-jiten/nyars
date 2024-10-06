@@ -1,7 +1,11 @@
 <script setup lang="ts">
 const { clientLogout } = useApi(userRepository)
 
+const { t } = useI18n()
 const { user } = useUserStore()
+
+// TODO: not nullable
+const avatar = computed(() => useAvatar(user.value?.avatar ?? '').href)
 
 async function logout() {
   await clientLogout()
@@ -19,7 +23,7 @@ async function logout() {
         <img
           v-if="user"
           class="size-9 rounded-full object-center"
-          :src="useAvatar(user.avatar).href"
+          :src="avatar"
           :alt="user.username"
         >
         <IconAccount v-else class="!m-0 text-3xl" />
@@ -31,13 +35,13 @@ async function logout() {
       <div class="absolute right-0 hidden w-[180px] group-hover:inline lg:left-1/2 lg:ml-[-90px]">
         <div class="flex flex-col gap-1 rounded-md border border-ns-gray-200 bg-white p-2 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800">
           <NuxtLink to="/" class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
-            <span>{{ $t('components.header.profileMenu.profile') }}</span>
+            <span>{{ t('components.header.profileMenu.profile') }}</span>
           </NuxtLink>
           <NuxtLink to="/" class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
-            <span>{{ $t('components.header.profileMenu.settings') }}</span>
+            <span>{{ t('components.header.profileMenu.settings') }}</span>
           </NuxtLink>
           <NuxtLink v-if="!user" :to="{ name: 'Login' }" class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
-            <span>{{ $t('components.header.profileMenu.login') }}</span>
+            <span>{{ t('components.header.profileMenu.login') }}</span>
           </NuxtLink>
           <button
             v-else
@@ -45,7 +49,7 @@ async function logout() {
             class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700"
             @click="logout"
           >
-            <span>{{ $t('components.header.profileMenu.exit') }}</span>
+            <span>{{ t('components.header.profileMenu.exit') }}</span>
           </button>
           <div class="border-t border-ns-gray-300 pt-2 dark:border-ns-gray-600">
             <ThemeSwitcher class="w-full" />

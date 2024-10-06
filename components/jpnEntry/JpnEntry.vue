@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import { useSearchRequest2 } from '~/composables/search-request'
-
 interface Props {
   jpnEntry: V2EntryJp
 }
 
 defineProps<Props>()
-
 </script>
 
 <template>

@@ -4,7 +4,6 @@ interface Props {
 }
 
 defineProps<Props>()
-const route = useRoute('jpn-wid')
 const isPreview = false
 </script>
 
@@ -17,11 +16,11 @@ const isPreview = false
           :key="tagPos.eng"
           class="pl-1 font-bold uppercase after:content-[','] first:pl-0 last:after:content-none"
         >
-          {{ tagPos.eng }}
+          {{ tagPos.ru }}
         </span>
       </div>
 
-      <div class="flex w-11/12 flex-col space-y-4">
+      <div class="w-11/12 space-y-2">
         <Sense
           v-for="(sense, senseIndex) of meaning.senses"
           :key="senseIndex"

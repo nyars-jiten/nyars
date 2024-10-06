@@ -1,4 +1,6 @@
 <script setup lang="ts">
+// import { tv } from 'tailwind-variants'
+
 interface Props {
   content: V2Content[]
   breakLine?: boolean
@@ -7,6 +9,18 @@ interface Props {
 withDefaults(defineProps<Props>(), {
   breakLine: true,
 })
+
+// const style = tv({
+//   variants: {
+//     tag: {
+//       i: 'italic text-gray-500 text-sm',
+//       p: 'italic',
+//       comp: 'font-bold italic',
+//       hide: 'hidden',
+//       ref: 'text-indigo-300', // TODO: routing logic
+//     } as Record<string, string>,
+//   },
+// })
 
 const tagsMap: Record<string, string> = {
   i: 'italic text-gray-500 text-sm',

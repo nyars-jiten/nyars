@@ -112,14 +112,14 @@ const password = useField('password')
 
           <div class="flex gap-2">
             <span v-show="!isRegister">
-              {{ $t('pages.login.noAccount') }}
+              {{ t('pages.login.noAccount') }}
             </span>
 
             <span
               class="cursor-pointer underline decoration-dotted underline-offset-4 hover:text-ns-500"
               @click="isRegister = !isRegister"
             >
-              {{ $t(isRegister ? 'pages.login.titleLogin' : 'pages.login.titleRegister') }}
+              {{ t(isRegister ? 'pages.login.titleLogin' : 'pages.login.titleRegister') }}
             </span>
           </div>
         </section>

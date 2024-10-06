@@ -4,35 +4,26 @@ interface Props {
 }
 
 defineProps<Props>()
-
-const route = useRoute('jpn-wid')
-
-const isPreview = !route.params.wid
 </script>
 
 <template>
   <div class="flex cursor-text flex-col items-start gap-3 pl-4">
     <!-- TODO: bruh -->
-    <NuxtLink
-      :to="{ name: 'jpn-wid', params: { wid: isPreview ? 'bruh' : jpnEntry.wid } }"
-      :class="`flex flex-col break-all ${isPreview ? 'hover:text-ns-500' : 'pointer-events-none'}`"
-    >
+    <div class="flex flex-col hyphens-auto">
       <div
         v-for="(word, wordIndex) of jpnEntry.words"
         :key="wordIndex"
         class="text-2xl"
       >
-        <div class="mb-2 ml-6">
-          <ul v-show="word.furigana?.length" class="inline before:-ml-3 dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
-            <li
-              v-for="(furigana, fi) of word.furigana"
-              :key="fi"
-              class="inline-flex flex-wrap items-baseline before:text-ns-gray-200 after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
-            >
-              <Furigana :furigana="furigana" />
-            </li>
-          </ul>
-        </div>
+        <ul v-show="word.furigana?.length" class="inline  dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
+          <li
+            v-for="(furigana, fi) of word.furigana"
+            :key="fi"
+            class="inline-flex flex-wrap items-baseline before:text-ns-gray-200 after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
+          >
+            <Furigana :furigana="furigana" />
+          </li>
+        </ul>
 
         <!-- <ul v-show="word.writings?.length" class="inline before:-ml-3 before:text-ns-gray-200 before:content-['【'] after:text-ns-gray-200 after:content-['】'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
           <li
@@ -78,7 +69,8 @@ const isPreview = !route.params.wid
           </li>
         </ul> -->
       </div>
-    </NuxtLink>
-    <LazyTags :tags="jpnEntry.tags" />
+    </div>
+
+    <Tags :tags="jpnEntry.tags" />
   </div>
 </template>

@@ -6,12 +6,14 @@ interface Props {
 const props = defineProps<Props>()
 
 const isTypeCreate = computed(() => props.edit.type === EditType.Create)
+
+const { t } = useI18n()
 </script>
 
 <template>
   <section class="m-2 flex flex-col gap-3">
     <div v-if="edit.comment.length > 0" class="select-text break-words border-l-2 border-ns-gray-200 pl-2 dark:border-ns-gray-700">
-      {{ $t('components.editGroup.changesPreview.comment') }} {{ edit.comment }}
+      {{ t('components.editGroup.changesPreview.comment') }} {{ edit.comment }}
     </div>
     <div :class="`grid grid-rows-1 gap-5 ${isTypeCreate ? 'sm:grid-cols-1' : 'sm:grid-cols-[1fr_auto_1fr]'} sm:gap-2 md:gap-4`">
       <div v-if="!isTypeCreate" class="select-text rounded-md border border-ns-gray-200 px-4 py-2 dark:border-ns-gray-600">

@@ -6,6 +6,8 @@ interface Props {
 }
 
 defineProps<Props>()
+
+  const { t } = useI18n()
 </script>
 
 <template>
@@ -52,7 +54,7 @@ defineProps<Props>()
           </span>
 
           <span class="ml-1 mr-2 italic">
-            {{ $t(`models.jpnEntry.referenceType.${reference.referenceType}`) }}
+            {{ t(`models.jpnEntry.referenceType.${reference.referenceType}`) }}
           </span>
 
           <NuxtLink

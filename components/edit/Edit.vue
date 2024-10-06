@@ -12,7 +12,7 @@ const props = defineProps<Props>()
 
 // const isEntryPage = Boolean(route.params.wid)
 
-const [showChanges, toggleChanges] = useToggle()
+const [showChanges, toggleChanges] = useToggle(props.expanded && props.edit.status === EditStatus.New)
 
 const mark = tv({
   variants: {
@@ -35,8 +35,13 @@ const mark = tv({
   },
 })
 
-const createdDate = computed(() => useTime(props.edit.createdAt).value)
+// TODO: reactivity test
+const createdAt = computed(() => props.edit.createdAt)
+const createdDate = useTime(createdAt)
+
 const useApprover = computed(() => props.edit.status !== EditStatus.AutoAccepted)
+
+const { t } = useI18n()
 </script>
 
 <template>
@@ -60,7 +65,7 @@ const useApprover = computed(() => props.edit.status !== EditStatus.AutoAccepted
 
       <div class="order-3 flex gap-3 md:order-none md:justify-end">
         <span class="whitespace-nowrap text-right" :class="mark({ text: edit.status })">
-          {{ $t(`models.edit.status.${edit.status}`) }}
+          {{ t(`models.edit.status.${edit.status}`) }}
         </span>
 
         <EditUserProfile v-if="edit.approver != null && useApprover && edit.approver" :user="edit.approver" />
@@ -68,17 +73,17 @@ const useApprover = computed(() => props.edit.status !== EditStatus.AutoAccepted
 
       <div class="flex items-center gap-2">
         <i class="text-neutral-500">
-          {{ $t(`models.edit.dictionary.${edit.dictionary}`) }}
+          {{ t(`models.edit.dictionary.${edit.dictionary}`) }}
         </i>
 
         <span :class="`italic text-ns-edit-type-${edit.type}`">
-          {{ $t(`models.edit.type.${edit.type}`) }}
+          {{ t(`models.edit.type.${edit.type}`) }}
         </span>
       </div>
 
       <div class="order-4 flex items-center gap-1.5 max-[490px]:flex-col-reverse md:order-none md:justify-end lg:gap-3">
         <span>
-          {{ $t('models.edit.createdDate') }}
+          {{ t('models.edit.createdDate') }}
           {{ createdDate }}
         </span>
 
@@ -86,6 +91,7 @@ const useApprover = computed(() => props.edit.status !== EditStatus.AutoAccepted
         <span v-else>анонимно</span>
       </div>
     </div>
-    <ChangesPreview v-if="(expanded && edit.status === EditStatus.New) ? !showChanges : showChanges" :edit="edit" />
+
+    <ChangesPreview v-if="showChanges" :edit="edit" />
   </section>
 </template>

@@ -44,12 +44,12 @@ function search(example: string) {
     <div class="grow space-y-8">
       <UiBlock class="space-y-4" size="large" :active="true">
         <div class="indent-10">
-          {{ $t('pages.main.infoNyars') }}
+          {{ t('pages.main.infoNyars') }}
         </div>
 
         <ul class="flex flex-col gap-1">
           <li v-for="(searchExamples, i) in infoExamples" :key="i">
-            → {{ $t(`pages.main.infoExamples.${i + 1}.text`) }}
+            → {{ t(`pages.main.infoExamples.${i + 1}.text`) }}
             <span
               v-for="searchExample in searchExamples"
               :key="searchExample"
@@ -68,27 +68,25 @@ function search(example: string) {
 
         <i18n-t tag="div" keypath="pages.main.infoHelp" scope="global" class="indent-10">
           <NuxtLink to="https://docs.nyars.org" external target="_blank" class="select-text underline decoration-dotted underline-offset-4 hover:text-ns-500">
-            {{ $t('pages.main.infoDocs') }}
+            {{ t('pages.main.infoDocs') }}
           </NuxtLink>
           <NuxtLink :to="config.public.discordUrl" external target="_blank" class="select-text text-indigo-600 underline decoration-dotted underline-offset-4 hover:text-ns-500 dark:text-indigo-300 dark:hover:text-ns-500">
-            {{ $t('pages.main.infoDiscord') }}
+            {{ t('pages.main.infoDiscord') }}
           </NuxtLink>
         </i18n-t>
       </UiBlock>
 
-      <UiBlock class="space-y-4" size="large" :active="true">
-        <h1 class="text-3xl font-bold">
-          activity
-        </h1>
+      <h1 class="text-center text-4xl uppercase">
+        activity
+      </h1>
 
-        <section class="space-y-4">
-          <Edit
-            v-for="edit of edits"
-            :key="edit.id"
-            :edit="edit"
-          />
-        </section>
-      </UiBlock>
+      <section class="space-y-4">
+        <Edit
+          v-for="edit of edits"
+          :key="edit.id"
+          :edit="edit"
+        />
+      </section>
     </div>
 
     <div class="space-y-8">

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { faker } from '@faker-js/faker'
 
-const request = useSearchRequest()
+const request = useRouteSearchRequest()
 
 const { data, refresh } = await useLazyAsyncData(`search-suggestions-${request.value}`, () =>
   Promise.resolve(

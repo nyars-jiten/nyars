@@ -4,6 +4,8 @@ definePageMeta({
   path: '/s/jpn',
 })
 
+const { t } = useI18n()
+
 const route = useRoute()
 
 const requestQuery = computed(() => {
@@ -31,7 +33,7 @@ const { pending, data: jpnEntriesSearchResult } = await useLazyAsyncData(
   <div class="flex flex-col gap-5">
     <div v-if="pending" class="flex gap-3 pl-3">
       <Spinner />
-      <TextLoading :text="$t('components.uiKit.textLoading')" />
+      <TextLoading :text="t('components.uiKit.textLoading')" />
     </div>
     <section v-else class="flex flex-col gap-5">
       <LazyGrammarParser

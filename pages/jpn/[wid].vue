@@ -3,6 +3,8 @@
 
 const wid = useRouteParams('wid', '0' as string)
 
+const { t } = useI18n()
+
 // const { getJpnEntry } = useApi(jpnEntryRepository)
 const { get } = useJpnArticles()
 // const { getImages } = useApi(kotobaRepository)
@@ -77,7 +79,7 @@ useHead({ title: jpnEntry.value.title })
           class="btn-generic"
           @click="showData = !showData"
         >
-          {{ showData ? $t('pages.jpnEntry.satelliteButtonClose') : $t('pages.jpnEntry.satelliteButtonOpen') }}
+          {{ showData ? t('pages.jpnEntry.satelliteButtonClose') : t('pages.jpnEntry.satelliteButtonOpen') }}
         </button>
       </div>
       <div class="flex flex-col gap-4">
@@ -91,7 +93,7 @@ useHead({ title: jpnEntry.value.title })
     </div>
     <div v-if="edits.length > 0" class="flex flex-col gap-2 border border-ns-gray-100 bg-white p-8 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800 md:rounded-md">
       <span class="pb-2 text-ns-gray-400">
-        {{ $t('pages.jpnEntry.editsTitle') }}
+        {{ t('pages.jpnEntry.editsTitle') }}
       </span>
       <Edit
         v-for="edit in edits"

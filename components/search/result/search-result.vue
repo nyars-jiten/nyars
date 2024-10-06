@@ -25,14 +25,15 @@ const shortenedSenses = computed(() => {
         res.data.push(curSense)
       }
       else {
-        res.hidden++
+        ++res.hidden
       }
     }
   }
   return res
 })
 
-const wid = useSearchRequest2()
+const wid = useRouteArticle()
+const { t } = useI18n()
 </script>
 
 <template>
@@ -56,7 +57,7 @@ const wid = useSearchRequest2()
             {{ 1 + sIndex }}
           </span>
 
-          <span class="space-x-1">
+          <span>
             <small v-for="(tag, i) of sense.fieldTags" :key="i" class="italic text-green-600">
               <span class="group relative after:content-[\',\'] last:after:content-none">
                 {{ tag.engShort }}
@@ -72,11 +73,11 @@ const wid = useSearchRequest2()
             <Content :content="sense.content" :break-line="false" />
           </span>
         </template>
-      </section>
 
-      <span v-if="shortenedSenses.hidden > 0" class="text-sm italic text-gray-500">
-        <span>{{ $t('components.searchGroup.general.hiddenSenses', shortenedSenses.hidden) }}</span>
-      </span>
+        <span v-show="shortenedSenses.hidden > 0" class="col-span-2 text-end text-sm italic text-amber-300">
+          <span>{{ t('components.searchGroup.general.hiddenSenses', shortenedSenses.hidden) }}</span>
+        </span>
+      </section>
     </UiBlock>
   </button>
 </template>
