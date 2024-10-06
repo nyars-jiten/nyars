@@ -3,6 +3,9 @@
   "prettier.enable": false,
   "eslint.format.enable": true,
   "editor.formatOnSave": false,
+  "eslint.options": {
+    "flags": ["unstable_ts_config"]
+  },
 
   // Auto fix
   "editor.codeActionsOnSave": {
