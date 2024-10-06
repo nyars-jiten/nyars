@@ -128,7 +128,18 @@
       "reading": "чтение",
       "body": "статья",
       "preview": "Предпросмотр",
-      "save": "сохранить"
+      "save": "сохранить",
+      "guide": "Справка",
+      "button": {
+        "italic": "italic",
+        "abbreviation": "abbreviation",
+        "sub": "sub",
+        "sup": "sup",
+        "comp1": "comp1",
+        "quotes": "quotes",
+        "single-bracket": "single-bracket",
+        "accent": "accent"
+      }
     },
     "jpnEntry": {
       "satelliteButtonOpen": "раскрыть",

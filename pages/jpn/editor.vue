@@ -19,7 +19,7 @@ const readingRows = computed(() => reading.value.split('\n').length)
 
 const body = ref('')
 
-const { data: previewData, execute: previewExecute } = useAsyncData(() => preview({
+const { data: previewData, execute: previewExecute } = useAsyncData('changes-preview', () => preview({
   body: body.value,
   reading: reading.value,
   writing: writing.value,
@@ -55,21 +55,20 @@ watchDebounced([writing, reading, body], async () => {
   }
 }, { debounce: 250 })
 
-const { data, execute } = useAsyncData('changes-preview', () => create({
-  body: body.value,
-  reading: reading.value,
-  writing: writing.value,
-}), {
-  lazy: true,
-  server: false,
-
-  default: () => ({
-    code: 0,
-    message: '',
-  }),
-})
-
 async function save() {
+  const { data, execute } = useAsyncData('create-edit', () => create({
+    body: body.value,
+    reading: reading.value,
+    writing: writing.value,
+  }), {
+    server: false,
+
+    default: () => ({
+      code: 0,
+      message: '',
+    }),
+  })
+
   await execute()
 
   console.log(data.value.code, data.value.message)
@@ -148,31 +147,31 @@ function buttons() {
       {
         name: '[p]',
         click: ['[p]', '[/p]'],
-        title: '',
+        title: 'abbreviation',
       },
       // sub
       {
         icon: 'material-symbols:subscript',
         click: ['[sub]', '[/sub]'],
-        title: '',
+        title: 'sub',
       },
       // sup
       {
         icon: 'material-symbols:superscript',
         click: ['[sup]', '[/sup]'],
-        title: '',
+        title: 'sup',
       },
       // comp1
       {
         icon: 'uil:brackets-curly',
         click: ['{~', '}'],
-        title: '',
+        title: 'comp1',
       },
       // кавычки
       {
         icon: 'ooui:markup',
         click: ['«', '»'],
-        title: '',
+        title: 'quotes',
       },
     ],
     [
@@ -180,7 +179,7 @@ function buttons() {
       {
         icon: 'tabler:brackets-contain-start',
         click: ['⌈'],
-        title: '',
+        title: 'single-bracket',
       },
       // ударение
       {
@@ -193,7 +192,7 @@ function buttons() {
     // {
     //   icon: 'material-symbols:tag',
     //   click: [],
-    // title: '',
+    // title: 'tag',
     // }
   ] as (({ icon: string, name: undefined } | { icon: undefined, name: string }) & { title: string, click: [string] | [string, string] })[][]
 }
@@ -213,7 +212,7 @@ const [state, toggle] = useToggle()
       <section class="flex items-start justify-between gap-4 max-sm:flex-col">
         <div class="inline-flex flex-wrap gap-x-8 gap-y-2">
           <span v-for="group, index in buttons()" :key="index" class="inline-flex flex-wrap gap-2">
-            <UiButton v-for="{ name, icon, title, click } in group" :key="icon || name" type="button" :icon="icon" :title="t(`editor.button.${title}`)" @click="insert.apply(null, click)">
+            <UiButton v-for="{ name, icon, title, click } in group" :key="title" type="button" :icon="icon" :title="t(`pages.editor.button.${title}`)" @click="insert.apply(null, click)">
               {{ name }}
             </UiButton>
           </span>
@@ -264,7 +263,7 @@ const [state, toggle] = useToggle()
 
       <JpnEntry v-if="changes && hasData" :jpn-entry="changes" />
 
-      <i v-else class="text-neutral-800 block">
+      <i v-else class="block text-neutral-800">
         Пусто тут как-то...
       </i>
     </div>
