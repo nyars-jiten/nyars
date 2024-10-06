@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { tv } from 'tailwind-variants'
+import { tv, type VariantProps } from 'tailwind-variants'
 
 interface MultilineProps {
   multiline: true
@@ -16,17 +16,24 @@ interface SingleLineProps {
 type Props = {
   autocomplete?: string
   fullHeight?: boolean
+  disabled?: VariantProps<typeof styles>['disabled']
 } & (SingleLineProps | MultilineProps)
 
 withDefaults(defineProps<Props>(), {
   fullHeight: false,
   rows: undefined,
+  disabled: false,
 })
 
 const slots = defineSlots<{ hint?: () => void }>()
 
 const styles = tv({
   base: 'w-full rounded-md bg-zinc-800 p-2 text-zinc-500 shadow-md outline outline-1 outline-zinc-700 transition-colors focus-within:bg-zinc-700 focus-within:text-zinc-300 focus-within:outline-none hover:bg-zinc-700 hover:text-zinc-300 hover:outline-transparent',
+  variants: {
+    disabled: {
+      true: 'bg-zinc-700 text-zinc-500',
+    },
+  },
 })
 
 const model = defineModel<string>({ required: true })
@@ -42,12 +49,12 @@ defineExpose({ inputRef })
     </small>
 
     <template v-if="multiline === false">
-      <input v-model="model" :autocomplete="autocomplete" :class="styles()" :type="type">
+      <input v-model="model" :autocomplete="autocomplete" :class="styles({ disabled })" :type="type" :disabled="disabled">
     </template>
 
     <template v-else>
-      <section class="flex h-full p-4" :class="styles()">
-        <textarea ref="inputRef" v-model="model" :autocomplete="autocomplete" :rows="rows" class="w-full bg-transparent outline-none" type="text" />
+      <section class="flex h-full p-4" :class="styles({ disabled })">
+        <textarea ref="inputRef" v-model="model" :autocomplete="autocomplete" :rows="rows" class="w-full bg-transparent outline-none" :disabled="disabled" />
       </section>
     </template>
   </section>

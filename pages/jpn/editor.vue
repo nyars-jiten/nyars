@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import type UiInput from '~/components/ui/ui-input.vue'
-
-import EditorGuide from './editor-guide.vue'
-
 definePageMeta({
   layout: 'desktop',
-  name: 'Editor',
+  name: 'editor',
 })
 
 const { t } = useI18n()
-const { create, preview } = useJpnArticles()
+const api = useJpnArticles()
 
 const writing = ref('')
 const writingRows = computed(() => writing.value.split('\n').length)
@@ -19,13 +15,23 @@ const readingRows = computed(() => reading.value.split('\n').length)
 
 const body = ref('')
 
-const { data: previewData, execute: previewExecute } = useAsyncData('changes-preview', () => preview({
+const article = useRouteArticle()
+
+const proto = useAsyncData(() => article.value ? api.source(article.value) : Promise.resolve(null))
+
+if (proto.data.value) {
+  writing.value = proto.data.value.writing
+  reading.value = proto.data.value.reading
+  body.value = proto.data.value.body
+}
+
+const disabled = computed(() => false /* proto.status.value === 'pending' */)
+
+const preview = useAsyncData('changes-preview', () => api.preview({
   body: body.value,
   reading: reading.value,
   writing: writing.value,
 }), {
-  lazy: true,
-  server: false,
   default: () => ({
     wid: '0000',
     status: {
@@ -43,25 +49,24 @@ const { data: previewData, execute: previewExecute } = useAsyncData('changes-pre
   } as V2EntryJp),
 })
 
-const changes = computed(() => 'code' in previewData.value ? null : previewData.value)
+// const changes = computed(() => 'code' in preview.data.value ? null : preview.data.value)
 
-const hasData = computed(() => (body.value.length || reading.value.length || writing.value.length) > 0)
+// const hasData = computed(() => (body.value.length || reading.value.length || writing.value.length) > 0)
 
 watchDebounced([writing, reading, body], async () => {
-  await previewExecute()
+  await preview.execute()
 
-  if ('code' in previewData.value) {
-    console.log(previewData.value.code, previewData.value.message)
-  }
-}, { debounce: 250 })
+  // if ('code' in preview.data.value) {
+  //   console.log(preview.data.value.code, preview.data.value.message)
+  // }
+}, { debounce: 250, immediate: true })
 
 async function save() {
-  const { data, execute } = useAsyncData('create-edit', () => create({
+  const { data, execute } = useAsyncData('create-edit', () => api.create({
     body: body.value,
     reading: reading.value,
     writing: writing.value,
   }), {
-    server: false,
 
     default: () => ({
       code: 0,
@@ -212,7 +217,7 @@ const [state, toggle] = useToggle()
       <section class="flex items-start justify-between gap-4 max-sm:flex-col">
         <div class="inline-flex flex-wrap gap-x-8 gap-y-2">
           <span v-for="group, index in buttons()" :key="index" class="inline-flex flex-wrap gap-2">
-            <UiButton v-for="{ name, icon, title, click } in group" :key="title" type="button" :icon="icon" :title="t(`pages.editor.button.${title}`)" @click="insert.apply(null, click)">
+            <UiButton v-for="{ name, icon, title, click } in group" :key="title" type="button" :icon="icon" :title="t(`pages.editor.button.${title}`)" :disabled="disabled" @click="insert.apply(null, click)">
               {{ name }}
             </UiButton>
           </span>
@@ -223,7 +228,7 @@ const [state, toggle] = useToggle()
             <!-- справка -->
           </UiButton>
 
-          <UiButton class="items-start justify-center text-center max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" @click="save">
+          <UiButton class="items-start justify-center text-center max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="save">
             <!-- {{ t('pages.editor.save') }} -->
           </UiButton>
         </div>
@@ -231,19 +236,19 @@ const [state, toggle] = useToggle()
 
       <section class="flex grow gap-8 max-md:flex-col" :class="{ 'md:grid md:grid-cols-2': state }">
         <div class="flex shrink grow flex-col gap-4">
-          <UiInput ref="writingRef" v-model="writing" :multiline="true" :rows="writingRows">
+          <UiInput ref="writingRef" v-model="writing" :multiline="true" :rows="writingRows" :disabled="disabled">
             <template #hint>
               {{ t('pages.editor.writing') }}
             </template>
           </UiInput>
 
-          <UiInput ref="readingRef" v-model="reading" :multiline="true" :rows="readingRows">
+          <UiInput ref="readingRef" v-model="reading" :multiline="true" :rows="readingRows" :disabled="disabled">
             <template #hint>
               {{ t('pages.editor.reading') }}
             </template>
           </UiInput>
 
-          <UiInput ref="bodyRef" v-model="body" :multiline="true" :rows="4" class="grow">
+          <UiInput ref="bodyRef" v-model="body" :multiline="true" :rows="4" class="grow" :disabled="disabled">
             <template #hint>
               {{ t('pages.editor.body') }}
             </template>
@@ -261,20 +266,21 @@ const [state, toggle] = useToggle()
         {{ t('pages.editor.preview') }}
       </h1>
 
-      <JpnEntry v-if="changes && hasData" :jpn-entry="changes" />
-
+      <JpnEntry v-if="preview.data.value" :jpn-entry="preview.data.value" />
+      <!--
       <i v-else class="block text-neutral-800">
         Пусто тут как-то...
-      </i>
+      </i> -->
     </div>
 
-    <span class="space-y-8 xl:hidden" :class="{ hidden: hasData === false }">
+    <!-- :class="{ hidden: hasData === false }" -->
+    <span class="space-y-8 xl:hidden">
       <h1 class="text-center text-4xl">
         {{ t('pages.editor.preview') }}
       </h1>
 
       <UiBlock>
-        <JpnEntry v-if="changes" :jpn-entry="changes" />
+        <JpnEntry v-if="preview.data.value" :jpn-entry="preview.data.value" />
       </UiBlock>
     </span>
   </section>

@@ -5,6 +5,7 @@ import { tv } from 'tailwind-variants'
 
 withDefaults(defineProps<Props>(), {
   type: 'button',
+  disabled: false,
 })
 
 const button = tv({
@@ -19,6 +20,10 @@ const button = tv({
     active: {
       true: 'bg-neutral-900 text-neutral-800 outline-neutral-800',
     },
+
+    disabled: {
+      true: 'cursor-not-allowed text-neutral-700',
+    },
   },
 })
 
@@ -30,11 +35,12 @@ interface Props {
   color?: V['color']
   active?: V['active']
   title?: string
+  disabled?: V['disabled']
 }
 </script>
 
 <template>
-  <button :type="type" :class="button({ color, active })" :title="title">
+  <button :type="type" :class="button({ color, active, disabled })" :title="title" :disabled="disabled">
     <Icon v-if="icon" :name="icon" size="1.5rem" />
     <slot />
   </button>
