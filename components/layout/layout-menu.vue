@@ -41,12 +41,12 @@ const styles = tv({
         target="_blank"
         external
       >
-        <Icon size="1.5rem" name="ic:baseline-bug-report" />
+        <Icon size="1.5rem" name="ic:outline-pest-control" />
         <span>{{ $t('components.header.navigation[0].pages.github') }}</span>
       </NuxtLink>
 
       <NuxtLink to="/" :class="styles()">
-        <Icon size="1.5rem" name="ic:baseline-cloud-download" />
+        <Icon size="1.5rem" name="ic:baseline-download" />
         <span>{{ $t('components.header.navigation[0].pages.download') }}</span>
       </NuxtLink>
     </li>
@@ -60,11 +60,11 @@ const styles = tv({
         <Icon size="1.5rem" name="ic:baseline-plus" />
 
         <span class="text-xs font-semibold uppercase">
-          {{ $t('components.header.navigation[1].pages.jpnEditor') }}
+          {{ $t('components.header.menu.addWord') }}
         </span>
       </NuxtLink>
 
-      <NuxtLink to="/" :class="styles()" class="text-amber-300 transition-colors xl:text-indigo-300">
+      <!-- <NuxtLink to="/" :class="styles()" class="text-amber-300 transition-colors xl:text-indigo-300">
         <Icon size="1.5rem" name="ic:baseline-plus" />
 
         <span class="text-xs font-semibold uppercase">
@@ -78,7 +78,7 @@ const styles = tv({
         <span class="text-xs font-semibold uppercase">
           {{ $t('components.header.navigation[1].pages.kanjiEditor') }}
         </span>
-      </NuxtLink>
+      </NuxtLink> -->
     </li>
 
     <li>

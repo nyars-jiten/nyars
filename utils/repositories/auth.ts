@@ -31,11 +31,13 @@ export const useAuth = createSharedComposable(() => useApi(<T>(fetch: $Fetch<T, 
 
   const login = (body: { login: string, password: string }) => fetch<ApiError | User>(`${path}/login`, {
     method: 'POST',
+    credentials: 'include',
     body,
   })
 
   const register = (body: { login: string, password: string }) => fetch<ApiError | User>(`${path}/register`, {
     method: 'POST',
+    credentials: 'include',
     body,
   })
 
