@@ -51,7 +51,10 @@ export default defineNuxtConfig({
     '@vee-validate/nuxt',
   ],
   icon: {
-    collections: ['material-symbols', 'tabler', 'ci', 'uil', 'mdi', 'ooui'],
+    serverBundle: {
+      // remote: true,
+      collections: ['ic', 'uil'],
+    },
   },
   eslint: {
     config: {

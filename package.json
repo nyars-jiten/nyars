@@ -25,6 +25,8 @@
     "@antfu/eslint-config": "^3.7.3",
     "@eslint/js": "^9.11.1",
     "@faker-js/faker": "^9.0.3",
+    "@iconify-json/ic": "^1.2.0",
+    "@iconify-json/uil": "^1.2.0",
     "@nuxt/devtools": "^1.5.1",
     "@nuxt/eslint": "^0.5.7",
     "@nuxt/icon": "^1.5.2",
