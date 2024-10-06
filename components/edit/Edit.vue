@@ -2,14 +2,15 @@
 import { tv } from 'tailwind-variants'
 
 interface Props {
-  edit: Edit
+  edit: EditResponse
+  expanded?: boolean
 }
 
 const props = defineProps<Props>()
 
-const route = useRoute('jpn-wid')
+// const route = useRoute('jpn-wid')
 
-const isEntryPage = Boolean(route.params.wid)
+// const isEntryPage = Boolean(route.params.wid)
 
 const [showChanges, toggleChanges] = useToggle()
 
@@ -34,15 +35,17 @@ const mark = tv({
   },
 })
 
-const createdDate = computed(() => useTime(props.edit.createdDate).value)
+const createdDate = computed(() => useTime(props.edit.createdAt).value)
 const useApprover = computed(() => props.edit.status !== EditStatus.AutoAccepted)
 </script>
 
 <template>
   <section class="rounded-md border-l-2 px-4 py-1 leading-none shadow-md outline-dashed outline-1 outline-neutral-700 transition-colors hover:bg-neutral-700 hover:outline-neutral-600" :class="mark({ border: edit.status })">
     <div class="flex flex-col items-center gap-3 py-1 hover:cursor-pointer md:grid md:grid-cols-[40%_60%] md:gap-0" @click="toggleChanges()">
-      <NuxtLink
-        :to="{ name: 'jpn-wid', params: { wid: edit.identifier } }"
+      {{ edit.title }}
+      <!-- idk why it doesnt' work. Keep in mind WID can be empty/null if there's no underlying entry -->
+      <!-- <NuxtLink
+        :to="{ name: 'jpn-wid', params: { wid: edit.wid } }"
         :class="`flex px-2 md:px-0 justify-center w-full md:truncate md:inline ${isEntryPage ? 'pointer-events-none' : 'hover:text-ns-500'}`"
         @click.stop
       >
@@ -53,19 +56,17 @@ const useApprover = computed(() => props.edit.status !== EditStatus.AutoAccepted
         >
           {{ w }}
         </span>
-      </NuxtLink>
+      </NuxtLink> -->
 
       <div class="order-3 flex gap-3 md:order-none md:justify-end">
         <span class="whitespace-nowrap text-right" :class="mark({ text: edit.status })">
           {{ $t(`models.edit.status.${edit.status}`) }}
         </span>
 
-        <EditUserProfile v-if="useApprover && edit.approver" :user="edit.approver" />
+        <EditUserProfile v-if="edit.approver != null && useApprover && edit.approver" :user="edit.approver" />
       </div>
 
       <div class="flex items-center gap-2">
-        <span>#{{ edit.id }}</span>
-
         <i class="text-neutral-500">
           {{ $t(`models.edit.dictionary.${edit.dictionary}`) }}
         </i>
@@ -81,10 +82,10 @@ const useApprover = computed(() => props.edit.status !== EditStatus.AutoAccepted
           {{ createdDate }}
         </span>
 
-        <EditUserProfile :user="edit.author" />
+        <EditUserProfile v-if="edit.author != null" :user="edit.author" />
+        <span v-else>анонимно</span>
       </div>
     </div>
-
-    <LazyChangesPreview v-if="showChanges" :edit-id="edit.id" :is-type-create="edit.type === 1" />
+    <ChangesPreview v-if="(expanded && edit.status === EditStatus.New) ? !showChanges : showChanges" :edit="edit" />
   </section>
 </template>

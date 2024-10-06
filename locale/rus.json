@@ -2,6 +2,9 @@
   "components": {
     "header": {
       "nyars": "НЯРС",
+      "menu": {
+        "addWord": "Новое слово"
+      },
       "navigation": [
         {
           "title": "Словарь",
@@ -187,7 +190,7 @@
     }
   },
   "timeAgo": {
-    "justNow": "сейчас",
+    "justNow": "только что",
     "ago": "{0} назад",
     "in": "через {0}",
     "yesterday": "вчера",

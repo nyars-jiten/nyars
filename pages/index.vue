@@ -4,7 +4,14 @@ definePageMeta({
   name: 'Home',
 })
 
-const edits = [] as Edit[]
+const { getEdits } = useApi(editRepository)
+const { data: edits } = await useLazyAsyncData(
+  'edits',
+  () => getEdits(),
+  {
+    default: (): EditResponse[] => [],
+  },
+)
 
 const infoExamples = [
   // Кол-во примеров:
