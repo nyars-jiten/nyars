@@ -16,6 +16,7 @@ definePageMeta({
 })
 
 const wid = useRouteArticle()
+
 const { data: article } = useAsyncData(() => {
   const result = data.value?.result.find(x => x.wid === wid.value)
   if (result) {

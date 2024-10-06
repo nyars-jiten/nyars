@@ -36,7 +36,7 @@ const isPreview = false
               ※
             </span>
 
-            <Content :content="meaning.note" />
+            <Content :data="meaning.note" />
           </div>
         </div>
       </div>

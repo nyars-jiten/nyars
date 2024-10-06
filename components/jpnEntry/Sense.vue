@@ -7,7 +7,7 @@ interface Props {
 
 defineProps<Props>()
 
-  const { t } = useI18n()
+const { t } = useI18n()
 </script>
 
 <template>
@@ -31,7 +31,7 @@ defineProps<Props>()
         </span>
       </span>
 
-      <Content :content="sense.content" />
+      <Content :data="sense.content" />
 
       <span class="space-x-2 italic">
         <span
@@ -79,8 +79,8 @@ defineProps<Props>()
     <!-- <div v-if="!isPreview && sense.examples?.length" :class="`${meaning.senses.length > 1 ? 'ml-8':'ml-1'}`"> -->
     <div v-if="!isPreview && sense.examples?.length" class="ml-8">
       <div v-for="(example, exampleIndex) of sense.examples" :key="exampleIndex" class="space-x-2 border-l-2 border-ns-gray-200 pl-2 text-neutral-500  dark:border-ns-gray-700">
-        <Content :content="example.sentence" />
-        <Content :content="example.translation" />
+        <Content :data="example.sentence" />
+        <Content :data="example.translation" />
       </div>
     </div>
 

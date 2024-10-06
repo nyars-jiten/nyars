@@ -70,7 +70,7 @@ const { t } = useI18n()
               </span>
             </small>
 
-            <Content :content="sense.content" :break-line="false" />
+            <Content :data="sense.content" :break-line="false" />
           </span>
         </template>
 
