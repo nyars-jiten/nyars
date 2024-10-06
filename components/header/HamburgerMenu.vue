@@ -56,14 +56,14 @@ const { user } = useUserStore()
         <span>{{ $t('components.header.navigation[1].pages.kanjiEditor') }}</span>
       </NuxtLink>
     </div>
-    <div v-if="user?.is_admin" class="mb-2 ml-2 border-b border-ns-gray-300 pb-2 dark:border-ns-gray-600">
+    <div v-if="user?.isAdmin" class="mb-2 ml-2 border-b border-ns-gray-300 pb-2 dark:border-ns-gray-600">
       <div class="flex items-center justify-start rounded-md p-1">
         <span class="text-neutral-500">{{ $t('components.header.navigation[2].title') }}</span>
         <IconChevronDown class="!m-0 text-xl text-neutral-500" />
       </div>
     </div>
     <div
-      v-if="user?.is_admin"
+      v-if="user?.isAdmin"
       class="ml-2 flex flex-col border-l border-ns-gray-300 p-1 dark:border-ns-gray-600"
       @click="headerStore.closeHamburgerMenu"
     >

@@ -1,10 +1,13 @@
-export interface User {
-  id: number
-  login: string
+export interface ShortUser {
+  id: string
   username: string
-  is_admin: boolean
-  is_bot: boolean
-  banned: boolean
+  isBot: boolean
   avatar: string
-  created_at: string
+}
+
+export interface User extends ShortUser {
+  login: string
+  banned: boolean
+  isAdmin: boolean
+  createdAt: string
 }

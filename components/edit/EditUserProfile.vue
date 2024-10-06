@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface Props {
-  user: User
+  user: ShortUser
 }
 
 const props = defineProps<Props>()

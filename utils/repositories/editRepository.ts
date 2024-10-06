@@ -1,20 +1,16 @@
 import type { $Fetch, NitroFetchRequest } from 'nitropack'
 
 export function editRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
-  const path = '/Edits'
+  const path = '/edits'
 
-  const getEdits = (number = 25, page = 0, statuses: number | null = null): Promise<Edit[]> => {
-    return fetch<Edit[]>(path, {
+  const getEdits = (number = 25, page = 0, statuses: number | null = null): Promise<EditResponse[]> => {
+    return fetch<EditResponse[]>(path, {
       params: {
         n: number,
         p: page,
         statuses,
       },
     })
-  }
-
-  const getCompare = (editId: number): Promise<EditCompare> => {
-    return fetch<EditCompare>(`${path}/${editId}/compare`)
   }
 
   // TODO change type to DictionaryType
@@ -27,5 +23,5 @@ export function editRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
     })
   }
 
-  return { getEdits, getCompare, getEditsEntry }
+  return { getEdits, getEditsEntry }
 }

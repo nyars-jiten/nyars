@@ -1,14 +1,12 @@
 <script setup lang="ts">
-// const { getEdits } = useApi(editRepository)
-// const { data: edits } = await useLazyAsyncData(
-//   'edits',
-//   () => getEdits(),
-//   {
-//     default: (): Edit[] => []
-//   }
-// )
-
-const edits = [] as Edit[]
+const { getEdits } = useApi(editRepository)
+const { data: edits } = await useLazyAsyncData(
+  'edits',
+  () => getEdits(),
+  {
+    default: (): EditResponse[] => [],
+  },
+)
 
 definePageMeta({
   name: 'Edits',
@@ -27,6 +25,7 @@ useHead({
       v-for="edit in edits"
       :key="edit.id"
       :edit="edit"
+      :expanded="true"
     />
   </UiBlock>
 </template>
