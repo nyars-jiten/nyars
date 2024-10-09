@@ -51,10 +51,7 @@ export default defineNuxtConfig({
     '@vee-validate/nuxt',
   ],
   icon: {
-    serverBundle: {
-      // remote: true,
-      collections: ['ic', 'uil'],
-    },
+    serverBundle: 'local',
   },
   eslint: {
     config: {
@@ -63,12 +60,6 @@ export default defineNuxtConfig({
   },
   veeValidate: {
     autoImports: true,
-    componentNames: {
-      // Form: 'VeeForm',
-      // Field: 'VeeField',
-      // FieldArray: 'VeeFieldArray',
-      // ErrorMessage: 'VeeErrorMessage',
-    },
   },
   i18n: {
     vueI18n: './locale/i18n.config.ts',
