@@ -17,7 +17,13 @@ const body = ref('')
 
 const article = useRouteArticle()
 
-const proto = useAsyncData(() => article.value ? api.source(article.value) : Promise.resolve(null))
+const proto = useAsyncData(() => article.value
+  ? api.source(article.value)
+  : Promise.resolve({
+    writing: '',
+    reading: '',
+    body: '',
+  }))
 
 if (proto.data.value) {
   writing.value = proto.data.value.writing
@@ -25,7 +31,7 @@ if (proto.data.value) {
   body.value = proto.data.value.body
 }
 
-const disabled = computed(() => false /* proto.status.value === 'pending' */)
+const disabled = computed(() => proto.status.value === 'pending')
 
 const preview = useAsyncData('changes-preview', () => api.preview({
   body: body.value,
@@ -52,32 +58,23 @@ const preview = useAsyncData('changes-preview', () => api.preview({
 
 // const changes = computed(() => 'code' in preview.data.value ? null : preview.data.value)
 
-// const hasData = computed(() => (body.value.length || reading.value.length || writing.value.length) > 0)
-
-watchDebounced([writing, reading, body], async () => {
-  await preview.execute()
-
-  // if ('code' in preview.data.value) {
-  //   console.log(preview.data.value.code, preview.data.value.message)
-  // }
-}, { debounce: 250, immediate: true })
+watchDebounced([writing, reading, body], () => preview.execute(), { debounce: 250, immediate: true })
 
 async function save() {
-  const { data, execute } = useAsyncData('create-edit', () => api.create({
+  const create = useAsyncData('create-edit', () => api.create({
     body: body.value,
     reading: reading.value,
     writing: writing.value,
   }), {
-
     default: () => ({
       code: 0,
       message: '',
     }),
   })
 
-  await execute()
+  await create.execute()
 
-  console.log(data.value.code, data.value.message)
+  console.log(create.data.value.code, create.data.value.message)
 }
 
 const writingRef = useTemplateRef('writingRef')

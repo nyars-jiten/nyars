@@ -1,19 +1,18 @@
 <script setup lang="ts">
-const request = useRouteSearchRequest()
+const route = useRoute()
+const request = computed(() => String(route.query.q))
+
 const api = useJpnArticles()
 
 definePageMeta({
   layout: 'desktop',
 })
 
-const { data, execute } = useAsyncData('search-request', () => api.search(request.value, 0, 0), {
+const { data } = useAsyncData('search-request', () => api.search(request.value, 0, 0), {
   default: () => ({ result: [] }),
-  lazy: false,
   dedupe: 'defer',
+  watch: [request],
 })
-
-// TODO: debounce
-watch(request, () => execute)
 
 const wid = useRouteArticle()
 watch(wid, () => window.scrollTo(0, 0))
