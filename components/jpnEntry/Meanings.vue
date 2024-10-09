@@ -16,7 +16,7 @@ const isPreview = false
           :key="tagPos.eng"
           class="pl-1 font-bold uppercase after:content-[','] first:pl-0 last:after:content-none"
         >
-          {{ tagPos.ru }}
+          {{ tagPos.ruShort }}
         </span>
       </div>
 

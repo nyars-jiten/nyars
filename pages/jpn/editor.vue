@@ -46,6 +46,7 @@ const preview = useAsyncData('changes-preview', () => api.preview({
     tags: [],
     words: [],
     meanings: [],
+    furigana: [],
   } as V2EntryJp),
 })
 

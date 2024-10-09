@@ -27,6 +27,13 @@ export interface V2EntryJp {
   tags: V2Tag[]
   words: V2Word[]
   meanings: V2Meaning[]
+  furigana: Furigana[]
+}
+
+export interface Furigana {
+  pairs: V2FuriganaPair[]
+  tags: V2Tag[]
+  isMarked: boolean
 }
 
 export interface V2Status {
@@ -40,7 +47,6 @@ export interface V2Status {
 export interface V2Word {
   writings: V2Writing[]
   readings: V2Reading[]
-  furigana: V2FuriganaPair[][]
 }
 
 export interface V2FuriganaPair {
@@ -51,12 +57,14 @@ export interface V2FuriganaPair {
 export interface V2Writing {
   value: string
   tags: V2Tag[]
+  isMarked: boolean
 }
 
 export interface V2Reading {
   value: string
   transcription?: V2Transcription
   tags: V2Tag[]
+  isMarked: boolean
 }
 
 export interface V2Transcription {

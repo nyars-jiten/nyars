@@ -11,21 +11,25 @@ defineProps<Props>()
     <!-- TODO: bruh -->
     <div class="flex flex-col hyphens-auto">
       <div
-        v-for="(word, wordIndex) of jpnEntry.words"
-        :key="wordIndex"
         class="text-2xl"
       >
-        <ul v-show="word.furigana?.length" class="inline  dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
+        <ul class="inline  dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
           <li
-            v-for="(furigana, fi) of word.furigana"
-            :key="fi"
+            v-for="(furigana, fI) of jpnEntry.furigana"
+            :key="fI"
             class="inline-flex flex-wrap items-baseline before:text-ns-gray-200 after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
           >
             <Furigana :furigana="furigana" />
           </li>
         </ul>
+      </div>
+      <!-- <div
+        v-for="(word, wordIndex) of jpnEntry.words"
+        :key="wordIndex"
+        class="text-2xl"
+      > -->
 
-        <!-- <ul v-show="word.writings?.length" class="inline before:-ml-3 before:text-ns-gray-200 before:content-['【'] after:text-ns-gray-200 after:content-['】'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
+      <!-- <ul v-show="word.writings?.length" class="inline before:-ml-3 before:text-ns-gray-200 before:content-['【'] after:text-ns-gray-200 after:content-['】'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
           <li
             v-for="(writing, writingIndex) of word.writings"
             :key="writingIndex"
@@ -46,7 +50,7 @@ defineProps<Props>()
             </span>
           </li>
         </ul> -->
-        <!--
+      <!--
         <ul class="inline">
           <li
             v-for="(reading, readingIndex) of word.readings"
@@ -68,7 +72,7 @@ defineProps<Props>()
             </span>
           </li>
         </ul> -->
-      </div>
+      <!-- </div> -->
     </div>
 
     <Tags :tags="jpnEntry.tags" />
