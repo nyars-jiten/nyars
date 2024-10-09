@@ -18,11 +18,11 @@ const button = tv({
     },
 
     active: {
-      true: 'bg-neutral-900 text-neutral-800 outline-neutral-800',
+      true: 'bg-zinc-900 text-zinc-800 outline-zinc-800',
     },
 
     disabled: {
-      true: 'cursor-not-allowed text-neutral-700',
+      true: 'cursor-not-allowed text-zinc-700',
     },
   },
 })
