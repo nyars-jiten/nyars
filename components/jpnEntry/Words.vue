@@ -15,7 +15,7 @@ defineProps<Props>()
       >
         <ul class="inline  dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
           <li
-            v-for="(furigana, fI) of jpnEntry.furigana"
+            v-for="(furigana, fI) of jpnEntry.furigana.toSorted((a, b) => a.isMarked ? -1 : 1)"
             :key="fI"
             class="inline-flex flex-wrap items-baseline before:text-ns-gray-200 after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
           >
