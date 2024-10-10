@@ -35,7 +35,7 @@ function getExample(exampleType: number, exampleIndex: number) {
 function search(example: string) {
   searchStore.searchQuery = example
   searchStore.mode = 'words'
-  
+
   return navigateTo({ name: 'search-JpnEntries', query: { r: example } })
 }
 </script>

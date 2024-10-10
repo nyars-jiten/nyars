@@ -38,6 +38,12 @@ const styles = tv({
 
 const model = defineModel<string>({ required: true })
 
+// NB: we're using value + event instead of v-model to catch an IME input
+// also it fixes bug with initial model value
+function updateModel(event: Event) {
+  model.value = (event.target as HTMLTextAreaElement).value
+}
+
 const inputRef = useTemplateRef('inputRef')
 defineExpose({ inputRef })
 </script>
@@ -54,7 +60,7 @@ defineExpose({ inputRef })
 
     <template v-else>
       <section class="flex h-full p-4" :class="styles({ disabled })">
-        <textarea ref="inputRef" v-model="model" :autocomplete="autocomplete" :rows="rows" class="w-full bg-transparent outline-none" :disabled="disabled" />
+        <textarea ref="inputRef" :value="model" :autocomplete="autocomplete" :rows="rows" class="w-full bg-transparent outline-none" :disabled="disabled" @input="updateModel" />
       </section>
     </template>
   </section>

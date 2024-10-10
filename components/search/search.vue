@@ -21,7 +21,7 @@ const button = tv({
       <input v-model="request" type="text" class="w-full bg-transparent text-center focus:outline-none" spellcheck="false" autocomplete="off" @keydown.enter.prevent="push()">
       <Icon name="ic:baseline-search" size="1.5rem" />
 
-      <SearchSuggestions class="invisible group-focus-within:visible group-hover:visible" />
+      <SearchSuggestions :data="request" class="invisible group-focus-within:visible group-hover:visible" />
     </section>
 
     <div class="inline-flex items-center gap-2">

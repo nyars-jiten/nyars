@@ -6,10 +6,8 @@ export const useSearchRequest = createGlobalState(() => {
 
   function push(value?: string) {
     const q = value ?? request.value
-    if (q.length > 3) {
-      request.value = q
-      return navigateTo({ name: 'search', query: { q } })
-    }
+    request.value = q
+    return navigateTo({ name: 'search', query: { q } })
   }
 
   return { request, push }

@@ -1,12 +1,12 @@
 import type { $Fetch, NitroFetchRequest } from 'nitropack'
 
 export function searchRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
-  const path = '/Search'
+  const path = '/search'
 
   const getSuggestions = (input: string, number = 10): Promise<string[]> => {
     return fetch<string[]>(`${path}/preview`, {
       params: {
-        r: input,
+        q: input,
         n: number,
       },
     })

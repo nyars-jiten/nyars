@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { cons } from 'fp-ts/lib/ReadonlyNonEmptyArray'
+
 definePageMeta({
   layout: 'desktop',
   name: 'editor',
@@ -15,23 +17,34 @@ const readingRows = computed(() => reading.value.split('\n').length)
 
 const body = ref('')
 
-const article = useRouteArticle()
+const routeWid = useRoute().query.wid
 
-const proto = useAsyncData(() => article.value
-  ? api.source(article.value)
-  : Promise.resolve({
+const srcSata = await useLazyAsyncData(`jpn-source-${routeWid}`, () => api.source(`${routeWid}`), {
+  default: () => ({
     writing: '',
     reading: '',
     body: '',
-  }))
+  }),
+})
 
-if (proto.data.value) {
-  writing.value = proto.data.value.writing
-  reading.value = proto.data.value.reading
-  body.value = proto.data.value.body
+watch (srcSata.data, (data) => {
+  if (data) {
+    writing.value = data.writing
+    reading.value = data.reading
+    body.value = data.body
+  }
+})
+
+// TODO: refactor
+if (srcSata.data.value) {
+  writing.value = srcSata.data.value.writing
+  reading.value = srcSata.data.value.reading
+  body.value = srcSata.data.value.body
 }
 
-const disabled = computed(() => proto.status.value === 'pending')
+const disabled = computed(() => {
+  return srcSata.status.value !== 'success'
+})
 
 const preview = useAsyncData('changes-preview', () => api.preview({
   body: body.value,
