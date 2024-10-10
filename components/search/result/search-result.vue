@@ -38,7 +38,7 @@ const { t } = useI18n()
 
 <template>
   <button type="button" class="w-full text-left" @click="wid = article.wid">
-    <UiBlock :hover="true" class="space-y-2">
+    <UiBlock :hover="true" :nonreviewed="!article.status.isReviewed" :unconfirmed="article.status.isUnconfirmed" class="space-y-2">
       <header class="grid grid-cols-[1fr_auto] items-center justify-between gap-4 text-2xl">
         <span class="grow truncate">
           <span v-for="furigana, wIndex of article.furigana.toSorted((a, b) => a.isMarked ? -1 : 1)" :key="wIndex" class="after:content-['・'] last:after:content-none dark:after:text-gray-700">
