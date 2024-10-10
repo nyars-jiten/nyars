@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { cons } from 'fp-ts/lib/ReadonlyNonEmptyArray'
-
 definePageMeta({
   layout: 'desktop',
   name: 'editor',

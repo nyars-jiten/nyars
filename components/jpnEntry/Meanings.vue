@@ -14,9 +14,13 @@ const isPreview = false
         <span
           v-for="tagPos of meaning.tags"
           :key="tagPos.eng"
-          class="pl-1 font-bold uppercase after:content-[','] first:pl-0 last:after:content-none"
+          class="group relative pl-1 font-bold uppercase after:content-[','] first:pl-0 last:after:content-none"
         >
           {{ tagPos.ruShort }}
+
+          <UiTooltip>
+            {{ tagPos.ru }}
+          </UiTooltip>
         </span>
       </div>
 

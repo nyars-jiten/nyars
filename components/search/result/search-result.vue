@@ -3,7 +3,7 @@ interface Props {
   article: V2EntryJp
 }
 
-/* const props =  */defineProps<Props>()
+const props = defineProps<Props>()
 
 interface ShortenedSenses {
   data: V2Sense[]
@@ -17,18 +17,18 @@ const shortenedSenses = computed(() => {
     data: [] as V2Sense[],
     hidden: 0,
   } as ShortenedSenses
-  // for (let i = 0; i < props.article.meanings.length; i++) {
-  //   const curMeaning = props.article.meanings[i]
-  //   for (let j = 0; j < curMeaning.senses.length; j++) {
-  //     const curSense = curMeaning.senses[j]
-  //     if (!curSense.isRare && res.data.length < 5) {
-  //       res.data.push(curSense)
-  //     }
-  //     else {
-  //       ++res.hidden
-  //     }
-  //   }
-  // }
+  for (let i = 0; i < props.article.meanings.length; i++) {
+    const curMeaning = props.article.meanings[i]
+    for (let j = 0; j < curMeaning.senses.length; j++) {
+      const curSense = curMeaning.senses[j]
+      if (!curSense.isRare && res.data.length < 5) {
+        res.data.push(curSense)
+      }
+      else {
+        ++res.hidden
+      }
+    }
+  }
   return res
 })
 

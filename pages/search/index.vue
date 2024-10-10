@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
 const request = computed(() => String(route.query.q))
+const articleWid = computed(() => String(route.query.wid))
 
 const api = useJpnArticles()
 
@@ -14,23 +15,11 @@ const { data } = useAsyncData('search-request', () => api.search(request.value, 
   watch: [request],
 })
 
-const wid = useRouteArticle()
-watch(wid, () => window.scrollTo(0, 0))
+watch(articleWid, () => window.scrollTo(0, 0))
 
-function getArticle() {
-  const result = data.value?.result.find(x => x.wid === wid.value)
-  if (result) {
-    return Promise.resolve(result)
-  }
-
-  if (wid.value) {
-    return api.get(wid.value)
-  }
-
-  return Promise.resolve(null)
-}
-
-const { data: article } = useAsyncData(getArticle, { watch: [wid] })
+const { data: article } = useAsyncData(`article-${articleWid.value}`, () => api.get(String(articleWid.value)), {
+  watch: [articleWid],
+})
 
 const config = useRuntimeConfig()
 const url = computed(() => article.value ? new URL(`jpn/${article.value.wid}`, config.public.baseUrl) : null)
@@ -38,7 +27,7 @@ const url = computed(() => article.value ? new URL(`jpn/${article.value.wid}`, c
 const clipboard = useClipboard()
 const { start, stop, isPending } = useTimeout(1000, { controls: true, immediate: false })
 
-watch(wid, stop)
+watch(articleWid, stop)
 
 function copy() {
   clipboard.copy(url.value?.toString() ?? '')
