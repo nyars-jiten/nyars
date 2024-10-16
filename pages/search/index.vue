@@ -17,7 +17,7 @@ const { data } = useAsyncData('search-request', () => api.search(request.value, 
 
 watch(articleWid, () => window.scrollTo(0, 0))
 
-const { data: article } = useAsyncData(`article-${articleWid.value}`, () => api.get(String(articleWid.value)), {
+const { data: article } = useAsyncData('jpn-article', () => api.get(articleWid.value), {
   watch: [articleWid],
 })
 
