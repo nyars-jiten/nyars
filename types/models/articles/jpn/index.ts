@@ -28,6 +28,7 @@ export interface V2EntryJp {
   words: V2Word[]
   meanings: V2Meaning[]
   furigana: Furigana[]
+  frequency: number
 }
 
 export interface Furigana {

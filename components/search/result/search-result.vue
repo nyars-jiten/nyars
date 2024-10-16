@@ -32,6 +32,13 @@ const shortenedSenses = computed(() => {
   return res
 })
 
+// const freq = computed(() => {
+//   if (props.article.frequency === 0) {
+//     return '—'
+//   }
+//   return Math.ceil(props.article.frequency / 1000) // ТОП {freq}k
+// })
+
 const wid = useRouteArticle()
 const { t } = useI18n()
 </script>
