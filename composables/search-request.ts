@@ -1,14 +1,16 @@
-export const useRouteArticle = createSharedComposable(() => useRouteQuery('wid', null as null | string))
+export function useRouteArticle() {
+  const route = useRoute()
+  return String(route.query.wid ?? '')
+}
 
-export const useSearchRequest = createGlobalState(() => {
+export function useSearchRequest() {
   const route = useRoute()
   const request = ref(String(route.query.q ?? ''))
 
   function push(value?: string) {
-    const q = value ?? request.value
-    request.value = q
-    return navigateTo({ name: 'search', query: { q } })
+    request.value = value ?? request.value
+    return navigateTo({ name: 'search', query: { q: request.value } })
   }
 
   return { request, push }
-})
+}

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { tv } from 'tailwind-variants'
 
-const { user } = useUserStore()
+const { user } = storeToRefs(useUserStore())
 // const avatar = computed(() => useAvatar(user.value?.avatar ?? '').href)
 const avatar = 'https://next.nyars.moe/upload/avatars/6bf3488d-da95-4936-880a-c66fb4bf3070.jpg'
 

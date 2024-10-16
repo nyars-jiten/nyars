@@ -1,9 +1,5 @@
 <script setup lang="ts">
-// const wid = useRoute('jpn-wid').params.wid
-
-const wid = useRouteParams('wid', '0' as string)
-
-const { t } = useI18n()
+const wid = useRoute('jpn-wid').params.wid
 
 // const { getJpnEntry } = useApi(jpnEntryRepository)
 const { get } = useJpnArticles()
@@ -11,7 +7,7 @@ const { get } = useJpnArticles()
 // const { getEditsEntry } = useApi(editRepository)
 // const { getSatellites } = useApi(satelliteRepository)
 
-const { data: jpnEntry } = await useAsyncData(`jpn-article-${wid.value}`, () => get(wid.value), {
+const { data: jpnEntry } = await useAsyncData(() => get(wid), {
   default: () => ({
     wid: '0000',
     status: {

@@ -5,52 +5,50 @@ withDefaults(defineProps<Props>(), {
   size: 'medium',
   hover: false,
   active: false,
-
-  nonreviewed: false,
-  unconfirmed: false,
-  nonstd: false,
 })
 
-const styles = tv({
-  base: 'rounded-md border-2 border-transparent p-4 shadow-md outline outline-1 outline-neutral-800 transition-colors',
+defineSlots<{
+  default: () => VNode[]
+  footer: () => VNode[]
+}>()
+
+const size_ = tv({
   variants: {
     size: {
       small: 'p-2',
       medium: 'p-4',
-      large: 'p-8',
+      large: 'p-6',
     },
+  },
+})
+
+const styles = tv({
+  base: 'group/block rounded-md outline outline-1 outline-neutral-800 transition-colors',
+  variants: {
     hover: {
       true: 'hover:bg-neutral-800 hover:outline-neutral-700',
     },
     active: {
       true: 'bg-neutral-800 outline-neutral-700',
     },
-    nonreviewed: {
-      true: 'border-l-amber-700',
-    },
-    unconfirmed: {
-      true: 'border-l-red-700',
-    },
-    nonstd: {
-      true: 'border-l-fuchsia-500',
-    },
   },
 })
 
 interface Props {
-  size?: VariantProps<typeof styles>['size']
+  size?: VariantProps<typeof size_>['size']
   hover?: VariantProps<typeof styles>['hover']
   active?: VariantProps<typeof styles>['active']
-
-  // Article props
-  nonreviewed?: VariantProps<typeof styles>['nonreviewed']
-  unconfirmed?: VariantProps<typeof styles>['unconfirmed']
-  nonstd?: VariantProps<typeof styles>['nonstd'] // archaic, dialect, proper
 }
 </script>
 
 <template>
-  <section :class="styles({ size, hover, active, nonreviewed, unconfirmed, nonstd })">
-    <slot />
+  <section :class="styles({ hover, active })">
+    <div :class="size_({ size })">
+      <slot />
+    </div>
+
+    <footer v-if="$slots.footer" class="flex flex-wrap items-center border-t border-neutral-800 p-2 leading-none transition-colors" :class="{ 'group-hover/block:border-neutral-700': hover }">
+      <slot name="footer" />
+    </footer>
   </section>
 </template>

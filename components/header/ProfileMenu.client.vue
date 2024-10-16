@@ -2,7 +2,7 @@
 const { clientLogout } = useApi(userRepository)
 
 const { t } = useI18n()
-const { user } = useUserStore()
+const { user } = storeToRefs(useUserStore())
 
 // TODO: not nullable
 const avatar = computed(() => useAvatar(user.value?.avatar ?? '').href)

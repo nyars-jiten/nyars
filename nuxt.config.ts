@@ -45,10 +45,10 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'nuxt-svgo',
     'nuxt-lodash',
-    '@vueuse/nuxt',
     'nuxt-typed-router',
     '@nuxt/icon',
     '@vee-validate/nuxt',
+    '@vueuse/nuxt',
   ],
   icon: {
     serverBundle: 'local',

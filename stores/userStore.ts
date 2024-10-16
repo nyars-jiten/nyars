@@ -1,4 +1,4 @@
-export const useUserStore = createGlobalState(() => {
+export const useUserStore = defineStore('user-store', () => {
   const { current } = useUser()
   const { data: user } = current()
 

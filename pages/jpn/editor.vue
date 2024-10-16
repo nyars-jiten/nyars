@@ -17,12 +17,13 @@ const body = ref('')
 
 const routeWid = useRoute().query.wid
 
-const srcSata = await useLazyAsyncData(`jpn-source-${routeWid}`, () => api.source(`${routeWid}`), {
+const srcSata = await useLazyAsyncData(() => routeWid ? api.source(`${routeWid}`) : Promise.resolve(null), {
   default: () => ({
     writing: '',
     reading: '',
     body: '',
   }),
+  server: false,
 })
 
 watch (srcSata.data, (data) => {

@@ -28,10 +28,11 @@ withDefaults(defineProps<Props>(), {
 const slots = defineSlots<{ hint?: () => void }>()
 
 const styles = tv({
-  base: 'w-full rounded-md bg-zinc-800 p-2 text-zinc-500 shadow-md outline outline-1 outline-zinc-700 transition-colors focus-within:bg-zinc-700 focus-within:text-zinc-300 focus-within:outline-none hover:bg-zinc-700 hover:text-zinc-300 hover:outline-transparent',
+  base: 'w-full rounded-md bg-zinc-800 p-2 text-zinc-500 shadow-md outline outline-1 outline-zinc-700 transition-colors',
   variants: {
     disabled: {
-      true: 'bg-zinc-700 text-zinc-500',
+      true: 'cursor-not-allowed bg-zinc-700 text-zinc-500',
+      false: ' focus-within:bg-zinc-700 focus-within:text-zinc-300 focus-within:outline-none hover:bg-zinc-700 hover:text-zinc-300 hover:outline-transparent',
     },
   },
 })
@@ -60,7 +61,7 @@ defineExpose({ inputRef })
 
     <template v-else>
       <section class="flex h-full p-4" :class="styles({ disabled })">
-        <textarea ref="inputRef" :value="model" :autocomplete="autocomplete" :rows="rows" class="w-full bg-transparent outline-none" :disabled="disabled" @input="updateModel" />
+        <textarea ref="inputRef" :value="model" :autocomplete="autocomplete" :rows="rows" class="w-full bg-transparent outline-none" :class="{ 'resize-none': disabled }" :disabled="disabled" @input="updateModel" />
       </section>
     </template>
   </section>

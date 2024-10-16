@@ -8,7 +8,7 @@ definePageMeta({
 })
 
 const notificationStore = useNotificationStore()
-const userStore = useUserStore()
+const userStore = storeToRefs(useUserStore())
 
 const isRegister = ref(false)
 

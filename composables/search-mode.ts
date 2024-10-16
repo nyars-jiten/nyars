@@ -1,1 +1,1 @@
-export const useSearchMode = createSharedComposable(() => useRouteQuery('mode', 'word'))
+// export const useSearchMode = createSharedComposable(() => useRouteQuery('mode', 'word'))
