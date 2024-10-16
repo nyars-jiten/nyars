@@ -27,6 +27,7 @@ const { data: jpnEntry } = await useAsyncData(`jpn-article-${wid.value}`, () => 
     tags: [],
     meanings: [],
     furigana: [],
+    frequency: 0,
   } satisfies V2EntryJp),
 })
 

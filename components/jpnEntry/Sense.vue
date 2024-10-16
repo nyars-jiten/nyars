@@ -5,9 +5,18 @@ interface Props {
   isPreview: boolean
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
 const { t } = useI18n()
+
+const miscTagsLine = computed(() => {
+  const tags = props.sense.metaTags.map(t => t.ru)
+    .concat(props.sense.dialectTags.map(t => t.ru))
+    .concat(props.sense.loanSources.map(ls => `${ls.lang}. ${ls.word}`))
+  if (tags.length === 0)
+    return ''
+  return `(${tags.join(', ')})`
+})
 </script>
 
 <template>
@@ -29,14 +38,8 @@ const { t } = useI18n()
 
       <Content :data="sense.content" />
 
-      <span class="space-x-2 italic">
-        <span
-          v-for="(tag, i) of sense.metaTags.concat(sense.dialectTags)"
-          :key="i"
-          class="after:content-[','] first:before:content-['('] last:after:content-[')']"
-        >
-          {{ tag.ru }}
-        </span>
+      <span class="space-x-2 text-sm italic text-gray-500">
+        {{ miscTagsLine }}
       </span>
     </div>
 
