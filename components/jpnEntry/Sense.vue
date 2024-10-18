@@ -41,6 +41,14 @@ const miscTagsLine = computed(() => {
       <span class="space-x-2 text-sm italic text-gray-500">
         {{ miscTagsLine }}
       </span>
+      <span v-if="sense.extRefs.length > 0" class="group relative cursor-pointer align-top text-xs text-ns-500 underline decoration-dotted underline-offset-4">
+        [*]
+        <UiTooltip class="text-base text-ns-gray-400">
+          <span v-for="(extRef, extRefIx) in sense.extRefs" :key="extRefIx">
+            {{ extRef.target }}: {{ extRef.value }}
+          </span>
+        </UiTooltip>
+      </span>
     </div>
 
     <!--  -->

@@ -3,7 +3,7 @@ export function useRouteArticle() {
   return String(route.query.wid ?? '')
 }
 
-export function useSearchRequest() {
+export const useSearchRequest = createGlobalState(() => {
   const route = useRoute()
   const request = ref(String(route.query.q ?? ''))
 
@@ -13,4 +13,4 @@ export function useSearchRequest() {
   }
 
   return { request, push }
-}
+})

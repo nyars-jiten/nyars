@@ -74,20 +74,25 @@ const preview = useAsyncData('changes-preview', () => api.preview({
 watchDebounced([writing, reading, body], () => preview.execute(), { debounce: 250, immediate: true })
 
 async function save() {
-  const create = useAsyncData('create-edit', () => api.create({
+  const req = {
     body: body.value,
     reading: reading.value,
     writing: writing.value,
-  }), {
-    default: () => ({
-      code: 0,
-      message: '',
-    }),
+  }
+  const defaultVal = () => ({
+    code: 0,
+    message: '',
   })
 
-  await create.execute()
+  if (routeWid) {
+    return await useAsyncData('create-edit', () => api.edit(`${routeWid}`, req), {
+      default: defaultVal,
+    })
+  }
 
-  console.log(create.data.value.code, create.data.value.message)
+  await useAsyncData('create-edit', () => api.create(req), {
+    default: defaultVal,
+  })
 }
 
 const writingRef = useTemplateRef('writingRef')

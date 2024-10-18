@@ -123,6 +123,17 @@
       "noPage": "Похоже, что такой страницы не существует.",
       "noEntry": "Похоже, что такой статьи нет, возможно она была удалена."
     },
+    "search": {
+      "frequency": "Топ {0}",
+      "frequencyNoData": "—",
+      "status": {
+        "isReviewed": "не проверено",
+        "isUnconfirmed": "не подтв.",
+        "isArchaic": "архаичное",
+        "isDialect": "диалектное",
+        "isProper": "имя/название"
+      }
+    },
     "editor": {
       "writing": "написание",
       "reading": "чтение",

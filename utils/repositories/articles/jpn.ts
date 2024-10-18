@@ -9,6 +9,9 @@ export function useJpnArticles() {
     const get = (wid: V2EntryJp['wid']) =>
       fetch<V2EntryJp /* | ApiError */>(`${path}/entries/${wid}`, { method: 'GET' })
 
+    const edit = (wid: V2EntryJp['wid'], body: CreateArticleJpn) =>
+      fetch<ApiError>(`${path}/entries/${wid}`, { method: 'POST', body })
+
     const source = (wid: V2EntryJp['wid']) =>
       fetch<CreateArticleJpn /* | ApiError */>(`${path}/entries/${wid}/txt`, { method: 'GET' })
 
@@ -21,6 +24,6 @@ export function useJpnArticles() {
     const search = (query: string, limit: number, offset: number) =>
       fetch<JpnSearchResponse>(`search`, { method: 'POST', body: { query, limit, offset } })
 
-    return { get, source, preview, create, search }
+    return { get, edit, source, preview, create, search }
   })
 }

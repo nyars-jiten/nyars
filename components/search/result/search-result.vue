@@ -206,7 +206,7 @@ const active = computed(() => wid === props.article.wid)
                 <Icon :name="status.path" />
 
                 <span class="text-xs uppercase">
-                  {{ status.key }}
+                  {{ t(`pages.search.status.${status.key}`) }}
                 </span>
               </span>
             </span>
