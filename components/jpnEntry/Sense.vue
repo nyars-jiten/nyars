@@ -15,40 +15,42 @@ const miscTagsLine = computed(() => {
     .concat(props.sense.loanSources.map(ls => `${ls.lang}. ${ls.word}`))
   if (tags.length === 0)
     return ''
-  return `(${tags.join(', ')})`
+  return `— ${tags.join(', ')}`
 })
 </script>
 
 <template>
   <div class="space-y-2">
     <div class="space-x-2">
-      <span v-if="ix !== ''" class="min-w-[30px] text-center text-ns-gray-400">
+      <span v-if="ix !== ''" class="min-w-[30px] text-center align-top text-ns-gray-400">
         {{ ix }}
       </span>
 
-      <span v-for="(tag, i) of sense.fieldTags" :key="i" class="italic text-green-600">
-        <span class="group relative cursor-pointer after:content-[\',\'] last:after:content-none">
-          {{ tag.engShort }}
+      <div class="inline-block w-11/12">
+        <span v-for="(tag, i) of sense.fieldTags" :key="i" class="italic text-green-600">
+          <span class="group relative cursor-pointer after:content-[\',\'] last:after:content-none">
+            {{ tag.ruShort }}
 
-          <UiTooltip>
-            {{ tag.ru }}
+            <UiTooltip>
+              {{ tag.ru }}
+            </UiTooltip>
+          </span>
+        </span>
+
+        <Content :data="sense.content" />
+
+        <span class="ml-1 space-x-2 text-base italic text-gray-500">
+          {{ miscTagsLine }}
+        </span>
+        <span v-if="sense.extRefs.length > 0" class="group relative cursor-pointer align-top text-xs text-ns-500 underline decoration-dotted underline-offset-4">
+          [*]
+          <UiTooltip class="text-base text-ns-gray-400">
+            <span v-for="(extRef, extRefIx) in sense.extRefs" :key="extRefIx">
+              {{ extRef.target }}: {{ extRef.value }}
+            </span>
           </UiTooltip>
         </span>
-      </span>
-
-      <Content :data="sense.content" />
-
-      <span class="space-x-2 text-sm italic text-gray-500">
-        {{ miscTagsLine }}
-      </span>
-      <span v-if="sense.extRefs.length > 0" class="group relative cursor-pointer align-top text-xs text-ns-500 underline decoration-dotted underline-offset-4">
-        [*]
-        <UiTooltip class="text-base text-ns-gray-400">
-          <span v-for="(extRef, extRefIx) in sense.extRefs" :key="extRefIx">
-            {{ extRef.target }}: {{ extRef.value }}
-          </span>
-        </UiTooltip>
-      </span>
+      </div>
     </div>
 
     <!--  -->

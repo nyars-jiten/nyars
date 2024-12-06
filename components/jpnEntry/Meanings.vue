@@ -10,11 +10,11 @@ const isPreview = false
 <template>
   <div class="space-y-4">
     <div v-for="(meaning, meaningIndex) of meanings" :key="meaningIndex">
-      <div v-show="meanings.length > 1 || !isPreview" class="mb-2 border-b border-ns-gray-200 pb-2 pl-2 text-sm dark:border-ns-gray-700">
+      <div v-show="meanings.length > 1 || !isPreview" class=" border-ns-gray-200 pl-4 text-sm italic text-green-600 dark:border-ns-gray-700">
         <span
           v-for="tagPos of meaning.tags"
           :key="tagPos.eng"
-          class="group relative pl-1 font-bold uppercase after:content-[','] first:pl-0 last:after:content-none"
+          class="group relative pl-1 after:content-[','] first:pl-0 last:after:content-none"
         >
           {{ tagPos.ruShort }}
 
@@ -36,11 +36,13 @@ const isPreview = false
 
         <div v-if="meaning.note.length > 0" class="flex flex-col">
           <div class="flex">
-            <span class="min-w-[30px] text-center text-ns-gray-400">
+            <span class="min-w-[30px] text-center align-top text-ns-gray-400">
               ※
             </span>
 
-            <Content :data="meaning.note" />
+            <div class="inline-block w-11/12">
+              <Content :data="meaning.note" />
+            </div>
           </div>
         </div>
       </div>
