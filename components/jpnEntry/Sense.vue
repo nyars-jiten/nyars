@@ -29,8 +29,8 @@ const miscTagsLine = computed(() => {
       <div class="inline-block w-11/12">
         <span v-if="sense.fieldTags.length > 0" class="space-x-2 pr-2">
           <template v-for="(tag, i) of sense.fieldTags" :key="i">
-            <span class="group relative cursor-pointer bg-green-700 text-sm px-1 rounded-md inline-flex leading-none py-0.5 shadow-md border border-neutral-800">
-              {{ tag.ruShort }}
+            <span class="group relative cursor-pointer rounded-sm uppercase leading-none text-xs bg-green-900 p-0.5 px-1">
+              {{ tag.ruShort.replaceAll('.', '') }}
 
               <UiTooltip>
                 {{ tag.ru }}

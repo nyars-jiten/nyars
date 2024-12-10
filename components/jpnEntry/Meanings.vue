@@ -10,18 +10,18 @@ const isPreview = false
 <template>
   <div class="space-y-4">
     <div v-for="(meaning, meaningIndex) of meanings" :key="meaningIndex">
-      <div v-show="meanings.length > 1 || !isPreview" class=" border-ns-gray-200 pl-4 text-sm italic text-green-600 dark:border-ns-gray-700">
-        <span
+      <div v-show="meanings.length > 1 || !isPreview" class="space-x-2">
+        <small
           v-for="tagPos of meaning.tags"
           :key="tagPos.eng"
-          class="group relative pl-1 after:content-[','] first:pl-0 last:after:content-none"
+          class="group relative cursor-pointer rounded-sm uppercase leading-none text-xs bg-lime-900 p-0.5 px-1"
         >
-          {{ tagPos.ruShort }}
+          {{ tagPos.ruShort.replaceAll('.', '') }}
 
           <UiTooltip>
             {{ tagPos.ru }}
           </UiTooltip>
-        </span>
+        </small>
       </div>
 
       <div class="w-11/12 space-y-2">
