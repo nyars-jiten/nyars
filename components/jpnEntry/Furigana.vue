@@ -6,11 +6,14 @@ interface Props {
   preview?: boolean
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
+
+// TODO: заменить true на проверку N-тегов, что они есть
+const sidebar = computed(() => props.furigana.tags.length > 0 || true)
 </script>
 
 <template>
-  <span class="flex">
+  <span class="flex gap-1">
     <span class="flex flex-col items-center">
       <span>
         <span v-for="(pair, i) of furigana.pairs" :key="i" :class="{ 'bg-teal-800': furigana.isMarked }">
@@ -20,16 +23,22 @@ defineProps<Props>()
           </span>
         </span>
       </span>
+
       <span v-if="!preview" class="block text-sm text-gray-500">{{ furigana.transcription.rus }}</span>
       <span v-if="!preview && furigana.freq !== 0 && furigana.freq !== 100" class="block text-xs text-gray-500">{{ furigana.freq }}%</span>
     </span>
-    <span class="space-x-2">
+
+    <span class="inline-flex items-baseline gap-2" v-show="sidebar">
       <small
         v-for="(tag, tagIndex) of furigana.tags"
         :key="tagIndex"
         class="inline align-text-top text-sm italic text-fuchsia-700"
       >
         {{ tag.engShort }}
+      </small>
+
+      <small class="bg-orange-400 w-fit h-fit text-xs leading-none p-0.5 rounded-sm text-neutral-900 font-bold uppercase">
+        n5
       </small>
     </span>
   </span>

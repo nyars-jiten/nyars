@@ -27,15 +27,17 @@ const miscTagsLine = computed(() => {
       </span>
 
       <div class="inline-block w-11/12">
-        <span v-for="(tag, i) of sense.fieldTags" :key="i" class="italic text-green-600">
-          <span class="group relative cursor-pointer after:content-[\',\'] last:after:content-none">
-            {{ tag.ruShort }}
+        <span v-if="sense.fieldTags.length > 0" class="space-x-2 pr-2">
+          <template v-for="(tag, i) of sense.fieldTags" :key="i">
+            <span class="group relative cursor-pointer bg-green-700 text-sm px-1 rounded-md inline-flex leading-none py-0.5 shadow-md border border-neutral-800">
+              {{ tag.ruShort }}
 
-            <UiTooltip>
-              {{ tag.ru }}
-            </UiTooltip>
-          </span>
-        </span>
+              <UiTooltip>
+                {{ tag.ru }}
+              </UiTooltip>
+            </span>
+          </template>
+        </span> 
 
         <Content :data="sense.content" />
 
