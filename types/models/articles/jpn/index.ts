@@ -33,8 +33,10 @@ export interface V2EntryJp {
 
 export interface Furigana {
   pairs: V2FuriganaPair[]
+  transcription: V2Transcription
   tags: V2Tag[]
   isMarked: boolean
+  freq: number
 }
 
 export interface V2Status {

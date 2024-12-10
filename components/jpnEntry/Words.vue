@@ -8,16 +8,13 @@ defineProps<Props>()
 
 <template>
   <div class="flex cursor-text flex-col items-start gap-3 pl-4">
-    <!-- TODO: bruh -->
     <div class="flex flex-col hyphens-auto">
-      <div
-        class="text-2xl"
-      >
-        <ul class="inline  dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
+      <div class="text-2xl">
+        <ul class=" dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
           <li
             v-for="(furigana, fI) of jpnEntry.furigana"
             :key="fI"
-            class="inline-flex flex-wrap items-baseline before:text-ns-gray-200 after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
+            class="inline-flex items-baseline before:text-ns-gray-200 after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
           >
             <Furigana :furigana="furigana" />
           </li>
@@ -75,6 +72,6 @@ defineProps<Props>()
       <!-- </div> -->
     </div>
 
-    <Tags :tags="jpnEntry.tags" />
+    <!-- <Tags :tags="jpnEntry.tags" /> -->
   </div>
 </template>
