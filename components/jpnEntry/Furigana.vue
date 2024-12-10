@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Furigana } from '~/types/models/articles/jpn'
+import type { Furigana, V2Tag } from '~/types/models/articles/jpn'
 
 interface Props {
   furigana: Furigana
@@ -10,6 +10,20 @@ const props = defineProps<Props>()
 
 // TODO: заменить true на проверку N-тегов, что они есть
 const sidebar = computed(() => props.furigana.tags.length > 0 || true)
+
+const tags = {
+  'ik': '🗿'
+} as Record<V2Tag['engShort'], string>;
+
+function tagOf(value: keyof typeof tags) {
+  const result = tags[value.toLocaleLowerCase()];
+  if (!result) {
+    return value
+  }
+
+  return result
+}
+
 </script>
 
 <template>
@@ -28,13 +42,13 @@ const sidebar = computed(() => props.furigana.tags.length > 0 || true)
       <span v-if="!preview && furigana.freq !== 0 && furigana.freq !== 100" class="block text-xs text-gray-500">{{ furigana.freq }}%</span>
     </span>
 
-    <span class="inline-flex items-baseline gap-2" v-show="sidebar">
+    <span class="inline-flex items-baseline gap-2 py-1" v-show="sidebar">
       <small
         v-for="(tag, tagIndex) of furigana.tags"
         :key="tagIndex"
-        class="inline align-text-top text-sm italic text-fuchsia-700"
+        class="inline align-text-top text-sm text-fuchsia-700"
       >
-        {{ tag.engShort }}
+        {{ tagOf(tag.engShort) }}
       </small>
 
       <small class="bg-orange-400 w-fit h-fit text-xs leading-none p-0.5 rounded-sm text-neutral-900 font-bold uppercase">
