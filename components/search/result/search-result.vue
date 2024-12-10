@@ -149,10 +149,33 @@ const active = computed(() => wid === props.article.wid)
       <template #default>
         <section class="space-y-2">
           <header class="text-2xl">
-            <span v-for="furigana, wIndex of article.furigana.toSorted((a, b) => a.isMarked ? -1 : 1)" :key="wIndex" class="after:content-['・'] last:after:content-none dark:after:text-gray-700">
-              <Furigana :furigana="furigana" />
-            </span>
+            <ul class="inline  dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
+              <li
+                v-for="furigana, wIndex of article.furigana"
+                :key="wIndex"
+                class="inline-flex flex-wrap items-baseline before:text-ns-gray-200 after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
+              >
+                <Furigana :furigana="furigana" :preview="true" />
+              </li>
+            </ul>
           </header>
+
+          <div v-if="article.frequency > 0" class="flex flex-wrap items-center gap-2">
+            <p class="flex overflow-hidden whitespace-nowrap rounded-md border text-xs leading-6 hover:opacity-75">
+              <span class="px-2 font-medium uppercase">
+                <MiscFreq :value="article.frequency" />
+              </span>
+            </p>
+            <span class="inline-flex flex-wrap items-center gap-2">
+              <span v-for="status in statusIconList" :key="status.key" class="inline-flex items-center gap-2" :class="statusStyle({ text: true, [status.key]: true })">
+                <Icon class="size-6" :name="status.path" />
+
+                <!-- <span class="text-xs uppercase">
+                  {{ t(`pages.search.status.${status.key}`) }}
+                </span> -->
+              </span>
+            </span>
+          </div>
 
           <div class="grid grid-cols-[auto_1fr] gap-x-2">
             <template v-for="sense, sIndex of shortenedSenses.data" :key="sIndex">
@@ -163,7 +186,7 @@ const active = computed(() => wid === props.article.wid)
               <span>
                 <small v-for="(tag, i) of sense.fieldTags" :key="i" class="italic text-green-600">
                   <span class="group relative after:content-[\',\'] last:after:content-none">
-                    {{ tag.engShort }}
+                    {{ tag.ruShort }}
 
                     <div class="invisible absolute bottom-full left-1/2 z-20 -translate-x-1/2 pb-1 group-hover:visible">
                       <div class="flex items-center justify-center rounded-md bg-neutral-800/80 px-3 py-1.5 leading-4 shadow-md outline outline-1 outline-neutral-700 backdrop-blur-md">
@@ -185,34 +208,6 @@ const active = computed(() => wid === props.article.wid)
               <span>{{ t('components.searchGroup.general.hiddenSenses', shortenedSenses.hidden) }}</span>
             </small>
           </div>
-        </section>
-      </template>
-
-      <template #footer>
-        <section class="flex w-full flex-wrap items-center justify-between gap-2 px-2 leading-none">
-          <span class="inline-flex flex-wrap items-center gap-2 text-xl">
-            <span class="inline-flex flex-wrap items-center gap-4">
-              <span v-for="tag in article.tags" :key="tag.eng" class="rounded-md text-xs uppercase text-violet-300 underline underline-offset-4">
-                {{ tag.engShort }}
-              </span>
-            </span>
-
-            <!-- <span class="text-neutral-700">
-              ⌁
-            </span> -->
-
-            <span class="inline-flex flex-wrap items-center gap-2">
-              <span v-for="status in statusIconList" :key="status.key" class="inline-flex items-center gap-2" :class="statusStyle({ text: true, [status.key]: true })">
-                <Icon :name="status.path" />
-
-                <span class="text-xs uppercase">
-                  {{ t(`pages.search.status.${status.key}`) }}
-                </span>
-              </span>
-            </span>
-          </span>
-
-          <MiscFreq :value="article.frequency" />
         </section>
       </template>
     </UiBlock>

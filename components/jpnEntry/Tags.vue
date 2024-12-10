@@ -22,7 +22,7 @@ const tags: Tag[] = props.tags.map((fullTag) => {
 </script>
 
 <template>
-  <div v-if="tags.length > 0" class="flex flex-wrap items-start justify-end gap-2">
+  <div v-if="tags.length > 0" class="flex flex-wrap items-start gap-2">
     <p
       v-for="tag of tags"
       :key="tag.full"
