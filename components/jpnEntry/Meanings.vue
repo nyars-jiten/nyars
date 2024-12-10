@@ -11,17 +11,13 @@ const isPreview = false
   <div class="space-y-4">
     <div v-for="(meaning, meaningIndex) of meanings" :key="meaningIndex">
       <div v-show="meanings.length > 1 || !isPreview" class="space-x-2">
-        <small
-          v-for="tagPos of meaning.tags"
-          :key="tagPos.eng"
-          class="group relative cursor-pointer rounded-sm uppercase leading-none text-xs bg-lime-900 p-0.5 px-1"
-        >
+        <UiTag kind="meaning" class="group relative cursor-pointer" v-for="tagPos of meaning.tags" :key="tagPos.eng">
           {{ tagPos.ruShort.replaceAll('.', '') }}
 
           <UiTooltip>
             {{ tagPos.ru }}
           </UiTooltip>
-        </small>
+        </UiTag>
       </div>
 
       <div class="w-11/12 space-y-2">

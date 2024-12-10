@@ -29,13 +29,13 @@ const miscTagsLine = computed(() => {
       <div class="inline-block w-11/12">
         <span v-if="sense.fieldTags.length > 0" class="space-x-2 pr-2">
           <template v-for="(tag, i) of sense.fieldTags" :key="i">
-            <span class="group relative cursor-pointer rounded-sm uppercase leading-none text-xs bg-green-900 p-0.5 px-1">
+            <UiTag kind="sense" class="group relative cursor-pointer">
               {{ tag.ruShort.replaceAll('.', '') }}
 
               <UiTooltip>
                 {{ tag.ru }}
               </UiTooltip>
-            </span>
+            </UiTag>
           </template>
         </span> 
 
