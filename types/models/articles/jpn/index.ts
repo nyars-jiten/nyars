@@ -74,6 +74,7 @@ export interface V2Reading {
 export interface V2Pitch {
   pitchNum: number
   pitchMap: V2PitchPair[]
+  audio: string
 }
 
 export interface V2PitchPair {

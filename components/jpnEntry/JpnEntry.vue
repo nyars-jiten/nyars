@@ -17,6 +17,7 @@ defineProps<Props>()
     <div>
       <div v-for="(reading, ri) in jpnEntry.words.flatMap(word => word.readings)" :key="ri">
         <div v-for="(pitch, pi) in reading.pitch" :key="pi">
+          <span v-if="pitch.audio.length > 0">*</span>
           <span
             v-for="(accent, ai) in pitch.pitchMap"
             :key="ai"
