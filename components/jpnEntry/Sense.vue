@@ -22,12 +22,12 @@ const miscTagsLine = computed(() => {
 <template>
   <div class="space-y-2">
     <div class="space-x-2">
-      <span v-if="ix !== ''" class="min-w-[30px] text-center align-top text-ns-gray-400">
+      <span v-if="ix !== ''" class="min-w-[30px] text-center align-top text-violet-300">
         {{ ix }}
       </span>
 
       <div class="inline-block w-11/12">
-        <span v-if="sense.fieldTags.length > 0" class="space-x-2 pr-2">
+        <!-- <span v-if="sense.fieldTags.length > 0" class="space-x-2 pr-2">
           <template v-for="(tag, i) of sense.fieldTags" :key="i">
             <UiTag kind="sense" class="group relative cursor-pointer">
               {{ tag.ruShort.replaceAll('.', '') }}
@@ -37,7 +37,18 @@ const miscTagsLine = computed(() => {
               </UiTooltip>
             </UiTag>
           </template>
-        </span> 
+        </span> -->
+        <small v-for="(tag, i) of sense.fieldTags" :key="i" class="pr-1 italic text-green-600">
+          <span class="group relative after:content-[\',\'] last:after:content-none">
+            {{ tag.ruShort }}
+
+            <div class="invisible absolute bottom-full left-1/2 z-20 -translate-x-1/2 pb-1 group-hover:visible">
+              <div class="flex items-center justify-center rounded-md bg-neutral-800/80 px-3 py-1.5 leading-4 shadow-md outline outline-1 outline-neutral-700 backdrop-blur-md">
+                {{ tag.ru }}
+              </div>
+            </div>
+          </span>
+        </small>
 
         <Content :data="sense.content" />
 

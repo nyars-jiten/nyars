@@ -3,15 +3,14 @@ import { tv, type VariantProps } from 'tailwind-variants'
 
 defineProps<Props>()
 
-
 const styles = tv({
-  base: 'rounded-sm uppercase leading-none text-xs p-0.5 px-1 inline',
+  base: 'inline rounded-sm p-0.5 px-1 uppercase leading-none',
   variants: {
     kind: {
-      'meaning': 'bg-lime-900',
-      'sense': 'bg-green-900',
-      'freq': 'bg-cyan-900'
-    }
+      meaning: 'bg-lime-900 text-xs',
+      sense: 'bg-green-900 text-xs',
+      freq: 'bg-cyan-900 text-xs',
+    },
   },
 })
 
@@ -21,7 +20,7 @@ interface Props {
 </script>
 
 <template>
-    <section :class="styles({ kind })">
-      <slot />
-    </section>
+  <section :class="styles({ kind })">
+    <slot />
+  </section>
 </template>

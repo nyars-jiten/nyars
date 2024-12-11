@@ -12,18 +12,17 @@ const props = defineProps<Props>()
 const sidebar = computed(() => props.furigana.tags.length > 0 || true)
 
 const tags = {
-  'ik': '🗿'
-} as Record<V2Tag['engShort'], string>;
+  ik: '🗿',
+} as Record<V2Tag['engShort'], string>
 
 function tagOf(value: keyof typeof tags) {
-  const result = tags[value.toLocaleLowerCase()];
+  const result = tags[value.toLocaleLowerCase()]
   if (!result) {
     return value
   }
 
   return result
 }
-
 </script>
 
 <template>
@@ -42,7 +41,7 @@ function tagOf(value: keyof typeof tags) {
       <span v-if="!preview && furigana.freq !== 0 && furigana.freq !== 100" class="block text-xs text-gray-500">{{ furigana.freq }}%</span>
     </span>
 
-    <span class="inline-flex items-baseline gap-2 py-1" v-show="sidebar">
+    <span v-show="sidebar" class="inline-flex items-baseline gap-2 py-1">
       <small
         v-for="(tag, tagIndex) of furigana.tags"
         :key="tagIndex"
@@ -51,9 +50,9 @@ function tagOf(value: keyof typeof tags) {
         {{ tagOf(tag.engShort) }}
       </small>
 
-      <small class="bg-orange-400 w-fit h-fit text-xs leading-none p-0.5 rounded-sm text-neutral-900 font-bold uppercase">
+      <!-- <small class="bg-orange-400 w-fit h-fit text-xs leading-none p-0.5 rounded-sm text-neutral-900 font-bold uppercase">
         n5
-      </small>
+      </small> -->
     </span>
   </span>
 </template>
