@@ -24,9 +24,8 @@ defineProps<Props>()
         v-for="(word, wordIndex) of jpnEntry.words"
         :key="wordIndex"
         class="text-2xl"
-      > -->
-
-      <!-- <ul v-show="word.writings?.length" class="inline before:-ml-3 before:text-ns-gray-200 before:content-['【'] after:text-ns-gray-200 after:content-['】'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
+      >
+        <ul v-show="word.writings?.length" class="inline before:-ml-3 before:text-ns-gray-200 before:content-['【'] after:text-ns-gray-200 after:content-['】'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
           <li
             v-for="(writing, writingIndex) of word.writings"
             :key="writingIndex"
@@ -46,8 +45,8 @@ defineProps<Props>()
               </small>
             </span>
           </li>
-        </ul> -->
-      <!--
+        </ul>
+
         <ul class="inline">
           <li
             v-for="(reading, readingIndex) of word.readings"
@@ -68,8 +67,8 @@ defineProps<Props>()
               </small>
             </span>
           </li>
-        </ul> -->
-      <!-- </div> -->
+        </ul>
+      </div> -->
     </div>
 
     <!-- <Tags :tags="jpnEntry.tags" /> -->

@@ -164,7 +164,7 @@ const active = computed(() => wid === props.article.wid)
             <UiTag kind="freq">
               <MiscFreq :value="article.frequency" />
             </UiTag>
-            
+
             <span class="inline-flex flex-wrap items-center gap-2">
               <span v-for="status in statusIconList" :key="status.key" class="inline-flex items-center gap-2" :class="statusStyle({ text: true, [status.key]: true })">
                 <Icon class="size-6" :name="status.path" />

@@ -11,18 +11,13 @@ const props = defineProps<Props>()
 // TODO: заменить true на проверку N-тегов, что они есть
 const sidebar = computed(() => props.furigana.tags.length > 0 || true)
 
-const tags = {
-  ik: '🗿',
-} as Record<V2Tag['engShort'], string>
-
-function tagOf(value: keyof typeof tags) {
-  const result = tags[value.toLocaleLowerCase()]
-  if (!result) {
-    return value
-  }
-
-  return result
-}
+const tagsMap = {
+  'jlpt-n5': { name: 'n5', class: 'bg-green-400' },
+  'jlpt-n4': { name: 'n4', class: 'bg-lime-400' },
+  'jlpt-n3': { name: 'n3', class: 'bg-amber-400' },
+  'jlpt-n2': { name: 'n2', class: 'bg-orange-400' },
+  'jlpt-n1': { name: 'n1', class: 'bg-red-400' },
+} as Record<V2Tag['engShort'], { name: string, class: string }>
 </script>
 
 <template>
@@ -42,17 +37,24 @@ function tagOf(value: keyof typeof tags) {
     </span>
 
     <span v-show="sidebar" class="inline-flex items-baseline gap-2 py-1">
+
+      <!-- Tags that doesn't exist in map -->
       <small
-        v-for="(tag, tagIndex) of furigana.tags"
+        v-for="(tag, tagIndex) of furigana.tags.filter(tag => !tagsMap[tag.engShort])"
         :key="tagIndex"
         class="inline align-text-top text-sm text-fuchsia-700"
       >
-        {{ tagOf(tag.engShort) }}
+        {{ tag.engShort }}
       </small>
 
-      <!-- <small class="bg-orange-400 w-fit h-fit text-xs leading-none p-0.5 rounded-sm text-neutral-900 font-bold uppercase">
-        n5
-      </small> -->
+      <small
+        v-for="(tag, tagIndex) of furigana.tags.filter(tag => tagsMap[tag.engShort])"
+        :key="tagIndex"
+        class="size-fit rounded-sm p-0.5 text-xs font-bold uppercase leading-none text-neutral-900"
+        :class="tagsMap[tag.engShort].class"
+      >
+        {{ tagsMap[tag.engShort].name }}
+      </small>
     </span>
   </span>
 </template>

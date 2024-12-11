@@ -68,6 +68,17 @@ export interface V2Reading {
   transcription?: V2Transcription
   tags: V2Tag[]
   isMarked: boolean
+  pitch: V2Pitch[]
+}
+
+export interface V2Pitch {
+  pitchNum: number
+  pitchMap: V2PitchPair[]
+}
+
+export interface V2PitchPair {
+  m: string
+  t: number
 }
 
 export interface V2Transcription {
