@@ -17,6 +17,7 @@ const tagsMap = {
   'jlpt-n3': { name: 'n3', class: 'bg-amber-400' },
   'jlpt-n2': { name: 'n2', class: 'bg-orange-400' },
   'jlpt-n1': { name: 'n1', class: 'bg-red-400' },
+  // 'iK': { name: '🡳', class: 'text-violet-400 p-0' },
 } as Record<V2Tag['engShort'], { name: string, class: string }>
 </script>
 
@@ -36,24 +37,34 @@ const tagsMap = {
       <span v-if="!preview && furigana.freq !== 0 && furigana.freq !== 100" class="block text-xs text-gray-500">{{ furigana.freq }}%</span>
     </span>
 
-    <span v-show="sidebar" class="inline-flex items-baseline gap-2 py-1">
+    <span v-show="sidebar" class="inline-flex items-baseline gap-1.5 py-1">
 
       <!-- Tags that doesn't exist in map -->
       <small
         v-for="(tag, tagIndex) of furigana.tags.filter(tag => !tagsMap[tag.engShort])"
         :key="tagIndex"
-        class="inline align-text-top text-sm text-fuchsia-700"
+        class="group relative size-fit cursor-pointer rounded-sm bg-fuchsia-400 p-0.5 text-xs leading-none"
       >
-        {{ tag.engShort }}
+        <span class="font-bold uppercase text-neutral-900">
+          {{ tag.engShort }}
+        </span>
+        <UiTooltip>
+          {{ tag.ru }}
+        </UiTooltip>
       </small>
 
       <small
         v-for="(tag, tagIndex) of furigana.tags.filter(tag => tagsMap[tag.engShort])"
         :key="tagIndex"
-        class="size-fit rounded-sm p-0.5 text-xs font-bold uppercase leading-none text-neutral-900"
+        class="group relative size-fit cursor-pointer rounded-sm p-0.5 text-xs leading-none "
         :class="tagsMap[tag.engShort].class"
       >
-        {{ tagsMap[tag.engShort].name }}
+        <span class="font-bold uppercase text-neutral-900">
+          {{ tagsMap[tag.engShort].name }}
+        </span>
+        <UiTooltip>
+          {{ tag.ru }}
+        </UiTooltip>
       </small>
     </span>
   </span>

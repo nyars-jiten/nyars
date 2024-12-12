@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { tv } from 'tailwind-variants'
 
+const props = defineProps<Props>()
+
+definePageMeta({
+  name: 'search',
+  path: '/search',
+})
+
 interface Props {
   article: V2EntryJp
 }
-
-const props = defineProps<Props>()
 
 interface ShortenedSenses {
   data: V2Sense[]
