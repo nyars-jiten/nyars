@@ -3,7 +3,7 @@
     <Header />
     <div class="px-2">
       <section class="container mx-auto my-10 flex max-w-4xl flex-col gap-10 md:leading-relaxed">
-        <SearchInput />
+        <!-- <SearchInput /> -->
         <slot />
       </section>
     </div>

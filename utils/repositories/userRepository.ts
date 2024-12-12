@@ -39,9 +39,13 @@ export function userRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
     return fetch(`${path}/signOut`)
   }
 
-  const serverGetCurrentUser = () => {
-    return fetch<User>(`${path}/current`).catch(() => null)
+  const clientGetUser = (username: string) => {
+    return fetch<User>(`${path}/profile/${username}`).catch(() => null)
   }
 
-  return { clientLogin, clientRegister, clientLogout, serverGetCurrentUser }
+  const serverGetCurrentUser = () => {
+    return fetch<User>(`${path}/me`).catch(() => null)
+  }
+
+  return { clientLogin, clientRegister, clientLogout, clientGetUser, serverGetCurrentUser }
 }

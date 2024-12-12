@@ -32,7 +32,7 @@ onClickOutside(userMenuRef, () => toggleUserMenu(false))
 
           <section v-if="userMenu" class="absolute right-full top-0 pr-2">
             <div class="space-y-2 overflow-hidden rounded-md bg-zinc-900 leading-none outline outline-1 outline-zinc-800">
-              <NuxtLink :to="{ name: 'editor' }" :class="styles()" @click="toggleUserMenu()">
+              <NuxtLink :to="{ name: 'user-profile', params: { username: user.username } }" :class="styles()" @click="toggleUserMenu()">
                 profile
               </NuxtLink>
 

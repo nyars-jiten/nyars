@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  layout: 'desktop',
+})
+
 const { t } = useI18n()
 </script>
 
