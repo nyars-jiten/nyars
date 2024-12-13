@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { EditorEntryJp, V2EntryJp } from '~/types/models/articles/jpn'
+
 definePageMeta({
   layout: 'desktop',
   name: 'editor',
@@ -50,23 +52,28 @@ const preview = useAsyncData('changes-preview', () => api.preview({
   reading: reading.value,
   writing: writing.value,
 }), {
-  default: () => ({
-    wid: '0000',
-    status: {
-      isReviewed: false,
-      isUnconfirmed: false,
-      isArchaic: false,
-      isDialect: false,
-      isProper: false,
-    },
-    externalEntry: '',
-    title: '',
-    tags: [],
-    words: [],
-    meanings: [],
-    furigana: [],
-    frequency: 0,
-  } as V2EntryJp),
+  default: () => (
+    {
+      entry: {
+        wid: '0000',
+        status: {
+          isReviewed: false,
+          isUnconfirmed: false,
+          isArchaic: false,
+          isDialect: false,
+          isProper: false,
+        },
+        externalEntry: '',
+        title: '',
+        tags: [],
+        words: [],
+        meanings: [],
+        furigana: [],
+        frequency: 0,
+      } as V2EntryJp,
+      warnings: [],
+    } as EditorEntryJp
+  ),
 })
 
 // const changes = computed(() => 'code' in preview.data.value ? null : preview.data.value)
@@ -282,7 +289,7 @@ const [state, toggle] = useToggle()
         {{ t('pages.editor.preview') }}
       </h1>
 
-      <JpnEntry v-if="preview.data.value" :jpn-entry="preview.data.value" />
+      <JpnEntry v-if="preview.data.value" :jpn-entry="preview.data.value.entry" />
       <!--
       <i v-else class="block text-neutral-800">
         Пусто тут как-то...
@@ -296,7 +303,7 @@ const [state, toggle] = useToggle()
       </h1>
 
       <UiBlock>
-        <JpnEntry v-if="preview.data.value" :jpn-entry="preview.data.value" />
+        <JpnEntry v-if="preview.data.value" :jpn-entry="preview.data.value.entry" />
       </UiBlock>
     </span>
   </section>

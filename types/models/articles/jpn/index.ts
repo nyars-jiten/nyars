@@ -19,6 +19,11 @@ export interface JpnSearchResponse {
   result: V2EntryJp[]
 }
 
+export interface EditorEntryJp {
+  entry: V2EntryJp
+  warnings: string[]
+}
+
 export interface V2EntryJp {
   wid: string
   status: V2Status

@@ -16,7 +16,7 @@ export function useJpnArticles() {
       fetch<CreateArticleJpn /* | ApiError */>(`${path}/entries/${wid}/txt`, { method: 'GET' })
 
     const preview = (body: CreateArticleJpn) =>
-      fetch<V2EntryJp/* | ApiError */>(`${path}/txt-to-entry`, { method: 'POST', body })
+      fetch<EditorEntryJp /* | ApiError */>(`${path}/txt-to-entry`, { method: 'POST', body })
 
     const create = (body: CreateArticleJpn) =>
       fetch<ApiError>(`${path}/entries`, { method: 'POST', body })

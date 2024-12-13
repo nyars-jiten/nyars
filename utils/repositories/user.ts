@@ -10,7 +10,7 @@ export function useUser() {
       // credentials: 'include',
       headers: useRequestHeaders(['cookie']),
     }), {
-    // server: false,
+      server: false,
     })
 
     return { current }
