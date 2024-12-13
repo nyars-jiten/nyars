@@ -3,11 +3,6 @@ import { tv } from 'tailwind-variants'
 
 const props = defineProps<Props>()
 
-definePageMeta({
-  name: 'search',
-  path: '/search',
-})
-
 interface Props {
   article: V2EntryJp
 }

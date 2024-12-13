@@ -7,6 +7,8 @@ const api = useJpnArticles()
 
 definePageMeta({
   layout: 'desktop',
+  name: 'search',
+  path: '/search',
 })
 
 const { data } = useAsyncData('search-request', () => api.search(request.value, 0, 0), {
