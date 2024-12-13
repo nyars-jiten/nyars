@@ -24,10 +24,8 @@ const styles = tv({
       <div class="space-x-2">
         <template v-for="(reading, ri) in jpnEntry.words.flatMap(word => word.readings)" :key="ri">
           <template v-for="(pitch, pi) in reading.pitch" :key="pi">
-            <!-- v-if="pitch.audio.length > 0"  -->
-
             <span class="space-x-1 py-1 px-1.5 rounded-md bg-neutral-800/20 shadow-md inline-flex items-center">
-              <button type="button" :class="styles()">
+              <button v-if="pitch.audio.length > 0" type="button" :class="styles()">
                 <Icon name="ic:baseline-volume-up" />
               </button>
 

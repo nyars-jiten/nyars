@@ -21,12 +21,12 @@ const styles = tv({
         <span>{{ t('components.header.navigation[0].pages.edits') }}</span>
       </NuxtLink>
 
-      <NuxtLink :to="{ name: 'Statistics' }" :class="styles()">
+      <NuxtLink to="/dev" :class="styles()">
         <Icon size="1.5rem" name="ic:baseline-auto-graph" />
         <span>{{ t('components.header.navigation[0].pages.statistics') }}</span>
       </NuxtLink>
 
-      <NuxtLink to="/" :class="styles()">
+      <NuxtLink to="/dev" :class="styles()">
         <Icon size="1.5rem" name="ic:baseline-menu-book" />
         <span>{{ t('components.header.navigation[0].pages.documentation') }}</span>
       </NuxtLink>
@@ -47,7 +47,7 @@ const styles = tv({
         <span>{{ t('components.header.navigation[0].pages.github') }}</span>
       </NuxtLink>
 
-      <NuxtLink to="/" :class="styles()">
+      <NuxtLink to="/dev" :class="styles()">
         <Icon size="1.5rem" name="ic:baseline-download" />
         <span>{{ t('components.header.navigation[0].pages.download') }}</span>
       </NuxtLink>

@@ -5,7 +5,7 @@ export function useUser() {
   return useApi(<T>(fetch: $Fetch<T, NitroFetchRequest>) => {
     const path = '/users'
 
-    const current = () => useAsyncData(() => fetch</* ApiError | */ User>(`${path}/me`, {
+    const current = () => useAsyncData(() => fetch</* ApiError | */ CurrentUser>(`${path}/me`, {
       // method: 'GET',
       // credentials: 'include',
       headers: useRequestHeaders(['cookie']),

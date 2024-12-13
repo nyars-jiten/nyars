@@ -12,9 +12,27 @@ const { t } = useI18n()
 
 <template>
   <section class="m-2 flex flex-col gap-3">
+    <div>
+      <button v-if="useAccess(Access.Edits)" class="border rounded text-green-500">
+        Принять
+      </button>
+      <button v-if="useAccess(Access.Edits)" class="border rounded text-yellow-500">
+        Принять без смены статуса
+      </button>
+      <button v-if="useAccess(Access.Edits)" class="border rounded text-red-500">
+        Отклонить
+      </button>
+      <button class="border rounded text-blue-500">
+        Отредактировать
+      </button>
+      <button class="border rounded text-gray-500">
+        Инфо
+      </button>
+    </div>
     <div v-if="edit.comment.length > 0" class="select-text break-words border-l-2 border-ns-gray-200 pl-2 dark:border-ns-gray-700">
       {{ t('components.editGroup.changesPreview.comment') }} {{ edit.comment }}
     </div>
+
     <div :class="`grid grid-rows-1 gap-5 ${isTypeCreate ? 'sm:grid-cols-1' : 'sm:grid-cols-[1fr_auto_1fr]'} sm:gap-2 md:gap-4`">
       <div v-if="!isTypeCreate" class="select-text rounded-md border border-ns-gray-200 px-4 py-2 dark:border-ns-gray-600">
         <span

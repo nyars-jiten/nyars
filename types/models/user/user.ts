@@ -11,3 +11,8 @@ export interface User extends ShortUser {
   isAdmin: boolean
   createdAt: string
 }
+
+export interface CurrentUser extends User {
+  access: number
+  settings: string
+}
