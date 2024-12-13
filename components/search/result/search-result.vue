@@ -39,7 +39,8 @@ const shortenedSenses = computed(() => {
   return res
 })
 
-const wid = useRouteArticle()
+const route = useRoute()
+
 const request = useSearchRequest()
 
 const { t } = useI18n()
@@ -145,11 +146,11 @@ const border = computed(() => {
   return ''
 })
 
-const active = computed(() => wid === props.article.wid)
+const active = computed(() => route.query.wid === props.article.wid)
 </script>
 
 <template>
-  <NuxtLink :to="{ name: 'search', query: { q: request.request.value, wid: article.wid } }" class="w-full" :class="{ 'cursor-default': active }" @click="wid = article.wid">
+  <NuxtLink :to="{ name: 'search', query: { q: request.request.value, wid: article.wid } }" class="w-full" :class="{ 'cursor-default': active }">
     <UiBlock :hover="active === false" :class="border">
       <template #default>
         <section class="space-y-2">
