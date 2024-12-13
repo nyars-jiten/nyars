@@ -1,6 +1,11 @@
 export function useRouteArticle() {
   const route = useRoute()
-  return String(route.query.wid ?? '')
+  
+  if (typeof route.query.wid !== 'string') {
+    route.query.wid = ''
+  }
+
+  return route.query.wid
 }
 
 export const useSearchRequest = createGlobalState(() => {
