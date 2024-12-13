@@ -1,39 +1,60 @@
 <script setup lang="ts">
+import { tv } from 'tailwind-variants'
+
 interface Props {
   jpnEntry: V2EntryJp
 }
 
 defineProps<Props>()
+
+const styles = tv({
+  base: 'flex items-center justify-start rounded-md transition-colors text-xl hover:text-neutral-800',
+})
 </script>
 
 <template>
-  <article>
+  <article class="space-y-4">
     <!-- <div id="xxx" /> -->
     <!-- https://nuxt.com/docs/api/nuxt-config#router -->
     <!-- https://router.vuejs.org/api/interfaces/RouterOptions.html#scrollBehavior -->
 
     <Words :jpn-entry="jpnEntry" class="mb-2 border-b border-ns-gray-200 pb-2 dark:border-ns-gray-700" />
 
-    <div>
-      <div v-for="(reading, ri) in jpnEntry.words.flatMap(word => word.readings)" :key="ri">
-        <div v-for="(pitch, pi) in reading.pitch" :key="pi">
-          <span v-if="pitch.audio.length > 0">*</span>
-          <span
-            v-for="(accent, ai) in pitch.pitchMap"
-            :key="ai"
-            :class="{
-              'border-b': accent.t === 0 || accent.t === 2,
-              'border-t': accent.t === 1 || accent.t === 3,
-              'border-r': accent.t === 2 || accent.t === 3,
-            }"
-          >
-            {{ accent.m }}
-          </span>
-          [{{ pitch.pitchNum }}]
-        </div>
-      </div>
-    </div>
+    <div class="px-2 space-y-4">
+      <div class="space-x-2">
+        <template v-for="(reading, ri) in jpnEntry.words.flatMap(word => word.readings)" :key="ri">
+          <template v-for="(pitch, pi) in reading.pitch" :key="pi">
+            <!-- v-if="pitch.audio.length > 0"  -->
 
-    <Meanings :meanings="jpnEntry.meanings" class="px-2" />
+            <span class="space-x-1 py-1 px-1.5 rounded-md bg-neutral-800/20 shadow-md inline-flex items-center">
+              <button type="button" :class="styles()">
+                <Icon name="ic:baseline-volume-up" />
+              </button>
+
+              <span>
+                <span
+                  v-for="(accent, ai) in pitch.pitchMap"
+                  :key="ai"
+                  class="border-violet-300/50"
+                  :class="{
+                    'border-b-2 border-t-2 border-t-transparent': accent.t === 0 || accent.t === 2,
+                    'border-t-2 border-b-2 border-b-transparent': accent.t === 1 || accent.t === 3,
+                    'border-r-2': accent.t === 2 || accent.t === 3,
+                  }"
+                >
+                  {{ accent.m }}
+                </span>
+              </span>
+
+              <small class="bg-slate-700 px-1 leading-none py-0.5 rounded-sm shadow-md font-bold text-xs">
+                {{ pitch.pitchNum }}
+              </small>
+            </span>
+          </template>
+        </template>
+      </div>
+
+      <Meanings :meanings="jpnEntry.meanings" />
+    </div>
   </article>
 </template>

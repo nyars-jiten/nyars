@@ -4,7 +4,7 @@ import { tv } from 'tailwind-variants'
 const { t } = useI18n()
 
 const styles = tv({
-  base: 'flex items-center justify-start gap-4 rounded-md px-2 py-1.5 leading-none transition-colors hover:bg-zinc-800 hover:text-zinc-400 max-xl:p-2  max-xl:[&>span:nth-child(2)]:hidden',
+  base: 'flex items-center justify-start gap-4 rounded-md px-2 py-1.5 leading-none transition-colors hover:bg-zinc-800 hover:text-zinc-400 max-xl:p-2 max-xl:[&>span:nth-child(2)]:hidden',
 })
 </script>
 
