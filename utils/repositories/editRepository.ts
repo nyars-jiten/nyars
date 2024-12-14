@@ -23,5 +23,23 @@ export function editRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
     })
   }
 
-  return { getEdits, getEditsEntry }
+  const approveEdit = (editId: string) => {
+    return fetch<Edit>(`${path}/${editId}/approve`, {
+      method: 'POST',
+    })
+  }
+
+  const approveEditStatus = (editId: string) => {
+    return fetch<Edit>(`${path}/${editId}/approve?status=false`, {
+      method: 'POST',
+    })
+  }
+
+  const declineEdit = (editId: string) => {
+    return fetch<Edit>(`${path}/${editId}/decline`, {
+      method: 'POST',
+    })
+  }
+
+  return { getEdits, getEditsEntry, approveEdit, approveEditStatus, declineEdit }
 }

@@ -20,7 +20,7 @@ const { t } = useI18n()
 <template>
   <UiBlock class="group" :hover="true">
     <div class="space-y-4 overflow-hidden">
-      <div class="flex grow items-center gap-4">
+      <NuxtLink :to="{ name: 'user-profile', params: { username } }" class="flex grow items-center gap-4 cursor-pointer">
         <img
           class="inline-flex size-12 items-center justify-center rounded-full border border-neutral-800 object-center shadow-md transition-colors group-hover:border-neutral-700 group-hover:hover:border-neutral-600"
           :src="avatar"
@@ -42,7 +42,7 @@ const { t } = useI18n()
             </span>
           </span>
         </div>
-      </div>
+      </NuxtLink>
 
       <div class="grid grid-cols-2 gap-4">
         <div class="grid grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1 leading-none">

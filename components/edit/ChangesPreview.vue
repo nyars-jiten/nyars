@@ -6,6 +6,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const { userAccess, user } = storeToRefs(useUserStore())
+const { approveEdit, approveEditStatus, declineEdit } = useApi(editRepository)
 
 const isTypeCreate = computed(() => props.edit.type === EditType.Create)
 
@@ -15,25 +16,27 @@ const { t } = useI18n()
 <template>
   <section class="m-2 flex flex-col gap-3">
     <div>
-      <button v-if="userAccess.hasAccessEdits" class="border rounded text-green-500">
+      <button v-if="userAccess.hasAccessEdits" class="border rounded text-green-500" @click="approveEdit(edit.id)">
         <Icon size="1.5rem" name="ic:baseline-done-all" />
         Принять
       </button>
-      <button v-if="userAccess.hasAccessEdits" class="border rounded text-yellow-500">
+      <button v-if="userAccess.hasAccessEdits" class="border rounded text-yellow-500" @click="approveEditStatus(edit.id)">
         <Icon size="1.5rem" name="ic:baseline-done" />
         Принять без смены статуса
       </button>
-      <button v-if="userAccess.hasAccessEdits || user?.id === edit.author?.id" class="border rounded text-red-500">
+      <button v-if="userAccess.hasAccessEdits || (user && user.id === edit.author?.id)" class="border rounded text-red-500" @click="declineEdit(edit.id)">
         <Icon size="1.5rem" name="ic:baseline-close" />
         Отклонить
       </button>
-      <button v-if="userAccess.hasAccessEdits || user?.id === edit.author?.id" class="border rounded text-blue-500">
+      <button v-if="userAccess.hasAccessEdits || (user && user.id === edit.author?.id)" class="border rounded text-blue-500">
         <Icon size="1.5rem" name="ic:baseline-edit" />
         Отредактировать
       </button>
       <button class="border rounded text-gray-500">
-        <Icon size="1.5rem" name="ic:outline-info" />
-        Инфо
+        <NuxtLink :to="{ name: 'edit-page', params: { id: edit.id } }">
+          <Icon size="1.5rem" name="ic:outline-info" />
+          Инфо
+        </NuxtLink>
       </button>
     </div>
     <div v-if="edit.comment.length > 0" class="select-text break-words border-l-2 border-ns-gray-200 pl-2 dark:border-ns-gray-700">

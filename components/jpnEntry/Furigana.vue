@@ -43,9 +43,9 @@ const tagsMap = {
       <small
         v-for="(tag, tagIndex) of furigana.tags.filter(tag => !tagsMap[tag.engShort])"
         :key="tagIndex"
-        class="group relative size-fit cursor-pointer rounded-sm bg-fuchsia-400 p-0.5 text-xs leading-none"
+        class="group relative size-fit cursor-pointer rounded-sm text-xs leading-none"
       >
-        <span class="font-bold uppercase text-neutral-900">
+        <span class="font-bold uppercase text-fuchsia-500">
           {{ tag.engShort }}
         </span>
         <UiTooltip>
