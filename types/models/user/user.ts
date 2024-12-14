@@ -12,7 +12,7 @@ export interface User extends ShortUser {
   createdAt: string
 }
 
-export interface CurrentUser extends User {
+export interface ExtendedUser extends User {
   access: number
   settings: string
 }

@@ -15,7 +15,7 @@ const style = tv({
     tag: {
       i: 'italic text-gray-500 text-sm',
       p: 'italic',
-      comp: 'font-bold italic',
+      comp: 'bg-gray-300/10 px-1 py-0.5 rounded text-sm', // bg-fuchsia-300/10
       hide: 'hidden',
       ref: 'text-indigo-300', // TODO: routing logic
     } as Record<string, string>,
@@ -34,6 +34,7 @@ const style = tv({
 
       <template v-else-if="tag === 'br'">
         <br v-if="breakLine">
+        <span v-else class="p-0.5" />
       </template>
 
       <span v-else :class="style({ tag })">

@@ -13,19 +13,26 @@ const { t } = useI18n()
 <template>
   <section class="m-2 flex flex-col gap-3">
     <div>
-      <button v-if="useAccess(Access.Edits)" class="border rounded text-green-500">
-        Принять
-      </button>
-      <button v-if="useAccess(Access.Edits)" class="border rounded text-yellow-500">
-        Принять без смены статуса
-      </button>
-      <button v-if="useAccess(Access.Edits)" class="border rounded text-red-500">
-        Отклонить
-      </button>
+      <template v-if="useAccess(Access.Edits)">
+        <button class="border rounded text-green-500">
+          <Icon size="1.5rem" name="ic:baseline-done-all" />
+          Принять
+        </button>
+        <button class="border rounded text-yellow-500">
+          <Icon size="1.5rem" name="ic:baseline-done" />
+          Принять без смены статуса
+        </button>
+        <button class="border rounded text-red-500">
+          <Icon size="1.5rem" name="ic:baseline-close" />
+          Отклонить
+        </button>
+      </template>
       <button class="border rounded text-blue-500">
+        <Icon size="1.5rem" name="ic:baseline-edit" />
         Отредактировать
       </button>
       <button class="border rounded text-gray-500">
+        <Icon size="1.5rem" name="ic:outline-info" />
         Инфо
       </button>
     </div>
