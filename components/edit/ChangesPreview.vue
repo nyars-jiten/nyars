@@ -5,6 +5,8 @@ interface Props {
 
 const props = defineProps<Props>()
 
+const { userAccess, user } = storeToRefs(useUserStore())
+
 const isTypeCreate = computed(() => props.edit.type === EditType.Create)
 
 const { t } = useI18n()
@@ -13,21 +15,19 @@ const { t } = useI18n()
 <template>
   <section class="m-2 flex flex-col gap-3">
     <div>
-      <template v-if="useAccess(Access.Edits)">
-        <button class="border rounded text-green-500">
-          <Icon size="1.5rem" name="ic:baseline-done-all" />
-          Принять
-        </button>
-        <button class="border rounded text-yellow-500">
-          <Icon size="1.5rem" name="ic:baseline-done" />
-          Принять без смены статуса
-        </button>
-        <button class="border rounded text-red-500">
-          <Icon size="1.5rem" name="ic:baseline-close" />
-          Отклонить
-        </button>
-      </template>
-      <button class="border rounded text-blue-500">
+      <button v-if="userAccess.hasAccessEdits" class="border rounded text-green-500">
+        <Icon size="1.5rem" name="ic:baseline-done-all" />
+        Принять
+      </button>
+      <button v-if="userAccess.hasAccessEdits" class="border rounded text-yellow-500">
+        <Icon size="1.5rem" name="ic:baseline-done" />
+        Принять без смены статуса
+      </button>
+      <button v-if="userAccess.hasAccessEdits || user?.id === edit.author?.id" class="border rounded text-red-500">
+        <Icon size="1.5rem" name="ic:baseline-close" />
+        Отклонить
+      </button>
+      <button v-if="userAccess.hasAccessEdits || user?.id === edit.author?.id" class="border rounded text-blue-500">
         <Icon size="1.5rem" name="ic:baseline-edit" />
         Отредактировать
       </button>
