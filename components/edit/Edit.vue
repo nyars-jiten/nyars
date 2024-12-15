@@ -39,36 +39,24 @@ const mark = tv({
 const createdAt = computed(() => props.edit.createdAt)
 const createdDate = useTime(createdAt)
 
-const useApprover = computed(() => props.edit.status !== EditStatus.AutoAccepted)
+const showApprover = computed(() => props.edit.status !== EditStatus.AutoAccepted)
 
 const { t } = useI18n()
 </script>
 
 <template>
-  <section class="rounded-md border-l-2 px-4 py-1 leading-none shadow-md outline-dashed outline-1 outline-neutral-700 transition-colors hover:bg-neutral-700 hover:outline-neutral-600" :class="mark({ border: edit.status })">
-    <div class="flex flex-col items-center gap-3 py-1 hover:cursor-pointer md:grid md:grid-cols-[40%_60%] md:gap-0" @click="toggleChanges()">
-      {{ edit.title }}
-      <!-- idk why it doesnt' work. Keep in mind WID can be empty/null if there's no underlying entry -->
-      <!-- <NuxtLink
-        :to="{ name: 'jpn-wid', params: { wid: edit.wid } }"
-        :class="`flex px-2 md:px-0 justify-center w-full md:truncate md:inline ${isEntryPage ? 'pointer-events-none' : 'hover:text-ns-500'}`"
-        @click.stop
-      >
-        <span
-          v-for="(_, w) in edit.title"
-          :key="w"
-          class="truncate text-2xl after:content-['・'] last:after:content-none"
-        >
-          {{ w }}
-        </span>
-      </NuxtLink> -->
+  <section class="space-y-4 rounded-md border-l-2 px-4 py-2 leading-none shadow-md outline-dashed outline-1 outline-neutral-800 transition-colors" :class="mark({ border: edit.status })">
+    <div class="flex flex-col items-center gap-3 hover:cursor-pointer md:grid md:grid-cols-[40%_60%] md:gap-0" @click="toggleChanges()">
+      <span class="text-2xl">
+        {{ edit.title }}
+      </span>
 
       <div class="order-3 flex gap-3 md:order-none md:justify-end">
         <span class="whitespace-nowrap text-right" :class="mark({ text: edit.status })">
           {{ t(`models.edit.status.${edit.status}`) }}
         </span>
 
-        <EditUserProfile v-if="edit.approver != null && useApprover && edit.approver" :user="edit.approver" />
+        <EditUserProfile v-if="showApprover && edit.approver" :user="edit.approver" />
       </div>
 
       <div class="flex items-center gap-2">
@@ -76,7 +64,7 @@ const { t } = useI18n()
           {{ t(`models.edit.dictionary.${edit.dictionary}`) }}
         </i>
 
-        <span :class="`italic text-ns-edit-type-${edit.type}`">
+        <span class="italic">
           {{ t(`models.edit.type.${edit.type}`) }}
         </span>
       </div>

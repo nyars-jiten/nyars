@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { tv } from 'tailwind-variants'
+
 interface Props {
   edit: EditResponse
 }
@@ -11,56 +13,64 @@ const { approveEdit, approveEditStatus, declineEdit } = useApi(editRepository)
 const isTypeCreate = computed(() => props.edit.type === EditType.Create)
 
 const { t } = useI18n()
+
+const preview = tv({
+  base: 'py-2',
+})
 </script>
 
 <template>
-  <section class="m-2 flex flex-col gap-3">
-    <div>
-      <button v-if="userAccess.hasAccessEdits" class="border rounded text-green-500" @click="approveEdit(edit.id)">
-        <Icon size="1.5rem" name="ic:baseline-done-all" />
-        Принять
-      </button>
-      <button v-if="userAccess.hasAccessEdits" class="border rounded text-yellow-500" @click="approveEditStatus(edit.id)">
-        <Icon size="1.5rem" name="ic:baseline-done" />
-        Принять без смены статуса
-      </button>
-      <button v-if="userAccess.hasAccessEdits || (user && user.id === edit.author?.id)" class="border rounded text-red-500" @click="declineEdit(edit.id)">
-        <Icon size="1.5rem" name="ic:baseline-close" />
-        Отклонить
-      </button>
-      <button v-if="userAccess.hasAccessEdits || (user && user.id === edit.author?.id)" class="border rounded text-blue-500">
-        <Icon size="1.5rem" name="ic:baseline-edit" />
-        Отредактировать
-      </button>
-      <button class="border rounded text-gray-500">
-        <NuxtLink :to="{ name: 'edit-page', params: { id: edit.id } }">
-          <Icon size="1.5rem" name="ic:outline-info" />
-          Инфо
-        </NuxtLink>
-      </button>
-    </div>
-    <div v-if="edit.comment.length > 0" class="select-text break-words border-l-2 border-ns-gray-200 pl-2 dark:border-ns-gray-700">
-      {{ t('components.editGroup.changesPreview.comment') }} {{ edit.comment }}
+  <section class="flex flex-col gap-3">
+    <div class="inline-flex gap-2 flex-wrap flex-row-reverse">
+      <NuxtLink :to="{ name: 'edit-page', params: { id: edit.id } }">
+        <UiButton class="text-gray-500" icon="ic:outline-info">
+          <!-- Инфо -->
+        </UiButton>
+      </NuxtLink>
+      
+      <UiButton v-if="userAccess.hasAccessEdits || (user && user.id === edit.author?.id)" class="text-red-500" icon="ic:baseline-close" @click="declineEdit(edit.id)">
+        <!-- Отклонить -->
+      </UiButton>
+
+      <UiButton v-if="userAccess.hasAccessEdits" class="text-green-500" icon="ic:baseline-done-all" @click="approveEdit(edit.id)">
+        <!-- Принять -->
+      </UiButton>
+
+      <UiButton v-if="userAccess.hasAccessEdits" class="text-yellow-500" icon="ic:baseline-done" @click="approveEditStatus(edit.id)">
+        <!-- Принять без смены статуса -->
+      </UiButton>
+
+      <UiButton v-if="userAccess.hasAccessEdits || (user && user.id === edit.author?.id)" class="text-blue-500" icon="ic:baseline-edit">
+        <!-- Отредактировать -->
+      </UiButton>
     </div>
 
-    <div :class="`grid grid-rows-1 gap-5 ${isTypeCreate ? 'sm:grid-cols-1' : 'sm:grid-cols-[1fr_auto_1fr]'} sm:gap-2 md:gap-4`">
-      <div v-if="!isTypeCreate" class="select-text rounded-md border border-ns-gray-200 px-4 py-2 dark:border-ns-gray-600">
-        <span
-          v-for="(text, index) of edit.diffSrc"
-          :key="index"
-          :class="`select-text whitespace-pre-wrap ${text.c.length > 25 ? 'break-all' : ''} ${text.d ? 'text-red-500' : ''}`"
-        >
-          {{ text.c }}
-        </span>
-      </div>
-      <div v-if="!isTypeCreate" class="flex flex-col items-center justify-evenly">
-        <div class="after:content-['↓'] sm:after:content-['⟶']" />
-      </div>
-      <div class="select-text rounded-md border border-ns-gray-200 px-4 py-2 dark:border-ns-gray-600">
+    <!-- <div v-if="edit.comment.length > 0" class="break-words border-l-2 border-ns-gray-200 pl-2 dark:border-ns-gray-700">
+      {{ t('components.editGroup.changesPreview.comment') }} {{ edit.comment }}
+    </div> -->
+
+    <div class="grid sm:grid-cols-[1fr_auto_1fr] gap-4 sm:gap-2">
+      <template v-if="!isTypeCreate">
+        <div :class="preview()">
+          <span
+            v-for="(text, index) of edit.diffSrc"
+            :key="index"
+            :class="`whitespace-pre-wrap ${text.d ? 'text-red-500' : ''}`"
+          >
+            {{ text.c }}
+          </span>
+        </div>
+
+        <div class="flex flex-col items-center justify-evenly max-sm:border-y sm:border-x p-2 border-neutral-800">
+          <div class="after:content-['↓'] sm:after:content-['⟶']" />
+        </div>
+      </template>
+
+      <div :class="[{ 'col-span-full': isTypeCreate }, preview()]">
         <span
           v-for="(text, index) of edit.diffDst"
           :key="index"
-          :class="`select-text whitespace-pre-wrap ${text.c.length > 25 ? 'break-all' : ''} ${text.d ? 'text-green-500' : ''}`"
+          :class="`whitespace-pre-wrap ${text.c.length > 25 ? 'break-all' : ''} ${text.d ? 'text-green-500' : ''}`"
         >
           {{ text.c }}
         </span>

@@ -13,7 +13,6 @@ const avatar = computed(() => useAvatar(props.user.avatar).href)
     <img
       class="h-6 rounded-full object-center"
       :src="avatar"
-      :alt="user.username"
     >
     <span class="inline-block max-w-36 truncate">
       {{ user.username }}

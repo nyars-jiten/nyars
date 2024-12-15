@@ -20,12 +20,12 @@ useHead({
 </script>
 
 <template>
-  <UiBlock :active="true">
+  <section class="space-y-4">
     <Edit
       v-for="edit in edits"
       :key="edit.id"
       :edit="edit"
       :expanded="true"
     />
-  </UiBlock>
+  </section>
 </template>
