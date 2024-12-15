@@ -17,11 +17,11 @@ const button = tv({
       </button>
     </div>
 
-    <section class="group relative inline-flex w-full flex-row gap-2 rounded-md bg-zinc-800 p-2 leading-none text-zinc-500 shadow-md outline outline-1 outline-zinc-700 transition-colors focus-within:bg-zinc-300 focus-within:text-zinc-900 focus-within:outline-none hover:bg-zinc-700 hover:text-zinc-300 hover:outline-transparent">
+    <section class="group relative inline-flex w-full flex-row gap-2 rounded-md bg-zinc-800 p-2 leading-none text-zinc-500 shadow-md outline outline-1 outline-zinc-700 transition-colors focus-within:outline-none hover:bg-zinc-700 hover:text-zinc-300 hover:outline-transparent">
       <input v-model="request" type="text" class="w-full bg-transparent text-center focus:outline-none" spellcheck="false" autocomplete="off" @keydown.enter.prevent="push()">
       <Icon name="ic:baseline-search" size="1.5rem" />
 
-      <SearchSuggestions :data="request" class="invisible group-focus-within:visible group-hover:visible" />
+      <SearchSuggestions :data="request" class="invisible group-focus-within:visible" />
     </section>
 
     <div class="inline-flex items-center gap-2">
