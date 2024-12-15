@@ -22,25 +22,25 @@ const preview = tv({
 <template>
   <section class="flex flex-col gap-3">
     <div class="inline-flex gap-2 flex-wrap flex-row-reverse">
-      <NuxtLink :to="{ name: 'edit-page', params: { id: edit.id } }">
+      <NuxtLink :to="{ name: 'edit-page', params: { id: edit.id } }" title="Инфо">
         <UiButton class="text-gray-500" icon="ic:outline-info">
           <!-- Инфо -->
         </UiButton>
       </NuxtLink>
-      
-      <UiButton v-if="userAccess.hasAccessEdits || (user && user.id === edit.author?.id)" class="text-red-500" icon="ic:baseline-close" @click="declineEdit(edit.id)">
+
+      <UiButton v-if="userAccess.hasAccessEdits || (user && user.id === edit.author?.id)" class="text-red-500" icon="ic:baseline-close" title="Отклонить" @click="declineEdit(edit.id)">
         <!-- Отклонить -->
       </UiButton>
 
-      <UiButton v-if="userAccess.hasAccessEdits" class="text-green-500" icon="ic:baseline-done-all" @click="approveEdit(edit.id)">
+      <UiButton v-if="userAccess.hasAccessEdits" class="text-green-500" icon="ic:baseline-done-all" title="Принять" @click="approveEdit(edit.id)">
         <!-- Принять -->
       </UiButton>
 
-      <UiButton v-if="userAccess.hasAccessEdits" class="text-yellow-500" icon="ic:baseline-done" @click="approveEditStatus(edit.id)">
+      <UiButton v-if="userAccess.hasAccessEdits" class="text-yellow-500" icon="ic:baseline-done" title="Принять без смены статуса" @click="approveEditStatus(edit.id)">
         <!-- Принять без смены статуса -->
       </UiButton>
 
-      <UiButton v-if="userAccess.hasAccessEdits || (user && user.id === edit.author?.id)" class="text-blue-500" icon="ic:baseline-edit">
+      <UiButton v-if="userAccess.hasAccessEdits || (user && user.id === edit.author?.id)" class="text-blue-500" icon="ic:baseline-edit" title="Отредактировать">
         <!-- Отредактировать -->
       </UiButton>
     </div>
