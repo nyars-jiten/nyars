@@ -36,7 +36,9 @@ export function userRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
   }
 
   const clientLogout = () => {
-    return fetch(`${path}/signOut`)
+    return fetch(`${path}/logout`, {
+      method: 'POST',
+    })
   }
 
   const clientGetUser = (username: string) => {

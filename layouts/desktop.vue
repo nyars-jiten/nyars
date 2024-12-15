@@ -2,12 +2,20 @@
 import { tv } from 'tailwind-variants'
 
 const { user } = storeToRefs(useUserStore())
+const { clientLogout } = useApi(userRepository)
+
 // const avatar = computed(() => useAvatar(user.value?.avatar ?? '').href)
 const avatar = 'https://next.nyars.moe/upload/avatars/6bf3488d-da95-4936-880a-c66fb4bf3070.jpg'
 
 const styles = tv({
   base: 'inline-block w-full px-8 py-3 text-center leading-none transition-colors hover:bg-zinc-800 hover:text-zinc-300',
 })
+
+async function logout() {
+  await clientLogout()
+  user.value = null
+  await navigateTo('/')
+}
 
 const [userMenu, toggleUserMenu] = useToggle()
 
@@ -36,11 +44,11 @@ onClickOutside(userMenuRef, () => toggleUserMenu(false))
                 profile
               </NuxtLink>
 
-              <button type="button" :class="styles()">
+              <NuxtLink to="/dev" type="button" :class="styles()">
                 settings
-              </button>
+              </NuxtLink>
 
-              <button type="button" :class="styles()">
+              <button type="button" :class="styles()" @click="logout()">
                 logout
               </button>
             </div>

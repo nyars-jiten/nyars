@@ -8,7 +8,7 @@ definePageMeta({
 })
 
 const notificationStore = useNotificationStore()
-const userStore = storeToRefs(useUserStore())
+const userStore = useUserStore()
 
 const isRegister = ref(false)
 
@@ -24,7 +24,7 @@ const { handleSubmit, errors } = useForm({
 const submit = handleSubmit(async ({ login, password }) => {
   const auth = useAuth()
 
-  const user: User | null = null
+  // const user: User | null = null
   const authError: AuthError | null = null
 
   try {
@@ -50,7 +50,8 @@ const submit = handleSubmit(async ({ login, password }) => {
     return
   }
 
-  userStore.user.value = user
+  // userStore.user.value = user
+  userStore.$reset()
   await navigateTo('/')
 })
 

@@ -1,5 +1,6 @@
 export const useUserStore = defineStore('user-store', () => {
   const { current } = useUser()
+  const { serverGetCurrentUser } = useApi(userRepository)
   const { data: user } = current()
 
   const checkAccess = (access: Access) => {
@@ -11,5 +12,9 @@ export const useUserStore = defineStore('user-store', () => {
     hasAccessEdits: checkAccess(Access.Edits),
   } as UserRights))
 
-  return { user, userAccess }
+  async function $reset() {
+    user.value = await serverGetCurrentUser()
+  }
+
+  return { user, userAccess, $reset }
 })
