@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { faker } from '@faker-js/faker'
 </script>
 
 <template>
@@ -20,7 +19,7 @@ import { faker } from '@faker-js/faker'
           </span>
 
           <span>
-            {{ faker.lorem.sentence() }}
+            abc
           </span>
         </template>
       </div>
