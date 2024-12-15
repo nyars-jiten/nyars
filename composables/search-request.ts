@@ -1,11 +1,20 @@
 export function useRouteArticle() {
   const route = useRoute()
-  
-  if (typeof route.query.wid !== 'string') {
-    route.query.wid = ''
-  }
 
-  return route.query.wid
+  const value = computed({
+    set: (value: string) => {
+      route.query.wid = value
+    },
+    get: () => {
+      if (typeof route.query.wid !== 'string') {
+        route.query.wid = ''
+      }
+
+      return route.query.wid
+    },
+  })
+
+  return value
 }
 
 export const useSearchRequest = createGlobalState(() => {

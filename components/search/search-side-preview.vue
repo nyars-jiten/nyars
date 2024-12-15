@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const route = useRoute()
-const articleWid = computed(() => String(route.query.wid))
+const articleWid = useRouteArticle()
 
 const api = useJpnArticles()
 

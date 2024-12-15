@@ -141,7 +141,9 @@ const border = computed(() => {
   return ''
 })
 
-const active = computed(() => route.query.wid === props.article.wid)
+const articleWid = useRouteArticle()
+
+const active = computed(() => articleWid.value === props.article.wid)
 </script>
 
 <template>
