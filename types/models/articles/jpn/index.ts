@@ -78,13 +78,16 @@ export interface V2Reading {
 
 export interface V2Pitch {
   pitchNum: number
-  pitchMap: V2PitchPair[]
+  diagram: V2PitchPair[]
   audio: string
 }
 
 export interface V2PitchPair {
-  m: string
-  t: number
+  m: string // Mora
+  s: number // State
+  sl: boolean // Silent
+  n: boolean // Nasal
+  sp: boolean // Split
 }
 
 export interface V2Transcription {

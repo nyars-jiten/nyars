@@ -31,13 +31,16 @@ const styles = tv({
 
               <span>
                 <span
-                  v-for="(accent, ai) in pitch.pitchMap"
+                  v-for="(accent, ai) in pitch.diagram"
                   :key="ai"
                   class="border-violet-300/50"
                   :class="{
-                    'border-b-2 border-t-2 border-t-transparent': accent.t === 0 || accent.t === 2,
-                    'border-t-2 border-b-2 border-b-transparent': accent.t === 1 || accent.t === 3,
-                    'border-r-2': accent.t === 2 || accent.t === 3,
+                    'border-b-2 border-t-2 border-t-transparent': accent.s === 0 || accent.s === 2,
+                    'border-t-2 border-b-2 border-b-transparent': accent.s === 1 || accent.s === 3,
+                    'border-r-2': accent.s === 2 || accent.s === 3,
+                    'text-red-400/80': accent.sl,
+                    'underline decoration-wavy decoration-red-400/80': accent.n,
+                    'after:content-[\'・\']': accent.sp,
                   }"
                 >
                   {{ accent.m }}
