@@ -151,17 +151,7 @@ const active = computed(() => articleWid.value === props.article.wid)
     <UiBlock :hover="active === false" :class="border">
       <template #default>
         <section class="space-y-2">
-          <header class="text-2xl">
-            <ul class="inline  dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
-              <li
-                v-for="furigana, wIndex of article.furigana"
-                :key="wIndex"
-                class="inline-flex flex-wrap items-baseline before:text-ns-gray-200 after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
-              >
-                <Furigana :furigana="furigana" :preview="true" />
-              </li>
-            </ul>
-          </header>
+          <Words :jpn-entry="article" :preview="true" />
 
           <div v-if="article.frequency > 0" class="flex flex-wrap items-center gap-2">
             <UiTag kind="freq">

@@ -34,6 +34,7 @@ export interface V2EntryJp {
   meanings: V2Meaning[]
   furigana: Furigana[]
   frequency: number
+  preferFurigana: boolean
 }
 
 export interface Furigana {

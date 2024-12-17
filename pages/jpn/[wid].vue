@@ -24,6 +24,7 @@ const { data: jpnEntry } = await useAsyncData(() => get(wid), {
     meanings: [],
     furigana: [],
     frequency: 0,
+    preferFurigana: true,
   } satisfies V2EntryJp),
 })
 

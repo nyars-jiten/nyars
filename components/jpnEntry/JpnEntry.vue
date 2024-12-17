@@ -18,7 +18,9 @@ const styles = tv({
     <!-- https://nuxt.com/docs/api/nuxt-config#router -->
     <!-- https://router.vuejs.org/api/interfaces/RouterOptions.html#scrollBehavior -->
 
-    <Words :jpn-entry="jpnEntry" class="mb-2 border-b border-ns-gray-200 pb-2 dark:border-ns-gray-700" />
+    <div class="flex flex-col hyphens-auto cursor-text items-start gap-3 pl-4 mb-2 border-b border-ns-gray-200 pb-2 dark:border-ns-gray-700">
+      <Words :jpn-entry="jpnEntry" class="" />
+    </div>
 
     <div class="px-2 space-y-4">
       <div class="space-x-2">

@@ -17,7 +17,7 @@ const style = tv({
       p: 'italic',
       comp: 'bg-gray-300/10 px-1 py-0.5 rounded text-sm', // bg-fuchsia-300/10
       hide: 'hidden',
-      ref: 'text-indigo-300', // TODO: routing logic
+      lat: 'decoration-violet-400 underline', // text-violet-300
     } as Record<string, string>,
   },
 })
@@ -31,6 +31,12 @@ const style = tv({
       <sup v-if="tag === 'sup'">{{ value }}</sup>
 
       <sub v-else-if="tag === 'sub'">{{ value }}</sub>
+
+      <template v-else-if="tag === 'ref'">
+        <NuxtLink :to="{ name: 'search', query: { q: value } }" class="text-indigo-300">
+          {{ value }}
+        </NuxtLink>
+      </template>
 
       <template v-else-if="tag === 'br'">
         <br v-if="breakLine">

@@ -1,76 +1,56 @@
 <script setup lang="ts">
 interface Props {
   jpnEntry: V2EntryJp
+  preview?: boolean
 }
 
 defineProps<Props>()
 </script>
 
 <template>
-  <div class="flex cursor-text flex-col items-start gap-3 pl-4">
-    <div class="flex flex-col hyphens-auto">
-      <div class="text-2xl">
-        <ul class=" dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
-          <li
-            v-for="(furigana, fI) of jpnEntry.furigana"
-            :key="fI"
-            class="inline-flex items-baseline before:text-ns-gray-200 after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
-          >
-            <Furigana :furigana="furigana" />
-          </li>
-        </ul>
-      </div>
-      <!-- <div
-        v-for="(word, wordIndex) of jpnEntry.words"
-        :key="wordIndex"
-        class="text-2xl"
+  <header v-if="jpnEntry.preferFurigana" class="text-2xl">
+    <ul class="inline dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
+      <li
+        v-for="furigana, wIndex of jpnEntry.furigana"
+        :key="wIndex"
+        class="inline-flex flex-wrap items-baseline before:text-ns-gray-200 after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
       >
-        <ul v-show="word.writings?.length" class="inline before:-ml-3 before:text-ns-gray-200 before:content-['【'] after:text-ns-gray-200 after:content-['】'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
-          <li
-            v-for="(writing, writingIndex) of word.writings"
-            :key="writingIndex"
-            class="inline-flex flex-wrap items-baseline gap-2 before:text-ns-gray-200 after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
-          >
-            <span>
-              {{ writing.value }}
-            </span>
+        <Furigana :furigana="furigana" :preview="preview" />
+      </li>
+    </ul>
+  </header>
+  <template v-else>
+    <div
+      v-for="(word, wordIndex) of jpnEntry.words"
+      :key="wordIndex"
+    >
+      <ul v-show="word.writings?.length" class="inline text-2xl before:-ml-3 before:text-ns-gray-200 before:content-['【'] after:text-ns-gray-200 after:content-['】'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
+        <li
+          v-for="(writing, writingIndex) of word.writings"
+          :key="writingIndex"
+          class="inline-flex flex-wrap items-baseline before:text-ns-gray-200 after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
+        >
+          <span>
+            {{ writing.value }}
+          </span>
 
-            <span class="space-x-2">
-              <small
-                v-for="(tag, tagIndex) of writing.tags"
-                :key="tagIndex"
-                class="inline align-text-top text-sm italic text-fuchsia-700"
-              >
-                {{ tag.engShort }}
-              </small>
-            </span>
-          </li>
-        </ul>
+          <EntryHeaderTag :tags="writing.tags" />
+        </li>
+      </ul>
 
-        <ul class="inline">
-          <li
-            v-for="(reading, readingIndex) of word.readings"
-            :key="readingIndex"
-            class="inline-flex flex-wrap items-baseline gap-2 after:text-neutral-300 after:content-['・'] last:after:content-none dark:after:text-neutral-700"
-          >
-            <span>
-              {{ reading.transcription?.kana }}
-            </span>
+      <ul class="inline text-lg">
+        <li
+          v-for="(reading, readingIndex) of word.readings"
+          :key="readingIndex"
+          class="inline-flex flex-wrap items-baseline after:text-neutral-300 after:content-['・'] last:after:content-none dark:after:text-neutral-700"
+        >
+          <span>
+            {{ reading.transcription?.kana }}
+          </span>
 
-            <span class="space-x-2 leading-none">
-              <small
-                v-for="(tag, tagIndex) of reading.tags"
-                :key="tagIndex"
-                class="align-text-top text-sm italic text-fuchsia-700"
-              >
-                {{ tag.engShort }}
-              </small>
-            </span>
-          </li>
-        </ul>
-      </div> -->
+          <EntryHeaderTag :tags="reading.tags" />
+        </li>
+      </ul>
     </div>
-
-    <!-- <Tags :tags="jpnEntry.tags" /> -->
-  </div>
+  </template>
 </template>
