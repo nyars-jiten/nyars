@@ -51,7 +51,6 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
   ],
   icon: {
-    serverBundle: 'local',
   },
   eslint: {
     config: {
