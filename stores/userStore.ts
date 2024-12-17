@@ -11,5 +11,7 @@ export const useUserStore = defineStore('user-store', () => {
     hasAccessEdits: checkAccess(Access.Edits),
   } as UserRights))
 
-  return { user, userAccess }
+  const menuState = ref(false)
+
+  return { user, userAccess, menuState }
 })
