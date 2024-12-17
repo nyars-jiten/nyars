@@ -1,32 +1,101 @@
 <script setup lang="ts">
 import { tv } from 'tailwind-variants'
 
+interface Props {
+  secondary?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  secondary: false,
+})
+
 const { t } = useI18n()
 
-const styles = tv({
-  base: 'flex items-center justify-start gap-4 rounded-md px-2 py-1.5 leading-none transition-colors hover:bg-zinc-800 hover:text-zinc-400 max-xl:p-2 max-xl:[&>span:nth-child(2)]:hidden',
+const links = tv({
+  base: 'flex items-center justify-start gap-4 rounded-md px-2 py-1.5 leading-none transition-colors hover:bg-zinc-800 hover:text-zinc-400',
+  variants: {
+    state: {
+      false: '',
+    },
+    secondary: {
+      true: '',
+      false: 'max-xl:[&>span:nth-child(2)]:hidden',
+    },
+  },
+
+  compoundVariants: [
+    {
+      state: false,
+      secondary: false,
+      class: '[&>span:nth-child(2)]:hidden',
+    },
+  ],
+})
+
+const block = tv({
+  base: 'space-y-4 transition-[transform,opacity]',
+  variants: {
+    secondary: {
+      true: 'fixed top-0 left-0 p-4 bg-neutral-900 h-dvh overflow-y-auto xl:hidden border-r border-neutral-800 shadow-md',
+      false: '',
+    },
+    state: {
+      true: '',
+      false: '',
+    },
+  },
+
+  compoundVariants: [
+    {
+      secondary: true,
+      state: false,
+      class: '-translate-x-full opacity-0',
+    },
+  ],
+})
+
+const { menuState } = storeToRefs(useUserStore())
+
+onMounted(() => {
+  if (props.secondary) {
+    const menu = useTemplateRef('menuRef')
+    onClickOutside(menu, () => {
+      const width = window.innerWidth
+
+      // tailwind xl
+      if (width < 1280) {
+        menuState.value = false
+      }
+    })
+  }
 })
 </script>
 
 <template>
-  <ul class="group space-y-4">
+  <ul ref="menuRef" :class="block({ state: menuState, secondary })">
+    <li v-if="secondary">
+      <button type="button" @click="menuState = !menuState">
+        x
+      </button>
+    </li>
+
     <li class="space-y-2">
-      <NuxtLink :to="{ name: 'Home' }" :class="styles()">
+      <NuxtLink :to="{ name: 'Home' }" :class="links({ state: menuState, secondary })">
         <Icon size="1.5rem" name="ic:baseline-home" />
         <span>{{ t('components.header.navigation[0].pages.home') }}</span>
       </NuxtLink>
 
-      <NuxtLink :to="{ name: 'Edits' }" :class="styles()">
+      <NuxtLink :to="{ name: 'Edits' }" :class="links({ state: menuState, secondary })">
         <Icon size="1.5rem" name="ic:baseline-plus-minus-alt" />
         <span>{{ t('components.header.navigation[0].pages.edits') }}</span>
       </NuxtLink>
 
-      <NuxtLink to="/dev" :class="styles()">
+      <NuxtLink to="/dev" :class="links({ state: menuState, secondary })">
         <Icon size="1.5rem" name="ic:baseline-auto-graph" />
         <span>{{ t('components.header.navigation[0].pages.statistics') }}</span>
       </NuxtLink>
 
-      <NuxtLink to="/dev" :class="styles()">
+      <NuxtLink to="/dev" :class="links({ state: menuState, secondary })">
         <Icon size="1.5rem" name="ic:baseline-menu-book" />
         <span>{{ t('components.header.navigation[0].pages.documentation') }}</span>
       </NuxtLink>
@@ -39,7 +108,7 @@ const styles = tv({
     <li class="space-y-1">
       <NuxtLink
         to="https://github.com/nyars-jiten/nyars/issues"
-        :class="styles()"
+        :class="links({ state: menuState, secondary })"
         target="_blank"
         external
       >
@@ -47,7 +116,7 @@ const styles = tv({
         <span>{{ t('components.header.navigation[0].pages.github') }}</span>
       </NuxtLink>
 
-      <NuxtLink to="/dev" :class="styles()">
+      <NuxtLink to="/dev" :class="links({ state: menuState, secondary })">
         <Icon size="1.5rem" name="ic:baseline-download" />
         <span>{{ t('components.header.navigation[0].pages.download') }}</span>
       </NuxtLink>
@@ -58,7 +127,7 @@ const styles = tv({
     </li>
 
     <li class="space-y-1">
-      <NuxtLink to="/jpn/editor" :class="styles()" class="text-lime-300 transition-colors xl:text-indigo-300">
+      <NuxtLink to="/jpn/editor" :class="links({ state: menuState, secondary })" class="text-lime-300 transition-colors">
         <Icon size="1.5rem" name="ic:baseline-plus" />
 
         <span class="text-xs font-semibold uppercase">
@@ -66,7 +135,7 @@ const styles = tv({
         </span>
       </NuxtLink>
 
-      <!-- <NuxtLink to="/" :class="styles()" class="text-amber-300 transition-colors xl:text-indigo-300">
+      <!-- <NuxtLink to="/" :class="styles({state: menuState})" class="text-amber-300 transition-colors">
         <Icon size="1.5rem" name="ic:baseline-plus" />
 
         <span class="text-xs font-semibold uppercase">
@@ -74,7 +143,7 @@ const styles = tv({
         </span>
       </NuxtLink>
 
-      <NuxtLink to="/" :class="styles()" class="text-rose-300 transition-colors xl:text-indigo-300">
+      <NuxtLink to="/" :class="styles({state: menuState})" class="text-rose-300 transition-colors">
         <Icon size="1.5rem" name="ic:baseline-plus" />
 
         <span class="text-xs font-semibold uppercase">
@@ -88,7 +157,7 @@ const styles = tv({
     </li>
 
     <li class="space-y-1">
-      <NuxtLink :to="{ name: 'jpn-wid', params: { wid: 0 } }" :class="styles()">
+      <NuxtLink :to="{ name: 'jpn-wid', params: { wid: 0 } }" :class="links({ state: menuState, secondary })">
         <Icon size="1.5rem" name="uil:github" />
         <span>suda</span>
       </NuxtLink>
