@@ -62,20 +62,23 @@ async function save() {
     reading: reading.value,
     spelling: spelling.value,
   }
-  const defaultVal = () => ({
-    code: 0,
-    message: '',
-  })
 
   if (!props.isNew) {
-    return await useAsyncData('create-edit', () => api.edit(`${routeWid}`, req), {
-      default: defaultVal,
-    })
+    return await api.edit(`${routeWid}`, req)
   }
 
-  await useAsyncData('create-edit', () => api.create(req), {
-    default: defaultVal,
-  })
+  await api.create(req)
+}
+
+async function remove() {
+  const req = {
+    body: body.value,
+    reading: reading.value,
+    spelling: spelling.value,
+  }
+
+  // body is still required, so we can save meta data
+  await api.remove(`${routeWid}`, req)
 }
 
 const spellingRef = useTemplateRef('spellingRef')
@@ -227,9 +230,9 @@ const [state, toggle] = useToggle()
             <!-- справка -->
           </UiButton>
 
-          <UiButton class="items-start justify-center text-center max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="save">
-            <!-- {{ t('pages.editor.save') }} -->
-          </UiButton>
+          <!-- <UiButton class="items-start justify-center text-center max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="save">
+            {{ t('pages.editor.save') }}
+          </UiButton> -->
         </div>
       </section>
 
@@ -262,6 +265,14 @@ const [state, toggle] = useToggle()
 
         <EditorGuide v-if="state" class="mt-2.5 max-md:hidden" @click-insert="(text) => insert.apply(null, text)" />
       </section>
+      <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
+        <UiButton v-if="!isNew" class="items-start justify-center text-center max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :title="t('pages.editor.delete')" :disabled="disabled" @click="remove">
+          {{ t('pages.editor.delete') }}
+        </UiButton>
+        <UiButton class="items-start justify-center text-center max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="save">
+          {{ t('pages.editor.save') }}
+        </UiButton>
+      </div>
     </div>
 
     <div class="border-l border-neutral-800 max-xl:hidden" />

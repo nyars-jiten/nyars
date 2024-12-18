@@ -1,6 +1,8 @@
 export enum EditType {
-  Create = 1,
+  None,
+  Create,
   Edit,
   Delete,
   Transfer,
+  Revert,
 }

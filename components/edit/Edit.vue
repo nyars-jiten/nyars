@@ -35,6 +35,19 @@ const mark = tv({
   },
 })
 
+const typeColors = tv({
+  variants: {
+    text: {
+      [EditType.None]: '',
+      [EditType.Create]: 'text-lime-300',
+      [EditType.Edit]: ' text-sky-300',
+      [EditType.Delete]: 'text-red-300',
+      [EditType.Transfer]: 'text-gray-300',
+      [EditType.Revert]: 'text-purple-300',
+    },
+  },
+})
+
 // TODO: reactivity test
 const createdAt = computed(() => props.edit.createdAt)
 const createdDate = useTime(createdAt)
@@ -60,11 +73,11 @@ const { t } = useI18n()
       </div>
 
       <div class="flex items-center gap-2">
-        <i class="text-neutral-500">
+        <i class="text-neutral-500 text-center align-middle">
           {{ t(`models.edit.dictionary.${edit.dictionary}`) }}
         </i>
 
-        <span class="italic">
+        <span class="italic" :class="typeColors({ text: edit.type })">
           {{ t(`models.edit.type.${edit.type}`) }}
         </span>
       </div>

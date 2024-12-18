@@ -15,6 +15,7 @@ const button = tv({
       discord: 'text-discord',
       lime: 'text-lime-300',
       amber: 'text-amber-300',
+      delete: 'text-rose-400',
     },
 
     active: {

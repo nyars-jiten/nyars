@@ -11,7 +11,7 @@ const isPreview = false
   <div class="space-y-4">
     <div v-for="(meaning, meaningIndex) of meanings" :key="meaningIndex">
       <div v-show="meanings.length > 1 || !isPreview" class="space-x-2">
-        <UiTag v-for="tagPos of meaning.tags" :key="tagPos.eng" kind="meaning" class="group relative cursor-pointer">
+        <UiTag v-for="tagPos of meaning.tags" :key="tagPos.eng" kind="meaning" class="group relative cursor-help">
           {{ tagPos.ruShort }}
 
           <UiTooltip>
