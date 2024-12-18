@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// const wid = useRoute('dict-jpn-wid').params.wid
+const wid = useRoute('dict-jpn-wid').params.wid
 const route = useRoute()
 const request = computed(() => String(route.query.q ?? ''))
 
@@ -13,6 +13,13 @@ const { data } = useAsyncData('search-request', () => search(request.value, 0, 0
   dedupe: 'defer',
   watch: [request],
 })
+
+if (!wid && data?.value.result) {
+  const first = data.value.result[0]
+  if (first) {
+    navigateTo({ name: 'dict-jpn-wid', params: { wid: first.wid }, query: { q: request.value } })
+  }
+}
 
 // // const showData = ref(false)
 // useHead({ title: jpnEntry.value?.title })
