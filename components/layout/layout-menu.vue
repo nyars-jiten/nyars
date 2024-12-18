@@ -127,7 +127,7 @@ onMounted(() => {
     </li>
 
     <li class="space-y-1">
-      <NuxtLink to="/jpn/editor" :class="links({ state: menuState, secondary })" class="text-lime-300 transition-colors">
+      <NuxtLink :to="{ name: 'dict-jpn-new' }" :class="links({ state: menuState, secondary })" class="text-lime-300 transition-colors">
         <Icon size="1.5rem" name="ic:baseline-plus" />
 
         <span class="text-xs font-semibold uppercase">

@@ -37,7 +37,7 @@ const { t } = useI18n()
               {{ t('models.userRating.weekRating') }}
             </small>
 
-            <span class="truncate text-violet-300">
+            <span class="truncate text-amber-300">
               {{ weekRating }}
             </span>
           </span>

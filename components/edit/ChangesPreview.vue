@@ -12,8 +12,6 @@ const { approveEdit, approveEditStatus, declineEdit } = useApi(editRepository)
 
 const isTypeCreate = computed(() => props.edit.type === EditType.Create)
 
-const { t } = useI18n()
-
 const preview = tv({
   base: 'py-2',
 })

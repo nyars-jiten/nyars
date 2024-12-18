@@ -14,7 +14,7 @@ defineProps<Props>()
 
   <span>
     <span v-for="v, index of values" :key="index">
-      <span v-if="v > 0" class="text-amber-300">
+      <span v-if="v > 0" class="text-violet-300">
         {{ v }}
       </span>
 

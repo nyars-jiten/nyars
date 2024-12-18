@@ -11,6 +11,12 @@ const CreateArticleJpnList = array(CreateArticleJpn)
 export type CreateArticleJpn = TypeOf<typeof CreateArticleJpn>
 export type CreateArticleJpnList = TypeOf<typeof CreateArticleJpnList>
 
+export interface EditorTxtEntryJp {
+  reading: string
+  spelling: string
+  body: string
+}
+
 export interface V2EntryJpResponse {
   entry: V2EntryJp
 }
