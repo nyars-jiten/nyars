@@ -223,7 +223,7 @@ const [state, toggle] = useToggle()
         </div>
 
         <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
-          <UiButton class="items-start justify-center text-center max-sm:w-full" type="button" icon="ic-baseline-whatshot" color="amber" :active="state" :title="t('pages.editor.guide')" @click="toggle()">
+          <UiButton class="items-start justify-center text-center max-sm:w-full" type="button" icon="ic:baseline-help-outline" color="amber" :active="state" :title="t('pages.editor.guide')" @click="toggle()">
             <!-- справка -->
           </UiButton>
 
@@ -235,15 +235,21 @@ const [state, toggle] = useToggle()
 
       <section class="flex grow gap-8 max-md:flex-col" :class="{ 'md:grid md:grid-cols-2': state }">
         <div class="flex shrink grow flex-col gap-4">
-          <UiInput ref="spellingRef" v-model="spelling" :multiline="true" :rows="spellingRows" :disabled="disabled">
+          <UiInput ref="spellingRef" v-model="spelling" :multiline="true" :rows="spellingRows" :disabled="disabled" :placeholder="isNew ? t('pages.editor.placeholder.spelling') : ''">
             <template #hint>
               {{ t('pages.editor.spelling') }}
             </template>
+            <template #description>
+              {{ t('pages.editor.hint.spelling') }}
+            </template>
           </UiInput>
 
-          <UiInput ref="readingRef" v-model="reading" :multiline="true" :rows="readingRows" :disabled="disabled">
+          <UiInput ref="readingRef" v-model="reading" :multiline="true" :rows="readingRows" :disabled="disabled" :placeholder="isNew ? t('pages.editor.placeholder.reading') : ''">
             <template #hint>
               {{ t('pages.editor.reading') }}
+            </template>
+            <template #description>
+              {{ t('pages.editor.hint.reading') }}
             </template>
           </UiInput>
 
@@ -254,7 +260,7 @@ const [state, toggle] = useToggle()
           </UiInput>
         </div>
 
-        <EditorGuide v-if="state" class="mt-2.5 max-md:hidden" />
+        <EditorGuide v-if="state" class="mt-2.5 max-md:hidden" @click-insert="(text) => insert.apply(null, text)" />
       </section>
     </div>
 
