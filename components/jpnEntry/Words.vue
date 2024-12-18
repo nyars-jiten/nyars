@@ -24,17 +24,17 @@ defineProps<Props>()
       v-for="(word, wordIndex) of jpnEntry.words"
       :key="wordIndex"
     >
-      <ul v-show="word.writings?.length" class="inline text-2xl before:-ml-3 before:text-ns-gray-200 before:content-['【'] after:text-ns-gray-200 after:content-['】'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
+      <ul v-show="word.spellings?.length" class="inline text-2xl before:-ml-3 before:text-ns-gray-200 before:content-['【'] after:text-ns-gray-200 after:content-['】'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
         <li
-          v-for="(writing, writingIndex) of word.writings"
-          :key="writingIndex"
+          v-for="(spelling, spellingIndex) of word.spellings"
+          :key="spellingIndex"
           class="inline-flex flex-wrap items-baseline before:text-ns-gray-200 after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
         >
           <span>
-            {{ writing.value }}
+            {{ spelling.value }}
           </span>
 
-          <EntryHeaderTag :tags="writing.tags" />
+          <EntryHeaderTag :tags="spelling.tags" />
         </li>
       </ul>
 

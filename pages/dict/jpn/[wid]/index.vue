@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const wid = useRoute('jpn-wid').params.wid
+const wid = useRoute('dict-jpn-wid').params.wid
+// const route = useRoute()
+// const request = computed(() => String(route.query.q ?? ''))
 
 // const { getJpnEntry } = useApi(jpnEntryRepository)
 const { get } = useJpnArticles()
@@ -7,26 +9,34 @@ const { get } = useJpnArticles()
 // const { getEditsEntry } = useApi(editRepository)
 // const { getSatellites } = useApi(satelliteRepository)
 
-const { data: jpnEntry } = await useAsyncData(() => get(wid), {
-  default: () => ({
-    wid: '0000',
-    status: {
-      isReviewed: false,
-      isUnconfirmed: false,
-      isArchaic: false,
-      isDialect: false,
-      isProper: false,
-    },
-    externalEntry: '',
-    title: '',
-    words: [],
-    tags: [],
-    meanings: [],
-    furigana: [],
-    frequency: 0,
-    preferFurigana: true,
-  } satisfies V2EntryJp),
-})
+// const { data: jpnEntry } = await useAsyncData(() => get(wid), {
+//   default: () => ({
+//     wid: '0000',
+//     status: {
+//       isReviewed: false,
+//       isUnconfirmed: false,
+//       isArchaic: false,
+//       isDialect: false,
+//       isProper: false,
+//     },
+//     externalEntry: '',
+//     title: '',
+//     words: [],
+//     tags: [],
+//     meanings: [],
+//     furigana: [],
+//     frequency: 0,
+//     preferFurigana: true,
+//   } satisfies V2EntryJp),
+// })
+
+const { data: jpnEntry } = useAsyncData('jpn-article', () => get(wid))
+
+// const { data } = useAsyncData('search-request', () => search(request.value, 0, 0), {
+//   default: () => ({ result: [] }),
+//   dedupe: 'defer',
+//   watch: [request],
+// })
 
 // const { data: images } = await useLazyAsyncData(
 //   `jpnEntryImages-${wid}`,
@@ -53,17 +63,21 @@ const { data: jpnEntry } = await useAsyncData(() => get(wid), {
 // )
 
 definePageMeta({
-  layout: 'desktop',
+  layout: false,
 })
 
 // const showData = ref(false)
-useHead({ title: jpnEntry.value.title })
+useHead({ title: jpnEntry.value?.title })
 </script>
 
 <template>
-  <UiBlock :active="true">
-    <JpnEntry v-if="jpnEntry" :jpn-entry="jpnEntry" />
-    <!-- <NotFound v-else /> -->
+  <div>
+    <!-- <div v-if="request" class="space-y-4">
+      <SearchResult v-for="result of data?.result" :key="result.wid" :article="result" />
+    </div>
+    <div v-else /> -->
+    <UiBlock v-if="jpnEntry">
+      <JpnEntry :jpn-entry="jpnEntry" />
     <!-- <div v-if="images.length > 0" class="rounded border border-ns-gray-100 bg-white p-8 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800">
       <img
         :src="images[0].link"
@@ -100,5 +114,7 @@ useHead({ title: jpnEntry.value.title })
         :edit="edit"
       />
     </div> -->
-  </UiBlock>
+    </UiBlock>
+    <NotFound v-else />
+  </div>
 </template>

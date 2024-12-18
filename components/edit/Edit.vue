@@ -8,7 +8,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-// const route = useRoute('jpn-wid')
+// const route = useRoute('dict-jpn-wid')
 
 // const isEntryPage = Boolean(route.params.wid)
 

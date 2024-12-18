@@ -34,7 +34,7 @@ const shortenedSenses = computed(() => {
   return res
 })
 
-const route = useRoute()
+// const route = useRoute()
 
 const request = useSearchRequest()
 
@@ -147,7 +147,7 @@ const active = computed(() => articleWid.value === props.article.wid)
 </script>
 
 <template>
-  <NuxtLink :to="{ name: 'search', query: { q: request.request.value, wid: article.wid } }" class="w-full" :class="{ 'cursor-default': active }">
+  <NuxtLink :to="{ name: 'dict-jpn-wid', params: { wid: article.wid }, query: { q: request.request.value } }" class="w-full" :class="{ 'cursor-default': active }">
     <UiBlock :hover="active === false" :class="border">
       <template #default>
         <section class="space-y-2">

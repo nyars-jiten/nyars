@@ -9,8 +9,8 @@ definePageMeta({
 const { t } = useI18n()
 const api = useJpnArticles()
 
-const writing = ref('')
-const writingRows = computed(() => writing.value.split('\n').length)
+const spelling = ref('')
+const spellingRows = computed(() => spelling.value.split('\n').length)
 
 const reading = ref('')
 const readingRows = computed(() => reading.value.split('\n').length)
@@ -21,7 +21,7 @@ const routeWid = useRoute().query.wid
 
 const srcSata = await useLazyAsyncData(() => routeWid ? api.source(`${routeWid}`) : Promise.resolve(null), {
   default: () => ({
-    writing: '',
+    spelling: '',
     reading: '',
     body: '',
   }),
@@ -30,7 +30,7 @@ const srcSata = await useLazyAsyncData(() => routeWid ? api.source(`${routeWid}`
 
 watch (srcSata.data, (data) => {
   if (data) {
-    writing.value = data.writing
+    spelling.value = data.spelling
     reading.value = data.reading
     body.value = data.body
   }
@@ -38,7 +38,7 @@ watch (srcSata.data, (data) => {
 
 // TODO: refactor
 if (srcSata.data.value) {
-  writing.value = srcSata.data.value.writing
+  spelling.value = srcSata.data.value.spelling
   reading.value = srcSata.data.value.reading
   body.value = srcSata.data.value.body
 }
@@ -50,7 +50,7 @@ const disabled = computed(() => {
 const preview = useAsyncData('changes-preview', () => api.preview({
   body: body.value,
   reading: reading.value,
-  writing: writing.value,
+  spelling: spelling.value,
 }), {
   default: () => (
     {
@@ -79,13 +79,13 @@ const preview = useAsyncData('changes-preview', () => api.preview({
 
 // const changes = computed(() => 'code' in preview.data.value ? null : preview.data.value)
 
-watchDebounced([writing, reading, body], () => preview.execute(), { debounce: 250, immediate: true })
+watchDebounced([spelling, reading, body], () => preview.execute(), { debounce: 250, immediate: true })
 
 async function save() {
   const req = {
     body: body.value,
     reading: reading.value,
-    writing: writing.value,
+    spelling: spelling.value,
   }
   const defaultVal = () => ({
     code: 0,
@@ -103,7 +103,7 @@ async function save() {
   })
 }
 
-const writingRef = useTemplateRef('writingRef')
+const spellingRef = useTemplateRef('spellingRef')
 const readingRef = useTemplateRef('readingRef')
 const bodyRef = useTemplateRef('bodyRef')
 
@@ -136,7 +136,7 @@ function insert(open: string, close?: string) {
 
 onMounted(() => {
   const refs = [
-    [writingRef, writing],
+    [spellingRef, spelling],
     [readingRef, reading],
     [bodyRef, body],
   ]
@@ -260,9 +260,9 @@ const [state, toggle] = useToggle()
 
       <section class="flex grow gap-8 max-md:flex-col" :class="{ 'md:grid md:grid-cols-2': state }">
         <div class="flex shrink grow flex-col gap-4">
-          <UiInput ref="writingRef" v-model="writing" :multiline="true" :rows="writingRows" :disabled="disabled">
+          <UiInput ref="spellingRef" v-model="spelling" :multiline="true" :rows="spellingRows" :disabled="disabled">
             <template #hint>
-              {{ t('pages.editor.writing') }}
+              {{ t('pages.editor.spelling') }}
             </template>
           </UiInput>
 

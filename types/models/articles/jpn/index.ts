@@ -3,7 +3,7 @@ import { array, string, type, type TypeOf } from 'io-ts'
 export const CreateArticleJpn = type({
   body: string,
   reading: string,
-  writing: string,
+  spelling: string,
 })
 
 const CreateArticleJpnList = array(CreateArticleJpn)
@@ -54,7 +54,7 @@ export interface V2Status {
 }
 
 export interface V2Word {
-  writings: V2Writing[]
+  spellings: V2Spelling[]
   readings: V2Reading[]
 }
 
@@ -63,7 +63,7 @@ export interface V2FuriganaPair {
   kana: string
 }
 
-export interface V2Writing {
+export interface V2Spelling {
   value: string
   tags: V2Tag[]
   isMarked: boolean

@@ -81,7 +81,7 @@ const miscTagsLine = computed(() => {
 
           <NuxtLink
             v-if="reference.target !== null && reference.target.length === 4"
-            :to="{ name: 'jpn-wid', params: { wid: reference.target } }"
+            :to="{ name: 'dict-jpn-wid', params: { wid: reference.target } }"
             class="text-ns-500 underline decoration-dotted underline-offset-4"
           >
             {{ reference.value }}

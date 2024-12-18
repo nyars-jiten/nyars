@@ -157,7 +157,7 @@ onMounted(() => {
     </li>
 
     <li class="space-y-1">
-      <NuxtLink :to="{ name: 'jpn-wid', params: { wid: 0 } }" :class="links({ state: menuState, secondary })">
+      <NuxtLink :to="{ name: 'dict-jpn-wid', params: { wid: 0 } }" :class="links({ state: menuState, secondary })">
         <Icon size="1.5rem" name="uil:github" />
         <span>suda</span>
       </NuxtLink>

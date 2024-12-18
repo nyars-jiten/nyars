@@ -3,7 +3,6 @@ import { tv } from 'tailwind-variants'
 
 const { user, menuState } = storeToRefs(useUserStore())
 const { clientLogout } = useApi(userRepository)
-
 // const avatar = computed(() => useAvatar(user.value?.avatar ?? '').href)
 const avatar = 'https://next.nyars.moe/upload/avatars/6bf3488d-da95-4936-880a-c66fb4bf3070.jpg'
 
@@ -17,6 +16,8 @@ async function logout() {
   await navigateTo('/')
 }
 
+const { t } = useI18n()
+const headerStore = useHeaderStore()
 const [userMenu, toggleUserMenu] = useToggle()
 
 const userMenuRef = useTemplateRef('userMenuRef')
@@ -41,9 +42,16 @@ onClickOutside(userMenuRef, () => toggleUserMenu(false))
           x
         </button>
 
-        <div>
-          <img src="/favicon-dark-96x96.png" alt="logo" class="size-12">
-        </div>
+        <NuxtLink
+          to="/"
+          class="relative flex items-center gap-1.5 rounded-md p-1.5"
+          @click="headerStore.closeHamburgerMenu"
+        >
+          <div class="size-9 rounded-full bg-ns-logo-light bg-cover dark:bg-ns-logo-dark" />
+          <span class="text-xl leading-snug text-ns-500 dark:text-white">
+            {{ t('components.header.nyars') }}
+          </span>
+        </NuxtLink>
 
         <Search class="w-1/2 max-xl:w-3/5 max-lg:w-3/4" />
 
@@ -59,11 +67,11 @@ onClickOutside(userMenuRef, () => toggleUserMenu(false))
                   profile
                 </NuxtLink>
 
-                <button type="button" :class="styles()">
+                <NuxtLink to="/dev" type="button" :class="styles()">
                   settings
-                </button>
+                </NuxtLink>
 
-                <button type="button" :class="styles()">
+                <button type="button" :class="styles()" @click="logout()">
                   logout
                 </button>
               </div>
@@ -76,43 +84,6 @@ onClickOutside(userMenuRef, () => toggleUserMenu(false))
         </div>
       </div>
 
-      <<<<<<< HEAD
-      <Search class="w-1/2 max-xl:w-3/5 max-lg:w-3/4" />
-
-      <div>
-        <span v-if="user" ref="userMenuRef" class="relative flex items-center gap-1.5">
-          <button type="button" @click="toggleUserMenu()">
-            <img :src="avatar" :alt="user.username" class="inline-flex size-12 rounded-full border border-neutral-800 object-center shadow-md transition-transform hover:rotate-12">
-          </button>
-
-          <section v-if="userMenu" class="absolute right-full top-0 pr-2">
-            <div class="space-y-2 overflow-hidden rounded-md bg-zinc-900 leading-none outline outline-1 outline-zinc-800">
-              <NuxtLink :to="{ name: 'user-profile', params: { username: user.username } }" :class="styles()" @click="toggleUserMenu()">
-                profile
-              </NuxtLink>
-
-              <NuxtLink to="/dev" type="button" :class="styles()">
-                settings
-              </NuxtLink>
-
-              <button type="button" :class="styles()" @click="logout()">
-                logout
-              </button>
-            </div>
-          </section>
-        </span>
-
-        <NuxtLink v-else to="/login">
-          login
-        </NuxtLink>
-      </div>
-    </div>
-
-    <div class="grid grow grid-cols-[auto_1fr] items-start gap-8 max-xl:gap-4">
-      <LayoutMenu class="sticky inset-y-24" />
-
-      =======
-      >>>>>>> 6c4e3a2f21ae886ca1401be42f170be93d179e06
       <slot />
     </div>
   </div>
