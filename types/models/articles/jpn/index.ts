@@ -41,6 +41,7 @@ export interface V2EntryJp {
   furigana: Furigana[]
   frequency: number
   preferFurigana: boolean
+  hideRare: boolean
 }
 
 export interface Furigana {

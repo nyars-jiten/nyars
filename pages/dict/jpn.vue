@@ -5,10 +5,21 @@ const request = computed(() => String(route.query.q ?? ''))
 const { search } = useJpnArticles()
 
 const { data } = useAsyncData('search-request', () => search(request.value, 0, 0), {
-  default: () => ({ result: [] }),
+  // default: () => ({ result: [] }),
   dedupe: 'defer',
   watch: [request],
 })
+
+const updateEntry = function () {
+  const first = data.value?.result[0]
+  if (first && !useRoute('dict-jpn-wid').params.wid && request) {
+    navigateTo({ name: 'dict-jpn-wid', params: { wid: first.wid }, query: { q: request.value } })
+  }
+}
+
+watch(data, updateEntry)
+
+onMounted(updateEntry)
 </script>
 
 <template>

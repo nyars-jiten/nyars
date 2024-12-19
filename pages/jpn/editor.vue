@@ -71,6 +71,7 @@ const preview = useAsyncData('changes-preview', () => api.preview({
         furigana: [],
         frequency: 0,
         preferFurigana: true,
+        hideRare: true,
       } as V2EntryJp,
       warnings: [],
     } as EditorEntryJp

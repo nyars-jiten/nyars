@@ -132,10 +132,10 @@
       "frequencyNoData": "—",
       "status": {
         "isReviewed": "не проверено",
-        "isUnconfirmed": "не подтв.",
+        "isUnconfirmed": "ненадёжное",
         "isArchaic": "архаичное",
         "isDialect": "диалектное",
-        "isProper": "имя/название"
+        "isProper": "собственное"
       }
     },
     "editor": {
@@ -181,8 +181,7 @@
     },
     "jpnEntry": {
       "satelliteButtonOpen": "раскрыть",
-      "satelliteButtonClose": "свернуть",
-      "editsTitle": "История правок"
+      "satelliteButtonClose": "свернуть"
     },
     "login": {
       "titleLogin": "Войти",

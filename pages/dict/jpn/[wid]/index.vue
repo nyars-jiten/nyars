@@ -8,7 +8,7 @@ const { get } = useJpnArticles()
 
 watch(articleWid, () => window.scrollTo(0, 0))
 
-const { data: jpnEntry } = useAsyncData('jpn-article', () => get(wid), {
+const { data: jpnEntry, status } = useAsyncData(`jpn-article-${wid}`, () => get(wid), {
   watch: [articleWid],
 })
 
@@ -19,6 +19,7 @@ const clipboard = useClipboard()
 const { start, stop, isPending } = useTimeout(1000, { controls: true, immediate: false })
 
 watch(articleWid, stop)
+// onBeforeUnmount(() => clear())
 
 function copy() {
   clipboard.copy(url.value?.toString() ?? '')
@@ -71,6 +72,9 @@ useHead({ title: jpnEntry.value?.title })
     </section>
     <UiBlock v-if="jpnEntry">
       <JpnEntry :jpn-entry="jpnEntry" />
+    </UiBlock>
+    <UiBlock v-else-if="status === 'pending'">
+      <span>Статья загружается</span>
     </UiBlock>
     <NotFound v-else />
   </div>

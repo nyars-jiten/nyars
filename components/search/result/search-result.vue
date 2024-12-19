@@ -23,7 +23,7 @@ const shortenedSenses = computed(() => {
     const curMeaning = props.article.meanings[i]
     for (let j = 0; j < curMeaning.senses.length; j++) {
       const curSense = curMeaning.senses[j]
-      if (!curSense.isRare && res.data.length < 5) {
+      if (!props.article.hideRare || (!curSense.isRare && res.data.length < 5)) {
         res.data.push(curSense)
       }
       else {
@@ -81,9 +81,9 @@ const statusStyle = tv({
 
     { isReviewed: true, border: true, class: 'border-l-2 border-l-amber-700' },
     { isUnconfirmed: true, border: true, class: 'border-l-2 border-l-red-700' },
-    { isArchaic: true, border: true, class: 'border-l-2 border-l-fuchsia-500' },
+    { isArchaic: true, border: true, class: 'border-l-2 border-l-indigo-500' },
     { isDialect: true, border: true, class: 'border-l-2 border-l-fuchsia-500' },
-    { isProper: true, border: true, class: 'border-l-2 border-l-fuchsia-500' },
+    { isProper: true, border: true, class: 'border-l-2 border-l-slate-500' },
 
     /*
      * text
@@ -91,9 +91,9 @@ const statusStyle = tv({
 
     { text: true, isReviewed: true, class: 'text-amber-300' },
     { text: true, isUnconfirmed: true, class: 'text-red-300' },
-    { text: true, isArchaic: true, class: 'text-fuchsia-300' },
+    { text: true, isArchaic: true, class: 'text-indigo-300' },
     { text: true, isDialect: true, class: 'text-fuchsia-300' },
-    { text: true, isProper: true, class: 'text-fuchsia-300' },
+    { text: true, isProper: true, class: 'text-slate-300' },
   ],
 })
 
@@ -116,7 +116,7 @@ const iconList = {
   },
   isProper: {
     value: true,
-    path: 'mdi:bacteria-outline',
+    path: 'ic:baseline-group',
   },
 
 } as Record<keyof V2Status, { value: boolean, path: string }>
@@ -153,18 +153,17 @@ const active = computed(() => articleWid.value === props.article.wid)
         <section class="space-y-2">
           <Words :jpn-entry="article" :preview="true" />
 
-          <div v-if="article.frequency > 0" class="flex flex-wrap items-center gap-2">
-            <UiTag kind="freq">
+          <div class="flex flex-wrap items-center gap-2">
+            <UiTag v-if="article.frequency > 0" kind="freq">
               <MiscFreq :value="article.frequency" />
             </UiTag>
-
             <span class="inline-flex flex-wrap items-center gap-2">
               <span v-for="status in statusIconList" :key="status.key" class="inline-flex items-center gap-2" :class="statusStyle({ text: true, [status.key]: true })">
                 <Icon class="size-6" :name="status.path" />
 
-                <!-- <span class="text-xs uppercase">
+                <span class="text-xs uppercase">
                   {{ t(`pages.search.status.${status.key}`) }}
-                </span> -->
+                </span>
               </span>
             </span>
           </div>

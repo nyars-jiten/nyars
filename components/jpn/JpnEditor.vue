@@ -22,39 +22,19 @@ spelling.value = props.entry.spelling
 reading.value = props.entry.reading
 body.value = props.entry.body
 
-const preview = useAsyncData('changes-preview', () => api.preview({
-  body: body.value,
-  reading: reading.value,
-  spelling: spelling.value,
-}), {
-  default: () => (
-    {
-      entry: {
-        wid: '0000',
-        status: {
-          isReviewed: false,
-          isUnconfirmed: false,
-          isArchaic: false,
-          isDialect: false,
-          isProper: false,
-        },
-        externalEntry: '',
-        title: '',
-        tags: [],
-        words: [],
-        meanings: [],
-        furigana: [],
-        frequency: 0,
-        preferFurigana: true,
-      } as V2EntryJp,
-      warnings: [],
-    } as EditorEntryJp
-  ),
-})
+const callPreview = async function () {
+  return await api.preview({
+    body: body.value,
+    reading: reading.value,
+    spelling: spelling.value,
+  })
+}
+
+let preview = await callPreview()
 
 // const changes = computed(() => 'code' in preview.data.value ? null : preview.data.value)
 
-watchDebounced([spelling, reading, body], () => preview.execute(), { debounce: 250, immediate: true })
+watchDebounced([spelling, reading, body], async () => preview = await callPreview(), { debounce: 250, immediate: true })
 
 async function save() {
   const req = {
@@ -282,7 +262,7 @@ const [state, toggle] = useToggle()
         {{ t('pages.editor.preview') }}
       </h1>
 
-      <JpnEntry v-if="preview.data.value" :jpn-entry="preview.data.value.entry" />
+      <JpnEntry v-if="preview" :jpn-entry="preview.entry" />
       <!--
       <i v-else class="block text-neutral-800">
         Пусто тут как-то...
@@ -296,7 +276,7 @@ const [state, toggle] = useToggle()
       </h1>
 
       <UiBlock>
-        <JpnEntry v-if="preview.data.value" :jpn-entry="preview.data.value.entry" />
+        <JpnEntry v-if="preview" :jpn-entry="preview.entry" />
       </UiBlock>
     </span>
   </section>

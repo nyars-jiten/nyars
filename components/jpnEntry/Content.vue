@@ -15,7 +15,7 @@ const style = tv({
     tag: {
       i: 'italic text-gray-500 text-sm',
       p: 'italic',
-      comp: 'bg-gray-300/10 px-1 py-0.5 rounded text-sm', // bg-fuchsia-300/10
+      comp: 'bg-gray-300/10 px-1 py-0.5 rounded text-sm whitespace-nowrap', // bg-fuchsia-300/10
       hide: 'hidden',
       lat: 'decoration-violet-400 underline', // text-violet-300
     } as Record<string, string>,

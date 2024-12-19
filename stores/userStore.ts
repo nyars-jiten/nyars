@@ -16,7 +16,7 @@ export const useUserStore = defineStore('user-store', () => {
     user.value = await serverGetCurrentUser()
   }
 
-  const menuState = ref(false)
+  const menuState = ref(true)
 
   return { user, userAccess, $reset, menuState }
 })
