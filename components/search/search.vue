@@ -13,13 +13,13 @@ const button = tv({
     <div class="inline-flex items-center gap-2">
       <button type="button" :class="button()">
         <Icon name="ic:baseline-text-fields" size="1.5rem" />
-        <span>mode</span>
+        <!-- <span>mode</span> -->
       </button>
     </div>
 
     <section class="group relative inline-flex w-full flex-row gap-2 rounded-md bg-zinc-800 p-2 leading-none text-zinc-500 shadow-md outline outline-1 outline-zinc-700 transition-colors focus-within:outline-none hover:bg-zinc-700 hover:text-zinc-300 hover:outline-transparent">
       <input v-model="request" type="text" class="w-full bg-transparent text-center focus:outline-none" spellcheck="false" autocomplete="off" @keydown.enter.prevent="push()">
-      <Icon name="ic:baseline-search" size="1.5rem" />
+      <!-- <Icon name="ic:baseline-search" size="1.5rem" /> -->
 
       <SearchSuggestions :data="request" class="invisible group-focus-within:visible" />
     </section>
@@ -27,7 +27,12 @@ const button = tv({
     <div class="inline-flex items-center gap-2">
       <button type="button" :class="button()">
         <Icon name="ic:baseline-draw" size="1.5rem" />
-        draw
+        <!-- draw -->
+      </button>
+      <button type="button" :class="button()">
+        <!-- <Icon name="ic:baseline-draw" size="1.5rem" /> -->
+        <span class="text-xl">部</span>
+        <!-- bushu -->
       </button>
     </div>
   </div>

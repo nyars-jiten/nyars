@@ -112,7 +112,7 @@ const iconList = {
   },
   isUnconfirmed: {
     value: true,
-    path: 'mdi:magnify-scan',
+    path: 'mdi:warning-octagon-outline',
   },
   isProper: {
     value: true,

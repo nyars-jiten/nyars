@@ -13,7 +13,7 @@ const { data: jpnEntry } = useAsyncData('jpn-article', () => get(wid), {
 })
 
 const config = useRuntimeConfig()
-const url = computed(() => jpnEntry.value ? new URL(`jpn/${jpnEntry.value.wid}`, config.public.baseUrl) : null)
+const url = computed(() => jpnEntry.value ? new URL(`dict/jpn/${jpnEntry.value.wid}`, config.public.baseUrl) : null)
 
 const clipboard = useClipboard()
 const { start, stop, isPending } = useTimeout(1000, { controls: true, immediate: false })
@@ -25,6 +25,12 @@ function copy() {
   start()
 }
 
+function switchFurigana() {
+  if (jpnEntry.value) {
+    jpnEntry.value.preferFurigana = !jpnEntry.value?.preferFurigana
+  }
+}
+
 definePageMeta({
   layout: false,
 })
@@ -34,14 +40,14 @@ useHead({ title: jpnEntry.value?.title })
 </script>
 
 <template>
-  <div>
+  <div class="space-y-4">
     <!-- <div v-if="request" class="space-y-4">
       <SearchResult v-for="result of data?.result" :key="result.wid" :article="result" />
     </div>
     <div v-else /> -->
     <section class="flex gap-4">
       <!-- todo copied -->
-      <UiButton icon="ic:baseline-content-copy" :active="isPending" @click="copy" />
+      <UiButton icon="mdi:link-variant" :active="isPending" @click="copy" />
 
       <!-- TODO: new block with caption -->
       <UiButton class="grow justify-center truncate" :active="isPending" @click="copy">
@@ -54,8 +60,11 @@ useHead({ title: jpnEntry.value?.title })
         </template>
       </UiButton>
 
+      <UiButton icon="mdi:furigana-horizontal" @click="switchFurigana">
+        <!-- furigana -->
+      </UiButton>
       <NuxtLink :to="{ name: 'dict-jpn-wid-editor', params: { wid: String(jpnEntry?.wid) } }">
-        <UiButton icon="ic:baseline-edit">
+        <UiButton icon="ic:baseline-edit" color="edit">
           <!-- edit -->
         </UiButton>
       </NuxtLink>
