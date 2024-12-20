@@ -1,6 +1,7 @@
 <script setup lang="ts">
 interface Props {
   meanings: V2EntryJp['meanings']
+  showLemmas: boolean
 }
 
 defineProps<Props>()
@@ -39,6 +40,7 @@ const isPreview = false
           :sense="sense"
           :ix="meaning.senses.length > 1 || sense.subSenses.length > 0 ? `${senseIndex + 1}` : ''"
           :is-preview="isPreview"
+          :show-lemmas="showLemmas"
           class="flex flex-col"
         />
 

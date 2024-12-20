@@ -3,6 +3,7 @@ import { tv } from 'tailwind-variants'
 
 interface Props {
   jpnEntry: V2EntryJp
+  showLemmas: boolean
 }
 
 defineProps<Props>()
@@ -57,7 +58,7 @@ const styles = tv({
         </template>
       </div>
 
-      <Meanings :meanings="jpnEntry.meanings" />
+      <Meanings :meanings="jpnEntry.meanings" :show-lemmas="showLemmas" />
     </div>
   </article>
 </template>

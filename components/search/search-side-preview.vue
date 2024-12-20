@@ -48,7 +48,7 @@ function copy() {
     </section>
 
     <UiBlock>
-      <JpnEntry :jpn-entry="article" />
+      <JpnEntry :jpn-entry="article" :show-lemmas="false" />
     </UiBlock>
   </section>
 </template>

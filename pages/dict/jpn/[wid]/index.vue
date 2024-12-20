@@ -12,6 +12,8 @@ const { data: jpnEntry, status } = useAsyncData(`jpn-article-${wid}`, () => get(
   watch: [articleWid],
 })
 
+const showLemmas = ref(false)
+
 const config = useRuntimeConfig()
 const url = computed(() => jpnEntry.value ? new URL(`dict/jpn/${jpnEntry.value.wid}`, config.public.baseUrl) : null)
 
@@ -61,7 +63,7 @@ useHead({ title: jpnEntry.value?.title })
         </template>
       </UiButton>
 
-      <UiButton icon="mdi:card-bulleted-outline">
+      <UiButton icon="mdi:card-bulleted-outline" @click="showLemmas = !showLemmas">
         <!-- lemma-mode -->
       </UiButton>
       <UiButton icon="mdi:furigana-horizontal" @click="switchFurigana">
@@ -74,7 +76,7 @@ useHead({ title: jpnEntry.value?.title })
       </NuxtLink>
     </section>
     <UiBlock v-if="jpnEntry">
-      <JpnEntry :jpn-entry="jpnEntry" />
+      <JpnEntry :jpn-entry="jpnEntry" :show-lemmas="showLemmas" />
     </UiBlock>
     <UiBlock v-else-if="status === 'pending'">
       <span>Статья загружается</span>

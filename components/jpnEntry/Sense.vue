@@ -3,6 +3,7 @@ interface Props {
   sense: V2Sense
   ix: string
   isPreview: boolean
+  showLemmas: boolean
 }
 
 const props = defineProps<Props>()
@@ -66,6 +67,20 @@ const miscTagsLine = computed(() => {
       </div>
     </div>
 
+    <div v-if="showLemmas">
+      <div class="flex flex-wrap place-items-center">
+        <span class="uppercase text-xs mr-2 ml-4 text-emerald-300">Леммы: </span>
+
+        <span
+          v-for="lemma, li in sense.lemmaContent"
+          :key="li"
+          class="px-0.5 m-1 whitespace-nowrap bg-emerald-800 rounded-sm"
+        >
+          {{ lemma.value }}
+        </span>
+      </div>
+    </div>
+
     <!--  -->
 
     <div v-if="!isPreview && sense.intRefs.length > 0" class="ml-7">
@@ -112,6 +127,7 @@ const miscTagsLine = computed(() => {
       :sense="subsense"
       :ix="`${ix}.${subsenseIndex + 1}`"
       :is-preview="isPreview"
+      :show-lemmas="showLemmas"
       class="ml-6 flex flex-col"
     />
   </div>

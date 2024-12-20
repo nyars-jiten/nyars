@@ -111,6 +111,7 @@ export interface V2Meaning {
 
 export interface V2Sense {
   content: V2Content[]
+  lemmaContent: V2Content[]
   examples: V2Example[]
   intRefs: V2InternalReference[]
   extRefs: V2ExternalReference[]

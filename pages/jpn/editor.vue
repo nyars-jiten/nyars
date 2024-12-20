@@ -291,7 +291,7 @@ const [state, toggle] = useToggle()
         {{ t('pages.editor.preview') }}
       </h1>
 
-      <JpnEntry v-if="preview.data.value" :jpn-entry="preview.data.value.entry" />
+      <JpnEntry v-if="preview.data.value" :jpn-entry="preview.data.value.entry" :show-lemmas="false" />
       <!--
       <i v-else class="block text-neutral-800">
         Пусто тут как-то...
@@ -305,7 +305,7 @@ const [state, toggle] = useToggle()
       </h1>
 
       <UiBlock>
-        <JpnEntry v-if="preview.data.value" :jpn-entry="preview.data.value.entry" />
+        <JpnEntry v-if="preview.data.value" :jpn-entry="preview.data.value.entry" :show-lemmas="false" />
       </UiBlock>
     </span>
   </section>
