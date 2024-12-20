@@ -7,9 +7,9 @@ const { t } = useI18n()
     <span class="text-5xl text-ns-500">{{ t('pages.development.title') }}</span>
     <span>{{ t('pages.development.text') }}</span>
     <img
-      src="@/assets/img/16.png"
+      src="@/assets/img/under-construction-1000.png"
       alt="under-dev-image"
-      class="size-72"
+      class="size-1/4"
     >
   </div>
 </template>

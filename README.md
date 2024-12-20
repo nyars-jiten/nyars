@@ -4,6 +4,10 @@
 
 ![Downdetector](https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fnyars.org%2F)
 
+<div align=center>
+<img src="./assets/img/under-construction-1000.png" width=500>
+</div>
+
 ## Development
 
 Make sure to use an even numbered version of Node.js (18, 20, etc.)

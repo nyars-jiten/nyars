@@ -61,6 +61,9 @@ useHead({ title: jpnEntry.value?.title })
         </template>
       </UiButton>
 
+      <UiButton icon="mdi:card-bulleted-outline">
+        <!-- lemma-mode -->
+      </UiButton>
       <UiButton icon="mdi:furigana-horizontal" @click="switchFurigana">
         <!-- furigana -->
       </UiButton>
@@ -76,6 +79,6 @@ useHead({ title: jpnEntry.value?.title })
     <UiBlock v-else-if="status === 'pending'">
       <span>Статья загружается</span>
     </UiBlock>
-    <NotFound v-else />
+    <NotFound v-else message="pages.notFound.noEntry" />
   </div>
 </template>

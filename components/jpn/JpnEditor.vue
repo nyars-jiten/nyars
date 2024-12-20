@@ -156,7 +156,7 @@ function buttons() {
       },
       // кавычки
       {
-        icon: 'ooui:markup',
+        icon: 'tabler:quotes',
         click: ['«', '»'],
         title: 'quotes',
       },
