@@ -34,7 +34,7 @@ const tagsMap = {
           {{ tag.engShort }}
         </span>
         <UiTooltip>
-          {{ tag.ru }}
+          {{ tag.rus }}
         </UiTooltip>
       </small>
 
@@ -48,7 +48,7 @@ const tagsMap = {
           {{ tagsMap[tag.engShort].name }}
         </span>
         <UiTooltip>
-          {{ tag.ru }}
+          {{ tag.rus }}
         </UiTooltip>
       </small>
     </span>

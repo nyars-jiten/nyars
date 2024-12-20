@@ -182,23 +182,6 @@ const guideEvents = [
             </template>
           </i18n-t>
         </template>
-        <div>
-          <!-- <div class="grid grid-cols-[auto_1fr] gap-4 leading-relaxed">
-        <template v-for="x of 10" :key="x">
-          <span class="text-end text-amber-300">
-            {{ x }}
-          </span>
-
-          <span>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            <span @click="$emit('clickInsert', ['[pre]', '[/[pre]]'])">
-              click me
-            </span>
-            Commodi deleniti ratione ad recusandae laudantium quidem ex eaque!
-          </span>
-        </template>
-      </div> -->
-        </div>
       </div>
     </UiBlock>
   </section>

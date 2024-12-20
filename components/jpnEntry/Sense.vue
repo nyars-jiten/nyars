@@ -11,8 +11,8 @@ const props = defineProps<Props>()
 const { t } = useI18n()
 
 const miscTagsLine = computed(() => {
-  const tags = props.sense.metaTags.map(t => t.ru)
-    .concat(props.sense.dialectTags.map(t => t.ru))
+  const tags = props.sense.metaTags.map(t => t.rus)
+    .concat(props.sense.dialectTags.map(t => t.rus))
     .concat(props.sense.loanSources.map(ls => `${ls.lang}. ${ls.word}`))
   if (tags.length === 0)
     return ''
@@ -41,11 +41,11 @@ const miscTagsLine = computed(() => {
         </span> -->
         <small v-for="(tag, i) of sense.fieldTags" :key="i" class="pr-1 italic text-green-600">
           <span class="group relative after:content-[\',\'] last:after:content-none">
-            {{ tag.ruShort }}
+            {{ tag.rusShort }}
 
             <div class="invisible absolute bottom-full left-1/2 z-20 -translate-x-1/2 pb-1 group-hover:visible">
               <div class="flex items-center justify-center rounded-md bg-neutral-800/80 px-3 py-1.5 leading-4 shadow-md outline outline-1 outline-neutral-700 backdrop-blur-md">
-                {{ tag.ru }}
+                {{ tag.rus }}
               </div>
             </div>
           </span>

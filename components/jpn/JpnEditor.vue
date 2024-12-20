@@ -184,12 +184,14 @@ function buttons() {
   ] as (({ icon: string, name: undefined } | { icon: undefined, name: string }) & { title: string, click: [string] | [string, string] })[][]
 }
 
-const [state, toggle] = useToggle()
+const [stateEditorHelp, toggleEditorHelp] = useToggle()
+const [stateTagSearch, toggleTagSearch] = useToggle()
 </script>
 
 <template>
   <section class="grid grow gap-8 xl:h-full xl:grid-cols-[1fr_auto_1fr]">
-    <EditorGuide v-if="state" class="md:hidden" />
+    <EditorGuide v-if="stateEditorHelp" class="md:hidden" @click-insert="(text) => insert.apply(null, text)" />
+    <TagSearch v-if="stateTagSearch" class="md:hidden" @click-insert="(text) => insert.apply(null, text)" />
 
     <h1 class="text-center text-4xl md:hidden">
       Редактор
@@ -206,7 +208,10 @@ const [state, toggle] = useToggle()
         </div>
 
         <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
-          <UiButton class="items-start justify-center text-center max-sm:w-full" type="button" icon="ic:baseline-help-outline" color="amber" :active="state" :title="t('pages.editor.guide')" @click="toggle()">
+          <UiButton class="items-start justify-center text-center max-sm:w-full" type="button" icon="mdi:hashtag-box-outline" color="amber" :active="stateTagSearch" :title="t('pages.editor.guide')" @click="toggleTagSearch(); toggleEditorHelp(false)">
+            <!-- теги -->
+          </UiButton>
+          <UiButton class="items-start justify-center text-center max-sm:w-full" type="button" icon="ic:baseline-help-outline" color="sky" :active="stateEditorHelp" :title="t('pages.editor.guide')" @click="toggleEditorHelp(); toggleTagSearch(false)">
             <!-- справка -->
           </UiButton>
 
@@ -216,7 +221,7 @@ const [state, toggle] = useToggle()
         </div>
       </section>
 
-      <section class="flex grow gap-8 max-md:flex-col" :class="{ 'md:grid md:grid-cols-2': state }">
+      <section class="flex grow gap-8 max-md:flex-col" :class="{ 'md:grid md:grid-cols-2': stateEditorHelp || stateTagSearch }">
         <div class="flex shrink grow flex-col gap-4">
           <UiInput ref="spellingRef" v-model="spelling" :multiline="true" :rows="spellingRows" :disabled="disabled" :placeholder="isNew ? t('pages.editor.placeholder.spelling') : ''">
             <template #hint>
@@ -243,7 +248,8 @@ const [state, toggle] = useToggle()
           </UiInput>
         </div>
 
-        <EditorGuide v-if="state" class="mt-2.5 max-md:hidden" @click-insert="(text) => insert.apply(null, text)" />
+        <EditorGuide v-if="stateEditorHelp" class="mt-2.5 max-md:hidden" @click-insert="(text) => insert.apply(null, text)" />
+        <TagSearch v-if="stateTagSearch" class="mt-2.5 max-md:hidden" @click-insert="(text) => insert.apply(null, text)" />
       </section>
       <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
         <UiButton v-if="!isNew" class="items-start justify-center text-center max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :title="t('pages.editor.delete')" :disabled="disabled" @click="remove">

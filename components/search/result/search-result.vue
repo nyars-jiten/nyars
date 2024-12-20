@@ -177,11 +177,11 @@ const active = computed(() => articleWid.value === props.article.wid)
               <span>
                 <small v-for="(tag, i) of sense.fieldTags" :key="i" class="italic text-green-600">
                   <span class="group relative after:content-[\',\'] last:after:content-none">
-                    {{ tag.ruShort }}
+                    {{ tag.rusShort }}
 
                     <div class="invisible absolute bottom-full left-1/2 z-20 -translate-x-1/2 pb-1 group-hover:visible">
                       <div class="flex items-center justify-center rounded-md bg-neutral-800/80 px-3 py-1.5 leading-4 shadow-md outline outline-1 outline-neutral-700 backdrop-blur-md">
-                        {{ tag.ru }}
+                        {{ tag.rus }}
                       </div>
                     </div>
                   </span>

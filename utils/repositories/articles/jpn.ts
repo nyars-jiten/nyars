@@ -27,6 +27,9 @@ export function useJpnArticles() {
     const search = (query: string, limit: number, offset: number) =>
       fetch<JpnSearchResponse>(`search`, { method: 'POST', body: { query, limit, offset } })
 
-    return { get, edit, remove, source, preview, create, search }
+    const tagList = (q: string, l: number) =>
+      fetch<V2Tag[]>(`${path}/tags`, { method: 'GET', query: { q, l } })
+
+    return { get, edit, remove, source, preview, create, search, tagList }
   })
 }

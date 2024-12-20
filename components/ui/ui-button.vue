@@ -17,6 +17,7 @@ const button = tv({
       amber: 'text-amber-300',
       delete: 'text-rose-400',
       edit: 'text-sky-400',
+      sky: 'text-sky-300',
     },
 
     active: {

@@ -126,8 +126,8 @@ export interface V2Sense {
 export interface V2Tag {
   eng: string
   engShort: string
-  ru: string
-  ruShort: string
+  rus: string
+  rusShort: string
   split?: string[]
 }
 
