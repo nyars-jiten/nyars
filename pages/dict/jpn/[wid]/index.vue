@@ -15,7 +15,7 @@ const { data: jpnEntry, status } = useAsyncData(`jpn-article-${wid}`, () => get(
 const showLemmas = ref(false)
 
 const config = useRuntimeConfig()
-const url = computed(() => jpnEntry.value ? new URL(`dict/jpn/${jpnEntry.value.wid}`, config.public.baseUrl) : null)
+const url = computed(() => jpnEntry.value ? new URL(`jp/${jpnEntry.value.wid}`, config.public.baseUrl) : null)
 
 const clipboard = useClipboard()
 const { start, stop, isPending } = useTimeout(1000, { controls: true, immediate: false })
@@ -36,6 +36,7 @@ function switchFurigana() {
 
 definePageMeta({
   layout: false,
+  alias: '/jp/:wid',
 })
 
 // const showData = ref(false)
@@ -48,36 +49,38 @@ useHead({ title: jpnEntry.value?.title })
       <SearchResult v-for="result of data?.result" :key="result.wid" :article="result" />
     </div>
     <div v-else /> -->
-    <section class="flex gap-4">
-      <!-- todo copied -->
-      <UiButton icon="mdi:link-variant" :active="isPending" @click="copy" />
+    <template v-if="jpnEntry">
+      <section class="flex gap-4">
+        <!-- todo copied -->
+        <UiButton icon="mdi:link-variant" :active="isPending" @click="copy" />
 
-      <!-- TODO: new block with caption -->
-      <UiButton class="grow justify-center truncate" :active="isPending" @click="copy">
-        <template v-if="isPending">
-          copied!
-        </template>
+        <!-- TODO: new block with caption -->
+        <UiButton class="grow justify-center truncate" :active="isPending" @click="copy">
+          <template v-if="isPending">
+            copied!
+          </template>
 
-        <template v-else>
-          {{ url }}
-        </template>
-      </UiButton>
-
-      <UiButton icon="mdi:card-bulleted-outline" @click="showLemmas = !showLemmas">
-        <!-- lemma-mode -->
-      </UiButton>
-      <UiButton icon="mdi:furigana-horizontal" @click="switchFurigana">
-        <!-- furigana -->
-      </UiButton>
-      <NuxtLink :to="{ name: 'dict-jpn-wid-editor', params: { wid: String(jpnEntry?.wid) } }">
-        <UiButton icon="ic:baseline-edit" color="edit">
-          <!-- edit -->
+          <template v-else>
+            {{ url }}
+          </template>
         </UiButton>
-      </NuxtLink>
-    </section>
-    <UiBlock v-if="jpnEntry">
-      <JpnEntry :jpn-entry="jpnEntry" :show-lemmas="showLemmas" />
-    </UiBlock>
+
+        <UiButton icon="mdi:card-bulleted-outline" @click="showLemmas = !showLemmas">
+        <!-- lemma-mode -->
+        </UiButton>
+        <UiButton icon="mdi:furigana-horizontal" @click="switchFurigana">
+        <!-- furigana -->
+        </UiButton>
+        <NuxtLink :to="{ name: 'dict-jpn-wid-editor', params: { wid: String(jpnEntry?.wid) } }">
+          <UiButton icon="ic:baseline-edit" color="edit">
+          <!-- edit -->
+          </UiButton>
+        </NuxtLink>
+      </section>
+      <UiBlock>
+        <JpnEntry :jpn-entry="jpnEntry" :show-lemmas="showLemmas" />
+      </UiBlock>
+    </template>
     <UiBlock v-else-if="status === 'pending'">
       <span>Статья загружается</span>
     </UiBlock>

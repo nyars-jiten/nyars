@@ -2,7 +2,7 @@
 const newEntry = {
   spelling: '',
   reading: '',
-  body: '=((n))\n- новое значение',
+  body: '=((сущ))\n- новое значение',
 } as EditorTxtEntryJp
 
 definePageMeta({
