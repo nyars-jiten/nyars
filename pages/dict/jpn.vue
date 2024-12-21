@@ -12,7 +12,7 @@ const { data } = useAsyncData('search-request', () => search(request.value, 0, 0
 
 const updateEntry = function () {
   const first = data.value?.result[0]
-  if (first && !useRoute('dict-jpn-wid').params.wid && request) {
+  if (first && !useRoute('dict-jpn-wid').params.wid && !useRoute('dict-jpn-new') && request) {
     navigateTo({ name: 'dict-jpn-wid', params: { wid: first.wid }, query: { q: request.value } })
   }
 }

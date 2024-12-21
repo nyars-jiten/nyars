@@ -3,12 +3,12 @@ import type { $Fetch, NitroFetchRequest } from 'nitropack'
 export function editRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
   const path = '/edits'
 
-  const getEdits = (number = 25, page = 0, statuses: number | null = null): Promise<EditResponse[]> => {
+  const getEdits = (number = 25, page = 0, statuses: string = ''): Promise<EditResponse[]> => {
     return fetch<EditResponse[]>(path, {
       params: {
         n: number,
         p: page,
-        statuses,
+        s: statuses,
       },
     })
   }
@@ -30,8 +30,11 @@ export function editRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
   }
 
   const approveEditStatus = (editId: string) => {
-    return fetch<Edit>(`${path}/${editId}/approve?status=false`, {
+    return fetch<Edit>(`${path}/${editId}/approve`, {
       method: 'POST',
+      params: {
+        status: false,
+      },
     })
   }
 

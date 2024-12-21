@@ -8,11 +8,13 @@ interface Props {
 
 const props = defineProps<Props>()
 
+const { userAccess } = storeToRefs(useUserStore())
+
 // const route = useRoute('dict-jpn-wid')
 
 // const isEntryPage = Boolean(route.params.wid)
 
-const [showChanges, toggleChanges] = useToggle(props.expanded && props.edit.status === EditStatus.New)
+const [showChanges, toggleChanges] = useToggle(props.expanded && props.edit.status === EditStatus.New && userAccess.value.hasAccessEdits)
 
 const mark = tv({
   variants: {

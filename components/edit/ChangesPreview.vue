@@ -26,19 +26,19 @@ const preview = tv({
         </UiButton>
       </NuxtLink>
 
-      <UiButton v-if="userAccess.hasAccessEdits || (user && user.id === edit.author?.id)" class="text-red-500" icon="ic:baseline-close" title="Отклонить" @click="declineEdit(edit.id)">
+      <UiButton v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))" class="text-red-500" icon="ic:baseline-close" title="Отклонить" @click="declineEdit(edit.id)">
         <!-- Отклонить -->
       </UiButton>
 
-      <UiButton v-if="userAccess.hasAccessEdits" class="text-green-500" icon="ic:baseline-done-all" title="Принять" @click="approveEdit(edit.id)">
+      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-green-500" icon="ic:baseline-done-all" title="Принять" @click="approveEdit(edit.id)">
         <!-- Принять -->
       </UiButton>
 
-      <UiButton v-if="userAccess.hasAccessEdits" class="text-yellow-500" icon="ic:baseline-done" title="Принять без смены статуса" @click="approveEditStatus(edit.id)">
+      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-yellow-500" icon="ic:baseline-done" title="Принять без смены статуса" @click="approveEditStatus(edit.id)">
         <!-- Принять без смены статуса -->
       </UiButton>
 
-      <UiButton v-if="userAccess.hasAccessEdits || (user && user.id === edit.author?.id)" class="text-blue-500" icon="ic:baseline-edit" title="Отредактировать">
+      <UiButton v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))" class="text-blue-500" icon="ic:baseline-edit" title="Отредактировать">
         <!-- Отредактировать -->
       </UiButton>
     </div>

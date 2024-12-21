@@ -16,7 +16,7 @@ const { t } = useI18n()
       class="ml-2 flex flex-col border-l border-ns-gray-300 p-1 dark:border-ns-gray-600"
       @click="headerStore.closeHamburgerMenu"
     >
-      <NuxtLink :to="{ name: 'Edits' }" class="flex items-center justify-center rounded-md p-2 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
+      <NuxtLink :to="{ name: 'edits' }" class="flex items-center justify-center rounded-md p-2 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
         <span>{{ t('components.header.navigation[0].pages.edits') }}</span>
       </NuxtLink>
       <NuxtLink :to="{ name: 'Statistics' }" class="flex items-center justify-center rounded-md p-2 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
