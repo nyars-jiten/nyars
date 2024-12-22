@@ -30,11 +30,11 @@ const callPreview = async function () {
   })
 }
 
-let preview = await callPreview()
+const preview = ref(await callPreview())
 
 // const changes = computed(() => 'code' in preview.data.value ? null : preview.data.value)
 
-watchDebounced([spelling, reading, body], async () => preview = await callPreview(), { debounce: 250, immediate: true })
+watchDebounced([spelling, reading, body], async () => preview.value = await callPreview(), { debounce: 250, immediate: true })
 
 async function save() {
   const req = {
