@@ -22,14 +22,23 @@ const [userMenu, toggleUserMenu] = useToggle()
 
 const userMenuRef = useTemplateRef('userMenuRef')
 onClickOutside(userMenuRef, () => toggleUserMenu(false))
+
+onMounted(() => {
+  if (import.meta.client) {
+    if (window.innerWidth < 1280) {
+      menuState.value = false
+    }
+  }
+})
 </script>
 
 <template>
   <div class="grid min-h-dvh grid-cols-[auto_1fr] gap-4 p-4">
     <section class="space-y-4 sticky h-[calc(100dvh-theme('spacing.8'))] top-4 bg-neutral-900 overflow-x-hidden overflow-y-auto max-sm:hidden">
-      <button type="button" @click="menuState = !menuState">
-        x
-      </button>
+      <UiButton type="button" @click="menuState = !menuState">
+        <Icon v-if="menuState" size="1.5rem" name="ic:baseline-close" />
+        <Icon v-else size="1.5rem" name="ic:baseline-menu" />
+      </UiButton>
 
       <LayoutMenu class="inset-y-24" />
     </section>
@@ -38,18 +47,25 @@ onClickOutside(userMenuRef, () => toggleUserMenu(false))
 
     <div class="space-y-4">
       <div class="sticky top-0 z-40 flex items-center justify-between gap-x-4 bg-neutral-900/95">
-        <button type="button" class="sm:hidden" @click="menuState = !menuState">
-          x
-        </button>
+        <!-- <UiButton type="button" class="sm:hidden" @click="menuState = !menuState">
+          <Icon size="1.5rem" name="ic:baseline-close" />
+        </UiButton> -->
 
         <NuxtLink
           to="/"
-          class="relative flex items-center gap-1.5 rounded-md p-1.5"
+          class="flex items-center gap-x-2"
           @click="headerStore.closeHamburgerMenu"
         >
           <div class="size-9 rounded-full bg-ns-logo-light bg-cover dark:bg-ns-logo-dark" />
-          <span class="text-xl leading-snug text-ns-500 dark:text-white">
-            {{ t('components.header.nyars') }}
+
+          <span>
+            <span class="text-xl leading-snug text-ns-500 dark:text-white">
+              {{ t('components.header.nyars') }}
+            </span>
+
+            <small class="text-xs align-super">
+              v11.1
+            </small>
           </span>
         </NuxtLink>
 
