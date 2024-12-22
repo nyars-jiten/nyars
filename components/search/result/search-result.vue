@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { tv } from 'tailwind-variants'
-
 const props = defineProps<Props>()
 
 interface Props {
@@ -40,106 +38,7 @@ const request = useSearchRequest()
 
 const { t } = useI18n()
 
-const statusStyle = tv({
-  variants: {
-    border: {
-      true: '',
-      false: '',
-    },
-
-    text: {
-      true: '',
-      false: '',
-    },
-
-    isReviewed: {
-      true: '',
-      false: '',
-    },
-    isUnconfirmed: {
-      true: '',
-      false: '',
-    },
-    isArchaic: {
-      true: '',
-      false: '',
-    },
-    isDialect: {
-      true: '',
-      false: '',
-    },
-    isProper: {
-      true: '',
-      false: '',
-    },
-  },
-
-  compoundVariants: [
-    /*
-     * border
-     */
-
-    { isReviewed: true, border: true, class: 'border-l-2 border-l-amber-700' },
-    { isUnconfirmed: true, border: true, class: 'border-l-2 border-l-red-700' },
-    { isArchaic: true, border: true, class: 'border-l-2 border-l-indigo-500' },
-    { isDialect: true, border: true, class: 'border-l-2 border-l-fuchsia-500' },
-    { isProper: true, border: true, class: 'border-l-2 border-l-slate-500' },
-
-    /*
-     * text
-     */
-
-    { text: true, isReviewed: true, class: 'text-amber-300' },
-    { text: true, isUnconfirmed: true, class: 'text-red-300' },
-    { text: true, isArchaic: true, class: 'text-indigo-300' },
-    { text: true, isDialect: true, class: 'text-fuchsia-300' },
-    { text: true, isProper: true, class: 'text-slate-300' },
-  ],
-})
-
-const iconList = {
-  isReviewed: {
-    value: false,
-    path: 'mdi:warning-outline',
-  },
-  isArchaic: {
-    value: true,
-    path: 'mdi:feather',
-  },
-  isDialect: {
-    value: true,
-    path: 'mdi:translate',
-  },
-  isUnconfirmed: {
-    value: true,
-    path: 'mdi:warning-octagon-outline',
-  },
-  isProper: {
-    value: true,
-    path: 'ic:baseline-group',
-  },
-
-} as Record<keyof V2Status, { value: boolean, path: string }>
-
-const statusIconList = computed(() => {
-  const res = [] as { key: keyof V2Status, path: string } []
-
-  for (const key of Object.keys(iconList) as (keyof V2Status)[]) {
-    if (iconList[key].value === props.article.status[key]) {
-      res.push({ key, path: iconList[key].path })
-    }
-  }
-
-  return res
-})
-
-const border = computed(() => {
-  if (statusIconList.value.length > 0) {
-    return statusStyle({ border: true, [statusIconList.value[0].key]: true })
-  }
-
-  return ''
-})
+const newBorder = ref('')
 
 const articleWid = useRouteArticle()
 
@@ -147,8 +46,8 @@ const active = computed(() => articleWid.value === props.article.wid)
 </script>
 
 <template>
-  <NuxtLink :to="{ name: 'dict-jpn-wid', params: { wid: article.wid }, query: { q: request.request.value } }" class="w-full" :class="{ 'cursor-default': active }">
-    <UiBlock :hover="active === false" :class="border">
+  <NuxtLink :to="{ name: 'dict-jpn-wid', params: { wid: `${article.wid}-${article.title}` }, query: { q: request.request.value } }" class="w-full" :class="{ 'cursor-default': active }">
+    <UiBlock :hover="active === false" :class="newBorder">
       <template #default>
         <section class="space-y-2">
           <Words :jpn-entry="article" :preview="true" />
@@ -157,15 +56,8 @@ const active = computed(() => articleWid.value === props.article.wid)
             <UiTag v-if="article.frequency > 0" kind="freq">
               <MiscFreq :value="article.frequency" />
             </UiTag>
-            <span class="inline-flex flex-wrap items-center gap-2">
-              <span v-for="status in statusIconList" :key="status.key" class="inline-flex items-center gap-2" :class="statusStyle({ text: true, [status.key]: true })">
-                <Icon class="size-6" :name="status.path" />
 
-                <span class="text-xs uppercase">
-                  {{ t(`pages.search.status.${status.key}`) }}
-                </span>
-              </span>
-            </span>
+            <EntryFlagBadge :statuses="article.status" @change-border="(cl) => { newBorder = cl }" />
           </div>
 
           <div class="grid grid-cols-[auto_1fr] gap-x-2">

@@ -23,8 +23,18 @@ const styles = tv({
       <Words :jpn-entry="jpnEntry" class="" />
     </div>
 
+    <div class="px-2 flex flex-wrap items-center gap-2">
+      <UiTag v-if="jpnEntry.frequency > 0" kind="freq">
+        <MiscFreq :value="jpnEntry.frequency" />
+      </UiTag>
+      <EntryFlagBadge :statuses="jpnEntry.status" hint />
+    </div>
     <div class="px-2 space-y-4">
       <div class="space-x-2">
+        <!-- <UiTag v-if="jpnEntry.frequency > 0" kind="freq">
+          <MiscFreq :value="jpnEntry.frequency" />
+        </UiTag>
+        <EntryFlagBadge :statuses="jpnEntry.status" hint /> -->
         <template v-for="(reading, ri) in jpnEntry.words.flatMap(word => word.readings)" :key="ri">
           <template v-for="(pitch, pi) in reading.pitch" :key="pi">
             <span class="space-x-1 py-1 px-1.5 rounded-md bg-neutral-800/20 shadow-md inline-flex items-center">
