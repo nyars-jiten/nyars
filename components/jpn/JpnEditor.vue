@@ -200,8 +200,8 @@ const [stateTagSearch, toggleTagSearch] = useToggle()
     <div class="flex h-full flex-col gap-4">
       <section class="flex items-start justify-between gap-4 max-sm:flex-col">
         <div class="inline-flex flex-wrap gap-x-8 gap-y-2">
-          <span v-for="group, index in buttons()" :key="index" class="inline-flex flex-wrap gap-2">
-            <UiButton v-for="{ name, icon, title, click } in group" :key="title" type="button" :icon="icon" :title="t(`pages.editor.button.${title}`)" :disabled="disabled" @click="insert.apply(null, click)">
+          <span v-for="group, index in buttons()" :key="index" class="gap-2 grid" :style="{ gridTemplateColumns: `repeat(${group.length}, minmax(0, 1fr))` }">
+            <UiButton v-for="{ name, icon, title, click } in group" :key="title" type="button" :icon="icon" :title="t(`pages.editor.button.${title}`)" :disabled="disabled" class="inline-flex justify-center" @click="insert.apply(null, click)">
               {{ name }}
             </UiButton>
           </span>

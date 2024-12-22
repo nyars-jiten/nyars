@@ -6,7 +6,7 @@ import { tv } from 'tailwind-variants'
 withDefaults(defineProps<Props>(), {
   type: 'button',
   disabled: false,
-  outline: false,
+  outline: true,
 })
 
 const button = tv({
@@ -22,7 +22,7 @@ const button = tv({
     },
 
     outline: {
-      true: 'shadow-md outline outline-1 outline-zinc-700',
+      true: 'shadow-md outline outline-1 outline-zinc-800',
       false: '',
     },
 
