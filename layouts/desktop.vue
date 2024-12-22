@@ -35,7 +35,7 @@ onMounted(() => {
 <template>
   <div class="grid min-h-dvh grid-cols-[auto_1fr] gap-4 p-4">
     <section class="space-y-4 sticky h-[calc(100dvh-theme('spacing.8'))] top-4 bg-neutral-900 overflow-x-hidden overflow-y-auto max-sm:hidden">
-      <UiButton type="button" @click="menuState = !menuState">
+      <UiButton :outline="false" type="button" @click="menuState = !menuState">
         <Icon v-if="menuState" size="1.5rem" name="ic:baseline-close" />
         <Icon v-else size="1.5rem" name="ic:baseline-menu" />
       </UiButton>
@@ -47,7 +47,7 @@ onMounted(() => {
 
     <div class="space-y-4">
       <div class="sticky top-0 z-40 flex items-center justify-between gap-x-4 bg-neutral-900/95">
-        <!-- <UiButton type="button" class="sm:hidden" @click="menuState = !menuState">
+        <!-- <UiButton :outline="false" type="button" class="sm:hidden" @click="menuState = !menuState">
           <Icon size="1.5rem" name="ic:baseline-close" />
         </UiButton> -->
 

@@ -4,6 +4,12 @@ const { t } = useI18n()
 const api = useJpnArticles()
 const routeWid = useRoute('dict-jpn-wid').params.wid
 
+const { menuState } = storeToRefs(useUserStore())
+
+onBeforeMount(() => {
+  menuState.value = false
+})
+
 const spelling = ref('')
 const spellingRows = computed(() => spelling.value.split('\n').length)
 
@@ -189,7 +195,7 @@ const [stateTagSearch, toggleTagSearch] = useToggle()
 </script>
 
 <template>
-  <section class="grid grow gap-8 xl:h-full xl:grid-cols-[1fr_auto_1fr]">
+  <section class="grid grow gap-8 xl:h-full xl:grid-cols-[2fr_1fr]">
     <EditorGuide v-if="stateEditorHelp" class="md:hidden" @click-insert="(text) => insert.apply(null, text)" />
     <TagSearch v-if="stateTagSearch" class="md:hidden" @click-insert="(text) => insert.apply(null, text)" />
 
@@ -198,9 +204,9 @@ const [stateTagSearch, toggleTagSearch] = useToggle()
     </h1>
 
     <div class="flex h-full flex-col gap-4">
-      <section class="flex items-start justify-between gap-4 max-sm:flex-col">
+      <section class="flex items-start justify-between gap-4 max-sm:flex-col top-10 sticky z-40 bg-neutral-900/95">
         <div class="inline-flex flex-wrap gap-x-8 gap-y-2">
-          <span v-for="group, index in buttons()" :key="index" class="gap-2 grid" :style="{ gridTemplateColumns: `repeat(${group.length}, minmax(0, 1fr))` }">
+          <span v-for="group, index in buttons()" :key="index" class="gap-2 grid" :style="{ gridTemplateColumns: `repeat(${group.length}, 1fr)` }">
             <UiButton v-for="{ name, icon, title, click } in group" :key="title" type="button" :icon="icon" :title="t(`pages.editor.button.${title}`)" :disabled="disabled" class="inline-flex justify-center" @click="insert.apply(null, click)">
               {{ name }}
             </UiButton>
@@ -208,10 +214,10 @@ const [stateTagSearch, toggleTagSearch] = useToggle()
         </div>
 
         <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
-          <UiButton class="items-start justify-center text-center max-sm:w-full" type="button" icon="mdi:hashtag-box-outline" color="amber" :active="stateTagSearch" :title="t('pages.editor.guide')" @click="toggleTagSearch(); toggleEditorHelp(false)">
+          <UiButton class="max-sm:w-full" type="button" icon="mdi:hashtag-box-outline" color="amber" :active="stateTagSearch" :title="t('pages.editor.guide')" @click="toggleTagSearch(); toggleEditorHelp(false)">
             <!-- теги -->
           </UiButton>
-          <UiButton class="items-start justify-center text-center max-sm:w-full" type="button" icon="ic:baseline-help-outline" color="sky" :active="stateEditorHelp" :title="t('pages.editor.guide')" @click="toggleEditorHelp(); toggleTagSearch(false)">
+          <UiButton class="max-sm:w-full" type="button" icon="ic:baseline-help-outline" color="sky" :active="stateEditorHelp" :title="t('pages.editor.guide')" @click="toggleEditorHelp(); toggleTagSearch(false)">
             <!-- справка -->
           </UiButton>
 
@@ -249,19 +255,17 @@ const [stateTagSearch, toggleTagSearch] = useToggle()
         </div>
 
         <EditorGuide v-if="stateEditorHelp" class="mt-2.5 max-md:hidden" @click-insert="(text) => insert.apply(null, text)" />
-        <TagSearch v-if="stateTagSearch" class="mt-2.5 max-md:hidden" @click-insert="(text) => insert.apply(null, text)" />
+        <TagSearch v-else-if="stateTagSearch" class="mt-2.5 max-md:hidden" @click-insert="(text) => insert.apply(null, text)" />
       </section>
       <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
-        <UiButton v-if="!isNew" class="items-start justify-center text-center max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :title="t('pages.editor.delete')" :disabled="disabled" @click="remove">
+        <UiButton v-if="!isNew" class="max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :title="t('pages.editor.delete')" :disabled="disabled" @click="remove">
           {{ t('pages.editor.delete') }}
         </UiButton>
-        <UiButton class="items-start justify-center text-center max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="save">
+        <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="save">
           {{ t('pages.editor.save') }}
         </UiButton>
       </div>
     </div>
-
-    <div class="border-l border-neutral-800 max-xl:hidden" />
 
     <div class="space-y-8 py-8 max-xl:hidden">
       <h1 class="text-center text-4xl">

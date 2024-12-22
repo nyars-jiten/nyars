@@ -7,12 +7,12 @@ const { tagList } = useJpnArticles()
 const tags = ref([] as V2Tag[])
 
 const updateTags = async function () {
-  tags.value = await tagList(query.value, 20)
+  tags.value = await tagList(query.value, 5)
 }
 
 await updateTags()
 
-watch(query, updateTags)
+watchDebounced(query, updateTags, { debounce: 350 })
 </script>
 
 <template>
@@ -25,20 +25,23 @@ watch(query, updateTags)
       <h1 class="text-center text-2xl max-md:hidden">
         Теги
       </h1>
+
       <UiInput v-model="query" type="text">
         <template #hint>
           Поиск
         </template>
       </UiInput>
-      <div>
-        <div v-for="tag in tags" :key="tag.engShort" class="cursor-pointer" @click="$emit('clickInsert', [tag.rusShort, ''])">
-          <span>
-            {{ tag.rusShort }}
+
+      <div class="flex flex-col gap-2">
+        <button v-for="{ engShort, rusShort, rus } in tags" :key="engShort" type="button" class="transition-opacity hover:opacity-30 text-left space-x-2" @click="$emit('clickInsert', [rusShort, ''])">
+          <span class="text-amber-300 italic">
+            {{ rusShort }}
           </span>
+
           <span>
-            {{ tag.rus }}
+            {{ rus }}
           </span>
-        </div>
+        </button>
       </div>
     </UiBlock>
   </section>

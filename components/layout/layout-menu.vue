@@ -74,7 +74,7 @@ onMounted(() => {
 <template>
   <ul ref="menuRef" :class="block({ state: menuState, secondary })">
     <li v-if="secondary" class="px-0">
-      <UiButton type="button" @click="menuState = !menuState">
+      <UiButton :outline="false" type="button" @click="menuState = !menuState">
         <Icon size="1.5rem" name="ic:baseline-close" />
       </UiButton>
     </li>

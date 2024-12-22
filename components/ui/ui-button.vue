@@ -9,6 +9,10 @@ withDefaults(defineProps<Props>(), {
   outline: true,
 })
 
+const slots = defineSlots<{
+  default: () => VNode[]
+}>()
+
 const button = tv({
   base: 'inline-flex items-center gap-2 rounded-md px-2 py-1.5 leading-none transition-colors',
   variants: {
@@ -19,6 +23,10 @@ const button = tv({
       delete: 'text-rose-400',
       edit: 'text-sky-400',
       sky: 'text-sky-300',
+    },
+
+    iconOnly: {
+      true: 'justify-center',
     },
 
     outline: {
@@ -51,7 +59,7 @@ interface Props {
 </script>
 
 <template>
-  <button :type="type" :class="button({ color, active, disabled, outline })" :title="title" :disabled="disabled">
+  <button :type="type" :class="button({ color, active, disabled, outline, iconOnly: !!slots.default })" :title="title" :disabled="disabled">
     <Icon v-if="icon" :name="icon" size="1.5rem" />
     <slot />
   </button>
