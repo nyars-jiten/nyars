@@ -46,7 +46,7 @@ const submit = handleSubmit(async ({ login, password }) => {
     }
   }
   catch {
-    notificationStore.createNotification('An error occurred')
+    notificationStore.createNotification('An error occurred', NyarsNotificationType.Error)
     return
   }
 

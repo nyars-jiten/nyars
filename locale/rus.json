@@ -164,6 +164,10 @@
         "single-bracket": "single-bracket",
         "accent": "accent"
       },
+      "notification": {
+        "success": "Правка отправлена",
+        "error": "Не удалось создать правку"
+      },
       "guideActions": {
         "click": "Нажмите на серые теги, чтобы вставить их в текст.",
         "basic": "Теги и пометки выделяются {tag}.",

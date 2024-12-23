@@ -5,6 +5,7 @@ const api = useJpnArticles()
 const routeWid = useRoute('dict-jpn-wid').params.wid
 
 const { menuState } = storeToRefs(useUserStore())
+const notificationStore = useNotificationStore()
 
 onBeforeMount(() => {
   menuState.value = false
@@ -54,6 +55,7 @@ async function save() {
   }
 
   await api.create(req)
+  notificationStore.createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
 }
 
 async function remove() {
