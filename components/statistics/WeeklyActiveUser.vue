@@ -1,18 +1,10 @@
 <script setup lang="ts">
 interface Props {
-  position: number
-  avatar: string
-  username: string
-  weekRating: number
-  jpnNew: number
-  jpnEdit: number
-  jpnNewAuto: number
-  jpnEditAuto: number
-  approved: number
+  data: WeeklyStats
 }
 
 const props = defineProps<Props>()
-const avatar = computed(() => useAvatar(props.avatar).href)
+const avatar = computed(() => useAvatar(props.data.user.avatar).href)
 
 const { t } = useI18n()
 </script>
@@ -20,16 +12,16 @@ const { t } = useI18n()
 <template>
   <UiBlock class="group" :hover="true">
     <div class="space-y-4 overflow-hidden">
-      <NuxtLink :to="{ name: 'user-profile', params: { username } }" class="flex grow items-center gap-4 cursor-pointer">
+      <NuxtLink :to="{ name: 'user-profile', params: { username: data.user.username } }" class="flex grow items-center gap-4 cursor-pointer">
         <img
           class="inline-flex size-12 items-center justify-center rounded-full border border-neutral-800 object-center shadow-md transition-colors group-hover:border-neutral-700 group-hover:hover:border-neutral-600"
           :src="avatar"
-          :alt="username"
+          :alt="data.user.username"
         >
 
         <div class="flex flex-col gap-1 leading-none">
           <span class="w-full truncate">
-            {{ username }}
+            {{ data.user.username }}
           </span>
 
           <span class="space-x-2 truncate">
@@ -37,8 +29,8 @@ const { t } = useI18n()
               {{ t('models.userRating.weekRating') }}
             </small>
 
-            <span class="truncate text-amber-300">
-              {{ weekRating }}
+            <span class="truncate text-violet-300">
+              {{ data.stats.rating }}
             </span>
           </span>
         </div>
@@ -46,29 +38,29 @@ const { t } = useI18n()
 
       <div class="grid grid-cols-2 gap-4">
         <div class="grid grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1 leading-none">
-          <WeeklyActivityLine :values="[jpnNew]" :name="t('models.userRating.summaryWeekJapNew')">
+          <WeeklyActivityLine :values="[data.stats.jpnNew]" :name="t('models.userRating.summaryWeekJapNew')">
             <template #value>
-              {{ jpnNew }}
+              {{ data.stats.jpnNew }}
             </template>
           </WeeklyActivityLine>
 
-          <WeeklyActivityLine :values="[jpnEdit]" :name="t('models.userRating.summaryWeekJapEdit')">
+          <WeeklyActivityLine :values="[data.stats.jpnEdit]" :name="t('models.userRating.summaryWeekJapEdit')">
             <template #value>
-              {{ jpnEdit }}
+              {{ data.stats.jpnEdit }}
             </template>
           </WeeklyActivityLine>
         </div>
 
         <div class="grid grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1 leading-none">
-          <WeeklyActivityLine :values="[approved]" :name="t('models.userRating.summaryWeekApproved')">
+          <WeeklyActivityLine :values="[data.stats.reviews]" :name="t('models.userRating.summaryWeekApproved')">
             <template #value>
-              {{ approved }}
+              {{ data.stats.reviews }}
             </template>
           </WeeklyActivityLine>
 
-          <WeeklyActivityLine :values="[jpnNewAuto, jpnEditAuto]" :name="t('components.statistics.weeklyActiveUser.jpnAuto')">
+          <WeeklyActivityLine :values="[data.stats.autoNew, data.stats.autoEdit]" :name="t('components.statistics.weeklyActiveUser.jpnAuto')">
             <template #value>
-              {{ jpnNewAuto }}<small class="text-neutral-300">/</small>{{ jpnEditAuto }}
+              {{ data.stats.autoNew }}<small class="text-neutral-300">/</small>{{ data.stats.autoEdit }}
             </template>
           </WeeklyActivityLine>
         </div>

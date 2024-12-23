@@ -17,6 +17,25 @@ export interface EditorTxtEntryJp {
   body: string
 }
 
+export interface WeeklyStats {
+  stats: StatsUser
+  user: ShortUser
+}
+
+export interface StatsUser {
+  jpnNew: number
+  jpnEdit: number
+  kanjiNew: number
+  kanjiEdit: number
+  rusNew: number
+  rusEdit: number
+  autoNew: number
+  autoEdit: number
+  reviews: number
+  rating: number
+  edits: number
+}
+
 export interface V2EntryJpResponse {
   entry: V2EntryJp
 }
