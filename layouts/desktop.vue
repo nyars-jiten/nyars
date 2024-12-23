@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { tv } from 'tailwind-variants'
+import { version } from '../package.json'
 
 const { user, menuState } = storeToRefs(useUserStore())
 const { clientLogout } = useApi(userRepository)
@@ -56,15 +57,18 @@ onMounted(() => {
           class="flex items-center gap-x-2"
           @click="headerStore.closeHamburgerMenu"
         >
-          <div class="size-9 rounded-full bg-ns-logo-light bg-cover dark:bg-ns-logo-dark" />
+          <div class="size-9 mt-1 rounded-full bg-cover invert" style="background-image: url('/favicon-logo.svg');" />
 
           <span>
             <span class="text-xl leading-snug text-ns-500 dark:text-white">
-              {{ t('components.header.nyars') }}
-            </span>
+              <!-- {{ t('components.header.nyars') }} -->Н</span>
+            <span class="text-xl leading-snug text-ns-500 dark:text-ns-400">
+              <!-- {{ t('components.header.nyars') }} -->Я</span>
+            <span class="text-xl leading-snug text-ns-500 dark:text-white">
+              <!-- {{ t('components.header.nyars') }} -->РС</span>
 
-            <small class="text-xs align-super">
-              v11.1
+            <small class="text-xs align-top">
+              v{{ version }}
             </small>
           </span>
         </NuxtLink>
