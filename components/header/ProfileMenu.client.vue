@@ -9,9 +9,7 @@ const avatar = computed(() => useAvatar(user.value?.avatar ?? '').href)
 
 async function logout() {
   await clientLogout()
-
   user.value = null
-
   navigateTo('/')
 }
 </script>
@@ -27,19 +25,19 @@ async function logout() {
           :alt="user.username"
         >
         <IconAccount v-else class="!m-0 text-3xl" />
-        <span class="inline-block max-w-20 truncate min-[380px]:max-w-32 sm:max-w-40">
+        <!-- <span class="inline-block max-w-20 truncate min-[380px]:max-w-32 sm:max-w-40">
           {{ user ? user.username : '' }}
-        </span>
+        </span> -->
         <IconChevronDown class="!m-0 text-xl text-ns-gray-400 duration-[0.2s] ease-out group-hover:-rotate-180" />
       </NuxtLink>
       <div class="absolute right-0 hidden w-[180px] group-hover:inline lg:left-1/2 lg:ml-[-90px]">
         <div class="flex flex-col gap-1 rounded-md border border-ns-gray-200 bg-white p-2 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800">
-          <NuxtLink to="/" class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
+          <NuxtLink v-if="user" to="/" class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
             <span>{{ t('components.header.profileMenu.profile') }}</span>
           </NuxtLink>
-          <NuxtLink to="/" class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
+          <!-- <NuxtLink to="/" class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
             <span>{{ t('components.header.profileMenu.settings') }}</span>
-          </NuxtLink>
+          </NuxtLink> -->
           <NuxtLink v-if="!user" :to="{ name: 'Login' }" class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
             <span>{{ t('components.header.profileMenu.login') }}</span>
           </NuxtLink>
@@ -51,9 +49,9 @@ async function logout() {
           >
             <span>{{ t('components.header.profileMenu.exit') }}</span>
           </button>
-          <div class="border-t border-ns-gray-300 pt-2 dark:border-ns-gray-600">
+          <!-- <div class="border-t border-ns-gray-300 pt-2 dark:border-ns-gray-600">
             <ThemeSwitcher class="w-full" />
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

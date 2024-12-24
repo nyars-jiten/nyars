@@ -2,26 +2,27 @@
 import { tv } from 'tailwind-variants'
 import { version } from '../package.json'
 
-const { user, menuState } = storeToRefs(useUserStore())
-const { clientLogout } = useApi(userRepository)
-const avatar = computed(() => useAvatar(user.value?.avatar ?? '').href)
+// user,
+const { menuState } = storeToRefs(useUserStore())
+// const { clientLogout } = useApi(userRepository)
+// const avatar = computed(() => useAvatar(user.value?.avatar ?? '').href)
 
-const styles = tv({
-  base: 'inline-block w-full px-8 py-3 text-center leading-none transition-colors hover:bg-zinc-800 hover:text-zinc-300',
-})
+// const styles = tv({
+//   base: 'inline-block w-full px-8 py-3 text-center leading-none transition-colors hover:bg-zinc-800 hover:text-zinc-300',
+// })
 
-async function logout() {
-  await clientLogout()
-  user.value = null
-  await navigateTo('/')
-}
+// async function logout() {
+//   await clientLogout()
+//   user.value = null
+//   await navigateTo('/')
+// }
 
-const { t } = useI18n()
+// const { t } = useI18n()
 const headerStore = useHeaderStore()
-const [userMenu, toggleUserMenu] = useToggle()
+// const [userMenu, toggleUserMenu] = useToggle()
 
-const userMenuRef = useTemplateRef('userMenuRef')
-onClickOutside(userMenuRef, () => toggleUserMenu(false))
+// const userMenuRef = useTemplateRef('userMenuRef')
+// onClickOutside(userMenuRef, () => toggleUserMenu(false))
 
 onMounted(() => {
   if (import.meta.client) {
@@ -75,7 +76,8 @@ onMounted(() => {
         <Search class="w-1/2 max-xl:w-3/5 max-lg:w-3/4" />
 
         <div>
-          <span v-if="user" ref="userMenuRef" class="relative flex items-center gap-1.5">
+          <ProfileMenu />
+          <!-- <span v-if="user" ref="userMenuRef" class="relative flex items-center gap-1.5">
             <button type="button" @click="toggleUserMenu()">
               <img :src="avatar" :alt="user.username" class="inline-flex size-12 rounded-full border border-neutral-800 object-center shadow-md transition-transform hover:rotate-12">
             </button>
@@ -95,11 +97,11 @@ onMounted(() => {
                 </button>
               </div>
             </section>
-          </span>
+          </span> -->
 
-          <NuxtLink v-else to="/login">
+          <!-- <NuxtLink v-else to="/login">
             login
-          </NuxtLink>
+          </NuxtLink> -->
         </div>
       </div>
 

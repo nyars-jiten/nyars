@@ -5,7 +5,7 @@ definePageMeta({
 })
 
 const { getEdits } = useApi(editRepository)
-const { data: edits, refresh } = await useLazyAsyncData(
+const { data: edits, refresh, status } = await useLazyAsyncData(
   'edits',
   () => getEdits(),
   {
@@ -79,7 +79,7 @@ function search(example: string) {
 
       <h1 class="text-center text-4xl uppercase">
         activity
-        <Icon class="bg-slate-500 align-baseline cursor-pointer" size="1.3rem" name="mdi:restart" @click="refresh()" />
+        <Icon class="bg-slate-500 align-baseline cursor-pointer" :class="{ 'animate-spin': status === 'pending' }" size="1.3rem" name="mdi:restart" @click="refresh()" />
       </h1>
 
       <section class="space-y-4">
