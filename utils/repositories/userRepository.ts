@@ -49,8 +49,8 @@ export function userRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
     return fetch<ExtendedUser>(`${path}/me`).catch(() => null)
   }
 
-  const getWeeklyStats = (): Promise<WeeklyStats[]> => {
-    return fetch<WeeklyStats[]>(`${path}/weekly-stats`)
+  const getWeeklyStats = (): Promise<WeeklyStats> => {
+    return fetch<WeeklyStats>(`${path}/weekly-stats`)
   }
 
   return { clientLogin, clientRegister, clientLogout, clientGetUser, serverGetCurrentUser, getWeeklyStats }

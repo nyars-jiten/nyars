@@ -4,8 +4,7 @@ import { version } from '../package.json'
 
 const { user, menuState } = storeToRefs(useUserStore())
 const { clientLogout } = useApi(userRepository)
-// const avatar = computed(() => useAvatar(user.value?.avatar ?? '').href)
-const avatar = 'https://next.nyars.moe/upload/avatars/6bf3488d-da95-4936-880a-c66fb4bf3070.jpg'
+const avatar = computed(() => useAvatar(user.value?.avatar ?? '').href)
 
 const styles = tv({
   base: 'inline-block w-full px-8 py-3 text-center leading-none transition-colors hover:bg-zinc-800 hover:text-zinc-300',

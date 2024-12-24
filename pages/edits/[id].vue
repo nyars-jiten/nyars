@@ -24,5 +24,7 @@ useHead({
 <template>
   <div>
     Edit {{ editId }}
+
+    <NotImplemented />
   </div>
 </template>

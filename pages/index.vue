@@ -5,7 +5,7 @@ definePageMeta({
 })
 
 const { getEdits } = useApi(editRepository)
-const { data: edits } = await useLazyAsyncData(
+const { data: edits, refresh } = await useLazyAsyncData(
   'edits',
   () => getEdits(),
   {
@@ -79,6 +79,7 @@ function search(example: string) {
 
       <h1 class="text-center text-4xl uppercase">
         activity
+        <Icon class="bg-slate-500 align-baseline cursor-pointer" size="1.3rem" name="mdi:restart" @click="refresh()" />
       </h1>
 
       <section class="space-y-4">
@@ -91,21 +92,7 @@ function search(example: string) {
     </div>
 
     <div class="space-y-8">
-      <div>
-        <UsersTable />
-      </div>
-
-      <hr class="border-neutral-800 max-lg:hidden">
-
-      <div>
-        summary
-      </div>
-
-      <hr class="border-neutral-800 max-lg:hidden">
-
-      <div>
-        comments
-      </div>
+      <MainPageSidebar />
     </div>
   </section>
 </template>

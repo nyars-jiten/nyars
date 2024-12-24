@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface Props {
-  data: WeeklyStats
+  data: WeeklyUserStats
 }
 
 const props = defineProps<Props>()

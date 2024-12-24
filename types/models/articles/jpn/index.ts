@@ -18,6 +18,26 @@ export interface EditorTxtEntryJp {
 }
 
 export interface WeeklyStats {
+  stats: WeeklyUserStats[]
+  site: StatsSite
+}
+
+export interface StatsSite {
+  jpn: number
+  jpnRev: number
+  kanji: number
+  kanjiRev: number
+  rus: number
+  rusRev: number
+  jpnPrev: number
+  jpnRevPrev: number
+  kanjiPrev: number
+  kanjiRevPrev: number
+  rusPrev: number
+  rusRevPrev: number
+}
+
+export interface WeeklyUserStats {
   stats: StatsUser
   user: ShortUser
 }

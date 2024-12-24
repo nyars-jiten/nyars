@@ -9,12 +9,30 @@ const props = defineProps<Props>()
 
 const { userAccess, user } = storeToRefs(useUserStore())
 const { approveEdit, approveEditStatus, declineEdit } = useApi(editRepository)
+const notificationStore = useNotificationStore()
+
+const { t } = useI18n()
 
 const isTypeCreate = computed(() => props.edit.type === EditType.Create)
 
 const preview = tv({
   base: 'py-2',
 })
+
+function approve() {
+  approveEdit(props.edit.id)
+  notificationStore.createNotification(t('models.edit.actions.approved'), NyarsNotificationType.Success)
+}
+
+function reject() {
+  declineEdit(props.edit.id)
+  notificationStore.createNotification(t('models.edit.actions.rejected'), NyarsNotificationType.Warning)
+}
+
+function approveStatus() {
+  approveEditStatus(props.edit.id)
+  notificationStore.createNotification(t('models.edit.actions.approved'), NyarsNotificationType.Success)
+}
 </script>
 
 <template>
@@ -26,15 +44,15 @@ const preview = tv({
         </UiButton>
       </NuxtLink>
 
-      <UiButton v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))" class="text-red-500" icon="ic:baseline-close" title="Отклонить" @click="declineEdit(edit.id)">
+      <UiButton v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))" class="text-red-500" icon="ic:baseline-close" title="Отклонить" @click="reject()">
         <!-- Отклонить -->
       </UiButton>
 
-      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-green-500" icon="ic:baseline-done-all" title="Принять" @click="approveEdit(edit.id)">
+      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-green-500" icon="ic:baseline-done-all" title="Принять" @click="approve()">
         <!-- Принять -->
       </UiButton>
 
-      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-yellow-500" icon="ic:baseline-done" title="Принять без смены статуса" @click="approveEditStatus(edit.id)">
+      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-yellow-500" icon="ic:baseline-done" title="Принять без смены статуса" @click="approveStatus()">
         <!-- Принять без смены статуса -->
       </UiButton>
 

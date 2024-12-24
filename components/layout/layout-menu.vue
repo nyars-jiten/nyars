@@ -117,7 +117,7 @@ onMounted(() => {
         <!-- mdi:virus-outline -->
         <!-- ic:outline-pest-control -->
         <!-- mdi:bacteria-outline -->
-        <Icon size="1.5rem" name="mdi:virus-outline" />
+        <Icon size="1.5rem" name="mdi:bacteria-outline" />
         <span>{{ t('components.header.navigation[0].pages.github') }}</span>
       </NuxtLink>
 

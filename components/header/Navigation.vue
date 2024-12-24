@@ -17,9 +17,9 @@ const { t } = useI18n()
           <NuxtLink :to="{ name: 'edits' }" class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
             <span>{{ t('components.header.navigation[0].pages.edits') }}</span>
           </NuxtLink>
-          <NuxtLink :to="{ name: 'Statistics' }" class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
+          <!-- <NuxtLink :to="{ name: 'Statistics' }" class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
             <span>{{ t('components.header.navigation[0].pages.statistics') }}</span>
-          </NuxtLink>
+          </NuxtLink> -->
           <NuxtLink to="/" class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
             <span>{{ t('components.header.navigation[0].pages.documentation') }}</span>
           </NuxtLink>
