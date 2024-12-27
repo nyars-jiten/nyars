@@ -43,7 +43,7 @@ function search(example: string) {
 <template>
   <section class="grid grid-cols-[1fr_auto] gap-8 max-lg:grid-cols-1">
     <div class="grow space-y-8">
-      <UiBlock class="space-y-4" size="large" :active="true">
+      <div class="space-y-4 p-8">
         <div class="indent-10">
           {{ t('pages.main.infoNyars') }}
         </div>
@@ -75,7 +75,7 @@ function search(example: string) {
             {{ t('pages.main.infoDiscord') }}
           </NuxtLink>
         </i18n-t>
-      </UiBlock>
+      </div>
 
       <h1 class="text-center text-4xl uppercase">
         activity
