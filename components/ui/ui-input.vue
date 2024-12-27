@@ -39,7 +39,7 @@ const styles = tv({
 })
 
 const description = tv({
-  base: 'text-gray-500 text-sm pl-4 italic',
+  base: 'text-gray-500 pl-4 text-sm italic pt-2',
 })
 
 const model = defineModel<string>({ required: true })
@@ -55,24 +55,23 @@ defineExpose({ inputRef })
 </script>
 
 <template>
-  <div>
-    <section class="relative" :class="{ 'pt-2.5': !!slots.hint }">
-      <small class="absolute left-2.5 top-0 rounded-md bg-neutral-300 px-2 text-neutral-900 shadow-md">
-        <slot name="hint" />
-      </small>
+  <section class="relative" :class="{ 'pt-2.5': !!slots.hint }">
+    <small class="absolute left-2.5 top-0 rounded-md bg-neutral-300 px-2 text-neutral-900 shadow-md">
+      <slot name="hint" />
+    </small>
 
-      <template v-if="multiline === false">
-        <input v-model="model" :autocomplete="autocomplete" :class="styles({ disabled })" :type="type" :placeholder="placeholder" :disabled="disabled">
-      </template>
+    <template v-if="multiline === false">
+      <input v-model="model" :autocomplete="autocomplete" :class="styles({ disabled })" :type="type" :placeholder="placeholder" :disabled="disabled">
+    </template>
 
-      <template v-else>
-        <section class="flex h-full p-4" :class="styles({ disabled })">
-          <textarea ref="inputRef" :value="model" :autocomplete="autocomplete" :rows="rows" class="w-full bg-transparent outline-none" :class="{ 'resize-none': disabled }" :placeholder="placeholder" :disabled="disabled" @input="updateModel" />
-        </section>
-      </template>
-    </section>
-    <span :class="description()">
+    <template v-else>
+      <section class="flex p-4" :class="styles({ disabled })">
+        <textarea ref="inputRef" :value="model" :autocomplete="autocomplete" :rows="rows" class="w-full bg-transparent outline-none" :class="{ 'resize-none': disabled }" :placeholder="placeholder" :disabled="disabled" @input="updateModel" />
+      </section>
+    </template>
+
+    <div v-if="!!slots.description" :class="description()">
       <slot name="description" />
-    </span>
-  </div>
+    </div>
+  </section>
 </template>
