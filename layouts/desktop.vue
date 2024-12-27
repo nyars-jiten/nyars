@@ -46,7 +46,7 @@ onMounted(() => {
 
     <LayoutMenu class="inset-y-24 z-50" secondary />
 
-    <div class="space-y-4">
+    <div class="space-y-4 flex flex-col">
       <div class="sticky top-0 z-40 flex items-center justify-between gap-x-4 bg-neutral-900/95">
         <!-- <UiButton :outline="false" type="button" class="sm:hidden" @click="menuState = !menuState">
           <Icon size="1.5rem" name="ic:baseline-close" />

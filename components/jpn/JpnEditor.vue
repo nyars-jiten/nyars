@@ -1,4 +1,10 @@
 <script setup lang="ts">
+interface Props {
+  entry: EditorTxtEntryJp
+  isNew?: boolean
+  disabled?: boolean
+}
+
 const props = defineProps<Props>()
 const { t } = useI18n()
 const api = useJpnArticles()
@@ -12,18 +18,12 @@ onBeforeMount(() => {
 })
 
 const spelling = ref('')
-const spellingRows = computed(() => spelling.value.split('\n').length)
+const spellingRows = computed(() => Math.min(5, Math.max(1, spelling.value.split('\n').length)))
 
 const reading = ref('')
-const readingRows = computed(() => reading.value.split('\n').length)
+const readingRows = computed(() => Math.min(5, Math.max(1, reading.value.split('\n').length)))
 
 const body = ref('')
-
-interface Props {
-  entry: EditorTxtEntryJp
-  isNew?: boolean
-  disabled?: boolean
-}
 
 spelling.value = props.entry.spelling
 reading.value = props.entry.reading
@@ -197,7 +197,7 @@ const [stateTagSearch, toggleTagSearch] = useToggle()
 </script>
 
 <template>
-  <section class="grid grow gap-8 xl:h-full xl:grid-cols-[2fr_1fr]">
+  <section class="grid grow gap-8 xl:h-full xl:grid-cols-[2fr_1fr] overflow-hidden p-1">
     <EditorGuide v-if="stateEditorHelp" class="md:hidden" @click-insert="(text) => insert.apply(null, text)" />
     <TagSearch v-if="stateTagSearch" class="md:hidden" @click-insert="(text) => insert.apply(null, text)" />
 
@@ -206,7 +206,7 @@ const [stateTagSearch, toggleTagSearch] = useToggle()
     </h1>
 
     <div class="flex h-full flex-col gap-4">
-      <section class="flex items-start justify-between gap-4 max-sm:flex-col top-10 sticky z-40 bg-neutral-900/95">
+      <section class="flex items-start justify-between gap-4 max-sm:flex-col bg-neutral-900/95">
         <div class="inline-flex flex-wrap gap-x-8 gap-y-2">
           <span v-for="group, index in buttons()" :key="index" class="gap-2 grid" :style="{ gridTemplateColumns: `repeat(${group.length}, 1fr)` }">
             <UiButton v-for="{ name, icon, title, click } in group" :key="title" type="button" :icon="icon" :title="t(`pages.editor.button.${title}`)" :disabled="disabled" class="inline-flex justify-center" @click="insert.apply(null, click)">
@@ -249,7 +249,7 @@ const [stateTagSearch, toggleTagSearch] = useToggle()
             </template>
           </UiInput>
 
-          <UiInput ref="bodyRef" v-model="body" :multiline="true" :rows="4" class="grow" :disabled="disabled">
+          <UiInput ref="bodyRef" v-model="body" :multiline="true" class="grow flex items-stretch" :disabled="disabled">
             <template #hint>
               {{ t('pages.editor.body') }}
             </template>
@@ -259,6 +259,9 @@ const [stateTagSearch, toggleTagSearch] = useToggle()
         <EditorGuide v-if="stateEditorHelp" class="mt-2.5 max-md:hidden" @click-insert="(text) => insert.apply(null, text)" />
         <TagSearch v-else-if="stateTagSearch" class="mt-2.5 max-md:hidden" @click-insert="(text) => insert.apply(null, text)" />
       </section>
+    </div>
+
+    <div class="space-y-8 max-xl:hidden flex flex-col">
       <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
         <UiButton v-if="!isNew" class="max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :title="t('pages.editor.delete')" :disabled="disabled" @click="remove">
           {{ t('pages.editor.delete') }}
@@ -267,14 +270,14 @@ const [stateTagSearch, toggleTagSearch] = useToggle()
           {{ t('pages.editor.save') }}
         </UiButton>
       </div>
-    </div>
 
-    <div class="space-y-8 py-8 max-xl:hidden">
-      <h1 class="text-center text-4xl">
-        {{ t('pages.editor.preview') }}
-      </h1>
+      <div class="grow flex flex-col h-0 overflow-y-auto">
+        <h1 class="text-center text-4xl pb-4">
+          {{ t('pages.editor.preview') }}
+        </h1>
 
-      <JpnEntry v-if="preview" :jpn-entry="preview.entry" :show-lemmas="false" />
+        <JpnEntry v-if="preview" :jpn-entry="preview.entry" :show-lemmas="false" />
+      </div>
       <!--
       <i v-else class="block text-neutral-800">
         Пусто тут как-то...
