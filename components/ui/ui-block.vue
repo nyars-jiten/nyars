@@ -47,7 +47,7 @@ interface Props {
       <slot />
     </div>
 
-    <footer v-if="$slots.footer" class="flex flex-wrap items-center border-t border-neutral-800 p-2 leading-none transition-colors" :class="{ 'group-hover/block:border-neutral-700': hover }">
+    <footer v-if="!!$slots.footer" class="flex flex-wrap items-center border-t border-neutral-800 p-2 leading-none transition-colors" :class="{ 'group-hover/block:border-neutral-700': hover }">
       <slot name="footer" />
     </footer>
   </section>

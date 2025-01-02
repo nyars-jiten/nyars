@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { MaybeElementRef } from '@vueuse/core'
 import { tv } from 'tailwind-variants'
 
 interface Props {
@@ -59,7 +60,7 @@ const { menuState } = storeToRefs(useUserStore())
 onMounted(() => {
   if (props.secondary) {
     const menu = useTemplateRef('menuRef')
-    onClickOutside(menu, () => {
+    onClickOutside(menu as MaybeElementRef, () => {
       const width = window.innerWidth
 
       // tailwind xl
@@ -117,7 +118,7 @@ onMounted(() => {
         <!-- mdi:virus-outline -->
         <!-- ic:outline-pest-control -->
         <!-- mdi:bacteria-outline -->
-        <Icon size="1.5rem" name="mdi:bacteria-outline" />
+        <Icon size="1.5rem" name="mdi:virus-outline" />
         <span>{{ t('components.header.navigation[0].pages.github') }}</span>
       </NuxtLink>
 
