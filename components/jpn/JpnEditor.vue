@@ -198,8 +198,8 @@ const [stateTagSearch, toggleTagSearch] = useToggle()
 
 <template>
   <section class="grid grow gap-8 xl:h-full xl:grid-cols-[2fr_1fr] overflow-hidden p-1">
-    <EditorGuide v-if="stateEditorHelp" class="md:hidden" @click-insert="(text: string) => insert('', text)" />
-    <TagSearch v-if="stateTagSearch" class="md:hidden" @click-insert="(text: string) => insert('', text)" />
+    <EditorGuide v-if="stateEditorHelp" class="md:hidden" @click-insert="(text: string[]) => insert(text[0], text[1])" />
+    <TagSearch v-if="stateTagSearch" class="md:hidden" @click-insert="(text: string[]) => insert(text[0], text[1])" />
 
     <h1 class="text-center text-4xl md:hidden">
       Редактор
@@ -256,8 +256,8 @@ const [stateTagSearch, toggleTagSearch] = useToggle()
           </UiInput>
         </div>
 
-        <EditorGuide v-if="stateEditorHelp" class="mt-2.5 max-md:hidden" @click-insert="(text: string) => insert('', text)" />
-        <TagSearch v-else-if="stateTagSearch" class="mt-2.5 max-md:hidden" @click-insert="(text: string) => insert('', text)" />
+        <EditorGuide v-if="stateEditorHelp" class="mt-2.5 max-md:hidden" @click-insert="(text: string[]) => insert(text[0], text[1])" />
+        <TagSearch v-else-if="stateTagSearch" class="mt-2.5 max-md:hidden" @click-insert="(text: string[]) => insert(text[0], text[1])" />
       </section>
     </div>
 
