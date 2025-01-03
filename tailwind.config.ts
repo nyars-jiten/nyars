@@ -27,6 +27,13 @@ export default {
       colors: {
         // discord: '#5865F2',
         discord: '#8c9eff',
+        tortoise: {
+          100: '#e2f7f9',
+          300: '#d1f4f3',
+          500: '#b1f0ee',
+          700: '#60d1d4',
+          900: '#56bcbe',
+        },
         ns: {
           '100': '#e1edee',
           '200': '#c3dadd',

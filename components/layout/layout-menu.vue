@@ -97,8 +97,22 @@ onMounted(() => {
       </NuxtLink>
 
       <NuxtLink to="/dev" :class="links({ state: menuState, secondary })">
-        <Icon size="1.5rem" name="ic:baseline-menu-book" />
-        <span>{{ t('components.header.navigation[0].pages.documentation') }}</span>
+        <Icon size="1.5rem" name="ic:baseline-download" />
+        <span>{{ t('components.header.navigation[0].pages.download') }}</span>
+      </NuxtLink>
+    </li>
+
+    <li>
+      <hr class="border-neutral-800">
+    </li>
+
+    <li class="space-y-1">
+      <NuxtLink :to="{ name: 'dict-jpn-new' }" :class="links({ state: menuState, secondary })" class="text-lime-300 transition-colors">
+        <Icon size="1.5rem" name="ic:baseline-plus" />
+
+        <span class="text-xs font-semibold uppercase">
+          {{ t('components.header.menu.addWord') }}
+        </span>
       </NuxtLink>
     </li>
 
@@ -123,71 +137,9 @@ onMounted(() => {
       </NuxtLink>
 
       <NuxtLink to="/dev" :class="links({ state: menuState, secondary })">
-        <Icon size="1.5rem" name="ic:baseline-download" />
-        <span>{{ t('components.header.navigation[0].pages.download') }}</span>
+        <Icon size="1.5rem" name="ic:baseline-menu-book" />
+        <span>{{ t('components.header.navigation[0].pages.documentation') }}</span>
       </NuxtLink>
     </li>
-
-    <li>
-      <hr class="border-neutral-800">
-    </li>
-
-    <li class="space-y-1">
-      <NuxtLink :to="{ name: 'dict-jpn-new' }" :class="links({ state: menuState, secondary })" class="text-lime-300 transition-colors">
-        <Icon size="1.5rem" name="ic:baseline-plus" />
-
-        <span class="text-xs font-semibold uppercase">
-          {{ t('components.header.menu.addWord') }}
-        </span>
-      </NuxtLink>
-
-      <!-- <NuxtLink to="/" :class="styles({state: menuState})" class="text-amber-300 transition-colors">
-        <Icon size="1.5rem" name="ic:baseline-plus" />
-
-        <span class="text-xs font-semibold uppercase">
-          {{ t('components.header.navigation[1].pages.exampleEditor') }}
-        </span>
-      </NuxtLink>
-
-      <NuxtLink to="/" :class="styles({state: menuState})" class="text-rose-300 transition-colors">
-        <Icon size="1.5rem" name="ic:baseline-plus" />
-
-        <span class="text-xs font-semibold uppercase">
-          {{ t('components.header.navigation[1].pages.kanjiEditor') }}
-        </span>
-      </NuxtLink> -->
-    </li>
-
-    <li>
-      <hr class="border-neutral-800">
-    </li>
-
-    <li class="space-y-1">
-      <NuxtLink :to="{ name: 'dict-jpn-wid', params: { wid: 0 } }" :class="links({ state: menuState, secondary })">
-        <Icon size="1.5rem" name="uil:github" />
-        <span>suda</span>
-      </NuxtLink>
-    </li>
-
-    <!--
-    <li v-show="user?.role" class="group relative space-y-1">
-      <NuxtLink to="/" class="flex items-center [@media(hover:none)]:pointer-events-none">
-        <span class="group-hover:text-ns-500">{{ t('components.header.navigation[2].title') }}</span>
-        <IconChevronDown class="!m-0 text-xl text-ns-gray-400 duration-[0.2s] ease-out group-hover:-rotate-180 group-hover:text-ns-500" />
-      </NuxtLink>
-      <div class="absolute left-1/2 ml-[-90px] hidden w-[180px] pt-2 group-hover:inline">
-        <div class="flex flex-col gap-1 rounded-md border border-ns-gray-200 bg-white p-2 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800">
-          <NuxtLink to="/" :class="link()">
-            <span>{{ t('components.header.navigation[2].pages.ocr') }}</span>
-          </NuxtLink>
-          <NuxtLink to="/" :class="link()">
-            <span>{{ t('components.header.navigation[2].pages.tags') }}</span>
-          </NuxtLink>
-          <NuxtLink to="/" :class="link()">
-            <span>{{ t('components.header.navigation[2].pages.fields') }}</span>
-          </NuxtLink>
-        </div>
-      </div>
-    </li> -->
   </ul>
 </template>

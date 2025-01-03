@@ -44,7 +44,6 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@pinia/nuxt',
     'nuxt-svgo',
-    'nuxt-lodash',
     'nuxt-typed-router',
     '@nuxt/icon',
     '@vee-validate/nuxt',
@@ -85,9 +84,6 @@ export default defineNuxtConfig({
   },
   svgo: {
     componentPrefix: 'icon',
-  },
-  lodash: {
-    prefix: 'useLodash',
   },
   typescript: {
     strict: true,

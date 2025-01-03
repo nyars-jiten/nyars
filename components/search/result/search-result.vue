@@ -57,7 +57,7 @@ const active = computed(() => articleWid.value === props.article.wid)
               <MiscFreq :value="article.frequency" />
             </UiTag>
 
-            <EntryFlagBadge :statuses="article.status" @change-border="(cl) => { newBorder = cl }" />
+            <EntryFlagBadge :statuses="article.status" @change-border="(cl: string) => { newBorder = cl }" />
           </div>
 
           <div class="grid grid-cols-[auto_1fr] gap-x-2">

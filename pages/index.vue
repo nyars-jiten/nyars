@@ -18,8 +18,8 @@ const infoExamples = [
   [1, 2], // Поиск по японским словам
   [1, 2], // Поиск по русским и английским словам
   [1, 2, 3, 4], // Поиск по транскрипции
-  [1], // Парсинг форм слова, предложений и текстов
-  [1, 2], // Поиск по шаблону
+  // [1], // Парсинг форм слова, предложений и текстов
+  // [1, 2], // Поиск по шаблону
 ]
 
 const config = useRuntimeConfig()
@@ -58,7 +58,7 @@ function search(example: string) {
             >
               <button
                 type="button"
-                class="underline decoration-dotted underline-offset-4 hover:text-ns-500"
+                class="underline decoration-dotted underline-offset-4 hover:text-tortoise-900"
                 @click="search(getExample(i + 1, searchExample))"
               >
                 {{ getExample(i + 1, searchExample) }}
@@ -68,9 +68,9 @@ function search(example: string) {
         </ul>
 
         <i18n-t tag="div" keypath="pages.main.infoHelp" scope="global" class="indent-10">
-          <NuxtLink to="https://docs.nyars.org" external target="_blank" class="select-text underline decoration-dotted underline-offset-4 hover:text-ns-500">
+          <!-- <NuxtLink to="https://docs.nyars.org" external target="_blank" class="select-text underline decoration-dotted underline-offset-4 hover:text-ns-500">
             {{ t('pages.main.infoDocs') }}
-          </NuxtLink>
+          </NuxtLink> -->
           <NuxtLink :to="config.public.discordUrl" external target="_blank" class="select-text text-indigo-600 underline decoration-dotted underline-offset-4 hover:text-ns-500 dark:text-indigo-300 dark:hover:text-ns-500">
             {{ t('pages.main.infoDiscord') }}
           </NuxtLink>
