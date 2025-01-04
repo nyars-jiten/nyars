@@ -129,6 +129,13 @@ onMounted(() => {
   }
 })
 
+interface Button {
+  icon?: string
+  name?: string
+  click: [string] | [string, string]
+  title: string
+}
+
 function buttons() {
   return [
     [
@@ -170,7 +177,7 @@ function buttons() {
       },
     ],
     [
-    // bracket-одна
+      // bracket-одна
       {
         icon: 'tabler:brackets-contain-start',
         click: ['⌈'],
@@ -189,11 +196,83 @@ function buttons() {
     //   click: [],
     // title: 'tag',
     // }
-  ] as (({ icon: string, name: undefined } | { icon: undefined, name: string }) & { title: string, click: [string] | [string, string] })[][]
+  ] as Button[][]
+}
+
+function supButtons() {
+  return [
+    [
+      {
+        name: '(( ))',
+        click: ['((', '))'],
+        title: '',
+      },
+      {
+        name: '=(( ))',
+        click: ['((', '))'],
+        title: '',
+      },
+      {
+        name: '[i]( )[/i]',
+        click: ['[i](', ')[/i]'],
+        title: '',
+      },
+    ],
+    [
+      {
+        name: 'see',
+        click: ['((see: ', '))'],
+        title: '',
+      },
+      {
+        name: 'also',
+        click: ['((also: ', '))'],
+        title: '',
+      },
+      {
+        name: 'ant',
+        click: ['((ant: ', '))'],
+        title: '',
+      },
+      {
+        name: 'cf',
+        click: ['((cf: ', '))'],
+        title: '',
+      },
+      {
+        name: 'abbr',
+        click: ['((abbr: ', '))'],
+        title: '',
+      },
+    ],
+    [
+      {
+        name: 'pitch',
+        click: ['((pitch: ', '))'],
+        title: '',
+      },
+      {
+        name: 'ext',
+        click: ['((ext: ', '))'],
+        title: '',
+      },
+      {
+        name: 'lang',
+        click: ['((lang: ', '))'],
+        title: '',
+      },
+      {
+        name: 'lat',
+        click: ['[lat]', '[/lat]'],
+        title: '',
+      },
+    ],
+  ] as Button[][]
 }
 
 const [stateEditorHelp, toggleEditorHelp] = useToggle()
 const [stateTagSearch, toggleTagSearch] = useToggle()
+const [stateSupButtons, toggleSupButtons] = useToggle()
 </script>
 
 <template>
@@ -213,6 +292,11 @@ const [stateTagSearch, toggleTagSearch] = useToggle()
               {{ name }}
             </UiButton>
           </span>
+          <span class="gap-2 grid">
+            <UiButton type="button" icon="mdi:arrow-expand-down" :title="t(`pages.editor.button.addition`)" :disabled="disabled" class="inline-flex justify-center" @click="toggleSupButtons()">
+              <!-- -->
+            </UiButton>
+          </span>
         </div>
 
         <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
@@ -227,6 +311,14 @@ const [stateTagSearch, toggleTagSearch] = useToggle()
             {{ t('pages.editor.save') }}
           </UiButton> -->
         </div>
+      </section>
+
+      <section v-if="stateSupButtons" class="flex items-start justify-left gap-10 max-sm:flex-col bg-neutral-900/95">
+        <span v-for="group, index in supButtons()" :key="index" class="gap-2 grid" :style="{ gridTemplateColumns: `repeat(${group.length}, 1fr)` }">
+          <UiButton v-for="{ name, icon, title, click } in group" :key="title" type="button" :icon="icon" :title="t(`pages.editor.button.${title}`)" :disabled="disabled" class="inline-flex justify-center" @click="insert.apply(null, click)">
+            {{ name }}
+          </UiButton>
+        </span>
       </section>
 
       <section class="flex grow gap-8 max-md:flex-col" :class="{ 'md:grid md:grid-cols-2': stateEditorHelp || stateTagSearch }">

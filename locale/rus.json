@@ -163,7 +163,8 @@
         "comp1": "comp1",
         "quotes": "quotes",
         "single-bracket": "single-bracket",
-        "accent": "accent"
+        "accent": "accent",
+        "addition": "Показать дополнительные теги"
       },
       "notification": {
         "success": "Правка отправлена",
