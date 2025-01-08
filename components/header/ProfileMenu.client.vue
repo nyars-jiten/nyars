@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { tv } from 'tailwind-variants'
+
 const { clientLogout } = useApi(userRepository)
 
 const { t } = useI18n()
@@ -12,48 +14,58 @@ async function logout() {
   user.value = null
   navigateTo('/')
 }
+
+const styles = tv({
+  variants: {
+    entity: {
+      menuItem: 'text-center rounded-md p-2 hover:bg-zinc-800 hover:text-zinc-400 leading-none transition-colors',
+    },
+  },
+})
 </script>
 
 <template>
   <div class="flex flex-wrap items-center justify-center gap-2 text-base">
-    <div class="group relative">
-      <NuxtLink to="/" :class="`flex items-center ${user ? 'gap-2' : 'gap-0'} rounded-md p-1.5 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700 [@media(hover:none)]:pointer-events-none`">
+    <div v-if="user" class="group relative">
+      <button type="button" class="flex items-center gap-2 rounded-md p-1.5 hover:bg-zinc-800 hover:text-zinc-400 transition-colors">
         <img
-          v-if="user"
-          class="size-9 rounded-full object-center"
+          class="size-6 rounded-full object-center group-hover:rotate-12 transition-transform"
           :src="avatar"
           :alt="user.username"
         >
-        <IconAccount v-else class="!m-0 text-3xl" />
-        <!-- <span class="inline-block max-w-20 truncate min-[380px]:max-w-32 sm:max-w-40">
-          {{ user ? user.username : '' }}
-        </span> -->
-        <IconChevronDown class="!m-0 text-xl text-ns-gray-400 duration-[0.2s] ease-out group-hover:-rotate-180" />
-      </NuxtLink>
-      <div class="absolute right-0 hidden w-[180px] group-hover:inline lg:left-1/2 lg:ml-[-90px]">
-        <div class="flex flex-col gap-1 rounded-md border border-ns-gray-200 bg-white p-2 shadow-md dark:border-ns-gray-700 dark:bg-ns-gray-800">
-          <NuxtLink v-if="user" to="/" class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
+        <Icon size="1.5rem" name="ic:baseline-keyboard-arrow-down" class="group-hover:-rotate-180 duration-200 ease-out transition-[transform,opacity] group-hover:opacity-10" />
+      </button>
+
+      <div class="absolute right-0 invisible top-full w-44 group-hover:visible">
+        <div class="flex flex-col gap-1 rounded-md mt-2 p-2 shadow-md outline outline-1 outline-neutral-800 bg-neutral-900">
+          <NuxtLink
+            :to="{ name: 'user-profile', params: { username: user.username } }"
+            :class="styles({ entity: 'menuItem' })"
+          >
             <span>{{ t('components.header.profileMenu.profile') }}</span>
           </NuxtLink>
-          <!-- <NuxtLink to="/" class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
+
+          <!-- <NuxtLink to="/" :class="styles({ entity: 'menuItem' })">
             <span>{{ t('components.header.profileMenu.settings') }}</span>
           </NuxtLink> -->
-          <NuxtLink v-if="!user" :to="{ name: 'Login' }" class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700">
-            <span>{{ t('components.header.profileMenu.login') }}</span>
-          </NuxtLink>
+
           <button
-            v-else
             type="button"
-            class="flex items-center justify-center rounded-md p-1 hover:bg-ns-gray-100 dark:hover:bg-ns-gray-700"
+            :class="styles({ entity: 'menuItem' })"
             @click="logout"
           >
             <span>{{ t('components.header.profileMenu.exit') }}</span>
           </button>
+
           <!-- <div class="border-t border-ns-gray-300 pt-2 dark:border-ns-gray-600">
             <ThemeSwitcher class="w-full" />
           </div> -->
         </div>
       </div>
     </div>
+
+    <NuxtLink v-else :to="{ name: 'Login' }" type="button">
+      <UiButton :title="t('components.header.profileMenu.login')" icon="ic:baseline-account-circle" />
+    </NuxtLink>
   </div>
 </template>

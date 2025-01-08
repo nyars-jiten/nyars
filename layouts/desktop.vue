@@ -35,7 +35,7 @@ onMounted(() => {
 
 <template>
   <div class="grid min-h-dvh grid-cols-[auto_1fr] gap-4 p-4">
-    <section class="pt-2 space-y-4 sticky h-[calc(100dvh-theme('spacing.8'))] top-4 bg-neutral-900 overflow-x-hidden overflow-y-auto max-sm:hidden">
+    <section class="space-y-4 sticky h-[calc(100dvh-theme('spacing.8'))] top-4 bg-neutral-900 overflow-x-hidden overflow-y-auto max-sm:hidden">
       <UiButton :outline="false" type="button" @click="menuState = !menuState">
         <Icon v-if="menuState" size="1.5rem" name="ic:baseline-close" />
         <Icon v-else size="1.5rem" name="ic:baseline-menu" />
@@ -44,7 +44,7 @@ onMounted(() => {
       <LayoutMenu class="inset-y-24" />
     </section>
 
-    <LayoutMenu class="inset-y-24 z-50 pt-6" secondary />
+    <LayoutMenu class="inset-y-24 z-50 pt-4" secondary />
 
     <div class="space-y-4 flex flex-col">
       <div class="sticky top-0 z-40 flex items-center justify-between gap-x-4 bg-neutral-900/95">
