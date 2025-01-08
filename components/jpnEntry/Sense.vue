@@ -115,9 +115,9 @@ const miscTagsLine = computed(() => {
 
     <!-- <div v-if="!isPreview && sense.examples?.length" :class="`${meaning.senses.length > 1 ? 'ml-8':'ml-1'}`"> -->
     <div v-if="!isPreview && sense.examples?.length" class="ml-8">
-      <div v-for="(example, exampleIndex) of sense.examples" :key="exampleIndex" class="space-x-2 border-l-2 border-ns-gray-200 pl-2 text-neutral-500  dark:border-ns-gray-700">
-        <Content :data="example.sentence" />
-        <Content :data="example.translation" />
+      <div v-for="(example, exampleIndex) of sense.examples" :key="exampleIndex" class="mb-3 border-l-2 border-ns-gray-200 pl-2 text-neutral-500  dark:border-ns-gray-700">
+        <Content class="block pb-1" :data="example.sentence" />
+        <Content class="text-sm block" :data="example.translation" />
       </div>
     </div>
 
