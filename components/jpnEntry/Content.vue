@@ -26,7 +26,7 @@ const style = tv({
 <template>
   <span class="leading-none">
     <template v-for="({ tag, value, content }, i) in data" :key="i">
-      <Content v-if="content" :data="content" :class="style({ tag })" :break-line="breakLine" />
+      <Content v-if="content && tag !== 'ruby'" :data="content" :class="style({ tag })" :break-line="breakLine" />
 
       <sup v-if="tag === 'sup'">{{ value }}</sup>
 
@@ -45,6 +45,17 @@ const style = tv({
         <br v-if="breakLine">
         <span v-else class="p-0.5" />
       </template>
+
+      <ruby v-else-if="tag === 'ruby'">
+        <template v-for="cont, ci in content" :key="ci">
+          <rt v-if="cont.tag === 'rt'">
+            {{ cont.value }}
+          </rt>
+          <template v-else>
+            {{ cont.value }}
+          </template>
+        </template>
+      </ruby>
 
       <span v-else :class="style({ tag })">
         {{ value }}
