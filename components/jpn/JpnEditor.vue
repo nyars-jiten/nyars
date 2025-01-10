@@ -194,6 +194,12 @@ function buttons() {
     [
       // bracket-одна
       {
+        name: '[e]',
+        click: ['[e]', ' | [/e]'],
+        title: 'example',
+      },
+      // bracket-одна
+      {
         icon: 'tabler:brackets-contain-start',
         click: ['⌈'],
         title: 'single-bracket',

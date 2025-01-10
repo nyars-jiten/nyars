@@ -2,6 +2,7 @@ import { env } from 'node:process'
 import antfu from '@antfu/eslint-config'
 import withNuxt from './.nuxt/eslint.config.mjs'
 
+// @ts-expect-error https://github.com/nuxt/eslint/issues/497
 export default withNuxt(antfu({
   rules: {
     // The code problem checked by this ESLint rule is automatically checked by the TypeScript compiler.
