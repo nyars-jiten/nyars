@@ -165,7 +165,8 @@
         "quotes": "quotes",
         "single-bracket": "single-bracket",
         "accent": "accent",
-        "addition": "Показать дополнительные теги"
+        "addition": "Показать дополнительные теги",
+        "example": "Пример"
       },
       "notification": {
         "success": "Правка отправлена",

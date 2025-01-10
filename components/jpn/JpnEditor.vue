@@ -13,8 +13,13 @@ const routeWid = useRoute('dict-jpn-wid').params.wid
 const { menuState } = storeToRefs(useUserStore())
 const notificationStore = useNotificationStore()
 
+const { user } = storeToRefs(useUserStore())
+
 onBeforeMount(() => {
   menuState.value = false
+  if (!user.value) {
+    navigateTo('/login')
+  }
 })
 
 const spelling = ref('')

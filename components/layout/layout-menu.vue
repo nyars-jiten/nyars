@@ -12,6 +12,8 @@ const props = withDefaults(defineProps<Props>(), {
 
 const { t } = useI18n()
 
+const { user } = storeToRefs(useUserStore())
+
 const links = tv({
   base: 'flex items-center justify-start gap-4 rounded-md px-2 py-1.5 leading-none transition-colors hover:bg-zinc-800 hover:text-zinc-400',
   variants: {
@@ -102,19 +104,21 @@ onMounted(() => {
       </NuxtLink>
     </li>
 
-    <li>
-      <hr class="border-neutral-800">
-    </li>
+    <template v-if="user">
+      <li>
+        <hr class="border-neutral-800">
+      </li>
 
-    <li class="space-y-1">
-      <NuxtLink :to="{ name: 'dict-jpn-new' }" :class="links({ state: menuState, secondary })" class="text-lime-300 transition-colors">
-        <Icon size="1.5rem" name="ic:baseline-plus" />
+      <li class="space-y-1">
+        <NuxtLink :to="{ name: 'dict-jpn-new' }" :class="links({ state: menuState, secondary })" class="text-lime-300 transition-colors">
+          <Icon size="1.5rem" name="ic:baseline-plus" />
 
-        <span class="text-xs font-semibold uppercase">
-          {{ t('components.header.menu.addWord') }}
-        </span>
-      </NuxtLink>
-    </li>
+          <span class="text-xs font-semibold uppercase">
+            {{ t('components.header.menu.addWord') }}
+          </span>
+        </NuxtLink>
+      </li>
+    </template>
 
     <li>
       <hr class="border-neutral-800">
