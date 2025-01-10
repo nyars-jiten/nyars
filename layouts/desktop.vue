@@ -56,12 +56,9 @@ onMounted(() => {
           <div class="size-9 mt-1 rounded-full bg-cover invert" style="background-image: url('/favicon-logo.svg');" />
 
           <span class="text-xl leading-snug">
-            <span class="text-tortoise-900 dark:text-white">
-              <!-- {{ t('components.header.nyars') }} -->Н</span>
-            <span class="text-tortoise-900 dark:text-tortoise-900">
-              <!-- {{ t('components.header.nyars') }} -->Я</span>
-            <span class="text-tortoise-900 dark:text-white">
-              <!-- {{ t('components.header.nyars') }} -->РС</span>
+            <span class="text-tortoise-900 dark:text-white">Н</span>
+            <span class="text-tortoise-900 dark:text-tortoise-900">Я</span>
+            <span class="text-tortoise-900 dark:text-white">РС</span>
 
             <small class="text-xs align-top">
               v{{ version }}

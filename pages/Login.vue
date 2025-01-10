@@ -70,7 +70,7 @@ const password = useField('password')
         </h1>
 
         <NuxtLink
-          to="/api/users/auth/discord"
+          to="/api/auth/discord"
           external
         >
           <UiButton icon="ic:baseline-discord" color="discord">
