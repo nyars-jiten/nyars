@@ -39,9 +39,24 @@ const callPreview = async function () {
 
 const preview = ref(await callPreview())
 
+const callCheckDuplicates = async function () {
+  return (await api.checkDuplicates({
+    body: body.value,
+    reading: reading.value,
+    spelling: spelling.value,
+  })).filter(x => x.wid !== routeWid)
+}
+
+const duplicates = ref(await callCheckDuplicates())
+
 // const changes = computed(() => 'code' in preview.data.value ? null : preview.data.value)
 
-watchDebounced([spelling, reading, body], async () => preview.value = await callPreview(), { debounce: 250, immediate: true })
+watchDebounced([body], async () => preview.value = await callPreview(), { debounce: 250, immediate: true })
+
+watchDebounced([spelling, reading], async () => {
+  preview.value = await callPreview()
+  duplicates.value = await callCheckDuplicates()
+}, { debounce: 250, immediate: true })
 
 async function save() {
   const req = {
@@ -369,6 +384,13 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
         </h1>
 
         <JpnEntry v-if="preview" :jpn-entry="preview.entry" :show-lemmas="false" />
+
+        <div v-if="duplicates.length > 0" class="space-y-4 mt-8">
+          <h1 class="text-center text-4xl mb-4">
+            {{ t('pages.editor.duplicates') }}
+          </h1>
+          <SearchResult v-for="dupentry of duplicates" :key="dupentry.wid" class="space-y-4" :article="dupentry" />
+        </div>
       </div>
       <!--
       <i v-else class="block text-neutral-800">

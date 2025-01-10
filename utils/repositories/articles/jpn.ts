@@ -30,6 +30,9 @@ export function useJpnArticles() {
     const tagList = (q: string, l: number) =>
       fetch<V2Tag[]>(`${path}/tags`, { method: 'GET', query: { q, l } })
 
-    return { get, edit, remove, source, preview, create, search, tagList }
+    const checkDuplicates = (body: CreateArticleJpn) =>
+      fetch<V2EntryJp[]>(`${path}/check-duplicates`, { method: 'POST', body })
+
+    return { get, edit, remove, source, preview, create, search, tagList, checkDuplicates }
   })
 }

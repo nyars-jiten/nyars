@@ -20,13 +20,13 @@ const jpnRevPercentage = computed(() => ((data.value?.site?.jpnRev ?? 0) / (data
       <section>
         <div>
           Всего статей: {{ data.site.jpn }}
-          <span :class="{ 'text-emerald-400': jpnDiff > 0, 'text-red-400': jpnDiff < 0 }">
+          <span v-if="jpnDiff !== 0" :class="{ 'text-emerald-400': jpnDiff > 0, 'text-red-400': jpnDiff < 0 }">
             {{ jpnDiff >= 0 ? `+${jpnDiff}` : jpnDiff }}
           </span>
         </div>
         <div>
           Проверено: {{ data.site.jpnRev }}
-          <span :class="{ 'text-emerald-400': jpnRevDiff > 0, 'text-red-400': jpnRevDiff < 0 }">
+          <span v-if="jpnRevDiff !== 0" :class="{ 'text-emerald-400': jpnRevDiff > 0, 'text-red-400': jpnRevDiff < 0 }">
             {{ jpnRevDiff > 0 ? `+${jpnRevDiff}` : jpnRevDiff }}
           </span>
           <span class="ml-2">
