@@ -43,7 +43,7 @@
     "eslint-plugin-tailwindcss": "^3.17.5",
     "nuxt": "^3.15.1",
     "nuxt-svgo": "^4.0.11",
-    "nuxt-typed-router": "^3.7.2",
+    "nuxt-typed-router": "^3.7.3",
     "pinia": "^2.3.0",
     "typescript": "^5.7.3",
     "vue": "^3.5.13",

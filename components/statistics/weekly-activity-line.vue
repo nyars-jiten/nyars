@@ -8,9 +8,9 @@ defineProps<Props>()
 </script>
 
 <template>
-  <small class="truncate" :title="name">
+  <span class="truncate text-xs" :title="name">
     {{ name }}
-  </small>
+  </span>
 
   <span>
     <span v-for="v, index of values" :key="index">
@@ -18,11 +18,11 @@ defineProps<Props>()
         {{ v }}
       </span>
 
-      <small v-else>
+      <span v-else>
         -
-      </small>
+      </span>
 
-      <small v-if="index < values.length - 1" class="text-neutral-300">/</small>
+      <span v-if="index < values.length - 1" class="text-neutral-300 text-xs">/</span>
     </span>
   </span>
 </template>
