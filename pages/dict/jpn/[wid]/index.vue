@@ -4,6 +4,8 @@ const articleWid = useRouteArticle()
 // const route = useRoute()
 // const request = computed(() => String(route.query.q ?? ''))
 
+const { t } = useI18n()
+
 const { get } = useJpnArticles()
 
 watch(articleWid, () => window.scrollTo(0, 0))
@@ -77,12 +79,15 @@ useHead({ title: jpnEntry.value?.title })
           </UiButton>
         </NuxtLink>
       </section>
-      <UiBlock>
+      <div v-if="jpnEntry.status.isDeleted" class="text-rose-400 pl-4">
+        {{ t('pages.jpnEntry.entryWasDeleted') }}
+      </div>
+      <UiBlock :class="{ 'opacity-40': jpnEntry.status.isDeleted }">
         <JpnEntry :jpn-entry="jpnEntry" :show-lemmas="showLemmas" />
       </UiBlock>
     </template>
     <UiBlock v-else-if="status === 'pending'">
-      <span>Статья загружается</span>
+      <span>{{ t('pages.jpnEntry.entryIsLoading') }}</span>
     </UiBlock>
     <NotFound v-else message="pages.notFound.noEntry" />
   </div>

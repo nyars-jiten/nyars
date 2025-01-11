@@ -62,6 +62,7 @@ const preview = useAsyncData('changes-preview', () => api.preview({
           isArchaic: false,
           isDialect: false,
           isProper: false,
+          isDeleted: false,
         },
         externalEntry: '',
         title: '',

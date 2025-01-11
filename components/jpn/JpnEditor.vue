@@ -87,6 +87,7 @@ async function remove() {
 
   // body is still required, so we can save meta data
   await api.remove(`${routeWid}`, req)
+  notificationStore.createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
 }
 
 const spellingRef = useTemplateRef('spellingRef')

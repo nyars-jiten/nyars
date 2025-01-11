@@ -98,6 +98,7 @@ export interface V2Status {
   isArchaic: boolean
   isDialect: boolean
   isProper: boolean
+  isDeleted: boolean
 }
 
 export interface V2Word {

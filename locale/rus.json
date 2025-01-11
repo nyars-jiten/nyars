@@ -189,7 +189,9 @@
     },
     "jpnEntry": {
       "satelliteButtonOpen": "раскрыть",
-      "satelliteButtonClose": "свернуть"
+      "satelliteButtonClose": "свернуть",
+      "entryWasDeleted": "Статья была удалена. Для уточнения причин посмотрите историю правок.",
+      "entryIsLoading": "Статья загружается"
     },
     "login": {
       "titleLogin": "Войти",
