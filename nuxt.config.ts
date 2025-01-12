@@ -61,17 +61,8 @@ export default defineNuxtConfig({
   },
   i18n: {
     vueI18n: './locale/i18n.config.ts',
-    langDir: 'locale',
-    defaultLocale: 'rus',
-    locales: [{
-      code: 'rus',
-      file: 'rus.json',
-    }],
+    langDir: './locale/lang',
     strategy: 'no_prefix',
-    lazy: true,
-    detectBrowserLanguage: {
-      useCookie: false,
-    },
   },
   googleFonts: {
     families: {
