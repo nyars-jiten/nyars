@@ -1,4 +1,9 @@
 <script setup lang="ts">
+definePageMeta({
+  layout: false,
+  alias: '/jp/:wid',
+})
+
 const wid = useRoute('dict-jpn-wid').params.wid
 const articleWid = useRouteArticle()
 // const route = useRoute()
@@ -35,11 +40,6 @@ function switchFurigana() {
     jpnEntry.value.preferFurigana = !jpnEntry.value?.preferFurigana
   }
 }
-
-definePageMeta({
-  layout: false,
-  alias: '/jp/:wid',
-})
 
 // const showData = ref(false)
 useHead({ title: jpnEntry.value?.title })

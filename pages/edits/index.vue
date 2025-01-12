@@ -58,10 +58,6 @@ onMounted(() => {
 
 const { t } = useI18n()
 
-definePageMeta({
-  layout: 'desktop',
-})
-
 useHead({
   title: 'Правки',
 })

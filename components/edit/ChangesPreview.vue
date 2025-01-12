@@ -38,7 +38,7 @@ function approveStatus() {
 <template>
   <section class="flex flex-col gap-3">
     <div class="inline-flex gap-2 flex-wrap flex-row-reverse">
-      <NuxtLink :to="{ name: 'edit-page', params: { id: edit.id } }">
+      <NuxtLink :to="{ name: 'edits-id', params: { id: edit.id } }">
         <UiButton class="text-gray-500" icon="ic:outline-info" title="Инфо">
           <!-- Инфо -->
         </UiButton>

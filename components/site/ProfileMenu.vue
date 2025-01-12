@@ -39,7 +39,7 @@ const styles = tv({
       <div class="absolute right-0 invisible top-full w-44 group-hover:visible">
         <div class="flex flex-col gap-1 rounded-md mt-2 p-2 shadow-md outline outline-1 outline-neutral-800 bg-neutral-900">
           <NuxtLink
-            :to="{ name: 'user-profile', params: { username: user.username } }"
+            :to="{ name: 'users-username', params: { username: user.username } }"
             :class="styles({ entity: 'menuItem' })"
           >
             <span>{{ t('components.header.profileMenu.profile') }}</span>
@@ -64,7 +64,7 @@ const styles = tv({
       </div>
     </div>
 
-    <NuxtLink v-else :to="{ name: 'Login' }" type="button">
+    <NuxtLink v-else :to="{ name: 'users-login' }" type="button">
       <UiButton :title="t('components.header.profileMenu.login')" icon="ic:baseline-account-circle" />
     </NuxtLink>
   </div>

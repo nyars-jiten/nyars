@@ -29,7 +29,7 @@ onMounted(updateEntry)
 
 <template>
   <div>
-    <NuxtLayout name="desktop">
+    <NuxtLayout name="default">
       <div class="grid grow items-start gap-8" :class="{ 'md:grid-cols-[1fr_2fr]': isSearchPage }">
         <template v-if="isSearchPage">
           <div v-if="hasResult" class="space-y-4">

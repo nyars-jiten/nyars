@@ -1,6 +1,5 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'desktop',
   name: 'Home',
 })
 
@@ -36,7 +35,7 @@ function search(example: string) {
   searchStore.searchQuery = example
   searchStore.mode = 'words'
 
-  return navigateTo({ name: 'search', query: { q: example } })
+  return navigateTo({ name: 'dict-jpn', query: { q: example } })
 }
 </script>
 

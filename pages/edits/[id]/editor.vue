@@ -30,10 +30,6 @@ const disabled = computed(() => {
 
   return false
 })
-
-definePageMeta({
-  layout: 'desktop',
-})
 </script>
 
 <template>

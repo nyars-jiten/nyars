@@ -1,12 +1,6 @@
 <script setup lang="ts">
 import { object, string } from 'yup'
 
-definePageMeta({
-  layout: 'desktop',
-  name: 'Login',
-  path: '/login',
-})
-
 const notificationStore = useNotificationStore()
 const userStore = useUserStore()
 

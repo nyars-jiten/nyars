@@ -8,13 +8,7 @@
 //   },
 // )
 
-definePageMeta({
-  name: 'edit-page',
-  path: '/edits/:id',
-  layout: 'desktop',
-})
-
-const editId = useRoute('edit-page').params.id
+const editId = useRoute('edits-id').params.id
 
 useHead({
   title: `Правка ${editId}`,

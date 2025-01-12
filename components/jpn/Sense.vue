@@ -104,7 +104,7 @@ const miscTagsLine = computed(() => {
 
           <NuxtLink
             v-else
-            :to="{ name: 'search-JpnEntries', query: { r: reference.value } }"
+            :to="{ name: 'dict-jpn', query: { r: reference.value } }"
             class="text-ns-500 underline decoration-dotted underline-offset-4"
           >
             {{ reference.value }}

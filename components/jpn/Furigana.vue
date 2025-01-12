@@ -20,9 +20,6 @@ defineProps<Props>()
           </span>
         </span>
       </span>
-
-      <span v-if="!preview" class="block text-sm text-gray-500">{{ furigana.transcription.rus }}</span>
-      <span v-if="!preview && furigana.freq !== 0 && furigana.freq !== 100" class="block text-xs text-gray-500">{{ furigana.freq }}%</span>
     </span>
 
   </span>

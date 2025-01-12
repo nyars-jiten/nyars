@@ -1,11 +1,5 @@
 <script setup lang="ts">
-definePageMeta({
-  layout: 'desktop',
-  name: 'user-profile',
-  path: '/users/:username',
-})
-
-const username = useRoute('user-profile').params.username
+const username = useRoute('users-username').params.username
 
 const { clientGetUser } = useApi(userRepository)
 const user = await clientGetUser(username)

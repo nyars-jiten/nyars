@@ -12,7 +12,7 @@ const { t } = useI18n()
 <template>
   <UiBlock class="group" :hover="true">
     <div class="overflow-hidden">
-      <NuxtLink :to="{ name: 'user-profile', params: { username: data.user.username } }">
+      <NuxtLink :to="{ name: 'users-username', params: { username: data.user.username } }">
         <div class="flex flex-row space-x-2">
           <img
             class="size-6 rounded-full"

@@ -40,7 +40,7 @@ function copy() {
         </template>
       </UiButton>
 
-      <NuxtLink :to="{ name: 'editor', query: { wid: article.wid } }">
+      <NuxtLink :to="{ name: 'dict-jpn-wid-editor', query: { wid: article.wid } }">
         <UiButton icon="ic:baseline-edit">
           <!-- edit -->
         </UiButton>
