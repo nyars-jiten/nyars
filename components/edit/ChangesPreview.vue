@@ -38,8 +38,8 @@ function approveStatus() {
 <template>
   <section class="flex flex-col gap-3">
     <div class="inline-flex gap-2 flex-wrap flex-row-reverse">
-      <NuxtLink :to="{ name: 'edit-page', params: { id: edit.id } }" title="Инфо">
-        <UiButton class="text-gray-500" icon="ic:outline-info">
+      <NuxtLink :to="{ name: 'edit-page', params: { id: edit.id } }">
+        <UiButton class="text-gray-500" icon="ic:outline-info" title="Инфо">
           <!-- Инфо -->
         </UiButton>
       </NuxtLink>
@@ -56,9 +56,13 @@ function approveStatus() {
         <!-- Принять без смены статуса -->
       </UiButton>
 
-      <UiButton v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))" class="text-blue-500" icon="ic:baseline-edit" title="Отредактировать">
-        <!-- Отредактировать -->
-      </UiButton>
+      <template v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))">
+        <NuxtLink :to="{ name: 'edits-id-editor', params: { id: edit.id } }">
+          <UiButton class="text-blue-500" icon="ic:baseline-edit" title="Отредактировать">
+            <!-- Отредактировать -->
+          </UiButton>
+        </NuxtLink>
+      </template>
     </div>
 
     <!-- <div v-if="edit.comment.length > 0" class="break-words border-l-2 border-ns-gray-200 pl-2 dark:border-ns-gray-700">

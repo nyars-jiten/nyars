@@ -16,5 +16,5 @@ definePageMeta({
 </script>
 
 <template>
-  <JpnEditor v-if="srcData.data.value" :entry="srcData.data.value" :disabled="disabled" />
+  <JpnEditor v-if="srcData.data.value" :entry="srcData.data.value" :disabled="disabled" :wid="routeWid" />
 </template>

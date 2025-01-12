@@ -11,5 +11,5 @@ definePageMeta({
 </script>
 
 <template>
-  <JpnEditor :is-new="true" :entry="newEntry" />
+  <JpnEditor :is-new="true" :entry="newEntry" wid="" />
 </template>

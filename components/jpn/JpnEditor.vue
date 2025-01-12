@@ -2,13 +2,15 @@
 interface Props {
   entry: EditorTxtEntryJp
   isNew?: boolean
+  isEdit?: boolean
   disabled?: boolean
+  wid: string
 }
 
 const props = defineProps<Props>()
 const { t } = useI18n()
 const api = useJpnArticles()
-const routeWid = useRoute('dict-jpn-wid').params.wid
+const { updateEdit } = useApi(editRepository)
 
 const { menuState } = storeToRefs(useUserStore())
 const notificationStore = useNotificationStore()
@@ -49,7 +51,7 @@ const callCheckDuplicates = async function () {
     body: body.value,
     reading: reading.value,
     spelling: spelling.value,
-  })).filter(x => x.wid !== routeWid)
+  })).filter(x => x.wid !== props.wid)
 }
 
 const duplicates = ref(await callCheckDuplicates())
@@ -70,11 +72,17 @@ async function save() {
     spelling: spelling.value,
   }
 
-  if (!props.isNew) {
-    return await api.edit(`${routeWid}`, req)
+  if (props.isNew) {
+    await api.create(req)
+  }
+  else if (props.isEdit) {
+    const routeId = useRoute('edits-id-editor').params.id
+    await updateEdit(routeId, req)
+  }
+  else {
+    await api.edit(props.wid, req)
   }
 
-  await api.create(req)
   notificationStore.createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
 }
 
@@ -86,7 +94,7 @@ async function remove() {
   }
 
   // body is still required, so we can save meta data
-  await api.remove(`${routeWid}`, req)
+  await api.remove(`${props.wid}`, req)
   notificationStore.createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
 }
 
@@ -327,10 +335,10 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
         </div>
 
         <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
-          <UiButton class="max-sm:w-full" type="button" icon="mdi:hashtag-box-outline" color="amber" :active="stateTagSearch" :title="t('pages.editor.guide')" @click="toggleTagSearch(); toggleEditorHelp(false)">
+          <UiButton class="max-sm:w-full" type="button" icon="mdi:hashtag-box-outline" color="amber" :disabled="disabled" :active="stateTagSearch" :title="t('pages.editor.guide')" @click="toggleTagSearch(); toggleEditorHelp(false)">
             <!-- теги -->
           </UiButton>
-          <UiButton class="max-sm:w-full" type="button" icon="ic:baseline-help-outline" color="sky" :active="stateEditorHelp" :title="t('pages.editor.guide')" @click="toggleEditorHelp(); toggleTagSearch(false)">
+          <UiButton class="max-sm:w-full" type="button" icon="ic:baseline-help-outline" color="sky" :disabled="disabled" :active="stateEditorHelp" :title="t('pages.editor.guide')" @click="toggleEditorHelp(); toggleTagSearch(false)">
             <!-- справка -->
           </UiButton>
 
@@ -382,7 +390,7 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
 
     <div class="space-y-8 max-xl:hidden flex flex-col">
       <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
-        <UiButton v-if="!isNew" class="max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :title="t('pages.editor.delete')" :disabled="disabled" @click="remove">
+        <UiButton v-if="!isNew && !isEdit" class="max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :title="t('pages.editor.delete')" :disabled="disabled" @click="remove">
           {{ t('pages.editor.delete') }}
         </UiButton>
         <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="save">

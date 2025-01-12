@@ -1,7 +1,12 @@
 import type { $Fetch, NitroFetchRequest } from 'nitropack'
+import type { CreateArticleJpn } from '~/types/models/articles/jpn'
 
 export function editRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
   const path = '/edits'
+
+  const get = (id: string): Promise<EditResponse> => {
+    return fetch<EditResponse>(`${path}/${id}`)
+  }
 
   const getEdits = (number = 25, page = 0, statuses: string = ''): Promise<EditResponse[]> => {
     return fetch<EditResponse[]>(path, {
@@ -10,6 +15,17 @@ export function editRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
         p: page,
         s: statuses,
       },
+    })
+  }
+
+  const getEditTxt = (id: string): Promise<EditorTxtEntryJp> => {
+    return fetch<EditorTxtEntryJp>(`${path}/${id}/txt`)
+  }
+
+  const updateEdit = (id: string, edit: CreateArticleJpn) => {
+    return fetch<Edit>(`${path}/${id}`, {
+      method: 'POST',
+      body: edit,
     })
   }
 
@@ -44,5 +60,5 @@ export function editRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
     })
   }
 
-  return { getEdits, getEditsEntry, approveEdit, approveEditStatus, declineEdit }
+  return { get, getEdits, getEditTxt, updateEdit, getEditsEntry, approveEdit, approveEditStatus, declineEdit }
 }
