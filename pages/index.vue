@@ -23,19 +23,12 @@ const infoExamples = [
 
 const config = useRuntimeConfig()
 
-const searchStore = useSearchStore()
+const { push } = useSearchRequest()
 
 const { t } = useI18n()
 
 function getExample(exampleType: number, exampleIndex: number) {
   return t(`pages.main.infoExamples.${exampleType}.searchExamples.${exampleIndex}`)
-}
-
-function search(example: string) {
-  searchStore.searchQuery = example
-  searchStore.mode = 'words'
-
-  return navigateTo({ name: 'dict-jpn', query: { q: example } })
 }
 </script>
 
@@ -58,7 +51,7 @@ function search(example: string) {
               <button
                 type="button"
                 class="underline decoration-dotted underline-offset-4 hover:text-ns-500"
-                @click="search(getExample(i + 1, searchExample))"
+                @click="push(getExample(i + 1, searchExample))"
               >
                 {{ getExample(i + 1, searchExample) }}
               </button>
