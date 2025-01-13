@@ -169,7 +169,6 @@ export interface V2Tag {
   engShort: string
   rus: string
   rusShort: string
-  split?: string[]
 }
 
 export interface V2LoanSource {
@@ -194,9 +193,9 @@ export interface V2Example {
 }
 
 export interface V2Content {
-  content?: V2Content[]
-  value: string
-  tag: string
+  c?: V2Content[] // content
+  v: string // value
+  t: string // tag
 }
 
 export enum V2ReferenceType {

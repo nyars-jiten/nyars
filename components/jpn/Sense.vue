@@ -76,7 +76,7 @@ const miscTagsLine = computed(() => {
           :key="li"
           class="px-0.5 m-1 whitespace-nowrap bg-emerald-800 rounded-sm"
         >
-          {{ lemma.value }}
+          {{ lemma.v }}
         </span>
       </div>
     </div>

@@ -12,7 +12,7 @@ withDefaults(defineProps<Props>(), {
 
 const style = tv({
   variants: {
-    tag: {
+    t: {
       i: 'italic text-gray-500 text-sm',
       p: 'italic',
       comp: 'bg-gray-300/10 px-1 py-0.5 rounded text-sm whitespace-nowrap', // bg-fuchsia-300/10
@@ -25,40 +25,40 @@ const style = tv({
 
 <template>
   <span class="leading-none">
-    <template v-for="({ tag, value, content }, i) in data" :key="i">
-      <Content v-if="content && tag !== 'ruby'" :data="content" :class="style({ tag })" :break-line="breakLine" />
+    <template v-for="({ t, v, c }, i) in data" :key="i">
+      <Content v-if="c && t !== 'ruby'" :data="c" :class="style({ t })" :break-line="breakLine" />
 
-      <sup v-if="tag === 'sup'">{{ value }}</sup>
+      <sup v-if="t === 'sup'">{{ v }}</sup>
 
-      <sub v-else-if="tag === 'sub'">{{ value }}</sub>
+      <sub v-else-if="t === 'sub'">{{ v }}</sub>
 
-      <template v-else-if="tag === 'ref'">
+      <template v-else-if="t === 'ref'">
         <!-- <NuxtLink :to="{ name: 'search', query: { q: value } }" class="text-indigo-300">
-          {{ value }}
+          {{ v }}
         </NuxtLink> -->
         <span class="text-indigo-300">
-          {{ value }}
+          {{ v }}
         </span>
       </template>
 
-      <template v-else-if="tag === 'br'">
+      <template v-else-if="t === 'br'">
         <br v-if="breakLine">
         <span v-else class="p-0.5" />
       </template>
 
-      <ruby v-else-if="tag === 'ruby'">
-        <template v-for="cont, ci in content" :key="ci">
-          <rt v-if="cont.tag === 'rt'">
-            {{ cont.value }}
+      <ruby v-else-if="t === 'ruby'">
+        <template v-for="cont, ci in c" :key="ci">
+          <rt v-if="cont.t === 'rt'">
+            {{ cont.v }}
           </rt>
           <template v-else>
-            {{ cont.value }}
+            {{ cont.v }}
           </template>
         </template>
       </ruby>
 
-      <span v-else :class="style({ tag })">
-        {{ value }}
+      <span v-else :class="style({ t })">
+        {{ v }}
       </span>
     </template>
   </span>

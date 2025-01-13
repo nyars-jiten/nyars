@@ -57,7 +57,7 @@ function search(example: string) {
             >
               <button
                 type="button"
-                class="underline decoration-dotted underline-offset-4 hover:text-tortoise-900"
+                class="underline decoration-dotted underline-offset-4 hover:text-ns-500"
                 @click="search(getExample(i + 1, searchExample))"
               >
                 {{ getExample(i + 1, searchExample) }}
