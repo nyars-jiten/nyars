@@ -35,6 +35,10 @@ function approveStatus() {
 }
 
 const showRaw = ref(false)
+
+function showEntryRef(edit: EditResponse): boolean {
+  return edit.type !== EditType.Create || (edit.type === EditType.Create && edit.status === EditStatus.Accepted)
+}
 </script>
 
 <template>
@@ -46,7 +50,7 @@ const showRaw = ref(false)
         </UiButton>
       </NuxtLink> -->
 
-      <NuxtLink :to="{ name: 'dict-jpn-wid', params: { wid: edit.wid } }" target="_blank" prefetch >
+      <NuxtLink v-if="showEntryRef(edit)" :to="{ name: 'dict-jpn-wid', params: { wid: edit.wid } }" target="_blank" prefetch >
         <UiButton class="text-gray-500" icon="ic:outline-open-in-new" title="Открыть статью">
           <!-- Открыть статью -->
         </UiButton>

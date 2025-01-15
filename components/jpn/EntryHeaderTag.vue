@@ -20,7 +20,7 @@ const tagsMap = {
 
 <template>
   <span>
-    <span v-show="sidebar" class="inline-flex align-text-top gap-1.5 py-1">
+    <span v-show="sidebar" class="inline-flex align-top gap-1.5 py-1">
 
       <!-- Tags that doesn't exist in map -->
       <small
@@ -39,7 +39,7 @@ const tagsMap = {
       <small
         v-for="(tag, tagIndex) of tags.filter(tag => tagsMap[tag.engShort])"
         :key="tagIndex"
-        class="group relative size-fit cursor-pointer rounded-sm p-0.5 text-xs leading-none "
+        class="group relative size-fit cursor-pointer rounded-sm p-0.5 text-[10px] leading-none "
         :class="tagsMap[tag.engShort].class"
       >
         <span class="font-bold uppercase text-neutral-900">
