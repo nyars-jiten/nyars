@@ -102,7 +102,7 @@ const password = useField('password')
 
         <section class="flex justify-between">
           <UiButton type="submit">
-            save
+            {{ t(isRegister ? 'pages.login.titleRegister' : 'pages.login.titleLogin') }}
           </UiButton>
 
           <div class="flex gap-2">

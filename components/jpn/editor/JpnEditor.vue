@@ -19,8 +19,8 @@ const { user } = storeToRefs(useUserStore())
 
 onBeforeMount(() => {
   menuState.value = false
-  if (!user.value) {
-    navigateTo('/login')
+  if (!user.value && props.isNew) {
+    navigateTo('/users/login')
   }
 })
 

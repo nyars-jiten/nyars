@@ -62,7 +62,7 @@ export interface V2EntryJpResponse {
 
 export interface JpnSearchResponse {
   result: V2EntryJp[]
-  request: string
+  request: string[]
 }
 
 export interface EditorEntryJp {

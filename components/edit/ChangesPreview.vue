@@ -33,6 +33,8 @@ function approveStatus() {
   approveEditStatus(props.edit.id)
   notificationStore.createNotification(t('models.edit.actions.approved'), NyarsNotificationType.Success)
 }
+
+const showRaw = ref(false)
 </script>
 
 <template>
@@ -88,7 +90,7 @@ function approveStatus() {
 
       <div :class="[{ 'col-span-full': isTypeCreate }, preview()]">
         <span
-          v-for="(text, index) of edit.diffDst"
+          v-for="(text, index) of (showRaw ? edit.diffRawDst : edit.diffDst)"
           :key="index"
           :class="`whitespace-pre-wrap ${text.c.length > 25 ? 'break-all' : ''} ${text.d ? 'text-green-500' : ''}`"
         >

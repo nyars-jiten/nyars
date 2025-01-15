@@ -9,12 +9,13 @@ export interface EditResponse {
   author: ShortUser | null
   approver: ShortUser | null
   comment: string
-  /** example: "title": { "引く": ["hiku"],"弾く": ["hiku"] } */
-  title: Record<string, string[]>
+  title: string
   createdAt: Date
   updatedAt: Date
   diffSrc: EditDiff[]
   diffDst: EditDiff[]
+  diffRawSrc: EditDiff[]
+  diffRawDst: EditDiff[]
 }
 
 export interface EditDiff {
