@@ -1,7 +1,7 @@
 <script setup lang="ts">
 interface Props {
   sense: V2Sense
-  ix: string
+  showIx: boolean
   isPreview: boolean
   showLemmas: boolean
 }
@@ -23,8 +23,8 @@ const miscTagsLine = computed(() => {
 <template>
   <div class="space-y-2">
     <div class="space-x-2">
-      <span v-if="ix !== ''" class="min-w-[30px] text-center align-top text-violet-300">
-        {{ ix }}
+      <span v-if="showIx" class="min-w-[30px] text-center align-top text-violet-300">
+        {{ sense.ix }}
       </span>
 
       <div class="inline-block w-11/12">
@@ -125,7 +125,7 @@ const miscTagsLine = computed(() => {
       v-for="(subsense, subsenseIndex) of sense.subSenses"
       :key="subsenseIndex"
       :sense="subsense"
-      :ix="`${ix}.${subsenseIndex + 1}`"
+      :show-ix="true"
       :is-preview="isPreview"
       :show-lemmas="showLemmas"
       class="ml-6 flex flex-col"

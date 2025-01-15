@@ -40,9 +40,15 @@ const showRaw = ref(false)
 <template>
   <section class="flex flex-col gap-3">
     <div class="inline-flex gap-2 flex-wrap flex-row-reverse">
-      <NuxtLink :to="{ name: 'edits-id', params: { id: edit.id } }">
+      <!-- <NuxtLink :to="{ name: 'edits-id', params: { id: edit.id } }">
         <UiButton class="text-gray-500" icon="ic:outline-info" title="Инфо">
-          <!-- Инфо -->
+          Инфо
+        </UiButton>
+      </NuxtLink> -->
+
+      <NuxtLink :to="{ name: 'dict-jpn-wid', params: { wid: edit.wid } }" target="_blank" prefetch >
+        <UiButton class="text-gray-500" icon="ic:outline-open-in-new" title="Открыть статью">
+          <!-- Открыть статью -->
         </UiButton>
       </NuxtLink>
 

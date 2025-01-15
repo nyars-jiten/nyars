@@ -93,15 +93,15 @@ onMounted(() => {
         <span>{{ t('components.header.navigation[0].pages.edits') }}</span>
       </NuxtLink>
 
-      <NuxtLink to="/dev" :class="links({ state: menuState, secondary })">
+      <!-- <NuxtLink to="/dev" :class="links({ state: menuState, secondary })">
         <Icon size="1.5rem" name="ic:baseline-auto-graph" />
         <span>{{ t('components.header.navigation[0].pages.statistics') }}</span>
-      </NuxtLink>
+      </NuxtLink> -->
 
-      <NuxtLink to="/dev" :class="links({ state: menuState, secondary })">
+      <!-- <NuxtLink to="/dev" :class="links({ state: menuState, secondary })">
         <Icon size="1.5rem" name="ic:baseline-download" />
         <span>{{ t('components.header.navigation[0].pages.download') }}</span>
-      </NuxtLink>
+      </NuxtLink> -->
     </li>
 
     <template v-if="user">
@@ -140,10 +140,10 @@ onMounted(() => {
         <span>{{ t('components.header.navigation[0].pages.github') }}</span>
       </NuxtLink>
 
-      <NuxtLink to="/dev" :class="links({ state: menuState, secondary })">
+      <!-- <NuxtLink to="/dev" :class="links({ state: menuState, secondary })">
         <Icon size="1.5rem" name="ic:baseline-menu-book" />
         <span>{{ t('components.header.navigation[0].pages.documentation') }}</span>
-      </NuxtLink>
+      </NuxtLink> -->
     </li>
   </ul>
 </template>

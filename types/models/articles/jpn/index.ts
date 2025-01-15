@@ -151,6 +151,7 @@ export interface V2Meaning {
 }
 
 export interface V2Sense {
+  ix: string
   content: V2Content[]
   lemmaContent: V2Content[]
   examples: V2Example[]
