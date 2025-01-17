@@ -8,7 +8,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const { userAccess, user } = storeToRefs(useUserStore())
-const { approveEdit, approveEditStatus, declineEdit } = useApi(editRepository)
+const { approveEditAsReviewed, approveEditAsUnreviewed, declineEdit } = useApi(editRepository)
 const notificationStore = useNotificationStore()
 
 const { t } = useI18n()
@@ -19,8 +19,8 @@ const preview = tv({
   base: 'py-2',
 })
 
-function approve() {
-  approveEdit(props.edit.id)
+function approveAsReviewed() {
+  approveEditAsReviewed(props.edit.id)
   notificationStore.createNotification(t('models.edit.actions.approved'), NyarsNotificationType.Success)
 }
 
@@ -29,8 +29,8 @@ function reject() {
   notificationStore.createNotification(t('models.edit.actions.rejected'), NyarsNotificationType.Warning)
 }
 
-function approveStatus() {
-  approveEditStatus(props.edit.id)
+function approveAsUnreviewed() {
+  approveEditAsUnreviewed(props.edit.id)
   notificationStore.createNotification(t('models.edit.actions.approved'), NyarsNotificationType.Success)
 }
 
@@ -43,6 +43,8 @@ function showEntryRef(edit: EditResponse): boolean {
 
 <template>
   <section class="flex flex-col gap-3">
+    {{ edit.entryStatus }}
+    <span v-if="edit.comment.length > 0">Comment: {{ edit.comment }}</span>
     <div class="inline-flex gap-2 flex-wrap flex-row-reverse">
       <!-- <NuxtLink :to="{ name: 'edits-id', params: { id: edit.id } }">
         <UiButton class="text-gray-500" icon="ic:outline-info" title="Инфо">
@@ -60,12 +62,12 @@ function showEntryRef(edit: EditResponse): boolean {
         <!-- Отклонить -->
       </UiButton>
 
-      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-green-500" icon="ic:baseline-done-all" title="Принять" @click="approve()">
-        <!-- Принять -->
+      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-green-500" icon="ic:baseline-done-all" title="Принять как отредактированную" @click="approveAsReviewed()">
+        <!-- Принять как отредактированную -->
       </UiButton>
 
-      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-yellow-500" icon="ic:baseline-done" title="Принять без смены статуса" @click="approveStatus()">
-        <!-- Принять без смены статуса -->
+      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-yellow-500" icon="ic:baseline-done" title="Принять как неотредактированную" @click="approveAsUnreviewed()">
+        <!-- Принять как неотредактированную -->
       </UiButton>
 
       <template v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))">

@@ -24,7 +24,7 @@ const statusStyle = tv({
       false: '',
     },
 
-    isReviewed: {
+    isUnreviewed: {
       true: '',
       false: '',
     },
@@ -51,7 +51,7 @@ const statusStyle = tv({
      * border
      */
 
-    { isReviewed: true, border: true, class: 'border-l-2 border-l-amber-700' },
+    { isUnreviewed: true, border: true, class: 'border-l-2 border-l-amber-700' },
     { isUnconfirmed: true, border: true, class: 'border-l-2 border-l-red-700' },
     { isArchaic: true, border: true, class: 'border-l-2 border-l-indigo-500' },
     { isDialect: true, border: true, class: 'border-l-2 border-l-fuchsia-500' },
@@ -61,7 +61,7 @@ const statusStyle = tv({
      * text
      */
 
-    { text: true, isReviewed: true, class: 'text-amber-300' },
+    { text: true, isUnreviewed: true, class: 'text-amber-300' },
     { text: true, isUnconfirmed: true, class: 'text-red-300' },
     { text: true, isArchaic: true, class: 'text-indigo-300' },
     { text: true, isDialect: true, class: 'text-fuchsia-300' },
@@ -70,8 +70,8 @@ const statusStyle = tv({
 })
 
 const iconList = {
-  isReviewed: {
-    value: false,
+  isUnreviewed: {
+    value: true,
     path: 'mdi:warning-outline',
   },
   isArchaic: {
@@ -95,7 +95,7 @@ const iconList = {
 
 const statusIconList = computed(() => {
   const res = [] as { key: keyof V2Status, path: string } []
-
+  
   for (const key of Object.keys(iconList) as (keyof V2Status)[]) {
     if (iconList[key].value === props.statuses[key]) {
       res.push({ key, path: iconList[key].path })
@@ -112,8 +112,6 @@ function borderCheck(stIconList: { key: keyof V2Status, path: string }[]) {
     emit('changeBorder', newBorder)
   }
 }
-
-// TODO: убрать мИгАнИе >_<
 
 // watch(props.statuses, () => {
 //   if (statusIconList.value.length > 0) {

@@ -39,17 +39,20 @@ export function editRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
     })
   }
 
-  const approveEdit = (editId: string) => {
-    return fetch<Edit>(`${path}/${editId}/approve`, {
-      method: 'POST',
-    })
-  }
-
-  const approveEditStatus = (editId: string) => {
+  const approveEditAsUnreviewed = (editId: string) => {
     return fetch<Edit>(`${path}/${editId}/approve`, {
       method: 'POST',
       params: {
-        status: false,
+        isUnreviewed: true,
+      }
+    })
+  }
+
+  const approveEditAsReviewed = (editId: string) => {
+    return fetch<Edit>(`${path}/${editId}/approve`, {
+      method: 'POST',
+      params: {
+        isUnreviewed: false,
       },
     })
   }
@@ -60,5 +63,5 @@ export function editRepository<T>(fetch: $Fetch<T, NitroFetchRequest>) {
     })
   }
 
-  return { get, getEdits, getEditTxt, updateEdit, getEditsEntry, approveEdit, approveEditStatus, declineEdit }
+  return { get, getEdits, getEditTxt, updateEdit, getEditsEntry, approveEditAsUnreviewed, approveEditAsReviewed, declineEdit }
 }

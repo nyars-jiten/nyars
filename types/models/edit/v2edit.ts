@@ -10,6 +10,7 @@ export interface EditResponse {
   approver: ShortUser | null
   comment: string
   title: string
+  entryStatus: V2Status
   createdAt: Date
   updatedAt: Date
   diffSrc: EditDiff[]

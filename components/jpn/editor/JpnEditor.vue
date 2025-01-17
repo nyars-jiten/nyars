@@ -24,77 +24,67 @@ onBeforeMount(() => {
   }
 })
 
-const spelling = ref('')
-const spellingRows = computed(() => Math.min(5, Math.max(1, spelling.value.split('\n').length)))
+const { entry } = storeToRefs(useEditorEntryStore())
 
-const reading = ref('')
-const readingRows = computed(() => Math.min(5, Math.max(1, reading.value.split('\n').length)))
+entry.value.spelling = ''
+const spellingRows = computed(() => Math.min(5, Math.max(1, entry.value.spelling.split('\n').length)))
 
-const body = ref('')
+entry.value.reading = ''
+const readingRows = computed(() => Math.min(5, Math.max(1, entry.value.reading.split('\n').length)))
 
-spelling.value = props.entry.spelling
-reading.value = props.entry.reading
-body.value = props.entry.body
+entry.value.body = ''
+entry.value.comment = props.entry.comment
+entry.value.status = props.entry.status
+
+entry.value.spelling = props.entry.spelling
+entry.value.reading = props.entry.reading
+entry.value.body = props.entry.body
+
+const showConfimationWindow = ref('')
 
 const callPreview = async function () {
-  return await api.preview({
-    body: body.value,
-    reading: reading.value,
-    spelling: spelling.value,
-  })
+  return await api.preview(entry.value)
 }
 
 const preview = ref(await callPreview())
 
 const callCheckDuplicates = async function () {
-  return (await api.checkDuplicates({
-    body: body.value,
-    reading: reading.value,
-    spelling: spelling.value,
-  })).filter(x => x.wid !== props.wid)
+  return (await api.checkDuplicates(entry.value)).filter(x => x.wid !== props.wid)
 }
 
 const duplicates = ref(await callCheckDuplicates())
 
 // const changes = computed(() => 'code' in preview.data.value ? null : preview.data.value)
 
-watchDebounced([body], async () => preview.value = await callPreview(), { debounce: 250, immediate: true })
+const spellingComp = computed(() => entry.value.spelling)
+const readingComp = computed(() => entry.value.reading)
+const bodyComp = computed(() => entry.value.body)
 
-watchDebounced([spelling, reading], async () => {
+watchDebounced([bodyComp], async () => preview.value = await callPreview(), { debounce: 250, immediate: true })
+
+watchDebounced([spellingComp, readingComp], async () => {
   preview.value = await callPreview()
   duplicates.value = await callCheckDuplicates()
 }, { debounce: 250, immediate: true })
 
 async function save() {
-  const req = {
-    body: body.value,
-    reading: reading.value,
-    spelling: spelling.value,
-  }
-
   if (props.isNew) {
-    await api.create(req)
+    await api.create(entry.value)
   }
   else if (props.isEdit) {
     const routeId = useRoute('edits-id-editor').params.id
-    await updateEdit(routeId, req)
+    await updateEdit(routeId, entry.value)
   }
   else {
-    await api.edit(props.wid, req)
+    await api.edit(props.wid, entry.value)
   }
 
   notificationStore.createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
 }
 
 async function remove() {
-  const req = {
-    body: body.value,
-    reading: reading.value,
-    spelling: spelling.value,
-  }
-
   // body is still required, so we can save meta data
-  await api.remove(`${props.wid}`, req)
+  await api.remove(`${props.wid}`, entry.value)
   notificationStore.createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
 }
 
@@ -112,49 +102,52 @@ const element = ref({
 
 function insert(open: string, close?: string) {
   let result = ''
+  const curValue = entry.value[element.value.target as keyof typeof entry.value] as string
 
-  result = element.value.target.slice(0, element.value.selection.start)
+  result = curValue.slice(0, element.value.selection.start)
   result += open
 
   if (close) {
-    result += element.value.target.slice(element.value.selection.start, element.value.selection.end)
+    result += curValue.slice(element.value.selection.start, element.value.selection.end)
     result += close
-    result += element.value.target.slice(element.value.selection.end)
+    result += curValue.slice(element.value.selection.end)
   }
-
   else {
-    result += element.value.target.slice(element.value.selection.start)
+    result += curValue.slice(element.value.selection.start)
   }
 
-  element.value.target = result
+  // @ts-expect-error TODO
+  entry.value[element.value.target as keyof typeof entry.value] = result
 }
 
 onMounted(() => {
-  const refs = [
-    [spellingRef, spelling],
-    [readingRef, reading],
-    [bodyRef, body],
-  ]
+  if (!showConfimationWindow.value) { 
+    const refs = [
+      [spellingRef, 'spelling'],
+      [readingRef, 'reading'],
+      [bodyRef, 'body'],
+    ]
 
-  for (const [r, v] of refs) {
-    // @ts-expect-error TODO
-    const { focused } = useFocus(r.value.inputRef)
+    for (const [r, v] of refs) {
+      // @ts-expect-error TODO
+      const { focused } = useFocus(r.value.inputRef)
 
-    watch(focused, (focused) => {
-      // blur
-      if (focused === false) {
-        element.value = {
-          // @ts-expect-error TODO
-          target: v,
-          selection: {
+      watch(focused, (focused) => {
+        // blur
+        if (focused === false) {
+          element.value = {
             // @ts-expect-error TODO
-            start: r.value.inputRef.selectionStart,
-            // @ts-expect-error TODO
-            end: r.value.inputRef.selectionEnd,
-          },
+            target: v,
+            selection: {
+              // @ts-expect-error TODO
+              start: r.value.inputRef.selectionStart,
+              // @ts-expect-error TODO
+              end: r.value.inputRef.selectionEnd,
+            },
+          }
         }
-      }
-    })
+      })
+    }
   }
 })
 
@@ -311,7 +304,15 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
 </script>
 
 <template>
-  <section class="grid grow gap-8 xl:h-full xl:grid-cols-[2fr_1fr] overflow-hidden p-1">
+  <ConfirmationWindow 
+    v-if="showConfimationWindow !== ''"
+    :type="showConfimationWindow"
+
+    @return="showConfimationWindow = ''"
+    @send="save(); showConfimationWindow = ''"
+    @delete="remove(); showConfimationWindow = ''"
+  />
+  <section v-else class="grid grow gap-8 xl:h-full xl:grid-cols-[2fr_1fr] overflow-hidden p-1">
     <EditorGuide v-if="stateEditorHelp" class="md:hidden" @click-insert="(text: string[]) => insert(text[0], text[1])" />
     <TagSearch v-if="stateTagSearch" class="md:hidden" @click-insert="(text: string[]) => insert(text[0], text[1])" />
 
@@ -358,7 +359,7 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
 
       <section class="flex grow gap-8 max-md:flex-col" :class="{ 'md:grid md:grid-cols-2': stateEditorHelp || stateTagSearch }">
         <div class="flex shrink grow flex-col gap-4">
-          <UiInput ref="spellingRef" v-model="spelling" :multiline="true" :rows="spellingRows" :disabled="disabled" :placeholder="isNew ? t('pages.editor.placeholder.spelling') : ''">
+          <UiInput ref="spellingRef" v-model="entry.spelling" :multiline="true" :rows="spellingRows" :disabled="disabled" :placeholder="isNew ? t('pages.editor.placeholder.spelling') : ''">
             <template #hint>
               {{ t('pages.editor.spelling') }}
             </template>
@@ -367,7 +368,7 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
             </template>
           </UiInput>
 
-          <UiInput ref="readingRef" v-model="reading" :multiline="true" :rows="readingRows" :disabled="disabled" :placeholder="isNew ? t('pages.editor.placeholder.reading') : ''">
+          <UiInput ref="readingRef" v-model="entry.reading" :multiline="true" :rows="readingRows" :disabled="disabled" :placeholder="isNew ? t('pages.editor.placeholder.reading') : ''">
             <template #hint>
               {{ t('pages.editor.reading') }}
             </template>
@@ -376,7 +377,7 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
             </template>
           </UiInput>
 
-          <UiInput ref="bodyRef" v-model="body" :multiline="true" class="grow flex items-stretch" :disabled="disabled">
+          <UiInput ref="bodyRef" v-model="entry.body" :multiline="true" class="grow flex items-stretch" :disabled="disabled">
             <template #hint>
               {{ t('pages.editor.body') }}
             </template>
@@ -390,10 +391,10 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
 
     <div class="space-y-8 max-xl:hidden flex flex-col">
       <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
-        <UiButton v-if="!isNew && !isEdit" class="max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :title="t('pages.editor.delete')" :disabled="disabled" @click="remove">
+        <UiButton v-if="!isNew && !isEdit" class="max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :title="t('pages.editor.delete')" :disabled="disabled" @click="showConfimationWindow = 'delete'">
           {{ t('pages.editor.delete') }}
         </UiButton>
-        <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="save">
+        <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="showConfimationWindow = 'edit'">
           {{ t('pages.editor.save') }}
         </UiButton>
       </div>

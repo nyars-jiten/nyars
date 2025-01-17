@@ -15,6 +15,8 @@ export interface EditorTxtEntryJp {
   reading: string
   spelling: string
   body: string
+  status: V2Status
+  comment: string
 }
 
 export interface WeeklyStats {
@@ -93,7 +95,7 @@ export interface Furigana {
 }
 
 export interface V2Status {
-  isReviewed: boolean
+  isUnreviewed: boolean
   isUnconfirmed: boolean
   isArchaic: boolean
   isDialect: boolean
