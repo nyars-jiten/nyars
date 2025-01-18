@@ -6,10 +6,10 @@ const { t } = useI18n()
 
 const { search } = useJpnArticles()
 
-const { data } = useAsyncData('search-request', () => search(request.value, 0, 0), {
-  // default: () => ({ result: [] }),
+const { data, clear, refresh, status } = useAsyncData('search-request', () => search(request.value, 0, 0), {
+  default: () => ({ result: [], request: '' }),
   dedupe: 'defer',
-  watch: [request],
+  // watch: [request],
 })
 
 const updateEntry = function () {
@@ -22,6 +22,10 @@ const updateEntry = function () {
 const hasResult = computed(() => request.value && (data.value?.result?.length ?? 0) > 0)
 const isSearchPage = computed(() => request.value)
 
+watch(request, () => {
+  clear()
+  refresh()
+})
 watch(data, updateEntry)
 
 onMounted(updateEntry)
@@ -35,10 +39,17 @@ onMounted(updateEntry)
           <div v-if="hasResult" class="space-y-4">
             <SearchResult v-for="result of data?.result" :key="result.wid" :article="result" />
           </div>
-          <div v-else>
+          <div v-else-if="status === 'success'">
             <div class="text-center">
-              <p>{{ t('pages.search.foundNothing', [data?.request]) }}</p>
+              <span>{{ t('pages.search.foundNothing', [data?.request]) }}</span>
             </div>
+          </div>
+          <div class="flex space-x-2 content-center" v-else-if="status === 'pending'">
+            <Icon class="animate-spin size-6" name="mdi:loading" />
+            <span>{{ t('pages.search.pendingRequest') }}</span>
+          </div>
+          <div v-else>
+            <span>{{ t('pages.search.errorRequest') }}</span>
           </div>
         </template>
         <NuxtPage />

@@ -137,7 +137,9 @@
         "isDialect": "диалектное",
         "isProper": "собственное"
       },
-      "foundNothing": "По запросу {0} ничего не найдено."
+      "foundNothing": "По запросу {0} ничего не найдено.",
+      "pendingRequest": "Загрузка...",
+      "errorRequest": "Произошла ошибка."
     },
     "editor": {
       "spelling": "написание",

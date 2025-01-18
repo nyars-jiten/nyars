@@ -24,7 +24,6 @@ export const useSearchRequest = createGlobalState(() => {
   function push(value?: string) {
     request.value = value ?? request.value
     return navigateTo({ name: 'dict-jpn', query: { q: request.value } })
-    // return navigateTo({ name: 'search', query: { q: request.value } })
   }
 
   return { request, push }
