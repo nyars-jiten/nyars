@@ -248,35 +248,35 @@ function supButtons() {
     ],
     [
       {
-        name: 'see',
-        click: ['((see: ', '))'],
+        name: 'см',
+        click: ['((см: ', '))'],
         title: '',
       },
       {
-        name: 'also',
-        click: ['((also: ', '))'],
+        name: 'см.т',
+        click: ['((см также: ', '))'],
         title: '',
       },
       {
-        name: 'ant',
-        click: ['((ant: ', '))'],
+        name: 'ант',
+        click: ['((ант: ', '))'],
         title: '',
       },
       {
-        name: 'cf',
-        click: ['((cf: ', '))'],
+        name: 'ср',
+        click: ['((ср: ', '))'],
         title: '',
       },
       {
-        name: 'abbr',
-        click: ['((abbr: ', '))'],
+        name: 'сокр',
+        click: ['((сокр: ', '))'],
         title: '',
       },
     ],
     [
       {
-        name: 'pitch',
-        click: ['((pitch: ', '))'],
+        name: 'питч',
+        click: ['((питч: ', '))'],
         title: '',
       },
       {
@@ -285,8 +285,8 @@ function supButtons() {
         title: '',
       },
       {
-        name: 'lang',
-        click: ['((lang: ', '))'],
+        name: 'язык',
+        click: ['((язык: ', '))'],
         title: '',
       },
       {
