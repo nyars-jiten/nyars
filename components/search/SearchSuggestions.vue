@@ -1,31 +1,10 @@
 <script lang="ts" setup>
-const props = defineProps<Props>()
-const { request, push } = useSearchRequest()
-const { getSuggestions } = useApi(searchRepository)
-
-interface Props {
-  data: string
-}
-
-const { data, refresh } = await useLazyAsyncData(
-  'suggestions',
-  () => getSuggestions(props.data),
-  {
-    default: (): string[] => [],
-  },
-)
+const { data } = storeToRefs(useSuggestionsStore())
+const { push } = useSearchRequest()
 
 function escapeVal(value: string) {
   return `"${value}"`
 }
-
-watchDebounced(request, () => {
-  // if (request.length < 3) {
-  //   return Promise.resolve()
-  // }
-
-  return refresh()
-}, { debounce: 500 })
 </script>
 
 <template>

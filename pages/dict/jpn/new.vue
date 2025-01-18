@@ -3,7 +3,16 @@ const newEntry = {
   spelling: '',
   reading: '',
   body: '=((сущ))\n- новое значение',
-} as EditorTxtEntryJp
+  comment: '',
+  status: {
+    isUnreviewed: true,
+    isUnconfirmed: true,
+    isArchaic: false,
+    isDialect: false,
+    isProper: false,
+    isDeleted: false,
+  },
+} satisfies EditorTxtEntryJp
 
 definePageMeta({
   layout: false,

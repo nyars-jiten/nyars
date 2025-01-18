@@ -5,11 +5,11 @@ interface Props {
 
 defineProps<Props>()
 
+const emit = defineEmits(['return', 'send', 'delete'])
+
 const { entry } = storeToRefs(useEditorEntryStore())
 
 const { t } = useI18n()
-const emit = defineEmits(['return', 'send', 'delete'])
-
 const emptyIsUnreviewed = { isUnreviewed: true } as V2Status
 const emptyIsUnconfirmed = { isUnconfirmed: true } as V2Status
 </script>
@@ -24,7 +24,7 @@ const emptyIsUnconfirmed = { isUnconfirmed: true } as V2Status
         <div>
           {{ t(`pages.editor.confirmation.comment.${type}`) }}
         </div>
-        <UiInput class="mt-2" ref="spellingRef" v-model="entry.comment" :multiline="true">
+        <UiInput ref="spellingRef" v-model="entry.comment" class="mt-2" :multiline="true">
           <!-- <template #hint>
             Обоснование
           </template> -->
@@ -33,13 +33,13 @@ const emptyIsUnconfirmed = { isUnconfirmed: true } as V2Status
       <section v-if="type === 'edit'" class="space-y-2">
         <div>Статус:</div>
         <div class="flex space-x-2 content-center">
-          <input type="checkbox" id="checkbox" v-model="entry.status.isUnreviewed" />
-          <EntryFlagBadge :statuses="emptyIsUnreviewed" hint /> 
+          <input id="checkbox" v-model="entry.status.isUnreviewed" type="checkbox">
+          <EntryFlagBadge :statuses="emptyIsUnreviewed" hint />
           <span>{{ t('pages.editor.confirmation.statusisUnreviewed') }}</span>
         </div>
         <div class="flex space-x-2 content-center">
-          <input type="checkbox" id="checkbox" v-model="entry.status.isUnconfirmed" />
-          <EntryFlagBadge :statuses="emptyIsUnconfirmed" hint /> 
+          <input id="checkbox" v-model="entry.status.isUnconfirmed" type="checkbox">
+          <EntryFlagBadge :statuses="emptyIsUnconfirmed" hint />
           <span>{{ t('pages.editor.confirmation.statusisUnconfirmed') }}</span>
         </div>
       </section>

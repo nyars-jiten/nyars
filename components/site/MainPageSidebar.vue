@@ -8,7 +8,7 @@ const { data } = await useLazyAsyncData(
 
 const jpnDiff = computed(() => (data.value?.site?.jpn ?? 0) - (data.value?.site?.jpnPrev ?? 0))
 const jpnRevDiff = computed(() => (data.value?.site?.jpnRev ?? 0) - (data.value?.site?.jpnRevPrev ?? 0))
-const jpnRevPercentage = computed(() => ((data.value?.site?.jpnRev ?? 0) / (data.value?.site?.jpn ?? 0) * 100).toFixed(3))
+const jpnRevPercentage = computed(() => ((((data.value?.site?.jpnRev ?? 0) / (data.value?.site?.jpn ?? 0)) || 0) * 100).toFixed(3))
 </script>
 
 <template>

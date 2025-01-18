@@ -44,7 +44,11 @@ function showEntryRef(edit: EditResponse): boolean {
 <template>
   <section class="flex flex-col gap-3">
     {{ edit.entryStatus }}
-    <span v-if="edit.comment.length > 0">Comment: {{ edit.comment }}</span>
+
+    <div v-if="edit.comment.length > 0" class="bg-zinc-500/5 p-2 whitespace-pre-line">
+      {{ edit.comment }}
+    </div>
+
     <div class="inline-flex gap-2 flex-wrap flex-row-reverse">
       <!-- <NuxtLink :to="{ name: 'edits-id', params: { id: edit.id } }">
         <UiButton class="text-gray-500" icon="ic:outline-info" title="Инфо">
@@ -52,7 +56,7 @@ function showEntryRef(edit: EditResponse): boolean {
         </UiButton>
       </NuxtLink> -->
 
-      <NuxtLink v-if="showEntryRef(edit)" :to="{ name: 'dict-jpn-wid', params: { wid: edit.wid } }" prefetch >
+      <NuxtLink v-if="showEntryRef(edit)" :to="{ name: 'dict-jpn-wid', params: { wid: edit.wid } }" prefetch>
         <UiButton class="text-gray-500" icon="ic:outline-open-in-new" title="Открыть статью">
           <!-- Открыть статью -->
         </UiButton>

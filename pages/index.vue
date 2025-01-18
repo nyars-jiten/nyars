@@ -83,7 +83,7 @@ function getExample(exampleType: number, exampleIndex: number) {
       </section>
     </div>
 
-    <div class="space-y-8">
+    <div class="space-y-8 pr-2">
       <MainPageSidebar />
     </div>
   </section>

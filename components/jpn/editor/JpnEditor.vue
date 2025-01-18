@@ -121,7 +121,7 @@ function insert(open: string, close?: string) {
 }
 
 onMounted(() => {
-  if (!showConfimationWindow.value) { 
+  if (!showConfimationWindow.value) {
     const refs = [
       [spellingRef, 'spelling'],
       [readingRef, 'reading'],
@@ -304,7 +304,7 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
 </script>
 
 <template>
-  <ConfirmationWindow 
+  <ConfirmationWindow
     v-if="showConfimationWindow !== ''"
     :type="showConfimationWindow"
 
@@ -349,7 +349,7 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
         </div>
       </section>
 
-      <section v-if="stateSupButtons" class="flex items-start justify-left gap-10 max-sm:flex-col bg-neutral-900/95">
+      <section v-if="stateSupButtons" class="flex items-start justify-left gap-x-8 gap-y-2 max-sm:flex-col bg-neutral-900/95">
         <span v-for="group, index in supButtons()" :key="index" class="gap-2 grid" :style="{ gridTemplateColumns: `repeat(${group.length}, 1fr)` }">
           <UiButton v-for="{ name, icon, title, click } in group" :key="title" type="button" :icon="icon" :title="t(`pages.editor.button.${title}`)" :disabled="disabled" class="inline-flex justify-center" @click="insert.apply(null, click)">
             {{ name }}
@@ -394,6 +394,7 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
         <UiButton v-if="!isNew && !isEdit" class="max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :title="t('pages.editor.delete')" :disabled="disabled" @click="showConfimationWindow = 'delete'">
           {{ t('pages.editor.delete') }}
         </UiButton>
+
         <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="showConfimationWindow = 'edit'">
           {{ t('pages.editor.save') }}
         </UiButton>
@@ -410,6 +411,7 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
           <h1 class="text-center text-4xl mb-4">
             {{ t('pages.editor.duplicates') }}
           </h1>
+
           <SearchResult v-for="dupentry of duplicates" :key="dupentry.wid" class="space-y-4" :article="dupentry" />
         </div>
       </div>
@@ -424,6 +426,16 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
       <h1 class="text-center text-4xl">
         {{ t('pages.editor.preview') }}
       </h1>
+
+      <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
+        <UiButton class="max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :title="t('pages.editor.delete')" :disabled="disabled" @click="showConfimationWindow = 'delete'">
+          {{ t('pages.editor.delete') }}
+        </UiButton>
+
+        <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="showConfimationWindow = 'edit'">
+          {{ t('pages.editor.save') }}
+        </UiButton>
+      </div>
 
       <UiBlock>
         <JpnEntry v-if="preview" :jpn-entry="preview.entry" :show-lemmas="false" />
