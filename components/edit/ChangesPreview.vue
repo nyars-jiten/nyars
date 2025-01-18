@@ -52,7 +52,7 @@ function showEntryRef(edit: EditResponse): boolean {
         </UiButton>
       </NuxtLink> -->
 
-      <NuxtLink v-if="showEntryRef(edit)" :to="{ name: 'dict-jpn-wid', params: { wid: edit.wid } }" target="_blank" prefetch >
+      <NuxtLink v-if="showEntryRef(edit)" :to="{ name: 'dict-jpn-wid', params: { wid: edit.wid } }" prefetch >
         <UiButton class="text-gray-500" icon="ic:outline-open-in-new" title="Открыть статью">
           <!-- Открыть статью -->
         </UiButton>

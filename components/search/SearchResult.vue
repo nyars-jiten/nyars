@@ -46,10 +46,17 @@ const active = computed(() => articleWid.value === props.article.wid)
 </script>
 
 <template>
-  <NuxtLink :to="{ name: 'dict-jpn-wid', params: { wid: `${article.wid}-${article.title}` }, query: { q: request.request.value } }" class="w-full" :class="{ 'cursor-default': active }">
+  <NuxtLink 
+    :to="{ name: 'dict-jpn-wid', params: { wid: `${article.wid}-${article.title}` }, query: { q: request.request.value } }" 
+    class="w-full" 
+    :class="{ 'cursor-default': active, 'opacity-40': article.status.isDeleted }"
+  >
     <UiBlock :hover="active === false" :class="newBorder">
       <template #default>
         <section class="space-y-2">
+        <div v-if="article.status.isDeleted" class="text-rose-400 pl-4">
+          {{ t('pages.jpnEntry.entryWasDeleted') }}
+        </div>
           <Words :jpn-entry="article" :preview="true" />
 
           <div class="flex flex-wrap items-center gap-2">
