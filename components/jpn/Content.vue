@@ -33,12 +33,12 @@ const style = tv({
       <sub v-else-if="t === 'sub'">{{ v }}</sub>
 
       <template v-else-if="t === 'ref'">
-        <!-- <NuxtLink :to="{ name: 'search', query: { q: value } }" class="text-indigo-300">
+        <NuxtLink :to="{ name: 'dict-jpn', query: { q: v } }" class="text-indigo-300">
           {{ v }}
-        </NuxtLink> -->
-        <span class="text-indigo-300">
+        </NuxtLink>
+        <!-- <span class="text-indigo-300">
           {{ v }}
-        </span>
+        </span> -->
       </template>
 
       <template v-else-if="t === 'br'">
