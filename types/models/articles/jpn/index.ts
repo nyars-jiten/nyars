@@ -183,6 +183,7 @@ export interface V2InternalReference {
   value: string
   target: string
   referenceType: V2ReferenceType
+  preview: V2Content[]
 }
 
 export interface V2ExternalReference {

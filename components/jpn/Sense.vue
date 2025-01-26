@@ -109,6 +109,10 @@ const miscTagsLine = computed(() => {
           >
             {{ reference.value }}
           </NuxtLink>
+
+          <div v-if="reference.preview" class="text-sm text-gray-500 pl-2">
+            <Content v-for="(prev, pi) in reference.preview" :key="pi" :data="prev.c ?? []" :break-line="false" class="pl-1 after:content-[';'] last:after:content-none" />
+          </div>
         </li>
       </ul>
     </div>
