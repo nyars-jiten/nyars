@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface Props {
-  meanings: V2EntryJp['meanings']
+  meanings: EntryJp['meanings']
   showLemmas: boolean
 }
 

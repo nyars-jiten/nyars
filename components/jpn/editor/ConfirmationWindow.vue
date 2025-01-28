@@ -10,8 +10,8 @@ const emit = defineEmits(['return', 'send', 'delete'])
 const { entry } = storeToRefs(useEditorEntryStore())
 
 const { t } = useI18n()
-const emptyIsUnreviewed = { isUnreviewed: true } as V2Status
-const emptyIsUnconfirmed = { isUnconfirmed: true } as V2Status
+const emptyIsUnreviewed = { isUnreviewed: true } as EntryStatus
+const emptyIsUnconfirmed = { isUnconfirmed: true } as EntryStatus
 </script>
 
 <template>

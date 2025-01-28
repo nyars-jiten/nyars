@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const username = useRoute('users-username').params.username
 
-const { clientGetUser } = useApi(userRepository)
+const { clientGetUser } = useUserRepo()
 const user = await clientGetUser(username)
 
 const avatar = computed(() => useAvatar(user?.avatar ?? '').href)

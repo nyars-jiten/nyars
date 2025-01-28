@@ -11,7 +11,7 @@ const articleWid = useRouteArticle()
 
 const { t } = useI18n()
 
-const { get } = useJpnArticles()
+const { get } = useJpnRepo()
 
 watch(articleWid, () => window.scrollTo(0, 0))
 

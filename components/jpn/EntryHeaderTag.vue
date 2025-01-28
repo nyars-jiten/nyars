@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface Props {
-  tags: V2Tag[]
+  tags: Tag[]
 }
 
 const props = defineProps<Props>()
@@ -15,7 +15,7 @@ const tagsMap = {
   'jlpt-n2': { name: 'n2', class: 'bg-orange-400' },
   'jlpt-n1': { name: 'n1', class: 'bg-red-400' },
   // 'iK': { name: '🡳', class: 'text-violet-400 p-0' },
-} as Record<V2Tag['engShort'], { name: string, class: string }>
+} as Record<Tag['engShort'], { name: string, class: string }>
 </script>
 
 <template>

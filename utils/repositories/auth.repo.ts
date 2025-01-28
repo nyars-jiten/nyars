@@ -1,7 +1,7 @@
 import type { ApiError } from '#imports'
 import type { $Fetch, NitroFetchRequest } from 'nitropack'
 
-export function useAuth() {
+export function useAuthRepo() {
   return useApi(<T>(fetch: $Fetch<T, NitroFetchRequest>) => {
     const path = '/auth'
 

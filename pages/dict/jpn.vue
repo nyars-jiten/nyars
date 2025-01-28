@@ -4,7 +4,7 @@ const request = computed(() => String(route.query.q ?? ''))
 
 const { t } = useI18n()
 
-const { search } = useJpnArticles()
+const { search } = useSearchRepo()
 
 const { data, clear, refresh, status } = useAsyncData('search-request', () => search(request.value, 0, 0), {
   default: () => ({ result: [], request: '' }),
@@ -44,7 +44,7 @@ onMounted(updateEntry)
               <span>{{ t('pages.search.foundNothing', [data?.request]) }}</span>
             </div>
           </div>
-          <div class="flex space-x-2 content-center" v-else-if="status === 'pending'">
+          <div v-else-if="status === 'pending'" class="flex space-x-2 content-center">
             <Icon class="animate-spin size-6" name="mdi:loading" />
             <span>{{ t('pages.search.pendingRequest') }}</span>
           </div>

@@ -1,6 +1,6 @@
 export const useUserStore = defineStore('user-store', () => {
   const { current } = useUser()
-  const { serverGetCurrentUser } = useApi(userRepository)
+  const { serverGetCurrentUser } = useUserRepo()
   const { data: user } = current()
 
   const checkAccess = (access: Access) => {

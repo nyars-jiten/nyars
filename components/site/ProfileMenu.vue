@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { tv } from 'tailwind-variants'
 
-const { clientLogout } = useApi(userRepository)
+const { clientLogout } = useUserRepo()
 
 const { t } = useI18n()
 const { user } = storeToRefs(useUserStore())

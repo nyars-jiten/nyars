@@ -2,7 +2,7 @@
 import { tv } from 'tailwind-variants'
 
 interface Props {
-  jpnEntry: V2EntryJp
+  jpnEntry: EntryJp
   showLemmas: boolean
 }
 

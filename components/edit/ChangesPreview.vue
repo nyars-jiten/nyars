@@ -8,7 +8,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const { userAccess, user } = storeToRefs(useUserStore())
-const { approveEditAsReviewed, approveEditAsUnreviewed, declineEdit } = useApi(editRepository)
+const { approveEditAsReviewed, approveEditAsUnreviewed, declineEdit } = useEditRepo()
 const notificationStore = useNotificationStore()
 
 const { t } = useI18n()

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const api = useJpnArticles()
+const api = useJpnRepo()
 
 const routeWid = useRoute('dict-jpn-wid').params.wid
 

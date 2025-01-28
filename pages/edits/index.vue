@@ -18,7 +18,7 @@ const query = computed(() => {
   }
 })
 
-const { getEdits } = useApi(editRepository)
+const { getEdits } = useEditRepo()
 const { data: edits } = await useLazyAsyncData(
   'edits',
   () => getEdits(undefined, undefined, query.value.s),

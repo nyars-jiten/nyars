@@ -3,8 +3,8 @@ defineEmits(['clickInsert'])
 
 const query = ref('')
 
-const { tagList } = useJpnArticles()
-const tags = ref([] as V2Tag[])
+const { tagList } = useJpnRepo()
+const tags = ref([] as Tag[])
 
 const updateTags = async function () {
   tags.value = await tagList(query.value, 5)

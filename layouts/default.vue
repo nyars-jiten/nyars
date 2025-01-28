@@ -4,7 +4,7 @@ import { version } from '../package.json'
 
 // user,
 const { menuState } = storeToRefs(useUserStore())
-// const { clientLogout } = useApi(userRepository)
+// const { clientLogout } = useUserRepo()
 // const avatar = computed(() => useAvatar(user.value?.avatar ?? '').href)
 
 // const styles = tv({

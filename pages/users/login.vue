@@ -16,7 +16,7 @@ const { handleSubmit, errors } = useForm({
 })
 
 const submit = handleSubmit(async ({ login, password }) => {
-  const auth = useAuth()
+  const auth = useAuthRepo()
 
   // const user: User | null = null
   const authError: AuthError | null = null

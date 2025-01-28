@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { Furigana, V2Tag } from '~/types/models/articles/jpn'
-
 interface Props {
   furigana: Furigana
   preview?: boolean

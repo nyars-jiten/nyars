@@ -1,7 +1,7 @@
 export const useSuggestionsStore = defineStore('suggestions', () => {
   const { request } = useSearchRequest()
 
-  const { getSuggestions } = useApi(searchRepository)
+  const { getSuggestions } = useSearchRepo()
 
   const state = useLazyAsyncData(
     'suggestions',

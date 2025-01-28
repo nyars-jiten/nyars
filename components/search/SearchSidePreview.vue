@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const articleWid = useRouteArticle()
 
-const api = useJpnArticles()
+const api = useJpnRepo()
 
 watch(articleWid, () => window.scrollTo(0, 0))
 

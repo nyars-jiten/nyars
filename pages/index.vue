@@ -3,7 +3,7 @@ definePageMeta({
   name: 'Home',
 })
 
-const { getEdits } = useApi(editRepository)
+const { getEdits } = useEditRepo()
 const { data: edits, refresh, status } = await useLazyAsyncData(
   'edits',
   () => getEdits(),

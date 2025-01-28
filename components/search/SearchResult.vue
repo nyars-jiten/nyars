@@ -2,11 +2,11 @@
 const props = defineProps<Props>()
 
 interface Props {
-  article: V2EntryJp
+  article: EntryJp
 }
 
 interface ShortenedSenses {
-  data: V2Sense[]
+  data: Sense[]
   hidden: number
 }
 
@@ -14,7 +14,7 @@ interface ShortenedSenses {
 // and count the number of hidden senses
 const shortenedSenses = computed(() => {
   const res = {
-    data: [] as V2Sense[],
+    data: [] as Sense[],
     hidden: 0,
   } as ShortenedSenses
   for (let i = 0; i < props.article.meanings.length; i++) {

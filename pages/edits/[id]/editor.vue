@@ -1,8 +1,7 @@
 <script setup lang="ts">
 const routeId = useRoute('edits-id-editor').params.id
 
-const { getEditTxt } = useApi(editRepository)
-const { get } = useApi(editRepository)
+const { getEditTxt, get } = useEditRepo()
 const { userAccess, user } = storeToRefs(useUserStore())
 
 const edit = await useAsyncData(() => get(routeId))

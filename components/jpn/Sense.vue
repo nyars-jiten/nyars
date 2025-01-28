@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface Props {
-  sense: V2Sense
+  sense: Sense
   showIx: boolean
   isPreview: boolean
   showLemmas: boolean

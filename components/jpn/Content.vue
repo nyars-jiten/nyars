@@ -2,7 +2,7 @@
 import { tv } from 'tailwind-variants'
 
 interface Props {
-  data: V2Content[]
+  data: Content[]
   breakLine?: boolean
 }
 

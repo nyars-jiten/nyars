@@ -6,7 +6,7 @@ const props = defineProps<Props>()
 const emit = defineEmits(['changeBorder'])
 
 interface Props {
-  statuses: V2Status
+  statuses: EntryStatus
   hint?: boolean
 }
 
@@ -91,12 +91,12 @@ const iconList = {
     path: 'ic:baseline-group',
   },
 
-} as Record<keyof V2Status, { value: boolean, path: string }>
+} as Record<keyof EntryStatus, { value: boolean, path: string }>
 
 const statusIconList = computed(() => {
-  const res = [] as { key: keyof V2Status, path: string } []
+  const res = [] as { key: keyof EntryStatus, path: string } []
   
-  for (const key of Object.keys(iconList) as (keyof V2Status)[]) {
+  for (const key of Object.keys(iconList) as (keyof EntryStatus)[]) {
     if (iconList[key].value === props.statuses[key]) {
       res.push({ key, path: iconList[key].path })
     }
@@ -106,7 +106,7 @@ const statusIconList = computed(() => {
   return res
 })
 
-function borderCheck(stIconList: { key: keyof V2Status, path: string }[]) {
+function borderCheck(stIconList: { key: keyof EntryStatus, path: string }[]) {
   if (stIconList?.length > 0) {
     const newBorder = statusStyle({ border: true, [stIconList[0].key]: true })
     emit('changeBorder', newBorder)

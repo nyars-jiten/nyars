@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface Props {
-  jpnEntry: V2EntryJp
+  jpnEntry: EntryJp
   preview?: boolean
 }
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { getWeeklyStats } = useApi(userRepository)
+const { getWeeklyStats } = useUserRepo()
 
 const { data } = await useLazyAsyncData(
   'userWeeklyStats',
@@ -15,7 +15,7 @@ const jpnRevPercentage = computed(() => ((((data.value?.site?.jpnRev ?? 0) / (da
   <div>
     <div v-if="data" class="space-y-4">
       <h1 class="text-center text-2xl max-lg:pb-4">
-        Статистика за 7 дней
+        Статистика
       </h1>
       <section>
         <div>
@@ -46,7 +46,7 @@ const jpnRevPercentage = computed(() => ((((data.value?.site?.jpnRev ?? 0) / (da
 
     <div v-if="data" class="space-y-4">
       <h1 class="text-center text-2xl max-lg:pb-4">
-        Рейтинг
+        Рейтинг за 7 дней
       </h1>
 
       <section class="max-lg:grid max-lg:grid-cols-2 max-lg:gap-4 max-md:block max-md:space-y-4 lg:space-y-4">

@@ -12,7 +12,7 @@ export const useSearchStore = defineStore('searchStore', () => {
       suggestionsCache.value.clear()
       suggestionsCache.value.set('', [])
     }
-    const { getSuggestions } = useApi(searchRepository)
+    const { getSuggestions } = useSearchRepo()
     const response = await getSuggestions(searchQuery)
     suggestionsCache.value.set(searchQuery, response)
   }

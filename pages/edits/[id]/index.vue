@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// const { getEdits } = useApi(editRepository)
+// const { getEdits } = useEditRepo()
 // const { data: edits } = await useLazyAsyncData(
 //   'edits',
 //   () => getEdits(),
