@@ -16,9 +16,6 @@ export function useSearchRepo() {
     const search = (query: string, limit: number, offset: number) =>
       fetch<JpnSearchResponse>(`search`, { method: 'POST', body: { query, limit, offset } })
 
-    const checkDuplicates = (body: EditorTxtEntryJp) =>
-      fetch<EntryJp[]>(`${path}/check-duplicates`, { method: 'POST', body })
-
-    return { getSuggestions, search, checkDuplicates }
+    return { getSuggestions, search }
   })
 }

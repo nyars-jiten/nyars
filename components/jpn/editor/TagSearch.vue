@@ -1,13 +1,25 @@
 <script setup lang="ts">
 defineEmits(['clickInsert'])
 
+const { t } = useI18n()
+
 const query = ref('')
+const hideCategories = ref([]) as Ref<string[]>
 
 const { tagList } = useJpnRepo()
-const tags = ref([] as Tag[])
+const tags = ref({} as Record<string, Tag[]>) as Ref<Record<string, Tag[]>>
 
 const updateTags = async function () {
-  tags.value = await tagList(query.value, 5)
+  tags.value = await tagList(query.value)
+}
+
+const toggleCategory = function (category: string) {
+  if (hideCategories.value.includes(category)) {
+    hideCategories.value = hideCategories.value.filter((c: string) => c !== category)
+  }
+  else {
+    hideCategories.value.push(category)
+  }
 }
 
 await updateTags()
@@ -33,15 +45,27 @@ watchDebounced(query, updateTags, { debounce: 350 })
       </UiInput>
 
       <div class="flex flex-col gap-2">
-        <button v-for="{ engShort, rusShort, rus } in tags" :key="engShort" type="button" class="transition-opacity hover:opacity-30 text-left space-x-2" @click="$emit('clickInsert', [rusShort, ''])">
-          <span class="text-amber-300 italic">
-            {{ rusShort }}
-          </span>
+        <div v-for="(tagscat, category) in tags" :key="category">
+          <div class="cursor-pointer text-slate-400" @click="toggleCategory(category)">
+            {{ t(`pages.editor.tagCategories.${category}`) }} {{ hideCategories.includes(category) || tagscat.length < 5 ? '▾' : '▸' }}
+          </div>
+          <div v-show="hideCategories.includes(category) || tagscat.length < 5">
+            <button
+              v-for="{ engShort, rusShort, rus } in tagscat" :key="engShort"
+              type="button"
+              class="block transition-opacity hover:opacity-30 text-left space-x-2"
+              @click="$emit('clickInsert', [rusShort, ''])"
+            >
+              <span class="text-amber-300 italic">
+                {{ rusShort }}
+              </span>
 
-          <span>
-            {{ rus }}
-          </span>
-        </button>
+              <span>
+                {{ rus }}
+              </span>
+            </button>
+          </div>
+        </div>
       </div>
     </UiBlock>
   </section>

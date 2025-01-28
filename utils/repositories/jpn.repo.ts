@@ -23,9 +23,12 @@ export function useJpnRepo() {
     const create = (body: EditorTxtEntryJp) =>
       fetch<ApiError>(`${path}/entries`, { method: 'POST', body })
 
-    const tagList = (q: string, l: number) =>
-      fetch<Tag[]>(`${path}/tags`, { method: 'GET', query: { q, l } })
+    const tagList = (q: string) =>
+      fetch<Record<string, Tag[]>>(`${path}/tags`, { method: 'GET', query: { q } })
 
-    return { get, edit, remove, source, preview, create, tagList }
+    const checkDuplicates = (body: EditorTxtEntryJp) =>
+      fetch<EntryJp[]>(`${path}/check-duplicates`, { method: 'POST', body })
+
+    return { get, edit, remove, source, preview, create, tagList, checkDuplicates }
   })
 }

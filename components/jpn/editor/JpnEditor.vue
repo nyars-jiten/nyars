@@ -10,7 +10,6 @@ interface Props {
 const props = defineProps<Props>()
 const { t } = useI18n()
 const api = useJpnRepo()
-const { checkDuplicates } = useSearchRepo()
 const { updateEdit } = useEditRepo()
 
 const { menuState } = storeToRefs(useUserStore())
@@ -50,7 +49,7 @@ const callPreview = async function () {
 const preview = ref(await callPreview())
 
 const callCheckDuplicates = async function () {
-  return (await checkDuplicates(entry.value)).filter(x => x.wid !== props.wid)
+  return (await api.checkDuplicates(entry.value)).filter(x => x.wid !== props.wid)
 }
 
 const duplicates = ref(await callCheckDuplicates())
