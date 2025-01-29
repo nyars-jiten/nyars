@@ -6,7 +6,7 @@ const { t } = useI18n()
 
 const { search } = useSearchRepo()
 
-const { data, clear, refresh, status } = useAsyncData('search-request', () => search(request.value, 0, 0), {
+const { data, clear, refresh, status } = useAsyncData(`search-request-${request.value}`, () => search(request.value, 0, 0), {
   default: () => ({ result: [], request: '' }),
   dedupe: 'defer',
   // watch: [request],
@@ -14,7 +14,7 @@ const { data, clear, refresh, status } = useAsyncData('search-request', () => se
 
 const updateEntry = function () {
   const first = data.value?.result[0]
-  if (first && !useRoute('dict-jpn-wid').params.wid && !useRoute('dict-jpn-new') && request) {
+  if (first && useRoute().name === 'dict-jpn' && request) {
     navigateTo({ name: 'dict-jpn-wid', params: { wid: first.wid }, query: { q: request.value } })
   }
 }
