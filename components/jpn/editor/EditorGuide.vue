@@ -96,8 +96,8 @@ const guideEvents = [
     actions: [
       {
         slot: 'tag',
-        text: '((pitch: ))',
-        action: ['((pitch: ', '))'],
+        text: '((питч: ))',
+        action: ['((питч: ', '))'],
       },
     ],
   },
@@ -106,28 +106,28 @@ const guideEvents = [
     actions: [
       {
         slot: 'see',
-        text: '((see: ))',
-        action: ['((see: ', '))'],
+        text: '((см: ))',
+        action: ['((см: ', '))'],
       },
       {
         slot: 'also',
-        text: '((also: ))',
-        action: ['((also: ', '))'],
+        text: '((см также: ))',
+        action: ['((см также: ', '))'],
       },
       {
         slot: 'ant',
-        text: '((ant: ))',
-        action: ['((ant: ', '))'],
+        text: '((ант: ))',
+        action: ['((ант: ', '))'],
       },
       {
         slot: 'cf',
-        text: '((cf: ))',
-        action: ['((cf: ', '))'],
+        text: '((ср: ))',
+        action: ['((ср: ', '))'],
       },
       {
         slot: 'abbr',
-        text: '((abbr: ))',
-        action: ['((abbr: ', '))'],
+        text: '((сокр: ))',
+        action: ['((сокр: ', '))'],
       },
     ],
   },
@@ -141,7 +141,7 @@ const guideEvents = [
       },
       {
         slot: 'lang',
-        text: '((lang: ))',
+        text: '((язык: ))',
         action: ['((lang: ', '))'],
       },
       {

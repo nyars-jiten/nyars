@@ -5,8 +5,8 @@ const newEntry = {
   body: '=((сущ))\n- новое значение',
   comment: '',
   status: {
-    isUnreviewed: true,
-    isUnconfirmed: true,
+    isUnreviewed: false,
+    isUnconfirmed: false,
     isArchaic: false,
     isDialect: false,
     isProper: false,

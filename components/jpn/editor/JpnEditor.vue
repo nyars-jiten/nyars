@@ -336,7 +336,7 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
         </div>
 
         <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
-          <UiButton class="max-sm:w-full" type="button" icon="mdi:hashtag-box-outline" color="amber" :disabled="disabled" :active="stateTagSearch" :title="t('pages.editor.guide')" @click="toggleTagSearch(); toggleEditorHelp(false)">
+          <UiButton class="max-sm:w-full" type="button" icon="mdi:hashtag-box-outline" color="amber" :disabled="disabled" :active="stateTagSearch" :title="t('pages.editor.tags')" @click="toggleTagSearch(); toggleEditorHelp(false)">
             <!-- теги -->
           </UiButton>
           <UiButton class="max-sm:w-full" type="button" icon="ic:baseline-help-outline" color="sky" :disabled="disabled" :active="stateEditorHelp" :title="t('pages.editor.guide')" @click="toggleEditorHelp(); toggleTagSearch(false)">
