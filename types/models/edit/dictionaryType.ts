@@ -1,8 +1,8 @@
-export const enum DictionaryType {
+export enum DictionaryType {
   Jpn,
   Rus,
   Kanji,
   Name,
   JpnAuto,
-  Example
+  Example,
 }

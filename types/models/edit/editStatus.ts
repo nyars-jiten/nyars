@@ -1,8 +1,8 @@
-export const enum EditStatus {
+export enum EditStatus {
   None, // Don't used?
   New,
   Declined,
   Accepted,
   AutoAccepted,
-  Reverted // Don't used?
+  Reverted, // Don't used?
 }

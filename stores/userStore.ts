@@ -1,11 +1,22 @@
-export const useUserStore = defineStore('userStore', () => {
-  const user = ref<User | null>(null)
+export const useUserStore = defineStore('user-store', () => {
+  const { current } = useUser()
+  const { serverGetCurrentUser } = useUserRepo()
+  const { data: user } = current()
 
-  const { serverGetCurrentUser } = useApi(userRepository)
+  const checkAccess = (access: Access) => {
+    return user?.value && (user.value.isAdmin || ((user.value.access & access) === access))
+  }
 
-  const initUser = async () => {
+  const userAccess = computed(() => ({
+    hasAccessAutoapprove: checkAccess(Access.Autoapprove),
+    hasAccessEdits: checkAccess(Access.Edits),
+  } as UserRights))
+
+  async function $reset() {
     user.value = await serverGetCurrentUser()
   }
 
-  return { user, initUser }
+  const menuState = ref(true)
+
+  return { user, userAccess, $reset, menuState }
 })

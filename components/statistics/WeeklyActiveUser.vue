@@ -1,44 +1,72 @@
 <script setup lang="ts">
-  interface Props {
-    position: number
-    avatar: string
-    username: string
-    weekRating: number | undefined
-    jpnNew: number | undefined
-    jpnEdit: number | undefined
-    jpnNewAuto: number | undefined
-    jpnEditAuto: number | undefined
-    approved: number | undefined
-  }
+interface Props {
+  data: WeeklyUserStats
+}
 
-  defineProps<Props>()
+const props = defineProps<Props>()
+const avatar = computed(() => useAvatar(props.data.user.avatar).href)
+
+const { t } = useI18n()
 </script>
 
 <template>
-  <div class="flex w-full select-text items-center justify-center gap-5 rounded-md p-1.5">
-    <div class="flex grow items-center sm:grow-0">
-      <div class="mr-2 flex h-full w-9 items-center justify-center text-2xl">
-        {{ position }}
+  <UiBlock class="group" :hover="true">
+    <div class="overflow-hidden">
+      <NuxtLink :to="{ name: 'users-username', params: { username: data.user.username } }">
+        <div class="flex flex-row space-x-2">
+          <img
+            class="size-6 rounded-full"
+            :src="avatar"
+            :alt="data.user.username"
+          >
+
+          <span class="w-full truncate">
+            {{ data.user.username }}
+          </span>
+        </div>
+      </NuxtLink>
+
+      <div class="space-x-2 truncate">
+        <span class="text-sm">
+          {{ t('models.userRating.weekRating') }}
+        </span>
+
+        <span class="truncate text-violet-300">
+          {{ data.stats.rating }}
+        </span>
       </div>
-      <img
-        class="mr-4 inline-flex size-12 items-center justify-center rounded-full bg-ns-gray-200 object-center"
-        :src="useAvatar(avatar).href"
-        :alt="username"
-      >
-      <div class="flex min-w-32 max-w-96 flex-col sm:w-40">
-        <span class="w-full truncate">{{ username }}</span>
-        <span>{{ $t('models.userRating.weekRating') }}: {{ weekRating }}</span>
+
+      <div class="space-x-2 truncate">
+        <WeeklyActivityLine :values="[data.stats.jpnNew]" :name="t('models.userRating.summaryWeekJapNew')">
+          <template #value>
+            {{ data.stats.jpnNew }}
+          </template>
+        </WeeklyActivityLine>
+
+        <WeeklyActivityLine :values="[data.stats.jpnEdit]" :name="t('models.userRating.summaryWeekJapEdit')">
+          <template #value>
+            {{ data.stats.jpnEdit }}
+          </template>
+        </WeeklyActivityLine>
       </div>
+
+      <!-- <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1 leading-none">
+          <WeeklyActivityLine :values="[data.stats.jpnNew]" :name="t('models.userRating.summaryWeekJapNew')">
+            <template #value>
+              {{ data.stats.jpnNew }}
+            </template>
+          </WeeklyActivityLine>
+        </div>
+
+        <div class="grid grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1 leading-none">
+          <WeeklyActivityLine :values="[data.stats.jpnEdit]" :name="t('models.userRating.summaryWeekJapEdit')">
+            <template #value>
+              {{ data.stats.jpnEdit }}
+            </template>
+          </WeeklyActivityLine>
+        </div>
+      </div> -->
     </div>
-    <div class="flex">
-      <div class="hidden w-40 flex-col border-l border-ns-gray-200 pl-1.5 dark:border-ns-gray-600 sm:flex">
-        <span>{{ $t('models.userRating.summaryWeekJapNew') }}: {{ jpnNew }}</span>
-        <span>{{ $t('models.userRating.summaryWeekJapEdit') }}: {{ jpnEdit }}</span>
-      </div>
-      <div class="hidden w-52 flex-col border-l border-ns-gray-200 pl-1.5 dark:border-ns-gray-600 md:flex">
-        <span>{{ $t('models.userRating.summaryWeekApproved') }}: {{ approved }}</span>
-        <span>{{ $t('components.statistics.weeklyActiveUser.jpnAuto') }}: {{ jpnNewAuto }}/{{ jpnEditAuto }}</span>
-      </div>
-    </div>
-  </div>
+  </UiBlock>
 </template>

@@ -1,6 +1,8 @@
-export const enum EditType {
-  Create = 1,
+export enum EditType {
+  None,
+  Create,
   Edit,
   Delete,
-  Transfer
+  Transfer,
+  Revert,
 }

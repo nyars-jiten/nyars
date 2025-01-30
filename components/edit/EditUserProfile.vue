@@ -1,20 +1,21 @@
 <script setup lang="ts">
-  interface Props {
-    user: User
-  }
+interface Props {
+  user: ShortUser
+}
 
-  defineProps<Props>()
+const props = defineProps<Props>()
+
+const avatar = computed(() => useAvatar(props.user.avatar).href)
 </script>
 
 <template>
-  <span class="flex items-center gap-1.5">
+  <NuxtLink :to="`/users/${user.username}`" class="flex items-center gap-1.5">
     <img
       class="h-6 rounded-full object-center"
-      :src="useAvatar(user.avatar).href"
-      :alt="user.username"
+      :src="avatar"
     >
     <span class="inline-block max-w-36 truncate">
       {{ user.username }}
     </span>
-  </span>
+  </NuxtLink>
 </template>

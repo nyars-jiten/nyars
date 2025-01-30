@@ -1,53 +1,116 @@
 <script setup lang="ts">
-  interface Props {
-    editId: number
-    isTypeCreate: boolean
-  }
+import { tv } from 'tailwind-variants'
 
-  const props = defineProps<Props>()
+interface Props {
+  edit: EditResponse
+}
 
-  const { getCompare } = useApi(editRepository)
+const props = defineProps<Props>()
 
-  const { data: compare } = await useLazyAsyncData(
-    `compare-${props.editId}`,
-    () => getCompare(props.editId),
-    {
-      default: (): EditCompare => {
-        return {
-          source: [],
-          result: [],
-          comment: ''
-        }
-      }
-    }
-  )
+const { userAccess, user } = storeToRefs(useUserStore())
+const { approveEditAsReviewed, approveEditAsUnreviewed, declineEdit } = useEditRepo()
+const notificationStore = useNotificationStore()
+
+const { t } = useI18n()
+
+const isTypeCreate = computed(() => props.edit.type === EditType.Create)
+
+const preview = tv({
+  base: 'py-2',
+})
+
+function approveAsReviewed() {
+  approveEditAsReviewed(props.edit.id)
+  notificationStore.createNotification(t('models.edit.actions.approved'), NyarsNotificationType.Success)
+}
+
+function reject() {
+  declineEdit(props.edit.id)
+  notificationStore.createNotification(t('models.edit.actions.rejected'), NyarsNotificationType.Warning)
+}
+
+function approveAsUnreviewed() {
+  approveEditAsUnreviewed(props.edit.id)
+  notificationStore.createNotification(t('models.edit.actions.approved'), NyarsNotificationType.Success)
+}
+
+const showRaw = ref(false)
+
+function showEntryRef(edit: EditResponse): boolean {
+  return edit.type !== EditType.Create || (edit.type === EditType.Create && edit.status === EditStatus.Accepted)
+}
 </script>
 
 <template>
-  <section class="m-2 flex flex-col gap-3">
-    <div v-if="compare.comment.length > 0" class="select-text break-words border-l-2 border-ns-gray-200 pl-2 dark:border-ns-gray-700">
-      {{ $t('components.editGroup.changesPreview.comment') }} {{ compare.comment }}
+  <section class="flex flex-col gap-3">
+    {{ edit.entryStatus }}
+
+    <div v-if="edit.comment.length > 0" class="bg-zinc-500/5 p-2 whitespace-pre-line">
+      {{ edit.comment }}
     </div>
-    <div :class="`grid grid-rows-1 gap-5 ${isTypeCreate ? 'sm:grid-cols-1' : 'sm:grid-cols-[1fr_auto_1fr]'} sm:gap-2 md:gap-4`">
-      <div v-if="!isTypeCreate" class="select-text rounded-md border border-ns-gray-200 px-4 py-2 dark:border-ns-gray-600">
+
+    <div class="inline-flex gap-2 flex-wrap flex-row-reverse">
+      <!-- <NuxtLink :to="{ name: 'edits-id', params: { id: edit.id } }">
+        <UiButton class="text-gray-500" icon="ic:outline-info" title="Инфо">
+          Инфо
+        </UiButton>
+      </NuxtLink> -->
+
+      <NuxtLink v-if="showEntryRef(edit)" :to="{ name: 'dict-jpn-wid', params: { wid: edit.wid } }" prefetch>
+        <UiButton class="text-gray-500" icon="ic:outline-open-in-new" title="Открыть статью">
+          <!-- Открыть статью -->
+        </UiButton>
+      </NuxtLink>
+
+      <UiButton v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))" class="text-red-500" icon="ic:baseline-close" title="Отклонить" @click="reject()">
+        <!-- Отклонить -->
+      </UiButton>
+
+      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-green-500" icon="ic:baseline-done-all" title="Принять как отредактированную" @click="approveAsReviewed()">
+        <!-- Принять как отредактированную -->
+      </UiButton>
+
+      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-yellow-500" icon="ic:baseline-done" title="Принять как неотредактированную" @click="approveAsUnreviewed()">
+        <!-- Принять как неотредактированную -->
+      </UiButton>
+
+      <template v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))">
+        <NuxtLink :to="{ name: 'edits-id-editor', params: { id: edit.id } }">
+          <UiButton class="text-blue-500" icon="ic:baseline-edit" title="Отредактировать">
+            <!-- Отредактировать -->
+          </UiButton>
+        </NuxtLink>
+      </template>
+    </div>
+
+    <!-- <div v-if="edit.comment.length > 0" class="break-words border-l-2 border-ns-gray-200 pl-2 dark:border-ns-gray-700">
+      {{ t('components.editGroup.changesPreview.comment') }} {{ edit.comment }}
+    </div> -->
+
+    <div class="grid sm:grid-cols-[1fr_auto_1fr] gap-4 sm:gap-2">
+      <template v-if="!isTypeCreate">
+        <div :class="preview()">
+          <span
+            v-for="(text, index) of edit.diffSrc"
+            :key="index"
+            :class="`whitespace-pre-wrap ${text.d ? 'text-red-500' : ''}`"
+          >
+            {{ text.c }}
+          </span>
+        </div>
+
+        <div class="flex flex-col items-center justify-evenly max-sm:border-y sm:border-x p-2 border-neutral-800">
+          <div class="after:content-['↓'] sm:after:content-['⟶']" />
+        </div>
+      </template>
+
+      <div :class="[{ 'col-span-full': isTypeCreate }, preview()]">
         <span
-          v-for="(text, index) of compare.source"
+          v-for="(text, index) of (showRaw ? edit.diffRawDst : edit.diffDst)"
           :key="index"
-          :class="`select-text whitespace-pre-wrap ${text.value.length > 25 ? 'break-all':''} ${text.isDiffered ? 'text-red-500':''}`"
+          :class="`whitespace-pre-wrap ${text.c.length > 25 ? 'break-all' : ''} ${text.d ? 'text-green-500' : ''}`"
         >
-          {{ text.value }}
-        </span>
-      </div>
-      <div v-if="!isTypeCreate" class="flex flex-col items-center justify-evenly">
-        <div class="after:content-['↓'] sm:after:content-['⟶']"></div>
-      </div>
-      <div class="select-text rounded-md border border-ns-gray-200 px-4 py-2 dark:border-ns-gray-600">
-        <span
-          v-for="(text, index) of compare.result"
-          :key="index"
-          :class="`select-text whitespace-pre-wrap ${text.value.length > 25 ? 'break-all':''} ${text.isDiffered ? 'text-green-500':''}`"
-        >
-          {{ text.value }}
+          {{ text.c }}
         </span>
       </div>
     </div>

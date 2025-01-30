@@ -1,11 +1,18 @@
-export interface User {
-  id: number
+export interface ShortUser {
+  id: string
   username: string
-  banned: boolean
-  role: 'User' | 'Admin' | 'Moderator' | 'Admin, Moderator'
-  access: number
-  avatar: string
   isBot: boolean
-  userRating: UserRating | null
-  createdDate: Date
+  avatar: string
+}
+
+export interface User extends ShortUser {
+  login: string
+  banned: boolean
+  isAdmin: boolean
+  createdAt: string
+}
+
+export interface ExtendedUser extends User {
+  access: number
+  settings: string
 }

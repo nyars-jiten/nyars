@@ -1,14 +1,14 @@
-export const useSettingsCookie = () => {
+export function useSettingsCookie() {
   const cookie = useCookie('settings', {
     maxAge: 400 * 24 * 60 * 60, // 400 days is Google Chrome limitation
     path: '/',
     watch: 'shallow',
-    default: () => 0
+    default: () => 0,
   })
 
   enum Theme {
     light,
-    dark
+    dark,
   }
 
   const getSettings: () => Settings = () => {
