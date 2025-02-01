@@ -29,7 +29,7 @@ withDefaults(defineProps<Props>(), {
 const slots = defineSlots<{ hint?: () => void, description?: () => void }>()
 
 const styles = tv({
-  base: 'w-full rounded-md bg-zinc-800 p-2 text-zinc-500 shadow-md outline outline-1 outline-zinc-700 transition-colors',
+  base: 'w-full rounded-md bg-zinc-800 p-2 text-zinc-500 shadow-md outline-1 outline-zinc-700 transition-colors',
   variants: {
     disabled: {
       true: 'cursor-not-allowed bg-zinc-700 text-zinc-500',

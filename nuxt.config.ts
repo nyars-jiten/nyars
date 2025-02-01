@@ -2,6 +2,9 @@ import { exit } from 'node:process'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
+  future: {
+    compatibilityVersion: 4,
+  },
   devtools: { enabled: true },
   devServer: {
     host: '127.0.0.1',
@@ -30,8 +33,9 @@ export default defineNuxtConfig({
   },
   imports: {
     dirs: [
-      'types/**',
-      'utils/**',
+      '../types/**/*',
+      './stores/**/*',
+      './utils/**/*',
     ],
   },
   components: [

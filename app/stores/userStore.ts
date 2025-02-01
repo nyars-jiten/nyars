@@ -16,7 +16,6 @@ export const useUserStore = defineStore('user-store', () => {
     const response = await serverGetCurrentUser()
 
     watch(response.data, (data) => {
-      // @ts-expect-error fully rework this file
       user.value = data
     })
   }
@@ -24,7 +23,7 @@ export const useUserStore = defineStore('user-store', () => {
   const menuState = ref(true)
 
   function logout() {
-    user.value = null
+    user.value = undefined
   }
 
   return { logout, user, userAccess, $reset, menuState }

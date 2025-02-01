@@ -1,5 +1,3 @@
-import { EditResponseSchemaList } from '~/types/models/edit/edit'
-
 interface GetEditListRequest {
   number?: number
   page?: number
@@ -15,8 +13,10 @@ export function useEditRepo() {
 
       return useAsyncData(() => toApiResponse({
         data: () => promise,
-        schema: EditResponseSchema,
-      }))
+        schema: EditResponseSchema
+      }), {
+        deep: true
+      });
     }
 
     const getEdits = ({ number = 25, page = 0, statuses = '' }: GetEditListRequest = {}) => {
@@ -29,7 +29,7 @@ export function useEditRepo() {
         schema: EditResponseSchemaList,
       }), {
         default: () => [],
-      })
+      });
     }
 
     const getEditTxt = (id: string) => {
@@ -38,7 +38,9 @@ export function useEditRepo() {
       return useAsyncData(() => toApiResponse({
         data: () => promise,
         schema: EditorTxtEntryJpSchema,
-      }))
+      }), {
+        deep: true
+      });
     }
 
     const updateEdit = (id: string, edit: EditorTxtEntryJp) => {
@@ -47,7 +49,9 @@ export function useEditRepo() {
       return useAsyncData(() => toApiResponse({
         data: () => promise,
         schema: EditResponseSchema,
-      }))
+      }), {
+        deep: true
+      });
     }
 
     // TODO change type to DictionaryType
@@ -59,7 +63,9 @@ export function useEditRepo() {
       return useAsyncData(() => toApiResponse({
         data: () => promise,
         schema: EditResponseSchemaList,
-      }))
+      }), {
+        deep: true
+      });
     }
 
     const approveEditAsUnreviewed = (editId: string) => {
@@ -70,7 +76,9 @@ export function useEditRepo() {
       return useAsyncData(() => toApiResponse({
         data: () => promise,
         schema: EditResponseSchema,
-      }))
+      }), {
+        deep: true
+      });
     }
 
     const approveEditAsReviewed = (editId: string) => {
@@ -81,7 +89,9 @@ export function useEditRepo() {
       return useAsyncData(() => toApiResponse({
         data: () => promise,
         schema: EditResponseSchema,
-      }))
+      }), {
+        deep: true
+      });
     }
 
     const declineEdit = (editId: string) => {
@@ -89,5 +99,5 @@ export function useEditRepo() {
     }
 
     return { get, getEdits, getEditTxt, updateEdit, getEditsEntry, approveEditAsUnreviewed, approveEditAsReviewed, declineEdit }
-  })
+  });
 }

@@ -52,20 +52,20 @@ onMounted(() => {
 const { ctrl, z, c } = useMagicKeys()
 
 watchEffect(() => {
-  if (ctrl.value && z.value) {
+  if (ctrl?.value && z?.value) {
     undo()
   }
 })
 
 watchEffect(() => {
-  if (ctrl.value && c.value) {
+  if (ctrl?.value && c?.value) {
     clear()
   }
 })
 </script>
 
 <template>
-  <section class="bg-neutral-900 p-4 outline outline-1 outline-neutral-800 shadow-md rounded-md flex gap-4">
+  <section class="bg-neutral-900 p-4 outline-1 outline-neutral-800 shadow-md rounded-md flex gap-4">
     <div class="flex flex-col gap-4">
       <canvas
         ref="canvas"

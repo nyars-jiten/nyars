@@ -40,10 +40,10 @@ const tagsMap = {
         v-for="(tag, tagIndex) of tags.filter(tag => tagsMap[tag.engShort])"
         :key="tagIndex"
         class="rounded-xs group relative size-fit cursor-pointer p-0.5 text-[10px] leading-none "
-        :class="tagsMap[tag.engShort].class"
+        :class="tagsMap[tag.engShort]?.class"
       >
         <span class="font-bold uppercase text-neutral-900">
-          {{ tagsMap[tag.engShort].name }}
+          {{ tagsMap[tag.engShort]?.name }}
         </span>
         <UiTooltip>
           {{ tag.rus }}

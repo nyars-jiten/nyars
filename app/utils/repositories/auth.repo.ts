@@ -29,7 +29,9 @@ export function useAuthRepo() {
         data: () => promise,
         schema: UserSchema,
         toError: toAuthError,
-      }))
+      }), {
+        deep: true
+      });
     }
 
     const register = ({ login, password }: { login: string, password: string }) => {
@@ -41,9 +43,11 @@ export function useAuthRepo() {
         data: () => promise,
         schema: UserSchema,
         toError: toAuthError,
-      }))
+      }), {
+        deep: true
+      });
     }
 
     return { login, register }
-  })
+  });
 }

@@ -313,8 +313,8 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
     @delete="remove(); showConfimationWindow = ''"
   />
   <section v-else class="grid grow gap-8 xl:h-full xl:grid-cols-[2fr_1fr] overflow-hidden p-1">
-    <EditorGuide v-if="stateEditorHelp" class="md:hidden" @click-insert="(text: string[]) => insert(text[0], text[1])" />
-    <TagSearch v-if="stateTagSearch" class="md:hidden" @click-insert="(text: string[]) => insert(text[0], text[1])" />
+    <EditorGuide v-if="stateEditorHelp" class="md:hidden" @click-insert="(text: [string, string?]) => insert(...text)" />
+    <TagSearch v-if="stateTagSearch" class="md:hidden" @click-insert="(text: [string, string?]) => insert(...text)" />
 
     <h1 class="text-center text-4xl md:hidden">
       Редактор
@@ -384,8 +384,8 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
           </UiInput>
         </div>
 
-        <EditorGuide v-if="stateEditorHelp" class="mt-2.5 max-md:hidden" @click-insert="(text: string[]) => insert(text[0], text[1])" />
-        <TagSearch v-else-if="stateTagSearch" class="mt-2.5 max-md:hidden" @click-insert="(text: string[]) => insert(text[0], text[1])" />
+        <EditorGuide v-if="stateEditorHelp" class="mt-2.5 max-md:hidden" @click-insert="(text: [string, string?]) => insert(...text)" />
+        <TagSearch v-else-if="stateTagSearch" class="mt-2.5 max-md:hidden" @click-insert="(text: [string, string?]) => insert(...text)" />
       </section>
     </div>
 

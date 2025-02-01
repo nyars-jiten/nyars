@@ -18,7 +18,7 @@ const disabled = computed(() => {
   }
 
   // check rights
-  if (!userAccess.value.hasAccessEdits && user.value.id !== edit.data.value?.author?.id) {
+  if (!userAccess.value.hasAccessEdits && user.value?.id !== edit.data.value?.author?.id) {
     return true
   }
 

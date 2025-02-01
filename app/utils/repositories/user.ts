@@ -11,5 +11,5 @@ export function useUser() {
     })
 
     return { current }
-  })
+  });
 }
