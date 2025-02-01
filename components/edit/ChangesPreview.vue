@@ -37,7 +37,7 @@ function approveAsUnreviewed() {
 const showRaw = ref(false)
 
 function showEntryRef(edit: EditResponse): boolean {
-  return edit.type !== EditType.Create || (edit.type === EditType.Create && edit.status === EditStatus.Accepted)
+  return edit.wid !== '' && !(edit.status === EditStatus.Accepted && edit.type === EditType.Delete)
 }
 </script>
 

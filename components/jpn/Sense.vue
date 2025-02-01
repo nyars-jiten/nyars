@@ -9,6 +9,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const { t } = useI18n()
+const request = useSearchRequest()
 
 const miscTagsLine = computed(() => {
   const tags = props.sense.metaTags.map(t => t.rus)
@@ -96,7 +97,7 @@ const miscTagsLine = computed(() => {
 
           <NuxtLink
             v-if="reference.target !== null && reference.target.length === 4"
-            :to="{ name: 'dict-jpn-wid', params: { wid: reference.target } }"
+            :to="{ name: 'dict-jpn-wid', params: { wid: reference.target }, query: { q: request.request.value } }"
             class="text-ns-500 underline decoration-dotted underline-offset-4"
           >
             {{ reference.value }}
@@ -110,7 +111,7 @@ const miscTagsLine = computed(() => {
             {{ reference.value }}
           </NuxtLink>
 
-          <div v-if="reference.preview" class="text-sm text-gray-500 pl-2">
+          <div v-if="reference.preview" class="text-sm italic text-gray-500 pl-2">
             <Content v-for="(prev, pi) in reference.preview" :key="pi" :data="prev.c ?? []" :break-line="false" class="pl-1 after:content-[';'] last:after:content-none" />
           </div>
         </li>

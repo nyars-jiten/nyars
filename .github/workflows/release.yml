@@ -27,4 +27,4 @@ jobs:
           push: true
           file: ./bun.Dockerfile
           platforms: linux/amd64
-          tags: nyars-jiten/nyars:latest
+          tags: ghcr.io/nyars-jiten/nyars:latest
