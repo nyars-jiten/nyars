@@ -31,7 +31,7 @@ useHead({
     class: 'dark',
   },
   bodyAttrs: {
-    class: 'min-h-dvh bg-ns-gray-100 text-ns-gray-700 dark:bg-neutral-900 dark:text-gray-300',
+    class: 'min-h-dvh bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300',
   },
 })
 </script>

@@ -33,7 +33,7 @@ const styles = tv({
   variants: {
     disabled: {
       true: 'cursor-not-allowed bg-zinc-700 text-zinc-500',
-      false: ' focus-within:bg-zinc-700 focus-within:text-zinc-300 focus-within:outline-none hover:bg-zinc-700 hover:text-zinc-300 hover:outline-transparent',
+      false: ' focus-within:bg-zinc-700 focus-within:text-zinc-300 focus-within:outline-hidden hover:bg-zinc-700 hover:text-zinc-300 hover:outline-transparent',
     },
   },
 })
@@ -66,7 +66,7 @@ defineExpose({ inputRef })
 
     <template v-else>
       <section class="flex p-4" :class="styles({ disabled })">
-        <textarea ref="inputRef" :value="model" :autocomplete="autocomplete" :rows="rows" class="w-full bg-transparent outline-none" :class="{ 'resize-none': disabled }" :placeholder="placeholder" :disabled="disabled" @input="updateModel" />
+        <textarea ref="inputRef" :value="model" :autocomplete="autocomplete" :rows="rows" class="w-full bg-transparent outline-hidden" :class="{ 'resize-none': disabled }" :placeholder="placeholder" :disabled="disabled" @input="updateModel" />
       </section>
     </template>
 

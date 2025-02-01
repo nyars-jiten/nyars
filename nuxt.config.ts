@@ -1,4 +1,5 @@
 import { exit } from 'node:process'
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -6,6 +7,7 @@ export default defineNuxtConfig({
     host: '127.0.0.1',
     port: 8080,
   },
+  css: ['~/assets/css/tailwind.css'],
   compatibilityDate: '2024-09-22',
   app: {
     rootId: 'nyars',
@@ -39,7 +41,6 @@ export default defineNuxtConfig({
   ],
   modules: [
     '@nuxt/eslint',
-    '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
     '@nuxtjs/google-fonts',
     '@pinia/nuxt',
@@ -49,7 +50,8 @@ export default defineNuxtConfig({
     '@vee-validate/nuxt',
     '@vueuse/nuxt',
   ],
-  icon: {
+  vite: {
+    plugins: [tailwindcss()],
   },
   eslint: {
     config: {

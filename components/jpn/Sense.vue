@@ -45,7 +45,7 @@ const miscTagsLine = computed(() => {
             {{ tag.rusShort }}
 
             <div class="invisible absolute bottom-full left-1/2 z-20 -translate-x-1/2 pb-1 group-hover:visible">
-              <div class="flex items-center justify-center rounded-md bg-neutral-800/80 px-3 py-1.5 leading-4 shadow-md outline outline-1 outline-neutral-700 backdrop-blur-md">
+              <div class="flex items-center justify-center rounded-md bg-neutral-800/80 px-3 py-1.5 leading-4 shadow-md outline-1 outline-neutral-700 backdrop-blur-md">
                 {{ tag.rus }}
               </div>
             </div>
@@ -59,7 +59,7 @@ const miscTagsLine = computed(() => {
         </span>
         <span v-if="sense.extRefs.length > 0" class="group relative cursor-pointer align-top text-xs text-ns-500 underline decoration-dotted underline-offset-4">
           [*]
-          <UiTooltip class="text-base text-ns-gray-400">
+          <UiTooltip class="text-base text-neutral-400">
             <span v-for="(extRef, extRefIx) in sense.extRefs" :key="extRefIx">
               {{ extRef.target }}: {{ extRef.value }}
             </span>
@@ -75,7 +75,7 @@ const miscTagsLine = computed(() => {
         <span
           v-for="lemma, li in sense.lemmaContent"
           :key="li"
-          class="px-0.5 m-1 whitespace-nowrap bg-emerald-800 rounded-sm"
+          class="px-0.5 m-1 whitespace-nowrap bg-emerald-800 rounded-xs"
         >
           {{ lemma.v }}
         </span>
@@ -120,7 +120,7 @@ const miscTagsLine = computed(() => {
 
     <!-- <div v-if="!isPreview && sense.examples?.length" :class="`${meaning.senses.length > 1 ? 'ml-8':'ml-1'}`"> -->
     <div v-if="!isPreview && sense.examples?.length" class="ml-8">
-      <div v-for="(example, exampleIndex) of sense.examples" :key="exampleIndex" class="mb-3 border-l-2 border-ns-gray-200 pl-2 text-neutral-500  dark:border-ns-gray-700">
+      <div v-for="(example, exampleIndex) of sense.examples" :key="exampleIndex" class="mb-3 border-l-2 border-neutral-200 pl-2 text-neutral-500  dark:border-neutral-700">
         <Content class="block pb-1" :data="example.sentence" />
         <Content class="text-sm block" :data="example.translation" />
       </div>

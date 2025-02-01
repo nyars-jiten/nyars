@@ -1,8 +1,8 @@
-import { env } from 'node:process'
 import antfu from '@antfu/eslint-config'
+import tailwind from 'eslint-plugin-tailwindcss'
 import withNuxt from './.nuxt/eslint.config.mjs'
 
-export default withNuxt(antfu({
+export default withNuxt(await antfu({
   rules: {
     // The code problem checked by this ESLint rule is automatically checked by the TypeScript compiler.
     // Thus, it is not recommended to turn on this rule in new TypeScript projects.
@@ -10,6 +10,6 @@ export default withNuxt(antfu({
     // (c) https://typescript-eslint.io/rules/no-redeclare/
     'ts/no-redeclare': 'off',
 
-    'no-console': env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-console': import.meta.env.NODE_ENV === 'production' ? 'error' : 'off',
   },
-}))
+}), tailwind.configs['flat/recommended'])

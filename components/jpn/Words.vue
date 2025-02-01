@@ -10,11 +10,11 @@ defineProps<Props>()
 <template>
   <div>
     <header v-if="jpnEntry.preferFurigana" class="text-2xl">
-      <ul class="inline dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
+      <ul class="inline dark:before:text-neutral-700 dark:after:text-neutral-700">
         <li
           v-for="furigana, wIndex of jpnEntry.furigana"
           :key="wIndex"
-          class="inline-flex flex-wrap items-baseline before:text-ns-gray-200 after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
+          class="inline-flex flex-wrap items-baseline before:text-neutral-200 after:text-neutral-200 after:content-['・'] last:after:content-none dark:after:text-neutral-700"
         >
           <Furigana :furigana="furigana" :preview="preview" />
         </li>
@@ -25,11 +25,11 @@ defineProps<Props>()
         v-for="(word, wordIndex) of jpnEntry.words"
         :key="wordIndex"
       >
-        <ul v-show="word.spellings?.length" class="inline text-2xl before:-ml-3 before:text-ns-gray-200 before:content-['【'] after:text-ns-gray-200 after:content-['】'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700">
+        <ul v-show="word.spellings?.length" class="inline text-2xl before:-ml-3 before:text-neutral-200 before:content-['【'] after:text-neutral-200 after:content-['】'] dark:before:text-neutral-700 dark:after:text-neutral-700">
           <li
             v-for="(spelling, spellingIndex) of word.spellings"
             :key="spellingIndex"
-            class="inline-flex flex-wrap items-baseline before:text-ns-gray-200 after:text-ns-gray-200 after:content-['・'] last:after:content-none dark:after:text-ns-gray-700"
+            class="inline-flex flex-wrap items-baseline before:text-neutral-200 after:text-neutral-200 after:content-['・'] last:after:content-none dark:after:text-neutral-700"
           >
             <span>
               {{ spelling.value }}

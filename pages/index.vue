@@ -46,7 +46,7 @@ function getExample(exampleType: number, exampleIndex: number) {
             <span
               v-for="searchExample in searchExamples"
               :key="searchExample"
-              class="whitespace-nowrap before:text-ns-gray-200 before:content-['「'] after:text-ns-gray-200 after:content-['」・'] last:after:content-['」'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700"
+              class="whitespace-nowrap before:text-neutral-200 before:content-['「'] after:text-neutral-200 after:content-['」・'] last:after:content-['」'] dark:before:text-neutral-700 dark:after:text-neutral-700"
             >
               <button
                 type="button"

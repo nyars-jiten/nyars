@@ -50,7 +50,7 @@ export default {
 
     <!-- Divider -->
     <div
-      class="w-2 bg-gray-400 hover:bg-gray-600 cursor-ew-resize"
+      class="w-2 bg-neutral-400 hover:bg-neutral-600 cursor-ew-resize"
       @mousedown="startResizing"
     />
 
