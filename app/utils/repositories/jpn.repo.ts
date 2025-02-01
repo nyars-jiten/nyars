@@ -1,8 +1,5 @@
-import type { $Fetch, NitroFetchRequest } from 'nitropack'
-import type { ApiErrorSchema } from '~/types/models/api/error'
-
 export function useJpnRepo() {
-  return useApi(<T>(fetch: $Fetch<T, NitroFetchRequest>) => {
+  return useApi((fetch) => {
     const path = '/jp'
 
     const get = (wid: EntryJp['wid']) =>

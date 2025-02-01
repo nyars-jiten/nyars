@@ -1,5 +1,3 @@
-import type { $Fetch, NitroFetchRequest } from 'nitropack'
-
 class ApiAuthError extends Error {
   readonly code: AuthError['code']
   readonly time: AuthError['time']
@@ -21,25 +19,29 @@ function toAuthError(e: unknown) {
 }
 
 export function useAuthRepo() {
-  return useApi(<T>(fetch: $Fetch<T, NitroFetchRequest>) => {
+  return useApi((fetch) => {
     const path = '/auth'
 
-    const login = (body: { login: string, password: string }) => useAsyncData(() =>
-      toApiResponse({
-        data: () => fetch(`${path}/login`, { method: 'POST', body }),
+    const login = (body: { login: string, password: string }) => {
+      const promise = fetch(`${path}/login`, { method: 'POST', body })
+
+      return useAsyncData(() => toApiResponse({
+        data: () => promise,
         schema: UserSchema,
         toError: toAuthError,
       }))
+    }
 
     const register = ({ login, password }: { login: string, password: string }) => {
       const body = { username: login, password }
 
-      useAsyncData(() =>
-        toApiResponse({
-          data: () => fetch(`${path}/register`, { method: 'POST', body }),
-          schema: UserSchema,
-          toError: toAuthError,
-        }))
+      const promise = fetch(`${path}/register`, { method: 'POST', body })
+
+      return useAsyncData(() => toApiResponse({
+        data: () => promise,
+        schema: UserSchema,
+        toError: toAuthError,
+      }))
     }
 
     return { login, register }

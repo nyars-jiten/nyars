@@ -1,4 +1,3 @@
-import type { $Fetch, NitroFetchRequest } from 'nitropack'
 import { EditResponseSchemaList } from '~/types/models/edit/edit'
 
 interface GetEditListRequest {
@@ -8,64 +7,81 @@ interface GetEditListRequest {
 }
 
 export function useEditRepo() {
-  return useApi(<T>(fetch: $Fetch<T, NitroFetchRequest>) => {
+  return useApi((fetch) => {
     const path = '/edits'
 
-    const get = (id: string) => useAsyncData(() =>
-      toApiResponse({
-        data: () => fetch(`${path}/${id}`),
+    const get = (id: string) => {
+      const promise = fetch(`${path}/${id}`)
+
+      return useAsyncData(() => toApiResponse({
+        data: () => promise,
         schema: EditResponseSchema,
       }))
+    }
 
-    const getEdits = ({ number = 25, page = 0, statuses = '' }: GetEditListRequest = {}) => useAsyncData(() =>
-      toApiResponse({
-        data: () => fetch(path, { params: { n: number, p: page, s: statuses } }),
+    const getEdits = ({ number = 25, page = 0, statuses = '' }: GetEditListRequest = {}) => {
+      const params = { n: number, p: page, s: statuses }
+
+      const promise = fetch(path, { params })
+
+      return useAsyncData(() => toApiResponse({
+        data: () => promise,
         schema: EditResponseSchemaList,
       }), {
-      default: () => [],
-    })
+        default: () => [],
+      })
+    }
 
-    const getEditTxt = (id: string) => useAsyncData(() =>
-      toApiResponse({
-        data: () => fetch(`${path}/${id}/txt`),
+    const getEditTxt = (id: string) => {
+      const promise = fetch(`${path}/${id}/txt`)
+
+      return useAsyncData(() => toApiResponse({
+        data: () => promise,
         schema: EditorTxtEntryJpSchema,
       }))
+    }
 
-    const updateEdit = (id: string, edit: EditorTxtEntryJp) => useAsyncData(() =>
-      toApiResponse({
-        data: () => fetch(`${path}/${id}`, { method: 'POST', body: edit }),
+    const updateEdit = (id: string, edit: EditorTxtEntryJp) => {
+      const promise = fetch(`${path}/${id}`, { method: 'POST', body: edit })
+
+      return useAsyncData(() => toApiResponse({
+        data: () => promise,
         schema: EditResponseSchema,
       }))
+    }
 
     // TODO change type to DictionaryType
     const getEditsEntry = (entryId: string, dictionary: number, page = 0, count = 25) => {
       const params = { p: page, c: count }
 
-      return useAsyncData(() =>
-        toApiResponse({
-          data: () => fetch(`${path}/by-entry/${dictionary}/${entryId}`, { params }),
-          schema: EditResponseSchemaList,
-        }))
+      const promise = fetch(`${path}/by-entry/${dictionary}/${entryId}`, { params })
+
+      return useAsyncData(() => toApiResponse({
+        data: () => promise,
+        schema: EditResponseSchemaList,
+      }))
     }
 
     const approveEditAsUnreviewed = (editId: string) => {
       const params = { isUnreviewed: true }
 
-      return useAsyncData(() =>
-        toApiResponse({
-          data: () => fetch(`${path}/${editId}/approve`, { method: 'POST', params }),
-          schema: EditResponseSchema,
-        }))
+      const promise = fetch(`${path}/${editId}/approve`, { method: 'POST', params })
+
+      return useAsyncData(() => toApiResponse({
+        data: () => promise,
+        schema: EditResponseSchema,
+      }))
     }
 
     const approveEditAsReviewed = (editId: string) => {
       const params = { isUnreviewed: false }
 
-      return useAsyncData(() =>
-        toApiResponse({
-          data: () => fetch(`${path}/${editId}/approve`, { method: 'POST', params }),
-          schema: EditResponseSchema,
-        }))
+      const promise = fetch(`${path}/${editId}/approve`, { method: 'POST', params })
+
+      return useAsyncData(() => toApiResponse({
+        data: () => promise,
+        schema: EditResponseSchema,
+      }))
     }
 
     const declineEdit = (editId: string) => {

@@ -1,7 +1,5 @@
-import type { $Fetch, NitroFetchRequest } from 'nitropack'
-
 export function useSearchRepo() {
-  return useApi(<T>(fetch: $Fetch<T, NitroFetchRequest>) => {
+  return useApi((fetch) => {
     const path = '/search'
 
     const getSuggestions = (input: string, number = 10): Promise<string[]> => {

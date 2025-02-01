@@ -34,6 +34,7 @@ const styles = tv({
           :src="avatar"
           :alt="user.username"
         >
+
         <Icon size="1.5rem" name="ic:baseline-keyboard-arrow-down" class="transition-[transform,opacity] duration-200 ease-out group-hover:-rotate-180 group-hover:opacity-10" />
       </button>
 

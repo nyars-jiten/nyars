@@ -1,7 +1,5 @@
-import type { $Fetch, NitroFetchRequest } from 'nitropack'
-
 export function useUser() {
-  return useApi(<T>(fetch: $Fetch<T, NitroFetchRequest>) => {
+  return useApi((fetch) => {
     const path = '/users'
 
     const current = () => useAsyncData(() => fetch</* ApiError | */ ExtendedUser>(`${path}/me`, {

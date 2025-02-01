@@ -66,6 +66,7 @@ useHead({
         </span>
       </div>
     </div>
+
     <Edit
       v-for="edit in edits"
       :key="edit.id"

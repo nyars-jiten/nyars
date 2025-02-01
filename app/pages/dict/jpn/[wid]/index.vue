@@ -86,9 +86,11 @@ useHead({ title: jpnEntry.value?.title })
         <JpnEntry :jpn-entry="jpnEntry" :show-lemmas="showLemmas" />
       </UiBlock>
     </template>
+    
     <UiBlock v-else-if="status === 'pending'">
       <span>{{ t('pages.jpnEntry.entryIsLoading') }}</span>
     </UiBlock>
+
     <NotFound v-else message="pages.notFound.noEntry" />
   </div>
 </template>
