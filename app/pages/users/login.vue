@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { object, string } from 'yup'
+import { z } from 'zod'
 
 const notificationStore = useNotificationStore()
 const userStore = useUserStore()
 
 const isRegister = ref(false)
 
-const schema = object({
-  login: string().min(3).default('').required(),
-  password: string().min(3).default('').required(),
+const schema = z.object({
+  login: z.string().min(3).default(''),
+  password: z.string().min(3).default(''),
 })
 
 const { handleSubmit, errors } = useForm({

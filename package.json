@@ -13,13 +13,11 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@vee-validate/yup": "^4.15.0",
+    "@vee-validate/zod": "^4.15.0",
     "@vueuse/core": "^12.5.0",
-    "fp-ts": "^2.16.9",
-    "io-ts": "^2.2.22",
     "tailwind-variants": "^0.3.1",
     "vee-validate": "^4.15.0",
-    "yup": "^1.6.1"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.1.0",
@@ -35,11 +33,9 @@
     "@nuxtjs/i18n": "^9.1.4",
     "@pinia/nuxt": "^0.9.0",
     "@tailwindcss/vite": "^4.0.2",
-    "@types/eslint-plugin-tailwindcss": "^3.17.0",
     "@vee-validate/nuxt": "^4.15.0",
     "@vueuse/nuxt": "^12.5.0",
     "eslint": "^9.19.0",
-    "eslint-plugin-tailwindcss": "^3.18.0",
     "nuxt": "^3.15.4",
     "nuxt-svgo": "^4.0.14",
     "nuxt-typed-router": "^3.7.3",

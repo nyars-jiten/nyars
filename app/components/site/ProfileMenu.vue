@@ -5,13 +5,14 @@ const { clientLogout } = useUserRepo()
 
 const { t } = useI18n()
 const { user } = storeToRefs(useUserStore())
+const userStore = useUserStore()
 
 // TODO: not nullable
 const avatar = computed(() => useAvatar(user.value?.avatar ?? '').href)
 
 async function logout() {
   await clientLogout()
-  user.value = null
+  userStore.logout()
   navigateTo('/')
 }
 

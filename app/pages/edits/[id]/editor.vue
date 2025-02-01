@@ -4,8 +4,8 @@ const routeId = useRoute('edits-id-editor').params.id
 const { getEditTxt, get } = useEditRepo()
 const { userAccess, user } = storeToRefs(useUserStore())
 
-const edit = await useAsyncData(() => get(routeId))
-const srcData = await useAsyncData(() => getEditTxt(routeId))
+const edit = await get(routeId)
+const srcData = await getEditTxt(routeId)
 
 const disabled = computed(() => {
   if (srcData.status.value !== 'success' && edit.status.value !== 'success') {

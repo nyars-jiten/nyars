@@ -1,12 +1,18 @@
-export interface SearchRequest {
-  query: string
-}
+import { z } from 'zod'
 
-export interface SearchResponse {
-  result: EntryJp[]
-}
+export const SearchRequestSchema = z.object({
+  query: z.string(),
+})
 
-export interface JpnSearchResponse {
-  result: EntryJp[]
-  request: string[]
-}
+export const SearchResponseSchema = z.object({
+  result: z.array(EntryJpSchema),
+})
+
+export const JpnSearchResponseSchema = z.object({
+  result: z.array(EntryJpSchema),
+  request: z.array(z.string()),
+})
+
+export type SearchRequest = z.infer<typeof SearchRequestSchema>
+export type SearchResponse = z.infer<typeof SearchResponseSchema>
+export type JpnSearchResponse = z.infer<typeof JpnSearchResponseSchema>

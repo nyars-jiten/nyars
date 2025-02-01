@@ -4,13 +4,7 @@ definePageMeta({
 })
 
 const { getEdits } = useEditRepo()
-const { data: edits, refresh, status } = await useLazyAsyncData(
-  'edits',
-  () => getEdits(),
-  {
-    default: (): EditResponse[] => [],
-  },
-)
+const { data: edits, refresh, status } = getEdits()
 
 const infoExamples = [
   // Кол-во примеров:

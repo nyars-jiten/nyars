@@ -1,7 +1,9 @@
 export const useUserStore = defineStore('user-store', () => {
   const { current } = useUser()
   const { serverGetCurrentUser } = useUserRepo()
-  const { data: user } = current()
+  let remote = ref(current())
+
+  const user = computed(() => remote.value.data)
 
   const checkAccess = (access: Access) => {
     return user?.value && (user.value.isAdmin || ((user.value.access & access) === access))
@@ -13,10 +15,17 @@ export const useUserStore = defineStore('user-store', () => {
   } as UserRights))
 
   async function $reset() {
-    user.value = await serverGetCurrentUser()
+    const response = await serverGetCurrentUser()
+
+    // @ts-expect-error fully rework this file
+    remote.value = response
   }
 
   const menuState = ref(true)
 
-  return { user, userAccess, $reset, menuState }
+  function logout() {
+    remote.value.data = null
+  }
+
+  return { logout, user, userAccess, $reset, menuState }
 })

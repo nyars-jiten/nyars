@@ -1,23 +1,25 @@
-import type { ShortUser } from '../user/user.js'
-import type { DictionaryType } from './dictionaryType.js'
-import type { EditStatus } from './editStatus.js'
-import type { EditType } from './editType.js'
+import { z } from 'zod'
 
-export interface EditResponse {
-  id: string
-  wid: string
-  dictionary: DictionaryType
-  type: EditType
-  status: EditStatus
-  author: ShortUser | null
-  approver: ShortUser | null
-  comment: string
-  title: string
-  entryStatus: EntryStatus
-  createdAt: Date
-  updatedAt: Date
-  diffSrc: EditDiff[]
-  diffDst: EditDiff[]
-  diffRawSrc: EditDiff[]
-  diffRawDst: EditDiff[]
-}
+export const EditResponseSchema = z.object({
+  id: z.string(),
+  wid: z.string(),
+  dictionary: z.nativeEnum(DictionaryType),
+  type: z.nativeEnum(EditType),
+  status: z.nativeEnum(EditStatus),
+  author: ShortUserSchema.nullable(),
+  approver: ShortUserSchema.nullable(),
+  comment: z.string(),
+  title: z.string(),
+  entryStatus: EntryStatusSchema.optional(),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
+  diffSrc: EditDiffSchema.array(),
+  diffDst: EditDiffSchema.array(),
+  diffRawSrc: EditDiffSchema.array().nullable(),
+  diffRawDst: EditDiffSchema.array().nullable(),
+})
+
+export const EditResponseSchemaList = z.array(EditResponseSchema)
+
+export type EditResponse = z.infer<typeof EditResponseSchema>
+export type EditResponseList = z.infer<typeof EditResponseSchemaList>

@@ -4,56 +4,26 @@ export function useUserRepo() {
   return useApi(<T>(fetch: $Fetch<T, NitroFetchRequest>) => {
     const path = '/users'
 
-    const clientLogin = (login: string, password: string) => {
-      return fetch<User>(`${path}/auth`, {
-        method: 'POST',
-        body: {
-          login,
-          password,
-        },
-      })
-        .then((user) => {
-          return { data: user, error: null }
-        })
-        .catch((error) => {
-          return { data: null, error: error.data as AuthError }
-        })
-    }
-
-    const clientRegister = (username: string, password: string) => {
-      return fetch<User>(`${path}/register`, {
-        method: 'POST',
-        body: {
-          username,
-          password,
-        },
-      })
-        .then((user) => {
-          return { data: user, error: null }
-        })
-        .catch((error) => {
-          return { data: null, error: error.data as AuthError }
-        })
-    }
-
-    const clientLogout = () => {
-      return fetch(`${path}/logout`, {
-        method: 'POST',
-      })
-    }
+    const clientLogout = () => fetch(`${path}/logout`, { method: 'POST' })
 
     const clientGetUser = (username: string) => {
-      return fetch<User>(`${path}/profile/${username}`).catch(() => null)
+      return useAsyncData(() =>
+        toApiResponse({
+          data: () => fetch(`${path}/profile/${username}`),
+          schema: UserSchema,
+        }))
     }
 
-    const serverGetCurrentUser = () => {
-      return fetch<ExtendedUser>(`${path}/me`).catch(() => null)
-    }
+    const serverGetCurrentUser = () => useAsyncData(() => toApiResponse({
+      data: () => fetch(`${path}/me`),
+      schema: ExtendedUserSchema,
+    }))
 
-    const getWeeklyStats = (): Promise<WeeklyStats> => {
-      return fetch<WeeklyStats>(`${path}/weekly-stats`)
-    }
+    const getWeeklyStats = () => useAsyncData(() => toApiResponse({
+      data: () => fetch(`${path}/weekly-stats`),
+      schema: WeeklyStatsSchema,
+    }))
 
-    return { clientLogin, clientRegister, clientLogout, clientGetUser, serverGetCurrentUser, getWeeklyStats }
+    return { clientLogout, clientGetUser, serverGetCurrentUser, getWeeklyStats }
   })
 }

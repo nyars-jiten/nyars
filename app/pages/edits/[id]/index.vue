@@ -1,12 +1,6 @@
 <script setup lang="ts">
 // const { getEdits } = useEditRepo()
-// const { data: edits } = await useLazyAsyncData(
-//   'edits',
-//   () => getEdits(),
-//   {
-//     default: (): EditResponse[] => [],
-//   },
-// )
+// const { data: edits } = getEdits()
 
 const editId = useRoute('edits-id').params.id
 

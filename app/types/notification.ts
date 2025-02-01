@@ -1,10 +1,4 @@
-export interface NyarsNotification {
-  message: string
-  // type is ComputedRef<boolean>, but for no reason TS "converts" it to boolean
-  type: NyarsNotificationType
-
-  isHidden: unknown
-}
+import { z } from 'zod'
 
 export enum NyarsNotificationType {
   Success = 'success',
@@ -12,3 +6,11 @@ export enum NyarsNotificationType {
   Info = 'info',
   Warning = 'warning',
 }
+
+export const NyarsNotificationSchema = z.object({
+  message: z.string(),
+  type: z.nativeEnum(NyarsNotificationType),
+  isHidden: z.unknown(),
+})
+
+export type NyarsNotification = z.infer<typeof NyarsNotificationSchema>

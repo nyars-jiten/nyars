@@ -1,6 +1,6 @@
 import { getMessages } from './time/getMessages'
 
-export function useTime(date: MaybeRefOrGetter<Date>) {
+export function useTime(date: MaybeRefOrGetter<Date | string | number>) {
   return useTimeAgo(date, {
     fullDateFormatter: (date: Date) => date.toLocaleDateString('ru-RU', {
       year: 'numeric',

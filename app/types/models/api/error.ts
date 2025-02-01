@@ -1,8 +1,8 @@
-import { number, string, type, type TypeOf } from 'io-ts'
+import { z } from 'zod'
 
-export const ApiError = type({
-  code: number,
-  message: string,
+export const ApiErrorSchema = z.object({
+  code: z.number(),
+  message: z.string(),
 })
 
-export type ApiError = TypeOf<typeof ApiError>
+export type ApiError = z.infer<typeof ApiErrorSchema>

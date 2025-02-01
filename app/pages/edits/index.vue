@@ -19,14 +19,7 @@ const query = computed(() => {
 })
 
 const { getEdits } = useEditRepo()
-const { data: edits } = await useLazyAsyncData(
-  'edits',
-  () => getEdits(undefined, undefined, query.value.s),
-  {
-    default: (): EditResponse[] => [],
-    watch: [query],
-  },
-)
+const { data: edits } = getEdits({ statuses: query.value.s })
 
 // TODO: remove code repeating
 const mark = tv({

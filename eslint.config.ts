@@ -1,5 +1,5 @@
 import antfu from '@antfu/eslint-config'
-import tailwind from 'eslint-plugin-tailwindcss'
+// import tailwind from 'eslint-plugin-tailwindcss'
 import withNuxt from './.nuxt/eslint.config.mjs'
 
 export default withNuxt(await antfu({
@@ -11,5 +11,14 @@ export default withNuxt(await antfu({
     'ts/no-redeclare': 'off',
 
     'no-console': import.meta.env.NODE_ENV === 'production' ? 'error' : 'off',
+
+    "ts/prefer-literal-enum-member": [
+      "error",
+      {
+        "allowBitwiseExpressions": true
+      }
+    ]
   },
-}), tailwind.configs['flat/recommended'])
+
+  // https://github.com/francoismassart/eslint-plugin-tailwindcss/issues/325
+})/*, tailwind.configs['flat/recommended']*/)

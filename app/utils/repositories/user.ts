@@ -1,4 +1,3 @@
-import type { ApiError } from '#imports'
 import type { $Fetch, NitroFetchRequest } from 'nitropack'
 
 export function useUser() {

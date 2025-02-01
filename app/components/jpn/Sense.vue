@@ -15,8 +15,10 @@ const miscTagsLine = computed(() => {
   const tags = props.sense.metaTags.map(t => t.rus)
     .concat(props.sense.dialectTags.map(t => t.rus))
     .concat(props.sense.loanSources.map(ls => `${ls.lang}. ${ls.word}`))
+
   if (tags.length === 0)
     return ''
+
   return `— ${tags.join(', ')}`
 })
 </script>

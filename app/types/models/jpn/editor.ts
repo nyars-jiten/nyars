@@ -1,12 +1,17 @@
-export interface EditorTxtEntryJp {
-  reading: string
-  spelling: string
-  body: string
-  status: EntryStatus
-  comment: string
-}
+import { z } from 'zod'
 
-export interface EditorEntryJp {
-  entry: EntryJp
-  warnings: string[]
-}
+export const EditorTxtEntryJpSchema = z.object({
+  reading: z.string(),
+  spelling: z.string(),
+  body: z.string(),
+  status: EntryStatusSchema,
+  comment: z.string(),
+})
+
+export const EditorEntryJpSchema = z.object({
+  entry: EntryJpSchema,
+  warnings: z.array(z.string()),
+})
+
+export type EditorTxtEntryJp = z.infer<typeof EditorTxtEntryJpSchema>
+export type EditorEntryJp = z.infer<typeof EditorEntryJpSchema>

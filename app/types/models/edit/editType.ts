@@ -1,3 +1,5 @@
+import { z } from 'zod'
+
 export enum EditType {
   None,
   Create,
@@ -6,3 +8,5 @@ export enum EditType {
   Transfer,
   Revert,
 }
+
+export const EditTypeSchema = z.nativeEnum(EditType)
