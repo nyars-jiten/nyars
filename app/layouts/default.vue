@@ -1,6 +1,6 @@
 <script lang="ts" setup>
+import { version } from '@/../package.json'
 import { tv } from 'tailwind-variants'
-import { version } from '../package.json'
 
 // user,
 const { menuState } = storeToRefs(useUserStore())
@@ -35,7 +35,7 @@ onMounted(() => {
 
 <template>
   <div class="grid min-h-dvh grid-cols-[auto_1fr] gap-4 p-4">
-    <section class="space-y-4 sticky h-[calc(100dvh-theme('spacing.8'))] top-4 bg-neutral-900 overflow-x-hidden overflow-y-auto max-sm:hidden">
+    <section class="sticky top-4 h-[calc(100dvh-theme('spacing.8'))] space-y-4 overflow-y-auto overflow-x-hidden bg-neutral-900 max-sm:hidden">
       <UiButton :outline="false" type="button" @click="menuState = !menuState">
         <Icon v-if="menuState" size="1.5rem" name="ic:baseline-close" />
         <Icon v-else size="1.5rem" name="ic:baseline-menu" />
@@ -46,21 +46,21 @@ onMounted(() => {
 
     <LayoutMenu class="inset-y-24 z-50 pt-4" secondary />
 
-    <div class="space-y-4 flex flex-col">
+    <div class="flex flex-col space-y-4">
       <div class="sticky top-0 z-40 flex items-center justify-between gap-x-4 bg-neutral-900/95">
         <NuxtLink
           to="/"
           class="flex items-center gap-x-2"
           @click="headerStore.closeHamburgerMenu"
         >
-          <div class="size-9 mt-1 rounded-full bg-cover invert" style="background-image: url('/favicon-logo.svg');" />
+          <div class="mt-1 size-9 rounded-full bg-cover invert" style="background-image: url('/favicon-logo.svg');" />
 
           <span class="text-xl leading-snug">
             <span class="text-ns-500 dark:text-white">Н</span>
             <span class="text-ns-500 dark:text-ns-500">Я</span>
             <span class="text-ns-500 dark:text-white">РС</span>
 
-            <small class="text-xs align-top">
+            <small class="align-top text-xs">
               v{{ version }}
             </small>
           </span>
