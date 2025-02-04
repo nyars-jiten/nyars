@@ -6,13 +6,13 @@ const userStore = useUserStore()
 
 const isRegister = ref(false)
 
-const schema = z.object({
-  login: z.string().min(3).default(''),
-  password: z.string().min(3).default(''),
-})
+// const schema = z.object({
+//   login: z.string().min(3).default(''),
+//   password: z.string().min(3).default(''),
+// })
 
 const { handleSubmit, errors } = useForm({
-  validationSchema: toTypedSchema(schema),
+  // validationSchema: toTypedSchema(schema),
 })
 
 const submit = handleSubmit(async ({ login, password }) => {

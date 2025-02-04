@@ -11,6 +11,11 @@ defineProps<Props>()
 const styles = tv({
   base: 'flex items-center justify-start rounded-md transition-colors text-xl hover:text-neutral-800',
 })
+
+const playAudio = function (audio: string) {
+  const audioElement = new Audio(audio)
+  audioElement.play()
+}
 </script>
 
 <template>
@@ -19,7 +24,7 @@ const styles = tv({
     <!-- https://nuxt.com/docs/api/nuxt-config#router -->
     <!-- https://router.vuejs.org/api/interfaces/RouterOptions.html#scrollBehavior -->
 
-    <div class="flex flex-col hyphens-auto cursor-text items-start gap-3 pl-4 mb-2 border-b border-neutral-200 pb-2 dark:border-neutral-700">
+    <div class="flex flex-col hyphens-auto cursor-text items-start gap-3 pl-4 mb-2 border-b border-ns-gray-200 pb-2 dark:border-ns-gray-700">
       <Words :jpn-entry="jpnEntry" class="" />
     </div>
 
@@ -38,7 +43,7 @@ const styles = tv({
         <template v-for="(reading, ri) in jpnEntry.words.flatMap(word => word.readings)" :key="ri">
           <template v-for="(pitch, pi) in reading.pitch" :key="pi">
             <span class="space-x-1 py-1 px-1.5 rounded-md bg-neutral-800/20 shadow-md inline-flex items-center">
-              <button v-if="pitch.audio.length > 0" type="button" :class="styles()">
+              <button v-if="pitch.audio.length > 0" type="button" :class="styles()" @click="playAudio(pitch.audio)">
                 <Icon name="ic:baseline-volume-up" />
               </button>
 
@@ -60,7 +65,7 @@ const styles = tv({
                 </span>
               </span>
 
-              <small class="bg-slate-700 px-1 leading-none py-0.5 rounded-xs shadow-md font-bold text-xs">
+              <small class="bg-slate-700 px-1 leading-none py-0.5 rounded-sm shadow-md font-bold text-xs">
                 {{ pitch.pitchNum }}
               </small>
             </span>
