@@ -83,7 +83,7 @@ onMounted(() => {
     </li>
 
     <li class="space-y-2">
-      <NuxtLink :to="{ name: 'Home' }" :class="links({ state: menuState, secondary })">
+      <NuxtLink to="/" :class="links({ state: menuState, secondary })">
         <Icon size="1.5rem" name="ic:baseline-home" />
         <span>{{ t('components.header.navigation[0].pages.home') }}</span>
       </NuxtLink>
@@ -96,11 +96,6 @@ onMounted(() => {
       <!-- <NuxtLink to="/dev" :class="links({ state: menuState, secondary })">
         <Icon size="1.5rem" name="ic:baseline-auto-graph" />
         <span>{{ t('components.header.navigation[0].pages.statistics') }}</span>
-      </NuxtLink> -->
-
-      <!-- <NuxtLink to="/dev" :class="links({ state: menuState, secondary })">
-        <Icon size="1.5rem" name="ic:baseline-download" />
-        <span>{{ t('components.header.navigation[0].pages.download') }}</span>
       </NuxtLink> -->
     </li>
 
@@ -144,6 +139,11 @@ onMounted(() => {
         <Icon size="1.5rem" name="ic:baseline-menu-book" />
         <span>{{ t('components.header.navigation[0].pages.documentation') }}</span>
       </NuxtLink> -->
+
+      <NuxtLink to="/downloads" :class="links({ state: menuState, secondary })">
+        <Icon size="1.5rem" name="ic:baseline-download" />
+        <span>{{ t('components.header.navigation[0].pages.download') }}</span>
+      </NuxtLink>
     </li>
   </ul>
 </template>

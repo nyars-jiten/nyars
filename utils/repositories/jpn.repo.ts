@@ -29,6 +29,9 @@ export function useJpnRepo() {
     const checkDuplicates = (body: EditorTxtEntryJp) =>
       fetch<EntryJp[]>(`${path}/check-duplicates`, { method: 'POST', body })
 
-    return { get, edit, remove, source, preview, create, tagList, checkDuplicates }
+    const getDownloads = () =>
+      fetch<Download[]>(`${path}/downloads`, { method: 'GET' })
+
+    return { get, edit, remove, source, preview, create, tagList, checkDuplicates, getDownloads }
   })
 }

@@ -11,6 +11,11 @@ defineProps<Props>()
 const styles = tv({
   base: 'flex items-center justify-start rounded-md transition-colors text-xl hover:text-neutral-800',
 })
+
+const playAudio = function (audio: string) {
+  const audioElement = new Audio(audio)
+  audioElement.play()
+}
 </script>
 
 <template>
@@ -38,7 +43,7 @@ const styles = tv({
         <template v-for="(reading, ri) in jpnEntry.words.flatMap(word => word.readings)" :key="ri">
           <template v-for="(pitch, pi) in reading.pitch" :key="pi">
             <span class="space-x-1 py-1 px-1.5 rounded-md bg-neutral-800/20 shadow-md inline-flex items-center">
-              <button v-if="pitch.audio.length > 0" type="button" :class="styles()">
+              <button v-if="pitch.audio.length > 0" type="button" :class="styles()" @click="playAudio(pitch.audio)">
                 <Icon name="ic:baseline-volume-up" />
               </button>
 
