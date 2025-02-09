@@ -1,4 +1,3 @@
-import type { ApiError } from '#imports'
 import type { $Fetch, NitroFetchRequest } from 'nitropack'
 
 export function useUser() {
@@ -11,6 +10,7 @@ export function useUser() {
       headers: useRequestHeaders(['cookie']),
     }), {
       server: false,
+      default: () => null,
     })
 
     return { current }

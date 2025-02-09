@@ -1,5 +1,7 @@
 <script setup lang="ts">
-defineEmits(['clickInsert'])
+defineEmits<{
+  (e: 'clickInsert', text: [string, string]): void
+}>()
 
 const { t } = useI18n()
 

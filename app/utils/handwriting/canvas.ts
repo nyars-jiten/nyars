@@ -136,7 +136,7 @@ export class Canvas implements Handwriting {
   }
 
   private pushNext() {
-    this.history[this.history.length - 1].points.push([this.pos.x, this.pos.y])
+    this.history.at(-1)?.points.push([this.pos.x, this.pos.y])
   }
 
   private getContext() {
@@ -161,6 +161,10 @@ export class Canvas implements Handwriting {
     // Determine the correct coordinates based on the event type
     if (e instanceof TouchEvent) {
       const touch = e.touches[0] || e.changedTouches[0]
+      if (!touch) {
+        return
+      }
+
       clientX = touch.clientX
       clientY = touch.clientY
     }

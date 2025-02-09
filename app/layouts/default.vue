@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { tv } from 'tailwind-variants'
-import { version } from '../package.json'
+import { version } from '~~/package.json'
 
 // user,
 const { menuState } = storeToRefs(useUserStore())

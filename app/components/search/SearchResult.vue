@@ -17,10 +17,8 @@ const shortenedSenses = computed(() => {
     data: [] as Sense[],
     hidden: 0,
   } as ShortenedSenses
-  for (let i = 0; i < props.article.meanings.length; i++) {
-    const curMeaning = props.article.meanings[i]
-    for (let j = 0; j < curMeaning.senses.length; j++) {
-      const curSense = curMeaning.senses[j]
+  for (const curMeaning of props.article.meanings) {
+    for (const curSense of curMeaning.senses) {
       if (!props.article.hideRare || (!curSense.isRare && res.data.length < 5)) {
         res.data.push(curSense)
       }
@@ -46,17 +44,17 @@ const active = computed(() => articleWid.value === props.article.wid)
 </script>
 
 <template>
-  <NuxtLink 
-    :to="{ name: 'dict-jpn-wid', params: { wid: `${article.wid}-${article.title}` }, query: { q: request.request.value } }" 
-    class="w-full" 
+  <NuxtLink
+    :to="{ name: 'dict-jpn-wid', params: { wid: `${article.wid}-${article.title}` }, query: { q: request.request.value } }"
+    class="w-full"
     :class="{ 'cursor-default': active, 'opacity-40': article.status.isDeleted }"
   >
     <UiBlock :hover="active === false" :class="newBorder">
       <template #default>
         <section class="space-y-2">
-        <div v-if="article.status.isDeleted" class="text-rose-400 pl-4">
-          {{ t('pages.jpnEntry.entryWasDeleted') }}
-        </div>
+          <div v-if="article.status.isDeleted" class="text-rose-400 pl-4">
+            {{ t('pages.jpnEntry.entryWasDeleted') }}
+          </div>
           <Words :jpn-entry="article" :preview="true" />
 
           <div class="flex flex-wrap items-center gap-2">

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-defineEmits(['clickInsert'])
+defineEmits<{
+  (e: 'clickInsert', text: (readonly [string] | readonly [string, string])): void
+}>()
 
 const guideEvents = [
   {
@@ -151,7 +153,9 @@ const guideEvents = [
       },
     ],
   },
-]
+] as const
+
+const { t } = useI18n()
 </script>
 
 <template>
@@ -170,17 +174,23 @@ const guideEvents = [
           <span class="text-end text-amber-300">
             {{ evi + 1 }}
           </span>
+
           <i18n-t
+            v-if="'actions' in ev"
             tag="span"
             :keypath="`pages.editor.guideActions.${ev.msg}`"
             scope="global"
           >
-            <template v-for="a, ai in ev.actions" :key="ai" #[a.slot]>
+            <template v-for="a, ai in ev?.actions" :key="ai" #[a.slot]>
               <span class="bg-zinc-800 px-1 py-0.5 rounded cursor-pointer hover:bg-zinc-700 whitespace-nowrap" @click="$emit('clickInsert', a.action)">
                 {{ a.text }}
               </span>
             </template>
           </i18n-t>
+
+          <span v-else>
+            {{ t(`pages.editor.guideActions.${ev.msg}`) }}
+          </span>
         </template>
       </div>
     </UiBlock>

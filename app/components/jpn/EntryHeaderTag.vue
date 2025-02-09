@@ -15,7 +15,7 @@ const tagsMap = {
   'jlpt-n2': { name: 'n2', class: 'bg-orange-400' },
   'jlpt-n1': { name: 'n1', class: 'bg-red-400' },
   // 'iK': { name: '🡳', class: 'text-violet-400 p-0' },
-} as Record<Tag['engShort'], { name: string, class: string }>
+} as Record<string, { name: string, class: string }>
 </script>
 
 <template>
@@ -24,7 +24,7 @@ const tagsMap = {
 
       <!-- Tags that doesn't exist in map -->
       <small
-        v-for="(tag, tagIndex) of tags.filter(tag => !tagsMap[tag.engShort])"
+        v-for="(tag, tagIndex) of tags.filter(tag => !(tag.engShort in tagsMap))"
         :key="tagIndex"
         class="group cursor-help relative size-fit rounded-sm text-xs leading-none"
       >
@@ -37,14 +37,15 @@ const tagsMap = {
       </small>
 
       <small
-        v-for="(tag, tagIndex) of tags.filter(tag => tagsMap[tag.engShort])"
+        v-for="(tag, tagIndex) of tags.filter(tag => tag.engShort in tagsMap)"
         :key="tagIndex"
-        class="group relative size-fit cursor-pointer rounded-sm p-0.5 text-[10px] leading-none "
-        :class="tagsMap[tag.engShort].class"
+        class="group relative size-fit cursor-pointer rounded-sm p-0.5 text-[10px] leading-none"
+        :class="tagsMap[tag.engShort]?.class"
       >
         <span class="font-bold uppercase text-neutral-900">
-          {{ tagsMap[tag.engShort].name }}
+          {{ tagsMap[tag.engShort]?.name }}
         </span>
+
         <UiTooltip>
           {{ tag.rus }}
         </UiTooltip>

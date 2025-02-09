@@ -52,13 +52,13 @@ onMounted(() => {
 const { ctrl, z, c } = useMagicKeys()
 
 watchEffect(() => {
-  if (ctrl.value && z.value) {
+  if (ctrl?.value && z?.value) {
     undo()
   }
 })
 
 watchEffect(() => {
-  if (ctrl.value && c.value) {
+  if (ctrl?.value && c?.value) {
     clear()
   }
 })
