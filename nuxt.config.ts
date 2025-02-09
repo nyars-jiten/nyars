@@ -1,6 +1,9 @@
 import { exit } from 'node:process'
 
 export default defineNuxtConfig({
+  future: {
+    compatibilityVersion: 4,
+  },
   devtools: { enabled: true },
   devServer: {
     host: '127.0.0.1',
