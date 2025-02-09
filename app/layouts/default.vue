@@ -56,9 +56,9 @@ onMounted(() => {
           <div class="size-9 mt-1 rounded-full bg-cover invert" style="background-image: url('/favicon-logo.svg');" />
 
           <span class="text-xl leading-snug">
-            <span class="text-ns-500 dark:text-white">Н</span>
-            <span class="text-ns-500 dark:text-ns-500">Я</span>
-            <span class="text-ns-500 dark:text-white">РС</span>
+            <span class="text-neutral-500 dark:text-white">Н</span>
+            <span class="text-[#6aa3ab]">Я</span>
+            <span class="text-neutral-500 dark:text-white">РС</span>
 
             <small class="text-xs align-top">
               v{{ version }}

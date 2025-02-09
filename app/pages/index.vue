@@ -46,11 +46,11 @@ function getExample(exampleType: number, exampleIndex: number) {
             <span
               v-for="searchExample in searchExamples"
               :key="searchExample"
-              class="whitespace-nowrap before:text-ns-gray-200 before:content-['「'] after:text-ns-gray-200 after:content-['」・'] last:after:content-['」'] dark:before:text-ns-gray-700 dark:after:text-ns-gray-700"
+              class="whitespace-nowrap before:text-neutral-200 before:content-['「'] after:text-neutral-200 after:content-['」・'] last:after:content-['」'] dark:before:text-neutral-700 dark:after:text-neutral-700"
             >
               <button
                 type="button"
-                class="underline decoration-dotted underline-offset-4 hover:text-ns-500"
+                class="underline decoration-dotted underline-offset-4 hover:text-neutral-500"
                 @click="push(getExample(i + 1, searchExample))"
               >
                 {{ getExample(i + 1, searchExample) }}
@@ -60,7 +60,7 @@ function getExample(exampleType: number, exampleIndex: number) {
         </ul>
 
         <i18n-t tag="div" keypath="pages.main.infoHelp" scope="global" class="indent-10">
-          <NuxtLink :to="config.public.discordUrl" external target="_blank" class="select-text text-indigo-600 underline decoration-dotted underline-offset-4 hover:text-ns-500 dark:text-indigo-300 dark:hover:text-ns-500">
+          <NuxtLink :to="config.public.discordUrl" external target="_blank" class="select-text text-discord underline decoration-dotted underline-offset-4 hover:text-neutral-500 dark:text-indigo-300 dark:hover:text-neutral-500">
             {{ t('pages.main.infoDiscord') }}
           </NuxtLink>
         </i18n-t>

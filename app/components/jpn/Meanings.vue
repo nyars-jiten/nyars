@@ -46,7 +46,7 @@ const isPreview = false
 
         <div v-if="meaning.note.length > 0" class="flex flex-col">
           <div class="flex">
-            <span class="min-w-[30px] text-center align-top text-ns-gray-400">
+            <span class="min-w-[30px] text-center align-top text-neutral-400">
               ※
             </span>
 

@@ -83,7 +83,7 @@ function showEntryRef(edit: EditResponse): boolean {
       </template>
     </div>
 
-    <!-- <div v-if="edit.comment.length > 0" class="break-words border-l-2 border-ns-gray-200 pl-2 dark:border-ns-gray-700">
+    <!-- <div v-if="edit.comment.length > 0" class="break-words border-l-2 border-neutral-200 pl-2 dark:border-neutral-700">
       {{ t('components.editGroup.changesPreview.comment') }} {{ edit.comment }}
     </div> -->
 

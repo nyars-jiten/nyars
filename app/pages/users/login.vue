@@ -111,7 +111,7 @@ const password = useField('password')
             </span>
 
             <span
-              class="cursor-pointer underline decoration-dotted underline-offset-4 hover:text-ns-500"
+              class="cursor-pointer underline decoration-dotted underline-offset-4 hover:text-neutral-500"
               @click="isRegister = !isRegister"
             >
               {{ t(isRegister ? 'pages.login.titleLogin' : 'pages.login.titleRegister') }}

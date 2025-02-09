@@ -34,7 +34,7 @@ const msgIcons = {
       <div v-for="notification of notifications" :key="notification.message">
         <div
           v-if="!notification.isHidden"
-          class="flex min-h-12 justify-start rounded-r-md border-l-4 bg-ns-gray-100 p-2 shadow dark:bg-ns-gray-700"
+          class="flex min-h-12 justify-start rounded-r-md border-l-4 bg-neutral-100 p-2 shadow dark:bg-neutral-700"
           :class="msgStyles.variants.border[notification.type]"
         >
           <div class="flex w-6 shrink-0 items-center justify-center sm:w-12">

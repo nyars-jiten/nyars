@@ -57,7 +57,7 @@ const styles = tv({
             <span>{{ t('components.header.profileMenu.exit') }}</span>
           </button>
 
-          <!-- <div class="border-t border-ns-gray-300 pt-2 dark:border-ns-gray-600">
+          <!-- <div class="border-t border-neutral-300 pt-2 dark:border-neutral-600">
             <ThemeSwitcher class="w-full" />
           </div> -->
         </div>

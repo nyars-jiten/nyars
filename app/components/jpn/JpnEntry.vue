@@ -24,7 +24,7 @@ const playAudio = function (audio: string) {
     <!-- https://nuxt.com/docs/api/nuxt-config#router -->
     <!-- https://router.vuejs.org/api/interfaces/RouterOptions.html#scrollBehavior -->
 
-    <div class="flex flex-col hyphens-auto cursor-text items-start gap-3 pl-4 mb-2 border-b border-ns-gray-200 pb-2 dark:border-ns-gray-700">
+    <div class="flex flex-col hyphens-auto cursor-text items-start gap-3 pl-4 mb-2 border-b border-neutral-200 pb-2 dark:border-neutral-700">
       <Words :jpn-entry="jpnEntry" class="" />
     </div>
 

@@ -57,9 +57,9 @@ const miscTagsLine = computed(() => {
         <span class="ml-1 space-x-2 text-base italic text-gray-500">
           {{ miscTagsLine }}
         </span>
-        <span v-if="sense.extRefs.length > 0" class="group relative cursor-pointer align-top text-xs text-ns-500 underline decoration-dotted underline-offset-4">
+        <span v-if="sense.extRefs.length > 0" class="group relative cursor-pointer align-top text-xs text-neutral-500 underline decoration-dotted underline-offset-4">
           [*]
-          <UiTooltip class="text-base text-ns-gray-400">
+          <UiTooltip class="text-base text-neutral-400">
             <span v-for="(extRef, extRefIx) in sense.extRefs" :key="extRefIx">
               {{ extRef.target }}: {{ extRef.value }}
             </span>
@@ -98,7 +98,7 @@ const miscTagsLine = computed(() => {
           <NuxtLink
             v-if="reference.target !== null && reference.target.length === 4"
             :to="{ name: 'dict-jpn-wid', params: { wid: reference.target }, query: { q: request.request.value } }"
-            class="text-ns-500 underline decoration-dotted underline-offset-4"
+            class="text-neutral-500 underline decoration-dotted underline-offset-4"
           >
             {{ reference.value }}
           </NuxtLink>
@@ -106,7 +106,7 @@ const miscTagsLine = computed(() => {
           <NuxtLink
             v-else
             :to="{ name: 'dict-jpn', query: { q: reference.value } }"
-            class="text-ns-500 underline decoration-dotted underline-offset-4"
+            class="text-neutral-500 underline decoration-dotted underline-offset-4"
           >
             {{ reference.value }}
           </NuxtLink>
@@ -120,7 +120,7 @@ const miscTagsLine = computed(() => {
 
     <!-- <div v-if="!isPreview && sense.examples?.length" :class="`${meaning.senses.length > 1 ? 'ml-8':'ml-1'}`"> -->
     <div v-if="!isPreview && sense.examples?.length" class="ml-8">
-      <div v-for="(example, exampleIndex) of sense.examples" :key="exampleIndex" class="mb-3 border-l-2 border-ns-gray-200 pl-2 text-neutral-500  dark:border-ns-gray-700">
+      <div v-for="(example, exampleIndex) of sense.examples" :key="exampleIndex" class="mb-3 border-l-2 border-neutral-200 pl-2 text-neutral-500  dark:border-neutral-700">
         <Content class="block pb-1" :data="example.sentence" />
         <Content class="text-sm block" :data="example.translation" />
       </div>
