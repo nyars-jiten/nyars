@@ -34,7 +34,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="grid min-h-dvh grid-cols-[auto_1fr] gap-4 p-4">
+  <div class="grid min-h-dvh grid-cols-[auto_1fr] max-sm:grid-cols-1 gap-4 p-4">
     <section class="space-y-4 sticky h-[calc(100dvh-theme('spacing.8'))] top-4 bg-neutral-900 overflow-x-hidden overflow-y-auto max-sm:hidden">
       <UiButton :outline="false" type="button" @click="menuState = !menuState">
         <Icon v-if="menuState" size="1.5rem" name="ic:baseline-close" />

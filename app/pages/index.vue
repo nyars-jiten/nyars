@@ -33,8 +33,8 @@ function getExample(exampleType: number, exampleIndex: number) {
 </script>
 
 <template>
-  <section class="grid grid-cols-[1fr_auto] gap-8 max-lg:grid-cols-1">
-    <div class="grow space-y-8">
+  <section class="grid grid-cols-[1fr_auto] gap-8 max-lg:grid-cols-1 max-lg:gap-16">
+    <div class="grow space-y-16">
       <div class="space-y-4 p-8">
         <div class="indent-10">
           {{ t('pages.main.infoNyars') }}
@@ -66,17 +66,19 @@ function getExample(exampleType: number, exampleIndex: number) {
         </i18n-t>
       </div>
 
-      <h1 class="text-center text-4xl uppercase">
-        activity
-        <Icon class="bg-slate-500 align-baseline cursor-pointer" :class="{ 'animate-spin': status === 'pending' }" size="1.3rem" name="mdi:restart" @click="refresh()" />
-      </h1>
-
       <section class="space-y-4">
-        <Edit
-          v-for="edit of edits"
-          :key="edit.id"
-          :edit="edit"
-        />
+        <h1 class="text-center text-4xl">
+          activity
+          <Icon class="bg-slate-500 align-baseline cursor-pointer" :class="{ 'animate-spin': status === 'pending' }" size="1.3rem" name="mdi:restart" @click="refresh()" />
+        </h1>
+
+        <div class="space-y-4">
+          <Edit
+            v-for="edit of edits"
+            :key="edit.id"
+            :edit="edit"
+          />
+        </div>
       </section>
     </div>
 

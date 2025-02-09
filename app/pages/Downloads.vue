@@ -40,35 +40,107 @@ const dlData = [
     data: downloads.value?.find(dl => dl.type === 'yomitan'),
   },
 ]
+
+const faqData = [
+  {
+    id: 1,
+    question: 'В каком формате выгружены данные?',
+    answer: 'JSON',
+  },
+  {
+    id: 2,
+    question: 'Какие данные выгружаются?',
+    answer: 'JSON',
+  },
+  {
+    id: 3,
+    question: 'Какие данные выгружаются?',
+    answer: 'JSON',
+  },
+  {
+    id: 4,
+    question: 'Какие данные выгружаются?',
+    answer: 'JSON',
+  },
+  {
+    id: 5,
+    question: 'Какие данные выгружаются?',
+    answer: 'JSON',
+  },
+  {
+    id: 6,
+    question: 'Какие данные выгружаются?',
+    answer: 'JSON',
+  },
+]
 </script>
 
 <template>
-  <section class="space-y-4">
-    <div class="flex items-center justify-between">
-      <h1 class="text-2xl font-bold">
-        Скачать
-      </h1>
-    </div>
-    <div class="space-y-4">
-      <div v-for="(dl, dli) in dlData.filter(x => x.data)" :key="dli">
-        <div class="flex items-center space-x-4">
-          <img :src="`/download/${dl.icon}`" class="w-12 h-12">
+  <section class="space-y-16">
+    <section class="space-y-4">
+      <div class="text-center leading-16">
+        <h1>
+          Скачать
+        </h1>
+
+        <p>
+          Выгружено 20 статей
+        </p>
+      </div>
+
+      <div class="inline-grid grid-cols-[auto_auto] gap-4 items-center">
+        <template v-for="(dl) in dlData.filter(x => x.data)" :key="dl.type">
+          <a v-if="dl.data" :href="getExportPath(dl.data.filepath)" class="flex gap-2 outline-1 outline-zinc-700 shadow-md hover:bg-zinc-800 transition-colors hover:outline-transparent rounded-md p-2 items-center">
+            <img :src="`/download/${dl.icon}`" class="w-12 h-12">
+
+            <span>
+              <div>
+                <span>
+                  {{ dl.data.filepath }}
+                </span>
+
+                <span>
+                  ({{ computeSize(dl.data.size) }})
+                </span>
+              </div>
+
+              <small class="text-neutral-300">
+                Обновлено {{ useTime(dl.data.createdAt) }}
+              </small>
+            </span>
+          </a>
+
           <div>
-            <h2 class="text-xl font-bold">
+            <h2 class="text-2xl">
               {{ dl.title }}
-              <a :href="getExportPath(dl.data?.filepath ?? '')">
-                <Icon size="1.5rem" name="ic:baseline-download" />
-              </a>
-              <span>
-                ({{ computeSize(dl.data?.size ?? 0) }})
-              </span>
             </h2>
+
             <p>
-              {{ dl.msg }} (Обновлено {{ useTime(dl.data?.createdAt ?? new Date()) }})
+              {{ dl.msg }}
             </p>
           </div>
-        </div>
+        </template>
       </div>
-    </div>
+    </section>
+
+    <section class="space-y-4">
+      <div class="text-center leading-16">
+        <h1>
+          faq
+        </h1>
+      </div>
+
+      <ul class="space-y-4">
+        <li v-for="faq in faqData" :key="faq.id" class="last:border-0 last:pb-0 border-neutral-800 border-b pb-4">
+          <h2 class="text-2xl">
+            {{ faq.question }}
+          </h2>
+
+          <p>
+            {{ faq.answer }}
+          </p>
+        </li>
+      </ul>
+    </section>
   </section>
 </template>

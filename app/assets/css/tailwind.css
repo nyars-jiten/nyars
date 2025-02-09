@@ -13,20 +13,24 @@
     --default-font-family: "Exo 2", "Noto Sans JP";
     /* --default-font-family: "Arial"; */
   }
-/*   
+
+  h1 {
+    @apply text-6xl font-extralight uppercase
+  }
+  
   html.dark ::-webkit-scrollbar-track {
     border-radius: 10px;
-    background-color: var(--neutral-800);
+    background-color: var(--color-neutral-800);
   }
   
   html.dark ::-webkit-scrollbar {
     width: 12px;
-    background-color: var(--neutral-800);
+    background-color: var(--color-neutral-800);
   }
   
   html.dark ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: var(--neutral-700);
+    background-color: var(--color-neutral-700);
   }
   
   html.dark ::-webkit-scrollbar-thumb:hover {
@@ -60,7 +64,7 @@
   
   html.dark ::-webkit-scrollbar-corner {
     background-color: var(--neutral-800);
-  } */
+  }
   
   ::selection {
     background: #6aa3ab;

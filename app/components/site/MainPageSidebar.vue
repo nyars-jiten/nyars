@@ -8,15 +8,16 @@ const { data } = await useLazyAsyncData(
 
 const jpnDiff = computed(() => (data.value?.site?.jpn ?? 0) - (data.value?.site?.jpnPrev ?? 0))
 const jpnRevDiff = computed(() => (data.value?.site?.jpnRev ?? 0) - (data.value?.site?.jpnRevPrev ?? 0))
-const jpnRevPercentage = computed(() => ((((data.value?.site?.jpnRev ?? 0) / (data.value?.site?.jpn ?? 0)) || 0) * 100).toFixed(3))
+const jpnRevPercentage = computed(() => ((((data.value?.site?.jpnRev ?? 0) / (data.value?.site?.jpn ?? 0)) || 0) * 100).toFixed(1))
 </script>
 
 <template>
-  <div>
-    <div v-if="data" class="space-y-4">
-      <h1 class="text-center text-2xl max-lg:pb-4">
+  <div class="max-lg:space-y-16">
+    <div v-if="data" class="space-y-4 min-lg:px-2">
+      <h3 class="text-center text-2xl font-extralight">
         Статистика
-      </h1>
+      </h3>
+
       <section>
         <div>
           Всего статей: {{ data.site.jpn }}
@@ -44,10 +45,10 @@ const jpnRevPercentage = computed(() => ((((data.value?.site?.jpnRev ?? 0) / (da
 
     <hr class="border-neutral-800 max-lg:hidden"> -->
 
-    <div v-if="data" class="space-y-4">
-      <h1 class="text-center text-2xl max-lg:pb-4">
+    <div v-if="data" class="space-y-4 min-lg:px-2">
+      <h3 class="text-center text-2xl font-extralight">
         Рейтинг за 7 дней
-      </h1>
+      </h3>
 
       <section class="max-lg:grid max-lg:grid-cols-2 max-lg:gap-4 max-md:block max-md:space-y-4 lg:space-y-4">
         <WeeklyActiveUser v-for="(stat, index) of data.stats" v-bind="{ position: index + 1 }" :key="stat.user.id" :data="stat" />

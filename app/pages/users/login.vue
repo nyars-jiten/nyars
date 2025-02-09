@@ -57,13 +57,16 @@ const password = useField('password')
 
 <template>
   <section class="flex justify-center">
-    <UiBlock class="w-1/3 space-y-8">
-      <span class="flex items-center justify-between gap-4">
-        <h1 class="text-xl font-semibold">
+    <div class="min-lg:w-1/3 space-y-16">
+      <div class="space-y-4">
+        <h1 class="text-center">
           {{ t(isRegister ? 'pages.login.titleRegister' : 'pages.login.titleLogin') }}
         </h1>
+      </div>
 
+      <div class="space-y-4 text-center">
         <NuxtLink
+          class="block"
           to="/api/auth/discord"
           external
         >
@@ -71,54 +74,60 @@ const password = useField('password')
             <span>{{ t('pages.login.discordOAuth') }}</span>
           </UiButton>
         </NuxtLink>
-      </span>
 
-      <form class="space-y-8" @submit="submit">
-        <span class="space-y-4">
-          <UiInput v-model="login.value.value" type="text" autocomplete="username">
-            <template #hint>
-              {{ t('pages.login.login') }}
-            </template>
-          </UiInput>
+        <div>
+          или
+        </div>
 
-          <UiInput v-model="password.value.value" type="password" autocomplete="current-password">
-            <template #hint>
-              {{ t('pages.login.password') }}
-            </template>
-          </UiInput>
-        </span>
+        <UiBlock>
+          <form class="space-y-8" @submit="submit">
+            <section class="space-y-4">
+              <div>
+                <UiInput v-model="login.value.value" type="text" autocomplete="username">
+                  <template #hint>
+                    {{ t('pages.login.login') }}
+                  </template>
+                </UiInput>
 
-        <section v-show="Object.keys(errors).length > 0" class="grid grid-cols-[auto_1fr] gap-2 px-8">
-          <template v-for="value, path in errors" :key="path">
-            <p class="text-rose-300">
-              {{ path }}
-            </p>
+                <div class="text-start px-2 text-rose-300">
+                  {{ errors.login }}
+                </div>
+              </div>
 
-            <p>
-              {{ value }}
-            </p>
-          </template>
-        </section>
+              <div>
+                <UiInput v-model="password.value.value" type="password" autocomplete="current-password">
+                  <template #hint>
+                    {{ t('pages.login.password') }}
+                  </template>
+                </UiInput>
 
-        <section class="flex justify-between">
-          <UiButton type="submit">
-            {{ t(isRegister ? 'pages.login.titleRegister' : 'pages.login.titleLogin') }}
-          </UiButton>
+                <div class="text-start px-2 text-rose-300">
+                  {{ errors.password }}
+                </div>
+              </div>
+            </section>
 
-          <div class="flex gap-2">
-            <span v-show="!isRegister">
-              {{ t('pages.login.noAccount') }}
-            </span>
+            <section class="flex justify-between items-center gap-4">
+              <UiButton type="submit" :disabled="Object.keys(errors).length > 0">
+                {{ t(isRegister ? 'pages.login.titleRegister' : 'pages.login.titleLogin') }}
+              </UiButton>
 
-            <span
-              class="cursor-pointer underline decoration-dotted underline-offset-4 hover:text-neutral-500"
-              @click="isRegister = !isRegister"
-            >
-              {{ t(isRegister ? 'pages.login.titleLogin' : 'pages.login.titleRegister') }}
-            </span>
-          </div>
-        </section>
-      </form>
-    </UiBlock>
+              <div class="flex gap-4 items-center">
+                <span v-show="!isRegister">
+                  {{ t('pages.login.noAccount') }}
+                </span>
+
+                <span
+                  class="cursor-pointer underline decoration-dotted underline-offset-4 hover:text-neutral-500"
+                  @click="isRegister = !isRegister"
+                >
+                  {{ t(isRegister ? 'pages.login.titleLogin' : 'pages.login.titleRegister') }}
+                </span>
+              </div>
+            </section>
+          </form>
+        </UiBlock>
+      </div>
+    </div>
   </section>
 </template>

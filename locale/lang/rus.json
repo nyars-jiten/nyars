@@ -229,7 +229,7 @@
       "buttonLogin": "Вход",
       "buttonRegister": "Зарегистрироваться",
       "or": "или",
-      "discordOAuth": "Войти через Discord"
+      "discordOAuth": "Discord"
     }
   },
   "models": {

@@ -37,7 +37,7 @@ const styles = tv({
       </button>
 
       <div class="absolute right-0 invisible top-full w-44 group-hover:visible">
-        <div class="flex flex-col gap-1 rounded-md mt-2 p-2 shadow-md outline outline-1 outline-neutral-800 bg-neutral-900">
+        <div class="flex flex-col gap-1 rounded-md mt-2 p-2 shadow-md outline-1 outline-neutral-800 bg-neutral-900">
           <NuxtLink
             :to="{ name: 'users-username', params: { username: user.username } }"
             :class="styles({ entity: 'menuItem' })"

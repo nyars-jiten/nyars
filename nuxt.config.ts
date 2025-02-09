@@ -74,9 +74,13 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       'Exo+2': {
-        wght: [400, 500, 600, 700, 800, 900],
+        wght: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+        italic: [100, 200, 300, 400, 500, 600, 700, 800, 900],
       },
-      'Noto+Sans+JP': true,
+      'Noto+Sans+JP': {
+        wght: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+        italic: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+      },
     },
     display: 'swap',
   },
