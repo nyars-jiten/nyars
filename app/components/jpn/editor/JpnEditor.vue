@@ -12,12 +12,12 @@ const { t } = useI18n()
 const api = useJpnRepo()
 const { updateEdit } = useEditRepo()
 
-const { menuState } = storeToRefs(useUserStore())
+const { $reset: userReset } = useUserStore()
+const { menuState, user } = storeToRefs(useUserStore())
 const notificationStore = useNotificationStore()
 
-const { user } = storeToRefs(useUserStore())
-
 onBeforeMount(() => {
+  userReset() // update user state
   menuState.value = false
   if (!user.value && props.isNew) {
     navigateTo('/users/login')
@@ -321,6 +321,10 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
     </h1>
 
     <div class="flex h-full flex-col gap-4">
+      <div v-if="!user" class="text-amber-300 flex gap-2">
+        <Icon name="ic:baseline-warning-amber" size="1.5rem" />
+        Вы не вошли в аккаунт. Правка будет создана анонимно.
+      </div>
       <section class="flex items-start justify-between gap-4 max-sm:flex-col bg-neutral-900/95">
         <div class="inline-flex flex-wrap gap-x-8 gap-y-2">
           <span v-for="group, index in buttons()" :key="index" class="gap-2 grid" :style="{ gridTemplateColumns: `repeat(${group.length}, 1fr)` }">
