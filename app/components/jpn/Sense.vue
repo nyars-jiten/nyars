@@ -9,7 +9,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const { t } = useI18n()
-const request = useSearchRequest()
+const { request } = useSearchRequest()
 
 const miscTagsLine = computed(() => {
   const tags = props.sense.metaTags.map(t => t.rus)
@@ -97,7 +97,7 @@ const miscTagsLine = computed(() => {
 
           <NuxtLink
             v-if="reference.target !== null && reference.target.length === 4"
-            :to="{ name: 'dict-jpn-wid', params: { wid: reference.target }, query: { q: request.request.value } }"
+            :to="{ name: 'dict-jpn-wid', params: { wid: reference.target }, query: { q: request } }"
             class="text-neutral-500 underline decoration-dotted underline-offset-4"
           >
             {{ reference.value }}

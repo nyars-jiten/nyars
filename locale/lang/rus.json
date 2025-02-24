@@ -92,10 +92,6 @@
         {
           "text": "Поиск по транскрипции: ",
           "searchExamples": ["сэйка", "kawairashii", "itizyou", "hiku"]
-        },
-        {
-          "text": "Неотредактированные статьи частотностью до 20к в случайном порядке: ",
-          "searchExamples": ["#freq20k #!ed #rnd"]
         }
       ]
     },

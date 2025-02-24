@@ -1,17 +1,25 @@
 <script setup lang="ts">
-const route = useRoute()
-const request = computed(() => String(route.query.q ?? ''))
+// const route = useRoute()
+// const request = computed(() => String(route.query.q ?? ''))
 
 const { t } = useI18n()
 
 const { search } = useSearchRepo()
+const { request, watchParam } = useSearchRequest()
 
-const { data, clear, refresh, status } = await useAsyncData(`search-request-${request.value}`, () => search(request.value, 0, 0), {
+const { data, status } = await useAsyncData(`search-request-${request.value}`, () => search(request.value, 0, 0), {
   dedupe: 'defer',
 })
 
 const srchResult = ref<JpnSearchResponse>()
 srchResult.value = data.value
+
+const updateEntry = function () {
+  const first = srchResult.value?.result[0]
+  if (first && useRoute().name === 'dict-jpn' && request) {
+    navigateTo({ name: 'dict-jpn-wid', params: { wid: first.wid }, query: { q: request.value } }, { replace: true })
+  }
+}
 
 const inlineSearch = async function (req: string) {
   const inlineSearchResult = await search(req, 0, 0)
@@ -19,19 +27,13 @@ const inlineSearch = async function (req: string) {
   updateEntry()
 }
 
-const updateEntry = function () {
-  const first = srchResult.value?.result[0]
-  if (first && useRoute().name === 'dict-jpn' && request) {
-    navigateTo({ name: 'dict-jpn-wid', params: { wid: first.wid }, query: { q: request.value } })
-  }
-}
-
 const hasResult = computed(() => request.value && (srchResult.value?.result?.length ?? 0) > 0)
 const isSearchPage = computed(() => request.value)
 
-watch(request, () => {
-  clear()
-  refresh()
+watch(watchParam, async () => {
+  console.log('watchParam', request.value)
+  srchResult.value = await search(request.value, 0, 0)
+  updateEntry()
 })
 watch(data, updateEntry)
 
