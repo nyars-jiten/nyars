@@ -237,7 +237,7 @@ function supButtons() {
       },
       {
         name: '=(( ))',
-        click: ['((', '))'],
+        click: ['=((', '))'],
         title: '',
       },
       {
