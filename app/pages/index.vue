@@ -12,24 +12,11 @@ const { data: edits, refresh, status } = await useLazyAsyncData(
   },
 )
 
-const infoExamples = [
-  // Кол-во примеров:
-  [1, 2], // Поиск по японским словам
-  [1, 2], // Поиск по русским и английским словам
-  [1, 2, 3, 4], // Поиск по транскрипции
-  // [1], // Парсинг форм слова, предложений и текстов
-  // [1, 2], // Поиск по шаблону
-]
-
 const config = useRuntimeConfig()
 
 const { push } = useSearchRequest()
 
-const { t } = useI18n()
-
-function getExample(exampleType: number, exampleIndex: number) {
-  return t(`pages.main.infoExamples.${exampleType}.searchExamples.${exampleIndex}`)
-}
+const { t, tm } = useI18n()
 </script>
 
 <template>
@@ -41,19 +28,19 @@ function getExample(exampleType: number, exampleIndex: number) {
         </div>
 
         <ul class="flex flex-col gap-1">
-          <li v-for="(searchExamples, i) in infoExamples" :key="i">
-            → {{ t(`pages.main.infoExamples.${i + 1}.text`) }}
+          <li v-for="(examples, i) in tm('pages.main.infoExamples') as any[]" :key="i">
+            → {{ examples.text }}
             <span
-              v-for="searchExample in searchExamples"
-              :key="searchExample"
+              v-for="(searchExample, sei) in examples.searchExamples as string[]"
+              :key="sei"
               class="whitespace-nowrap before:text-neutral-200 before:content-['「'] after:text-neutral-200 after:content-['」・'] last:after:content-['」'] dark:before:text-neutral-700 dark:after:text-neutral-700"
             >
               <button
                 type="button"
-                class="underline decoration-dotted underline-offset-4 hover:text-neutral-500"
-                @click="push(getExample(i + 1, searchExample))"
+                class="underline cursor-pointer decoration-dotted underline-offset-4 hover:text-neutral-500"
+                @click="push(searchExample)"
               >
-                {{ getExample(i + 1, searchExample) }}
+                {{ searchExample }}
               </button>
             </span>
           </li>
