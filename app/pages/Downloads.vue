@@ -17,60 +17,26 @@ const computeSize = function (size: number) {
   return `${size.toFixed(2)} ${units[unit]}`
 }
 
+const { t, tm } = useI18n()
+
 const dlData = [
   {
     type: 'json',
     title: 'JSON',
-    msg: 'Исходные данные в формате JSON',
     icon: 'json.png',
     data: downloads.value?.find(dl => dl.type === 'json'),
   },
   {
     type: 'dsl',
     title: 'DSL',
-    msg: 'Для программ Lingvo и GoldenDict',
     icon: 'lingvo.png',
     data: downloads.value?.find(dl => dl.type === 'dsl'),
   },
   {
     type: 'yomitan',
     title: 'Yomitan',
-    msg: 'Для браузерного плагина Yomitan',
     icon: 'yomitan.png',
     data: downloads.value?.find(dl => dl.type === 'yomitan'),
-  },
-]
-
-const faqData = [
-  {
-    id: 1,
-    question: 'В каком формате выгружены данные?',
-    answer: 'JSON',
-  },
-  {
-    id: 2,
-    question: 'Какие данные выгружаются?',
-    answer: 'JSON',
-  },
-  {
-    id: 3,
-    question: 'Какие данные выгружаются?',
-    answer: 'JSON',
-  },
-  {
-    id: 4,
-    question: 'Какие данные выгружаются?',
-    answer: 'JSON',
-  },
-  {
-    id: 5,
-    question: 'Какие данные выгружаются?',
-    answer: 'JSON',
-  },
-  {
-    id: 6,
-    question: 'Какие данные выгружаются?',
-    answer: 'JSON',
   },
 ]
 </script>
@@ -80,11 +46,11 @@ const faqData = [
     <section class="space-y-4">
       <div class="text-center leading-16">
         <h1>
-          Скачать
+          {{ t('pages.downloads.title') }}
         </h1>
 
         <p>
-          Выгружено 20 статей
+          {{ t('pages.downloads.count', dlData.find(x => x.data?.type === 'json')?.data?.count ?? 0) }}
         </p>
       </div>
 
@@ -105,7 +71,7 @@ const faqData = [
               </div>
 
               <small class="text-neutral-300">
-                Обновлено {{ useTime(dl.data.createdAt) }}
+                {{ t('pages.downloads.updated', [useTime(dl.data.createdAt).value]) }}
               </small>
             </span>
           </a>
@@ -116,7 +82,7 @@ const faqData = [
             </h2>
 
             <p>
-              {{ dl.msg }}
+              {{ t(`pages.downloads.dictionary.${dl.type}`) }}
             </p>
           </div>
         </template>
@@ -126,18 +92,18 @@ const faqData = [
     <section class="space-y-4">
       <div class="text-center leading-16">
         <h1>
-          faq
+          {{ t('pages.downloads.faq') }}
         </h1>
       </div>
 
       <ul class="space-y-4">
-        <li v-for="faq in faqData" :key="faq.id" class="last:border-0 last:pb-0 border-neutral-800 border-b pb-4">
+        <li v-for="(faq, fi) in tm('pages.downloads.faqList') as any" :key="fi" class="last:border-0 last:pb-0 border-neutral-800 border-b pb-4">
           <h2 class="text-2xl">
-            {{ faq.question }}
+            {{ faq.q }}
           </h2>
 
           <p>
-            {{ faq.answer }}
+            {{ faq.a }}
           </p>
         </li>
       </ul>
