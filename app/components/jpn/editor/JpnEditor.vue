@@ -323,7 +323,7 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
     <div class="flex h-full flex-col gap-4">
       <div v-if="!user" class="text-amber-300 flex gap-2">
         <Icon name="ic:baseline-warning-amber" size="1.5rem" />
-        Вы не вошли в аккаунт. Правка будет создана анонимно.
+        {{ t('pages.editor.anonymous') }}
       </div>
       <section class="flex items-start justify-between gap-4 max-sm:flex-col bg-neutral-900/95">
         <div class="inline-flex flex-wrap gap-x-8 gap-y-2">

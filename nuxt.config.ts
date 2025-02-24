@@ -68,7 +68,6 @@ export default defineNuxtConfig({
   },
   i18n: {
     vueI18n: './locale/i18n.config.ts',
-    langDir: './locale/lang',
     strategy: 'no_prefix',
   },
   googleFonts: {

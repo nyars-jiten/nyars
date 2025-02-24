@@ -6,20 +6,27 @@ const { t } = useI18n()
 
 const { search } = useSearchRepo()
 
-const { data, clear, refresh, status } = useAsyncData(`search-request-${request.value}`, () => search(request.value, 0, 0), {
-  default: () => ({ result: [], request: '' }),
+const { data, clear, refresh, status } = await useAsyncData(`search-request-${request.value}`, () => search(request.value, 0, 0), {
   dedupe: 'defer',
-  // watch: [request],
 })
 
+const srchResult = ref<JpnSearchResponse>()
+srchResult.value = data.value
+
+const inlineSearch = async function (req: string) {
+  const inlineSearchResult = await search(req, 0, 0)
+  srchResult.value = { ...inlineSearchResult, parsed: data.value?.parsed ?? [] }
+  updateEntry()
+}
+
 const updateEntry = function () {
-  const first = data.value?.result[0]
+  const first = srchResult.value?.result[0]
   if (first && useRoute().name === 'dict-jpn' && request) {
     navigateTo({ name: 'dict-jpn-wid', params: { wid: first.wid }, query: { q: request.value } })
   }
 }
 
-const hasResult = computed(() => request.value && (data.value?.result?.length ?? 0) > 0)
+const hasResult = computed(() => request.value && (srchResult.value?.result?.length ?? 0) > 0)
 const isSearchPage = computed(() => request.value)
 
 watch(request, () => {
@@ -34,14 +41,24 @@ onMounted(updateEntry)
 <template>
   <div>
     <NuxtLayout name="default">
+      <div class="text-center">
+        <div class="text-xl">
+          <span v-for="(token, ti) in data?.parsed" :key="ti" class="border-b-2 pb-0.5 ml-2 cursor-pointer" @click="inlineSearch(token.surface)">
+            <span v-for="(furigana, fi) in token.furigana" :key="`${ti}.${fi}`">
+              <ruby>{{ furigana.word }}</ruby>
+              <!-- <rt class="select-none">{{ furigana.kana }}</rt> -->
+            </span>
+          </span>
+        </div>
+      </div>
       <div class="grid grow items-start gap-8" :class="{ 'md:grid-cols-[1fr_2fr]': isSearchPage }">
         <template v-if="isSearchPage">
           <div v-if="hasResult" class="space-y-4">
-            <SearchResult v-for="result of data?.result" :key="result.wid" :article="result" />
+            <SearchResult v-for="result of srchResult?.result" :key="result.wid" :article="result" />
           </div>
           <div v-else-if="status === 'success'">
             <div class="text-center">
-              <span>{{ t('pages.search.foundNothing', [data?.request]) }}</span>
+              <span>{{ t('pages.search.foundNothing', [srchResult?.request]) }}</span>
             </div>
           </div>
           <div v-else-if="status === 'pending'" class="flex space-x-2 content-center">
