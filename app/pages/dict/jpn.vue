@@ -28,11 +28,12 @@ const _inlineSearch = async function (req: string) {
 }
 
 const hasResult = computed(() => request.value && (srchResult.value?.result?.length ?? 0) > 0)
-const isSearchPage = computed(() => request.value)
+const isSearchPage = computed(() => useRoute().query.q)
 
 watch(watchParam, async () => {
-  console.log('watchParam', request.value)
+  status.value = 'pending'
   srchResult.value = await search(request.value, 0, 0)
+  status.value = 'success'
   updateEntry()
 })
 watch(data, updateEntry)
@@ -56,7 +57,7 @@ onMounted(updateEntry)
       </div> -->
       <div class="grid grow items-start gap-8" :class="{ 'md:grid-cols-[1fr_2fr]': isSearchPage }">
         <template v-if="isSearchPage">
-          <div v-if="hasResult" class="space-y-4">
+          <div v-if="hasResult && status === 'success'" class="space-y-4">
             <SearchResult v-for="result of srchResult?.result" :key="result.wid" :article="result" />
           </div>
           <div v-else-if="status === 'success'">
