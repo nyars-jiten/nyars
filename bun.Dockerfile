@@ -13,11 +13,15 @@ RUN cd /temp/dev && bun install --frozen-lockfile
 # copy node_modules from temp directory
 # then copy all (non-ignored) project files into the image
 FROM base AS prerelease
+
+# https://github.com/oven-sh/bun/issues/16915#issuecomment-2625160196
+RUN apk add --no-cache libc6-compat make g++ python3
+
 COPY --from=install /temp/dev/node_modules node_modules
 COPY . .
 
 ENV NODE_ENV=production
-RUN bun --bun run build
+RUN bun run build
 
 # copy production dependencies and source code into final image
 FROM base AS release
