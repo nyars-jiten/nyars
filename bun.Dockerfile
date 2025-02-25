@@ -19,6 +19,7 @@ RUN apk add --no-cache libc6-compat make g++ python3
 
 COPY --from=install /temp/dev/node_modules node_modules
 COPY . .
+RUN cp example.env .env
 
 ENV NODE_ENV=production
 RUN bun run build
