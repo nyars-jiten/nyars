@@ -21,7 +21,7 @@ const updateEntry = function () {
   }
 }
 
-const inlineSearch = async function (req: string) {
+const _inlineSearch = async function (req: string) {
   const inlineSearchResult = await search(req, 0, 0)
   srchResult.value = { ...inlineSearchResult, parsed: data.value?.parsed ?? [] }
   updateEntry()
@@ -43,16 +43,17 @@ onMounted(updateEntry)
 <template>
   <div>
     <NuxtLayout name="default">
-      <div class="text-center">
+      <!-- <div class="text-center">
+        {{ data?.parsed }}
         <div class="text-xl">
           <span v-for="(token, ti) in data?.parsed" :key="ti" class="border-b-2 pb-0.5 ml-2 cursor-pointer" @click="inlineSearch(token.surface)">
             <span v-for="(furigana, fi) in token.furigana" :key="`${ti}.${fi}`">
               <ruby>{{ furigana.word }}</ruby>
-              <!-- <rt class="select-none">{{ furigana.kana }}</rt> -->
+              <rt class="select-none">{{ furigana.kana }}</rt>
             </span>
           </span>
         </div>
-      </div>
+      </div> -->
       <div class="grid grow items-start gap-8" :class="{ 'md:grid-cols-[1fr_2fr]': isSearchPage }">
         <template v-if="isSearchPage">
           <div v-if="hasResult" class="space-y-4">
