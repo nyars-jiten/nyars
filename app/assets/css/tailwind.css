@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --color-discord: #8c9eff;  
+}
+
+@layer base {
+  :root {
+    /* --neutral-300: rgb(212 212 216); */
+    /* --neutral-700: rgb(63 63 70); */
+    /* --neutral-800: rgb(39 39 42); */
+
+    --default-font-family: "Exo 2", "Noto Sans JP";
+    /* --default-font-family: "Arial"; */
+  }
+
+  h1 {
+    @apply text-6xl font-extralight uppercase
+  }
+  
+  html.dark ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: var(--color-neutral-800);
+  }
+  
+  html.dark ::-webkit-scrollbar {
+    width: 12px;
+    background-color: var(--color-neutral-800);
+  }
+  
+  html.dark ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: var(--color-neutral-700);
+  }
+  
+  html.dark ::-webkit-scrollbar-thumb:hover {
+    border-radius: 10px;
+    background-color: #39393F;
+  }
+  
+  html.light ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: white;
+  }
+  
+  html.light ::-webkit-scrollbar {
+    width: 12px;
+    background-color: white;
+  }
+  
+  html.light ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #C1C1C1;
+  }
+  
+  html.light ::-webkit-scrollbar-thumb:hover {
+    border-radius: 10px;
+    background-color: #A8A8A8;
+  }
+  
+  html.light ::-webkit-scrollbar-corner {
+    background-color: white;
+  }
+  
+  html.dark ::-webkit-scrollbar-corner {
+    background-color: var(--neutral-800);
+  }
+  
+  ::selection {
+    background: #6aa3ab;
+    color: white;
+  }
+}
+
+@layer components {
+  .btn-generic {
+    @apply inline-flex items-center gap-2 whitespace-nowrap rounded border border-neutral-300 bg-white px-2 py-1 text-xs font-medium uppercase shadow hover:bg-neutral-300 focus:outline-none dark:border-neutral-600 dark:bg-neutral-700 hover:dark:bg-neutral-600;
+  }
+}

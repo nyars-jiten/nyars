@@ -2,7 +2,7 @@ import { env } from 'node:process'
 import antfu from '@antfu/eslint-config'
 import withNuxt from './.nuxt/eslint.config.mjs'
 
-export default withNuxt(antfu({
+export default withNuxt(await antfu({
   rules: {
     // The code problem checked by this ESLint rule is automatically checked by the TypeScript compiler.
     // Thus, it is not recommended to turn on this rule in new TypeScript projects.

@@ -1,7 +1,7 @@
 <h1 align="center">NYARS THE DICTIONARY</h1>
 
 <div align="center">
-  <img src="./assets/img/under-construction-1000.png" width="500">
+  <img src="./app/assets/img/under-construction-1000.png" width="500">
 </div>
 
 <p>
