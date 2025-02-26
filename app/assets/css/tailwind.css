@@ -4,6 +4,8 @@
   --color-discord: #8c9eff;  
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :root {
     /* --neutral-300: rgb(212 212 216); */
