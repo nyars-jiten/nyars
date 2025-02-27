@@ -38,6 +38,12 @@ const dlData = [
     icon: 'yomitan.png',
     data: downloads.value?.find(dl => dl.type === 'yomitan'),
   },
+  {
+    type: 'yomichan-legacy',
+    title: 'Yomichan Legacy',
+    icon: 'yomichan-legacy.png',
+    data: downloads.value?.find(dl => dl.type === 'yomichan-legacy'),
+  },
 ]
 </script>
 
