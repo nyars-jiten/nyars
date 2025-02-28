@@ -6,7 +6,7 @@ export function useJpnRepo() {
     const path = '/jp'
 
     const get = (wid: EntryJp['wid']) =>
-      fetch<EntryJp /* | ApiError */>(`${path}/entries/${wid}`, { method: 'GET' })
+      fetch<EntryJp>(`${path}/entries/${wid}`, { method: 'GET' })
 
     const edit = (wid: EntryJp['wid'], body: EditorTxtEntryJp) =>
       fetch<ApiError>(`${path}/entries/${wid}`, { method: 'POST', body })
@@ -15,10 +15,10 @@ export function useJpnRepo() {
       fetch<ApiError>(`${path}/entries/${wid}`, { method: 'DELETE', body })
 
     const source = (wid: EntryJp['wid']) =>
-      fetch<EditorTxtEntryJp /* | ApiError */>(`${path}/entries/${wid}/txt`, { method: 'GET' })
+      fetch<EditorTxtEntryJp>(`${path}/entries/${wid}/txt`, { method: 'GET' })
 
     const preview = (body: EditorTxtEntryJp) =>
-      fetch<EditorEntryJp /* | ApiError */>(`${path}/txt-to-entry`, { method: 'POST', body })
+      fetch<EditorEntryJp>(`${path}/txt-to-entry`, { method: 'POST', body })
 
     const create = (body: EditorTxtEntryJp) =>
       fetch<ApiError>(`${path}/entries`, { method: 'POST', body })
@@ -32,6 +32,9 @@ export function useJpnRepo() {
     const getDownloads = () =>
       fetch<Download[]>(`${path}/downloads`, { method: 'GET' })
 
-    return { get, edit, remove, source, preview, create, tagList, checkDuplicates, getDownloads }
+    const getSatellites = (wid: string) =>
+      fetch<EntryJpSatellite[]>(`${path}/entries/${wid}/satellites`, { method: 'GET' })
+
+    return { get, edit, remove, source, preview, create, tagList, checkDuplicates, getDownloads, getSatellites }
   })
 }

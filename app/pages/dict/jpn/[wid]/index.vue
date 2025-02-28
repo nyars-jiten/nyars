@@ -85,6 +85,8 @@ useHead({ title: jpnEntry.value?.title })
       <UiBlock :class="{ 'opacity-40': jpnEntry.status.isDeleted }">
         <JpnEntry :jpn-entry="jpnEntry" :show-lemmas="showLemmas" />
       </UiBlock>
+
+      <SatelliteEntry :wid="wid" />
     </template>
     <UiBlock v-else-if="status === 'pending'">
       <span>{{ t('pages.jpnEntry.entryIsLoading') }}</span>
