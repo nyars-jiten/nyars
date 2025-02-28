@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 const { data } = storeToRefs(useSuggestionsStore())
-const { push } = useSearchRequest()
+const { push } = useSearchStore()
 
 function escapeVal(value: string) {
   return `"${value}"`

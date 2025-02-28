@@ -7,6 +7,14 @@ export const useSearchStore = defineStore('searchStore', () => {
 
   const suggestionsCache = ref<Map<string, string[]>>(new Map().set('', []))
 
+  const watchParam = ref(searchQuery.value + Date.now())
+
+  function push(value?: string) {
+    searchQuery.value = value ?? searchQuery.value
+    watchParam.value = searchQuery.value + Date.now()
+    return navigateTo({ name: 'dict-jpn', query: { q: searchQuery.value } })
+  }
+
   const setSuggestions = async (searchQuery: string) => {
     if (suggestionsCache.value.size > 1_000) {
       suggestionsCache.value.clear()
@@ -54,5 +62,5 @@ export const useSearchStore = defineStore('searchStore', () => {
     currentSuggestion.value++
   }
 
-  return { mode, searchQuery, currentSuggestion, setCurrentSuggestion, suggestionsCache, getSuggestions, setSuggestions }
+  return { mode, push, watchParam, searchQuery, currentSuggestion, setCurrentSuggestion, suggestionsCache, getSuggestions, setSuggestions }
 })

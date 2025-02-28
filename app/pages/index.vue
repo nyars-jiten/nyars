@@ -14,7 +14,7 @@ const { data: edits, refresh, status } = await useLazyAsyncData(
 
 const config = useRuntimeConfig()
 
-const { push } = useSearchRequest()
+const { push } = useSearchStore()
 
 // {
 //   "text": "Неотредактированные статьи частотностью до 20к в случайном порядке: ",

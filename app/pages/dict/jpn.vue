@@ -1,23 +1,29 @@
 <script setup lang="ts">
-// const route = useRoute()
+const route = useRoute()
 // const request = computed(() => String(route.query.q ?? ''))
 
 const { t } = useI18n()
 
 const { search } = useSearchRepo()
-const { request, watchParam } = useSearchRequest()
+const { searchQuery, watchParam } = storeToRefs(useSearchStore())
 
-const { data, status } = await useAsyncData(`search-request-${request.value}`, () => search(request.value, 0, 0), {
+// there's no state on SSR
+if (searchQuery.value === '') {
+  searchQuery.value = String(route.query.q ?? '')
+}
+
+const { data, status } = await useAsyncData(`search-request-${searchQuery.value}`, () => search(searchQuery.value, 0, 0), {
   dedupe: 'defer',
 })
 
-const srchResult = ref<JpnSearchResponse>()
-srchResult.value = data.value
+// const srchResult = ref<JpnSearchResponse>()
+// srchResult.value = data.value
+const srchResult = data
 
 const updateEntry = function () {
   const first = srchResult.value?.result[0]
-  if (first && useRoute().name === 'dict-jpn' && request) {
-    navigateTo({ name: 'dict-jpn-wid', params: { wid: first.wid }, query: { q: request.value } }, { replace: true })
+  if (first && route.name === 'dict-jpn' && searchQuery) {
+    navigateTo({ name: 'dict-jpn-wid', params: { wid: first.wid }, query: { q: searchQuery.value } }, { replace: true })
   }
 }
 
@@ -27,12 +33,12 @@ const _inlineSearch = async function (req: string) {
   updateEntry()
 }
 
-const hasResult = computed(() => request.value && (srchResult.value?.result?.length ?? 0) > 0)
-const isSearchPage = computed(() => useRoute().query.q)
+const hasResult = computed(() => searchQuery.value && (srchResult.value?.result?.length ?? 0) > 0)
+const isSearchPage = computed(() => route.query.q)
 
 watch(watchParam, async () => {
   status.value = 'pending'
-  srchResult.value = await search(request.value, 0, 0)
+  srchResult.value = await search(searchQuery.value, 0, 0)
   status.value = 'success'
   updateEntry()
 })

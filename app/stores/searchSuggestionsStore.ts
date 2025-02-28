@@ -1,17 +1,17 @@
 export const useSuggestionsStore = defineStore('suggestions', () => {
-  const { request } = useSearchRequest()
+  const { searchQuery } = storeToRefs(useSearchStore())
 
   const { getSuggestions } = useSearchRepo()
 
   const state = useLazyAsyncData(
     'suggestions',
-    () => getSuggestions(request.value),
+    () => getSuggestions(searchQuery.value),
     {
       default: (): string[] => [],
     },
   )
 
-  watchDebounced(request, () => {
+  watchDebounced(searchQuery, () => {
     return state.refresh()
   }, { debounce: 500 })
 

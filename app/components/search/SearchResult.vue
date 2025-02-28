@@ -32,7 +32,7 @@ const shortenedSenses = computed(() => {
 
 // const route = useRoute()
 
-const { request } = useSearchRequest()
+const { searchQuery } = useSearchStore()
 
 const { t } = useI18n()
 
@@ -45,7 +45,7 @@ const active = computed(() => articleWid.value === props.article.wid)
 
 <template>
   <NuxtLink
-    :to="{ name: 'dict-jpn-wid', params: { wid: `${article.wid}-${article.title}` }, query: { q: request } }"
+    :to="{ name: 'dict-jpn-wid', params: { wid: `${article.wid}-${article.title}` }, query: { q: searchQuery } }"
     class="w-full"
     :class="{ 'cursor-default': active, 'opacity-40': article.status.isDeleted }"
   >

@@ -6,7 +6,7 @@ const hw = ref<Handwriting>(new Null())
 const proposals = ref<string[]>([])
 
 const { refresh } = useSuggestionsStore()
-const { request } = useSearchRequest()
+const { searchQuery } = storeToRefs(useSearchStore())
 
 const update = useDebounceFn(async () => {
   const response = await hw.value.getProposals()
@@ -19,7 +19,7 @@ function clear() {
 }
 
 async function onSelect(q: string) {
-  request.value += q
+  searchQuery.value += q
   clear()
   await refresh()
 }
