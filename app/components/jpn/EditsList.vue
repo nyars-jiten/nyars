@@ -10,7 +10,7 @@ const { t } = useI18n()
 
 <template>
   <div>
-    <div class="space-y-2" v-if="editsList && editsList.length > 0">
+    <div v-if="editsList && editsList.length > 0">
       <ShortEdit 
         v-for="edit in editsList" 
         :edit 
