@@ -71,7 +71,11 @@
       }
     },
     "uiKit": {
-      "textLoading": "Идёт поиск"
+      "textLoading": "Идёт поиск",
+      "tabs": {
+        "edits": "Правки",
+        "satellites": "Сателлиты"
+      }
     }
   },
   "pages": {

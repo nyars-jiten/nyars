@@ -86,7 +86,14 @@ useHead({ title: jpnEntry.value?.title })
         <JpnEntry :jpn-entry="jpnEntry" :show-lemmas="showLemmas" />
       </UiBlock>
 
-      <SatelliteEntry :wid="wid" />
+      <UiTabs :tabs="['edits', 'satellites']">
+        <UiTab title="edits">
+          <p>Здесь будут правки</p>
+        </UiTab>
+        <UiTab title="satellites">
+          <SatelliteEntry :wid="wid" />
+        </UiTab>
+      </UiTabs>
     </template>
     <UiBlock v-else-if="status === 'pending'">
       <span>{{ t('pages.jpnEntry.entryIsLoading') }}</span>

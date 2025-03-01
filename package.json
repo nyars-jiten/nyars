@@ -46,6 +46,7 @@
     "nuxt-typed-router": "^3.7.3",
     "pinia": "^3.0.0",
     "typescript": "^5.7.3",
+    "v-lazy-show": "^0.3.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
     "vue-tsc": "^2.2.0"
