@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 const props = defineProps<{ wid: string }>()
 
+const { t } = useI18n()
+
 const { getSatellites } = useJpnRepo()
 
 const { data: satelliteEntries } = useAsyncData(`jpn-satellites-${props.wid}`, () => getSatellites(props.wid))
@@ -34,5 +36,8 @@ const opened = ref([] as string[])
         <span v-else class="whitespace-pre-wrap " v-html="sat.text" />
       </div>
     </div>
+  </div>
+  <div v-else class="italic font-extralight">
+    {{ t('models.satellite.tabNoData') }}
   </div>
 </template>

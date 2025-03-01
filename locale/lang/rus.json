@@ -268,7 +268,11 @@
         "яп-ру (авто)",
         "пример"
       ],
-      "createdDate": "создана"
+      "createdDate": "создана",
+      "tabNoData": "Нет данных..."
+    },
+    "satellite": {
+      "tabNoData": "Нет данных..."
     },
     "jpnEntry": {
       "language": {

@@ -41,6 +41,8 @@ function switchFurigana() {
   }
 }
 
+const rawWid = computed(() => wid.split('-')[0] ?? wid)
+
 // const showData = ref(false)
 useHead({ title: jpnEntry.value?.title })
 </script>
@@ -88,10 +90,10 @@ useHead({ title: jpnEntry.value?.title })
 
       <UiTabs :tabs="['edits', 'satellites']">
         <UiTab title="edits">
-          <p>Здесь будут правки</p>
+          <EditsList :wid="rawWid" />
         </UiTab>
         <UiTab title="satellites">
-          <SatelliteEntry :wid="wid" />
+          <SatelliteEntry :wid="rawWid" />
         </UiTab>
       </UiTabs>
     </template>

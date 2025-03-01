@@ -18,6 +18,12 @@ export function useEditRepo() {
       })
     }
 
+    const getEditsByWid = (wid: string): Promise<EditResponse[]> => {
+      return fetch<EditResponse[]>(path, {
+        params: { wid },
+      })
+    } 
+
     const getEditTxt = (id: string): Promise<EditorTxtEntryJp> => {
       return fetch<EditorTxtEntryJp>(`${path}/${id}/txt`)
     }
@@ -63,6 +69,6 @@ export function useEditRepo() {
       })
     }
 
-    return { get, getEdits, getEditTxt, updateEdit, getEditsEntry, approveEditAsUnreviewed, approveEditAsReviewed, declineEdit }
+    return { get, getEdits, getEditsByWid, getEditTxt, updateEdit, getEditsEntry, approveEditAsUnreviewed, approveEditAsReviewed, declineEdit }
   })
 }
