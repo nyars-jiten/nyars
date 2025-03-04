@@ -10,6 +10,14 @@ const { data: satelliteEntries } = useAsyncData(`jpn-satellites-${props.wid}`, (
 const maxSatelliteSize = 10
 
 const opened = ref([] as string[])
+
+// const getSatBody = function(text: string) {
+//   try {
+//     return JSON.parse(text)
+//   } catch(e) {
+//     strData.value = props.body
+//   }
+// }
 </script>
 
 <template>
@@ -25,15 +33,18 @@ const opened = ref([] as string[])
       <div
         v-for="(sat, si) in satellite.body"
         :key="si"
-        class="py-2 first-line:bg-neutral-700"
+        class="py-2"
       >
-        <template v-if="sat.lines > maxSatelliteSize && !opened.find(x => x === satellite.id + si)">
-          <span class="whitespace-pre-wrap" v-html="sat.text.split('\n').slice(0,maxSatelliteSize).join('\n')" />
-          <div class="text-gray-500 cursor-pointer ml-2 mb-2" @click="opened.push(satellite.id + si)">
+        <!-- first-line:bg-neutral-700 -->
+        <StructuredContent class="whitespace-pre-wrap" :body="sat.text" />
+        <!-- <span class="text-rose-300">{{ sat.text }}</span> -->
+        <!-- <template v-if="sat.lines > maxSatelliteSize && !opened.find(x => x === satellite.id + si)">
+          <span class="whitespace-pre-wrap" v-html="sat.text.split('\n').slice(0,maxSatelliteSize).join('\n')" /> -->
+        <!-- <div class="text-gray-500 cursor-pointer ml-2 mb-2" @click="opened.push(satellite.id + si)">
             Раскрыть...
-          </div>
-        </template>
-        <span v-else class="whitespace-pre-wrap " v-html="sat.text" />
+          </div> -->
+        <!-- </template>
+        <span v-else class="whitespace-pre-wrap " v-html="sat.text" /> -->
       </div>
     </div>
   </div>
