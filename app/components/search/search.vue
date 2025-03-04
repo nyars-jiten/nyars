@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 const { t } = useI18n()
-
 const { searchQuery } = storeToRefs(useSearchStore())
+const { suggestions } = storeToRefs(useSuggestionsStore())
+const { addToHistory } = useSuggestionsStore()
 const { push } = useSearchStore()
 const [state, toggle] = useToggle()
 
@@ -26,11 +27,13 @@ onClickOutside(panel, () => {
         spellcheck="false"
         autocomplete="off"
         @click="($event.target as HTMLInputElement).select()"
-        @keydown.enter.prevent="push()"
+        @keydown.enter.prevent="push(); addToHistory(searchQuery)"
       >
       <!-- <Icon name="ic:baseline-search" size="1.5rem" /> -->
 
-      <SearchSuggestions class="invisible group-focus-within:visible" />
+      <ClientOnly>
+        <SearchSuggestions class="invisible group-focus-within:visible" />
+      </ClientOnly>
 
       <DrawingPanel v-if="state" ref="panelRef" class="absolute left-0 top-full z-10 mt-4" />
     </section>

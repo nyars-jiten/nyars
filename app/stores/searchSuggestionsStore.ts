@@ -1,19 +1,35 @@
+import { useStorage } from '@vueuse/core'
+
 export const useSuggestionsStore = defineStore('suggestions', () => {
   const { searchQuery } = storeToRefs(useSearchStore())
 
   const { getSuggestions } = useSearchRepo()
 
-  const state = useLazyAsyncData(
-    'suggestions',
-    () => getSuggestions(searchQuery.value),
-    {
-      default: (): string[] => [],
-    },
-  )
+  const history = useStorage('searchHistory', [] as string[])
+
+  const addToHistory = (value: string) => {
+    history.value = [value, ...history.value]
+    if (history.value.length > 10) {
+      history.value = history.value.slice(0, 10)
+    }
+  }
+
+  const suggestionsCache = ref(history.value)
+
+  const refresh = async () => {
+    suggestionsCache.value = await getSuggestions(searchQuery.value)
+  }
+
+  const suggestions = computed<string[]>(() => {
+    if (searchQuery.value.length < 1) {
+      return history.value
+    }
+    return suggestionsCache.value
+  })
 
   watchDebounced(searchQuery, () => {
-    return state.refresh()
-  }, { debounce: 500 })
+    return refresh()
+  }, { debounce: 250 })
 
-  return state
+  return { suggestions, refresh, addToHistory }
 })

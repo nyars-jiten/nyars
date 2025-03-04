@@ -33,7 +33,7 @@ async function _inlineSearch(req: string) {
   updateEntry()
 }
 
-const hasResult = computed(() => searchQuery.value && (srchResult.value?.result?.length ?? 0) > 0)
+const hasResult = computed(() => (searchQuery.value || route.query.q) && (srchResult.value?.result?.length ?? 0) > 0)
 const isSearchPage = computed(() => route.query.q)
 
 watch(watchParam, async () => {
