@@ -12,7 +12,6 @@ const disabled = computed(() => {
 
 definePageMeta({
   layout: false,
-  pageTransition: false,
 })
 </script>
 

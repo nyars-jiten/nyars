@@ -20,14 +20,14 @@ const { data, status } = await useAsyncData(`search-request-${searchQuery.value}
 // srchResult.value = data.value
 const srchResult = data
 
-const updateEntry = function () {
+function updateEntry() {
   const first = srchResult.value?.result[0]
   if (first && route.name === 'dict-jpn' && searchQuery) {
     navigateTo({ name: 'dict-jpn-wid', params: { wid: first.wid }, query: { q: searchQuery.value } }, { replace: true })
   }
 }
 
-const _inlineSearch = async function (req: string) {
+async function _inlineSearch(req: string) {
   const inlineSearchResult = await search(req, 0, 0)
   srchResult.value = { ...inlineSearchResult, parsed: data.value?.parsed ?? [] }
   updateEntry()
@@ -48,7 +48,7 @@ onMounted(updateEntry)
 </script>
 
 <template>
-  <div>
+  <div id="jpn-search-layout">
     <NuxtLayout name="default">
       <!-- <div class="text-center">
         {{ data?.parsed }}
