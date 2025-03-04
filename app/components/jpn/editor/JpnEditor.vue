@@ -42,13 +42,13 @@ entry.value.body = props.entry.body
 
 const showConfimationWindow = ref('')
 
-const callPreview = async function () {
+async function callPreview() {
   return await api.preview(entry.value)
 }
 
 const preview = ref(await callPreview())
 
-const callCheckDuplicates = async function () {
+async function callCheckDuplicates() {
   return (await api.checkDuplicates(entry.value)).filter(x => x.wid !== props.wid)
 }
 
@@ -80,12 +80,14 @@ async function save() {
   }
 
   notificationStore.createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
+  navigateTo('/')
 }
 
 async function remove() {
   // body is still required, so we can save meta data
   await api.remove(`${props.wid}`, entry.value)
   notificationStore.createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
+  navigateTo('/')
 }
 
 const spellingRef = useTemplateRef('spellingRef')

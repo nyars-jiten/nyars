@@ -24,7 +24,7 @@ const emptyIsUnconfirmed = { isUnconfirmed: true } as EntryStatus
         <div>
           {{ t(`pages.editor.confirmation.comment.${type}`) }}
         </div>
-        <UiInput ref="spellingRef" v-model="entry.comment" class="mt-2" :multiline="true">
+        <UiInput v-model="entry.comment" class="mt-2" :multiline="true">
           <!-- <template #hint>
             Обоснование
           </template> -->
