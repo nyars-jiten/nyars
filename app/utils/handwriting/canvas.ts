@@ -159,7 +159,7 @@ export class Canvas implements Handwriting {
     let clientY = 0
 
     // Determine the correct coordinates based on the event type
-    if (e instanceof TouchEvent) {
+    if (window.TouchEvent && e instanceof TouchEvent) {
       const touch = e.touches[0] || e.changedTouches[0]
       if (!touch) {
         return
@@ -168,7 +168,7 @@ export class Canvas implements Handwriting {
       clientX = touch.clientX
       clientY = touch.clientY
     }
-    else {
+    else if (e instanceof MouseEvent) {
       clientX = e.clientX
       clientY = e.clientY
     }
