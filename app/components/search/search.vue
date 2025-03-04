@@ -25,6 +25,7 @@ onClickOutside(panel, () => {
         class="w-full bg-transparent placeholder:text-center focus:outline-none"
         spellcheck="false"
         autocomplete="off"
+        @click="($event.target as HTMLInputElement).select()"
         @keydown.enter.prevent="push()"
       >
       <!-- <Icon name="ic:baseline-search" size="1.5rem" /> -->
