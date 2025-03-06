@@ -37,7 +37,8 @@ function copy() {
 
 function switchFurigana() {
   if (jpnEntry.value) {
-    jpnEntry.value.preferFurigana = !jpnEntry.value?.preferFurigana
+    // force reactivity
+    jpnEntry.value = { ...jpnEntry.value, preferFurigana: !jpnEntry.value.preferFurigana }
   }
 }
 
