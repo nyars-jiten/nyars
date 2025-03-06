@@ -61,7 +61,7 @@ onMounted(updateEntry)
           </span>
         </div>
       </div> -->
-      <div class="grid grow items-start gap-8" :class="{ 'md:grid-cols-[1fr_2fr]': isSearchPage }">
+      <div v-if="isSearchPage" class="grid grow items-start gap-8 md:grid-cols-[1fr_2fr]">
         <template v-if="isSearchPage">
           <div v-if="hasResult && status === 'success'" class="space-y-4">
             <SearchResult v-for="result of srchResult?.result" :key="result.wid" :article="result" />
@@ -81,6 +81,7 @@ onMounted(updateEntry)
         </template>
         <NuxtPage />
       </div>
+      <NuxtPage v-else />
     </NuxtLayout>
   </div>
 </template>

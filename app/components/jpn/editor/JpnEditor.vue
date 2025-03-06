@@ -315,7 +315,7 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
       @send="save()"
       @delete="remove()"
     />
-    <section v-else class="grid xl:grid-cols-[2fr_1fr] gap-8 xl:h-full  overflow-hidden p-1">
+    <section v-else class="grid grow xl:grid-cols-[2fr_1fr] gap-8 xl:h-full overflow-hidden p-1">
       <EditorGuide v-if="stateEditorHelp" class="md:hidden" @click-insert="(text) => insert(text[0], text[1])" />
       <TagSearch v-if="stateTagSearch" class="md:hidden" @click-insert="(text) => insert(text[0], text[1])" />
 
