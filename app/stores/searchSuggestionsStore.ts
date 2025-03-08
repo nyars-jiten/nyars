@@ -6,6 +6,7 @@ export const useSuggestionsStore = defineStore('suggestions', () => {
   const { getSuggestions } = useSearchRepo()
 
   const history = useStorage('searchHistory', [] as string[])
+  const listType = ref(0)
 
   const addToHistory = (value: string) => {
     history.value = [value, ...history.value]
@@ -22,8 +23,10 @@ export const useSuggestionsStore = defineStore('suggestions', () => {
 
   const suggestions = computed<string[]>(() => {
     if (searchQuery.value.length < 1) {
+      listType.value = 0
       return history.value
     }
+    listType.value = 1
     return suggestionsCache.value
   })
 
@@ -31,5 +34,5 @@ export const useSuggestionsStore = defineStore('suggestions', () => {
     return refresh()
   }, { debounce: 250 })
 
-  return { suggestions, refresh, addToHistory }
+  return { suggestions, refresh, addToHistory, listType }
 })
