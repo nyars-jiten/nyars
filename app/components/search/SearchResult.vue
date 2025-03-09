@@ -32,7 +32,7 @@ const shortenedSenses = computed(() => {
 
 // const route = useRoute()
 
-const { request } = useSearchRequest()
+const { searchQuery } = useSearchStore()
 
 const { t } = useI18n()
 
@@ -45,7 +45,7 @@ const active = computed(() => articleWid.value === props.article.wid)
 
 <template>
   <NuxtLink
-    :to="{ name: 'dict-jpn-wid', params: { wid: `${article.wid}-${article.title}` }, query: { q: request } }"
+    :to="{ name: 'dict-jpn-wid', params: { wid: `${article.wid}-${article.title}` }, query: { q: searchQuery } }"
     class="w-full"
     :class="{ 'cursor-default': active, 'opacity-40': article.status.isDeleted }"
   >
@@ -72,17 +72,18 @@ const active = computed(() => articleWid.value === props.article.wid)
               </span>
 
               <span>
-                <small v-for="(tag, i) of sense.fieldTags" :key="i" class="italic text-green-600">
-                  <span class="group relative after:content-[\',\'] last:after:content-none">
-                    {{ tag.rusShort }}
+                <span v-if="sense.fieldTags.length > 0">
+                  <span v-for="(tag, i) of sense.fieldTags" :key="i" class="r-1 cursor-help group relative">
+                    <span class="italic text-green-600 text-sm">
+                      <template v-if="i > 0">,&nbsp;</template>{{ tag.rusShort }}
+                    </span>
 
-                    <div class="invisible absolute bottom-full left-1/2 z-20 -translate-x-1/2 pb-1 group-hover:visible">
-                      <div class="flex items-center justify-center rounded-md bg-neutral-800/80 px-3 py-1.5 leading-4 shadow-md outline-1 outline-neutral-700 backdrop-blur-md">
-                        {{ tag.rus }}
-                      </div>
-                    </div>
+                    <UiTooltip>
+                      {{ tag.rus }}
+                    </UiTooltip>
                   </span>
-                </small>
+                  <span>&nbsp;</span>
+                </span>
 
                 <Content :data="sense.content" :break-line="false" />
               </span>

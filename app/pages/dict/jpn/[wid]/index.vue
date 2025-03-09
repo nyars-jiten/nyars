@@ -37,9 +37,12 @@ function copy() {
 
 function switchFurigana() {
   if (jpnEntry.value) {
-    jpnEntry.value.preferFurigana = !jpnEntry.value?.preferFurigana
+    // force reactivity
+    jpnEntry.value = { ...jpnEntry.value, preferFurigana: !jpnEntry.value.preferFurigana }
   }
 }
+
+const rawWid = computed(() => wid.split('-')[0] ?? wid)
 
 // const showData = ref(false)
 useHead({ title: jpnEntry.value?.title })
@@ -85,6 +88,15 @@ useHead({ title: jpnEntry.value?.title })
       <UiBlock :class="{ 'opacity-40': jpnEntry.status.isDeleted }">
         <JpnEntry :jpn-entry="jpnEntry" :show-lemmas="showLemmas" />
       </UiBlock>
+
+      <UiTabs :tabs="['edits', 'satellites']">
+        <UiTab title="edits">
+          <EditsList :wid="rawWid" />
+        </UiTab>
+        <UiTab title="satellites">
+          <SatelliteEntry :wid="rawWid" />
+        </UiTab>
+      </UiTabs>
     </template>
     <UiBlock v-else-if="status === 'pending'">
       <span>{{ t('pages.jpnEntry.entryIsLoading') }}</span>

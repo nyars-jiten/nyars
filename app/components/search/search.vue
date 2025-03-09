@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 const { t } = useI18n()
-
-const { request, push } = useSearchRequest()
+const { searchQuery } = storeToRefs(useSearchStore())
+const { suggestions } = storeToRefs(useSuggestionsStore())
+const { addToHistory } = useSuggestionsStore()
+const { push } = useSearchStore()
 const [state, toggle] = useToggle()
 
 const panel = useTemplateRef('panelRef')
@@ -18,17 +20,20 @@ onClickOutside(panel, () => {
 
     <section class="group relative inline-flex grow flex-row gap-2 rounded-md bg-zinc-800 p-2 leading-none text-zinc-500 shadow-md outline-1 outline-zinc-700 transition-colors focus-within:outline-none hover:bg-zinc-700 hover:text-zinc-300 hover:outline-transparent">
       <input
-        v-model="request"
+        v-model="searchQuery"
         type="text"
         :placeholder="t('components.searchGroup.searchInput.placeholder.words')"
-        class="w-full bg-transparent text-center focus:outline-none"
+        class="w-full bg-transparent placeholder:text-center focus:outline-none"
         spellcheck="false"
         autocomplete="off"
-        @keydown.enter.prevent="push()"
+        @click="($event.target as HTMLInputElement).select()"
+        @keydown.enter.prevent="push(); addToHistory(searchQuery)"
       >
       <!-- <Icon name="ic:baseline-search" size="1.5rem" /> -->
 
-      <SearchSuggestions class="invisible group-focus-within:visible" />
+      <ClientOnly>
+        <SearchSuggestions class="invisible group-focus-within:visible" />
+      </ClientOnly>
 
       <DrawingPanel v-if="state" ref="panelRef" class="absolute left-0 top-full z-10 mt-4" />
     </section>

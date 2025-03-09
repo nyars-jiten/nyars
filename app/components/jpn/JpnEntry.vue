@@ -12,7 +12,7 @@ const styles = tv({
   base: 'flex items-center justify-start rounded-md transition-colors text-xl hover:text-neutral-800',
 })
 
-const playAudio = function (audio: string) {
+function playAudio(audio: string) {
   const audioElement = new Audio(audio)
   audioElement.play()
 }
@@ -58,7 +58,7 @@ const playAudio = function (audio: string) {
                     'border-r-2': accent.s === 2 || accent.s === 3,
                     'text-red-400/80': accent.sl,
                     'underline decoration-wavy decoration-red-400/80': accent.n,
-                    'after:content-[\'・\']': accent.sp,
+                    'after:content-[\'・\'] after:text-gray-500': accent.sp,
                   }"
                 >
                   {{ accent.m }}

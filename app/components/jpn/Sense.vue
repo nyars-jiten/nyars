@@ -9,7 +9,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const { t } = useI18n()
-const { request } = useSearchRequest()
+const { searchQuery } = useSearchStore()
 
 const miscTagsLine = computed(() => {
   const tags = props.sense.metaTags.map(t => t.rus)
@@ -29,28 +29,18 @@ const miscTagsLine = computed(() => {
       </span>
 
       <div class="inline-block w-11/12">
-        <!-- <span v-if="sense.fieldTags.length > 0" class="space-x-2 pr-2">
-          <template v-for="(tag, i) of sense.fieldTags" :key="i">
-            <UiTag kind="sense" class="group relative cursor-pointer">
-              {{ tag.ruShort.replaceAll('.', '') }}
+        <span v-if="sense.fieldTags.length > 0">
+          <span v-for="(tag, i) of sense.fieldTags" :key="i" class="r-1 cursor-help group relative">
+            <span class="italic text-green-600 text-sm">
+              <template v-if="i > 0">,&nbsp;</template>{{ tag.rusShort }}
+            </span>
 
-              <UiTooltip>
-                {{ tag.ru }}
-              </UiTooltip>
-            </UiTag>
-          </template>
-        </span> -->
-        <small v-for="(tag, i) of sense.fieldTags" :key="i" class="pr-1 italic text-green-600">
-          <span class="group relative after:content-[\',\'] last:after:content-none">
-            {{ tag.rusShort }}
-
-            <div class="invisible absolute bottom-full left-1/2 z-20 -translate-x-1/2 pb-1 group-hover:visible">
-              <div class="flex items-center justify-center rounded-md bg-neutral-800/80 px-3 py-1.5 leading-4 shadow-md outline-1 outline-neutral-700 backdrop-blur-md">
-                {{ tag.rus }}
-              </div>
-            </div>
+            <UiTooltip>
+              {{ tag.rus }}
+            </UiTooltip>
           </span>
-        </small>
+          <span>&nbsp;</span>
+        </span>
 
         <Content :data="sense.content" />
 
@@ -97,7 +87,7 @@ const miscTagsLine = computed(() => {
 
           <NuxtLink
             v-if="reference.target !== null && reference.target.length === 4"
-            :to="{ name: 'dict-jpn-wid', params: { wid: reference.target }, query: { q: request } }"
+            :to="{ name: 'dict-jpn-wid', params: { wid: reference.target }, query: { q: searchQuery } }"
             class="text-neutral-500 underline decoration-dotted underline-offset-4"
           >
             {{ reference.value }}

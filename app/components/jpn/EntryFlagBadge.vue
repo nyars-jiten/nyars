@@ -80,7 +80,7 @@ const iconList = {
   },
   isDialect: {
     value: true,
-    path: 'mdi:translate',
+    path: 'mdi:spoken-language', // mdi:translate
   },
   isUnconfirmed: {
     value: true,
@@ -125,7 +125,7 @@ function borderCheck(stIconList: { key: keyof EntryStatus, path: string }[]) {
 <template>
   <span class="inline-flex flex-wrap items-center gap-2">
     <span v-for="status in statusIconList" :key="status.key" class="inline-flex items-center gap-2" :class="statusStyle({ text: true, [status.key]: true })">
-      <Icon class="size-6" :name="status.path" />
+      <Icon size="1.3rem" :name="status.path" />
 
       <span v-if="hint" class="text-xs uppercase ">
         {{ t(`pages.search.status.${status.key}`) }}

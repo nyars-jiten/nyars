@@ -55,6 +55,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@vee-validate/nuxt',
     '@vueuse/nuxt',
+    'v-lazy-show/nuxt',
   ],
   icon: {
   },
