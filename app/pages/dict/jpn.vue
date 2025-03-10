@@ -21,6 +21,9 @@ const { data, status } = await useAsyncData(`search-request-${searchQuery.value}
 const srchResult = data
 
 function updateEntry() {
+  if (!srchResult.value?.result || srchResult.value.result.length === 0) {
+    return
+  }
   const first = srchResult.value?.result[0]
   if (first && route.name === 'dict-jpn' && searchQuery) {
     navigateTo({ name: 'dict-jpn-wid', params: { wid: first.wid }, query: { q: searchQuery.value } }, { replace: true })
