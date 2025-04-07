@@ -11,7 +11,7 @@ const avatar = computed(() => useAvatar(props.user.avatar).href)
 <template>
   <NuxtLink :to="`/users/${user.username}`" class="flex items-center gap-1.5">
     <img
-      class="h-6 rounded-full object-center"
+      class="size-6 rounded-full object-center"
       :src="avatar"
     >
     <span class="inline-block max-w-36 truncate">
