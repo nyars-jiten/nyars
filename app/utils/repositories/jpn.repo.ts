@@ -26,6 +26,12 @@ export function useJpnRepo() {
     const tagList = (q: string) =>
       fetch<Record<string, Tag[]>>(`${path}/tags`, { method: 'GET', query: { q } })
 
+    const updateTag = (id: number, body: Tag) =>
+      fetch<Tag>(`${path}/tags/${id}`, { method: 'POST', body })
+
+    const createTag = (body: Tag) =>
+      fetch<Tag>(`${path}/tags`, { method: 'POST', body })
+
     const checkDuplicates = (body: EditorTxtEntryJp) =>
       fetch<EntryJp[]>(`${path}/check-duplicates`, { method: 'POST', body })
 
@@ -35,6 +41,6 @@ export function useJpnRepo() {
     const getSatellites = (wid: string) =>
       fetch<EntryJpSatellite[]>(`${path}/entries/${wid}/satellites`, { method: 'GET' })
 
-    return { get, edit, remove, source, preview, create, tagList, checkDuplicates, getDownloads, getSatellites }
+    return { get, edit, remove, source, preview, create, tagList, updateTag, createTag, checkDuplicates, getDownloads, getSatellites }
   })
 }
