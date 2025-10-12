@@ -15,7 +15,8 @@
             "documentation": "Справка",
             "download": "Скачать",
             "github": "Баг-трекер",
-            "tags": "Теги"
+            "tags": "Теги",
+            "ocr": "Сканы"
           }
         },
         {
@@ -75,8 +76,10 @@
       "textLoading": "Идёт поиск",
       "tabs": {
         "edits": "Правки",
-        "satellites": "Сателлиты"
-      }
+        "satellites": "Сателлиты",
+        "scans": "Сканы"
+      },
+      "noData": "Нет данных..."
     }
   },
   "pages": {
@@ -215,6 +218,9 @@
     },
     "tags": {
       "title": "Теги"
+    },
+    "ocr": {
+      "title": "Сканы"
     },
     "downloads": {
       "title": "Скачать",

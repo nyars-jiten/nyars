@@ -89,12 +89,15 @@ useHead({ title: jpnEntry.value?.title })
         <JpnEntry :jpn-entry="jpnEntry" :show-lemmas="showLemmas" />
       </UiBlock>
 
-      <UiTabs :tabs="['edits', 'satellites']">
+      <UiTabs :tabs="['edits', 'satellites', 'scans']">
         <UiTab title="edits">
           <EditsList :wid="rawWid" />
         </UiTab>
         <UiTab title="satellites">
           <SatelliteEntry :wid="rawWid" />
+        </UiTab>
+        <UiTab title="scans">
+          <OCREntry :wid="rawWid" />
         </UiTab>
       </UiTabs>
     </template>

@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const { t } = useI18n()
 
-const { user } = storeToRefs(useUserStore())
+const { user, userAccess } = storeToRefs(useUserStore())
 
 const links = tv({
   base: 'flex items-center justify-start gap-4 rounded-md px-2 py-1.5 leading-none transition-colors hover:bg-zinc-800 hover:text-zinc-400',
@@ -125,6 +125,11 @@ onMounted(() => {
     </li>
 
     <li class="space-y-1">
+      <NuxtLink v-if="userAccess.hasAccessOcr" :to="{ name: 'ocr' }" :class="links({ state: menuState, secondary })">
+        <Icon size="1.5rem" name="material-symbols:scan-outline" />
+        <span>{{ t('components.header.navigation[0].pages.ocr') }}</span>
+      </NuxtLink>
+
       <NuxtLink
         to="https://github.com/nyars-jiten/nyars/issues"
         :class="links({ state: menuState, secondary })"

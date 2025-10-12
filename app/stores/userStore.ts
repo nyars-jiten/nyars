@@ -11,7 +11,12 @@ export const useUserStore = defineStore('user-store', () => {
 
   const userAccess = computed(() => ({
     hasAccessAutoapprove: checkAccess(Access.Autoapprove),
+    hasAccessWiki: checkAccess(Access.Wiki),
     hasAccessEdits: checkAccess(Access.Edits),
+    hasAccessProfileEdit: checkAccess(Access.ProfileEdit),
+    hasAccessSatellites: checkAccess(Access.Satellites),
+    hasAccessTagEdit: checkAccess(Access.TagEdit),
+    hasAccessOcr: checkAccess(Access.Ocr),
   } as UserRights))
 
   async function $reset() {
@@ -20,7 +25,7 @@ export const useUserStore = defineStore('user-store', () => {
   }
 
   async function checkAuth() {
-    if (Date.now() - updTime.value > (1 * 60 * 1000)) { // every 15 min 
+    if (Date.now() - updTime.value > (1 * 60 * 1000)) { // every 15 min
       $reset()
     }
   }

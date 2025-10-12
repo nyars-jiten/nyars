@@ -12,7 +12,7 @@ const { t } = useI18n()
 const icons: Record<string, string> = {
   edits: 'ic:baseline-plus-minus-alt',
   satellites: 'ic:baseline-translate', // material-symbols:planet-outline ic:baseline-translate
-  scans: 'ic:baseline-flip', // ic:outline-book
+  scans: 'material-symbols:scan-outline', // material-symbols:scan-outline ic:outline-book ic:baseline-flip
 }
 
 onMounted(() => {
