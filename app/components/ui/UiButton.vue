@@ -23,6 +23,8 @@ const button = tv({
       amber: 'text-amber-300',
       delete: 'text-rose-400',
       edit: 'text-indigo-300/80',
+      cancel: 'text-orange-300/80',
+      save: 'text-lime-300/80',
       sky: 'text-sky-300',
     },
 

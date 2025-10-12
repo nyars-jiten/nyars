@@ -2,11 +2,10 @@
 const { t } = useI18n()
 
 const { tagList } = useJpnRepo()
-const tags = ref({} as Record<string, { uuid: string, tags: Tag[] }>)
+const tags = ref({} as Record<string, Tag[]>)
 
-const tagKeys = ['eng', 'engShort', 'rus', 'rusShort', 'priority'] as (keyof Tag)[]
 async function updateTags() {
-  tags.value = await tagList('').then(e => Object.fromEntries(Object.entries(e).map(([key, value]) => [key, { uuid: crypto.randomUUID(), tags: value }])))
+  tags.value = await tagList('')
 }
 
 await updateTags()
@@ -25,21 +24,13 @@ await updateTags()
         <tbody v-for="(list, category) of tags" :key="category">
           <tr class="sticky top-10 bg-neutral-900/95 text-indigo-300/80">
             <td colspan="100%">
-              <h2 class="col-span-full text-4xl font-extralight text-center">
+              <h2 class="text-4xl font-extralight text-center m-4">
                 {{ category }}
               </h2>
             </td>
           </tr>
 
-          <tr v-for="tag, tagIndex in list.tags" :key="tagIndex" class="group odd:bg-neutral-800/50">
-            <td v-for="key in tagKeys" :key="key" class="p-2">
-              {{ tag[key] }}
-            </td>
-
-            <td class="opacity-0 group-hover:opacity-100 transition-opacity">
-              <ui-button icon="ic:baseline-edit" color="edit" class="w-min" :outline="false" />
-            </td>
-          </tr>
+          <tags-item v-for="_, tagIndex in list" :key="tagIndex" v-model="list[tagIndex]" />
         </tbody>
       </table>
     </section>
