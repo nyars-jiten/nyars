@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
 interface MultilineProps {
   multiline: true
@@ -58,7 +59,7 @@ defineExpose({ inputRef })
   <section class="relative" :class="{ 'pt-2.5': !!slots.hint }">
     <small class="absolute left-2.5 top-0 rounded-md bg-neutral-300 px-2 text-neutral-900 shadow-md">
       <slot name="hint" />
-</small>
+    </small>
 
     <template v-if="multiline === false">
       <input v-model="model" :autocomplete="autocomplete" :class="styles({ disabled })" :type="type" :placeholder="placeholder" :disabled="disabled">

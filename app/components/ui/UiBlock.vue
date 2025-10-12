@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { tv, type VariantProps } from 'tailwind-variants'
+import type { VariantProps } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
 withDefaults(defineProps<Props>(), {
   size: 'medium',

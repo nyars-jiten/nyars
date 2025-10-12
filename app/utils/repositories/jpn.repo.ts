@@ -1,5 +1,4 @@
 import type { $Fetch, NitroFetchRequest } from 'nitropack'
-import type { ApiError } from '~/types/models/api/error'
 
 export function useJpnRepo() {
   return useApi(<T>(fetch: $Fetch<T, NitroFetchRequest>) => {

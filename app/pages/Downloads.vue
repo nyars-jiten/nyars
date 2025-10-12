@@ -3,11 +3,11 @@ const { getDownloads } = useJpnRepo()
 
 const { data: downloads } = await useAsyncData(() => getDownloads())
 
-const getExportPath = function (file: string) {
+function getExportPath(file: string) {
   return `/static/export/${file}`
 }
 
-const computeSize = function (size: number) {
+function computeSize(size: number) {
   const units = ['b', 'kb', 'Mb', 'Gb', 'Tb']
   let unit = 0
   while (size > 1024) {

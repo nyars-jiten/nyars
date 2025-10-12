@@ -22,7 +22,7 @@ export function useEditRepo() {
       return fetch<EditResponse[]>(path, {
         params: { wid },
       })
-    } 
+    }
 
     const getEditTxt = (id: string): Promise<EditorTxtEntryJp> => {
       return fetch<EditorTxtEntryJp>(`${path}/${id}/txt`)

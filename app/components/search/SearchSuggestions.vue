@@ -9,7 +9,7 @@ function escapeVal(value: string) {
 
 function search(val: string) {
   const escaped = escapeVal(val)
-  push(escaped);
+  push(escaped)
   addToHistory(escaped)
 }
 </script>

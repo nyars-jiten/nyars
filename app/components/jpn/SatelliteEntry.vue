@@ -7,9 +7,9 @@ const { getSatellites } = useJpnRepo()
 
 const { data: satelliteEntries } = useAsyncData(`jpn-satellites-${props.wid}`, () => getSatellites(props.wid))
 
-const maxSatelliteSize = 10
+// const maxSatelliteSize = 10
 
-const opened = ref([] as string[])
+// const opened = ref([] as string[])
 
 // const getSatBody = function(text: string) {
 //   try {

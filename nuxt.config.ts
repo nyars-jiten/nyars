@@ -1,10 +1,6 @@
-import { exit } from 'node:process'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
-  future: {
-    compatibilityVersion: 4,
-  },
   devtools: { enabled: true },
   css: ['~/assets/css/tailwind.css'],
   devServer: {
@@ -13,17 +9,14 @@ export default defineNuxtConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      strictPort: true,
+    },
   },
-  compatibilityDate: '2024-09-22',
+  compatibilityDate: '2025-07-15',
   app: {
     rootId: 'nyars',
     pageTransition: { name: 'page', mode: 'out-in' },
-  },
-  hooks: {
-    /** @see https://github.com/nuxt/cli/issues/169 */
-    close: () => {
-      exit()
-    },
   },
   runtimeConfig: {
     public: {
@@ -35,8 +28,8 @@ export default defineNuxtConfig({
   },
   imports: {
     dirs: [
-      'types/**',
-      'utils/**',
+      '~/types/**',
+      '~/utils/**',
     ],
   },
   components: [
@@ -48,17 +41,14 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
     '@nuxtjs/i18n',
-    '@nuxtjs/google-fonts',
     '@pinia/nuxt',
-    'nuxt-svgo',
-    'nuxt-typed-router',
     '@nuxt/icon',
     '@vee-validate/nuxt',
     '@vueuse/nuxt',
-    'v-lazy-show/nuxt',
+    '@nuxt/fonts',
+    'nuxt-typed-router',
+    "v-lazy-show/nuxt",
   ],
-  icon: {
-  },
   eslint: {
     config: {
       standalone: false,
@@ -68,29 +58,11 @@ export default defineNuxtConfig({
     autoImports: true,
   },
   i18n: {
-    vueI18n: './locale/i18n.config.ts',
+    defaultLocale: 'ru',
+    locales: [
+      { code: 'ru', name: 'Русский', file: 'ru.json' },
+    ],
     strategy: 'no_prefix',
-  },
-  googleFonts: {
-    families: {
-      'Exo+2': {
-        wght: [100, 200, 300, 400, 500, 600, 700, 800, 900],
-        italic: [100, 200, 300, 400, 500, 600, 700, 800, 900],
-      },
-      'Noto+Sans+JP': {
-        wght: [100, 200, 300, 400, 500, 600, 700, 800, 900],
-        italic: [100, 200, 300, 400, 500, 600, 700, 800, 900],
-      },
-    },
-    display: 'swap',
-  },
-  svgo: {
-    componentPrefix: 'icon',
-  },
-  typescript: {
-    strict: true,
-    typeCheck: true,
-    shim: false,
   },
 })
 // https://nuxt.com/docs/api/configuration/nuxt-config

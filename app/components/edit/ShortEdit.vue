@@ -65,7 +65,7 @@ const { t } = useI18n()
       <span class="italic" :class="typeColors({ text: edit.type })">
         {{ t(`models.edit.type.${edit.type}`) }}
       </span>
-      
+
       <span class="text-neutral-700">|</span>
 
       <div class="flex items-center gap-1.5">

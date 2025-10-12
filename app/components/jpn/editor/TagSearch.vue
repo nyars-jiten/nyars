@@ -11,11 +11,11 @@ const hideCategories = ref([]) as Ref<string[]>
 const { tagList } = useJpnRepo()
 const tags = ref({} as Record<string, Tag[]>) as Ref<Record<string, Tag[]>>
 
-const updateTags = async function () {
+async function updateTags() {
   tags.value = await tagList(query.value)
 }
 
-const toggleCategory = function (category: string) {
+function toggleCategory(category: string) {
   if (hideCategories.value.includes(category)) {
     hideCategories.value = hideCategories.value.filter((c: string) => c !== category)
   }

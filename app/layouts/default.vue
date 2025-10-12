@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { tv } from 'tailwind-variants'
 import { version } from '~~/package.json'
 
 // user,
@@ -35,7 +34,7 @@ onMounted(() => {
 
 <template>
   <div class="grid min-h-dvh grid-cols-[auto_1fr] max-sm:grid-cols-1 gap-4 p-4">
-    <section class="space-y-4 sticky h-[calc(100dvh-theme('spacing.8'))] top-4 bg-neutral-900 overflow-x-hidden overflow-y-auto max-sm:hidden">
+    <section class="space-y-4 sticky h-[calc(100dvh-var(--spacing)*8)] top-4 bg-neutral-900 max-sm:hidden">
       <UiButton :outline="false" type="button" @click="menuState = !menuState">
         <Icon v-if="menuState" size="1.5rem" name="ic:baseline-close" />
         <Icon v-else size="1.5rem" name="ic:baseline-menu" />

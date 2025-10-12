@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 const { t } = useI18n()
 const { searchQuery } = storeToRefs(useSearchStore())
-const { suggestions } = storeToRefs(useSuggestionsStore())
 const { addToHistory } = useSuggestionsStore()
 const { push } = useSearchStore()
 const [state, toggle] = useToggle()

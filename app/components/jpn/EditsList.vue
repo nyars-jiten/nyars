@@ -11,10 +11,10 @@ const { t } = useI18n()
 <template>
   <div>
     <div v-if="editsList && editsList.length > 0">
-      <ShortEdit 
-        v-for="edit in editsList" 
-        :edit 
+      <ShortEdit
+        v-for="edit in editsList"
         :key="edit.id"
+        :edit
       />
     </div>
     <div v-else class="italic font-extralight">
