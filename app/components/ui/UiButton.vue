@@ -7,6 +7,7 @@ withDefaults(defineProps<Props>(), {
   type: 'button',
   disabled: false,
   outline: true,
+  loose: false,
 })
 
 const slots = defineSlots<{
@@ -14,14 +15,14 @@ const slots = defineSlots<{
 }>()
 
 const button = tv({
-  base: 'inline-flex items-center gap-2 rounded-md px-2 py-1.5 leading-none transition-colors',
+  base: 'inline-flex items-center gap-2 rounded-md px-2 py-1.5 leading-none transition-all cursor-pointer',
   variants: {
     color: {
       discord: 'text-discord',
       lime: 'text-lime-300',
       amber: 'text-amber-300',
       delete: 'text-rose-400',
-      edit: 'text-sky-400',
+      edit: 'text-indigo-300/80',
       sky: 'text-sky-300',
     },
 
@@ -42,6 +43,10 @@ const button = tv({
       true: 'cursor-not-allowed text-zinc-700',
       false: 'hover:bg-zinc-800 hover:text-zinc-400 hover:outline-transparent',
     },
+
+    loose: {
+      true: 'opacity-20 hover:opacity-100',
+    },
   },
 })
 
@@ -55,11 +60,12 @@ interface Props {
   title?: string
   disabled?: V['disabled']
   outline?: V['outline']
+  loose?: V['loose']
 }
 </script>
 
 <template>
-  <button :type="type" :class="button({ color, active, disabled, outline, iconOnly: !!slots.default })" :title="title" :disabled="disabled">
+  <button :type="type" :class="button({ color, active, disabled, outline, iconOnly: !!slots.default, loose })" :title="title" :disabled="disabled">
     <Icon v-if="icon" :name="icon" size="1.5rem" />
     <slot />
   </button>

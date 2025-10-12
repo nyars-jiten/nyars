@@ -98,6 +98,9 @@ export interface Sense {
 }
 
 export interface Tag {
+  id: number
+  type: string
+  priority: number
   eng: string
   engShort: string
   rus: string

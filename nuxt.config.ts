@@ -38,6 +38,12 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
+  fonts: {
+    defaults: {
+      weights: [200, 400, 700],
+    },
+
+  },
   modules: [
     '@nuxt/eslint',
     '@nuxtjs/i18n',
@@ -47,7 +53,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxt/fonts',
     'nuxt-typed-router',
-    "v-lazy-show/nuxt",
+    'v-lazy-show/nuxt',
   ],
   eslint: {
     config: {
