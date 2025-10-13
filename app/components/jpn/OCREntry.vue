@@ -3,7 +3,8 @@ const props = defineProps<{ wid: string }>()
 
 const { t } = useI18n()
 
-const { searchPagesByWid } = useOcrRepo()
+const { searchPagesByWid, ocrImageUrl } = useOcrRepo()
+const { userAccess } = storeToRefs(useUserStore())
 
 const { data: ocrPages } = useAsyncData(`jpn-ocr-${props.wid}`, () => searchPagesByWid(props.wid))
 </script>
@@ -13,14 +14,17 @@ const { data: ocrPages } = useAsyncData(`jpn-ocr-${props.wid}`, () => searchPage
     <div
       v-for="page in ocrPages"
       :key="page.id"
-      class="py-2 border-b-1 border-neutral-800"
+      class="group py-2 border-b-1 border-neutral-800"
     >
-      <div class="text-[#6aa3ab]">
-        [{{ page.prefix }}] {{ page.title }}
+      <div class="flex items-center gap-2">
+        <div class="text-[#6aa3ab]">
+          [{{ page.prefix }}] {{ page.title }}
+        </div>
+        <ui-button v-if="userAccess.hasAccessOcr || true" icon="ic:baseline-edit" color="edit" class="w-min opacity-0 group-hover:opacity-100 transition-opacity" :outline="false" @click="navigateTo(`/ocr/${page.id}`)" />
       </div>
       <img
         v-if="page.file"
-        :src="`https://nyars.moe/static/ocr/${page.prefix}/${page.file}`"
+        :src="ocrImageUrl(page.prefix, page.file).href"
         alt="page image"
         class="w-md mt-2 mb-2"
       >

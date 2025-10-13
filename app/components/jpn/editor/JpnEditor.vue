@@ -16,13 +16,13 @@ const { $reset: userReset } = useUserStore()
 const { menuState, user } = storeToRefs(useUserStore())
 const notificationStore = useNotificationStore()
 
-onBeforeMount(() => {
-  userReset() // update user state
-  menuState.value = false
-  if (!user.value && props.isNew) {
-    navigateTo('/users/login')
-  }
-})
+// onBeforeMount(() => {
+//   userReset() // update user state
+//   menuState.value = false
+//   if (!user.value && props.isNew) {
+//     navigateTo('/users/login')
+//   }
+// })
 
 const { entry } = storeToRefs(useEditorEntryStore())
 

@@ -3,6 +3,9 @@ import type { $Fetch, NitroFetchRequest } from 'nitropack'
 export function useOcrRepo() {
   return useApi(<T>(fetch: $Fetch<T, NitroFetchRequest>) => {
     const path = '/ocr'
+    const config = useRuntimeConfig()
+
+    const ocrImageUrl = (prefix: string, file: string) => new URL(`/static/ocr/${prefix}/${file}`, config.public.imageUrl)
 
     const getBooks = () =>
       fetch<OCRBook[]>(`${path}/books`, { method: 'GET' })
@@ -16,6 +19,6 @@ export function useOcrRepo() {
     const getPage = (id: string) =>
       fetch<OCRPageWithBook>(`${path}/pages/${id}`, { method: 'GET' })
 
-    return { getBooks, searchPages, searchPagesByWid, getPage }
+    return { getBooks, searchPages, searchPagesByWid, getPage, ocrImageUrl }
   })
 }

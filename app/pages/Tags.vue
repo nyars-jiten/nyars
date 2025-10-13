@@ -30,7 +30,7 @@ await updateTags()
             </td>
           </tr>
 
-          <tags-item v-for="_, tagIndex in list" :key="tagIndex" v-model="list[tagIndex]" />
+          <tags-item v-for="_, tagIndex in list" :key="tagIndex" v-model="list[tagIndex]!" />
         </tbody>
       </table>
     </section>

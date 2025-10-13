@@ -93,7 +93,7 @@ onMounted(() => {
         <span>{{ t('components.header.navigation[0].pages.edits') }}</span>
       </NuxtLink>
 
-      <NuxtLink :to="{ name: 'Tags' }" :class="links({ state: menuState, secondary })">
+      <NuxtLink :to="{ name: 'tags' }" :class="links({ state: menuState, secondary })">
         <Icon size="1.5rem" name="ic:round-tag" />
         <span>{{ t('components.header.navigation[0].pages.tags') }}</span>
       </NuxtLink>
