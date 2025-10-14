@@ -19,12 +19,14 @@ type Props = {
   fullHeight?: boolean
   disabled?: VariantProps<typeof styles>['disabled']
   placeholder?: string
+  selectable?: boolean
 } & (SingleLineProps | MultilineProps)
 
 withDefaults(defineProps<Props>(), {
   fullHeight: false,
   rows: undefined,
   disabled: false,
+  selectable: false,
 })
 
 const slots = defineSlots<{ hint?: () => void, description?: () => void }>()
@@ -33,10 +35,20 @@ const styles = tv({
   base: 'w-full rounded-md bg-zinc-800 p-2 text-zinc-500 shadow-md outline-1 outline-zinc-700 transition-colors',
   variants: {
     disabled: {
-      true: 'cursor-not-allowed bg-zinc-700 text-zinc-500',
+      true: 'bg-zinc-700 ',
       false: ' focus-within:bg-zinc-700 focus-within:text-zinc-300 focus-within:outline-none hover:bg-zinc-700 hover:text-zinc-300 hover:outline-transparent',
     },
+    selectable: {
+      true: 'select-text cursor-text text-zinc-300',
+    },
   },
+  compoundVariants: [
+    {
+      disabled: true,
+      selectable: false,
+      class: 'cursor-not-allowed text-zinc-500',
+    },
+  ],
 })
 
 const description = tv({
@@ -62,7 +74,7 @@ defineExpose({ inputRef })
     </small>
 
     <template v-if="multiline === false">
-      <input v-model="model" :autocomplete="autocomplete" :class="styles({ disabled })" :type="type" :placeholder="placeholder" :disabled="disabled">
+      <input v-model="model" :autocomplete="autocomplete" :class="styles({ disabled, selectable })" :type="type" :placeholder="placeholder" :disabled="disabled">
     </template>
 
     <template v-else>
