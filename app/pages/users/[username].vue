@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import { formatTimeAgo } from '@vueuse/core'
+
 const username = useRoute('users-username').params.username
 
 const { clientGetUser } = useUserRepo()
 const user = await clientGetUser(username)
 
 const avatar = computed(() => useAvatar(user?.avatar ?? '').href)
+
+const regTimeAgo = formatTimeAgo(user?.createdAt ?? new Date())
 </script>
 
 <template>
@@ -21,6 +25,18 @@ const avatar = computed(() => useAvatar(user?.avatar ?? '').href)
           {{ user.banned }}
         </i>
       </div>
+      <div>{{ user.isAdmin ? 'admin' : 'user' }}</div>
+      <div>
+        Регистрация: {{ user.createdAt }} ( {{ regTimeAgo }} )
+      </div>
+      <div>Последняя активность: {{ new Date() }}</div>
+      <div>Рейтинг: {{ user.stats.rating }}</div>
+      <div>Правок: {{ user.stats.edits }}</div>
+      <div v-if="user.stats.reviews > 0">
+        Проверок: {{ user.stats.reviews }}
+      </div>
+      <div>Комментариев: -</div>
+      <heatmap :id="user.id" />
     </div>
   </section>
 </template>
