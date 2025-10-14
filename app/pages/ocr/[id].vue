@@ -214,9 +214,9 @@ await updateSearch()
 
       <hr class="border-neutral-200 dark:border-neutral-800 my-8">
 
-      <template v-if="srchResult.result.length > 0">
+      <template v-if="srchResult.result && srchResult.result.length > 0">
         <div class="grid grid-cols-[auto_1fr] gap-4 items-start">
-          <template v-for="result of srchResult?.result" :key="result.wid">
+          <template v-for="result of srchResult.result" :key="result.wid">
             <UiButton class="flex-shrink-0" type="button" icon="mdi:source-branch-plus" color="sky" :title="t('pages.editor.save')" @click="mergeEntry(result.wid)">
               Объединить
             </UiButton>

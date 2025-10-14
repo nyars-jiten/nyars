@@ -37,9 +37,20 @@ function cancelTag() {
   <tr class="group odd:bg-neutral-800/50">
     <td v-for="key in tagKeys" :key="key" class="p-2">
       <ui-input v-if="isEditing" v-model="editable[key]" class="w-full" :disabled="loading" />
-      <span v-else>
-        {{ tag[key] }}
-      </span>
+      <template v-else>
+        <NuxtLink
+          v-if="key === 'rusShort' || key === 'engShort'"
+          external
+          target="_blank"
+          :to="{ name: 'dict-jpn', query: { q: `#${tag[key]}` } }"
+          class="text-indigo-300"
+        >
+          #{{ tag[key] }}
+        </NuxtLink>
+        <span v-else>
+          {{ tag[key] }}
+        </span>
+      </template>
     </td>
 
     <td class="opacity-0 group-hover:opacity-100 transition-opacity">
