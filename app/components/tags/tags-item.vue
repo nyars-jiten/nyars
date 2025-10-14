@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const tagKeys = ['eng', 'engShort', 'rus', 'rusShort', 'priority'] as (keyof Tag)[]
+const tagKeys = ['rusShort', 'rus', 'engShort', 'eng', 'priority'] as (keyof Tag)[]
 const [isEditing, toggleEditing] = useToggle(false)
 
 const tag = defineModel<Tag>({ required: true })
