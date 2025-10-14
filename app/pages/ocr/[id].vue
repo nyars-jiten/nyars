@@ -123,17 +123,21 @@ await updateSearch()
 </script>
 
 <template>
-  <div>
-    {{ page }}
-
+  <div class="space-y-4">
     <template v-if="page">
-      <h3 class="text-[#6aa3ab] text-lg">
-        [{{ page?.prefix }}] {{ page?.title }}
-      </h3>
-      <div>
-        {{ page?.description }}
-      </div>
-      <div class="flex gap-4 items-center mb-4">
+      <section class="space-y-4 px-4">
+        <h3 class="text-[#6aa3ab] text-lg">
+          [{{ page?.prefix }}] {{ page?.title }}
+        </h3>
+
+        <p class="text-sm text-gray-500">
+          {{ page?.description }} simple text
+        </p>
+      </section>
+
+      <hr class="border-neutral-200 dark:border-neutral-800 my-8">
+
+      <div class="flex gap-4 items-center px-4">
         <UiButton
           type="button"
           icon="material-symbols:arrow-back"
@@ -162,76 +166,80 @@ await updateSearch()
           Next
         </UiButton>
       </div>
-      <div class="border rounded border-neutral-200 p-2 dark:border-neutral-700">
+
+      <hr class="border-neutral-200 dark:border-neutral-800 my-8">
+
+      <div class="px-4 space-y-4">
         <img
-          v-if="page?.file"
           :src="ocrImageUrl(page.prefix, page.file).href"
           alt="page image"
-          class="w-[70%] mt-2 mb-2"
         >
-        <div>
-          Raw: <span>{{ page?.rawLine }}</span>
+
+        <UiInput v-if="page" v-model="page.rawLine" :disabled="true" :selectable="true" class="w-full" />
+      </div>
+
+      <hr class="border-neutral-200 dark:border-neutral-800 my-8">
+
+      <section class="space-y-4 px-4">
+        <div v-if="page" class="grid grid-cols-2 gap-4">
+          <UiInput v-model="page.word" class="w-full">
+            <template #hint>
+              word
+            </template>
+          </UiInput>
+
+          <UiInput v-model="page.reading" class="w-full">
+            <template #hint>
+              reading
+            </template>
+          </UiInput>
+
+          <UiInput v-model="page.meaningRu" class="w-full" :multiline="true">
+            <template #hint>
+              meaningRu
+            </template>
+          </UiInput>
+
+          <UiInput v-model="page.meaningEn" class="w-full" :multiline="true">
+            <template #hint>
+              meaningEn
+            </template>
+          </UiInput>
         </div>
-        <div v-if="page" class="flex flex-wrap gap-4 mt-4">
-          <div class="flex-1 min-w-[350px]">
-            <UiInput v-model="page.word" class="w-full">
-              <template #hint>
-                word
-              </template>
-            </UiInput>
-          </div>
 
-          <div class="flex-1 min-w-[350px]">
-            <UiInput v-model="page.reading" class="w-full">
-              <template #hint>
-                reading
-              </template>
-            </UiInput>
-          </div>
-
-          <div class="flex-1 min-w-[350px]">
-            <UiInput v-model="page.meaningRu" class="w-full" :multiline="true">
-              <template #hint>
-                meaningRu
-              </template>
-            </UiInput>
-          </div>
-
-          <div class="flex-1 min-w-[350px]">
-            <UiInput v-model="page.meaningEn" class="w-full" :multiline="true">
-              <template #hint>
-                meaningEn
-              </template>
-            </UiInput>
-          </div>
-        </div>
-        <UiButton class="max-sm:w-full mt-4" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')">
+        <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')">
           {{ t('pages.editor.save') }}
         </UiButton>
-      </div>
+      </section>
 
-      <div class="mt-8">
-        <div class="gap-8 mx-8">
-          <div v-if="srchResult.result.length > 0 " class="space-y-4">
-            <div v-for="result of srchResult?.result" :key="result.wid" class="flex items-start gap-4">
-              <UiButton class="flex-shrink-0 mt-4" type="button" icon="mdi:source-branch-plus" color="sky" :title="t('pages.editor.save')" @click="mergeEntry(result.wid)">
-                Объединить
-              </UiButton>
-              <div class="flex-1">
-                <SearchResult :article="result" />
-              </div>
-            </div>
-          </div>
+      <hr class="border-neutral-200 dark:border-neutral-800 my-8">
+
+      <template v-if="srchResult.result.length > 0">
+        <div class="grid grid-cols-[auto_1fr] gap-4 items-start">
+          <template v-for="result of srchResult?.result" :key="result.wid">
+            <UiButton class="flex-shrink-0" type="button" icon="mdi:source-branch-plus" color="sky" :title="t('pages.editor.save')" @click="mergeEntry(result.wid)">
+              Объединить
+            </UiButton>
+
+            <SearchResult :article="result" />
+          </template>
         </div>
-        <ui-button class="mt-8" type="button" icon="ic:baseline-add" color="lime" :title="t('pages.editor.save')" @click="createNewEntry()">
+      </template>
+
+      <section>
+        <hr class="border-neutral-200 dark:border-neutral-800 my-8">
+
+        <ui-button type="button" icon="ic:baseline-add" color="lime" :title="t('pages.editor.save')" @click="createNewEntry()">
           Создать новую статью
         </ui-button>
-      </div>
 
-      <div v-if="showEditor" class="my-8 p-4 border rounded border-neutral-200 dark:border-neutral-700">
-        {{ isNew ? 'New Entry' : `Edit entry ${activeWid}` }}
-        <JpnEditor :is-new="isNew" :entry="activeEntry" :wid="activeWid" />
-      </div>
+        <hr class="border-neutral-200 dark:border-neutral-800 my-8">
+
+        <div v-if="showEditor" class="my-8 p-4 border rounded border-neutral-200 dark:border-neutral-700">
+          {{ isNew ? 'New Entry' : `Edit entry ${activeWid}` }}
+          <JpnEditor :is-new="isNew" :entry="activeEntry" :wid="activeWid" />
+        </div>
+      </section>
     </template>
   </div>
 </template>
