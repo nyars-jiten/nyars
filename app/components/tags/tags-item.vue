@@ -6,6 +6,7 @@ const tag = defineModel<Tag>({ required: true })
 const editable = ref({ ...tag.value })
 
 const notificationStore = useNotificationStore()
+const { userAccess } = storeToRefs(useUserStore())
 
 const { updateTag } = useJpnRepo()
 const loading = ref(false)
@@ -54,7 +55,7 @@ function cancelTag() {
     </td>
 
     <td class="opacity-0 group-hover:opacity-100 transition-opacity">
-      <section class="flex gap-2">
+      <section v-if="userAccess.hasAccessTagEdit" class="flex gap-2">
         <ui-button v-if="!isEditing" icon="ic:baseline-edit" color="edit" class="w-min" :outline="false" :disabled="loading" @click="toggleEditing()" />
         <template v-else>
           <ui-button icon="ic:baseline-cancel" color="cancel" class="w-min" :outline="false" :disabled="loading" @click="cancelTag()" />
