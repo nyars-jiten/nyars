@@ -67,7 +67,7 @@ onMounted(updateEntry)
       <div v-if="isSearchPage" class="grid grow items-start gap-8 md:grid-cols-[1fr_2fr]">
         <template v-if="isSearchPage">
           <div v-if="hasResult && status === 'success'" class="space-y-4">
-            <SearchResult v-for="result of srchResult?.result" :key="result.wid" :article="result" />
+            <SearchResult v-for="result of srchResult?.result" :key="result.wid" :article="result" class="block" />
           </div>
           <div v-else-if="status === 'success'">
             <div class="text-center">
