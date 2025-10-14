@@ -17,7 +17,7 @@ function computeSize(size: number) {
   return `${size.toFixed(2)} ${units[unit]}`
 }
 
-const { t, tm } = useI18n()
+const { t, tm, rt } = useI18n()
 
 const dlData = [
   {
@@ -103,13 +103,13 @@ const dlData = [
       </div>
 
       <ul class="space-y-4">
-        <li v-for="(faq, fi) in tm('pages.downloads.faqList') as any" :key="fi" class="last:border-0 last:pb-0 border-neutral-800 border-b pb-4">
+        <li v-for="(faq, fi) in tm('pages.downloads.faqList') as any[]" :key="fi" class="last:border-0 last:pb-0 border-neutral-800 border-b pb-4">
           <h2 class="text-2xl">
-            {{ faq.q }}
+            {{ rt(faq.q) }}
           </h2>
 
           <p>
-            {{ faq.a }}
+            {{ rt(faq.a) }}
           </p>
         </li>
       </ul>
