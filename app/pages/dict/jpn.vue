@@ -53,6 +53,13 @@ onMounted(updateEntry)
 <template>
   <div id="jpn-search-layout">
     <NuxtLayout name="default">
+      <div v-if="data?.conversion && data?.conversion.length > 0" class="text-center">
+        <div class="text-xl">
+          <div v-for="(conv, ci) in data?.conversion" :key="ci">
+            {{ conv.srcValue }}<ruby>{{ conv.unit }}<rt>{{ conv.unitReading }}</rt></ruby> ≈ {{ conv.resValue.toFixed(3) }} {{ t(`pages.search.unit.${conv.metricUnit}`) }}
+          </div>
+        </div>
+      </div>
       <!-- <div class="text-center">
         {{ data?.parsed }}
         <div class="text-xl">

@@ -26,5 +26,14 @@ export interface Deinflect {
 export interface JpnSearchResponse {
   result: EntryJp[]
   request: string[]
+  conversion: UnitConversion[]
   parsed: Token[]
+}
+
+export interface UnitConversion {
+  srcValue: number
+  resValue: number
+  unit: string
+  unitReading: string
+  metricUnit: string
 }

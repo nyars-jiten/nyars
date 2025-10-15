@@ -16,11 +16,6 @@ const config = useRuntimeConfig()
 
 const { push } = useSearchStore()
 
-// {
-//   "text": "Неотредактированные статьи частотностью до 20к в случайном порядке: ",
-//   "searchExamples": ["#freq20k #!ed #rnd"]
-// }
-
 const { t, tm, rt } = useI18n()
 </script>
 
