@@ -25,9 +25,9 @@
     "yup": "^1.7.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^5.4.1",
+    "@antfu/eslint-config": "^6.0.0",
     "@iconify-json/ic": "^1.2.4",
-    "@iconify-json/material-symbols": "^1.2.41",
+    "@iconify-json/material-symbols": "^1.2.42",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/ooui": "^1.2.12",
     "@iconify-json/tabler": "^1.2.23",
@@ -36,7 +36,7 @@
     "@nuxt/eslint": "^1.9.0",
     "@nuxt/fonts": "0.11.4",
     "@nuxt/icon": "^2.0.0",
-    "@nuxtjs/i18n": "^10.1.0",
+    "@nuxtjs/i18n": "^10.1.1",
     "@pinia/nuxt": "^0.11.2",
     "@tailwindcss/vite": "^4.1.14",
     "@types/eslint-plugin-tailwindcss": "^3.17.0",
@@ -48,7 +48,7 @@
     "pinia": "^3.0.3",
     "typescript": "^5.9.3",
     "vue": "^3.5.22",
-    "vue-router": "^4.5.1",
+    "vue-router": "^4.6.3",
     "vue-tsc": "^3.1.1"
   }
 }
