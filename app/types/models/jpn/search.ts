@@ -26,7 +26,8 @@ export interface Deinflect {
 export interface JpnSearchResponse {
   result: EntryJp[]
   request: string[]
-  conversion: UnitConversion[]
+  unitConversions: UnitConversion[]
+  eraConversions: EraConversion[]
   parsed: Token[]
 }
 
@@ -36,4 +37,11 @@ export interface UnitConversion {
   unit: string
   unitReading: string
   metricUnit: string
+}
+
+export interface EraConversion {
+  srcEra: string
+  srcYear: number
+  gregorianYear: number
+  eraReading: string
 }

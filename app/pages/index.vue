@@ -38,7 +38,7 @@ const { t, tm, rt } = useI18n()
               <button
                 type="button"
                 class="underline cursor-pointer decoration-dotted underline-offset-4 hover:text-neutral-500"
-                @click="push(searchExample)"
+                @click="push(rt(searchExample))"
               >
                 {{ rt(searchExample) }}
               </button>

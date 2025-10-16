@@ -30,6 +30,10 @@ function updateEntry() {
   }
 }
 
+function renderNum(num: number) {
+  return num.toLocaleString('ru-RU', { minimumFractionDigits: 0, maximumFractionDigits: 3 })
+}
+
 async function _inlineSearch(req: string) {
   const inlineSearchResult = await search(req, 0, 0)
   srchResult.value = { ...inlineSearchResult, parsed: data.value?.parsed ?? [] }
@@ -53,10 +57,17 @@ onMounted(updateEntry)
 <template>
   <div id="jpn-search-layout">
     <NuxtLayout name="default">
-      <div v-if="data?.conversion && data?.conversion.length > 0" class="text-center">
+      <div v-if="data?.unitConversions && data?.unitConversions.length > 0" class="text-center">
         <div class="text-xl">
-          <div v-for="(conv, ci) in data?.conversion" :key="ci">
-            {{ conv.srcValue }}<ruby>{{ conv.unit }}<rt>{{ conv.unitReading }}</rt></ruby> ≈ {{ conv.resValue.toFixed(3) }} {{ t(`pages.search.unit.${conv.metricUnit}`) }}
+          <div v-for="(conv, ci) in data?.unitConversions" :key="ci">
+            {{ renderNum(conv.srcValue) }}<ruby>{{ conv.unit }}<rt>{{ conv.unitReading }}</rt></ruby> ≈ {{ renderNum(conv.resValue) }} {{ t(`pages.search.unit.${conv.metricUnit}`) }}
+          </div>
+        </div>
+      </div>
+      <div v-if="data?.eraConversions && data?.eraConversions.length > 0" class="text-center">
+        <div class="text-xl">
+          <div v-for="(conv, ci) in data?.eraConversions" :key="ci">
+            <ruby>{{ conv.srcEra }}<rt>{{ conv.eraReading }}</rt></ruby>{{ conv.srcYear }}年 = {{ conv.gregorianYear }}
           </div>
         </div>
       </div>
