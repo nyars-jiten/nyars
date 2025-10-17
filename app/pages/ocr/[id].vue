@@ -1,10 +1,11 @@
 <script lang="ts" setup>
+import { tv } from 'tailwind-variants'
 import SearchResult from '~/components/search/SearchResult.vue'
 
 const routeId = useRoute('ocr-id').params.id
 
 const { t } = useI18n()
-const { getPage, ocrImageUrl, getNextPage } = useOcrRepo()
+const { getPage, ocrImageUrl, getNextPage, updatePage } = useOcrRepo()
 const { createNotification } = useNotificationStore()
 
 const page = ref(null as OCRPageWithBook | null)
@@ -102,6 +103,20 @@ enum NextPage {
   Prev,
 }
 
+async function invokeUpdatePage() {
+  try {
+    if (!page.value)
+      return
+    page.value = await updatePage(page.value.id, page.value)
+    createNotification(t('pages.ocr.update-success'), NyarsNotificationType.Success)
+    await updateSearch()
+  }
+  catch (e) {
+    console.error(e)
+    createNotification(t('pages.ocr.update-error'), NyarsNotificationType.Error)
+  }
+}
+
 async function navigatePage(nextType: NextPage) {
   if (!page.value)
     return
@@ -119,13 +134,30 @@ async function navigatePage(nextType: NextPage) {
   }
 }
 
+async function actionOnEditorSave() {
+  createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
+  showEditor.value = false
+  await updateSearch()
+}
+
+const statusStyles = tv({
+  variants: {
+    status: {
+      0: 'text-sky-300',
+      1: 'text-yellow-300',
+      2: 'text-green-300',
+      3: 'text-red-300',
+    },
+  },
+})
+
 await updateSearch()
 </script>
 
 <template>
   <div class="space-y-4">
     <template v-if="page">
-      <section class="space-y-4 px-4">
+      <section class="space-y-2 px-4">
         <h3 class="text-[#6aa3ab] text-lg">
           [{{ page?.prefix }}] {{ page?.title }}
         </h3>
@@ -133,9 +165,21 @@ await updateSearch()
         <p class="text-sm text-gray-500">
           {{ page?.description }} simple text
         </p>
+
+        <div class="flex gap-2 items-center">
+          <div :class="statusStyles.variants.status[page?.status || 0]">
+            {{ t(`pages.ocr.status.${page?.status}`) }}
+          </div>
+          <div class="text-gray-500">
+            |
+          </div>
+          <div>
+            статья {{ page?.innerIndex + 1 }}
+          </div>
+        </div>
       </section>
 
-      <hr class="border-neutral-200 dark:border-neutral-800 my-8">
+      <!-- <hr class="border-neutral-200 dark:border-neutral-800 my-8"> -->
 
       <div class="flex gap-4 items-center px-4">
         <UiButton
@@ -207,7 +251,7 @@ await updateSearch()
           </UiInput>
         </div>
 
-        <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')">
+        <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" @click="invokeUpdatePage">
           {{ t('pages.editor.save') }}
         </UiButton>
       </section>
@@ -237,7 +281,13 @@ await updateSearch()
 
         <div v-if="showEditor" class="my-8 p-4 border rounded border-neutral-200 dark:border-neutral-700">
           {{ isNew ? 'New Entry' : `Edit entry ${activeWid}` }}
-          <JpnEditor :is-new="isNew" :entry="activeEntry" :wid="activeWid" />
+          <JpnEditor
+            :is-new="isNew"
+            :entry="activeEntry"
+            :wid="activeWid"
+            @save="actionOnEditorSave"
+            @remove="actionOnEditorSave"
+          />
         </div>
       </section>
     </template>
