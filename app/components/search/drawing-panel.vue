@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
-
 const canvas = ref<HTMLCanvasElement>()
 const hw = ref<Handwriting>(new Null())
 const proposals = ref<string[]>([])
