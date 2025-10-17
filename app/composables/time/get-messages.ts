@@ -1,5 +1,5 @@
 import type { UseTimeAgoMessages, UseTimeAgoUnitNamesDefault } from '@vueuse/core'
-import { getTranslation } from './getTranslation'
+import { getTranslation } from './get-translation'
 
 export function getMessages() {
   const { t } = useI18n()

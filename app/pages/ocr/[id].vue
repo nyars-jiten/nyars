@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import SearchResult from '~/components/search/SearchResult.vue'
+import SearchResult from '~/components/search/search-result.vue'
 
 const routeId = useRoute('ocr-id').params.id
 
@@ -229,9 +229,9 @@ await updateSearch()
       <section>
         <hr class="border-neutral-200 dark:border-neutral-800 my-8">
 
-        <ui-button type="button" icon="ic:baseline-add" color="lime" :title="t('pages.editor.save')" @click="createNewEntry()">
+        <UiButton type="button" icon="ic:baseline-add" color="lime" :title="t('pages.editor.save')" @click="createNewEntry()">
           Создать новую статью
-        </ui-button>
+        </UiButton>
 
         <hr class="border-neutral-200 dark:border-neutral-800 my-8">
 

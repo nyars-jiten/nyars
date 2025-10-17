@@ -97,7 +97,7 @@ useHead({ title: jpnEntry.value?.title })
           <SatelliteEntry :wid="rawWid" />
         </UiTab>
         <UiTab title="scans">
-          <OCREntry :wid="rawWid" />
+          <OcrEntry :wid="rawWid" />
         </UiTab>
       </UiTabs>
     </template>

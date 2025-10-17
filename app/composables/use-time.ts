@@ -1,4 +1,4 @@
-import { getMessages } from './time/getMessages'
+import { getMessages } from './time/get-messages'
 
 export function useTime(date: MaybeRefOrGetter<Date>) {
   return useTimeAgo(date, {

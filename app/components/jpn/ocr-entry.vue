@@ -20,7 +20,7 @@ const { data: ocrPages } = useAsyncData(`jpn-ocr-${props.wid}`, () => searchPage
         <div class="text-[#6aa3ab]">
           [{{ page.prefix }}] {{ page.title }}
         </div>
-        <ui-button v-if="userAccess.hasAccessOcr || true" icon="ic:baseline-edit" color="edit" class="w-min opacity-0 group-hover:opacity-100 transition-opacity" :outline="false" @click="navigateTo(`/ocr/${page.id}`)" />
+        <UiButton v-if="userAccess.hasAccessOcr || true" icon="ic:baseline-edit" color="edit" class="w-min opacity-0 group-hover:opacity-100 transition-opacity" :outline="false" @click="navigateTo(`/ocr/${page.id}`)" />
       </div>
       <img
         v-if="page.file"
