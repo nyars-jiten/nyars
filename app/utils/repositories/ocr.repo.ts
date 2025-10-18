@@ -19,9 +19,12 @@ export function useOcrRepo() {
     const getPage = (id: string) =>
       fetch<OCRPageWithBook>(`${path}/pages/${id}`, { method: 'GET' })
 
+    const updatePage = (id: string, data: OCRPageWithBook) =>
+      fetch<OCRPageWithBook>(`${path}/pages/${id}`, { method: 'POST', body: data })
+
     const getNextPage = (currentId: string, bookId: number, innerIndex: number, type: number) =>
       fetch<Record<string, string>>(`${path}/pages/${currentId}/next`, { method: 'GET', query: { bookId, innerIndex, type } })
 
-    return { getBooks, searchPages, searchPagesByWid, getPage, getNextPage, ocrImageUrl }
+    return { getBooks, searchPages, searchPagesByWid, getPage, updatePage, getNextPage, ocrImageUrl }
   })
 }

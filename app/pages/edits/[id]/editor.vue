@@ -3,9 +3,15 @@ const routeId = useRoute('edits-id-editor').params.id
 
 const { getEditTxt, get } = useEditRepo()
 const { userAccess, user } = storeToRefs(useUserStore())
+const { t } = useI18n()
 
 const edit = await useAsyncData(() => get(routeId))
 const srcData = await useAsyncData(() => getEditTxt(routeId))
+
+function actionOnSave() {
+  useNotificationStore().createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
+  useRouter().back()
+}
 
 const disabled = computed(() => {
   if (srcData.status.value !== 'success' && edit.status.value !== 'success') {
@@ -32,5 +38,5 @@ const disabled = computed(() => {
 </script>
 
 <template>
-  <JpnEditor v-if="srcData.data.value" :entry="srcData.data.value" :disabled="disabled" is-edit :wid="edit.data.value?.wid || ''" />
+  <JpnEditor v-if="srcData.data.value" :entry="srcData.data.value" :disabled="disabled" is-edit collapse-menu :wid="edit.data.value?.wid || ''" @save="actionOnSave" />
 </template>

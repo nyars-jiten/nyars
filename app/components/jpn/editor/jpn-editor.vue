@@ -4,16 +4,28 @@ interface Props {
   isNew?: boolean
   isEdit?: boolean
   disabled?: boolean
+  redirectIfAnonymous?: boolean
+  collapseMenu?: boolean
   wid: string
 }
 
 const props = defineProps<Props>()
+const emit = defineEmits(['save', 'remove'])
 const { t } = useI18n()
 const api = useJpnRepo()
 const { updateEdit } = useEditRepo()
 
-const { user } = storeToRefs(useUserStore())
-const notificationStore = useNotificationStore()
+const { $reset: userReset } = useUserStore()
+const { menuState, user } = storeToRefs(useUserStore())
+
+onBeforeMount(() => {
+  userReset() // update user state
+  if (props.collapseMenu)
+    menuState.value = false
+  if (!user.value && props.redirectIfAnonymous) {
+    navigateTo('/users/login')
+  }
+})
 
 const { entry } = storeToRefs(useEditorEntryStore())
 
@@ -70,15 +82,17 @@ async function save() {
     await api.edit(props.wid, entry.value)
   }
 
-  notificationStore.createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
-  useRouter().back()
+  // notificationStore.createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
+  // useRouter().back()
+  emit('save')
 }
 
 async function remove() {
   // body is still required, so we can save meta data
   await api.remove(`${props.wid}`, entry.value)
-  notificationStore.createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
-  useRouter().back()
+  // notificationStore.createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
+  // useRouter().back()
+  emit('remove')
 }
 
 const spellingRef = useTemplateRef('spellingRef')

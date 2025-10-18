@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
 const newEntry = {
   spelling: '',
   reading: '',
@@ -14,11 +16,23 @@ const newEntry = {
   },
 } satisfies EditorTxtEntryJp
 
+function actionOnSave() {
+  useNotificationStore().createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
+  useRouter().back()
+}
+
 definePageMeta({
   layout: false,
 })
 </script>
 
 <template>
-  <JpnEditor :is-new="true" :entry="newEntry" wid="" />
+  <JpnEditor
+    :is-new="true"
+    :entry="newEntry"
+    wid=""
+    redirect-if-anonymous
+    collapse-menu
+    @save="actionOnSave"
+  />
 </template>
