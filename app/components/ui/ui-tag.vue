@@ -10,7 +10,6 @@ const styles = tv({
     kind: {
       meaning: 'bg-lime-900 text-xs',
       sense: 'bg-green-900 text-xs',
-      freq: 'bg-cyan-900 text-xs',
     },
   },
 })

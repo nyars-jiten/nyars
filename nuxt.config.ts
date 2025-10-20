@@ -42,7 +42,6 @@ export default defineNuxtConfig({
     defaults: {
       weights: [200, 400, 700],
     },
-
   },
   modules: [
     '@nuxt/eslint',

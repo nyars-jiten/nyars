@@ -20,9 +20,11 @@ export const useSearchStore = defineStore('searchStore', () => {
       suggestionsCache.value.clear()
       suggestionsCache.value.set('', [])
     }
-    const { getSuggestions } = useSearchRepo()
-    const response = await getSuggestions(searchQuery)
-    suggestionsCache.value.set(searchQuery, response)
+    const { getSuggestions } = useSearch()
+    const { data: response } = await getSuggestions(searchQuery)
+    if (response.value) {
+      suggestionsCache.value.set(searchQuery, response.value)
+    }
   }
 
   const getSuggestions = computed(async () => {

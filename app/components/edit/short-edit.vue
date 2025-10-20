@@ -60,7 +60,7 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <section class="space-y-4 border-l-2 px-4 py-2 leading-none shadow-md outline-dashed outline-1 outline-neutral-800 transition-colors" :class="mark({ border: edit.status })">
+  <section class="space-y-4 border-l-2 px-4 py-2 leading-none shadow outline-dashed outline-1 outline-neutral-800 transition-colors" :class="mark({ border: edit.status })">
     <div class="flex items-center gap-4 hover:cursor-pointer select-none" @click="toggleChanges()">
       <span class="italic" :class="typeColors({ text: edit.type })">
         {{ t(`models.edit.type.${edit.type}`) }}

@@ -1,7 +1,6 @@
 export const useUserStore = defineStore('user-store', () => {
-  const { current } = useUser()
-  const { serverGetCurrentUser } = useUserRepo()
-  const { data: user } = current()
+  const { getCurrentUser } = useUserData()
+  const { data: user, refresh: $refresh } = getCurrentUser()
   const updTime = ref(Date.now())
 
   const checkAccess = (access: Access) => {
@@ -19,18 +18,19 @@ export const useUserStore = defineStore('user-store', () => {
     hasAccessOcr: checkAccess(Access.Ocr),
   } as UserRights))
 
-  async function $reset() {
-    updTime.value = Date.now()
-    user.value = await serverGetCurrentUser()
-  }
+  watch(user, (current) => {
+    if (current) {
+      updTime.value = Date.now()
+    }
+  }, { immediate: true })
 
   async function checkAuth() {
     if (Date.now() - updTime.value > (1 * 60 * 1000)) { // every 15 min
-      $reset()
+      $refresh()
     }
   }
 
   const menuState = ref(true)
 
-  return { user, userAccess, $reset, menuState }
+  return { user, userAccess, menuState, $refresh }
 })

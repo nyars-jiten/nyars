@@ -2,7 +2,7 @@
 import { tv } from 'tailwind-variants'
 import SearchResult from '~/components/search/search-result.vue'
 
-const routeId = useRoute('ocr-id').params.id
+const bookId = useRoute('ocr-id').params.id
 
 const { t } = useI18n()
 const { getPage, ocrImageUrl, getNextPage, updatePage } = useOcrRepo()
@@ -10,9 +10,12 @@ const { createNotification } = useNotificationStore()
 
 const page = ref(null as OCRPageWithBook | null)
 
-if (routeId) {
+if (bookId) {
   try {
-    page.value = await getPage(routeId)
+    const nextId = await getNextPage(Number(bookId))
+    if (nextId && nextId.id) {
+      page.value = await getPage(nextId.id)
+    }
   }
   catch (e) {
     console.error(e)
@@ -122,7 +125,7 @@ async function navigatePage(nextType: NextPage) {
     return
 
   try {
-    const nextId = await getNextPage(page.value.id, page.value.bookId, page.value.innerIndex, nextType)
+    const nextId = await getNextPage(page.value.bookId, page.value.innerIndex, nextType, page.value.id)
     console.log('nextId', nextId)
     if (nextId) {
       await navigateTo({ name: 'ocr-id', params: { id: nextId.id ?? '' } })

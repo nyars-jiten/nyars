@@ -67,9 +67,7 @@ onMounted(() => {
 
         <Search class="w-1/2 max-xl:w-3/5 max-lg:w-3/4" />
 
-        <div>
-          <ProfileMenu />
-        </div>
+        <ProfileMenu />
       </div>
 
       <slot />

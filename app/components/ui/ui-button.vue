@@ -33,7 +33,7 @@ const button = tv({
     },
 
     outline: {
-      true: 'shadow-md outline-1 outline-zinc-800',
+      true: 'shadow outline-1 outline-zinc-800',
       false: '',
     },
 

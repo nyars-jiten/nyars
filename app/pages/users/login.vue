@@ -2,7 +2,6 @@
 import { object, string } from 'yup'
 
 const notificationStore = useNotificationStore()
-const userStore = useUserStore()
 
 const isRegister = ref(false)
 
@@ -17,6 +16,7 @@ const { handleSubmit, errors } = useForm({
 
 const submit = handleSubmit(async ({ login, password }) => {
   const auth = useAuthRepo()
+  const user = useUserStore()
 
   // const user: User | null = null
   const authError: AuthError | null = null
@@ -30,8 +30,8 @@ const submit = handleSubmit(async ({ login, password }) => {
 
     else {
     /* const { data, error } = */await auth.login({ login, password })
-    // user = data
-    // authError = error
+      // user = data
+      // authError = error
     }
 
     if (authError !== null) {
@@ -45,7 +45,7 @@ const submit = handleSubmit(async ({ login, password }) => {
   }
 
   // userStore.user.value = user
-  userStore.$reset()
+  await user.$refresh()
   await navigateTo('/')
 })
 

@@ -3,7 +3,7 @@ import { useStorage } from '@vueuse/core'
 export const useSuggestionsStore = defineStore('suggestions', () => {
   const { searchQuery } = storeToRefs(useSearchStore())
 
-  const { getSuggestions } = useSearchRepo()
+  const { getSuggestions } = useSearch()
 
   const history = useStorage('searchHistory', [] as string[])
   const listType = ref(0)
@@ -18,7 +18,10 @@ export const useSuggestionsStore = defineStore('suggestions', () => {
   const suggestionsCache = ref(history.value)
 
   const refresh = async () => {
-    suggestionsCache.value = await getSuggestions(searchQuery.value)
+    const { data: response } = await getSuggestions(searchQuery.value)
+    if (response.value) {
+      suggestionsCache.value = response.value
+    }
   }
 
   const suggestions = computed<string[]>(() => {

@@ -229,7 +229,7 @@
     "jpnEntry": {
       "satelliteButtonOpen": "раскрыть",
       "satelliteButtonClose": "свернуть",
-      "entryWasDeleted": "Статья была удалена. Для уточнения причин посмотрите историю правок.",
+      "entryWasDeleted": "Статья удалена",
       "entryIsLoading": "Статья загружается"
     },
     "login": {

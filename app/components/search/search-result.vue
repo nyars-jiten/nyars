@@ -44,26 +44,17 @@ const active = computed(() => articleWid.value === props.article.wid)
 </script>
 
 <template>
-  <NuxtLink
-    :to="{ name: 'dict-jpn-wid', params: { wid: `${article.wid}-${article.title}` }, query: { q: searchQuery } }"
-    class="w-full"
-    :class="{ 'cursor-default': active, 'opacity-40': article.status.isDeleted }"
-  >
+  <NuxtLink :to="{ name: 'dict-jpn-wid-title', params: { wid: article.wid, title: article.title }, query: { q: searchQuery } }" class="block shadow">
     <UiBlock :hover="active === false" :class="newBorder">
       <template #default>
         <section class="space-y-2">
-          <div v-if="article.status.isDeleted" class="text-rose-400 pl-4">
-            {{ t('pages.jpnEntry.entryWasDeleted') }}
-          </div>
           <Words :jpn-entry="article" :preview="true" />
 
-          <div class="flex flex-wrap items-center gap-2">
-            <UiTag v-if="article.frequency > 0" kind="freq">
-              <MiscFreq :value="article.frequency" />
-            </UiTag>
-
-            <EntryFlagBadge :statuses="article.status" @change-border="(cl: string) => { newBorder = cl }" />
-          </div>
+          <section class="space-x-2">
+            <UiBadge v-if="article.status.isDeleted" color="danger" icon="ic:outline-cancel" :text="t('pages.jpnEntry.entryWasDeleted')" />
+            <UiBadgeWarning v-if="article.status.isUnreviewed" :text="t('pages.search.status.isUnreviewed')" />
+            <UiBadgeFrequency v-if="article.frequency > 0" :value="article.frequency" />
+          </section>
 
           <div class="grid grid-cols-[auto_1fr] gap-x-2">
             <template v-for="sense, sIndex of shortenedSenses.data" :key="sIndex">
@@ -75,7 +66,8 @@ const active = computed(() => articleWid.value === props.article.wid)
                 <span v-if="sense.fieldTags.length > 0">
                   <span v-for="(tag, i) of sense.fieldTags" :key="i" class="r-1 cursor-help group relative">
                     <span class="italic text-green-600 text-sm">
-                      <template v-if="i > 0">,&nbsp;</template>{{ tag.rusShort }}
+                      <template v-if="i > 0">,&nbsp;</template>
+                      {{ tag.rusShort }}
                     </span>
 
                     <UiTooltip>

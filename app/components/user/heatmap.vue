@@ -83,27 +83,33 @@ onMounted(() => paintCalendar())
 </script>
 
 <template>
-  <div class="bg-gray-800 text-gray-300 rounded-md p-4 overflow-hidden">
-    <div id="ex-ghDay" class="mb-4" />
+  <div class="bg-neutral-800/50 text-neutral-300 rounded-lg p-6 overflow-hidden backdrop-blur-sm">
+    <div id="ex-ghDay" class="mb-6" />
 
-    <button
-      class="bg-gray-600 hover:bg-gray-500 text-white text-sm px-3 py-1 rounded mt-2"
-      @click="cal.previous()"
-    >
-      ← Previous
-    </button>
+    <div class="flex items-center justify-between">
+      <div class="flex gap-2">
+        <button
+          class="bg-neutral-700 hover:bg-neutral-600 text-white text-sm px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
+          @click="cal.previous()"
+        >
+          <Icon name="ic:baseline-chevron-left" size="1rem" />
+          Предыдущий
+        </button>
 
-    <button
-      class="bg-gray-600 hover:bg-gray-500 text-white text-sm px-3 py-1 rounded mt-2 ml-2"
-      @click="cal.next()"
-    >
-      Next →
-    </button>
+        <button
+          class="bg-neutral-700 hover:bg-neutral-600 text-white text-sm px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
+          @click="cal.next()"
+        >
+          Следующий
+          <Icon name="ic:baseline-chevron-right" size="1rem" />
+        </button>
+      </div>
 
-    <div class="float-right text-xs">
-      <span class="text-gray-400">Less</span>
-      <div id="ex-ghDay-legend" class="inline-block mx-1" />
-      <span class="text-gray-400 text-xs">More</span>
+      <div class="flex items-center gap-2 text-sm">
+        <span class="text-neutral-400">Меньше</span>
+        <div id="ex-ghDay-legend" class="inline-block" />
+        <span class="text-neutral-400">Больше</span>
+      </div>
     </div>
   </div>
 </template>

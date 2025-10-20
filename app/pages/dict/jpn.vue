@@ -30,10 +30,6 @@ function updateEntry() {
   }
 }
 
-function renderNum(num: number) {
-  return num.toLocaleString('ru-RU', { minimumFractionDigits: 0, maximumFractionDigits: 3 })
-}
-
 async function _inlineSearch(req: string) {
   const inlineSearchResult = await search(req, 0, 0)
   srchResult.value = { ...inlineSearchResult, parsed: data.value?.parsed ?? [] }
@@ -60,7 +56,7 @@ onMounted(updateEntry)
       <div v-if="data?.unitConversions && data?.unitConversions.length > 0" class="text-center">
         <div class="text-xl">
           <div v-for="(conv, ci) in data?.unitConversions" :key="ci">
-            {{ renderNum(conv.srcValue) }}<ruby>{{ conv.unit }}<rt>{{ conv.unitReading }}</rt></ruby> ≈ {{ renderNum(conv.resValue) }} {{ t(`pages.search.unit.${conv.metricUnit}`) }}
+            {{ useFormatNumber(conv.srcValue, { precision: 3 }) }}<ruby>{{ conv.unit }}<rt>{{ conv.unitReading }}</rt></ruby> ≈ {{ useFormatNumber(conv.resValue, { precision: 3 }) }} {{ t(`pages.search.unit.${conv.metricUnit}`) }}
           </div>
         </div>
       </div>
