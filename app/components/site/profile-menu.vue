@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { tv } from 'tailwind-variants'
 
-const { clientLogout } = useUserRepo()
+const { logout: userLogout } = useAuth()
 
 const { t } = useI18n()
 const { user } = storeToRefs(useUserStore())
@@ -10,7 +10,7 @@ const { user } = storeToRefs(useUserStore())
 const avatar = computed(() => useAvatar(user.value?.avatar ?? '').href)
 
 async function logout() {
-  await clientLogout()
+  await userLogout()
   user.value = null
   navigateTo('/')
 }

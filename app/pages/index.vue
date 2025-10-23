@@ -3,14 +3,9 @@ definePageMeta({
   name: 'Home',
 })
 
-const { getEdits } = useEditRepo()
-const { data: edits, refresh, status } = await useLazyAsyncData(
-  'edits',
-  () => getEdits(),
-  {
-    default: (): EditResponse[] => [],
-  },
-)
+const { getEdits } = useEditsData()
+const { data: edits, refresh, status } = getEdits()
+const { data: user } = useUserData().getCurrentUser()
 
 const config = useRuntimeConfig()
 
@@ -23,6 +18,7 @@ const { t, tm, rt } = useI18n()
   <section class="grid grid-cols-[1fr_auto] gap-8 max-lg:grid-cols-1 max-lg:gap-16">
     <div class="grow space-y-16">
       <div class="space-y-4 p-8">
+        {{ user }}
         <div class="indent-10">
           {{ t('pages.main.infoNyars') }}
         </div>

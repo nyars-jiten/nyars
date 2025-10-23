@@ -58,10 +58,17 @@ export function useUserAuth() {
 export function useUserData() {
   const { fetch, path } = useUserApi()
 
-  // Get current user (server-side)
+  // Get current user (server-side and client-side)
   const getCurrentUser = () => {
-    return useAsyncData('current-user', () =>
-      fetch<ExtendedUser>(`${path}/me`).catch(() => null))
+    // Use useFetch instead of useAsyncData + $fetch to properly forward cookies during SSR
+    // useFetch automatically passes the request context and cookies from the initial SSR request
+    return useFetch<ExtendedUser>('/api/me', {
+      key: 'current-user',
+      // Return null on error instead of throwing
+      onResponseError() {
+        return null
+      },
+    })
   }
 
   // Get user by username
@@ -152,4 +159,3 @@ export function useUserProfile() {
     removeAvatar,
   }
 }
-

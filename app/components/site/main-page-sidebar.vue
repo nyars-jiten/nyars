@@ -1,10 +1,7 @@
 <script setup lang="ts">
-const { getWeeklyStats } = useUserRepo()
+const { getWeeklyStats } = useUserData()
 
-const { data } = await useLazyAsyncData(
-  'userWeeklyStats',
-  () => Promise.resolve(getWeeklyStats()),
-)
+const { data } = await getWeeklyStats()
 
 const jpnDiff = computed(() => (data.value?.site?.jpn ?? 0) - (data.value?.site?.jpnPrev ?? 0))
 const jpnRevDiff = computed(() => (data.value?.site?.jpnRev ?? 0) - (data.value?.site?.jpnRevPrev ?? 0))

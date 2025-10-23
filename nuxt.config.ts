@@ -19,8 +19,10 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' },
   },
   runtimeConfig: {
+    // Private keys are only available on the server
+    apiUrl: '', // Server-side API URL for proxying
     public: {
-      apiUrl: '',
+      apiUrl: '', // Client-side API URL
       baseUrl: '',
       imageUrl: '',
       discordUrl: '',
