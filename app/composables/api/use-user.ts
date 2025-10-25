@@ -63,7 +63,6 @@ export function useUserData() {
     // Use useFetch instead of useAsyncData + $fetch to properly forward cookies during SSR
     // useFetch automatically passes the request context and cookies from the initial SSR request
     return useFetch<ExtendedUser>('/api/me', {
-      key: 'current-user',
       // Return null on error instead of throwing
       onResponseError() {
         return null
