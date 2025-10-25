@@ -3,10 +3,11 @@ const props = defineProps<{ wid: string }>()
 
 const { t } = useI18n()
 
-const { searchPagesByWid, ocrImageUrl } = useOcrRepo()
+const { searchPagesByWid } = useOcrData()
+const { ocrImageUrl } = useOcrUtils()
 const { userAccess } = storeToRefs(useUserStore())
 
-const { data: ocrPages } = useAsyncData(`jpn-ocr-${props.wid}`, () => searchPagesByWid(props.wid))
+const { data: ocrPages } = searchPagesByWid(props.wid)
 </script>
 
 <template>
@@ -14,7 +15,7 @@ const { data: ocrPages } = useAsyncData(`jpn-ocr-${props.wid}`, () => searchPage
     <div
       v-for="page in ocrPages"
       :key="page.id"
-      class="group py-2 border-b-1 border-neutral-800"
+      class="group py-2 border-b border-neutral-800"
     >
       <div class="flex items-center gap-2">
         <div class="text-[#6aa3ab]">

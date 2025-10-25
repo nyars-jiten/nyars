@@ -19,14 +19,38 @@ export function useEditsData() {
       fetch<EditResponse>(`${path}/${id}`))
   }
 
-  const getEdits = (number = 25, page = 0, statuses: string = '') => {
-    return useAsyncData(`edits-${number}-${page}-${statuses}`, () =>
+  /**
+   * Get edits with optional filters
+   * @param params - Query parameters for filtering edits
+   * @param params.n - Limit (number of results)
+   * @param params.o - Offset (pagination)
+   * @param params.s - Status filter (new, accepted, declined)
+   * @param params.d - Dictionary filter
+   * @param params.t - Edit type filter (create, edit, remove)
+   * @param params.wid - Word ID filter
+   * @param params.from - Start date filter (YYYY-MM-DD)
+   * @param params.to - End date filter (YYYY-MM-DD)
+   * @param params.userId - User ID filter (UUID)
+   */
+  const getEdits = (params?: {
+    n?: number
+    o?: number
+    s?: string
+    d?: string
+    t?: string
+    wid?: string
+    from?: string
+    to?: string
+    userId?: string
+  }) => {
+    const cacheKey = params
+      ? `edits-${Object.entries(params).map(([k, v]) => `${k}-${v}`).join('-')}`
+      : 'edits'
+    console.log(cacheKey)
+
+    return useAsyncData(cacheKey, () =>
       fetch<EditResponse[]>(path, {
-        params: {
-          n: number,
-          p: page,
-          s: statuses,
-        },
+        params,
       }))
   }
 
@@ -103,4 +127,3 @@ export function useEditActions() {
     declineEdit,
   }
 }
-

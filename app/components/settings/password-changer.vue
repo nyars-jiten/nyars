@@ -2,7 +2,7 @@
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
 
-const { updatePassword } = useUserRepo()
+const { updatePassword } = useUserProfile()
 
 const isChanging = ref(false)
 const showSuccess = ref(false)
@@ -12,11 +12,11 @@ const schema = yup.object({
   currentPassword: yup.string().required('Текущий пароль обязателен'),
   newPassword: yup
     .string()
-    .min(8, 'Пароль должен содержать минимум 8 символов')
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
-      'Пароль должен содержать строчную букву, заглавную букву и цифру',
-    )
+    .min(3, 'Пароль должен содержать минимум 3 символа')
+    // .matches(
+    //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+    //   'Пароль должен содержать строчную букву, заглавную букву и цифру',
+    // )
     .required('Новый пароль обязателен'),
   confirmPassword: yup
     .string()

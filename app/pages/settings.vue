@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useUserStore } from '~/stores/user-store'
-
 const { user } = storeToRefs(useUserStore())
 
 // Redirect if not authenticated

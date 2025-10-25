@@ -133,6 +133,7 @@ export interface Content {
   c?: Content[] // content
   v: string // value
   t: string // tag
+  p?: string // prop
 }
 
 export enum ReferenceType {

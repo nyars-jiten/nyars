@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 const props = defineProps<{ wid: string }>()
 
-const { getEditsByWid } = useEditRepo()
+const { getEditsByWid } = useEditsData()
 
-const { data: editsList } = useAsyncData(`jpn-edits-${props.wid}`, () => getEditsByWid(props.wid))
+const { data: editsList } = getEditsByWid(props.wid)
 
 const { t } = useI18n()
 </script>

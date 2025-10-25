@@ -10,7 +10,8 @@ export interface User extends ShortUser {
   banned: boolean
   isAdmin: boolean
   stats: StatsUser
-  createdAt: string
+  lastOnline: Date
+  createdAt: Date
 }
 
 export interface ExtendedUser extends User {

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 const routeId = useRoute('edits-id-editor').params.id
 
-const { getEditTxt, get } = useEditRepo()
+const { getEditTxt, getEdit } = useEditsData()
 const { userAccess, user } = storeToRefs(useUserStore())
 const { t } = useI18n()
 
-const edit = await useAsyncData(() => get(routeId))
-const srcData = await useAsyncData(() => getEditTxt(routeId))
+const edit = getEdit(routeId)
+const srcData = getEditTxt(routeId)
 
 function actionOnSave() {
   useNotificationStore().createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
@@ -24,7 +24,7 @@ const disabled = computed(() => {
   }
 
   // check rights
-  if (!userAccess.value.hasAccessEdits && user.value.id !== edit.data.value?.author?.id) {
+  if (!userAccess.value.hasAccessEdits && user.value?.id !== edit.data.value?.author?.id) {
     return true
   }
 

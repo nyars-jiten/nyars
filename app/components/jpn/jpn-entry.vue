@@ -22,6 +22,9 @@ function playAudio(audio: string) {
       <span v-for="(pitch, pi) in reading.pitch" :key="pi" class="inline-flex items-center gap-2">
         <!-- v-if="pitch.audio.length > 0"  -->
         <UiButton type="button" icon="ic:baseline-volume-up" @click="playAudio(pitch.audio)" />
+        <button type="button" class="flex items-center justify-start rounded-md transition-colors text-xl hover:text-violet-300/50 cursor-pointer" @click="playAudio(pitch.audio)">
+          <Icon name="ic:baseline-volume-up" />
+        </button>
 
         <span>
           <span

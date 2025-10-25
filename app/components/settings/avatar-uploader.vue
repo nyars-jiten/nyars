@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { useUserStore } from '~/stores/user-store'
-
 const { user } = storeToRefs(useUserStore())
-const { uploadAvatar: uploadUserAvatar, removeAvatar: removeUserAvatar } = useUserRepo()
+const { changeAvatar: uploadUserAvatar, deleteAvatar: removeUserAvatar } = useSettings()
 
 const isUploading = ref(false)
 const showCropModal = ref(false)

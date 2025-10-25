@@ -3,7 +3,7 @@ import { useForm } from 'vee-validate'
 import * as yup from 'yup'
 
 const { user } = storeToRefs(useUserStore())
-const { updateUsername } = useUserRepo()
+const { updateUsername } = useUserProfile()
 
 const isChanging = ref(false)
 const showSuccess = ref(false)

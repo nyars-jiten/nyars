@@ -12,6 +12,7 @@ export interface Token {
   surface: string
   furigana: FuriganaPair[]
   // reading: string
+  base: string
   deinflect: Deinflect[]
   children: Token[]
 }
@@ -29,6 +30,13 @@ export interface JpnSearchResponse {
   unitConversions: UnitConversion[]
   eraConversions: EraConversion[]
   parsed: Token[]
+  timings: Timings
+}
+
+export interface Timings {
+  total: string
+  tokenization: string
+  search: string
 }
 
 export interface UnitConversion {

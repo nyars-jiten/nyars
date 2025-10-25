@@ -1,20 +1,20 @@
 <script lang="ts" setup>
 import { tv } from 'tailwind-variants'
-import SearchResult from '~/components/search/search-result.vue'
 
-const bookId = useRoute('ocr-id').params.id
+const pageId = useRoute('ocr-id').params.id
+const bookId = useRoute('ocr-id').query.bookId
 
 const { t } = useI18n()
-const { getPage, ocrImageUrl, getNextPage, updatePage } = useOcrRepo()
+const { getPage, getNextPage } = useOcrData()
+const { updatePage } = useOcrActions()
+const { ocrImageUrl } = useOcrUtils()
 const { createNotification } = useNotificationStore()
-
-const page = ref(null as OCRPageWithBook | null)
 
 if (bookId) {
   try {
-    const nextId = await getNextPage(Number(bookId))
-    if (nextId && nextId.id) {
-      page.value = await getPage(nextId.id)
+    const { data: nextId } = await getNextPage(Number(bookId))
+    if (nextId.value && nextId.value.id) {
+      await useRouter().replace({ name: 'ocr-id', params: { id: nextId.value.id } })
     }
   }
   catch (e) {
@@ -22,13 +22,13 @@ if (bookId) {
   }
 }
 
-const { search } = useSearchRepo()
-const { source } = useJpnRepo()
-const srchResult = ref({} as JpnSearchResponse)
+const { data: page } = getPage(pageId)
 
-async function updateSearch() {
-  srchResult.value = await search(page.value?.word || '', 0, 20)
-}
+const { search } = useSearch()
+const { getEntrySource } = useJpnEntries()
+const { data: srchResult, refresh: updateSearch } = await useAsyncData(`search-request-${page.value?.word}`, () => search(page.value?.word || '', 0, 20), {
+  dedupe: 'defer',
+})
 
 const newEntry = {
   spelling: '',
@@ -61,36 +61,40 @@ function createNewEntry() {
 }
 
 async function mergeEntry(wid: string) {
-  const srcEntry = await source(wid)
+  const { data: srcEntry } = await getEntrySource(wid)
 
-  if (srcEntry.spelling.length === 0) {
+  if (!srcEntry.value) {
+    return
+  }
+
+  if (srcEntry.value.spelling.length === 0) {
     activeEntry.spelling = page.value?.word || ''
   }
-  else if (page.value && !srcEntry.spelling.split(', ').includes(page.value.word)) {
-    activeEntry.spelling = `${page.value?.word || ''}, ${srcEntry.spelling}`
+  else if (page.value && !srcEntry.value.spelling.split(', ').includes(page.value.word)) {
+    activeEntry.spelling = `${page.value?.word || ''}, ${srcEntry.value.spelling}`
   }
   else {
-    activeEntry.spelling = srcEntry.spelling
+    activeEntry.spelling = srcEntry.value.spelling
   }
 
-  if (srcEntry.reading.length === 0) {
+  if (srcEntry.value.reading.length === 0) {
     activeEntry.reading = page.value?.reading || ''
   }
-  else if (page.value && !srcEntry.reading.split(', ').includes(page.value.reading)) {
-    activeEntry.reading = `${page.value?.reading || ''}, ${srcEntry.reading}`
+  else if (page.value && !srcEntry.value.reading.split(', ').includes(page.value.reading)) {
+    activeEntry.reading = `${page.value?.reading || ''}, ${srcEntry.value.reading}`
   }
   else {
-    activeEntry.reading = srcEntry.reading
+    activeEntry.reading = srcEntry.value.reading
   }
 
-  if (srcEntry.body.length === 0) {
+  if (srcEntry.value.body.length === 0) {
     activeEntry.body = `=((сущ))\n${page.value?.meaningRu}` || ''
   }
-  else if (page.value && !srcEntry.body.includes(page.value.meaningRu)) {
-    activeEntry.body = `${srcEntry.body}\n=((сущ))\n- ${page.value?.meaningRu || ''}`
+  else if (page.value && !srcEntry.value.body.includes(page.value.meaningRu)) {
+    activeEntry.body = `${srcEntry.value.body}\n=((сущ))\n- ${page.value?.meaningRu || ''}`
   }
   else {
-    activeEntry.body = srcEntry.body
+    activeEntry.body = srcEntry.value.body
   }
 
   activeEntry.comment = `[${page.value?.prefix}] ${page.value?.title}`
@@ -125,10 +129,9 @@ async function navigatePage(nextType: NextPage) {
     return
 
   try {
-    const nextId = await getNextPage(page.value.bookId, page.value.innerIndex, nextType, page.value.id)
-    console.log('nextId', nextId)
-    if (nextId) {
-      await navigateTo({ name: 'ocr-id', params: { id: nextId.id ?? '' } })
+    const { data: nextId } = await getNextPage(page.value.bookId, page.value.innerIndex, nextType, page.value.id)
+    if (nextId.value && nextId.value.id) {
+      await navigateTo({ name: 'ocr-id', params: { id: nextId.value.id ?? '' } })
     }
   }
   catch (e) {
@@ -143,6 +146,58 @@ async function actionOnEditorSave() {
   await updateSearch()
 }
 
+// Text transformation functions
+function transformBrackets(field: 'meaningRu' | 'meaningEn') {
+  if (!page.value)
+    return
+  // Swap both directions: () ↔ [] and {} → ()
+  const transformed = page.value[field]
+    .replace(/\(/g, '⟪TEMP_OPEN⟫')
+    .replace(/\)/g, '⟪TEMP_CLOSE⟫')
+    .replace(/\[/g, '(')
+    .replace(/\]/g, ')')
+    .replace(/⟪TEMP_OPEN⟫/g, '[')
+    .replace(/⟪TEMP_CLOSE⟫/g, ']')
+    .replace(/\{/g, '(')
+    .replace(/\}/g, ')')
+
+  // Force reactivity by creating a new object reference
+  page.value = { ...page.value, [field]: transformed }
+  updateUnexpectedChars()
+}
+
+function trimWhitespace(field: 'meaningRu' | 'meaningEn') {
+  if (!page.value)
+    return
+  const cleaned = page.value[field].replace(/\s+/g, ' ').trim()
+
+  // Force reactivity by creating a new object reference
+  page.value = { ...page.value, [field]: cleaned }
+  updateUnexpectedChars()
+}
+
+const unexpectedChars = ref('')
+
+function updateUnexpectedChars() {
+  if (!page.value) {
+    unexpectedChars.value = ''
+    return
+  }
+
+  /* eslint-disable regexp/no-obscure-range */
+  const wordC = page.value.word.replace(/[ぁ-ゔゞァ-・ヽヾ゛゜ー一-龯]/g, '')
+  const readingC = page.value.reading.replace(/[ぁ-ゔァ-ンー\sa-z:'!]/gi, '')
+  const meaningEngC = page.value.meaningEn.replace(/[a-z\s,;.\\\-[\]()]/gi, '')
+  const meaningRuC = page.value.meaningRu.replace(/[а-яё\s,;.\\\-[\]()]/gi, '')
+  /* eslint-enable regexp/no-obscure-range */
+
+  unexpectedChars.value = `${wordC}|${readingC}|${meaningRuC}|${meaningEngC}`
+}
+
+watch(() => page.value, () => {
+  updateUnexpectedChars()
+})
+
 const statusStyles = tv({
   variants: {
     status: {
@@ -153,8 +208,6 @@ const statusStyles = tv({
     },
   },
 })
-
-await updateSearch()
 </script>
 
 <template>
@@ -165,9 +218,9 @@ await updateSearch()
           [{{ page?.prefix }}] {{ page?.title }}
         </h3>
 
-        <p class="text-sm text-gray-500">
-          {{ page?.description }} simple text
-        </p>
+        <div>
+          <Content allow-external :data="page?.description" class="text-gray-500" />
+        </div>
 
         <div class="flex gap-2 items-center">
           <div :class="statusStyles.variants.status[page?.status || 0]">
@@ -218,6 +271,7 @@ await updateSearch()
 
       <div class="px-4 space-y-4">
         <img
+          class="w-[50%] "
           :src="ocrImageUrl(page.prefix, page.file).href"
           alt="page image"
         >
@@ -229,29 +283,53 @@ await updateSearch()
 
       <section class="space-y-4 px-4">
         <div v-if="page" class="grid grid-cols-2 gap-4">
-          <UiInput v-model="page.word" class="w-full">
+          <UiInput v-model="page.word" class="w-full" @input="updateUnexpectedChars">
             <template #hint>
               word
             </template>
           </UiInput>
 
-          <UiInput v-model="page.reading" class="w-full">
+          <UiInput v-model="page.reading" class="w-full" @input="updateUnexpectedChars">
             <template #hint>
               reading
             </template>
           </UiInput>
 
-          <UiInput v-model="page.meaningRu" class="w-full" :multiline="true">
-            <template #hint>
-              meaningRu
-            </template>
-          </UiInput>
+          <div class="space-y-2">
+            <UiInput v-model="page.meaningRu" class="w-full" :multiline="true" @input="updateUnexpectedChars">
+              <template #hint>
+                meaningRu
+              </template>
+            </UiInput>
+            <div class="flex gap-1 flex-wrap">
+              <button type="button" class="px-2 py-1 text-xs bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 rounded" @click="transformBrackets('meaningRu')">
+                () ↔ []
+              </button>
+              <button type="button" class="px-2 py-1 text-xs bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 rounded" @click="trimWhitespace('meaningRu')">
+                Spaces
+              </button>
+            </div>
+          </div>
 
-          <UiInput v-model="page.meaningEn" class="w-full" :multiline="true">
-            <template #hint>
-              meaningEn
-            </template>
-          </UiInput>
+          <div class="space-y-2">
+            <UiInput v-model="page.meaningEn" class="w-full" :multiline="true" @input="updateUnexpectedChars">
+              <template #hint>
+                meaningEn
+              </template>
+            </UiInput>
+            <div class="flex gap-1 flex-wrap">
+              <button type="button" class="px-2 py-1 text-xs bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 rounded" @click="transformBrackets('meaningEn')">
+                () ↔ []
+              </button>
+              <button type="button" class="px-2 py-1 text-xs bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 rounded" @click="trimWhitespace('meaningEn')">
+                Spaces
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="unexpectedChars.length > 3">
+          Сомнительные символы: <span class="bg-rose-500">{{ unexpectedChars }}</span>
         </div>
 
         <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" @click="invokeUpdatePage">
@@ -261,7 +339,7 @@ await updateSearch()
 
       <hr class="border-neutral-200 dark:border-neutral-800 my-8">
 
-      <template v-if="srchResult.result && srchResult.result.length > 0">
+      <template v-if="srchResult?.result && srchResult.result.length > 0">
         <div class="grid grid-cols-[auto_1fr] gap-4 items-start">
           <template v-for="result of srchResult.result" :key="result.wid">
             <UiButton class="flex-shrink-0" type="button" icon="mdi:source-branch-plus" color="sky" :title="t('pages.editor.save')" @click="mergeEntry(result.wid)">

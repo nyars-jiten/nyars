@@ -64,8 +64,7 @@ export function useAuthState() {
   const logout = async () => {
     const { logout } = useUserAuth()
     await logout()
-    user.value = null
-    await navigateTo('/')
+    user.value = undefined
   }
 
   return {

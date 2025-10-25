@@ -25,11 +25,10 @@ export function useSearch() {
   }
 
   const search = (query: string, limit: number, offset: number) => {
-    return useAsyncData(`search-${query}-${limit}-${offset}`, () =>
-      fetch<JpnSearchResponse>('search', {
-        method: 'POST',
-        body: { query, limit, offset },
-      }))
+    return fetch<JpnSearchResponse>('search', {
+      method: 'POST',
+      body: { query, limit, offset },
+    })
   }
 
   return {
@@ -75,4 +74,3 @@ export function useReactiveSearch() {
     resetSearch,
   }
 }
-

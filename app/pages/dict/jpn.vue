@@ -4,7 +4,7 @@ const route = useRoute()
 
 const { t } = useI18n()
 
-const { search } = useSearchRepo()
+const { search } = useSearch()
 const { searchQuery, watchParam } = storeToRefs(useSearchStore())
 
 // there's no state on SSR
@@ -30,7 +30,7 @@ function updateEntry() {
   }
 }
 
-async function _inlineSearch(req: string) {
+async function inlineSearch(req: string) {
   const inlineSearchResult = await search(req, 0, 0)
   srchResult.value = { ...inlineSearchResult, parsed: data.value?.parsed ?? [] }
   updateEntry()
@@ -53,6 +53,7 @@ onMounted(updateEntry)
 <template>
   <div id="jpn-search-layout">
     <NuxtLayout name="default">
+      <!-- CONVERSIONS -->
       <div v-if="data?.unitConversions && data?.unitConversions.length > 0" class="text-center">
         <div class="text-xl">
           <div v-for="(conv, ci) in data?.unitConversions" :key="ci">
@@ -60,6 +61,7 @@ onMounted(updateEntry)
           </div>
         </div>
       </div>
+
       <div v-if="data?.eraConversions && data?.eraConversions.length > 0" class="text-center">
         <div class="text-xl">
           <div v-for="(conv, ci) in data?.eraConversions" :key="ci">
@@ -67,17 +69,24 @@ onMounted(updateEntry)
           </div>
         </div>
       </div>
-      <!-- <div class="text-center">
-        {{ data?.parsed }}
-        <div class="text-xl">
-          <span v-for="(token, ti) in data?.parsed" :key="ti" class="border-b-2 pb-0.5 ml-2 cursor-pointer" @click="inlineSearch(token.surface)">
+
+      <!-- PARSER -->
+      <div class="text-center">
+        <!-- {{ data?.parsed }} -->
+        <div class="text-xl leading-12">
+          <span v-for="(token, ti) in data?.parsed" :key="ti" class="border-b-2 pb-0.5 ml-2 cursor-pointer" @click="inlineSearch(token.base)">
             <span v-for="(furigana, fi) in token.furigana" :key="`${ti}.${fi}`">
-              <ruby>{{ furigana.word }}</ruby>
-              <rt class="select-none">{{ furigana.kana }}</rt>
+              <ruby>{{ furigana.word }}<rt class="select-none">{{ furigana.kana }}</rt></ruby>
             </span>
           </span>
         </div>
-      </div> -->
+        <div>
+          <small class="text-neutral-500">
+            {{ t('pages.search.searchInfo', [data?.parsed.length || '', data?.timings.tokenization || '', data?.timings.search || '']) }}
+          </small>
+        </div>
+      </div>
+
       <div v-if="isSearchPage" class="grid grow items-start gap-8 md:grid-cols-[1fr_2fr]">
         <template v-if="isSearchPage">
           <div v-if="hasResult && status === 'success'" class="space-y-4">
