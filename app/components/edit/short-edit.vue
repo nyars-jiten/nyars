@@ -73,7 +73,7 @@ const { t } = useI18n()
           {{ t(`models.edit.status.${edit.status}`) }}
         </span>
 
-        <EditUserProfile v-if="showApprover && edit.approver" :user="edit.approver" />
+        <user-badge-profile v-if="showApprover && edit.approver" :user="edit.approver" />
       </div>
 
       <span class="text-neutral-700">|</span>
@@ -84,7 +84,7 @@ const { t } = useI18n()
           {{ createdDate }}
         </span>
 
-        <EditUserProfile v-if="edit.author != null" :user="edit.author" />
+        <user-badge-profile v-if="edit.author != null" :user="edit.author" />
         <span v-else>анонимно</span>
       </div>
     </div>

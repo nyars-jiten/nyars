@@ -1,17 +1,23 @@
 <script setup lang="ts">
 const username = useRoute('users-username').params.username
 
-const { clientGetUser } = useUserRepo()
-const { data: user, pending, error } = await useAsyncData(`user-${username}`, () => clientGetUser(username))
-
-watch(user, () => {
-  if (user.value) {
-    user.value.banned = true
-  }
-})
+const { getUser } = useUserData()
+const { data: user, pending, error } = getUser(username)
 
 const avatar = computed(() => useAvatar(user.value?.avatar ?? '').href)
-const regTimeAgo = computed(() => user.value ? useTime(new Date(user.value.createdAt)) : '')
+const regTimeAgo = computed(() => user.value ? useTime(user.value.createdAt) : '—')
+const isOnline = computed(() => {
+  if (!user.value || !user.value.lastOnline)
+    return false
+  return (new Date().getTime() - new Date(user.value.lastOnline).getTime()) <= 15 * 60 * 1000
+})
+const onlineTimeAgo = computed(() => {
+  if (!user.value || !user.value.lastOnline || user.value.lastOnline < user.value.createdAt)
+    return '—'
+  if (isOnline.value)
+    return 'Онлайн'
+  return useTime(new Date(user.value.lastOnline))
+})
 
 // const { t } = useI18n()
 
@@ -31,17 +37,27 @@ function getRoleBadge(isAdmin: boolean) {
 
 const roleBadge = computed(() => getRoleBadge(user.value?.isAdmin ?? false))
 
-const { getEdits } = useEditRepo()
-const { data: edits } = await useLazyAsyncData(
-  'edits',
-  () => getEdits(),
-  {
-    default: (): EditResponse[] => [],
-  },
-)
+const { getEdits } = useEditsData()
+const { data: edits } = getEdits({ userId: user.value?.id })
+
+// Year selection for heatmap
+const currentYear = new Date().getFullYear()
+const registrationYear = computed(() => user.value ? new Date(user.value.createdAt).getFullYear() : currentYear)
+const selectedYear = ref(currentYear)
+
+// Generate years array from registration to current year
+const availableYears = computed(() => {
+  if (!user.value)
+    return [currentYear]
+  const years = []
+  for (let year = currentYear; year >= registrationYear.value; year--) {
+    years.push(year)
+  }
+  return years
+})
 
 // Admin functions
-const { updateUserAccess, banUser, unbanUser } = useUserRepo()
+const { updateUserAccess, banUser, unbanUser } = useUserManagement()
 const { user: currentUser } = storeToRefs(useUserStore())
 
 const isAdmin = computed(() => currentUser.value?.isAdmin ?? false)
@@ -66,7 +82,7 @@ async function saveAccess() {
   try {
     await updateUserAccess(user.value.id, userAccess.value)
     // Refresh user data
-    await refreshCookie('user')
+    refreshCookie('user')
   }
   catch (error) {
     console.error('Failed to update user access:', error)
@@ -138,7 +154,7 @@ async function handleUnban() {
           :alt="user?.username"
           class="size-32 md:size-40 rounded-2xl border-2 border-neutral-700 group-hover:border-neutral-600 transition-all duration-300 group-hover:scale-105 shadow-2xl"
         >
-        <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-neutral-900 flex items-center justify-center">
+        <div v-if="isOnline" class="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-neutral-900 flex items-center justify-center">
           <Icon name="ic:baseline-check" class="text-sm" />
         </div>
       </div>
@@ -157,7 +173,7 @@ async function handleUnban() {
         </div>
 
         <!-- Key Stats -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
           <div class="bg-neutral-800/50 rounded-lg p-4 backdrop-blur-sm">
             <div class="text-2xl font-bold">
               {{ user?.stats.rating }}
@@ -187,7 +203,15 @@ async function handleUnban() {
               {{ regTimeAgo }}
             </div>
             <div class="text-sm text-neutral-400">
-              На сайте
+              Регистрация
+            </div>
+          </div>
+          <div class="bg-neutral-800/50 rounded-lg p-4 backdrop-blur-sm">
+            <div class="text-2xl font-bold">
+              {{ onlineTimeAgo }}
+            </div>
+            <div v-if="!isOnline" class="text-sm text-neutral-400">
+              Был(а) в сети
             </div>
           </div>
         </div>
@@ -203,11 +227,16 @@ async function handleUnban() {
             <h2 class="text-xl font-semibold">
               Активность
             </h2>
-            <div class="text-sm text-neutral-400">
-              {{ new Date().getFullYear() }}
-            </div>
+            <select
+              v-model="selectedYear"
+              class="bg-neutral-700 hover:bg-neutral-600 text-white text-sm px-4 py-2 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-neutral-500"
+            >
+              <option v-for="year in availableYears" :key="year" :value="year">
+                {{ year }}
+              </option>
+            </select>
           </div>
-          <Heatmap :id="user?.id" />
+          <Heatmap :id="user?.id" :year="selectedYear" />
         </template>
       </UiBlock>
 
@@ -215,7 +244,7 @@ async function handleUnban() {
       <UiBlock class="col-span-2 lg:col-span-1">
         <template #default>
           <h2 class="text-xl font-semibold mb-4">
-            Детальная статистика
+            Статистика
           </h2>
           <div class="space-y-3">
             <div class="flex justify-between">
@@ -246,33 +275,14 @@ async function handleUnban() {
         </template>
       </UiBlock>
 
-      <!-- Edits -->
-      <UiBlock class="col-span-full">
-        <template #default>
-          <h2 class="text-xl font-semibold mb-4">
-            Правки
-          </h2>
-
-          <Edit
-            v-for="edit in edits"
-            :key="edit.id"
-            :edit="edit"
-            :expanded="true"
-          />
-        </template>
-      </UiBlock>
-
       <!-- Admin Panel -->
-      <UiBlock v-if="isAdmin" class="col-span-full">
+      <UiBlock v-if="isAdmin && !user.isAdmin" class="col-span-full">
         <template #default>
           <div class="space-y-6">
-            <div class="flex items-center justify-between">
-              <h2 class="text-xl font-semibold">
-                <Icon name="ic:baseline-admin-panel-settings" class="inline mr-2" />
-                Панель администратора
-              </h2>
-              <UiBadge color="warning" text="Только для администраторов" />
-            </div>
+            <h2 class="text-xl font-semibold">
+              <Icon name="ic:baseline-admin-panel-settings" class="inline mr-2" />
+              Управление пользователем
+            </h2>
 
             <!-- User Status -->
             <user-status-manager
@@ -291,6 +301,22 @@ async function handleUnban() {
               @save="saveAccess"
             />
           </div>
+        </template>
+      </UiBlock>
+
+      <!-- Edits -->
+      <UiBlock class="col-span-full">
+        <template #default>
+          <h2 class="text-xl font-semibold mb-4">
+            Правки
+          </h2>
+
+          <Edit
+            v-for="edit in edits"
+            :key="edit.id"
+            :edit="edit"
+            :expanded="true"
+          />
         </template>
       </UiBlock>
     </section>

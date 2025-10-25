@@ -14,9 +14,8 @@ function useJpnApi() {
 export function useJpnEntries() {
   const { fetch, path } = useJpnApi()
 
-  const getEntry = (wid: EntryJp['wid']) => {
-    return useAsyncData(`entry-${wid}`, () =>
-      fetch<EntryJp>(`${path}/entries/${wid}`))
+  const getEntry = (wid: EntryJp['wid'], options?: { watch?: any[] }) => {
+    return useAsyncData(`entry-${wid}`, () => fetch<EntryJp>(`${path}/entries/${wid}`), options)
   }
 
   const getEntrySource = (wid: EntryJp['wid']) => {
@@ -122,4 +121,3 @@ export function useJpnDownloads() {
     getDownloads,
   }
 }
-

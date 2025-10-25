@@ -11,13 +11,11 @@ const articleWid = useRouteArticle()
 
 const { t } = useI18n()
 
-const { get } = useJpnRepo()
+const { getEntry } = useJpnEntries()
 
 watch(articleWid, () => window.scrollTo(0, 0))
 
-const { data: jpnEntry, status } = useAsyncData(`jpn-article-${wid}`, () => get(wid), {
-  watch: [articleWid],
-})
+const { data: jpnEntry, status } = getEntry(wid, { watch: [articleWid] })
 
 const showLemmas = ref(false)
 

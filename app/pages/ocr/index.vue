@@ -1,24 +1,18 @@
 <script lang="ts" setup>
 const { t } = useI18n()
 
-const { getBooks } = useOcrRepo()
-const books = ref([] as OCRBook[]) as Ref<OCRBook[]>
+const { getBooks } = useOcrData()
+const { data: books } = getBooks()
 
-async function updateBooks() {
-  books.value = await getBooks()
-}
+// const { $reset: userReset } = useUserStore()
+// const { user } = storeToRefs(useUserStore())
 
-const { $reset: userReset } = useUserStore()
-const { user } = storeToRefs(useUserStore())
-
-onBeforeMount(() => {
-  userReset() // update user state
-  if (!user.value) {
-    navigateTo('/users/login')
-  }
-})
-
-await updateBooks()
+// onBeforeMount(() => {
+//   userReset() // update user state
+//   if (!user.value) {
+//     navigateTo('/users/login')
+//   }
+// })
 </script>
 
 <template>
@@ -34,7 +28,7 @@ await updateBooks()
             <UiBadge :text="book.prefix" color="dict" />
           </div>
 
-          <NuxtLink :to="{ name: 'ocr-id', params: { id: book.id } }" class="truncate hover:text-zinc-400 transition-colors">
+          <NuxtLink :to="{ name: 'ocr-id', query: { bookId: book.id }, params: { id: book.id } }" class="truncate hover:text-zinc-400 transition-colors">
             {{ book.title }}
           </NuxtLink>
 
@@ -53,7 +47,7 @@ await updateBooks()
             {{ useFormatNumber((book.completedPages / book.totalPages * 100)) }}%
           </div>
 
-          <hr v-if="index < books.length - 1" class="border-neutral-800 col-span-full -mx-4">
+          <hr v-if="index < (books?.length || 0) " class="border-neutral-800 col-span-full -mx-4">
         </template>
       </div>
     </section>

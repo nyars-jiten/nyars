@@ -13,7 +13,7 @@ const props = defineProps<Props>()
 const emit = defineEmits(['save', 'remove'])
 const { t } = useI18n()
 const api = useJpnRepo()
-const { updateEdit } = useEditRepo()
+const { updateEdit } = useEditActions()
 
 const { $reset: userReset } = useUserStore()
 const { menuState, user } = storeToRefs(useUserStore())

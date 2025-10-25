@@ -4,6 +4,7 @@ import { tv } from 'tailwind-variants'
 interface Props {
   data: Content[]
   breakLine?: boolean
+  allowExternal?: boolean
 }
 
 withDefaults(defineProps<Props>(), {
@@ -25,7 +26,7 @@ const style = tv({
 
 <template>
   <span class="leading-none">
-    <template v-for="({ t, v, c }, i) in data" :key="i">
+    <template v-for="({ t, v, c, p }, i) in data" :key="i">
       <Content v-if="c && t !== 'ruby'" :data="c" :class="style({ t })" :break-line="breakLine" />
 
       <sup v-if="t === 'sup'">{{ v }}</sup>
@@ -33,7 +34,10 @@ const style = tv({
       <sub v-else-if="t === 'sub'">{{ v }}</sub>
 
       <template v-else-if="t === 'ref'">
-        <NuxtLink :to="{ name: 'dict-jpn', query: { q: v } }" class="text-indigo-300">
+        <NuxtLink v-if="allowExternal && p" :to="p" external target="_blank" class="text-indigo-300">
+          {{ v }}
+        </NuxtLink>
+        <NuxtLink v-else :to="{ name: 'dict-jpn', query: { q: v } }" class="text-indigo-300">
           {{ v }}
         </NuxtLink>
         <!-- <span class="text-indigo-300">

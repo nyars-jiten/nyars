@@ -1,14 +1,8 @@
 <script lang="ts" setup>
 const { t } = useI18n()
 
-const { tagList } = useJpnRepo()
-const tags = ref({} as Record<string, Tag[]>)
-
-async function updateTags() {
-  tags.value = await tagList('')
-}
-
-await updateTags()
+const { getTags } = useJpnTags()
+const { data: tags } = getTags('')
 </script>
 
 <template>

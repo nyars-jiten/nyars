@@ -3,9 +3,9 @@ const props = defineProps<{ wid: string }>()
 
 const { t } = useI18n()
 
-const { getSatellites } = useJpnRepo()
+const { getSatellites } = useJpnEntries()
 
-const { data: satelliteEntries } = useAsyncData(`jpn-satellites-${props.wid}`, () => getSatellites(props.wid))
+const { data: satelliteEntries } = getSatellites(props.wid)
 
 // const maxSatelliteSize = 10
 
