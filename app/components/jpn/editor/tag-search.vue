@@ -8,11 +8,12 @@ const { t } = useI18n()
 const query = ref('')
 const hideCategories = ref([]) as Ref<string[]>
 
-const { tagList } = useJpnRepo()
+const { getTags } = useJpnTags()
 const tags = ref({} as Record<string, Tag[]>) as Ref<Record<string, Tag[]>>
 
 async function updateTags() {
-  tags.value = await tagList(query.value)
+  const result = await getTags(query.value)
+  tags.value = result.data.value || {}
 }
 
 function toggleCategory(category: string) {
@@ -24,7 +25,10 @@ function toggleCategory(category: string) {
   }
 }
 
-await updateTags()
+// Initialize tags
+onMounted(async () => {
+  await updateTags()
+})
 
 watchDebounced(query, updateTags, { debounce: 350 })
 </script>

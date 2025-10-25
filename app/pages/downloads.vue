@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const { getDownloads } = useJpnRepo()
+const { getDownloads } = useJpnDownloads()
 
-const { data: downloads } = await useAsyncData(() => getDownloads())
+const { data: downloads } = getDownloads()
 
 function getExportPath(file: string) {
   return `/static/export/${file}`

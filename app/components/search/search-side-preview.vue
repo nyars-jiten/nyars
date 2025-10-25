@@ -1,11 +1,11 @@
 <script setup lang="ts">
 const articleWid = useRouteArticle()
 
-const api = useJpnRepo()
+const { getEntry } = useJpnEntries()
 
 watch(articleWid, () => window.scrollTo(0, 0))
 
-const { data: article } = useAsyncData('jpn-article', () => api.get(articleWid.value), {
+const { data: article } = getEntry(articleWid.value, {
   watch: [articleWid],
 })
 

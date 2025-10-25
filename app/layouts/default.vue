@@ -33,7 +33,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="grid min-h-dvh grid-cols-[auto_1fr] max-sm:grid-cols-1 gap-4 p-4">
+  <div class="grid min-h-dvh grid-cols-[auto_1fr] max-sm:grid-cols-1 gap-4 px-4">
     <section class="space-y-4 sticky h-[calc(100dvh-var(--spacing)*8)] top-4 bg-neutral-900 max-sm:hidden">
       <UiButton :outline="false" type="button" @click="menuState = !menuState">
         <Icon v-if="menuState" size="1.5rem" name="ic:baseline-close" />
@@ -46,7 +46,7 @@ onMounted(() => {
     <LayoutMenu class="inset-y-24 z-50 pt-4" secondary />
 
     <div class="space-y-4 flex flex-col">
-      <div class="sticky top-0 z-40 flex items-center justify-between gap-x-4 bg-neutral-900/95">
+      <div class="sticky top-0 py-4 z-40 flex items-center justify-between gap-x-4 bg-neutral-900/95">
         <NuxtLink
           to="/"
           class="flex items-center gap-x-2"

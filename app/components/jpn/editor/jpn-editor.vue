@@ -12,7 +12,7 @@ interface Props {
 const props = defineProps<Props>()
 const emit = defineEmits(['save', 'remove'])
 const { t } = useI18n()
-const api = useJpnRepo()
+const { previewEntry, checkDuplicates, editEntry, removeEntry, createEntry } = useJpnEntries()
 const { updateEdit } = useEditActions()
 
 const { $reset: userReset } = useUserStore()
@@ -45,17 +45,22 @@ entry.value.body = props.entry.body
 
 const showConfimationWindow = ref('')
 
-async function callPreview() {
-  return await api.preview(entry.value)
-}
+const preview = ref<EditorEntryJp | null>(null)
+const duplicates = ref<EntryJp[]>([])
 
-const preview = ref(await callPreview())
+async function callPreview() {
+  return await previewEntry(entry.value)
+}
 
 async function callCheckDuplicates() {
-  return (await api.checkDuplicates(entry.value)).filter(x => x.wid !== props.wid)
+  return (await checkDuplicates(entry.value)).filter((x: EntryJp) => x.wid !== props.wid)
 }
 
-const duplicates = ref(await callCheckDuplicates())
+// Initialize preview and duplicates
+onMounted(async () => {
+  preview.value = await callPreview()
+  duplicates.value = await callCheckDuplicates()
+})
 
 // const changes = computed(() => 'code' in preview.data.value ? null : preview.data.value)
 
@@ -72,14 +77,14 @@ watchDebounced([spellingComp, readingComp], async () => {
 
 async function save() {
   if (props.isNew) {
-    await api.create(entry.value)
+    await createEntry(entry.value)
   }
   else if (props.isEdit) {
     const routeId = useRoute('edits-id-editor').params.id
     await updateEdit(routeId, entry.value)
   }
   else {
-    await api.edit(props.wid, entry.value)
+    await editEntry(props.wid, entry.value)
   }
 
   // notificationStore.createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
@@ -89,7 +94,7 @@ async function save() {
 
 async function remove() {
   // body is still required, so we can save meta data
-  await api.remove(`${props.wid}`, entry.value)
+  await removeEntry(`${props.wid}`, entry.value)
   // notificationStore.createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
   // useRouter().back()
   emit('remove')

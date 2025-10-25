@@ -3,16 +3,6 @@ const { t } = useI18n()
 
 const { getBooks } = useOcrData()
 const { data: books } = getBooks()
-
-// const { $reset: userReset } = useUserStore()
-// const { user } = storeToRefs(useUserStore())
-
-// onBeforeMount(() => {
-//   userReset() // update user state
-//   if (!user.value) {
-//     navigateTo('/users/login')
-//   }
-// })
 </script>
 
 <template>
