@@ -52,6 +52,7 @@ function getDefaultIcon(tabId: string): string {
     edits: 'ic:baseline-plus-minus-alt',
     satellites: 'ic:baseline-translate',
     scans: 'material-symbols:scan-outline',
+    llm: 'mdi:sparkles-outline',
   }
   return icons[tabId] || ''
 }

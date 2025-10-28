@@ -63,6 +63,17 @@ export function useJpnEntries() {
     })
   }
 
+  const getLLMData = (wid: string) => {
+    return useAsyncData(`llm-data-${wid}`, () =>
+      fetch<LLMStoredResponse | null>(`${path}/entries/${wid}/llm`))
+  }
+
+  const sendLLMRequest = async (wid: string) => {
+    return await fetch<ApiError>(`${path}/entries/${wid}/llm`, {
+      method: 'POST',
+    })
+  }
+
   return {
     getEntry,
     getEntrySource,
@@ -72,6 +83,8 @@ export function useJpnEntries() {
     createEntry,
     previewEntry,
     checkDuplicates,
+    getLLMData,
+    sendLLMRequest,
   }
 }
 

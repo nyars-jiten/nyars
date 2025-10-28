@@ -72,12 +72,22 @@
         "jpnAuto": "авто(нов./исп.)"
       }
     },
+    "llmEntry": {
+      "requestLLMData": "Отправить в очередь на генерацию",
+      "status": [
+        "В очереди",
+        "В процессе",
+        "Готово",
+        "Ошибка"
+      ]
+    },
     "uiKit": {
       "textLoading": "Идёт поиск",
       "tabs": {
         "edits": "Правки",
         "satellites": "Сателлиты",
-        "scans": "Сканы"
+        "scans": "Сканы",
+        "llm": "AI"
       },
       "noData": "Нет данных..."
     }
@@ -231,7 +241,8 @@
       "satelliteButtonOpen": "раскрыть",
       "satelliteButtonClose": "свернуть",
       "entryWasDeleted": "Статья удалена",
-      "entryIsLoading": "Статья загружается"
+      "entryIsLoading": "Статья загружается",
+      "llmDataNotAvailable": "LLM данные недоступны"
     },
     "login": {
       "titleLogin": "Войти",
