@@ -1,22 +1,27 @@
-import type { $Fetch, NitroFetchRequest } from 'nitropack'
+import { useApiClient } from './client'
 
-function useEditsApi() {
-  const { $apiFetch } = useNuxtApp()
+/**
+ * Edits API client
+ */
+export function useEditsApi() {
+  const client = useApiClient()
   const path = '/edits'
 
   return {
-    fetch: $apiFetch as $Fetch<any, NitroFetchRequest>,
+    client,
     path,
   }
 }
 
-// Edits data management
+/**
+ * Edits data management composable
+ */
 export function useEditsData() {
-  const { fetch, path } = useEditsApi()
+  const { client, path } = useEditsApi()
 
   const getEdit = (id: string) => {
     return useAsyncData(`edit-${id}`, () =>
-      fetch<EditResponse>(`${path}/${id}`))
+      client.get<EditResponse>(`${path}/${id}`))
   }
 
   /**
@@ -46,34 +51,27 @@ export function useEditsData() {
     const cacheKey = params
       ? `edits-${Object.entries(params).map(([k, v]) => `${k}-${v}`).join('-')}`
       : 'edits'
-    console.log(cacheKey)
 
     return useAsyncData(cacheKey, () =>
-      fetch<EditResponse[]>(path, {
-        params,
-      }))
+      client.get<EditResponse[]>(path, params))
   }
 
   const getEditsByWid = (wid: string) => {
     return useAsyncData(`edits-wid-${wid}`, () =>
-      fetch<EditResponse[]>(path, {
-        params: { wid },
-      }))
+      client.get<EditResponse[]>(path, { wid }))
   }
 
   const getEditsByEntry = (entryId: string, dictionary: number, page = 0, count = 25) => {
     return useAsyncData(`edits-entry-${dictionary}-${entryId}-${page}-${count}`, () =>
-      fetch<EditResponse[]>(`${path}/by-entry/${dictionary}/${entryId}`, {
-        params: {
-          p: page,
-          c: count,
-        },
+      client.get<EditResponse[]>(`${path}/by-entry/${dictionary}/${entryId}`, {
+        p: page,
+        c: count,
       }))
   }
 
   const getEditTxt = (id: string) => {
     return useAsyncData(`edit-txt-${id}`, () =>
-      fetch<EditorTxtEntryJp>(`${path}/${id}/txt`))
+      client.get<EditorTxtEntryJp>(`${path}/${id}/txt`))
   }
 
   return {
@@ -85,39 +83,26 @@ export function useEditsData() {
   }
 }
 
-// Edit actions
+/**
+ * Edit actions composable
+ */
 export function useEditActions() {
-  const { fetch, path } = useEditsApi()
+  const { client, path } = useEditsApi()
 
   const updateEdit = async (id: string, edit: EditorTxtEntryJp) => {
-    return await fetch<EditResponse>(`${path}/${id}`, {
-      method: 'POST',
-      body: edit,
-    })
+    return await client.post<EditResponse>(`${path}/${id}`, edit)
   }
 
   const approveEditAsUnreviewed = async (editId: string) => {
-    return await fetch<EditResponse>(`${path}/${editId}/approve`, {
-      method: 'POST',
-      params: {
-        isUnreviewed: true,
-      },
-    })
+    return await client.post<EditResponse>(`${path}/${editId}/approve`, null, { isUnreviewed: true })
   }
 
   const approveEditAsReviewed = async (editId: string) => {
-    return await fetch<EditResponse>(`${path}/${editId}/approve`, {
-      method: 'POST',
-      params: {
-        isUnreviewed: false,
-      },
-    })
+    return await client.post<EditResponse>(`${path}/${editId}/approve`, null, { isUnreviewed: false })
   }
 
   const declineEdit = async (editId: string) => {
-    return await fetch<EditResponse>(`${path}/${editId}/decline`, {
-      method: 'POST',
-    })
+    return await client.post<EditResponse>(`${path}/${editId}/decline`)
   }
 
   return {

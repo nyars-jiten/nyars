@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const { user } = storeToRefs(useUserStore())
 const { changeAvatar: uploadUserAvatar, deleteAvatar: removeUserAvatar } = useSettings()
+const { getUserAvatarUrl } = useUserProfile()
 
 const isUploading = ref(false)
 const showCropModal = ref(false)
@@ -19,7 +20,7 @@ const cropCanvas = ref<HTMLCanvasElement>()
 // Avatar URL
 const avatarUrl = computed(() => {
   if (user.value?.avatar) {
-    return useAvatar(user.value.avatar).href
+    return getUserAvatarUrl(user.value.avatar).href
   }
   return '/default-avatar.png'
 })

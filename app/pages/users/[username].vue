@@ -4,7 +4,8 @@ const username = useRoute('users-username').params.username
 const { getUser } = useUserData()
 const { data: user, pending, error } = getUser(username)
 
-const avatar = computed(() => useAvatar(user.value?.avatar ?? '').href)
+const { getUserAvatarUrl } = useUserProfile()
+const avatar = computed(() => getUserAvatarUrl(user.value?.avatar ?? '').href)
 const regTimeAgo = computed(() => user.value ? useTime(user.value.createdAt) : '—')
 const isOnline = computed(() => {
   if (!user.value || !user.value.lastOnline)

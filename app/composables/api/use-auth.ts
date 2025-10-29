@@ -1,59 +1,77 @@
-import type { $Fetch, NitroFetchRequest } from 'nitropack'
+import { useApiClient } from './client'
 
-function useAuthApi() {
-  const { $apiFetch } = useNuxtApp()
+/**
+ * Authentication API client
+ */
+export function useAuth() {
+  const client = useApiClient()
   const path = '/auth'
 
-  return {
-    fetch: $apiFetch as $Fetch<any, NitroFetchRequest>,
-    path,
-  }
-}
-
-// Authentication composables
-export function useAuth() {
-  const { fetch, path } = useAuthApi()
-
-  const login = async (body: { login: string, password: string }) => {
+  /**
+   * Login with credentials
+   * @param credentials - Login credentials with login and password
+   */
+  const login = async (credentials: { login: string, password: string }) => {
     try {
-      const user = await fetch<User>(`${path}/login`, {
-        method: 'POST',
-        body,
-      })
-      return { data: user, error: null }
+      const data = await client.post<User>(`${path}/login`, credentials)
+      return { data, error: null }
     }
     catch (error: any) {
       return { data: null, error: error.data as ApiError }
     }
   }
 
-  const register = async (body: { login: string, password: string }) => {
+  /**
+   * Register a new user
+   * @param credentials - Registration credentials with login and password
+   */
+  const register = async (credentials: { login: string, password: string }) => {
     try {
-      const user = await fetch<User>(`${path}/register`, {
-        method: 'POST',
-        body,
-      })
-      return { data: user, error: null }
+      const data = await client.post<User>(`${path}/register`, credentials)
+      return { data, error: null }
     }
     catch (error: any) {
       return { data: null, error: error.data as ApiError }
+    }
+  }
+
+  /**
+   * Logout current user
+   */
+  const logout = async () => {
+    try {
+      await client.post(`${path}/logout`)
+      return { error: null }
+    }
+    catch (error: any) {
+      return { error: error.data as ApiError }
     }
   }
 
   return {
     login,
     register,
+    logout,
   }
 }
 
-// Authentication state management
+/**
+ * Authentication state composable
+ * Provides reactive authentication state
+ */
 export function useAuthState() {
   const { user } = storeToRefs(useUserStore())
   const { getCurrentUser } = useUserData()
+  const { logout: apiLogout } = useAuth()
 
   const isAuthenticated = computed(() => !!user.value)
   const isAdmin = computed(() => user.value?.isAdmin ?? false)
+  const isBot = computed(() => user.value?.isBot ?? false)
+  const isBanned = computed(() => user.value?.banned ?? false)
 
+  /**
+   * Refresh user data
+   */
   const refreshUser = async () => {
     const { data } = await getCurrentUser()
     if (data.value) {
@@ -61,15 +79,20 @@ export function useAuthState() {
     }
   }
 
+  /**
+   * Logout current user
+   */
   const logout = async () => {
-    const { logout } = useUserAuth()
-    await logout()
+    await apiLogout()
     user.value = undefined
   }
 
   return {
+    user: readonly(user),
     isAuthenticated,
     isAdmin,
+    isBot,
+    isBanned,
     refreshUser,
     logout,
   }

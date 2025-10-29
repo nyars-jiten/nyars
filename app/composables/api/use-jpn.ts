@@ -1,77 +1,65 @@
-import type { $Fetch, NitroFetchRequest } from 'nitropack'
+import { useApiClient } from './client'
 
-function useJpnApi() {
-  const { $apiFetch } = useNuxtApp()
+/**
+ * Japanese Dictionary API client
+ */
+export function useJpnApi() {
+  const client = useApiClient()
   const path = '/jp'
 
   return {
-    fetch: $apiFetch as $Fetch<any, NitroFetchRequest>,
+    client,
     path,
   }
 }
 
-// Japanese dictionary entries
+/**
+ * Japanese dictionary entries composable
+ */
 export function useJpnEntries() {
-  const { fetch, path } = useJpnApi()
+  const { client, path } = useJpnApi()
 
   const getEntry = (wid: EntryJp['wid'], options?: { watch?: any[] }) => {
-    return useAsyncData(`entry-${wid}`, () => fetch<EntryJp>(`${path}/entries/${wid}`), options)
+    return useAsyncData(`entry-${wid}`, () => client.get<EntryJp>(`${path}/entries/${wid}`), options)
   }
 
   const getEntrySource = (wid: EntryJp['wid']) => {
     return useAsyncData(`entry-source-${wid}`, () =>
-      fetch<EditorTxtEntryJp>(`${path}/entries/${wid}/txt`))
+      client.get<EditorTxtEntryJp>(`${path}/entries/${wid}/txt`))
   }
 
   const getSatellites = (wid: string) => {
     return useAsyncData(`satellites-${wid}`, () =>
-      fetch<EntryJpSatellite[]>(`${path}/entries/${wid}/satellites`))
+      client.get<EntryJpSatellite[]>(`${path}/entries/${wid}/satellites`))
   }
 
   const editEntry = async (wid: EntryJp['wid'], body: EditorTxtEntryJp) => {
-    return await fetch<ApiError>(`${path}/entries/${wid}`, {
-      method: 'POST',
-      body,
-    })
+    return await client.post(`${path}/entries/${wid}`, body)
   }
 
   const removeEntry = async (wid: EntryJp['wid'], body: EditorTxtEntryJp) => {
-    return await fetch<ApiError>(`${path}/entries/${wid}`, {
-      method: 'DELETE',
-      body,
-    })
+    return await client.delete(`${path}/entries/${wid}`, body)
   }
 
   const createEntry = async (body: EditorTxtEntryJp) => {
-    return await fetch<ApiError>(`${path}/entries`, {
-      method: 'POST',
-      body,
-    })
+    return await client.post(`${path}/entries`, body)
   }
 
   const previewEntry = async (body: EditorTxtEntryJp) => {
-    return await fetch<EditorEntryJp>(`${path}/txt-to-entry`, {
-      method: 'POST',
-      body,
-    })
+    return await client.post<EditorEntryJp>(`${path}/txt-to-entry`, body)
   }
 
   const checkDuplicates = async (body: EditorTxtEntryJp) => {
-    return await fetch<EntryJp[]>(`${path}/check-duplicates`, {
-      method: 'POST',
-      body,
-    })
+    return await client.post<EntryJp[]>(`${path}/check-duplicates`, body)
   }
 
   const getLLMData = (wid: string) => {
     return useAsyncData(`llm-data-${wid}`, () =>
-      fetch<LLMStoredResponse | null>(`${path}/entries/${wid}/llm`))
+      client.get<LLMStoredResponse | null>(`${path}/entries/${wid}/llm`))
   }
 
   const sendLLMRequest = async (wid: string) => {
-    return await fetch<ApiError>(`${path}/entries/${wid}/llm`, {
-      method: 'POST',
-    })
+    return await client.post(`${path}/entries/${wid}/llm`)
   }
 
   return {
@@ -88,30 +76,23 @@ export function useJpnEntries() {
   }
 }
 
-// Tags management
+/**
+ * Tags management composable
+ */
 export function useJpnTags() {
-  const { fetch, path } = useJpnApi()
+  const { client, path } = useJpnApi()
 
   const getTags = (q: string) => {
     return useAsyncData(`tags-${q}`, () =>
-      fetch<Record<string, Tag[]>>(`${path}/tags`, {
-        method: 'GET',
-        query: { q },
-      }))
+      client.get<Record<string, Tag[]>>(`${path}/tags`, { q }))
   }
 
   const updateTag = async (id: number, body: Tag) => {
-    return await fetch<Tag>(`${path}/tags/${id}`, {
-      method: 'POST',
-      body,
-    })
+    return await client.put<Tag>(`${path}/tags/${id}`, body)
   }
 
   const createTag = async (body: Tag) => {
-    return await fetch<Tag>(`${path}/tags`, {
-      method: 'POST',
-      body,
-    })
+    return await client.post<Tag>(`${path}/tags`, body)
   }
 
   return {
@@ -121,13 +102,15 @@ export function useJpnTags() {
   }
 }
 
-// Downloads
+/**
+ * Downloads composable
+ */
 export function useJpnDownloads() {
-  const { fetch, path } = useJpnApi()
+  const { client, path } = useJpnApi()
 
   const getDownloads = () => {
     return useAsyncData('downloads', () =>
-      fetch<Download[]>(`${path}/downloads`))
+      client.get<Download[]>(`${path}/downloads`))
   }
 
   return {

@@ -1,53 +1,49 @@
-import type { $Fetch, NitroFetchRequest } from 'nitropack'
+import { useApiClient } from './client'
 
-function useOcrApi() {
-  const { $apiFetch } = useNuxtApp()
+/**
+ * OCR API client
+ */
+export function useOcrApi() {
+  const client = useApiClient()
   const path = '/ocr'
   const config = useRuntimeConfig()
 
   return {
-    fetch: $apiFetch as $Fetch<any, NitroFetchRequest>,
+    client,
     path,
     config,
   }
 }
 
-// OCR data management
+/**
+ * OCR data management composable
+ */
 export function useOcrData() {
-  const { fetch, path } = useOcrApi()
+  const { client, path } = useOcrApi()
 
   const getBooks = () => {
     return useAsyncData('ocr-books', () =>
-      fetch<OCRBook[]>(`${path}/books`))
+      client.get<OCRBook[]>(`${path}/books`))
   }
 
   const searchPages = (query: string) => {
     return useAsyncData(`ocr-search-${query}`, () =>
-      fetch<OCRPageWithBook[]>(`${path}/search`, {
-        method: 'GET',
-        query: { q: query },
-      }))
+      client.get<OCRPageWithBook[]>(`${path}/search`, { q: query }))
   }
 
   const searchPagesByWid = (wid: string) => {
     return useAsyncData(`ocr-search-wid-${wid}`, () =>
-      fetch<OCRPageWithBook[]>(`${path}/search-wid`, {
-        method: 'GET',
-        query: { wid },
-      }))
+      client.get<OCRPageWithBook[]>(`${path}/search-wid`, { wid }))
   }
 
   const getPage = (id: string) => {
     return useAsyncData(`ocr-page-${id}`, () =>
-      fetch<OCRPageWithBook>(`${path}/pages/${id}`))
+      client.get<OCRPageWithBook>(`${path}/pages/${id}`))
   }
 
   const getNextPage = (bookId: number, innerIndex: number = 0, type: number = 0, currentId: string = '') => {
     return useAsyncData(`ocr-next-page-${bookId}-${innerIndex}-${type}-${currentId}`, () =>
-      fetch<Record<string, string>>(`${path}/pages/${currentId}/next`, {
-        method: 'GET',
-        query: { bookId, innerIndex, type },
-      }))
+      client.get<Record<string, string>>(`${path}/pages/${currentId}/next`, { bookId, innerIndex, type }))
   }
 
   return {
@@ -59,15 +55,14 @@ export function useOcrData() {
   }
 }
 
-// OCR actions
+/**
+ * OCR actions composable
+ */
 export function useOcrActions() {
-  const { fetch, path } = useOcrApi()
+  const { client, path } = useOcrApi()
 
   const updatePage = async (id: string, data: OCRPageWithBook) => {
-    return await fetch<OCRPageWithBook>(`${path}/pages/${id}`, {
-      method: 'POST',
-      body: data,
-    })
+    return await client.post<OCRPageWithBook>(`${path}/pages/${id}`, data)
   }
 
   return {
@@ -75,7 +70,9 @@ export function useOcrActions() {
   }
 }
 
-// OCR utilities
+/**
+ * OCR utilities composable
+ */
 export function useOcrUtils() {
   const { config } = useOcrApi()
 
@@ -86,4 +83,3 @@ export function useOcrUtils() {
     ocrImageUrl,
   }
 }
-

@@ -5,9 +5,10 @@ const { logout: userLogout } = useAuthState()
 
 const { t } = useI18n()
 const { user } = storeToRefs(useUserStore())
+const { getUserAvatarUrl } = useUserProfile()
 
 // TODO: not nullable
-const avatar = computed(() => useAvatar(user.value?.avatar ?? '').href)
+const avatar = computed(() => getUserAvatarUrl(user.value?.avatar ?? '').href)
 
 async function logout() {
   await userLogout()

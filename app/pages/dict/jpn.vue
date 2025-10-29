@@ -72,7 +72,6 @@ onMounted(updateEntry)
 
       <!-- PARSER -->
       <div class="text-center">
-        <!-- {{ data?.parsed }} -->
         <div class="text-xl leading-12">
           <span v-for="(token, ti) in data?.parsed" :key="ti" class="border-b-2 pb-0.5 ml-2 cursor-pointer" @click="inlineSearch(token.base)">
             <span v-for="(furigana, fi) in token.furigana" :key="`${ti}.${fi}`">
@@ -89,7 +88,7 @@ onMounted(updateEntry)
 
       <div v-if="isSearchPage" class="grid grow items-start gap-8 md:grid-cols-[1fr_2fr]">
         <template v-if="isSearchPage">
-          <div v-if="hasResult && status === 'success'" class="space-y-4">
+          <div v-if="hasResult && status === 'success'" class="space-y-4 top-18 sticky h-[calc(100dvh-var(--spacing)*18*2)] overflow-y-auto">
             <SearchResult v-for="result of srchResult?.result" :key="result.wid" :article="result" class="block" />
           </div>
           <div v-else-if="status === 'success'">

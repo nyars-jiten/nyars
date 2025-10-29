@@ -1,34 +1,42 @@
-import type { $Fetch, NitroFetchRequest } from 'nitropack'
+import { useApiClient } from './client'
 
-function useSearchApi() {
-  const { $apiFetch } = useNuxtApp()
+/**
+ * Search API client
+ */
+export function useSearchApi() {
+  const client = useApiClient()
   const path = '/search'
 
   return {
-    fetch: $apiFetch as $Fetch<any, NitroFetchRequest>,
+    client,
     path,
   }
 }
 
-// Search functionality
+/**
+ * Search functionality composable
+ */
 export function useSearch() {
-  const { fetch, path } = useSearchApi()
+  const { client, path } = useSearchApi()
 
+  /**
+   * Get search suggestions
+   * @param input - Search input
+   * @param number - Number of suggestions (default: 10)
+   */
   const getSuggestions = (input: string, number = 10) => {
     return useAsyncData(`suggestions-${input}-${number}`, () =>
-      fetch<string[]>(`${path}/preview`, {
-        params: {
-          q: input,
-          n: number,
-        },
-      }))
+      client.get<string[]>(`${path}/preview`, { q: input, n: number }))
   }
 
-  const search = (query: string, limit: number, offset: number) => {
-    return fetch<JpnSearchResponse>('search', {
-      method: 'POST',
-      body: { query, limit, offset },
-    })
+  /**
+   * Perform a search
+   * @param query - Search query
+   * @param limit - Limit number of results
+   * @param offset - Offset for pagination
+   */
+  const search = async (query: string, limit: number, offset: number) => {
+    return await client.post<JpnSearchResponse>('search', { query, limit, offset })
   }
 
   return {
@@ -37,7 +45,10 @@ export function useSearch() {
   }
 }
 
-// Search with reactive parameters
+/**
+ * Reactive search composable
+ * Provides reactive search state and pagination
+ */
 export function useReactiveSearch() {
   const query = ref('')
   const limit = ref(25)
@@ -51,14 +62,23 @@ export function useReactiveSearch() {
     return search(query.value, limit.value, offset.value)
   })
 
+  /**
+   * Navigate to next page
+   */
   const nextPage = () => {
     offset.value += limit.value
   }
 
+  /**
+   * Navigate to previous page
+   */
   const prevPage = () => {
     offset.value = Math.max(0, offset.value - limit.value)
   }
 
+  /**
+   * Reset search state
+   */
   const resetSearch = () => {
     query.value = ''
     offset.value = 0

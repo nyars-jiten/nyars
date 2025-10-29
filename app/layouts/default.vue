@@ -1,27 +1,8 @@
 <script lang="ts" setup>
 import { version } from '~~/package.json'
 
-// user,
 const { menuState } = storeToRefs(useUserStore())
-// const { clientLogout } = useUserRepo()
-// const avatar = computed(() => useAvatar(user.value?.avatar ?? '').href)
-
-// const styles = tv({
-//   base: 'inline-block w-full px-8 py-3 text-center leading-none transition-colors hover:bg-zinc-800 hover:text-zinc-300',
-// })
-
-// async function logout() {
-//   await clientLogout()
-//   user.value = null
-//   await navigateTo('/')
-// }
-
-// const { t } = useI18n()
 const headerStore = useHeaderStore()
-// const [userMenu, toggleUserMenu] = useToggle()
-
-// const userMenuRef = useTemplateRef('userMenuRef')
-// onClickOutside(userMenuRef, () => toggleUserMenu(false))
 
 onMounted(() => {
   if (import.meta.client) {
