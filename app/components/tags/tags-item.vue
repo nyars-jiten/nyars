@@ -54,7 +54,7 @@ function cancelTag() {
       </template>
     </td>
 
-    <td class="opacity-0 group-hover:opacity-100 transition-opacity">
+    <td class="opacity-0 group-hover:opacity-100 transition-opacity p-2">
       <section v-if="userAccess.hasAccessTagEdit" class="flex gap-2">
         <UiButton v-if="!isEditing" icon="ic:baseline-edit" color="edit" class="w-min" :outline="false" :disabled="loading" @click="toggleEditing()" />
         <template v-else>
