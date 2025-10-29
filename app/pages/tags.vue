@@ -16,7 +16,7 @@ const { data: tags } = getTags('')
 
       <table class="w-full">
         <tbody v-for="(list, category) of tags" :key="category">
-          <tr class="sticky top-10 bg-neutral-900/95 text-indigo-300/80">
+          <tr class="sticky top-18 bg-neutral-900/95 text-indigo-300/80">
             <td colspan="100%">
               <h2 class="text-4xl uppercase font-extralight text-center m-4">
                 {{ t(`pages.editor.tagCategories.${category}`) }}
