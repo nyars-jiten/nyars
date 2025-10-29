@@ -39,10 +39,21 @@ export default defineNuxtConfig({
     },
   ],
   fonts: {
+    families: [
+      {
+        name: 'Noto Sans JP',
+        subsets: ['japanese'],
+      },
+      {
+        name: 'Exo 2',
+        subsets: ['latin', 'latin-ext', 'cyrillic', 'cyrillic-ext'],
+      },
+    ],
     defaults: {
-      weights: [200, 400, 700],
+      subsets: [],
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+      styles: ['normal', 'italic'],
     },
-
   },
   modules: [
     '@nuxt/eslint',
