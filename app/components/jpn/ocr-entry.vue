@@ -18,7 +18,7 @@ const { data: ocrPages } = searchPagesByWid(props.wid)
       class="group py-2 border-b border-neutral-800"
     >
       <div class="flex items-center gap-2">
-        <div class="text-[#6aa3ab]">
+        <div class="text-blue-300">
           [{{ page.prefix }}] {{ page.title }}
         </div>
         <UiButton v-if="userAccess.hasAccessOcr || true" icon="ic:baseline-edit" color="edit" class="w-min opacity-0 group-hover:opacity-100 transition-opacity" :outline="false" @click="navigateTo(`/ocr/${page.id}`)" />

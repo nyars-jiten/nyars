@@ -5,9 +5,9 @@ export interface LLMValue {
   examples: LLMExample[]
   collocations: string[]
   domain_register: string
-  grammatical_notes: string
+  grammatical_note: string
   sources: LLMSource[]
-  raw_evidence: string[]
+  raw_evidence: string
   confidence: number
 }
 
@@ -25,9 +25,7 @@ export interface LLMSource {
 export interface LLMConflict {
   issue: string
   sources: string[]
-  recommendation: {
-    prefer: string
-  }
+  recommendation: string
 }
 
 export interface LLMEntry {
@@ -48,6 +46,7 @@ export interface LLMStoredResponse {
   created_at: string
   updated_at: string
   requested_by: string
+  sources: Record<number, string>
 }
 
 export enum LLMStatus {

@@ -25,9 +25,9 @@ const { data: satelliteEntries } = getSatellites(props.wid)
     <div
       v-for="satellite in satelliteEntries?.sort((a, b) => a.title > b.title ? 1 : -1)"
       :key="satellite.id"
-      class="py-2 border-b-1 border-neutral-800"
+      class="py-2 border-b-1 leading-6 border-neutral-800"
     >
-      <span class="text-[#6aa3ab]">
+      <span class="text-blue-300">
         {{ satellite.title }}
       </span>
       <div

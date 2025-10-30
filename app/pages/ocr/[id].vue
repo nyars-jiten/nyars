@@ -214,7 +214,7 @@ const statusStyles = tv({
   <div class="space-y-4">
     <template v-if="page">
       <section class="space-y-2 px-4">
-        <h3 class="text-[#6aa3ab] text-lg">
+        <h3 class="text-blue-300 text-lg">
           [{{ page?.prefix }}] {{ page?.title }}
         </h3>
 

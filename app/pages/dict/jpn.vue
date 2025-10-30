@@ -79,9 +79,9 @@ onMounted(updateEntry)
             </span>
           </span>
         </div>
-        <div>
+        <div v-if="data && data.timings && data.parsed">
           <small class="text-neutral-500">
-            {{ t('pages.search.searchInfo', [data?.parsed.length || '', data?.timings.tokenization || '', data?.timings.search || '']) }}
+            {{ t('pages.search.searchInfo', [data.parsed.length || '', data.timings.tokenization || '', data.timings.search || '']) }}
           </small>
         </div>
       </div>

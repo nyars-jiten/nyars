@@ -8,6 +8,8 @@ const { t } = useI18n()
 const { getLLMData, sendLLMRequest } = useJpnEntries()
 const { data: llmData, refresh, status } = getLLMData(props.wid)
 
+const startedTimeAgo = computed(() => llmData.value ? useTime(new Date(llmData.value?.created_at)) : '—')
+
 function formatConfidence(confidence: number) {
   return `${Math.round(confidence * 100)}%`
 }
@@ -26,6 +28,10 @@ const statusStyles = tv({
 async function handleLLMRequest() {
   await sendLLMRequest(props.wid)
   refresh()
+}
+
+function getSourceName(sourceId: number): string {
+  return llmData.value?.sources[sourceId] || `Source ${sourceId}`
 }
 </script>
 
@@ -48,6 +54,9 @@ async function handleLLMRequest() {
             name="mdi:restart"
             @click="refresh()"
           />
+          <div v-if="llmData.status === LLMStatus.PENDING || llmData.status === LLMStatus.PROCESSING">
+            <span class="text-gray-400">| Started:</span> {{ startedTimeAgo }}
+          </div>
         </div>
         <div v-if="llmData.model" class="text-xs text-gray-500">
           <span class="bg-slate-700 px-2 py-1 rounded">
@@ -121,7 +130,7 @@ async function handleLLMRequest() {
                 <span class="group cursor-help relative size-fit rounded-sm text-xs leading-none">
                   <span class="align-top text-blue-300">[{{ example.source_id }}]</span>
                   <UiTooltip>
-                    Source ID: {{ example.source_id }}
+                    {{ getSourceName(example.source_id) }}
                   </UiTooltip>
                 </span>
               </div>
@@ -148,15 +157,26 @@ async function handleLLMRequest() {
           </div>
 
           <!-- Grammatical Notes -->
-          <div v-if="value.grammatical_notes" class="text-sm text-gray-400">
-            <strong>Grammar:</strong> {{ value.grammatical_notes }}
+          <div v-if="value.grammatical_note" class="text-sm text-gray-400">
+            <strong>Grammar:</strong> {{ value.grammatical_note }}
+          </div>
+
+          <!-- domain -->
+          <div v-if="value.domain_register" class="text-sm text-gray-400">
+            <strong>Domain:</strong> {{ value.domain_register }}
+          </div>
+
+          <!-- Raw -->
+          <div v-if="value.raw_evidence" class="text-sm text-gray-400">
+            <strong>Raw:</strong> {{ value.raw_evidence }}
           </div>
 
           <!-- Sources -->
           <div v-if="value.sources.length > 0" class="text-xs text-gray-500">
             <strong>Sources:</strong>
             <span v-for="(source, index) in value.sources" :key="index">
-              Source {{ source.source_id }}
+              <!-- Source {{ getSourceName(source.source_id) }} -->
+              --//--
               <span v-if="source.fragment" class="text-gray-400">({{ source.fragment }})</span>
               <span v-if="index < value.sources.length - 1">, </span>
             </span>
@@ -186,7 +206,7 @@ async function handleLLMRequest() {
             </ul>
           </div>
           <div v-if="conflict.recommendation" class="text-yellow-100 text-sm">
-            <strong>Recommendation:</strong> {{ conflict.recommendation.prefer }}
+            <strong>Recommendation:</strong> {{ conflict.recommendation }}
           </div>
         </div>
       </div>
@@ -197,7 +217,7 @@ async function handleLLMRequest() {
     <div>{{ t('pages.jpnEntry.llmDataNotAvailable') }}</div>
   </div>
 
-  <div v-if="!llmData || llmData.status === LLMStatus.FAILED" class="text-center">
+  <div v-if="!llmData || llmData.status === LLMStatus.FAILED || llmData.status === LLMStatus.COMPLETED" class="text-center">
     <UiButton class="mt-4 text-blue-300" icon="ic:outline-cloud-sync" @click="handleLLMRequest">
       {{ t('components.llmEntry.requestLLMData') }}
     </UiButton>

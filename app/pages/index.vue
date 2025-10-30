@@ -20,7 +20,6 @@ const { t, tm, rt } = useI18n()
         <div class="indent-10">
           {{ t('pages.main.infoNyars') }}
         </div>
-
         <ul class="flex flex-col gap-1">
           <li v-for="(examples, i) in tm('pages.main.infoExamples') as any[]" :key="i">
             → {{ rt(examples.text) }}
