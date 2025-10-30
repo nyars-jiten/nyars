@@ -1,5 +1,4 @@
 export * from './use-auth'
-export * from './use-avatar'
 export * from './use-edits'
 export * from './use-jpn'
 export * from './use-ocr'
