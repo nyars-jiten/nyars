@@ -31,4 +31,7 @@ definePageMeta({
     @save="actionOnSave"
     @remove="actionOnSave"
   />
+  <div v-else class="flex items-center justify-center min-h-screen">
+    Loading...
+  </div>
 </template>

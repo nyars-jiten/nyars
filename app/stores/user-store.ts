@@ -32,5 +32,5 @@ export const useUserStore = defineStore('user-store', () => {
 
   const menuState = ref(true)
 
-  return { user, userAccess, menuState, $refresh }
+  return { user, userAccess, menuState, checkAuth, $refresh }
 })

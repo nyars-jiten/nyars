@@ -12,6 +12,7 @@ const articleWid = useRouteArticle()
 const { t } = useI18n()
 
 const { getEntry } = useJpnEntries()
+const { user } = storeToRefs(useUserStore())
 
 watch(articleWid, () => window.scrollTo(0, 0))
 
@@ -87,7 +88,7 @@ useHead({ title: jpnEntry.value?.title })
         <JpnEntry :jpn-entry="jpnEntry" :show-lemmas="showLemmas" />
       </UiBlock>
 
-      <UiTabs :tabs="['edits', 'satellites', 'scans', 'llm']">
+      <UiTabs :tabs="user?.isAdmin ? ['edits', 'satellites', 'scans', 'llm'] : ['edits', 'satellites', 'scans']">
         <UiTab title="edits">
           <EditsList :wid="rawWid" />
         </UiTab>
@@ -97,7 +98,7 @@ useHead({ title: jpnEntry.value?.title })
         <UiTab title="scans">
           <OcrEntry :wid="rawWid" />
         </UiTab>
-        <UiTab title="llm">
+        <UiTab v-if="user?.isAdmin" title="llm">
           <LlmEntry :wid="rawWid" />
         </UiTab>
       </UiTabs>

@@ -39,7 +39,7 @@ function getRoleBadge(isAdmin: boolean) {
 const roleBadge = computed(() => getRoleBadge(user.value?.isAdmin ?? false))
 
 const { getEdits } = useEditsData()
-const { data: edits } = getEdits({ userId: user.value?.id })
+const { data: edits } = getEdits({ username })
 
 // Year selection for heatmap
 const currentYear = new Date().getFullYear()
@@ -58,22 +58,29 @@ const availableYears = computed(() => {
 })
 
 // Admin functions
-const { updateUserAccess, banUser, unbanUser } = useUserManagement()
+const { getUserAccess, updateUserAccess, banUser, unbanUser } = useUserManagement()
 const { user: currentUser } = storeToRefs(useUserStore())
 
 const isAdmin = computed(() => currentUser.value?.isAdmin ?? false)
 
 // Admin state
-const userAccess = ref(21)
+const userAccess = ref(0)
 const banReason = ref('')
 const isBanning = ref(false)
 
 // Initialize user access when user data loads
-// watch(user, (newUser) => {
-//   if (newUser) {
-//     userAccess.value = (newUser as any).access ?? 0
-//   }
-// }, { immediate: true })
+watch(user, async (newUser) => {
+  if (newUser && isAdmin.value) {
+    try {
+      const response = await getUserAccess(newUser.id)
+      userAccess.value = response.access
+    }
+    catch (error) {
+      console.error('Failed to fetch user access:', error)
+      userAccess.value = 0
+    }
+  }
+}, { immediate: true })
 
 // Admin functions
 async function saveAccess() {
@@ -81,9 +88,9 @@ async function saveAccess() {
     return
 
   try {
-    await updateUserAccess(user.value.id, userAccess.value)
-    // Refresh user data
-    refreshCookie('user')
+    const response = await updateUserAccess(user.value.id, userAccess.value)
+    userAccess.value = response.access
+    // Optionally show success notification
   }
   catch (error) {
     console.error('Failed to update user access:', error)
@@ -97,8 +104,9 @@ async function handleBan(reason: string) {
   try {
     isBanning.value = true
     await banUser(user.value.id, reason)
-    // Refresh user data
-    await refreshCookie('user')
+    // Refresh user data to show banned status
+    const { refresh } = getUser(username)
+    await refresh()
     banReason.value = ''
   }
   catch (error) {
@@ -115,8 +123,9 @@ async function handleUnban() {
 
   try {
     await unbanUser(user.value.id)
-    // Refresh user data
-    await refreshCookie('user')
+    // Refresh user data to show unbanned status
+    const { refresh } = getUser(username)
+    await refresh()
   }
   catch (error) {
     console.error('Failed to unban user:', error)
@@ -174,7 +183,7 @@ async function handleUnban() {
         </div>
 
         <!-- Key Stats -->
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div class="bg-neutral-800/50 rounded-lg p-4 backdrop-blur-sm">
             <div class="text-2xl font-bold">
               {{ user?.stats.rating }}
@@ -191,14 +200,14 @@ async function handleUnban() {
               Правок
             </div>
           </div>
-          <div class="bg-neutral-800/50 rounded-lg p-4 backdrop-blur-sm">
+          <!-- <div class="bg-neutral-800/50 rounded-lg p-4 backdrop-blur-sm">
             <div class="text-2xl font-bold">
               {{ user?.stats.reviews }}
             </div>
             <div class="text-sm text-neutral-400">
               Проверок
             </div>
-          </div>
+          </div> -->
           <div class="bg-neutral-800/50 rounded-lg p-4 backdrop-blur-sm">
             <div class="text-2xl font-bold">
               {{ regTimeAgo }}
@@ -237,7 +246,7 @@ async function handleUnban() {
               </option>
             </select>
           </div>
-          <Heatmap :id="user?.id" :year="selectedYear" />
+          <Heatmap :id="user?.id" :key="selectedYear" :year="selectedYear" />
         </template>
       </UiBlock>
 

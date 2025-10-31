@@ -21,7 +21,7 @@ const { data: ocrPages } = searchPagesByWid(props.wid)
         <div class="text-blue-300">
           [{{ page.prefix }}] {{ page.title }}
         </div>
-        <UiButton v-if="userAccess.hasAccessOcr || true" icon="ic:baseline-edit" color="edit" class="w-min opacity-0 group-hover:opacity-100 transition-opacity" :outline="false" @click="navigateTo(`/ocr/${page.id}`)" />
+        <UiButton v-if="userAccess.hasAccessOcr" icon="ic:baseline-edit" color="edit" class="w-min opacity-0 group-hover:opacity-100 transition-opacity" :outline="false" @click="navigateTo(`/ocr/${page.id}`)" />
       </div>
       <img
         v-if="page.file"

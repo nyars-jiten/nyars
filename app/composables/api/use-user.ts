@@ -60,8 +60,7 @@ export function useUserData() {
    * @param to - End date (YYYY-MM-DD)
    */
   const getUserHeatmap = (userId: string, from?: string, to?: string) => {
-    return useAsyncData(`user-heatmap-${userId}-${from}-${to}`, () =>
-      client.get<Array<{ date: string, value: number }>>(`${path}/${userId}/heatmap`, { from, to }))
+    return client.get<Array<{ date: string, value: number }>>(`${path}/${userId}/heatmap`, { from, to })
   }
 
   return {
@@ -77,7 +76,12 @@ export function useUserData() {
  * Provides methods for managing users
  */
 export function useUserManagement() {
-  const { client, path } = useUserApi()
+  const { client } = useUserApi()
+  const path = '/admin/users'
+
+  const getUserAccess = async (userId: string) => {
+    return await client.get<UserAccessResponse>(`${path}/${userId}/access`)
+  }
 
   /**
    * Update user access level
@@ -85,7 +89,7 @@ export function useUserManagement() {
    * @param access - Access level
    */
   const updateUserAccess = async (userId: string, access: number) => {
-    return await client.post<User>(`${path}/${userId}/access`, { access })
+    return await client.put<UserAccessResponse>(`${path}/${userId}/access`, { access })
   }
 
   /**
@@ -94,7 +98,7 @@ export function useUserManagement() {
    * @param reason - Ban reason
    */
   const banUser = async (userId: string, reason: string) => {
-    return await client.post<User>(`${path}/${userId}/ban`, { reason })
+    return await client.post(`${path}/${userId}/ban`, { reason })
   }
 
   /**
@@ -102,10 +106,11 @@ export function useUserManagement() {
    * @param userId - User ID (UUID)
    */
   const unbanUser = async (userId: string) => {
-    return await client.post<User>(`${path}/${userId}/unban`)
+    return await client.post(`${path}/${userId}/unban`)
   }
 
   return {
+    getUserAccess,
     updateUserAccess,
     banUser,
     unbanUser,

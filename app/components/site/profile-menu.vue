@@ -45,12 +45,12 @@ const styles = tv({
             <span>{{ t('components.header.profileMenu.profile') }}</span>
           </NuxtLink>
 
-          <NuxtLink
+          <!-- <NuxtLink
             to="/settings"
             :class="styles({ entity: 'menuItem' })"
           >
             <span>{{ t('components.header.profileMenu.settings') }}</span>
-          </NuxtLink>
+          </NuxtLink> -->
 
           <button
             type="button"

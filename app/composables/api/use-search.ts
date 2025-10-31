@@ -24,9 +24,8 @@ export function useSearch() {
    * @param input - Search input
    * @param number - Number of suggestions (default: 10)
    */
-  const getSuggestions = (input: string, number = 10) => {
-    return useAsyncData(`suggestions-${input}-${number}`, () =>
-      client.get<string[]>(`${path}/preview`, { q: input, n: number }))
+  const getSuggestions = async (input: string, number = 10) => {
+    return await client.get<string[]>(`${path}/preview`, { q: input, n: number })
   }
 
   /**

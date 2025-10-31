@@ -15,11 +15,11 @@ const { t } = useI18n()
 const { previewEntry, checkDuplicates, editEntry, removeEntry, createEntry } = useJpnEntries()
 const { updateEdit } = useEditActions()
 
-const { $reset: userReset } = useUserStore()
+const { checkAuth } = useUserStore()
 const { menuState, user } = storeToRefs(useUserStore())
 
-onBeforeMount(() => {
-  userReset() // update user state
+onBeforeMount(async () => {
+  await checkAuth() // update user state
   if (props.collapseMenu)
     menuState.value = false
   if (!user.value && props.redirectIfAnonymous) {

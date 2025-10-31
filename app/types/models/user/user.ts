@@ -18,3 +18,10 @@ export interface ExtendedUser extends User {
   access: number
   settings: string
 }
+
+export interface UserAccessResponse {
+  userId: string
+  username: string
+  access: number
+  isAdmin: boolean
+}

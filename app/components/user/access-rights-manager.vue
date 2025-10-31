@@ -16,38 +16,38 @@ const emit = defineEmits<Emits>()
 const accessRights = [
   {
     key: Access.Autoapprove,
-    title: 'Автоодобрение',
-    description: 'Автоматическое одобрение правок',
+    title: 'Автоаппрув',
+    description: 'Автоматическое принятие правок',
   },
   {
     key: Access.Wiki,
     title: 'Вики',
-    description: 'Редактирование вики',
+    description: 'Редактирование документации сайта (пока ничего не делает)',
   },
   {
     key: Access.Edits,
     title: 'Правки',
-    description: 'Управление правками',
+    description: 'Принятие, отклонение, редактирование чужих правок ',
   },
   {
     key: Access.ProfileEdit,
-    title: 'Редактирование профилей',
-    description: 'Изменение профилей пользователей',
+    title: 'Редактирование профиля',
+    description: '(пока ничего не делает)',
   },
   {
     key: Access.Satellites,
-    title: 'Спутники',
-    description: 'Управление спутниками',
+    title: 'Сателлиты',
+    description: 'Доступ к просмотру скрытых сателлитов',
   },
   {
     key: Access.TagEdit,
-    title: 'Редактирование тегов',
-    description: 'Управление тегами',
+    title: 'Теги',
+    description: 'Редактирование/добавление тегов',
   },
   {
     key: Access.Ocr,
     title: 'OCR',
-    description: 'Управление OCR',
+    description: 'Доступ к редактированию OCR',
   },
 ]
 

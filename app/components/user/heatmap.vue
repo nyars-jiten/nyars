@@ -14,12 +14,20 @@ interface Props {
 
 const props = defineProps<Props>()
 const config = useRuntimeConfig()
+const calContainer = ref<HTMLElement>()
+let cal: CalHeatmap | null = null
 
-function paintCalendar(cal: CalHeatmap, theme: 'light' | 'dark') {
+function paintCalendar(theme: 'light' | 'dark') {
   // Calculate start date based on selected year
   const isCurrentYear = props.year === new Date().getFullYear()
   const startDate = isCurrentYear ? dayjs().subtract(11, 'month') : dayjs().year(props.year).month(0).date(1)
   const endDate = dayjs().year(props.year).month(11).date(31)
+
+  if (cal) {
+    cal.destroy()
+  }
+
+  cal = new CalHeatmap()
 
   cal.paint(
     {
@@ -52,7 +60,7 @@ function paintCalendar(cal: CalHeatmap, theme: 'light' | 'dark') {
         label: { text: 'M月', textAlign: 'middle', position: 'bottom' },
       },
       subDomain: { type: 'day', radius: 2 },
-      itemSelector: '#heatmap',
+      itemSelector: calContainer.value,
     },
     [
       [
@@ -92,39 +100,45 @@ function paintCalendar(cal: CalHeatmap, theme: 'light' | 'dark') {
   )
 }
 
-let cal: CalHeatmap
+onMounted(() => {
+  paintCalendar('dark')
+})
 
-function destory(cal: CalHeatmap) {
-  cal.destroy()
-}
+onBeforeUnmount(() => {
+  if (cal) {
+    cal.destroy()
+  }
+})
 
-const isDark = ref(true)
+// const isDark = ref(true)
 
-watch(
-  [isDark, () => props.year],
-  () => {
-    if (isDark.value) {
-      if (cal !== undefined)
-        destory(cal)
-      cal = new CalHeatmap()
-      paintCalendar(cal, 'dark')
-    }
-    else {
-      if (cal !== undefined)
-        destory(cal)
-      cal = new CalHeatmap()
-      paintCalendar(cal, 'light')
-    }
-  },
-  {
-    immediate: true,
-  },
-)
+// watch(
+//   [isDark, () => props.year],
+//   () => {
+//     if (isDark.value) {
+//       if (cal !== undefined)
+//         destory(cal)
+//       cal = new CalHeatmap()
+//       paintCalendar(cal, 'dark')
+//     }
+//     else {
+//       if (cal !== undefined)
+//         destory(cal)
+//       cal = new CalHeatmap()
+//       paintCalendar(cal, 'light')
+//     }
+//   },
+//   {
+//     immediate: true,
+//   },
+// )
 </script>
 
 <template>
-  <div class="bg-neutral-800/50 text-neutral-300 rounded-lg p-6 overflow-hidden backdrop-blur-sm">
-    <div id="heatmap" class="mb-2" />
+  <div class="bg-neutral-800/50 text-neutral-300 rounded-lg p-6 backdrop-blur-sm">
+    <div class="overflow-x-auto mb-2">
+      <div id="heatmap" ref="calContainer" />
+    </div>
 
     <div class="flex items-center gap-2 text-xs">
       <span class="text-neutral-400">Меньше</span>

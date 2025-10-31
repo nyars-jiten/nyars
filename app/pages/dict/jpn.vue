@@ -79,17 +79,16 @@ onMounted(updateEntry)
             </span>
           </span>
         </div>
-        <div v-if="data && data.timings && data.parsed">
-          <small class="text-neutral-500">
-            {{ t('pages.search.searchInfo', [data.parsed.length || '', data.timings.tokenization || '', data.timings.search || '']) }}
-          </small>
-        </div>
+        <!-- DEBUG INFO -->
+        <!-- <div v-if="data && data.timings && data.parsed" class="mb-2 p-2 bg-blue-900/20 border border-blue-400/30 text-xs">
+          {{ t('pages.search.searchInfo', [data.parsed.length || '', data.timings.tokenization || '', data.timings.search || '']) }}
+        </div> -->
       </div>
 
       <div v-if="isSearchPage" class="grid grow items-start gap-8 md:grid-cols-[1fr_2fr]">
         <template v-if="isSearchPage">
           <div v-if="hasResult && status === 'success'" class="space-y-4 top-18 sticky h-[calc(100dvh-var(--spacing)*18*2)] overflow-y-auto">
-            <SearchResult v-for="result of srchResult?.result" :key="result.wid" :article="result" class="block" />
+            <SearchResult v-for="result of srchResult?.result" :key="result.wid" :article="result" class="px-1 block" />
           </div>
           <div v-else-if="status === 'success'">
             <div class="text-center">

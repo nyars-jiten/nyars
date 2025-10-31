@@ -47,6 +47,7 @@ export function useEditsData() {
     from?: string
     to?: string
     userId?: string
+    username?: string
   }) => {
     const cacheKey = params
       ? `edits-${Object.entries(params).map(([k, v]) => `${k}-${v}`).join('-')}`

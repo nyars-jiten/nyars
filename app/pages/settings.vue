@@ -8,7 +8,8 @@ if (!user.value) {
 </script>
 
 <template>
-  <div class="min-h-screen bg-neutral-900">
+  <NotImplemented v-if="true" />
+  <div v-else class="min-h-screen bg-neutral-900">
     <div class="container mx-auto px-4 py-8">
       <div class="max-w-4xl mx-auto">
         <!-- Header -->

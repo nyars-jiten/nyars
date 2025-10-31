@@ -18,9 +18,9 @@ export const useSuggestionsStore = defineStore('suggestions', () => {
   const suggestionsCache = ref(history.value)
 
   const refresh = async () => {
-    const { data: response } = await getSuggestions(searchQuery.value)
-    if (response.value) {
-      suggestionsCache.value = response.value
+    const response = await getSuggestions(searchQuery.value)
+    if (response) {
+      suggestionsCache.value = response
     }
   }
 

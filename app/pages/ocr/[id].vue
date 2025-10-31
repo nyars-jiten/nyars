@@ -12,9 +12,9 @@ const { createNotification } = useNotificationStore()
 
 if (bookId) {
   try {
-    const { data: nextId } = await getNextPage(Number(bookId))
-    if (nextId.value && nextId.value.id) {
-      await useRouter().replace({ name: 'ocr-id', params: { id: nextId.value.id } })
+    const nextId = await getNextPage(Number(bookId))
+    if (nextId.id) {
+      await useRouter().replace({ name: 'ocr-id', params: { id: nextId.id } })
     }
   }
   catch (e) {
@@ -22,13 +22,21 @@ if (bookId) {
   }
 }
 
-const { data: page } = getPage(pageId)
+const { data: page } = !bookId ? getPage(pageId) : { data: ref(null) }
 
 const { search } = useSearch()
 const { getEntrySource } = useJpnEntries()
-const { data: srchResult, refresh: updateSearch } = await useAsyncData(`search-request-${page.value?.word}`, () => search(page.value?.word || '', 0, 20), {
-  dedupe: 'defer',
-})
+
+const searchWord = computed(() => page.value?.word || '')
+
+const { data: srchResult, refresh: updateSearch } = await useAsyncData(
+  () => `search-request-${searchWord.value}`,
+  () => search(searchWord.value, 0, 20),
+  {
+    dedupe: 'defer',
+    watch: [searchWord],
+  },
+)
 
 const newEntry = {
   spelling: '',
@@ -49,6 +57,7 @@ const activeEntry = newEntry
 const showEditor = ref(false)
 const isNew = ref(false)
 const activeWid = ref('')
+const editorSection = ref<HTMLElement>()
 
 function createNewEntry() {
   activeEntry.spelling = page.value?.word || ''
@@ -58,6 +67,9 @@ function createNewEntry() {
   showEditor.value = true
   isNew.value = true
   activeWid.value = ''
+  nextTick(() => {
+    editorSection.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
 }
 
 async function mergeEntry(wid: string) {
@@ -102,6 +114,10 @@ async function mergeEntry(wid: string) {
   showEditor.value = true
   isNew.value = false
   activeWid.value = wid
+
+  nextTick(() => {
+    editorSection.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
 }
 
 enum NextPage {
@@ -129,9 +145,9 @@ async function navigatePage(nextType: NextPage) {
     return
 
   try {
-    const { data: nextId } = await getNextPage(page.value.bookId, page.value.innerIndex, nextType, page.value.id)
-    if (nextId.value && nextId.value.id) {
-      await navigateTo({ name: 'ocr-id', params: { id: nextId.value.id ?? '' } })
+    const nextId = await getNextPage(page.value.bookId, page.value.innerIndex, nextType, page.value.id)
+    if (nextId.id) {
+      await navigateTo({ name: 'ocr-id', params: { id: nextId.id ?? '' } })
     }
   }
   catch (e) {
@@ -194,9 +210,14 @@ function updateUnexpectedChars() {
   unexpectedChars.value = `${wordC}|${readingC}|${meaningRuC}|${meaningEngC}`
 }
 
-watch(() => page.value, () => {
+watch([
+  () => page.value?.word,
+  () => page.value?.reading,
+  () => page.value?.meaningEn,
+  () => page.value?.meaningRu,
+], () => {
   updateUnexpectedChars()
-})
+}, { immediate: true })
 
 const statusStyles = tv({
   variants: {
@@ -283,20 +304,20 @@ const statusStyles = tv({
 
       <section class="space-y-4 px-4">
         <div v-if="page" class="grid grid-cols-2 gap-4">
-          <UiInput v-model="page.word" class="w-full" @input="updateUnexpectedChars">
+          <UiInput v-model="page.word" class="w-full">
             <template #hint>
               word
             </template>
           </UiInput>
 
-          <UiInput v-model="page.reading" class="w-full" @input="updateUnexpectedChars">
+          <UiInput v-model="page.reading" class="w-full">
             <template #hint>
               reading
             </template>
           </UiInput>
 
           <div class="space-y-2">
-            <UiInput v-model="page.meaningRu" class="w-full" :multiline="true" @input="updateUnexpectedChars">
+            <UiInput v-model="page.meaningRu" class="w-full" :multiline="true">
               <template #hint>
                 meaningRu
               </template>
@@ -312,7 +333,7 @@ const statusStyles = tv({
           </div>
 
           <div class="space-y-2">
-            <UiInput v-model="page.meaningEn" class="w-full" :multiline="true" @input="updateUnexpectedChars">
+            <UiInput v-model="page.meaningEn" class="w-full" :multiline="true">
               <template #hint>
                 meaningEn
               </template>
@@ -342,7 +363,7 @@ const statusStyles = tv({
       <template v-if="srchResult?.result && srchResult.result.length > 0">
         <div class="grid grid-cols-[auto_1fr] gap-4 items-start">
           <template v-for="result of srchResult.result" :key="result.wid">
-            <UiButton class="flex-shrink-0" type="button" icon="mdi:source-branch-plus" color="sky" :title="t('pages.editor.save')" @click="mergeEntry(result.wid)">
+            <UiButton class="shrink-0" type="button" icon="mdi:source-branch-plus" color="sky" :title="t('pages.editor.save')" @click="mergeEntry(result.wid)">
               Объединить
             </UiButton>
 
@@ -351,7 +372,7 @@ const statusStyles = tv({
         </div>
       </template>
 
-      <section>
+      <section ref="editorSection">
         <hr class="border-neutral-200 dark:border-neutral-800 my-8">
 
         <UiButton type="button" icon="ic:baseline-add" color="lime" :title="t('pages.editor.save')" @click="createNewEntry()">
