@@ -3,7 +3,6 @@ import type { VariantProps } from 'tailwind-variants'
 import { tv } from 'tailwind-variants'
 
 withDefaults(defineProps<Props>(), {
-  size: 'medium',
   hover: false,
   active: false,
 })
@@ -12,16 +11,6 @@ defineSlots<{
   default: () => VNode[]
   footer: () => VNode[]
 }>()
-
-const size_ = tv({
-  variants: {
-    size: {
-      small: 'p-2 space-y-2',
-      medium: 'p-4 space-y-4',
-      large: 'p-6 space-y-6',
-    },
-  },
-})
 
 const styles = tv({
   base: 'group/block rounded-md outline m-px outline-neutral-800 transition-colors',
@@ -36,7 +25,6 @@ const styles = tv({
 })
 
 interface Props {
-  size?: VariantProps<typeof size_>['size']
   hover?: VariantProps<typeof styles>['hover']
   active?: VariantProps<typeof styles>['active']
 }
@@ -44,12 +32,6 @@ interface Props {
 
 <template>
   <section :class="styles({ hover, active })">
-    <div :class="size_({ size })">
-      <slot />
-    </div>
-
-    <footer v-if="!!$slots.footer" class="flex flex-wrap items-center border-t border-neutral-800 p-2 leading-none transition-colors" :class="{ 'group-hover/block:border-neutral-700': hover }">
-      <slot name="footer" />
-    </footer>
+    <slot />
   </section>
 </template>
