@@ -353,7 +353,7 @@ const statusStyles = tv({
           Сомнительные символы: <span class="bg-rose-500">{{ unexpectedChars }}</span>
         </div>
 
-        <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" @click="invokeUpdatePage">
+        <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :label="t('pages.editor.save')" @click="invokeUpdatePage">
           {{ t('pages.editor.save') }}
         </UiButton>
       </section>
@@ -363,7 +363,7 @@ const statusStyles = tv({
       <template v-if="srchResult?.result && srchResult.result.length > 0">
         <div class="grid grid-cols-[auto_1fr] gap-4 items-start">
           <template v-for="result of srchResult.result" :key="result.wid">
-            <UiButton class="shrink-0" type="button" icon="mdi:source-branch-plus" color="sky" :title="t('pages.editor.save')" @click="mergeEntry(result.wid)">
+            <UiButton class="shrink-0" type="button" icon="mdi:source-branch-plus" color="sky" :label="t('pages.editor.save')" @click="mergeEntry(result.wid)">
               Объединить
             </UiButton>
 
@@ -375,7 +375,7 @@ const statusStyles = tv({
       <section ref="editorSection">
         <hr class="border-neutral-200 dark:border-neutral-800 my-8">
 
-        <UiButton type="button" icon="ic:baseline-add" color="lime" :title="t('pages.editor.save')" @click="createNewEntry()">
+        <UiButton type="button" icon="ic:baseline-add" color="lime" :label="t('pages.editor.save')" @click="createNewEntry()">
           Создать новую статью
         </UiButton>
 

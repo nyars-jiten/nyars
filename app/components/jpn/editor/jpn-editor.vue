@@ -343,22 +343,22 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
         <section class="flex items-start justify-between gap-4 max-sm:flex-col bg-neutral-900/95">
           <div class="inline-flex flex-wrap gap-x-8 gap-y-2">
             <span v-for="group, index in buttons()" :key="index" class="gap-2 grid" :style="{ gridTemplateColumns: `repeat(${group.length}, 1fr)` }">
-              <UiButton v-for="{ name, icon, title, click } in group" :key="title" type="button" :icon="icon" :title="t(`pages.editor.button.${title}`)" :disabled="disabled" class="inline-flex justify-center" @click="insert.apply(null, click)">
+              <UiButton v-for="{ name, icon, title, click } in group" :key="title" type="button" :icon="icon" :label="t(`pages.editor.button.${title}`)" :disabled="disabled" class="inline-flex justify-center" @click="insert.apply(null, click)">
                 {{ name }}
               </UiButton>
             </span>
             <span class="gap-2 grid">
-              <UiButton type="button" icon="mdi:arrow-expand-down" :title="t(`pages.editor.button.addition`)" :disabled="disabled" class="inline-flex justify-center" @click="toggleSupButtons()">
+              <UiButton type="button" icon="mdi:arrow-expand-down" :label="t(`pages.editor.button.addition`)" :disabled="disabled" class="inline-flex justify-center" @click="toggleSupButtons()">
                 <!-- -->
               </UiButton>
             </span>
           </div>
 
           <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
-            <UiButton class="max-sm:w-full" type="button" icon="mdi:hashtag-box-outline" color="amber" :disabled="disabled" :active="stateTagSearch" :title="t('pages.editor.tags')" @click="toggleTagSearch(); toggleEditorHelp(false)">
+            <UiButton class="max-sm:w-full" type="button" icon="mdi:hashtag-box-outline" color="amber" :disabled="disabled" :active="stateTagSearch" :label="t('pages.editor.tags')" @click="toggleTagSearch(); toggleEditorHelp(false)">
               <!-- теги -->
             </UiButton>
-            <UiButton class="max-sm:w-full" type="button" icon="ic:baseline-help-outline" color="sky" :disabled="disabled" :active="stateEditorHelp" :title="t('pages.editor.guide')" @click="toggleEditorHelp(); toggleTagSearch(false)">
+            <UiButton class="max-sm:w-full" type="button" icon="ic:baseline-help-outline" color="sky" :disabled="disabled" :active="stateEditorHelp" :label="t('pages.editor.guide')" @click="toggleEditorHelp(); toggleTagSearch(false)">
               <!-- справка -->
             </UiButton>
 
@@ -370,7 +370,7 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
 
         <section v-if="stateSupButtons" class="flex items-start justify-left gap-x-8 gap-y-2 max-sm:flex-col bg-neutral-900/95">
           <span v-for="group, index in supButtons()" :key="index" class="gap-2 grid" :style="{ gridTemplateColumns: `repeat(${group.length}, 1fr)` }">
-            <UiButton v-for="{ name, icon, title, click } in group" :key="title" type="button" :icon="icon" :title="t(`pages.editor.button.${title}`)" :disabled="disabled" class="inline-flex justify-center" @click="insert.apply(null, click)">
+            <UiButton v-for="{ name, icon, title, click } in group" :key="title" type="button" :icon="icon" :label="t(`pages.editor.button.${title}`)" :disabled="disabled" class="inline-flex justify-center" @click="insert.apply(null, click)">
               {{ name }}
             </UiButton>
           </span>
@@ -410,11 +410,11 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
 
       <div class="space-y-8 max-xl:hidden flex flex-col">
         <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
-          <UiButton v-if="!isNew && !isEdit" class="max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :title="t('pages.editor.delete')" :disabled="disabled" @click="showConfimationWindow = 'delete'">
+          <UiButton v-if="!isNew && !isEdit" class="max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :label="t('pages.editor.delete')" :disabled="disabled" @click="showConfimationWindow = 'delete'">
             {{ t('pages.editor.delete') }}
           </UiButton>
 
-          <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="showConfimationWindow = 'edit'">
+          <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :label="t('pages.editor.save')" :disabled="disabled" @click="showConfimationWindow = 'edit'">
             {{ t('pages.editor.save') }}
           </UiButton>
         </div>
@@ -447,11 +447,11 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
         </h1>
 
         <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
-          <UiButton class="max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :title="t('pages.editor.delete')" :disabled="disabled" @click="showConfimationWindow = 'delete'">
+          <UiButton class="max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :label="t('pages.editor.delete')" :disabled="disabled" @click="showConfimationWindow = 'delete'">
             {{ t('pages.editor.delete') }}
           </UiButton>
 
-          <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="showConfimationWindow = 'edit'">
+          <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :label="t('pages.editor.save')" :disabled="disabled" @click="showConfimationWindow = 'edit'">
             {{ t('pages.editor.save') }}
           </UiButton>
         </div>

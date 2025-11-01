@@ -8,13 +8,14 @@ withDefaults(defineProps<Props>(), {
   disabled: false,
   outline: true,
   loose: false,
+  active: false,
 })
 
-const slots = defineSlots<{
+defineSlots<{
   default: () => VNode[]
 }>()
 
-const button = tv({
+const _styles = tv({
   base: 'inline-flex items-center gap-2 rounded-md px-2 py-1.5 leading-none transition-all cursor-pointer',
   variants: {
     color: {
@@ -52,14 +53,14 @@ const button = tv({
   },
 })
 
-type V = VariantProps<typeof button>
+type V = VariantProps<typeof _styles>
 
 interface Props {
   type?: 'button' | 'submit'
   icon?: string
   color?: V['color']
   active?: V['active']
-  title?: string
+  label?: string
   disabled?: V['disabled']
   outline?: V['outline']
   loose?: V['loose']
@@ -67,8 +68,10 @@ interface Props {
 </script>
 
 <template>
-  <button :type="type" :class="button({ color, active, disabled, outline, iconOnly: !!slots.default, loose })" :title="title" :disabled="disabled">
-    <Icon v-if="icon" :name="icon" size="1.5rem" />
-    <slot />
+  <button :type="type" :title="label" :disabled="disabled" class="cursor-pointer">
+    <ui-block :disabled="disabled" :active="active" class="flex items-center gap-x-2 justify-center px-2 py-1.5 w-full" :hover="true">
+      <Icon v-if="icon" :name="icon" size="1.5rem" />
+      <span class="truncate">{{ $slots.default?.() ?? label }}</span>
+    </ui-block>
   </button>
 </template>

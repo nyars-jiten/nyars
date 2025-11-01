@@ -44,13 +44,13 @@ const emptyIsUnconfirmed = { isUnconfirmed: true } as EntryStatus
         </div>
       </section>
       <section class="inline-flex gap-2">
-        <UiButton class="text-slate-400" icon="ic:baseline-replay" :title="t('pages.editor.confirmation.return')" @click="emit('return')">
+        <UiButton class="text-slate-400" icon="ic:baseline-replay" :label="t('pages.editor.confirmation.return')" @click="emit('return')">
           {{ t('pages.editor.confirmation.return') }}
         </UiButton>
-        <UiButton v-if="type === 'edit'" class="text-lime-300" icon="ic:baseline-check" :title="t('pages.editor.confirmation.send')" @click="emit('send')">
+        <UiButton v-if="type === 'edit'" class="text-lime-300" icon="ic:baseline-check" :label="t('pages.editor.confirmation.send')" @click="emit('send')">
           {{ t('pages.editor.confirmation.send') }}
         </UiButton>
-        <UiButton v-else-if="type === 'delete'" class="text-rose-400" icon="ic:baseline-check" :title="t('pages.editor.confirmation.delete')" @click="emit('delete')">
+        <UiButton v-else-if="type === 'delete'" class="text-rose-400" icon="ic:baseline-check" :label="t('pages.editor.confirmation.delete')" @click="emit('delete')">
           {{ t('pages.editor.confirmation.delete') }}
         </UiButton>
       </section>

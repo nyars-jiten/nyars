@@ -68,7 +68,7 @@ const styles = tv({
     </div>
 
     <NuxtLink v-else :to="{ name: 'users-login' }" type="button">
-      <UiButton :title="t('components.header.profileMenu.login')" icon="ic:baseline-account-circle" />
+      <UiButton :label="t('components.header.profileMenu.login')" icon="ic:baseline-account-circle" />
     </NuxtLink>
   </div>
 </template>

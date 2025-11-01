@@ -57,26 +57,26 @@ function showEntryRef(edit: EditResponse): boolean {
       </NuxtLink> -->
 
       <NuxtLink v-if="showEntryRef(edit)" :to="{ name: 'dict-jpn-wid', params: { wid: edit.wid } }" prefetch>
-        <UiButton class="text-gray-500" icon="ic:outline-open-in-new" title="Открыть статью">
+        <UiButton class="text-gray-500" icon="ic:outline-open-in-new" label="Открыть статью">
           <!-- Открыть статью -->
         </UiButton>
       </NuxtLink>
 
-      <UiButton v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))" class="text-red-500" icon="ic:baseline-close" title="Отклонить" @click="reject()">
+      <UiButton v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))" class="text-red-500" icon="ic:baseline-close" label="Отклонить" @click="reject()">
         <!-- Отклонить -->
       </UiButton>
 
-      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-green-500" icon="ic:baseline-done-all" title="Принять как отредактированную" @click="approveAsReviewed()">
+      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-green-500" icon="ic:baseline-done-all" label="Принять как отредактированную" @click="approveAsReviewed()">
         <!-- Принять как отредактированную -->
       </UiButton>
 
-      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-yellow-500" icon="ic:baseline-done" title="Принять как неотредактированную" @click="approveAsUnreviewed()">
+      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-yellow-500" icon="ic:baseline-done" label="Принять как неотредактированную" @click="approveAsUnreviewed()">
         <!-- Принять как неотредактированную -->
       </UiButton>
 
       <template v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))">
         <NuxtLink :to="{ name: 'edits-id-editor', params: { id: edit.id } }">
-          <UiButton class="text-blue-500" icon="ic:baseline-edit" title="Отредактировать">
+          <UiButton class="text-blue-500" icon="ic:baseline-edit" label="Отредактировать">
             <!-- Отредактировать -->
           </UiButton>
         </NuxtLink>
