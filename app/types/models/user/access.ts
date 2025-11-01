@@ -1,13 +1,13 @@
 /* eslint-disable ts/prefer-literal-enum-member */
 export enum Access {
   None = 0,
-  Autoapprove = 1 << 0,
-  Wiki = 1 << 1,
-  Edits = 1 << 2,
-  ProfileEdit = 1 << 3,
-  Satellites = 1 << 4,
-  TagEdit = 1 << 5,
-  Ocr = 1 << 6,
+  Autoapprove = 1 << 1,
+  Wiki = 1 << 2,
+  Edits = 1 << 3,
+  ProfileEdit = 1 << 4,
+  Satellites = 1 << 5,
+  TagEdit = 1 << 6,
+  Ocr = 1 << 7,
 }
 
 export interface UserRights {
