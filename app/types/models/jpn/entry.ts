@@ -98,6 +98,9 @@ export interface Sense {
 }
 
 export interface Tag {
+  id: number
+  type: string
+  priority: number
   eng: string
   engShort: string
   rus: string
@@ -130,6 +133,7 @@ export interface Content {
   c?: Content[] // content
   v: string // value
   t: string // tag
+  p?: string // prop
 }
 
 export enum ReferenceType {

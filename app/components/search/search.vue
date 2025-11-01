@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 const { t } = useI18n()
 const { searchQuery } = storeToRefs(useSearchStore())
-const { suggestions } = storeToRefs(useSuggestionsStore())
 const { addToHistory } = useSuggestionsStore()
 const { push } = useSearchStore()
 const [state, toggle] = useToggle()
@@ -18,7 +17,7 @@ onClickOutside(panel, () => {
     <!-- grid-cols-[auto_1fr_auto] -->
     <!-- <UiButton type="button" icon="ic:baseline-text-fields" /> -->
 
-    <section class="group relative inline-flex grow flex-row gap-2 rounded-md bg-zinc-800 p-2 leading-none text-zinc-500 shadow-md outline-1 outline-zinc-700 transition-colors focus-within:outline-none hover:bg-zinc-700 hover:text-zinc-300 hover:outline-transparent">
+    <section class="group relative inline-flex grow flex-row gap-2 rounded-md bg-zinc-800 p-2 leading-none text-zinc-500 shadow outline-1 outline-zinc-700 transition-colors focus-within:outline-none hover:bg-zinc-700 hover:text-zinc-300 hover:outline-transparent">
       <input
         v-model="searchQuery"
         type="text"

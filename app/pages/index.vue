@@ -3,25 +3,14 @@ definePageMeta({
   name: 'Home',
 })
 
-const { getEdits } = useEditRepo()
-const { data: edits, refresh, status } = await useLazyAsyncData(
-  'edits',
-  () => getEdits(),
-  {
-    default: (): EditResponse[] => [],
-  },
-)
+const { getEdits } = useEditsData()
+const { data: edits, refresh, status } = getEdits()
 
 const config = useRuntimeConfig()
 
 const { push } = useSearchStore()
 
-// {
-//   "text": "Неотредактированные статьи частотностью до 20к в случайном порядке: ",
-//   "searchExamples": ["#freq20k #!ed #rnd"]
-// }
-
-const { t, tm } = useI18n()
+const { t, tm, rt } = useI18n()
 </script>
 
 <template>
@@ -31,10 +20,9 @@ const { t, tm } = useI18n()
         <div class="indent-10">
           {{ t('pages.main.infoNyars') }}
         </div>
-
         <ul class="flex flex-col gap-1">
           <li v-for="(examples, i) in tm('pages.main.infoExamples') as any[]" :key="i">
-            → {{ examples.text }}
+            → {{ rt(examples.text) }}
             <span
               v-for="(searchExample, sei) in examples.searchExamples as string[]"
               :key="sei"
@@ -43,9 +31,9 @@ const { t, tm } = useI18n()
               <button
                 type="button"
                 class="underline cursor-pointer decoration-dotted underline-offset-4 hover:text-neutral-500"
-                @click="push(searchExample)"
+                @click="push(rt(searchExample))"
               >
-                {{ searchExample }}
+                {{ rt(searchExample) }}
               </button>
             </span>
           </li>

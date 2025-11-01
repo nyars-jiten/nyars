@@ -2,20 +2,15 @@
 
 @theme {
   --color-discord: #8c9eff;  
+  
+  --font-exo: "Exo 2";
+  --font-noto: "Noto Sans JP";
+  --font-sans: var(--font-exo), var(--font-noto);
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
-  :root {
-    /* --neutral-300: rgb(212 212 216); */
-    /* --neutral-700: rgb(63 63 70); */
-    /* --neutral-800: rgb(39 39 42); */
-
-    --default-font-family: "Exo 2", "Noto Sans JP";
-    /* --default-font-family: "Arial"; */
-  }
-
   h1 {
     @apply text-6xl font-extralight uppercase
   }
