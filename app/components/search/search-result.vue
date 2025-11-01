@@ -49,7 +49,7 @@ const active = computed(() => articleWid.value === props.article.wid)
     class="w-full"
     :class="{ 'cursor-default': active, 'opacity-40': article.status.isDeleted }"
   >
-    <UiBlock :hover="active === false" :class="newBorder">
+    <UiBlock :hover="active === false" :active="active" :class="newBorder">
       <template #default>
         <section class="relative space-y-2">
           <div class="absolute top-0 right-0 flex flex-wrap items-center gap-2">
