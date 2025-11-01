@@ -18,6 +18,7 @@
     "fp-ts": "^2.16.11",
     "io-ts": "^2.2.22",
     "nuxt-typed-router": "^4.0.2",
+    "set-cookie-parser": "^2.7.2",
     "tailwind-variants": "^3.1.1",
     "tailwindcss": "^4.1.16",
     "v-lazy-show": "^0.3.0",
@@ -39,19 +40,19 @@
     "@nuxtjs/i18n": "^10.1.2",
     "@pinia/nuxt": "^0.11.2",
     "@tailwindcss/vite": "^4.1.16",
-    "@types/eslint-plugin-tailwindcss": "^3.17.0",
+    "@types/set-cookie-parser": "^2.4.10",
     "@vee-validate/nuxt": "^4.15.1",
     "@vueuse/nuxt": "^14.0.0",
     "eslint": "^9.38.0",
-    "eslint-plugin-tailwindcss": "^3.18.2",
     "nuxt": "^4.2.0",
     "pinia": "^3.0.3",
+    "tailwind-merge": "^3.3.1",
     "typescript": "^5.9.3",
     "vue": "^3.5.22",
     "vue-router": "^4.6.3",
     "vue-tsc": "^3.1.2"
   },
   "overrides": {
-    "@vue/devtools-kit": ">=8.0.3"
+    "@vue/devtools-kit": "^8.0.3"
   }
 }

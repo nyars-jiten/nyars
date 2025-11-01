@@ -72,12 +72,22 @@
         "jpnAuto": "авто(нов./исп.)"
       }
     },
+    "llmEntry": {
+      "requestLLMData": "Отправить в очередь на генерацию",
+      "status": [
+        "В очереди",
+        "В процессе",
+        "Готово",
+        "Ошибка"
+      ]
+    },
     "uiKit": {
       "textLoading": "Идёт поиск",
       "tabs": {
         "edits": "Правки",
         "satellites": "Сателлиты",
-        "scans": "Сканы"
+        "scans": "Сканы",
+        "llm": "AI"
       },
       "noData": "Нет данных..."
     }
@@ -102,16 +112,16 @@
           "searchExamples": ["сэйка", "kawairashii", "itizyou", "hiku"]
         },
         {
-          "text": "Поиск по шаблону (? - один символ, * - строка символов любой длины): ",
-          "searchExamples": ["正長?", "*化"]
+          "text": "Конвертация японских эпох и величин: ",
+          "searchExamples": ["昭和５８", "四畳半"]
+        },
+        {
+          "text": "Поиск по шаблону: ",
+          "searchExamples": ["事?所", "*化学"]
         },
         {
           "text": "Неотредактированные статьи частотностью до 20к в случайном порядке: ",
           "searchExamples": ["#freq20k #!ed #rnd"]
-        },
-        {
-          "text": "Конвертация японских эпох и величин: ",
-          "searchExamples": ["昭和５８", "四畳半"]
         }
       ]
     },
@@ -146,6 +156,7 @@
         "isDialect": "диалектное",
         "isProper": "собственное"
       },
+      "searchInfo": "токены: {0}, парсинг: {1}, поиск: {2}",
       "foundNothing": "По запросу {0} ничего не найдено.",
       "pendingRequest": "Загрузка...",
       "errorRequest": "Произошла ошибка."
@@ -229,8 +240,9 @@
     "jpnEntry": {
       "satelliteButtonOpen": "раскрыть",
       "satelliteButtonClose": "свернуть",
-      "entryWasDeleted": "Статья была удалена. Для уточнения причин посмотрите историю правок.",
-      "entryIsLoading": "Статья загружается"
+      "entryWasDeleted": "Статья удалена",
+      "entryIsLoading": "Статья загружается",
+      "llmDataNotAvailable": "LLM данные недоступны"
     },
     "login": {
       "titleLogin": "Войти",

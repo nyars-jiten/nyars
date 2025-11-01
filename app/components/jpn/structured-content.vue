@@ -22,7 +22,7 @@ const strData = computed(() => {
 </script>
 
 <template>
-  <span class="leading-none">
+  <span class="">
     <template v-if="objData">
       <span v-if="typeof objData === 'string'">
         {{ objData }}

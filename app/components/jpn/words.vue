@@ -9,7 +9,7 @@ defineProps<Props>()
 
 <template>
   <div>
-    <header v-if="jpnEntry.preferFurigana" class="text-2xl">
+    <header v-if="jpnEntry.preferFurigana && jpnEntry.furigana.length > 0" class="text-2xl">
       <ul class="inline dark:before:text-neutral-700 dark:after:text-neutral-700">
         <li
           v-for="furigana, wIndex of jpnEntry.furigana"

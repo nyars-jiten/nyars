@@ -3,14 +3,8 @@ definePageMeta({
   name: 'Home',
 })
 
-const { getEdits } = useEditRepo()
-const { data: edits, refresh, status } = await useLazyAsyncData(
-  'edits',
-  () => getEdits(),
-  {
-    default: (): EditResponse[] => [],
-  },
-)
+const { getEdits } = useEditsData()
+const { data: edits, refresh, status } = getEdits()
 
 const config = useRuntimeConfig()
 
@@ -26,7 +20,6 @@ const { t, tm, rt } = useI18n()
         <div class="indent-10">
           {{ t('pages.main.infoNyars') }}
         </div>
-
         <ul class="flex flex-col gap-1">
           <li v-for="(examples, i) in tm('pages.main.infoExamples') as any[]" :key="i">
             → {{ rt(examples.text) }}

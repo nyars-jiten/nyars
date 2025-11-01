@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const api = useJpnRepo()
+const { getEntry, getEntrySource } = useJpnEntries()
 const { t } = useI18n()
 
 const routeWid = useRoute('dict-jpn-wid').params.wid
 
-const srcData = await useAsyncData(() => api.source(`${routeWid}`))
-const rawEntry = await useAsyncData(() => api.get(`${routeWid}`))
+const srcData = getEntrySource(routeWid)
+const rawEntry = getEntry(routeWid)
 
 const disabled = computed(() => {
   return srcData.status.value !== 'success' || rawEntry.status.value !== 'success' || rawEntry.data.value?.status.isDeleted
@@ -31,4 +31,7 @@ definePageMeta({
     @save="actionOnSave"
     @remove="actionOnSave"
   />
+  <div v-else class="flex items-center justify-center min-h-screen">
+    Loading...
+  </div>
 </template>

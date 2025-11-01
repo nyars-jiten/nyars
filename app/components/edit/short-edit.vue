@@ -60,7 +60,7 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <section class="space-y-4 border-l-2 px-4 py-2 leading-none shadow-md outline-dashed outline-1 outline-neutral-800 transition-colors" :class="mark({ border: edit.status })">
+  <section class="space-y-4 border-l-2 px-4 py-2 leading-none shadow outline-dashed outline-1 outline-neutral-800 transition-colors" :class="mark({ border: edit.status })">
     <div class="flex items-center gap-4 hover:cursor-pointer select-none" @click="toggleChanges()">
       <span class="italic" :class="typeColors({ text: edit.type })">
         {{ t(`models.edit.type.${edit.type}`) }}
@@ -73,7 +73,7 @@ const { t } = useI18n()
           {{ t(`models.edit.status.${edit.status}`) }}
         </span>
 
-        <EditUserProfile v-if="showApprover && edit.approver" :user="edit.approver" />
+        <user-badge-profile v-if="showApprover && edit.approver" :user="edit.approver" />
       </div>
 
       <span class="text-neutral-700">|</span>
@@ -84,7 +84,7 @@ const { t } = useI18n()
           {{ createdDate }}
         </span>
 
-        <EditUserProfile v-if="edit.author != null" :user="edit.author" />
+        <user-badge-profile v-if="edit.author != null" :user="edit.author" />
         <span v-else>анонимно</span>
       </div>
     </div>

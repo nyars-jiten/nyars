@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const { getDownloads } = useJpnRepo()
+const { getDownloads } = useJpnDownloads()
 
-const { data: downloads } = await useAsyncData(() => getDownloads())
+const { data: downloads } = getDownloads()
 
 function getExportPath(file: string) {
   return `/static/export/${file}`
@@ -62,7 +62,7 @@ const dlData = [
 
       <div class="inline-grid grid-cols-[auto_auto] gap-4 items-center">
         <template v-for="(dl) in dlData.filter(x => x.data)" :key="dl.type">
-          <a v-if="dl.data" :href="getExportPath(dl.data.filepath)" class="flex gap-2 outline-1 outline-zinc-700 shadow-md hover:bg-zinc-800 transition-colors hover:outline-transparent rounded-md p-2 items-center">
+          <a v-if="dl.data" :href="getExportPath(dl.data.filepath)" class="flex gap-2 outline-1 outline-zinc-700 shadow hover:bg-zinc-800 transition-colors hover:outline-transparent rounded-md p-2 items-center">
             <img :src="`/download/${dl.icon}`" class="w-12 h-12">
 
             <span>

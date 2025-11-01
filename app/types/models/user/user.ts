@@ -10,10 +10,18 @@ export interface User extends ShortUser {
   banned: boolean
   isAdmin: boolean
   stats: StatsUser
+  lastOnline: Date
   createdAt: Date
 }
 
 export interface ExtendedUser extends User {
   access: number
   settings: string
+}
+
+export interface UserAccessResponse {
+  userId: string
+  username: string
+  access: number
+  isAdmin: boolean
 }

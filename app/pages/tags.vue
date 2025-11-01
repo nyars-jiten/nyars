@@ -1,14 +1,8 @@
 <script lang="ts" setup>
 const { t } = useI18n()
 
-const { tagList } = useJpnRepo()
-const tags = ref({} as Record<string, Tag[]>)
-
-async function updateTags() {
-  tags.value = await tagList('')
-}
-
-await updateTags()
+const { getTags } = useJpnTags()
+const { data: tags } = getTags('')
 </script>
 
 <template>
@@ -22,7 +16,7 @@ await updateTags()
 
       <table class="w-full">
         <tbody v-for="(list, category) of tags" :key="category">
-          <tr class="sticky top-10 bg-neutral-900/95 text-indigo-300/80">
+          <tr class="sticky top-18 bg-neutral-900/95 text-indigo-300/80">
             <td colspan="100%">
               <h2 class="text-4xl uppercase font-extralight text-center m-4">
                 {{ t(`pages.editor.tagCategories.${category}`) }}

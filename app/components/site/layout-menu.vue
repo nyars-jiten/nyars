@@ -39,7 +39,7 @@ const block = tv({
   base: 'space-y-4 transition-[transform,opacity]',
   variants: {
     secondary: {
-      true: 'fixed top-0 left-0 p-4 bg-neutral-900 h-dvh overflow-y-auto xl:hidden border-r border-neutral-800 shadow-md',
+      true: 'fixed top-0 left-0 p-4 bg-neutral-900 h-dvh overflow-y-auto xl:hidden border-r border-neutral-800 shadow',
       false: '',
     },
     state: {
@@ -110,7 +110,7 @@ onMounted(() => {
       </li>
 
       <li class="space-y-1">
-        <NuxtLink :to="{ name: 'dict-jpn-new' }" :class="links({ state: menuState, secondary })" class="text-lime-300 transition-colors">
+        <NuxtLink :to="{ name: 'dict-jpn-new' }" :class="links({ state: menuState, secondary })" class="text-lime-300/80 transition-colors">
           <Icon size="1.5rem" name="ic:baseline-plus" />
 
           <span class="text-xs font-semibold uppercase">

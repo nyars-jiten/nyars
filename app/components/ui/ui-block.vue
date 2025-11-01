@@ -16,9 +16,9 @@ defineSlots<{
 const size_ = tv({
   variants: {
     size: {
-      small: 'p-2',
-      medium: 'p-4',
-      large: 'p-6',
+      small: 'p-2 space-y-2',
+      medium: 'p-4 space-y-4',
+      large: 'p-6 space-y-6',
     },
   },
 })

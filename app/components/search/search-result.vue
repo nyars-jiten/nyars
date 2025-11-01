@@ -51,18 +51,17 @@ const active = computed(() => articleWid.value === props.article.wid)
   >
     <UiBlock :hover="active === false" :class="newBorder">
       <template #default>
-        <section class="space-y-2">
+        <section class="relative space-y-2">
+          <div class="absolute top-0 right-0 flex flex-wrap items-center gap-2">
+            <EntryFlagBadge :statuses="article.status" @change-border="(cl: string) => { newBorder = cl }" />
+            <UiBadgeFrequency v-if="article.frequency > 0" :value="article.frequency" />
+          </div>
+
           <div v-if="article.status.isDeleted" class="text-rose-400 pl-4">
             {{ t('pages.jpnEntry.entryWasDeleted') }}
           </div>
-          <Words :jpn-entry="article" :preview="true" />
-
-          <div class="flex flex-wrap items-center gap-2">
-            <UiTag v-if="article.frequency > 0" kind="freq">
-              <MiscFreq :value="article.frequency" />
-            </UiTag>
-
-            <EntryFlagBadge :statuses="article.status" @change-border="(cl: string) => { newBorder = cl }" />
+          <div class="pr-20">
+            <Words :jpn-entry="article" :preview="true" />
           </div>
 
           <div class="grid grid-cols-[auto_1fr] gap-x-2">

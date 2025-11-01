@@ -4,7 +4,8 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-const avatar = computed(() => useAvatar(props.data.user.avatar).href)
+const { getUserAvatarUrl } = useUserProfile()
+const avatar = computed(() => getUserAvatarUrl(props.data.user.avatar).href)
 
 const { t } = useI18n()
 </script>

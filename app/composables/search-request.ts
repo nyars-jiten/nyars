@@ -16,17 +16,3 @@ export function useRouteArticle() {
 
   return value
 }
-
-// export const useSearchRequest = createGlobalState(() => {
-//   const route = useRoute()
-//   const request = ref(String(route.query.q ?? ''))
-//   const watchParam = ref(request.value + Date.now())
-
-//   function push(value?: string) {
-//     request.value = value ?? request.value
-//     watchParam.value = request.value + Date.now()
-//     return navigateTo({ name: 'dict-jpn', query: { q: request.value } })
-//   }
-
-//   return { request, push, watchParam }
-// })

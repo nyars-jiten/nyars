@@ -3,9 +3,9 @@ const props = defineProps<{ wid: string }>()
 
 const { t } = useI18n()
 
-const { getSatellites } = useJpnRepo()
+const { getSatellites } = useJpnEntries()
 
-const { data: satelliteEntries } = useAsyncData(`jpn-satellites-${props.wid}`, () => getSatellites(props.wid))
+const { data: satelliteEntries } = getSatellites(props.wid)
 
 // const maxSatelliteSize = 10
 
@@ -25,9 +25,9 @@ const { data: satelliteEntries } = useAsyncData(`jpn-satellites-${props.wid}`, (
     <div
       v-for="satellite in satelliteEntries?.sort((a, b) => a.title > b.title ? 1 : -1)"
       :key="satellite.id"
-      class="py-2 border-b-1 border-neutral-800"
+      class="py-2 border-b-1 leading-6 border-neutral-800"
     >
-      <span class="text-[#6aa3ab]">
+      <span class="text-blue-300">
         {{ satellite.title }}
       </span>
       <div

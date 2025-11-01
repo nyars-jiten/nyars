@@ -1,52 +1,72 @@
 <script lang="ts" setup>
 import CalHeatmap from 'cal-heatmap'
 import CalendarLabel from 'cal-heatmap/plugins/CalendarLabel'
-import LegendLite from 'cal-heatmap/plugins/Legend'
+import LegendLite from 'cal-heatmap/plugins/LegendLite'
 import Tooltip from 'cal-heatmap/plugins/Tooltip'
+import dayjs from 'dayjs'
 
 import 'cal-heatmap/cal-heatmap.css'
 
 interface Props {
   id: string
+  year: number
 }
 
 const props = defineProps<Props>()
 const config = useRuntimeConfig()
+const calContainer = ref<HTMLElement>()
+let cal: CalHeatmap | null = null
 
-const cal: CalHeatmap = new CalHeatmap()
+function paintCalendar(theme: 'light' | 'dark') {
+  // Calculate start date based on selected year
+  const isCurrentYear = props.year === new Date().getFullYear()
+  const startDate = isCurrentYear ? dayjs().subtract(11, 'month') : dayjs().year(props.year).month(0).date(1)
+  const endDate = dayjs().year(props.year).month(11).date(31)
 
-function paintCalendar() {
+  if (cal) {
+    cal.destroy()
+  }
+
+  cal = new CalHeatmap()
+
   cal.paint(
     {
+      theme,
       data: {
-        source: `${config.public.apiUrl}/users/${props.id}/heatmap`,
+        source: `${config.public.apiUrl}/users/${props.id}/heatmap?from={{start=YYYY-MM-DD}}&to={{end=YYYY-MM-DD}}`,
         type: 'json',
         dataType: 'json',
         x: 'date',
         y: 'value',
       },
-      date: { start: new Date('2025-01-01') },
+      date: {
+        start: startDate.valueOf(),
+        min: new Date('2020-10-01'),
+        max: isCurrentYear ? new Date() : endDate.toDate(),
+        highlight: isCurrentYear ? [new Date()] : [],
+        locale: 'ru',
+      },
       range: 12,
       scale: {
         color: {
           type: 'threshold',
-          range: ['#14432a', '#166b34', '#37a446', '#4dd05a'],
-          domain: [10, 20, 30],
+          range: ['#2D333B', '#355361', '#3E7387', '#4693AD', '#4EB3D3', '#A7D9E9'],
+          domain: [0, 15, 30, 80, 200, 1000],
         },
       },
       domain: {
         type: 'month',
-        gutter: 4,
-        label: { text: 'MMM', textAlign: 'start', position: 'top' },
+        gutter: 5,
+        label: { text: 'M月', textAlign: 'middle', position: 'bottom' },
       },
-      subDomain: { type: 'ghDay', radius: 2, width: 11, height: 11, gutter: 4 },
-      itemSelector: '#ex-ghDay',
+      subDomain: { type: 'day', radius: 2 },
+      itemSelector: calContainer.value,
     },
     [
       [
         Tooltip,
         {
-          text(date, value, dayjsDate) {
+          text(timestamp: number, value: number, dayjsDate: dayjs.Dayjs) {
             return (
               `${value || 'No'
               } contributions on ${
@@ -58,8 +78,8 @@ function paintCalendar() {
       [
         LegendLite,
         {
-          includeBlank: true,
-          itemSelector: '#ex-ghDay-legend',
+          includeBlank: false,
+          itemSelector: '#cal-legend',
           radius: 2,
           width: 11,
           height: 11,
@@ -69,41 +89,61 @@ function paintCalendar() {
       [
         CalendarLabel,
         {
-          width: 30,
+          width: 25,
           textAlign: 'start',
-          text: () => '',
-          padding: [25, 0, 0, 0],
+          text() {
+            return ['月', '', '水', '', '金', '', '日']
+          },
         },
       ],
     ],
   )
 }
 
-onMounted(() => paintCalendar())
+onMounted(() => {
+  paintCalendar('dark')
+})
+
+onBeforeUnmount(() => {
+  if (cal) {
+    cal.destroy()
+  }
+})
+
+// const isDark = ref(true)
+
+// watch(
+//   [isDark, () => props.year],
+//   () => {
+//     if (isDark.value) {
+//       if (cal !== undefined)
+//         destory(cal)
+//       cal = new CalHeatmap()
+//       paintCalendar(cal, 'dark')
+//     }
+//     else {
+//       if (cal !== undefined)
+//         destory(cal)
+//       cal = new CalHeatmap()
+//       paintCalendar(cal, 'light')
+//     }
+//   },
+//   {
+//     immediate: true,
+//   },
+// )
 </script>
 
 <template>
-  <div class="bg-gray-800 text-gray-300 rounded-md p-4 overflow-hidden">
-    <div id="ex-ghDay" class="mb-4" />
+  <div class="bg-neutral-800/50 text-neutral-300 rounded-lg p-6 backdrop-blur-sm">
+    <div class="overflow-x-auto mb-2">
+      <div id="heatmap" ref="calContainer" />
+    </div>
 
-    <button
-      class="bg-gray-600 hover:bg-gray-500 text-white text-sm px-3 py-1 rounded mt-2"
-      @click="cal.previous()"
-    >
-      ← Previous
-    </button>
-
-    <button
-      class="bg-gray-600 hover:bg-gray-500 text-white text-sm px-3 py-1 rounded mt-2 ml-2"
-      @click="cal.next()"
-    >
-      Next →
-    </button>
-
-    <div class="float-right text-xs">
-      <span class="text-gray-400">Less</span>
-      <div id="ex-ghDay-legend" class="inline-block mx-1" />
-      <span class="text-gray-400 text-xs">More</span>
+    <div class="flex items-center gap-2 text-xs">
+      <span class="text-neutral-400">Меньше</span>
+      <div id="cal-legend" class="inline-block" />
+      <span class="text-neutral-400">Больше</span>
     </div>
   </div>
 </template>

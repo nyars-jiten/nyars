@@ -16,7 +16,7 @@ function search(val: string) {
 
 <template>
   <section v-if="suggestions && suggestions.length" class="absolute left-0 top-full z-10 w-full pt-4 leading-none text-zinc-300">
-    <div class="rounded-md bg-zinc-800/50 p-2 shadow-md outline-1 outline-zinc-700 backdrop-blur-md">
+    <div class="rounded-md bg-zinc-800/50 p-2 shadow outline-1 outline-zinc-700 backdrop-blur-md">
       <button
         v-for="val, index of suggestions"
         :key="index"
@@ -28,7 +28,7 @@ function search(val: string) {
           {{ val }}
         </div>
 
-        <div class="rounded-md px-2 py-1 font-mono shadow-md outline-dashed outline-1 outline-zinc-700 transition-colors">
+        <div class="rounded-md px-2 py-1 font-mono shadow outline-dashed outline-1 outline-zinc-700 transition-colors">
           {{ 1 + index }}
         </div>
       </button>

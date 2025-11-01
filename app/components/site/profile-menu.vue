@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import { tv } from 'tailwind-variants'
 
-const { clientLogout } = useUserRepo()
+const { logout: userLogout } = useAuthState()
 
 const { t } = useI18n()
 const { user } = storeToRefs(useUserStore())
+const { getUserAvatarUrl } = useUserProfile()
 
 // TODO: not nullable
-const avatar = computed(() => useAvatar(user.value?.avatar ?? '').href)
+const avatar = computed(() => getUserAvatarUrl(user.value?.avatar ?? '').href)
 
 async function logout() {
-  await clientLogout()
-  user.value = null
+  await userLogout()
   navigateTo('/')
 }
 
@@ -37,7 +37,7 @@ const styles = tv({
       </button>
 
       <div class="absolute right-0 invisible top-full w-44 group-hover:visible">
-        <div class="flex flex-col gap-1 rounded-md mt-2 p-2 shadow-md outline-1 outline-neutral-800 bg-neutral-900">
+        <div class="flex flex-col gap-1 rounded-md mt-2 p-2 shadow outline-1 outline-neutral-800 bg-neutral-900">
           <NuxtLink
             :to="{ name: 'users-username', params: { username: user.username } }"
             :class="styles({ entity: 'menuItem' })"
@@ -45,7 +45,10 @@ const styles = tv({
             <span>{{ t('components.header.profileMenu.profile') }}</span>
           </NuxtLink>
 
-          <!-- <NuxtLink to="/" :class="styles({ entity: 'menuItem' })">
+          <!-- <NuxtLink
+            to="/settings"
+            :class="styles({ entity: 'menuItem' })"
+          >
             <span>{{ t('components.header.profileMenu.settings') }}</span>
           </NuxtLink> -->
 

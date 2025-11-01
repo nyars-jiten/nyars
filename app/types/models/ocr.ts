@@ -19,7 +19,7 @@ export interface OCRPageWithBook {
   innerIndex: number
   status: PageStatus
   title: string
-  description: string
+  description: Content[]
   prefix: string
 }
 

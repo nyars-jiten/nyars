@@ -8,7 +8,7 @@ const editable = ref({ ...tag.value })
 const notificationStore = useNotificationStore()
 const { userAccess } = storeToRefs(useUserStore())
 
-const { updateTag } = useJpnRepo()
+const { updateTag } = useJpnTags()
 const loading = ref(false)
 
 async function saveTag() {
