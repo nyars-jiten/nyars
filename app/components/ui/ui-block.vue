@@ -24,7 +24,7 @@ const size_ = tv({
 })
 
 const styles = tv({
-  base: 'group/block rounded-md outline-1 m-1 outline-neutral-800 transition-colors',
+  base: 'group/block rounded-md outline m-px outline-neutral-800 transition-colors',
   variants: {
     hover: {
       true: 'hover:bg-neutral-800 hover:outline-neutral-700',
