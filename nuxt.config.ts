@@ -1,6 +1,8 @@
 import tailwindcss from '@tailwindcss/vite'
+import { env } from 'node:process'
 
 export default defineNuxtConfig({
+  debug: env.NODE_ENV === 'development',
   devtools: { enabled: true },
   css: ['~/assets/css/tailwind.css'],
   devServer: {
