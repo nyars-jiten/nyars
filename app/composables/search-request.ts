@@ -1,17 +1,14 @@
 export function useRouteArticle() {
   const route = useRoute()
 
-  const value = computed({
-    set: (value: string) => {
-      route.query.wid = value
-    },
-    get: () => {
-      if (typeof route.query.wid !== 'string') {
-        route.query.wid = ''
-      }
+  const value = computed(() => {
+    const { wid } = route.params
 
-      return route.query.wid
-    },
+    if (typeof wid !== 'string') {
+      return ''
+    }
+
+    return wid.split('-')[0] ?? wid
   })
 
   return value
