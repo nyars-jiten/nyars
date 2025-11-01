@@ -6,6 +6,8 @@ interface Props {
 
 const props = defineProps<Props>()
 
+const { getAudioUrl } = useJpnApi()
+
 const hasPitchAccents = computed(() => {
   return props.jpnEntry.words.some(word =>
     word.readings.some(reading => reading.pitch.length > 0),
@@ -39,7 +41,7 @@ function playAudio(audio: string) {
     <section class="px-4 inline-flex items-center gap-4 flex-wrap">
       <template v-for="(reading, ri) in jpnEntry.words.flatMap(word => word.readings)" :key="ri">
         <span v-for="(pitch, pi) in reading.pitch" :key="pi" class="inline-flex items-center gap-2">
-          <button v-if="pitch.audio.length > 0" type="button" class="flex items-center justify-start rounded-md transition-colors text-xl hover:text-violet-300/50 cursor-pointer" @click="playAudio(pitch.audio)">
+          <button v-if="pitch.audio.length > 0" type="button" class="flex items-center justify-start rounded-md transition-colors text-xl hover:text-violet-300/50 cursor-pointer" @click="playAudio(getAudioUrl(pitch.audio).toString())">
             <Icon name="ic:baseline-volume-up" />
           </button>
 

@@ -7,9 +7,16 @@ export function useJpnApi() {
   const client = useApiClient()
   const path = '/jp'
 
+  const getAudioUrl = (path: string) => {
+    const config = useRuntimeConfig()
+
+    return new URL(`/static/audio/${path}`, config.public.imageUrl)
+  }
+
   return {
     client,
     path,
+    getAudioUrl,
   }
 }
 
