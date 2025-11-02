@@ -23,7 +23,7 @@ export function useUserData() {
    * Uses useFetch to properly forward cookies during SSR
    */
   const getCurrentUser = () => {
-    return useFetch<ExtendedUser>('/api/me', {
+    return useFetch<ExtendedUser>('/_api/me', {
       onResponseError() {
         return null
       },

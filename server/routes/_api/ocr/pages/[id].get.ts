@@ -1,5 +1,5 @@
 import { defineEventHandler, getRouterParam } from 'h3'
-import { proxyApiRequest } from '../../../utils/cookie-proxy'
+import { proxyApiRequest } from '../../../../utils/cookie-proxy'
 
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, 'id')
