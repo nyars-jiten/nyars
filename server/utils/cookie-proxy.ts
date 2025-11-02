@@ -27,7 +27,6 @@ export function forwardCookies(event: H3Event, setCookieRaw: string) {
       parts.push(`SameSite=${c.sameSite}`)
 
     const cookieString = parts.join('; ')
-    console.log('Forwarding cookie:', cookieString)
 
     // Use appendResponseHeader to allow multiple Set-Cookie headers
     appendResponseHeader(event, 'set-cookie', cookieString)

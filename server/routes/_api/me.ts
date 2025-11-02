@@ -1,5 +1,5 @@
 import { defineEventHandler, getRequestHeader } from 'h3'
-import { proxyApiRequest } from '../utils/cookie-proxy'
+import { proxyApiRequest } from '../../utils/cookie-proxy'
 
 export default defineEventHandler(async (event) => {
   // Get the cookie header from the incoming request
