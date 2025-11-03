@@ -12,7 +12,7 @@ const { createNotification } = useNotificationStore()
 
 if (bookId) {
   try {
-    const nextId = await getNextPage(Number(bookId))
+    const nextId = await getNextPage(Number(bookId), -1, 3)
     if (nextId.id) {
       await useRouter().replace({ name: 'ocr-id', params: { id: nextId.id } })
     }
