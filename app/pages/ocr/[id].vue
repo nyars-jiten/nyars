@@ -120,6 +120,28 @@ async function mergeEntry(wid: string) {
   })
 }
 
+async function replaceEntry(wid: string) {
+  const { data: srcEntry } = await getEntrySource(wid)
+
+  if (!srcEntry.value) {
+    return
+  }
+
+  // Replace with OCR page data
+  activeEntry.spelling = page.value?.word || ''
+  activeEntry.reading = page.value?.reading || ''
+  activeEntry.body = `=((сущ))\n${page.value?.meaningRu || ''}`
+  activeEntry.comment = `[${page.value?.prefix}] ${page.value?.title}`
+
+  showEditor.value = true
+  isNew.value = false
+  activeWid.value = wid
+
+  nextTick(() => {
+    editorSection.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
+}
+
 enum NextPage {
   Random = 0,
   Next,
@@ -363,9 +385,15 @@ const statusStyles = tv({
       <template v-if="srchResult?.result && srchResult.result.length > 0">
         <div class="grid grid-cols-[auto_1fr] gap-4 items-start">
           <template v-for="result of srchResult.result" :key="result.wid">
-            <UiButton class="shrink-0" type="button" icon="mdi:source-branch-plus" color="sky" :title="t('pages.editor.save')" @click="mergeEntry(result.wid)">
-              Объединить
-            </UiButton>
+            <div class="flex flex-col gap-2">
+              <UiButton type="button" icon="mdi:source-branch-plus" color="sky" :title="t('pages.editor.save')" @click="mergeEntry(result.wid)">
+                Объединить
+              </UiButton>
+
+              <UiButton type="button" icon="mdi:swap-horizontal" color="amber" title="Заменить" @click="replaceEntry(result.wid)">
+                Заменить
+              </UiButton>
+            </div>
 
             <SearchResult :article="result" />
           </template>
