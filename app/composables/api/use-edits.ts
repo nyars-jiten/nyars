@@ -48,13 +48,13 @@ export function useEditsData() {
     to?: string
     userId?: string
     username?: string
-  }) => {
+  }, options?: { watch?: any[] }) => {
     const cacheKey = params
       ? `edits-${Object.entries(params).map(([k, v]) => `${k}-${v}`).join('-')}`
       : 'edits'
 
     return useAsyncData(cacheKey, () =>
-      client.get<EditResponse[]>(path, params))
+      client.get<EditResponse[]>(path, params), options)
   }
 
   const getEditsByWid = (wid: string) => {
