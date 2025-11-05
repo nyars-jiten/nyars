@@ -1,5 +1,5 @@
-import tailwindcss from '@tailwindcss/vite'
 import { env } from 'node:process'
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
   debug: env.NODE_ENV === 'development',
@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/tailwind.css'],
   devServer: {
     host: '127.0.0.1',
-    port: 8080,
+    port: 8090,
   },
   vite: {
     plugins: [tailwindcss()],
