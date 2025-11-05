@@ -3,7 +3,7 @@ import type { VariantProps } from 'tailwind-variants'
 
 import { tv } from 'tailwind-variants'
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   type: 'button',
   disabled: false,
   outline: true,
@@ -11,7 +11,7 @@ withDefaults(defineProps<Props>(), {
   active: false,
 })
 
-defineSlots<{
+const slots = defineSlots<{
   default: () => VNode[]
 }>()
 
@@ -71,7 +71,7 @@ interface Props {
   <button :type="type" :title="label" :disabled="disabled" class="cursor-pointer">
     <ui-block :disabled="disabled" :active="active" class="flex items-center gap-x-2 justify-center px-2 py-1.5 w-full" :hover="true">
       <Icon v-if="icon" :name="icon" size="1.5rem" />
-      <span class="truncate">{{ $slots.default?.() ?? label }}</span>
+      <!-- <span class="truncate" v-if="content">{{ content }}</span> -->
     </ui-block>
   </button>
 </template>

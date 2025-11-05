@@ -4,22 +4,24 @@ import { tv } from 'tailwind-variants'
 const { userAccess } = storeToRefs(useUserStore())
 
 const statusesSearch = ref({
-  [EditType.Create]: false,
-  [EditType.Edit]: false,
-  [EditType.Delete]: false,
-  [EditType.Transfer]: false,
-  // [EditType.Revert]: true,
+  [EditStatus.New]: false,
+  [EditStatus.Declined]: false,
+  [EditStatus.Accepted]: false,
+  [EditStatus.AutoAccepted]: false,
 } as Record<EditStatus, boolean>)
 
-const query = computed(() => {
-  const stStr = Object.keys(statusesSearch.value).filter(key => statusesSearch.value[Number(key) as EditStatus]).join(',')
-  return {
-    s: stStr,
-  }
+const statusQuery = computed(() => {
+  return Object.keys(statusesSearch.value)
+    .filter(key => statusesSearch.value[Number(key) as EditStatus])
+    .join(',')
 })
 
-const { getEdits } = useEditsData()
-const { data: edits } = getEdits({ s: query.value.s })
+const { client, path } = useEditsApi()
+const { data: edits } = useAsyncData(
+  () => `edits-${statusQuery.value}`,
+  () => client.get<EditResponse[]>(path, { s: statusQuery.value }),
+  { watch: [statusQuery] },
+)
 
 // TODO: remove code repeating
 const mark = tv({

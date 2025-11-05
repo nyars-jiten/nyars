@@ -19,7 +19,7 @@ function computeSize(size: number) {
 
 const { t, tm, rt } = useI18n()
 
-const dlData = [
+const dlData = computed(() => [
   {
     type: 'json',
     title: 'JSON',
@@ -44,7 +44,7 @@ const dlData = [
     icon: 'yomichan-legacy.png',
     data: downloads.value?.find(dl => dl.type === 'yomichan-legacy'),
   },
-]
+])
 </script>
 
 <template>

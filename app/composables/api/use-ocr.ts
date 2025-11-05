@@ -23,12 +23,12 @@ export function useOcrData() {
 
   // SSR-compatible: uses server proxy
   const getBooks = () => {
-    return useFetch<OCRBook[]>('/api/ocr/books')
+    return useFetch<OCRBook[]>('/_api/ocr/books')
   }
 
   // SSR-compatible: uses server proxy
   const getPage = (id: string) => {
-    return useFetch<OCRPageWithBook>(`/api/ocr/pages/${id}`, { deep: true })
+    return useFetch<OCRPageWithBook>(`/_api/ocr/pages/${id}`, { deep: true })
   }
 
   // Client-only: direct API call
