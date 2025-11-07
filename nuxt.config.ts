@@ -3,6 +3,10 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
   devtools: { enabled: process.env.NODE_ENV !== 'production' },
+  sourcemap: {
+    server: process.env.NODE_ENV !== 'production',
+    client: process.env.NODE_ENV !== 'production',
+  },
   css: ['~/assets/css/tailwind.css'],
   devServer: {
     host: '127.0.0.1',
@@ -13,6 +17,9 @@ export default defineNuxtConfig({
     server: {
       strictPort: true,
     },
+  },
+  routeRules: {
+    '/**': { isr: false },
   },
   compatibilityDate: '2025-07-15',
   app: {
