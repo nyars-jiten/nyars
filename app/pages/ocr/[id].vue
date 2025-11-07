@@ -35,6 +35,7 @@ const { data: srchResult, refresh: updateSearch } = await useAsyncData(
   {
     dedupe: 'defer',
     watch: [searchWord],
+    server: false,
   },
 )
 
