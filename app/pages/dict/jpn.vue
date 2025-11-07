@@ -14,6 +14,7 @@ if (searchQuery.value === '') {
 
 const { data, status } = await useAsyncData(`search-request-${searchQuery.value}`, () => search(searchQuery.value, 0, 0), {
   dedupe: 'defer',
+  server: false,
 })
 
 // const srchResult = ref<JpnSearchResponse>()
@@ -96,7 +97,7 @@ onMounted(updateEntry)
                 <span>{{ t('pages.search.foundNothing', [srchResult?.request]) }}</span>
               </div>
             </div>
-            <div v-else-if="status === 'pending'" class="flex space-x-2 content-center">
+            <div v-else-if="status === 'pending' || status === 'idle'" class="flex space-x-2 content-center">
               <Icon class="animate-spin size-6" name="mdi:loading" />
               <span>{{ t('pages.search.pendingRequest') }}</span>
             </div>
