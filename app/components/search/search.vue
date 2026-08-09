@@ -6,10 +6,11 @@ const { push } = useSearchStore()
 const [state, toggle] = useToggle()
 
 const panel = useTemplateRef('panelRef')
+const drawButton = useTemplateRef('drawButtonRef')
 
 onClickOutside(panel, () => {
   toggle(false)
-})
+}, { ignore: [drawButton] })
 </script>
 
 <template>
@@ -31,13 +32,13 @@ onClickOutside(panel, () => {
       <!-- <Icon name="ic:baseline-search" size="1.5rem" /> -->
 
       <ClientOnly>
-        <SearchSuggestions class="invisible group-focus-within:visible" />
+        <SearchSuggestions :class="state ? 'invisible' : 'invisible group-focus-within:visible'" />
       </ClientOnly>
 
       <DrawingPanel v-if="state" ref="panelRef" class="absolute left-0 top-full z-10 mt-4" />
     </section>
 
-    <UiButton type="button" class="relative" icon="mdi:draw-pen" @click="toggle()">
+    <UiButton ref="drawButtonRef" type="button" class="relative" icon="mdi:draw-pen" @click="toggle()">
       <span class="md:hidden">
         drawing
       </span>
