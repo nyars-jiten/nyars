@@ -105,6 +105,7 @@ export interface Tag {
   engShort: string
   rus: string
   rusShort: string
+  count: number
 }
 
 export interface LoanSource {

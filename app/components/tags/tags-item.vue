@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const tagKeys = ['rusShort', 'rus', 'engShort', 'eng'] as (keyof Tag)[]
+const tagKeys = ['rusShort', 'rus', 'engShort', 'eng', 'count'] as (keyof Tag)[]
 const [isEditing, toggleEditing] = useToggle(false)
 
 const tag = defineModel<Tag>({ required: true })
@@ -37,7 +37,7 @@ function cancelTag() {
 <template>
   <tr class="group odd:bg-neutral-800/50">
     <td v-for="key in tagKeys" :key="key" class="p-2">
-      <UiInput v-if="isEditing" v-model="editable[key]" class="w-full" :disabled="loading" />
+      <UiInput v-if="isEditing && key !== 'count'" v-model="editable[key]" class="w-full" :disabled="loading" />
       <template v-else>
         <NuxtLink
           v-if="key === 'rusShort' || key === 'engShort'"
