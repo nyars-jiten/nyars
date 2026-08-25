@@ -1,6 +1,7 @@
 export * from './use-auth'
 export * from './use-edits'
 export * from './use-jpn'
+export * from './use-kanji'
 export * from './use-ocr'
 export * from './use-search'
 export * from './use-user'

@@ -3,14 +3,31 @@ const { t } = useI18n()
 const { searchQuery } = storeToRefs(useSearchStore())
 const { addToHistory } = useSuggestionsStore()
 const { push } = useSearchStore()
-const [state, toggle] = useToggle()
+const [drawState, toggleDraw] = useToggle()
+const [compState, toggleComp] = useToggle()
 
 const panel = useTemplateRef('panelRef')
 const drawButton = useTemplateRef('drawButtonRef')
+const compPanel = useTemplateRef('compPanelRef')
+const compButton = useTemplateRef('compButtonRef')
 
 onClickOutside(panel, () => {
-  toggle(false)
+  toggleDraw(false)
 }, { ignore: [drawButton] })
+
+onClickOutside(compPanel, () => {
+  toggleComp(false)
+}, { ignore: [compButton] })
+
+function openDraw() {
+  toggleComp(false)
+  toggleDraw()
+}
+
+function openComp() {
+  toggleDraw(false)
+  toggleComp()
+}
 </script>
 
 <template>
@@ -29,28 +46,23 @@ onClickOutside(panel, () => {
         @focus="($event.target as HTMLInputElement).select()"
         @keydown.enter.prevent="push(); addToHistory(searchQuery)"
       >
-      <!-- <Icon name="ic:baseline-search" size="1.5rem" /> -->
 
       <ClientOnly>
-        <SearchSuggestions :class="state ? 'invisible' : 'invisible group-focus-within:visible'" />
+        <SearchSuggestions :class="(drawState || compState) ? 'invisible' : 'invisible group-focus-within:visible'" />
       </ClientOnly>
 
-      <DrawingPanel v-if="state" ref="panelRef" class="absolute left-0 top-full z-10 mt-4" />
+      <DrawingPanel v-if="drawState" ref="panelRef" class="absolute left-0 top-full z-10 mt-4" />
+      <ComponentPanel v-if="compState" ref="compPanelRef" class="absolute left-0 top-full z-10 mt-4 w-full" />
     </section>
 
-    <UiButton ref="drawButtonRef" type="button" class="relative" icon="mdi:draw-pen" @click="toggle()">
+    <UiButton ref="drawButtonRef" type="button" class="relative" icon="mdi:draw-pen" @click="openDraw()">
       <span class="md:hidden">
         drawing
       </span>
     </UiButton>
 
-    <!-- <div class="grid grid-cols-2 gap-2">
-
-      <UiButton type="button" icon="ic:baseline-draw" />
-
-      <UiButton type="button">
-        部
-      </UiButton>
-    </div> -->
+    <UiButton ref="compButtonRef" type="button" class="relative text-2xl" @click="openComp()">
+      部
+    </UiButton>
   </div>
 </template>
