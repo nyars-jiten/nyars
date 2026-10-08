@@ -1,8 +1,22 @@
 @import "tailwindcss";
+@import "./palettes.css";
+@import "./hz.css";
 
 @theme {
-  --color-discord: #8c9eff;  
-  
+  --color-discord: #8c9eff;
+
+  --color-bg: var(--palette-bg);
+  --color-surf: var(--palette-surf);
+  --color-ink: var(--palette-ink);
+  --color-muted: var(--palette-muted);
+  --color-line: var(--palette-line);
+  --color-acc: var(--palette-acc);
+  --color-onacc: var(--palette-onacc);
+  --color-strong: var(--palette-strong);
+  --color-soft: var(--palette-soft);
+  --color-sec: var(--palette-sec);
+  --color-secsoft: var(--palette-secsoft);
+
   --font-exo: "Exo 2";
   --font-noto: "Noto Sans JP";
   --font-sans: var(--font-exo), var(--font-noto);
@@ -14,63 +28,47 @@
   h1 {
     @apply text-6xl font-extralight uppercase
   }
-  
-  html.dark ::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background-color: var(--color-neutral-800);
+
+  html {
+    color-scheme: light;
   }
-  
-  html.dark ::-webkit-scrollbar {
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  html ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: var(--palette-surf);
+  }
+
+  html ::-webkit-scrollbar {
     width: 12px;
-    background-color: var(--color-neutral-800);
+    background-color: var(--palette-surf);
   }
-  
-  html.dark ::-webkit-scrollbar-thumb {
+
+  html ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: var(--color-neutral-700);
+    background-color: var(--palette-line);
   }
-  
-  html.dark ::-webkit-scrollbar-thumb:hover {
+
+  html ::-webkit-scrollbar-thumb:hover {
     border-radius: 10px;
-    background-color: #39393F;
+    background-color: var(--palette-muted);
   }
-  
-  html.light ::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background-color: white;
+
+  html ::-webkit-scrollbar-corner {
+    background-color: var(--palette-surf);
   }
-  
-  html.light ::-webkit-scrollbar {
-    width: 12px;
-    background-color: white;
-  }
-  
-  html.light ::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #C1C1C1;
-  }
-  
-  html.light ::-webkit-scrollbar-thumb:hover {
-    border-radius: 10px;
-    background-color: #A8A8A8;
-  }
-  
-  html.light ::-webkit-scrollbar-corner {
-    background-color: white;
-  }
-  
-  html.dark ::-webkit-scrollbar-corner {
-    background-color: var(--neutral-800);
-  }
-  
+
   ::selection {
-    background: #6aa3ab;
-    color: white;
+    background: var(--palette-acc);
+    color: var(--palette-onacc);
   }
 }
 
 @layer components {
   .btn-generic {
-    @apply inline-flex items-center gap-2 whitespace-nowrap rounded border border-neutral-300 bg-white px-2 py-1 text-xs font-medium uppercase shadow hover:bg-neutral-300 focus:outline-none dark:border-neutral-600 dark:bg-neutral-700 hover:dark:bg-neutral-600;
+    @apply inline-flex items-center gap-2 whitespace-nowrap rounded border border-line bg-surf px-2 py-1 text-xs font-medium uppercase text-ink shadow hover:bg-soft focus:outline-none;
   }
 }

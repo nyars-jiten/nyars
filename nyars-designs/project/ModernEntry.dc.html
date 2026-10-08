@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Модернизм — статья</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@500;700;800;900&amp;family=Geologica:wght@300;400;600;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FAFAF7;color:#111;font-family:'Geologica',system-ui,sans-serif;font-size:17px;line-height:1.55}
+a{color:#111;text-decoration:none;border-bottom:2px solid #111}a:hover{color:#C41A12;border-color:#C41A12}
+.mp{font-family:'M PLUS 1p',sans-serif}
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px;box-sizing:border-box}
+.lab{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.mod{display:grid;grid-template-columns:110px minmax(0,1fr);gap:0 24px;padding:20px 0;border-top:1px solid #111}
+.big{font-size:64px;font-weight:900;line-height:.9;letter-spacing:-0.04em}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;background:#111;color:#FAFAF7;font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;vertical-align:3px}
+.tag.o{background:transparent;color:#111;box-shadow:inset 0 0 0 2px #111}
+.chip{height:36px;padding:0 14px;border:2px solid #111;background:transparent;font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;color:#111}
+.chip[aria-pressed=true],.chip[aria-selected=true]{background:#111;color:#FAFAF7}
+.ex{margin-top:8px;font-size:15.5px}
+@media (max-width:900px){.wrap{padding:0 16px}.mod{grid-template-columns:1fr}.hero{flex-direction:column}}
+</style>
+</helmet>
+<div>
+  <header class="wrap" style="display: flex; align-items: center; gap: 16px 28px; flex-wrap: wrap; padding-top: 18px; padding-bottom: 18px; border-bottom: 1px solid #111">
+    <a href="ModernHome.dc.html" style="border: 0; display: flex; align-items: center; gap: 10px"><span style="width: 22px; height: 22px; border-radius: 50%; background: #E2231A"></span><span style="font-size: 20px; font-weight: 900">nyars</span></a>
+    <form role="search" style="flex: 1 1 480px; display: flex; background: #111"><label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label><input id="q" type="search" value="結構" class="mp" style="flex: 1; min-width: 0; height: 50px; border: 0; background: #111; color: #FAFAF7; padding: 0 16px; font-size: 20px; outline: none"><a href="ModernSearch.dc.html" style="width: 54px; display: flex; align-items: center; justify-content: center; background: #E2231A; color: #fff; border: 0; font-size: 22px; font-weight: 900">→</a></form>
+  </header>
+
+  <div class="wrap hero" style="display: flex; gap: 48px; padding-top: 36px; padding-bottom: 72px; align-items: flex-start">
+    <aside style="flex: 0 0 auto; position: sticky; top: 20px; display: flex; flex-direction: column; gap: 20px; align-items: flex-start">
+      <div style="position: relative; padding: 20px 10px 10px 20px">
+        <span aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 180px; height: 180px; border-radius: 50%; background: #E2231A"></span>
+        <div style="position: relative; display: flex; gap: 12px; align-items: flex-start">
+          <span class="mp" lang="ja" style="writing-mode: vertical-rl; font-size: 18px; font-weight: 700; letter-spacing: .2em; max-height: {{ hw.rh }}">{{ hw.r }}</span>
+          <h1 class="mp" lang="ja" style="margin: 0; writing-mode: vertical-rl; font-size: {{ hw.fs }}; font-weight: 900; line-height: 1.05; max-height: {{ hw.mh }}">{{ hw.w }}</h1>
+        </div>
+      </div>
+      <div role="group" aria-label="Тест длины" style="display: flex; gap: 4px; align-items: center"><span class="lab">Длина</span><sc-for list="{{ lens }}" as="l" hint-placeholder-count="3"><button type="button" class="chip" aria-pressed="{{ l.on }}" onClick="{{ l.pick }}" style="height: 30px; padding: 0 10px">{{ l.label }}</button></sc-for></div>
+    </aside>
+
+    <main style="flex: 1 1 auto; min-width: 0">
+      <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 0; border-top: 8px solid #111; margin-bottom: 30px">
+        <div style="padding: 12px 16px 12px 0"><p class="lab" style="margin: 0">Ударение</p>
+          <div style="display: flex; align-items: flex-end; gap: 6px; margin-top: 8px; height: 46px" role="img" aria-label="Высокий тон на け, затем низкий">
+            <span style="width: 26px; height: 46px; background: #E2231A"></span><span style="width: 26px; height: 18px; background: #111"></span><span style="width: 26px; height: 18px; background: #111"></span><span style="width: 26px; height: 18px; background: #111"></span>
+            <button type="button" aria-label="Прослушать" style="margin-left: 8px; width: 40px; height: 40px; border-radius: 50%; border: 2px solid #111; background: transparent; cursor: pointer; font-size: 14px">▶</button>
+          </div>
+          <p class="mp" style="margin: 4px 0 0; font-size: 13px; letter-spacing: .5em">けっこう</p>
+        </div>
+        <div style="padding: 12px 16px; border-left: 1px solid #111"><p class="lab" style="margin: 0">JLPT</p><p class="big" style="margin: 6px 0 0">N3</p></div>
+        <div style="padding: 12px 16px; border-left: 1px solid #111"><p class="lab" style="margin: 0">Частотность</p><p class="big" style="margin: 6px 0 0; font-weight: 300">1284</p></div>
+        <div style="padding: 12px 16px; border-left: 1px solid #111"><p class="lab" style="margin: 0">Значений</p><p class="big" style="margin: 6px 0 0; font-weight: 300">05</p></div>
+      </section>
+
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; align-items: center">
+        <span class="lab">Часть речи:</span><a href="#p1" class="chip" style="display: inline-flex; align-items: center">◆ на-прил.</a><a href="#p2" class="chip" style="display: inline-flex; align-items: center">▲ наречие</a><a href="#p3" class="chip" style="display: inline-flex; align-items: center">■ сущ.</a>
+        <span style="flex: 1"></span><a href="#" class="chip" style="display: inline-flex; align-items: center; background: #E2231A; border-color: #E2231A; color: #fff">Править</a>
+      </div>
+
+      <h2 id="p1" style="margin: 26px 0 0; font-size: 28px; font-weight: 900; letter-spacing: -0.02em">◆ на-прилагательное <span class="mp" style="font-size: 15px; font-weight: 700">形容動詞</span></h2>
+      <div class="mod"><span class="big" style="color: #C41A12">01</span><div><b>прекрасный, превосходный, отличный</b>; великолепный<div class="ex"><span class="mp">結構なお土産をありがとうございます。</span><br>Спасибо за чудесный подарок.</div></div></div>
+      <div class="mod"><span class="big">02</span><div><span class="tag o">часто 〜です</span> <b>достаточный</b>; (уже) хорошо, годится<div class="ex"><span class="mp">サインはボールペンで結構です。</span><br>Расписаться можно и шариковой ручкой.</div></div></div>
+      <div class="mod"><span class="big">03</span><div><span class="tag">вежл.</span> <b>нет, спасибо</b>; не нужно<div class="ex"><span class="mp">いえ、もう結構です。</span><br>Нет, спасибо, мне достаточно.</div></div></div>
+      <h2 id="p2" style="margin: 26px 0 0; font-size: 28px; font-weight: 900; letter-spacing: -0.02em">▲ наречие <span class="mp" style="font-size: 15px; font-weight: 700">副詞</span></h2>
+      <div class="mod"><span class="big">01</span><div><span class="tag o">разг.</span> <b>довольно, вполне</b>; порядочно<div class="ex"><span class="mp">この店、安いけど結構おいしい。</span><br>Здесь дёшево, но довольно вкусно.</div></div></div>
+      <h2 id="p3" style="margin: 26px 0 0; font-size: 28px; font-weight: 900; letter-spacing: -0.02em">■ существительное <span class="mp" style="font-size: 15px; font-weight: 700">名詞</span></h2>
+      <div class="mod"><span class="big">01</span><div><span class="tag o">книжн.</span> <b>структура, конструкция</b>; композиция; план</div></div>
+
+      <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 24px; border-top: 8px solid #111; padding-top: 16px; margin-top: 20px">
+        <div><p class="lab" style="margin: 0 0 6px">Употребление</p><p style="margin: 0; font-size: 15px">結構です — и «подойдёт», и «не нужно»; в магазине почти всегда отказ.</p></div>
+        <div><p class="lab" style="margin: 0 0 6px">Знаки</p><p style="margin: 0; font-size: 15px"><a href="#" class="mp" style="font-size: 22px; font-weight: 900; border: 0">結</a> завязывать · <a href="#" class="mp" style="font-size: 22px; font-weight: 900; border: 0">構</a> строить</p></div>
+        <div><p class="lab" style="margin: 0 0 6px">Соседи</p><p style="margin: 0; font-size: 15px">← <a href="#" class="mp">結局</a> · <a href="#" class="mp">結合</a> →</p></div>
+      </section>
+
+      <section style="margin-top: 30px">
+        <div role="tablist" style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px"><sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3"><button type="button" role="tab" class="chip" aria-selected="{{ t.on }}" onClick="{{ t.pick }}">{{ t.label }}</button></sc-for></div>
+        <sc-if value="{{ isHist }}" hint-placeholder-val="{{ true }}">
+          <sc-for list="{{ hist }}" as="h" hint-placeholder-count="3"><div style="display: grid; grid-template-columns: 60px minmax(0, 1fr) 90px; gap: 16px; padding: 10px 0; border-top: 1px solid #111; font-size: 15px"><b>{{ h.v }}</b><span>{{ h.u }} — {{ h.s }}</span><span style="text-align: right">+{{ h.a }} / −{{ h.r }}</span></div></sc-for>
+        </sc-if>
+        <sc-if value="{{ isSrc }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 15px">Конрад, с. 482 · Яркси · JMdict-ru</p></sc-if>
+        <sc-if value="{{ isDisc }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 15px">Murasaki: вынести 結構です в отдельную статью?</p></sc-if>
+      </section>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2500}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { len: 0, tab: 'hist' }; }
+  renderVals() {
+    const { len, tab } = this.state;
+    const H = [['結構', 'けっこう'], ['腕によりをかける', 'うでによりをかける'], ['鳴かぬなら殺してしまえホトトギス', 'なかぬならころしてしまえほととぎす']];
+    const [w, r] = H[len];
+    const n = Array.from(w).length;
+    const fs = n <= 2 ? 150 : n <= 8 ? 78 : 64;
+    const hw = { w, r, fs: fs + 'px', mh: Math.round(fs * 1.02 * 8) + 'px', rh: Math.round(fs * 1.02 * 8) + 'px' };
+    const lens = ['2', '8', '16'].map((label, i) => ({ label, on: i === len, pick: () => this.setState({ len: i }) }));
+    const tabs = [['hist', 'История 14'], ['src', 'Источники 5'], ['disc', 'Обсуждение 2']].map(([id, label]) => ({ label, on: tab === id, pick: () => this.setState({ tab: id }) }));
+    const hist = [['v14', 'kitsune_ru', 'уточнил перевод наречия', 18, 4], ['v13', 'гость', 'добавил «нет, спасибо»', 41, 0], ['v12', 'Murasaki', 'разделил значения', 26, 11]].map(([v, u, s, a, r]) => ({ v, u, s, a, r }));
+    return { hw, lens, tabs, hist, isHist: tab === 'hist', isSrc: tab === 'src', isDisc: tab === 'disc' };
+  }
+}
+</script>
+</body>
+</html>

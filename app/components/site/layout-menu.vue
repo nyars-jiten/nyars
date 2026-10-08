@@ -15,7 +15,7 @@ const { t } = useI18n()
 const { user, userAccess } = storeToRefs(useUserStore())
 
 const links = tv({
-  base: 'flex items-center justify-start gap-4 rounded-md px-2 py-1.5 leading-none transition-colors hover:bg-zinc-800 hover:text-zinc-400',
+  base: 'flex items-center justify-start gap-4 rounded-md px-2 py-1.5 leading-none transition-colors hover:bg-soft hover:text-muted',
   variants: {
     state: {
       false: '',
@@ -39,7 +39,7 @@ const block = tv({
   base: 'space-y-4 transition-[transform,opacity]',
   variants: {
     secondary: {
-      true: 'fixed top-0 left-0 p-4 bg-neutral-900 h-dvh overflow-y-auto xl:hidden border-r border-neutral-800 shadow',
+      true: 'fixed top-0 left-0 p-4 bg-bg h-dvh overflow-y-auto xl:hidden border-r border-line shadow',
       false: '',
     },
     state: {
@@ -56,7 +56,6 @@ const block = tv({
     },
   ],
 })
-
 const { menuState } = storeToRefs(useUserStore())
 
 onMounted(() => {

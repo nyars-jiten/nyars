@@ -15,7 +15,7 @@ const slots = defineSlots<{
 }>()
 
 const button = tv({
-  base: 'inline-flex items-center gap-2 rounded-md px-2 py-1.5 leading-none transition-all cursor-pointer',
+  base: 'inline-flex items-center gap-2 rounded-md px-2 py-1.5 leading-none transition-all cursor-pointer text-ink',
   variants: {
     color: {
       discord: 'text-discord',
@@ -33,17 +33,17 @@ const button = tv({
     },
 
     outline: {
-      true: 'shadow outline-1 outline-zinc-800',
+      true: 'shadow outline-1 outline-line',
       false: '',
     },
 
     active: {
-      true: 'bg-zinc-900 text-zinc-800 outline-zinc-800',
+      true: 'bg-soft text-strong outline-line',
     },
 
     disabled: {
-      true: 'cursor-not-allowed text-zinc-700',
-      false: 'hover:bg-zinc-800 hover:text-zinc-400 hover:outline-transparent',
+      true: 'cursor-not-allowed text-muted',
+      false: 'hover:bg-soft hover:text-muted hover:outline-transparent',
     },
 
     loose: {
@@ -51,7 +51,6 @@ const button = tv({
     },
   },
 })
-
 type V = VariantProps<typeof button>
 
 interface Props {

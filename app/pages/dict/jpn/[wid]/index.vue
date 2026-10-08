@@ -1,24 +1,28 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: false,
+  layout: 'hz',
   alias: '/jp/:wid',
+  pageTransition: false,
 })
 
 const wid = useRoute('dict-jpn-wid').params.wid
 const articleWid = useRouteArticle()
-// const route = useRoute()
-// const request = computed(() => String(route.query.q ?? ''))
 
 const { t } = useI18n()
 
 const { getEntry } = useJpnEntries()
 const { user } = storeToRefs(useUserStore())
 
-watch(articleWid, () => window.scrollTo(0, 0))
+watch(articleWid, () => {
+  if (import.meta.client)
+    window.scrollTo(0, 0)
+})
 
 const { data: jpnEntry, status } = getEntry(wid, { watch: [articleWid] })
 
 const showLemmas = ref(false)
+/** Admin-only tab — enable after mount so SSR/client markup match. */
+const showLlmTab = ref(false)
 
 const config = useRuntimeConfig()
 const url = computed(() => jpnEntry.value ? new URL(`jp/${jpnEntry.value.wid}`, config.public.baseUrl) : null)
@@ -27,7 +31,16 @@ const clipboard = useClipboard()
 const { start, stop, isPending } = useTimeout(1000, { controls: true, immediate: false })
 
 watch(articleWid, stop)
-// onBeforeUnmount(() => clear())
+
+onMounted(() => {
+  showLlmTab.value = !!user.value?.isAdmin
+})
+
+watch(user, (current) => {
+  if (!import.meta.client)
+    return
+  showLlmTab.value = !!current?.isAdmin
+})
 
 function copy() {
   clipboard.copy(url.value?.toString() ?? '')
@@ -36,76 +49,69 @@ function copy() {
 
 function switchFurigana() {
   if (jpnEntry.value) {
-    // force reactivity
     jpnEntry.value = { ...jpnEntry.value, preferFurigana: !jpnEntry.value.preferFurigana }
   }
 }
 
+const entryTabs = computed(() =>
+  showLlmTab.value
+    ? ['edits', 'satellites', 'scans', 'llm']
+    : ['edits', 'satellites', 'scans'],
+)
+
 const rawWid = computed(() => wid.split('-')[0] ?? wid)
 
-// const showData = ref(false)
 useHead({ title: jpnEntry.value?.title })
 </script>
 
 <template>
-  <div class="space-y-4">
-    <!-- <div v-if="request" class="space-y-4">
-      <SearchResult v-for="result of data?.result" :key="result.wid" :article="result" />
-    </div>
-    <div v-else /> -->
+  <div>
     <template v-if="jpnEntry">
-      <section class="flex gap-4">
-        <!-- todo copied -->
-        <UiButton icon="mdi:link-variant" :active="isPending" @click="copy" />
+      <div class="flex flex-wrap items-start gap-8 lg:gap-12">
+        <HzEntryAside
+          :entry="jpnEntry"
+          :show-lemmas="showLemmas"
+          @copy="copy"
+          @switch-furigana="switchFurigana"
+          @toggle-lemmas="showLemmas = !showLemmas"
+        />
 
-        <!-- TODO: new block with caption -->
-        <UiButton class="grow justify-center truncate" :active="isPending" @click="copy">
-          <template v-if="isPending">
-            copied!
-          </template>
+        <main class="min-w-0 flex-[999_1_640px] space-y-6">
+          <div v-if="isPending" class="text-[13.5px] text-muted">
+            Ссылка скопирована
+          </div>
 
-          <template v-else>
-            {{ url }}
-          </template>
-        </UiButton>
+          <div v-if="jpnEntry.status.isDeleted" class="text-rose-400">
+            {{ t('pages.jpnEntry.entryWasDeleted') }}
+          </div>
 
-        <UiButton icon="mdi:card-bulleted-outline" @click="showLemmas = !showLemmas">
-        <!-- lemma-mode -->
-        </UiButton>
-        <UiButton icon="mdi:furigana-horizontal" @click="switchFurigana">
-        <!-- furigana -->
-        </UiButton>
-        <NuxtLink :to="{ name: 'dict-jpn-wid-editor', params: { wid: String(jpnEntry?.wid) } }">
-          <UiButton icon="ic:baseline-edit" color="edit">
-          <!-- edit -->
-          </UiButton>
-        </NuxtLink>
-      </section>
-      <div v-if="jpnEntry.status.isDeleted" class="text-rose-400 pl-4">
-        {{ t('pages.jpnEntry.entryWasDeleted') }}
+          <div :class="{ 'opacity-40': jpnEntry.status.isDeleted }">
+            <JpnEntry :jpn-entry="jpnEntry" :show-lemmas="showLemmas" />
+          </div>
+
+          <div class="pt-2">
+            <UiTabs :tabs="entryTabs">
+              <UiTab title="edits">
+                <EditsList :wid="rawWid" />
+              </UiTab>
+              <UiTab title="satellites">
+                <SatelliteEntry :wid="rawWid" />
+              </UiTab>
+              <UiTab title="scans">
+                <OcrEntry :wid="rawWid" />
+              </UiTab>
+              <UiTab v-if="showLlmTab" title="llm">
+                <LlmEntry :wid="rawWid" />
+              </UiTab>
+            </UiTabs>
+          </div>
+        </main>
       </div>
-      <UiBlock :class="{ 'opacity-40': jpnEntry.status.isDeleted }">
-        <JpnEntry :jpn-entry="jpnEntry" :show-lemmas="showLemmas" />
-      </UiBlock>
-
-      <UiTabs :tabs="user?.isAdmin ? ['edits', 'satellites', 'scans', 'llm'] : ['edits', 'satellites', 'scans']">
-        <UiTab title="edits">
-          <EditsList :wid="rawWid" />
-        </UiTab>
-        <UiTab title="satellites">
-          <SatelliteEntry :wid="rawWid" />
-        </UiTab>
-        <UiTab title="scans">
-          <OcrEntry :wid="rawWid" />
-        </UiTab>
-        <UiTab v-if="user?.isAdmin" title="llm">
-          <LlmEntry :wid="rawWid" />
-        </UiTab>
-      </UiTabs>
     </template>
-    <UiBlock v-else-if="status === 'pending'">
-      <span>{{ t('pages.jpnEntry.entryIsLoading') }}</span>
-    </UiBlock>
+
+    <div v-else-if="status === 'pending'" class="py-10 text-muted">
+      {{ t('pages.jpnEntry.entryIsLoading') }}
+    </div>
     <NotFound v-else message="pages.notFound.noEntry" />
   </div>
 </template>

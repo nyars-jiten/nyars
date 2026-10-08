@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Тетрадь — главная</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&amp;family=Caveat:wght@500;700&amp;family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FDFBF3;color:#2D2D2D;font-family:'Nunito',system-ui,sans-serif;font-size:16px;line-height:1.5}
+a{color:#23408E}a:hover{color:#B92D23}
+.kl{font-family:'Klee One',serif}
+.hand{font-family:'Caveat',cursive}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px 0 72px;box-sizing:border-box;position:relative}
+.ruled{background-color:#FDFBF3;background-image:linear-gradient(90deg,transparent 54px,#F2A7A0 54px,#F2A7A0 56px,transparent 56px),repeating-linear-gradient(180deg,transparent 0 31px,#D5E2F3 31px 32px)}
+.genko{display:grid;grid-auto-flow:column;grid-template-rows:repeat(6,64px);grid-auto-columns:64px;border:2px solid #7FB08E;width:max-content;background:#fff}
+.genko span{border:1px solid #B9D8C2;display:flex;align-items:center;justify-content:center;font-family:'Klee One',serif;font-size:40px;font-weight:600;color:#23408E}
+.sticky{background:#FFF07A;padding:18px 18px 22px;box-shadow:0 14px 18px -12px rgba(0,0,0,.35);position:relative}
+.tape{position:absolute;width:90px;height:24px;background:repeating-linear-gradient(45deg,rgba(255,170,190,.75) 0 8px,rgba(255,210,220,.75) 8px 16px);top:-12px;left:50%;transform:translateX(-50%) rotate(-3deg)}
+.hl{background:linear-gradient(transparent 45%,#FFF07A 45%,#FFF07A 88%,transparent 88%)}
+.red{color:#B92D23}
+.fix{position:relative;display:inline-block}
+.fix s{color:#555;text-decoration-color:#D2372C;text-decoration-thickness:2px}
+.fix em{position:absolute;left:0;top:-22px;white-space:nowrap;font-family:'Caveat',cursive;font-style:normal;font-size:22px;color:#B92D23}
+.card{background:#fff;border:1px solid #E0DCCB;padding:30px 18px 16px;position:relative;cursor:pointer;font:inherit;text-align:left;color:inherit;transition:transform .2s}
+.card:hover{transform:rotate(-.6deg)}
+.stamp{position:absolute;right:12px;top:10px;width:76px;height:76px;border:3px solid #D2372C;border-radius:50%;color:#D2372C;display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Klee One',serif;font-weight:600;font-size:13px;line-height:1.15;transform:rotate(-14deg);opacity:.85}
+@keyframes pop{0%{transform:rotate(-14deg) scale(2);opacity:0}100%{transform:rotate(-14deg) scale(1);opacity:.85}}
+.stamp.new{animation:pop .35s ease-out}
+.tab{padding:10px 18px 8px;border-radius:8px 8px 0 0;font-weight:700;font-size:15px;color:#2D2D2D;text-decoration:none}
+@media (max-width:760px){.wrap{padding:0 16px 0 64px}}
+</style>
+</helmet>
+<div class="ruled">
+  <header class="wrap" style="display: flex; align-items: flex-end; gap: 16px 28px; flex-wrap: wrap; padding-top: 20px; border-bottom: 2px solid #2D2D2D">
+    <a href="#" style="text-decoration: none; color: #2D2D2D; padding-bottom: 8px"><span class="hand" style="font-size: 42px; font-weight: 700; line-height: 1">nyars</span> <span class="kl" style="font-size: 22px; color: #B92D23">じしょ</span><svg width="150" height="10" viewBox="0 0 150 10" aria-hidden="true" style="display: block"><path d="M2 6 C40 1 80 9 148 3" stroke="#B92D23" stroke-width="3" fill="none" stroke-linecap="round"/></svg></a>
+    <nav aria-label="Разделы" style="display: flex; gap: 4px; flex: 1 1 auto; flex-wrap: wrap">
+      <a href="NoteSearch.dc.html" class="tab" style="background: #FFC2D6">Словарь</a><a href="#" class="tab" style="background: #C9E7D2">Кандзи</a><a href="#" class="tab" style="background: #FFE9A8">Правки · 214</a><a href="#" class="tab" style="background: #CFE0F7">Скачать</a>
+    </nav>
+    <a href="#" style="padding-bottom: 10px; font-weight: 700">Войти</a>
+  </header>
+
+  <section class="wrap" style="display: flex; flex-wrap: wrap; gap: 36px 48px; padding-top: 44px; padding-bottom: 32px; align-items: flex-start">
+    <div class="genko" lang="ja" aria-label="みんなでつくる辞書 — словарь, который делаем вместе" role="img">
+      <span>み</span><span>ん</span><span>な</span><span>で</span><span></span><span></span>
+      <span>つ</span><span>く</span><span>る</span><span style="color: #B92D23">辞</span><span style="color: #B92D23">書</span><span></span>
+    </div>
+    <div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 18px; position: relative">
+      <h1 style="margin: 0; font-size: clamp(32px, 3.8vw, 48px); font-weight: 800; line-height: 1.1">Словарь, который мы <span class="hl">пишем вместе</span></h1>
+      <form role="search" style="background: #fff; border: 2px solid #2D2D2D; border-radius: 10px; padding: 8px; display: flex; gap: 8px; box-shadow: 4px 4px 0 #2D2D2D; position: relative">
+        <span class="tape" aria-hidden="true" style="left: 18%"></span>
+        <label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label>
+        <input id="q" type="search" placeholder="слово, よみ, перевод…" class="kl" style="flex: 1; min-width: 0; height: 52px; border: 0; padding: 0 12px; font-size: 22px; outline: none">
+        <a href="NoteSearch.dc.html" style="height: 52px; padding: 0 20px; display: flex; align-items: center; background: #23408E; color: #fff; border-radius: 6px; font-weight: 800; text-decoration: none">Найти</a>
+      </form>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap">
+        <button type="button" style="height: 44px; padding: 0 14px; border: 2px dashed #2D2D2D; background: #fff; border-radius: 8px; font: inherit; font-weight: 700; cursor: pointer">✎ нарисовать знак</button>
+        <button type="button" style="height: 44px; padding: 0 14px; border: 2px dashed #2D2D2D; background: #fff; border-radius: 8px; font: inherit; font-weight: 700; cursor: pointer"><span class="kl">部</span> по ключам</button>
+        <button type="button" style="height: 44px; padding: 0 14px; border: 2px dashed #2D2D2D; background: #fff; border-radius: 8px; font: inherit; font-weight: 700; cursor: pointer">фильтры</button>
+      </div>
+      <p class="hand red" style="margin: 0; font-size: 26px; transform: rotate(-2deg); display: flex; align-items: center; gap: 8px"><svg width="70" height="40" viewBox="0 0 70 40" aria-hidden="true"><path d="M66 30 C44 36 20 28 10 8 M10 8 L8 20 M10 8 L21 12" stroke="#B92D23" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>можно ромадзи — kakeru станет かける</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 22px; flex: 0 0 220px">
+      <div class="sticky" style="transform: rotate(2deg)"><span class="tape" aria-hidden="true"></span><p style="margin: 0; font-weight: 700; font-size: 14px">статей в словаре</p><p class="hand" style="margin: 0; font-size: 46px; font-weight: 700; line-height: 1">1 820 463</p><p class="hand red" style="margin: 4px 0 0; font-size: 22px"><span style="border: 2px solid #B92D23; border-radius: 50%; padding: 0 8px">−8</span> за неделю</p></div>
+      <div class="sticky" style="background: #FFC2D6; transform: rotate(-3deg)"><p style="margin: 0; font-weight: 700; font-size: 14px">ждут проверки</p><p class="hand" style="margin: 0; font-size: 40px; font-weight: 700; line-height: 1">214</p><a href="#" style="font-weight: 700; font-size: 14px">проверить →</a></div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="fresh" style="padding-top: 20px; padding-bottom: 32px">
+    <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 28px; flex-wrap: wrap"><h2 id="fresh" style="margin: 0; font-size: 28px; font-weight: 800">Свежие исправления</h2><span class="hand red" style="font-size: 24px">нажмите на карточку — поставьте «よくできました»</span></div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(270px, 100%), 1fr)); gap: 22px">
+      <sc-for list="{{ feed }}" as="e" hint-placeholder-count="6">
+        <button type="button" class="card" onClick="{{ e.thank }}" aria-pressed="{{ e.on }}" style="transform: rotate({{ e.rot }})">
+          <span class="kl" lang="ja" style="font-size: 32px; font-weight: 600; display: block">{{ e.w }}</span>
+          <span style="display: block; margin-top: 26px; font-size: 16px"><span class="fix"><em>{{ e.new }}</em><s>{{ e.old }}</s></span></span>
+          <span style="display: block; margin-top: 10px; font-size: 13px; color: #555">{{ e.user }} · {{ e.t }} · спасибо: {{ e.likes }}</span>
+          <sc-if value="{{ e.on }}" hint-placeholder-val="{{ false }}"><span class="stamp new" lang="ja">よく<br>できました</span></sc-if>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="best" style="padding-top: 20px; padding-bottom: 72px">
+    <h2 id="best" style="margin: 0 0 18px; font-size: 28px; font-weight: 800">Доска почёта <span class="hand red" style="font-size: 26px; font-weight: 500">эта неделя</span></h2>
+    <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 18px">
+      <sc-for list="{{ top }}" as="t" hint-placeholder-count="5">
+        <li class="sticky" style="background: {{ t.bg }}; transform: rotate({{ t.rot }}); width: 170px; box-sizing: border-box">
+          <span class="hand" style="font-size: 30px; font-weight: 700; color: #B92D23">{{ t.r }}</span>
+          <b style="display: block; font-size: 17px">{{ t.u }}</b>
+          <span style="font-size: 14px">{{ t.n }} правок</span>
+          <span class="kl" lang="ja" style="position: absolute; right: 10px; bottom: 8px; width: 40px; height: 40px; border: 2px solid #D2372C; border-radius: 50%; color: #D2372C; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 600; transform: rotate(-12deg)">{{ t.s }}</span>
+        </li>
+      </sc-for>
+    </ol>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { th: { 2: true } }; }
+  renderVals() {
+    const th = this.state.th;
+    const F = [
+      { w: '結構', old: 'довольно-таки', new: 'довольно, вполне', user: 'kitsune_ru', t: '4 мин', likes: 3 },
+      { w: '推し活', old: '—', new: 'поддержка артиста', user: 'гость', t: '11 мин', likes: 0 },
+      { w: '米', old: '(нет примера)', new: '米を研ぐ — промывать рис', user: 'Murasaki', t: '26 мин', likes: 5 },
+      { w: '仕舞う', old: 'спрягать', new: 'спрятать', user: 'yuki.p', t: '38 мин', likes: 2 },
+      { w: '矢鱈', old: 'без помет', new: '+ атэдзи', user: 'Tanuki42', t: '1 ч', likes: 1 },
+      { w: '気', old: 'настроение', new: 'настроение, расположение духа', user: 'Murasaki', t: '3 ч', likes: 4 }
+    ];
+    const rots = ['-1deg', '0.8deg', '-0.4deg', '1.2deg', '-1.4deg', '0.5deg'];
+    const feed = F.map((e, i) => ({ ...e, rot: rots[i], on: !!th[i], likes: e.likes + (th[i] ? 1 : 0),
+      thank: () => this.setState({ th: { ...th, [i]: !th[i] } }) }));
+    const top = [['Murasaki', 312, '優'], ['kitsune_ru', 268, '優'], ['yuki.p', 197, '良'], ['old_kanbun', 141, '良'], ['Tanuki42', 96, '可']]
+      .map(([u, n, s], i) => ({ u, n, s, r: '#' + (i + 1), bg: ['#FFF07A', '#C9E7D2', '#FFC2D6', '#CFE0F7', '#FFE9A8'][i], rot: ['-2deg', '1.5deg', '-1deg', '2deg', '-1.5deg'][i] }));
+    return { feed, top };
+  }
+}
+</script>
+</body>
+</html>

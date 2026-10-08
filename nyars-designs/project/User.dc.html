@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>kitsune_ru — профиль участника</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&amp;family=Shippori+Mincho:wght@500;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F4F0;color:#1A1C21;font-family:'Golos Text','Hiragino Sans','Noto Sans JP',system-ui,sans-serif;font-size:15px;line-height:1.5}
+a{color:#2B4A85;text-decoration:none}a:hover{color:#1A2F57;text-decoration:underline}
+.jp{font-family:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.wrap{max-width:1312px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.card{background:#FCFBF8;border:1px solid #DDDAD2;border-radius:6px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#61656E;font-weight:600;margin:0}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 7px;border-radius:4px;font-size:12px;font-weight:600;background:#E9E7E1;color:#474B54;white-space:nowrap}
+.tag.ai{background:#E1E8F4;color:#22396A}.tag.shu{background:#F7E2DB;color:#8A2D1B}.tag.ok{background:#1A1C21;color:#fff}
+.chip{height:34px;padding:0 12px;border:1px solid #DDDAD2;background:#fff;border-radius:17px;font:inherit;font-size:13px;cursor:pointer}
+.chip[aria-pressed=true]{background:#1A1C21;border-color:#1A1C21;color:#fff}
+.cols{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+.main{flex:999 1 640px;min-width:0}.side{flex:1 1 300px;min-width:0}
+.hm{display:grid;grid-template-rows:repeat(7,12px);grid-auto-flow:column;grid-auto-columns:12px;gap:3px}
+.hm span{border-radius:2px}
+.stat dt{font-size:13px;color:#474B54}.stat dd{margin:2px 0 0;font-size:28px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+@media (max-width:640px){.wrap{padding:0 16px}.chip{height:44px}}
+</style>
+</helmet>
+<div>
+  <dc-import name="Header" active="none" initial-panel="none" hint-size="100%,72px"></dc-import>
+
+  <section style="border-bottom: 1px solid #DDDAD2">
+    <div class="wrap" style="padding-top: 36px; padding-bottom: 32px; display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: center">
+      <div style="display: flex; gap: 20px; align-items: center; flex: 1 1 420px; min-width: 0">
+        <span style="flex: 0 0 auto; width: 96px; height: 96px; border-radius: 50%; background: #2B4A85; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 34px; font-weight: 700">KR</span>
+        <div style="min-width: 0">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+            <h1 style="margin: 0; font-size: 32px; font-weight: 700">kitsune_ru</h1>
+            <span class="tag ok">Модератор</span>
+          </div>
+          <p style="margin: 6px 0 0; font-size: 14px; color: #474B54; display: flex; flex-wrap: wrap; gap: 4px 16px">
+            <span>В словаре с 12 марта 2021</span>
+            <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: #2B4A85"></span>в сети</span>
+            <span>Интересы: разговорная лексика, наречия</span>
+          </p>
+        </div>
+      </div>
+      <dl class="stat" style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(130px, 100%), 1fr)); gap: 16px 32px; flex: 1 1 440px">
+        <div><dt>Правок</dt><dd>3 482</dd></div>
+        <div><dt>Рейтинг <a href="#" aria-label="Как считается рейтинг" style="font-size: 12px">?</a></dt><dd>1 920</dd><dd style="font-size: 13px; font-weight: 500; color: #22396A">+34 за неделю</dd></div>
+        <div><dt>Принято</dt><dd>96%</dd><dd style="font-size: 13px; font-weight: 500; color: #474B54">412 из 431 за год</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="wrap" style="padding-top: 28px; padding-bottom: 72px">
+    <div class="cols">
+      <main class="main" style="display: flex; flex-direction: column; gap: 28px">
+        <section class="card" style="padding: 20px 24px" aria-labelledby="act">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px">
+            <h2 id="act" style="margin: 0; font-size: 18px; font-weight: 700">{{ total }} правок в {{ year }} году</h2>
+            <div role="group" aria-label="Год" style="display: flex; gap: 6px; flex-wrap: wrap">
+              <sc-for list="{{ years }}" as="y" hint-placeholder-count="4">
+                <button type="button" class="chip" aria-pressed="{{ y.on }}" onClick="{{ y.pick }}">{{ y.y }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="overflow-x: auto; padding-bottom: 4px">
+            <div style="display: grid; grid-template-columns: 26px auto; gap: 6px 6px; width: max-content">
+              <span></span>
+              <div style="display: grid; grid-template-columns: repeat(12, 64px); font-size: 12px; color: #61656E">
+                <span>янв</span><span>фев</span><span>мар</span><span>апр</span><span>май</span><span>июн</span><span>июл</span><span>авг</span><span>сен</span><span>окт</span><span>ноя</span><span>дек</span>
+              </div>
+              <div style="display: grid; grid-template-rows: repeat(7, 12px); gap: 3px; font-size: 11px; color: #61656E; line-height: 12px"><span>пн</span><span></span><span>ср</span><span></span><span>пт</span><span></span><span></span></div>
+              <div class="hm" role="img" aria-label="Активность по дням за {{ year }} год">
+                <sc-for list="{{ cells }}" as="c" hint-placeholder-count="60">
+                  <span style="background: {{ c }}"></span>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin-top: 12px; font-size: 12px; color: #61656E">
+            <span>Самая длинная серия: 41 день · сейчас: 9 дней</span>
+            <span style="display: flex; align-items: center; gap: 4px">меньше <span style="width: 12px; height: 12px; border-radius: 2px; background: #E9E7E1"></span><span style="width: 12px; height: 12px; border-radius: 2px; background: #C3D0E8"></span><span style="width: 12px; height: 12px; border-radius: 2px; background: #8EA6D3"></span><span style="width: 12px; height: 12px; border-radius: 2px; background: #5677B3"></span><span style="width: 12px; height: 12px; border-radius: 2px; background: #22396A"></span> больше</span>
+          </div>
+        </section>
+
+        <section aria-labelledby="feed">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap">
+            <h2 id="feed" style="margin: 0; font-size: 18px; font-weight: 700">Последние правки</h2>
+            <label style="font-size: 14px; display: flex; gap: 8px; align-items: center"><span>Словарь</span><select style="height: 36px; border: 1px solid #CFCCC3; border-radius: 6px; background: #fff; font: inherit; font-size: 14px; padding: 0 8px"><option>Все</option><option>Японско-русский</option><option>Кандзи</option><option>OCR</option></select></label>
+          </div>
+          <ol class="card" style="list-style: none; margin: 0; padding: 0">
+            <sc-for list="{{ feed }}" as="e" hint-placeholder-count="7">
+              <li style="display: grid; grid-template-columns: minmax(110px, 150px) minmax(0, 1fr) auto; gap: 6px 16px; align-items: baseline; padding: 14px 20px; border-bottom: 1px solid #E9E7E1">
+                <a href="Entry.dc.html" lang="ja" class="jp" style="font-size: 19px; font-weight: 700; color: #1A1C21">{{ e.w }}</a>
+                <span style="min-width: 0; font-size: 14px"><span class="tag" style="margin-right: 6px">{{ e.d }}</span>{{ e.s }}</span>
+                <span style="display: flex; gap: 10px; align-items: center; white-space: nowrap"><span class="tag {{ e.cls }}">{{ e.st }}</span><time style="font-size: 13px; color: #61656E">{{ e.t }}</time></span>
+              </li>
+            </sc-for>
+          </ol>
+        </section>
+      </main>
+
+      <aside class="side" style="display: flex; flex-direction: column; gap: 20px">
+        <section class="card" style="padding: 20px">
+          <h2 class="eyebrow" style="margin-bottom: 14px">Правки по словарям</h2>
+          <div role="img" aria-label="Японско-русский 2610, кандзи 512, сверка OCR 288, русско-японский 72" style="display: flex; height: 14px; border-radius: 3px; overflow: hidden; gap: 2px; margin-bottom: 16px">
+            <span style="flex: 2610; background: #1A1C21"></span><span style="flex: 512; background: #2B4A85"></span><span style="flex: 288; background: #B33E27"></span><span style="flex: 72; background: #B4B6BB"></span>
+          </div>
+          <dl style="margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px">
+            <div style="display: flex; align-items: center; gap: 10px"><span style="width: 10px; height: 10px; border-radius: 2px; background: #1A1C21"></span><dt style="flex: 1">Японско-русский</dt><dd class="mono" style="margin: 0">2 610</dd></div>
+            <div style="display: flex; align-items: center; gap: 10px"><span style="width: 10px; height: 10px; border-radius: 2px; background: #2B4A85"></span><dt style="flex: 1">Кандзи</dt><dd class="mono" style="margin: 0">512</dd></div>
+            <div style="display: flex; align-items: center; gap: 10px"><span style="width: 10px; height: 10px; border-radius: 2px; background: #B33E27"></span><dt style="flex: 1">Сверка OCR</dt><dd class="mono" style="margin: 0">288</dd></div>
+            <div style="display: flex; align-items: center; gap: 10px"><span style="width: 10px; height: 10px; border-radius: 2px; background: #B4B6BB"></span><dt style="flex: 1">Русско-японский β</dt><dd class="mono" style="margin: 0">72</dd></div>
+          </dl>
+        </section>
+
+        <section class="card" style="padding: 20px">
+          <h2 class="eyebrow" style="margin-bottom: 10px">Как считается рейтинг</h2>
+          <p style="margin: 0; font-size: 14px; color: #33363D">Принятая правка даёт очки по объёму изменений; новая статья — больше, чем пометка. Отклонённые правки отнимают очки, откаты вандализма — добавляют.</p>
+          <dl style="margin: 12px 0 0; font-size: 14px; display: flex; flex-direction: column; gap: 6px">
+            <div style="display: flex; justify-content: space-between"><dt style="color: #474B54">Место в общем зачёте</dt><dd class="mono" style="margin: 0">№ 2</dd></div>
+            <div style="display: flex; justify-content: space-between"><dt style="color: #474B54">Проверено чужих правок</dt><dd class="mono" style="margin: 0">5 117</dd></div>
+          </dl>
+        </section>
+      </aside>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1800}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { year: 2026 }; }
+  renderVals() {
+    const year = this.state.year;
+    const ramp = ['#E9E7E1', '#C3D0E8', '#8EA6D3', '#5677B3', '#22396A'];
+    let seed = year * 9301 + 49297, total = 0;
+    const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+    const cells = [];
+    const daysLimit = year === 2026 ? 278 : 371;
+    for (let i = 0; i < 371; i++) {
+      if (i >= daysLimit) { cells.push('transparent'); continue; }
+      const wk = i % 7 >= 5 ? 1.25 : 1;
+      const season = 0.6 + 0.4 * Math.sin(i / 40 + year);
+      const r = rnd() * wk * season;
+      const lvl = r < 0.28 ? 0 : r < 0.5 ? 1 : r < 0.7 ? 2 : r < 0.86 ? 3 : 4;
+      total += [0, 2, 5, 9, 16][lvl];
+      cells.push(ramp[lvl]);
+    }
+    const years = [2026, 2025, 2024, 2023, 2022, 2021].map(y => ({ y, on: y === year, pick: () => this.setState({ year: y }) }));
+    const S = { ok: ['принято', 'ok'], wait: ['ждёт', 'shu'], no: ['отклонено', ''] };
+    const feed = [
+      { w: '結構', d: 'ЯРС', s: 'Уточнил перевод наречия, добавил пример', k: 'wait', t: '4 мин' },
+      { w: '取り敢えず', d: 'ЯРС', s: 'Отклонил дубль, объединил примеры', k: 'ok', t: 'вчера' },
+      { w: '矢鱈', d: 'ЯРС', s: 'Пометы: атэдзи, обычно каной', k: 'ok', t: '2 окт.' },
+      { w: '米', d: 'Кандзи', s: 'Разделил значения «в составе слов»', k: 'ok', t: '30 сен.' },
+      { w: '仕舞う', d: 'OCR', s: 'Сверка скана, с. 1104', k: 'ok', t: '29 сен.' },
+      { w: 'ぶっちゃけ', d: 'ЯРС', s: 'Новое значение', k: 'no', t: '27 сен.' },
+      { w: 'うざい', d: 'ЯРС', s: 'Пример из корпуса', k: 'ok', t: '26 сен.' }
+    ].map(e => ({ ...e, st: S[e.k][0], cls: S[e.k][1] }));
+    return { cells, years, year, total: total.toLocaleString('ru-RU'), feed };
+  }
+}
+</script>
+</body>
+</html>

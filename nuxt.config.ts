@@ -13,7 +13,9 @@ export default defineNuxtConfig({
     port: 8080,
   },
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+    ],
     server: {
       strictPort: true,
     },
@@ -58,6 +60,21 @@ export default defineNuxtConfig({
         name: 'Exo 2',
         subsets: ['latin', 'latin-ext', 'cyrillic', 'cyrillic-ext'],
       },
+      {
+        name: 'Manrope',
+        subsets: ['latin', 'latin-ext', 'cyrillic', 'cyrillic-ext'],
+        weights: [400, 500, 600, 700, 800],
+      },
+      {
+        name: 'Zen Old Mincho',
+        subsets: ['japanese', 'latin'],
+        weights: [400, 700],
+      },
+      {
+        name: 'Zen Maru Gothic',
+        subsets: ['japanese', 'latin'],
+        weights: [500, 700],
+      },
     ],
     defaults: {
       subsets: [],
@@ -73,7 +90,6 @@ export default defineNuxtConfig({
     '@vee-validate/nuxt',
     '@vueuse/nuxt',
     '@nuxt/fonts',
-    'nuxt-typed-router',
     'v-lazy-show/nuxt',
   ],
   eslint: {

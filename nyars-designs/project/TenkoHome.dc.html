@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Тэнкоку — главная</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&amp;family=Spectral:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F6F2EA;color:#2B2724;font-family:'Spectral',Georgia,serif;font-size:16.5px;line-height:1.55}
+a{color:#2B2724;text-decoration:underline;text-decoration-color:#C9A39C;text-underline-offset:4px}a:hover{color:#9C2522}
+.sm{font-family:'Shippori Mincho B1',serif}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.seal{background:#B8312F;color:#F6F2EA;display:grid;border-radius:5px;padding:6px;box-sizing:border-box;filter:url(#worn);font-family:'Shippori Mincho B1',serif;font-weight:800}
+.seal.yang{background:transparent;color:#B8312F;border:4px solid #B8312F}
+.seal span{display:flex;align-items:center;justify-content:center;line-height:1}
+.press{transition:transform .15s}
+.press:active{transform:scale(.94) rotate(-2deg)}
+@keyframes stamp{0%{transform:scale(1.6) rotate(-8deg);opacity:0}70%{transform:scale(.96) rotate(2deg);opacity:1}100%{transform:scale(1) rotate(-2deg)}}
+.stamped{animation:stamp .35s ease-out both}
+.imp{display:flex;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid #E2D9CB;text-decoration:none;color:#2B2724;background:transparent;border-left:0;border-right:0;border-top:0;width:100%;text-align:left;font:inherit;cursor:pointer}
+@media (max-width:760px){.wrap{padding:0 16px}}
+</style>
+</helmet>
+<div>
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true"><filter id="worn"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.5" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in" result="c"/><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="1" seed="2" result="w"/><feDisplacementMap in="c" in2="w" scale="2.5"/></filter></svg>
+
+  <header class="wrap" style="display: flex; align-items: center; gap: 16px 28px; flex-wrap: wrap; padding-top: 20px; padding-bottom: 20px">
+    <a href="#" style="display: flex; align-items: center; gap: 12px; text-decoration: none"><span class="seal" style="width: 44px; height: 44px; grid-template-columns: 1fr 1fr; font-size: 16px; padding: 3px"><span>書</span><span>辞</span></span><span style="font-size: 22px; font-weight: 700; letter-spacing: 0.02em">nyars</span></a>
+    <nav aria-label="Разделы" style="display: flex; gap: 22px; flex: 1 1 auto; flex-wrap: wrap; font-size: 17px"><a href="TenkoSearch.dc.html" style="text-decoration: none">Словарь</a><a href="#" style="text-decoration: none">Кандзи</a><a href="#" style="text-decoration: none">Правки</a><a href="#" style="text-decoration: none">Скачать</a></nav>
+    <a href="#" style="font-weight: 600">Войти</a>
+  </header>
+
+  <section class="wrap" style="padding-top: 40px; padding-bottom: 40px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px">
+    <p style="margin: 0; font-style: italic; color: #6A625A; font-size: 18px">японско-русский словарь, который пишут читатели</p>
+    <div style="position: relative; width: min(760px, 100%); border: 7px solid #B8312F; border-radius: 10px; padding: 34px 36px 30px; box-sizing: border-box; filter: url(#worn)">
+      <span class="sm" aria-hidden="true" style="position: absolute; top: -26px; left: 50%; transform: translateX(-50%); background: #F6F2EA; padding: 0 16px; color: #B8312F; font-size: 30px; font-weight: 800; letter-spacing: 0.4em">言葉印</span>
+      <form role="search" style="display: flex; flex-direction: column; gap: 14px; filter: none">
+        <label for="q" style="font-size: 15px; color: #6A625A">Слово, чтение или перевод</label>
+        <div style="display: flex; gap: 8px">
+          <input id="q" type="search" class="sm" style="flex: 1; min-width: 0; height: 58px; border: 0; border-bottom: 2px solid #2B2724; background: transparent; font-size: 26px; text-align: center; outline: none; color: #2B2724">
+        </div>
+        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap">
+          <button type="button" style="height: 44px; padding: 0 16px; border: 1.5px solid #2B2724; background: transparent; border-radius: 22px; font: inherit; cursor: pointer">нарисовать знак</button>
+          <button type="button" style="height: 44px; padding: 0 16px; border: 1.5px solid #2B2724; background: transparent; border-radius: 22px; font: inherit; cursor: pointer"><span class="sm">部</span> по ключам</button>
+          <a href="TenkoSearch.dc.html" style="height: 44px; padding: 0 24px; display: flex; align-items: center; background: #B8312F; color: #F6F2EA; border-radius: 22px; text-decoration: none; font-weight: 700">Найти</a>
+        </div>
+      </form>
+    </div>
+    <dl style="margin: 18px 0 0; display: flex; gap: 34px; flex-wrap: wrap; justify-content: center">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 8px"><dd class="seal" style="margin: 0; padding: 12px 16px; font-family: Spectral; font-size: 28px; transform: rotate(-2deg)">1 820 463</dd><dt style="font-size: 14px; color: #6A625A">статей · <span style="color: #9C2522; font-weight: 700">−8</span> за неделю</dt></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 8px"><dd class="seal yang" style="margin: 0; padding: 9px 14px; font-family: Spectral; font-size: 28px; transform: rotate(1.5deg)">1 942</dd><dt style="font-size: 14px; color: #6A625A">правки за неделю</dt></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 8px"><dd class="seal yang" style="margin: 0; padding: 9px 14px; font-family: Spectral; font-size: 28px; transform: rotate(-1deg)">214</dd><dt style="font-size: 14px; color: #6A625A">ждут проверки</dt></div>
+    </dl>
+  </section>
+
+  <div class="wrap" style="display: flex; flex-wrap: wrap; gap: 48px; padding-top: 20px; padding-bottom: 72px; align-items: flex-start">
+    <section aria-labelledby="fresh" style="flex: 999 1 560px; min-width: 0">
+      <div style="display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px"><h2 id="fresh" style="margin: 0; font-size: 26px">Свежие оттиски</h2><span style="font-size: 14px; color: #6A625A">нажмите — поставите печать «спасибо»</span></div>
+      <sc-for list="{{ feed }}" as="e" hint-placeholder-count="7">
+        <button type="button" class="imp" onClick="{{ e.thank }}" aria-pressed="{{ e.on }}">
+          <span class="seal press" lang="ja" style="flex: 0 0 auto; width: 58px; height: 58px; grid-template-columns: {{ e.gc }}; font-size: {{ e.fs }}">
+            <sc-for list="{{ e.chars }}" as="ch" hint-placeholder-count="2"><span>{{ ch }}</span></sc-for>
+          </span>
+          <span style="flex: 1 1 auto; min-width: 0"><b class="sm" lang="ja" style="font-size: 19px">{{ e.w }}</b> <span style="color: #6A625A">— {{ e.what }}</span><br><span style="font-size: 14px; color: #6A625A">{{ e.u }} · {{ e.t }}</span></span>
+          <sc-if value="{{ e.on }}" hint-placeholder-val="{{ false }}"><span class="seal yang stamped sm" style="flex: 0 0 auto; width: 54px; height: 54px; font-size: 24px; border-radius: 50%; place-items: center">謝</span></sc-if>
+        </button>
+      </sc-for>
+    </section>
+    <aside style="flex: 1 1 300px">
+      <h2 style="margin: 0 0 10px; font-size: 22px">Мастера недели</h2>
+      <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px">
+        <sc-for list="{{ top }}" as="t" hint-placeholder-count="5">
+          <li style="display: flex; align-items: center; gap: 14px">
+            <span class="seal" style="width: 46px; height: 46px; grid-template-columns: 1fr 1fr; font-family: Spectral; font-size: 15px; padding: 4px; transform: rotate({{ t.rot }})"><span>{{ t.a }}</span><span>{{ t.b }}</span></span>
+            <span style="flex: 1"><b>{{ t.u }}</b><br><span style="font-size: 14px; color: #6A625A">{{ t.n }} правок</span></span>
+          </li>
+        </sc-for>
+      </ol>
+      <p style="margin: 18px 0 0; font-size: 14px; color: #6A625A">Личная печать участника вырезается из его имени и темнеет с ростом рейтинга.</p>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { th: { 1: true } }; }
+  renderVals() {
+    const th = this.state.th;
+    const F = [['結構', 'уточнён перевод наречия', 'kitsune_ru', '4 мин'], ['推し活', 'новая статья', 'гость', '11 мин'], ['米', 'пример: 米を研ぐ', 'Murasaki', '26 мин'], ['仕舞う', 'сверка скана', 'yuki.p', '38 мин'], ['矢鱈', 'помета «атэдзи»', 'Tanuki42', '1 ч'], ['腕によりをかける', 'новая идиома', 'old_kanbun', '3 ч'], ['取り敢えず', 'удалён дубль', 'Tanuki42', '6 ч']];
+    const seal = (w) => {
+      const ch = Array.from(w), n = ch.length;
+      const cols = n <= 2 ? 1 : n <= 4 ? 2 : n <= 9 ? 3 : 4, rows = Math.ceil(n / cols);
+      const cells = [];
+      for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) cells.push(ch[(cols - 1 - c) * rows + r] || '');
+      return { cells, cols, rows };
+    };
+    const feed = F.map(([w, what, u, t], i) => {
+      const s = seal(w);
+      const k = Math.max(s.cols, s.rows);
+      return { w, what, u, t, chars: s.cells, gc: 'repeat(' + s.cols + ', 1fr)', fs: Math.floor(46 / k * 0.82) + 'px', on: !!th[i],
+        thank: () => this.setState({ th: { ...th, [i]: !th[i] } }) };
+    });
+    const top = [['Murasaki', 312], ['kitsune_ru', 268], ['yuki.p', 197], ['old_kanbun', 141], ['Tanuki42', 96]]
+      .map(([u, n], i) => ({ u, n, a: u[0].toUpperCase(), b: u[1].toUpperCase(), rot: ['-3deg', '2deg', '-1deg', '3deg', '-2deg'][i] }));
+    return { feed, top };
+  }
+}
+</script>
+</body>
+</html>

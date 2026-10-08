@@ -17,7 +17,7 @@ const { t } = useI18n()
         :edit
       />
     </div>
-    <div v-else class="italic font-extralight">
+    <div v-else class="py-2 text-[14.5px] text-muted italic">
       {{ t('models.edit.tabNoData') }}
     </div>
   </div>

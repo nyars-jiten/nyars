@@ -42,65 +42,66 @@ function showEntryRef(edit: EditResponse): boolean {
 </script>
 
 <template>
-  <section class="flex flex-col gap-3">
-    {{ edit.entryStatus }}
-
-    <div v-if="edit.comment.length > 0" class="bg-zinc-500/5 p-2 whitespace-pre-line">
+  <section class="flex flex-col gap-3 text-[14.5px]">
+    <div
+      v-if="edit.comment.length > 0"
+      class="rounded-[10px] bg-soft px-3 py-2 whitespace-pre-line text-ink"
+    >
       {{ edit.comment }}
     </div>
 
-    <div class="inline-flex gap-2 flex-wrap flex-row-reverse">
-      <!-- <NuxtLink :to="{ name: 'edits-id', params: { id: edit.id } }">
-        <UiButton class="text-gray-500" icon="ic:outline-info" title="Инфо">
-          Инфо
-        </UiButton>
-      </NuxtLink> -->
-
+    <div class="inline-flex flex-row-reverse flex-wrap gap-2">
       <NuxtLink v-if="showEntryRef(edit)" :to="{ name: 'dict-jpn-wid', params: { wid: edit.wid } }" prefetch>
-        <UiButton class="text-gray-500" icon="ic:outline-open-in-new" title="Открыть статью">
-          <!-- Открыть статью -->
-        </UiButton>
+        <UiButton class="text-muted" icon="ic:outline-open-in-new" title="Открыть статью" />
       </NuxtLink>
 
-      <UiButton v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))" class="text-red-500" icon="ic:baseline-close" title="Отклонить" @click="reject()">
-        <!-- Отклонить -->
-      </UiButton>
+      <UiButton
+        v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))"
+        class="text-sec"
+        icon="ic:baseline-close"
+        title="Отклонить"
+        @click="reject()"
+      />
 
-      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-green-500" icon="ic:baseline-done-all" title="Принять как отредактированную" @click="approveAsReviewed()">
-        <!-- Принять как отредактированную -->
-      </UiButton>
+      <UiButton
+        v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits"
+        class="text-strong"
+        icon="ic:baseline-done-all"
+        title="Принять как отредактированную"
+        @click="approveAsReviewed()"
+      />
 
-      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-yellow-500" icon="ic:baseline-done" title="Принять как неотредактированную" @click="approveAsUnreviewed()">
-        <!-- Принять как неотредактированную -->
-      </UiButton>
+      <UiButton
+        v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits"
+        class="text-muted"
+        icon="ic:baseline-done"
+        title="Принять как неотредактированную"
+        @click="approveAsUnreviewed()"
+      />
 
-      <template v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))">
-        <NuxtLink :to="{ name: 'edits-id-editor', params: { id: edit.id } }">
-          <UiButton class="text-blue-500" icon="ic:baseline-edit" title="Отредактировать">
-            <!-- Отредактировать -->
-          </UiButton>
-        </NuxtLink>
-      </template>
+      <NuxtLink
+        v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))"
+        :to="{ name: 'edits-id-editor', params: { id: edit.id } }"
+      >
+        <UiButton class="text-strong" icon="ic:baseline-edit" title="Отредактировать" />
+      </NuxtLink>
     </div>
 
-    <!-- <div v-if="edit.comment.length > 0" class="break-words border-l-2 border-neutral-200 pl-2 dark:border-neutral-700">
-      {{ t('components.editGroup.changesPreview.comment') }} {{ edit.comment }}
-    </div> -->
-
-    <div class="grid sm:grid-cols-[1fr_auto_1fr] gap-4 sm:gap-2">
+    <div class="grid gap-4 sm:grid-cols-[1fr_auto_1fr] sm:gap-2">
       <template v-if="!isTypeCreate">
         <div :class="preview()">
           <span
             v-for="(text, index) of edit.diffSrc"
             :key="index"
-            :class="`whitespace-pre-wrap ${text.d ? 'text-red-500' : ''}`"
+            class="whitespace-pre-wrap"
+            :class="text.d ? 'font-semibold text-sec' : 'text-ink'"
           >
             {{ text.c }}
           </span>
         </div>
 
-        <div class="flex flex-col items-center justify-evenly max-sm:border-y sm:border-x p-2 border-neutral-800">
-          <div class="after:content-['↓'] sm:after:content-['⟶']" />
+        <div class="flex flex-col items-center justify-evenly border-line p-2 max-sm:border-y sm:border-x">
+          <div class="text-muted after:content-['↓'] sm:after:content-['⟶']" />
         </div>
       </template>
 
@@ -108,7 +109,11 @@ function showEntryRef(edit: EditResponse): boolean {
         <span
           v-for="(text, index) of (showRaw ? edit.diffRawDst : edit.diffDst)"
           :key="index"
-          :class="`whitespace-pre-wrap ${text.c.length > 25 ? 'break-all' : ''} ${text.d ? 'text-green-500' : ''}`"
+          class="whitespace-pre-wrap"
+          :class="[
+            text.c.length > 25 ? 'break-all' : '',
+            text.d ? 'font-semibold text-strong' : 'text-ink',
+          ]"
         >
           {{ text.c }}
         </span>

@@ -1,0 +1,72 @@
+/* Semantic palette tokens from PalSheet. Applied via html[data-palette]. */
+
+html[data-palette='washi'] {
+  --palette-bg: #f6f3ec;
+  --palette-surf: #fffdf8;
+  --palette-ink: #1e2433;
+  --palette-muted: #5b6275;
+  --palette-line: #e3ddd0;
+  --palette-acc: #b7c7f7;
+  --palette-onacc: #1e2433;
+  --palette-strong: #34478a;
+  --palette-soft: #e9eefc;
+  --palette-sec: #a63f2a;
+  --palette-secsoft: #f7e3dc;
+}
+
+html[data-palette='cold'] {
+  --palette-bg: #f3f5f9;
+  --palette-surf: #ffffff;
+  --palette-ink: #1b2030;
+  --palette-muted: #58607a;
+  --palette-line: #dee3ee;
+  --palette-acc: #b7c7f7;
+  --palette-onacc: #1b2030;
+  --palette-strong: #33458a;
+  --palette-soft: #eaf0fe;
+  --palette-sec: #7652a8;
+  --palette-secsoft: #efe8f8;
+}
+
+html[data-palette='sakura'] {
+  --palette-bg: #faf6f4;
+  --palette-surf: #ffffff;
+  --palette-ink: #26202a;
+  --palette-muted: #665c68;
+  --palette-line: #ebe0e0;
+  --palette-acc: #b7c7f7;
+  --palette-onacc: #26202a;
+  --palette-strong: #3a4b8c;
+  --palette-soft: #ecf0fd;
+  --palette-sec: #a3445c;
+  --palette-secsoft: #f9e5ea;
+}
+
+html[data-palette='indigo'] {
+  --palette-bg: #131a2a;
+  --palette-surf: #1a2236;
+  --palette-ink: #e7ebf6;
+  --palette-muted: #a2abc3;
+  --palette-line: #2b3550;
+  --palette-acc: #b7c7f7;
+  --palette-onacc: #131a2a;
+  --palette-strong: #b7c7f7;
+  --palette-soft: #263252;
+  --palette-sec: #f0a28f;
+  --palette-secsoft: #3a2a30;
+}
+
+/* Default before SSR/client attribute is applied */
+html:not([data-palette]) {
+  --palette-bg: #131a2a;
+  --palette-surf: #1a2236;
+  --palette-ink: #e7ebf6;
+  --palette-muted: #a2abc3;
+  --palette-line: #2b3550;
+  --palette-acc: #b7c7f7;
+  --palette-onacc: #131a2a;
+  --palette-strong: #b7c7f7;
+  --palette-soft: #263252;
+  --palette-sec: #f0a28f;
+  --palette-secsoft: #3a2a30;
+}

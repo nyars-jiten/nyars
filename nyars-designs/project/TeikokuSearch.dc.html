@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Имперская Япония — поиск かける</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@500;700&amp;family=Forum&amp;family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4ECD8;color:#14213D;font-family:'PT Serif',Georgia,serif;font-size:16px;line-height:1.55}
+a{color:#6B1E2A;text-decoration:underline;text-underline-offset:3px}a:hover{color:#14213D}
+.kd{font-family:'Kaisei Decol',serif}
+.fo{font-family:'Forum',serif}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.sheet{background:#E7DCC2;padding:16px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;border:1px solid #CDBE9C}
+.stamp{border:0;font:inherit;color:#14213D;cursor:pointer;padding:12px;-webkit-mask:radial-gradient(circle 5px at 6px 6px,transparent 98%,#000) -6px -6px/12px 12px;mask:radial-gradient(circle 5px at 6px 6px,transparent 98%,#000) -6px -6px/12px 12px;transition:transform .2s;aspect-ratio:4/5}
+.stamp:hover{transform:scale(1.03)}
+.stamp[aria-pressed=true]{transform:rotate(-2deg) scale(1.05)}
+.stamp .in{border:1.5px solid currentColor;height:100%;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:8px 6px;text-align:center}
+.doc{background:#FBF6EA;border:2px solid #14213D;outline:1px solid #14213D;outline-offset:5px;padding:26px 28px}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;border:1px solid #14213D;font-size:12.5px;white-space:nowrap}
+.tag.m{border-color:#6B1E2A;color:#6B1E2A}
+table{border-collapse:collapse;width:100%}
+td,th{padding:9px 12px;border-bottom:1px solid #B9AA86;text-align:left;vertical-align:baseline}
+th{font-family:'Forum';font-weight:400;font-size:14px;letter-spacing:.12em;border-bottom:2px solid #14213D}
+@media (max-width:860px){.wrap{padding:0 16px}.sheet{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</helmet>
+<div>
+  <header style="background: #14213D; color: #F4ECD8; border-bottom: 3px double #B8954A">
+    <div class="wrap" style="display: flex; align-items: center; gap: 14px 26px; flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px">
+      <a href="TeikokuHome.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none"><span class="kd" style="width: 38px; height: 38px; border: 2px solid #B8954A; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #D8B66A">辞</span><span class="fo" style="font-size: 22px; letter-spacing: .14em; color: #F4ECD8">NYARS</span></a>
+      <form role="search" style="flex: 1 1 460px; display: flex; border: 1.5px solid #B8954A"><label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label><input id="q" type="search" value="かける" class="kd" style="flex: 1; min-width: 0; height: 44px; border: 0; background: transparent; color: #F4ECD8; padding: 0 14px; font-size: 19px; outline: none"><a href="#" class="fo" style="padding: 0 18px; display: flex; align-items: center; background: #B8954A; color: #14213D; text-decoration: none; letter-spacing: .1em">ИСКАТЬ</a></form>
+      <nav aria-label="Разделы" class="fo" style="display: flex; gap: 20px; font-size: 17px"><a href="#" style="color: #E2C98A; text-decoration: none">Кандзи</a><a href="#" style="color: #E2C98A; text-decoration: none">Правки</a><a href="#" style="color: #E2C98A; text-decoration: none">Скачать</a></nav>
+    </div>
+  </header>
+
+  <div class="wrap" style="padding-top: 30px; padding-bottom: 72px">
+    <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 18px; margin-bottom: 20px; border-bottom: 1px solid #14213D; padding-bottom: 12px">
+      <h1 class="fo" style="margin: 0; font-size: 36px; font-weight: 400">Альбом «<span class="kd" lang="ja">かける</span>»</h1>
+      <span style="font-style: italic">девять марок одной серии · 8 выражений · 46 слов с かける внутри</span>
+      <span style="flex: 1"></span>
+      <span class="fo" style="font-size: 15px; letter-spacing: .08em">ЯРС 55 · КАНДЗИ 8 · СПУТНИКИ 31 · СКАНЫ 17</span>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+      <section aria-label="Омонимы — марки" style="flex: 1 1 460px; max-width: 560px">
+        <div class="sheet" role="group">
+          <sc-for list="{{ items }}" as="r" hint-placeholder-count="9">
+            <button type="button" class="stamp" aria-pressed="{{ r.on }}" onClick="{{ r.pick }}" style="background: {{ r.bg }}; color: {{ r.fg }}">
+              <span class="in">
+                <span class="fo" style="font-size: 11px; letter-spacing: .14em">NYARS · {{ r.code }}</span>
+                <span class="kd" lang="ja" style="font-size: {{ r.fs }}; font-weight: 700; line-height: 1.1">{{ r.w }}</span>
+                <span style="font-size: 12.5px; line-height: 1.2">{{ r.hint }}</span>
+                <span class="fo" style="font-size: 17px">{{ r.den }}</span>
+              </span>
+            </button>
+          </sc-for>
+        </div>
+        <p style="margin: 10px 0 0; font-size: 13.5px; font-style: italic">Номинал марки — место в частотном списке. Тёмные марки — частые слова.</p>
+      </section>
+
+      <section class="doc" aria-live="polite" style="flex: 999 1 460px; min-width: 0; position: sticky; top: 16px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; border-bottom: 3px double #14213D; padding-bottom: 8px; flex-wrap: wrap">
+          <span class="fo" style="font-size: 14px; letter-spacing: .16em">ПАСПОРТ СЛОВА · № {{ cur.code }}</span>
+          <span class="fo" style="font-size: 14px; letter-spacing: .16em">{{ cur.den }}</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; padding: 18px 0 10px">
+          <span class="kd" lang="ja" style="font-size: 64px; font-weight: 700; line-height: 1">{{ cur.w }}</span>
+          <div style="display: flex; flex-direction: column; gap: 6px"><span class="kd" lang="ja" style="font-size: 18px; letter-spacing: .2em">かける</span><span style="display: flex; gap: 6px; flex-wrap: wrap"><sc-if value="{{ cur.jlpt }}" hint-placeholder-val="{{ false }}"><span class="tag m">{{ cur.jlpt }}</span></sc-if><span class="tag">{{ cur.pos }}</span></span></div>
+        </div>
+        <sc-if value="{{ cur.note }}" hint-placeholder-val="{{ false }}"><p style="margin: 0 0 8px; font-style: italic; color: #6B1E2A">{{ cur.note }}</p></sc-if>
+        <ol style="margin: 0; padding: 0; list-style: none">
+          <sc-for list="{{ cur.senses }}" as="s" hint-placeholder-count="4"><li style="display: grid; grid-template-columns: 82px minmax(0, 1fr); gap: 10px; padding: 7px 0; border-bottom: 1px dotted #9C8D6B"><span class="fo" style="font-size: 15px; letter-spacing: .06em; color: #6B1E2A">Статья {{ s.n }}</span><span>{{ s.t }}</span></li></sc-for>
+        </ol>
+        <p style="margin: 14px 0 0; display: flex; gap: 18px; flex-wrap: wrap; font-size: 15px"><a href="TeikokuEntry.dc.html">Полный текст статьи</a><a href="#">Править</a><span style="font-style: italic">{{ cur.src }}</span></p>
+      </section>
+    </div>
+
+    <section aria-labelledby="idi" style="margin-top: 44px">
+      <h2 id="idi" class="fo" style="margin: 0 0 10px; font-size: 28px; font-weight: 400">Реестр выражений</h2>
+      <div style="overflow-x: auto">
+        <table>
+          <thead><tr><th>№</th><th>Выражение</th><th>Чтение</th><th>Перевод</th></tr></thead>
+          <tbody><sc-for list="{{ idioms }}" as="m" hint-placeholder-count="8"><tr><td class="fo">{{ m.n }}</td><td><a href="#" class="kd" lang="ja" style="font-size: 18px; font-weight: 700; text-decoration: none; color: #14213D">{{ m.w }}</a></td><td class="kd" lang="ja" style="font-size: 14px">{{ m.r }}</td><td>{{ m.g }}</td></tr></sc-for></tbody>
+        </table>
+      </div>
+      <p style="margin: 16px 0 0"><span class="fo" style="letter-spacing: .1em">ВНУТРИ СЛОВЪ:</span> <span class="kd">出かける · 見かける · 話しかける · 追いかける · 腰掛ける</span> <a href="#">и ещё 41</a></p>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2100}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { sel: 0 }; }
+  renderVals() {
+    const sel = this.state.sel;
+    const R = [
+      { w: '掛ける', hint: 'вешать; тратить', jlpt: 'N4', rank: 410, pos: 'глагол · 15 знач.', s: ['вешать, подвешивать', 'надевать (очки); накрывать', 'тратить (время, деньги)', 'звонить (по телефону)', 'умножать'], src: 'Яркси · 2 скана' },
+      { w: '欠ける', hint: 'недоставать', jlpt: 'N3', rank: 1730, pos: 'глагол', s: ['откалываться, отбиваться', 'недоставать, не хватать', 'убывать (о луне)'], src: 'Яркси · 1 скан' },
+      { w: '書ける', hint: 'мочь писать', jlpt: 'N5', rank: 2050, pos: 'потенц. от 書く', s: ['мочь писать', 'хорошо пишется (о ручке)'], src: 'основной словарь' },
+      { w: '駆ける', hint: 'мчаться', jlpt: 'N1', rank: 4120, pos: 'глагол', note: 'также 駈ける', s: ['бежать, мчаться', 'скакать (на лошади)'], src: 'Яркси' },
+      { w: '賭ける', hint: 'ставить', jlpt: 'N2', rank: 5300, pos: 'глагол', s: ['ставить, держать пари', 'рисковать (жизнью)'], src: 'Яркси' },
+      { w: '〜かける', hint: 'начать', rank: 6100, pos: 'вспом. глагол', note: 'после основы: 読みかける', s: ['начинать (делать)', 'не доделать', 'обращать действие к кому-л.'], src: 'основной словарь' },
+      { w: '懸ける', hint: 'награда', rank: 18400, pos: 'глагол', note: 'ср. 掛ける, 賭ける', s: ['назначать (награду)', 'ставить на карту (честь)'], src: '1 скан' },
+      { w: '架ける', hint: 'мост', rank: 24800, pos: 'глагол', note: 'обычно пишется 掛ける', s: ['наводить (мост)'], src: 'основной словарь' },
+      { w: '翔る', hint: 'парить', rank: 41000, pos: 'глагол · книжн.', s: ['парить, высоко лететь', 'мчаться'], src: 'Яркси' }
+    ];
+    const items = R.map((r, i) => { const n = Array.from(r.w).length; const dark = r.rank < 6000; return { ...r, code: 'K-' + String(i + 1).padStart(2, '0'), den: '№ ' + r.rank.toLocaleString('ru-RU'), on: i === sel,
+      bg: dark ? ['#14213D', '#6B1E2A', '#2F4A3A'][i % 3] : '#FBF6EA', fg: dark ? '#F4ECD8' : '#14213D', fs: n <= 2 ? '40px' : n <= 3 ? '30px' : '22px', pick: () => this.setState({ sel: i }) }; });
+    const c = items[sel];
+    const ord = ['I', 'II', 'III', 'IV', 'V'];
+    return { items, cur: { ...c, jlpt: c.jlpt || '', note: c.note || '', senses: c.s.map((t, k) => ({ n: ord[k], t })) },
+      idioms: [['腕によりをかける', 'うでによりをかける', 'показать всё своё мастерство'], ['天秤にかける', 'てんびんにかける', 'взвешивать варианты'], ['手塩にかける', 'てしおにかける', 'растить с любовью'], ['拍車をかける', 'はくしゃをかける', 'подстёгивать'], ['鎌をかける', 'かまをかける', 'выведывать хитростью'], ['輪をかける', 'わをかける', 'ещё сильнее'], ['迷惑をかける', 'めいわくをかける', 'доставлять неудобства'], ['二股をかける', 'ふたまたをかける', 'вести двойную игру']].map(([w, r, g], i) => ({ w, r, g, n: i + 1 })) };
+  }
+}
+</script>
+</body>
+</html>

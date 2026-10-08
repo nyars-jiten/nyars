@@ -1,0 +1,926 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "CatEntry.dc.html": {
+      "expand": "fill",
+      "h": 2300,
+      "is_interactive": true,
+      "page": "v4",
+      "title": "4 · Статья — Стилизация: кошачьи мотивы nya (subtle)",
+      "w": 1440,
+      "x": 1520,
+      "y": 9550
+    },
+    "CatSearch.dc.html": {
+      "expand": "fill",
+      "h": 2100,
+      "is_interactive": true,
+      "page": "v4",
+      "title": "4 · Поиск — Стилизация: кошачьи мотивы nya (subtle)",
+      "w": 1440,
+      "x": 0,
+      "y": 9550
+    },
+    "Downloads.dc.html": {
+      "expand": "fill",
+      "h": 1600,
+      "title": "07 · Загрузки",
+      "w": 1440,
+      "x": 4560,
+      "y": 3720
+    },
+    "Editor.dc.html": {
+      "expand": "fill",
+      "h": 2050,
+      "is_interactive": true,
+      "title": "05 · Редактор",
+      "w": 1440,
+      "x": 0,
+      "y": 3720
+    },
+    "EkiEntry.dc.html": {
+      "expand": "fill",
+      "h": 2300,
+      "is_interactive": true,
+      "page": "v2",
+      "title": "F · Станция — статья 結構",
+      "w": 1440,
+      "x": 3040,
+      "y": 8700
+    },
+    "EkiHome.dc.html": {
+      "expand": "fill",
+      "h": 1400,
+      "is_interactive": true,
+      "page": "v2",
+      "title": "F · Станция — главная",
+      "w": 1440,
+      "x": 0,
+      "y": 8700
+    },
+    "EkiSearch.dc.html": {
+      "expand": "fill",
+      "h": 1900,
+      "is_interactive": true,
+      "page": "v2",
+      "title": "F · Станция — поиск かける",
+      "w": 1440,
+      "x": 1520,
+      "y": 8700
+    },
+    "Entry.dc.html": {
+      "expand": "fill",
+      "h": 2400,
+      "is_interactive": true,
+      "title": "04a · Статья ЯРС",
+      "w": 1440,
+      "x": 3040,
+      "y": 940
+    },
+    "FrogEntry.dc.html": {
+      "expand": "fill",
+      "h": 2300,
+      "is_interactive": true,
+      "page": "v4",
+      "title": "3 · Статья — Стилизация: маскот-лягушка Кавадзу (subtle)",
+      "w": 1440,
+      "x": 1520,
+      "y": 6850
+    },
+    "FrogSearch.dc.html": {
+      "expand": "fill",
+      "h": 2100,
+      "is_interactive": true,
+      "page": "v4",
+      "title": "3 · Поиск — Стилизация: маскот-лягушка Кавадзу (subtle)",
+      "w": 1440,
+      "x": 0,
+      "y": 6850
+    },
+    "Header.dc.html": {
+      "expand": "fill",
+      "h": 600,
+      "is_interactive": true,
+      "title": "00 · Шапка, способы ввода, фильтры",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "HzEntry.dc.html": {
+      "expand": "fill",
+      "h": 2300,
+      "is_interactive": true,
+      "page": "v4",
+      "title": "1 · Статья — Горизонтальная раскладка",
+      "w": 1440,
+      "x": 1520,
+      "y": 1450
+    },
+    "HzSearch.dc.html": {
+      "expand": "fill",
+      "h": 2100,
+      "is_interactive": true,
+      "page": "v4",
+      "title": "1 · Поиск — Горизонтальная раскладка",
+      "w": 1440,
+      "x": 0,
+      "y": 1450
+    },
+    "Kanji.dc.html": {
+      "expand": "fill",
+      "h": 2300,
+      "is_interactive": true,
+      "title": "04b · Статья кандзи",
+      "w": 1440,
+      "x": 4560,
+      "y": 940
+    },
+    "Main.dc.html": {
+      "expand": "fill",
+      "h": 1560,
+      "title": "01 · Главная",
+      "w": 1440,
+      "x": 0,
+      "y": 940
+    },
+    "MangaEntry.dc.html": {
+      "expand": "fill",
+      "h": 2000,
+      "is_interactive": true,
+      "page": "dirs",
+      "title": "B · Манга — статья 結構",
+      "w": 1440,
+      "x": 3040,
+      "y": 2500
+    },
+    "MangaEntry2.dc.html": {
+      "expand": "fill",
+      "h": 2500,
+      "is_interactive": true,
+      "page": "v2",
+      "title": "B2 · Манга — статья 結構",
+      "w": 1440,
+      "x": 1520,
+      "y": 2900
+    },
+    "MangaHome.dc.html": {
+      "expand": "fill",
+      "h": 1500,
+      "is_interactive": true,
+      "page": "dirs",
+      "title": "B · Манга — главная",
+      "w": 1440,
+      "x": 0,
+      "y": 2500
+    },
+    "MangaSearch.dc.html": {
+      "expand": "fill",
+      "h": 1700,
+      "is_interactive": true,
+      "page": "dirs",
+      "title": "B · Манга — поиск かける",
+      "w": 1440,
+      "x": 1520,
+      "y": 2500
+    },
+    "MangaSearch2.dc.html": {
+      "expand": "fill",
+      "h": 2100,
+      "is_interactive": true,
+      "page": "v2",
+      "title": "B2 · Манга — поиск かける",
+      "w": 1440,
+      "x": 0,
+      "y": 2900
+    },
+    "MeijiEntry.dc.html": {
+      "expand": "fill",
+      "h": 2500,
+      "is_interactive": true,
+      "page": "v3",
+      "title": "I · Мэйдзи-типография — статья 結構 + тест длины",
+      "w": 1440,
+      "x": 3040,
+      "y": 2900
+    },
+    "MeijiHome.dc.html": {
+      "expand": "fill",
+      "h": 1500,
+      "is_interactive": true,
+      "page": "v3",
+      "title": "I · Мэйдзи-типография — главная",
+      "w": 1440,
+      "x": 0,
+      "y": 2900
+    },
+    "MeijiSearch.dc.html": {
+      "expand": "fill",
+      "h": 2100,
+      "is_interactive": true,
+      "page": "v3",
+      "title": "I · Мэйдзи-типография — поиск かける",
+      "w": 1440,
+      "x": 1520,
+      "y": 2900
+    },
+    "MobileEntry.dc.html": {
+      "h": 1760,
+      "title": "Mobile · Статья",
+      "w": 390,
+      "x": 470,
+      "y": 6100
+    },
+    "MobileReview.dc.html": {
+      "h": 844,
+      "title": "Mobile · Проверка правки",
+      "w": 390,
+      "x": 940,
+      "y": 6100
+    },
+    "MobileSearch.dc.html": {
+      "h": 844,
+      "title": "Mobile · Поиск + рукописный ввод",
+      "w": 390,
+      "x": 0,
+      "y": 6100
+    },
+    "Moderation.dc.html": {
+      "expand": "fill",
+      "h": 1900,
+      "is_interactive": true,
+      "title": "06 · Очередь модерации",
+      "w": 1440,
+      "x": 1520,
+      "y": 3720
+    },
+    "ModernEntry.dc.html": {
+      "expand": "fill",
+      "h": 2500,
+      "is_interactive": true,
+      "page": "v3",
+      "title": "K · Японский модернизм 60–70-х — статья 結構 + тест длины",
+      "w": 1440,
+      "x": 3040,
+      "y": 8700
+    },
+    "ModernHome.dc.html": {
+      "expand": "fill",
+      "h": 1500,
+      "is_interactive": true,
+      "page": "v3",
+      "title": "K · Японский модернизм 60–70-х — главная",
+      "w": 1440,
+      "x": 0,
+      "y": 8700
+    },
+    "ModernSearch.dc.html": {
+      "expand": "fill",
+      "h": 2100,
+      "is_interactive": true,
+      "page": "v3",
+      "title": "K · Японский модернизм 60–70-х — поиск かける",
+      "w": 1440,
+      "x": 1520,
+      "y": 8700
+    },
+    "NeonEntry.dc.html": {
+      "expand": "fill",
+      "h": 1900,
+      "is_interactive": true,
+      "page": "dirs",
+      "title": "C · Неон — статья 結構",
+      "w": 1440,
+      "x": 3040,
+      "y": 5000
+    },
+    "NeonHome.dc.html": {
+      "expand": "fill",
+      "h": 1400,
+      "is_interactive": true,
+      "page": "dirs",
+      "title": "C · Неон — главная",
+      "w": 1440,
+      "x": 0,
+      "y": 5000
+    },
+    "NeonSearch.dc.html": {
+      "expand": "fill",
+      "h": 1600,
+      "is_interactive": true,
+      "page": "dirs",
+      "title": "C · Неон — поиск かける",
+      "w": 1440,
+      "x": 1520,
+      "y": 5000
+    },
+    "NoteEntry.dc.html": {
+      "expand": "fill",
+      "h": 2100,
+      "is_interactive": true,
+      "page": "dirs",
+      "title": "E · Тетрадь — статья 結構",
+      "w": 1440,
+      "x": 3040,
+      "y": 10000
+    },
+    "NoteHome.dc.html": {
+      "expand": "fill",
+      "h": 1500,
+      "is_interactive": true,
+      "page": "dirs",
+      "title": "E · Тетрадь — главная",
+      "w": 1440,
+      "x": 0,
+      "y": 10000
+    },
+    "NoteSearch.dc.html": {
+      "expand": "fill",
+      "h": 1700,
+      "is_interactive": true,
+      "page": "dirs",
+      "title": "E · Тетрадь — поиск かける",
+      "w": 1440,
+      "x": 1520,
+      "y": 10000
+    },
+    "PalSheet.dc.html": {
+      "expand": "fill",
+      "h": 1150,
+      "is_interactive": true,
+      "page": "v4",
+      "title": "Палитры вокруг #B7C7F7 — токены и контраст",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "RetroEntry.dc.html": {
+      "expand": "fill",
+      "h": 2500,
+      "is_interactive": true,
+      "page": "v3",
+      "title": "J · Ретро-аниме 80–90-х — статья 結構 + тест длины",
+      "w": 1440,
+      "x": 3040,
+      "y": 5800
+    },
+    "RetroHome.dc.html": {
+      "expand": "fill",
+      "h": 1500,
+      "is_interactive": true,
+      "page": "v3",
+      "title": "J · Ретро-аниме 80–90-х — главная",
+      "w": 1440,
+      "x": 0,
+      "y": 5800
+    },
+    "RetroSearch.dc.html": {
+      "expand": "fill",
+      "h": 2100,
+      "is_interactive": true,
+      "page": "v3",
+      "title": "J · Ретро-аниме 80–90-х — поиск かける",
+      "w": 1440,
+      "x": 1520,
+      "y": 5800
+    },
+    "SashiEntry.dc.html": {
+      "expand": "fill",
+      "h": 2300,
+      "is_interactive": true,
+      "page": "v2",
+      "title": "G · Сасико — статья 結構",
+      "w": 1440,
+      "x": 3040,
+      "y": 11400
+    },
+    "SashiHome.dc.html": {
+      "expand": "fill",
+      "h": 1400,
+      "is_interactive": true,
+      "page": "v2",
+      "title": "G · Сасико — главная",
+      "w": 1440,
+      "x": 0,
+      "y": 11400
+    },
+    "SashiSearch.dc.html": {
+      "expand": "fill",
+      "h": 1900,
+      "is_interactive": true,
+      "page": "v2",
+      "title": "G · Сасико — поиск かける",
+      "w": 1440,
+      "x": 1520,
+      "y": 11400
+    },
+    "Search.dc.html": {
+      "expand": "fill",
+      "h": 1900,
+      "is_interactive": true,
+      "title": "03 · Поиск и токенизатор",
+      "w": 1440,
+      "x": 1520,
+      "y": 940
+    },
+    "SearchWord.dc.html": {
+      "expand": "fill",
+      "h": 2300,
+      "is_interactive": true,
+      "title": "03b · Поиск по слову: несколько результатов",
+      "w": 1440,
+      "x": 6080,
+      "y": 940
+    },
+    "SumiEntry2.dc.html": {
+      "expand": "fill",
+      "h": 2500,
+      "is_interactive": true,
+      "page": "v2",
+      "title": "A2 · Тушь — статья 結構",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "SumiHome.dc.html": {
+      "expand": "fill",
+      "h": 1500,
+      "is_interactive": true,
+      "page": "dirs",
+      "title": "A · Тушь — главная",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "SumiSearch.dc.html": {
+      "expand": "fill",
+      "h": 1500,
+      "is_interactive": true,
+      "page": "dirs",
+      "title": "A · Тушь — поиск かける",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "SumiSearch2.dc.html": {
+      "expand": "fill",
+      "h": 2100,
+      "is_interactive": true,
+      "page": "v2",
+      "title": "A2 · Тушь — поиск かける (спокойнее, информативнее)",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "TeikokuEntry.dc.html": {
+      "expand": "fill",
+      "h": 2500,
+      "is_interactive": true,
+      "page": "v3",
+      "title": "L · Имперская Япония — статья 結構 + тест длины",
+      "w": 1440,
+      "x": 3040,
+      "y": 11600
+    },
+    "TeikokuHome.dc.html": {
+      "expand": "fill",
+      "h": 1500,
+      "is_interactive": true,
+      "page": "v3",
+      "title": "L · Имперская Япония — главная",
+      "w": 1440,
+      "x": 0,
+      "y": 11600
+    },
+    "TeikokuSearch.dc.html": {
+      "expand": "fill",
+      "h": 2100,
+      "is_interactive": true,
+      "page": "v3",
+      "title": "L · Имперская Япония — поиск かける",
+      "w": 1440,
+      "x": 1520,
+      "y": 11600
+    },
+    "TenkoEntry.dc.html": {
+      "expand": "fill",
+      "h": 2500,
+      "is_interactive": true,
+      "page": "v3",
+      "title": "H · Тэнкоку — статья 結構 + тест длины",
+      "w": 1440,
+      "x": 3040,
+      "y": 0
+    },
+    "TenkoHome.dc.html": {
+      "expand": "fill",
+      "h": 1500,
+      "is_interactive": true,
+      "page": "v3",
+      "title": "H · Тэнкоку — главная",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "TenkoSearch.dc.html": {
+      "expand": "fill",
+      "h": 2100,
+      "is_interactive": true,
+      "page": "v3",
+      "title": "H · Тэнкоку — поиск かける",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "UkiyoEntry.dc.html": {
+      "expand": "fill",
+      "h": 2000,
+      "is_interactive": true,
+      "page": "dirs",
+      "title": "D · Гравюра — статья 結構",
+      "w": 1440,
+      "x": 3040,
+      "y": 7500
+    },
+    "UkiyoEntry2.dc.html": {
+      "expand": "fill",
+      "h": 2500,
+      "is_interactive": true,
+      "page": "v2",
+      "title": "D2 · Гравюра — статья 結構",
+      "w": 1440,
+      "x": 1520,
+      "y": 5800
+    },
+    "UkiyoHome.dc.html": {
+      "expand": "fill",
+      "h": 1500,
+      "is_interactive": true,
+      "page": "dirs",
+      "title": "D · Гравюра — главная",
+      "w": 1440,
+      "x": 0,
+      "y": 7500
+    },
+    "UkiyoSearch.dc.html": {
+      "expand": "fill",
+      "h": 1700,
+      "is_interactive": true,
+      "page": "dirs",
+      "title": "D · Гравюра — поиск かける",
+      "w": 1440,
+      "x": 1520,
+      "y": 7500
+    },
+    "UkiyoSearch2.dc.html": {
+      "expand": "fill",
+      "h": 2100,
+      "is_interactive": true,
+      "page": "v2",
+      "title": "D2 · Гравюра — поиск かける",
+      "w": 1440,
+      "x": 0,
+      "y": 5800
+    },
+    "User.dc.html": {
+      "expand": "fill",
+      "h": 1800,
+      "is_interactive": true,
+      "title": "02 · Профиль участника",
+      "w": 1440,
+      "x": 3040,
+      "y": 3720
+    },
+    "VtEntry.dc.html": {
+      "expand": "fill",
+      "h": 2300,
+      "is_interactive": true,
+      "page": "v4",
+      "title": "2 · Статья — Вертикальная раскладка (татэгаки)",
+      "w": 1440,
+      "x": 1520,
+      "y": 4150
+    },
+    "VtSearch.dc.html": {
+      "expand": "fill",
+      "h": 2100,
+      "is_interactive": true,
+      "page": "v4",
+      "title": "2 · Поиск — Вертикальная раскладка (татэгаки)",
+      "w": 1440,
+      "x": 0,
+      "y": 4150
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-05T09:30:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "page": "v4",
+    "view": "canvas"
+  },
+  "notes": {
+    "dA": {
+      "kind": "title1",
+      "maxW": 4480,
+      "page": "dirs",
+      "text": "A · Тушь и бумага — каллиграфия, вертикальное письмо, энсо",
+      "w": 240,
+      "x": 0,
+      "y": -280
+    },
+    "dB": {
+      "kind": "title1",
+      "maxW": 4480,
+      "page": "dirs",
+      "text": "B · Манга — панели, скринтон, диалоги-пузыри, маскот",
+      "w": 240,
+      "x": 0,
+      "y": 2220
+    },
+    "dC": {
+      "kind": "title1",
+      "maxW": 4480,
+      "page": "dirs",
+      "text": "C · Ночной Токио — неон, вывески, терминал",
+      "w": 240,
+      "x": 0,
+      "y": 4720
+    },
+    "dD": {
+      "kind": "title1",
+      "maxW": 4480,
+      "page": "dirs",
+      "text": "D · Гравюра укиё-э — волны, картуши, карты ханафуда",
+      "w": 240,
+      "x": 0,
+      "y": 7220
+    },
+    "dE": {
+      "kind": "title1",
+      "maxW": 4480,
+      "page": "dirs",
+      "text": "E · Тетрадь ученика — гэнко-ёси, маркер, штампы",
+      "w": 240,
+      "x": 0,
+      "y": 9720
+    },
+    "t0": {
+      "kind": "title1",
+      "maxW": 1440,
+      "text": "Каркас: шапка, ввод, фильтры",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "t1": {
+      "kind": "title1",
+      "maxW": 7520,
+      "text": "Чтение: главная, поиск, статьи",
+      "w": 240,
+      "x": 0,
+      "y": 680
+    },
+    "t2": {
+      "kind": "title1",
+      "maxW": 6000,
+      "text": "Участие: правка, модерация, профиль, загрузки",
+      "w": 240,
+      "x": 0,
+      "y": 3460
+    },
+    "t3": {
+      "kind": "title1",
+      "maxW": 1330,
+      "text": "Мобильная версия",
+      "w": 240,
+      "x": 0,
+      "y": 5840
+    },
+    "vA": {
+      "kind": "title1",
+      "maxW": 2960,
+      "page": "v2",
+      "text": "A2 · Тушь — спокойнее и плотнее",
+      "w": 240,
+      "x": 0,
+      "y": -280
+    },
+    "vB": {
+      "kind": "title1",
+      "maxW": 2960,
+      "page": "v2",
+      "text": "B2 · Манга — спокойнее и плотнее",
+      "w": 240,
+      "x": 0,
+      "y": 2620
+    },
+    "vD": {
+      "kind": "title1",
+      "maxW": 2960,
+      "page": "v2",
+      "text": "D2 · Гравюра — спокойнее и плотнее",
+      "w": 240,
+      "x": 0,
+      "y": 5520
+    },
+    "vF": {
+      "kind": "title1",
+      "maxW": 4480,
+      "page": "v2",
+      "text": "F · Станция — навигация японских железных дорог",
+      "w": 240,
+      "x": 0,
+      "y": 8420
+    },
+    "vG": {
+      "kind": "title1",
+      "maxW": 4480,
+      "page": "v2",
+      "text": "G · Сасико — индиго и стежок",
+      "w": 240,
+      "x": 0,
+      "y": 11120
+    },
+    "w0": {
+      "kind": "title1",
+      "maxW": 4480,
+      "page": "v3",
+      "text": "H · Тэнкоку — резьба печатей",
+      "w": 240,
+      "x": 0,
+      "y": -280
+    },
+    "w1": {
+      "kind": "title1",
+      "maxW": 4480,
+      "page": "v3",
+      "text": "I · Мэйдзи-типография — высокая печать",
+      "w": 240,
+      "x": 0,
+      "y": 2620
+    },
+    "w2": {
+      "kind": "title1",
+      "maxW": 4480,
+      "page": "v3",
+      "text": "J · Ретро-аниме 80–90-х",
+      "w": 240,
+      "x": 0,
+      "y": 5520
+    },
+    "w3": {
+      "kind": "title1",
+      "maxW": 4480,
+      "page": "v3",
+      "text": "K · Японский модернизм 60–70-х",
+      "w": 240,
+      "x": 0,
+      "y": 8420
+    },
+    "w4": {
+      "kind": "title1",
+      "maxW": 4480,
+      "page": "v3",
+      "text": "L · Имперская Япония — смешанный стиль",
+      "w": 240,
+      "x": 0,
+      "y": 11320
+    },
+    "x0": {
+      "kind": "title1",
+      "maxW": 2960,
+      "page": "v4",
+      "text": "1 · Горизонтальная раскладка",
+      "w": 240,
+      "x": 0,
+      "y": 1170
+    },
+    "x1": {
+      "kind": "title1",
+      "maxW": 2960,
+      "page": "v4",
+      "text": "2 · Вертикальная раскладка (татэгаки)",
+      "w": 240,
+      "x": 0,
+      "y": 3870
+    },
+    "x2": {
+      "kind": "title1",
+      "maxW": 2960,
+      "page": "v4",
+      "text": "3 · Стилизация: маскот-лягушка Кавадзу (subtle)",
+      "w": 240,
+      "x": 0,
+      "y": 6570
+    },
+    "x3": {
+      "kind": "title1",
+      "maxW": 2960,
+      "page": "v4",
+      "text": "4 · Стилизация: кошачьи мотивы nya (subtle)",
+      "w": 240,
+      "x": 0,
+      "y": 9270
+    },
+    "xp": {
+      "kind": "title1",
+      "maxW": 2960,
+      "page": "v4",
+      "text": "Палитра: серо-голубой акцент #B7C7F7",
+      "w": 240,
+      "x": 0,
+      "y": -280
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Header.dc.html",
+    "Search.dc.html",
+    "Entry.dc.html",
+    "Kanji.dc.html",
+    "Editor.dc.html",
+    "Moderation.dc.html",
+    "User.dc.html",
+    "Downloads.dc.html",
+    "MobileSearch.dc.html",
+    "MobileEntry.dc.html",
+    "MobileReview.dc.html",
+    "SearchWord.dc.html",
+    "SumiHome.dc.html",
+    "SumiSearch.dc.html",
+    "MangaHome.dc.html",
+    "MangaSearch.dc.html",
+    "MangaEntry.dc.html",
+    "NeonHome.dc.html",
+    "NeonSearch.dc.html",
+    "NeonEntry.dc.html",
+    "UkiyoHome.dc.html",
+    "UkiyoSearch.dc.html",
+    "UkiyoEntry.dc.html",
+    "NoteHome.dc.html",
+    "NoteSearch.dc.html",
+    "NoteEntry.dc.html",
+    "SumiSearch2.dc.html",
+    "SumiEntry2.dc.html",
+    "MangaSearch2.dc.html",
+    "MangaEntry2.dc.html",
+    "UkiyoSearch2.dc.html",
+    "UkiyoEntry2.dc.html",
+    "EkiHome.dc.html",
+    "EkiSearch.dc.html",
+    "EkiEntry.dc.html",
+    "SashiHome.dc.html",
+    "SashiSearch.dc.html",
+    "SashiEntry.dc.html",
+    "TenkoHome.dc.html",
+    "TenkoSearch.dc.html",
+    "TenkoEntry.dc.html",
+    "MeijiHome.dc.html",
+    "MeijiSearch.dc.html",
+    "MeijiEntry.dc.html",
+    "RetroHome.dc.html",
+    "RetroSearch.dc.html",
+    "RetroEntry.dc.html",
+    "ModernHome.dc.html",
+    "ModernSearch.dc.html",
+    "ModernEntry.dc.html",
+    "TeikokuHome.dc.html",
+    "TeikokuSearch.dc.html",
+    "TeikokuEntry.dc.html",
+    "PalSheet.dc.html",
+    "HzSearch.dc.html",
+    "HzEntry.dc.html",
+    "VtSearch.dc.html",
+    "VtEntry.dc.html",
+    "FrogSearch.dc.html",
+    "FrogEntry.dc.html",
+    "CatSearch.dc.html",
+    "CatEntry.dc.html"
+  ],
+  "pages": [
+    {
+      "id": "base",
+      "name": "Базовый вариант"
+    },
+    {
+      "id": "dirs",
+      "name": "5 направлений"
+    },
+    {
+      "id": "v2",
+      "name": "Доработка A·B·D + F·G"
+    },
+    {
+      "id": "v3",
+      "name": "Новые стили H–L"
+    },
+    {
+      "id": "v4",
+      "name": "Палитра · G + A2"
+    }
+  ],
+  "title": "nyars — японско-русский словарь"
+}

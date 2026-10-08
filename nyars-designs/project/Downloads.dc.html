@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Скачать словари</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&amp;family=Shippori+Mincho:wght@500;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F4F0;color:#1A1C21;font-family:'Golos Text','Hiragino Sans','Noto Sans JP',system-ui,sans-serif;font-size:15px;line-height:1.5}
+a{color:#2B4A85;text-decoration:none}a:hover{color:#1A2F57;text-decoration:underline}
+.jp{font-family:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.wrap{max-width:1312px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.card{background:#FCFBF8;border:1px solid #DDDAD2;border-radius:6px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#61656E;font-weight:600;margin:0}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 7px;border-radius:4px;font-size:12px;font-weight:600;background:#E9E7E1;color:#474B54;white-space:nowrap}
+.tag.shu{background:#F7E2DB;color:#8A2D1B}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:6px;border:1px solid #DDDAD2;background:#FCFBF8;color:#1A1C21;font:inherit;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn.primary{background:#1A1C21;color:#fff;border-color:#1A1C21}
+.btn.shu{background:#B33E27;color:#fff;border-color:#B33E27}
+.dl{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 12px;border:1px solid #DDDAD2;border-radius:6px;background:#fff;color:#1A1C21;font-size:14px;font-weight:500;white-space:nowrap}
+.dl:hover{border-color:#1A1C21;text-decoration:none}
+table{border-collapse:collapse;width:100%;min-width:760px}
+th,td{text-align:left;padding:14px 16px;border-bottom:1px solid #E9E7E1;vertical-align:middle}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#61656E;font-weight:600;background:#F5F4F0}
+.cols{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+@media (max-width:640px){.wrap{padding:0 16px}.btn,.dl{height:44px}}
+</style>
+</helmet>
+<div>
+  <dc-import name="Header" active="downloads" initial-panel="none" hint-size="100%,72px"></dc-import>
+
+  <div class="wrap" style="padding-top: 40px; padding-bottom: 72px; display: flex; flex-direction: column; gap: 40px">
+    <section style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px">
+      <div style="flex: 1 1 520px; min-width: 0">
+        <h1 style="margin: 0; font-size: 40px; font-weight: 700; letter-spacing: -0.02em">Скачать словари</h1>
+        <p style="margin: 10px 0 0; font-size: 17px; color: #474B54; max-width: 620px">Сборки собираются каждую ночь из всех принятых правок. Ссылки ниже всегда ведут на последнюю версию — их можно прописать в программе один раз.</p>
+      </div>
+      <div class="card" style="padding: 14px 18px; display: flex; gap: 14px; align-items: center">
+        <span style="width: 10px; height: 10px; border-radius: 50%; background: #2B4A85; flex: 0 0 auto"></span>
+        <div style="font-size: 14px"><b>Сборка от 5 окт. 2026, 04:00 UTC</b><br><span style="color: #474B54">+1 942 правки с прошлой · следующая через 18 ч</span></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="fmt" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px">
+      <h2 id="fmt" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Форматы</h2>
+      <article class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-top: 3px solid #B33E27">
+        <h3 style="margin: 0; font-size: 20px">Yomitan</h3>
+        <p style="margin: 0; font-size: 14px; color: #474B54">Всплывающий словарь в браузере: наведите на слово на любом сайте. С частотностью и ударением.</p>
+        <p style="margin: 4px 0 0; font-size: 13px; color: #61656E">Chrome, Firefox, Edge · <span class="mono">.zip</span></p>
+      </article>
+      <article class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-top: 3px solid #1A1C21">
+        <h3 style="margin: 0; font-size: 20px">DSL</h3>
+        <p style="margin: 0; font-size: 14px; color: #474B54">Для настольных и мобильных словарных оболочек. Полная разметка, примеры и ссылки.</p>
+        <p style="margin: 4px 0 0; font-size: 13px; color: #61656E">GoldenDict, ABBYY Lingvo и др. · <span class="mono">.dsl.dz</span></p>
+      </article>
+      <article class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-top: 3px solid #2B4A85">
+        <h3 style="margin: 0; font-size: 20px">JSON-дамп</h3>
+        <p style="margin: 0; font-size: 14px; color: #474B54">Структурированные данные для своих программ и исследований. Схема описана в документации.</p>
+        <p style="margin: 4px 0 0; font-size: 13px; color: #61656E">Для разработчиков · <span class="mono">.jsonl.gz</span></p>
+      </article>
+    </section>
+
+    <section aria-labelledby="files">
+      <h2 id="files" style="margin: 0 0 14px; font-size: 22px; font-weight: 700">Файлы</h2>
+      <div class="card" style="overflow-x: auto">
+        <table>
+          <thead><tr><th>Словарь</th><th>Статей</th><th>Yomitan</th><th>DSL</th><th>JSON</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><b>Японско-русский</b><br><span style="font-size: 13px; color: #474B54">основной, только проверенные статьи</span></td>
+              <td class="mono" style="font-size: 14px">1 820 463</td>
+              <td><a href="#" class="dl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>48 МБ</a></td>
+              <td><a href="#" class="dl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>36 МБ</a></td>
+              <td><a href="#" class="dl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>112 МБ</a></td>
+            </tr>
+            <tr>
+              <td><b>Кандзи</b><br><span style="font-size: 13px; color: #474B54">чтения, значения, коды</span></td>
+              <td class="mono" style="font-size: 14px">13 108</td>
+              <td><a href="#" class="dl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>6 МБ</a></td>
+              <td><a href="#" class="dl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>4 МБ</a></td>
+              <td><a href="#" class="dl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>9 МБ</a></td>
+            </tr>
+            <tr>
+              <td><b>Русско-японский</b> <span class="tag shu">β</span><br><span style="font-size: 13px; color: #474B54">обратный индекс, в работе</span></td>
+              <td class="mono" style="font-size: 14px">[КОЛ-ВО]</td>
+              <td><a href="#" class="dl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>21 МБ</a></td>
+              <td><a href="#" class="dl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>15 МБ</a></td>
+              <td style="color: #61656E; font-size: 14px">—</td>
+            </tr>
+            <tr>
+              <td><b>Спутники и сканы</b><br><span style="font-size: 13px; color: #474B54">только источники, чья лицензия это разрешает</span></td>
+              <td class="mono" style="font-size: 14px">—</td>
+              <td colspan="3" style="font-size: 14px; color: #474B54">Отдельными архивами по источнику — <a href="#">список и лицензии</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin: 10px 0 0; font-size: 13px; color: #61656E">Постоянная ссылка: <span class="mono" style="color: #1A1C21">/downloads/latest/jr-yomitan.zip</span> · SHA-256 рядом с каждым файлом · лицензия данных: [ЛИЦЕНЗИЯ]</p>
+    </section>
+
+    <div class="cols">
+      <section class="card" aria-labelledby="custom" style="flex: 1 1 420px; min-width: 0; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+        <div>
+          <h2 id="custom" style="margin: 0; font-size: 20px; font-weight: 700">Собрать свой набор</h2>
+          <p style="margin: 4px 0 0; font-size: 14px; color: #474B54">Один файл из нескольких словарей, с нужными настройками. Готово за пару минут — пришлём ссылку.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 8px 20px; font-size: 14px">
+          <label style="display: flex; gap: 8px; align-items: center"><input type="checkbox" checked> Японско-русский</label>
+          <label style="display: flex; gap: 8px; align-items: center"><input type="checkbox" checked> Кандзи</label>
+          <label style="display: flex; gap: 8px; align-items: center"><input type="checkbox"> Спутник: Яркси</label>
+          <label style="display: flex; gap: 8px; align-items: center"><input type="checkbox"> Включить непроверенные</label>
+          <label style="display: flex; gap: 8px; align-items: center"><input type="checkbox" checked> Примеры</label>
+          <label style="display: flex; gap: 8px; align-items: center"><input type="checkbox" checked> Частотность и ударение</label>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
+          <label for="cf" style="font-size: 14px">Формат</label>
+          <select id="cf" style="height: 40px; border: 1px solid #CFCCC3; border-radius: 6px; background: #fff; font: inherit; font-size: 14px; padding: 0 10px"><option>Yomitan</option><option>DSL</option><option>JSON</option></select>
+          <button type="button" class="btn shu">Собрать</button>
+        </div>
+      </section>
+
+      <section aria-labelledby="howto" style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+        <h2 id="howto" style="margin: 0; font-size: 20px; font-weight: 700">Как подключить к Yomitan</h2>
+        <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px">
+          <li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 28px; height: 28px; border-radius: 50%; background: #1A1C21; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700">1</span><span>Скачайте архив Yomitan для нужного словаря — распаковывать не надо.</span></li>
+          <li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 28px; height: 28px; border-radius: 50%; background: #1A1C21; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700">2</span><span>Откройте настройки Yomitan → «Словари» → «Импорт» и выберите файл.</span></li>
+          <li style="display: flex; gap: 14px"><span style="flex: 0 0 auto; width: 28px; height: 28px; border-radius: 50%; background: #1A1C21; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700">3</span><span>Включите проверку обновлений — Yomitan сам подтянет новую сборку по постоянной ссылке.</span></li>
+        </ol>
+        <a href="#" style="font-size: 14px; font-weight: 600">Инструкции для GoldenDict и других программ →</a>
+      </section>
+    </div>
+
+    <section aria-labelledby="arch">
+      <h2 id="arch" style="margin: 0 0 12px; font-size: 20px; font-weight: 700">Прошлые сборки</h2>
+      <ul class="card" style="list-style: none; margin: 0; padding: 0">
+        <sc-for list="{{ builds }}" as="b" hint-placeholder-count="5">
+          <li style="display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: center; padding: 12px 18px; border-bottom: 1px solid #E9E7E1; font-size: 14px">
+            <span class="mono" style="min-width: 110px">{{ b.d }}</span>
+            <span style="flex: 1 1 200px; color: #474B54">{{ b.c }}</span>
+            <a href="#">все файлы</a>
+          </li>
+        </sc-for>
+      </ul>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1600}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      builds: [
+        { d: '2026-10-04', c: '+288 правок · 3 новые статьи' },
+        { d: '2026-10-03', c: '+301 правка · 1 удалена' },
+        { d: '2026-10-02', c: '+254 правки' },
+        { d: '2026-10-01', c: '+276 правок · 5 новых статей' },
+        { d: '2026-09-30', c: '+190 правок' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

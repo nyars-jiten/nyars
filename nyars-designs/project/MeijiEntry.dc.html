@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Мэйдзи-типография — статья</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Kaisei+Tokumin:wght@500;700;800&amp;family=Playfair+Display:ital,wght@0,600;0,800;0,900;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EEE6D3;color:#221E19;font-family:'Lora',Georgia,serif;font-size:17px;line-height:1.6}
+a{color:#221E19;text-decoration:underline;text-underline-offset:3px}a:hover{color:#9E2B25}
+.kt{font-family:'Kaisei Tokumin','Yu Mincho',serif}
+.pf{font-family:'Playfair Display',Georgia,serif}
+.ink{text-shadow:0 0 .6px rgba(34,30,25,.55),.3px .3px 0 rgba(34,30,25,.18)}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.sorts{display:flex;flex-wrap:wrap;gap:4px;max-width:100%}
+.sort{position:relative;background:linear-gradient(145deg,#B9B3A8,#7E776C);border-radius:3px;box-shadow:inset 0 0 0 1px #5D574E,0 3px 0 #4A453E;display:flex;align-items:center;justify-content:center;perspective:300px}
+.sort span{font-family:'Kaisei Tokumin';font-weight:800;color:#1B1814;text-shadow:0 1px 0 rgba(255,255,255,.25);transition:transform .35s}
+.sort:hover span{transform:scaleX(-1)}
+.chip{height:34px;padding:0 12px;border:1.5px solid #221E19;background:transparent;font:inherit;font-size:14px;cursor:pointer;color:#221E19}
+.chip[aria-pressed=true],.chip[aria-selected=true]{background:#221E19;color:#EEE6D3}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:0 40px}
+.side{font-size:14.5px;font-style:italic;border-left:1px solid #221E19;padding-left:16px}
+.pos{font-family:'Playfair Display',serif;font-size:26px;font-weight:800;margin:0;padding:6px 0;border-top:3px double #221E19;border-bottom:1px solid #221E19;display:flex;align-items:baseline;gap:12px}
+.sense{padding:10px 0;text-align:justify}
+.cn{font-family:'Kaisei Tokumin';font-weight:800;color:#9E2B25;font-size:19px;margin-right:6px}
+.ex{display:block;margin:4px 0 0 28px;font-size:16px}
+.drop::first-letter{font-family:'Playfair Display';font-weight:900;font-size:52px;float:left;line-height:.85;padding:4px 8px 0 0;color:#9E2B25}
+@media (max-width:900px){.wrap{padding:0 16px}.row{grid-template-columns:1fr}.side{border-left:0;padding-left:0;margin-bottom:14px}}
+</style>
+</helmet>
+<div class="ink">
+  <header style="background: #221E19; color: #EEE6D3">
+    <div class="wrap" style="display: flex; align-items: center; gap: 14px 26px; flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px">
+      <a href="MeijiHome.dc.html" class="pf" style="color: #EEE6D3; text-decoration: none; font-size: 24px; font-weight: 900">nyars <span class="kt" lang="ja">新報</span></a>
+      <form role="search" style="flex: 1 1 460px; display: flex; border: 1.5px solid #EEE6D3"><label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label><input id="q" type="search" value="結構" class="kt" style="flex: 1; min-width: 0; height: 44px; border: 0; background: #EEE6D3; padding: 0 12px; font-size: 20px; outline: none"><a href="MeijiSearch.dc.html" class="pf" style="padding: 0 18px; display: flex; align-items: center; color: #EEE6D3; font-weight: 800; text-decoration: none; letter-spacing: .06em">ИСКАТЬ</a></form>
+    </div>
+  </header>
+
+  <main class="wrap" style="padding-top: 28px; padding-bottom: 72px; display: flex; flex-direction: column; gap: 26px">
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 14px; font-style: italic">
+      <span>← <a href="#" class="kt" style="font-style: normal">結局</a> · Японско-русскій · <a href="#" class="kt" style="font-style: normal">結合</a> →</span>
+      <span style="display: flex; gap: 6px; align-items: center; font-style: normal">длина заголовка: <sc-for list="{{ lens }}" as="l" hint-placeholder-count="3"><button type="button" class="chip" aria-pressed="{{ l.on }}" onClick="{{ l.pick }}" style="height: 28px; font-size: 13px">{{ l.label }}</button></sc-for></span>
+    </div>
+
+    <section class="row" style="align-items: end">
+      <div>
+        <p class="pf" style="margin: 0 0 8px; font-size: 14px; letter-spacing: .2em; text-transform: uppercase; font-weight: 800">Набрано литерами · наведите на литеру</p>
+        <h1 class="sorts" lang="ja" aria-label="{{ hw.w }}" style="margin: 0; max-width: {{ hw.maxw }}">
+          <sc-for list="{{ hw.cells }}" as="ch" hint-placeholder-count="2"><span class="sort" style="width: {{ hw.sz }}; height: {{ hw.sz }}"><span style="font-size: {{ hw.fs }}">{{ ch }}</span></span></sc-for>
+        </h1>
+        <p class="kt" lang="ja" style="margin: 12px 0 0; font-size: 20px; letter-spacing: .2em">{{ hw.r }}</p>
+      </div>
+      <aside class="side" style="font-style: normal">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px"><button type="button" aria-label="Прослушать" style="width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid #221E19; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#221E19" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9v6h4l5 4V5L9 9H5z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg></button><span class="kt" style="font-size: 19px"><span style="border-top: 2px solid #9E2B25; border-right: 2px solid #9E2B25; padding: 0 2px">け</span>っこう</span> [1]</div>
+        <div><b>N3</b> · частое · news1 · № 1 284</div>
+        <div style="font-style: italic">3 части речи, 5 значений</div>
+        <div style="margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap"><a href="#" class="chip" style="display: inline-flex; align-items: center; text-decoration: none; background: #221E19; color: #EEE6D3">Править</a><a href="#" class="chip" style="display: inline-flex; align-items: center; text-decoration: none">Anki</a></div>
+      </aside>
+    </section>
+
+    <div class="row"><h2 class="pos">на-прилагательное <span class="kt" style="font-size: 17px; font-weight: 700">形容動詞</span></h2><span></span></div>
+    <div class="row"><p class="sense drop" style="margin: 0"><span class="cn">①</span><b>прекрасный, превосходный, отличный</b>; великолепный.<span class="ex"><span class="kt">結構なお土産をありがとうございます。</span> Спасибо за чудесный подарок.</span></p><aside class="side">Похвала вещи или угощению; звучит учтиво, немного старомодно.</aside></div>
+    <div class="row"><p class="sense" style="margin: 0"><span class="cn">②</span><i>(часто ～です)</i> <b>достаточный</b>; (уже) хорошо, годится.<span class="ex"><span class="kt">サインはボールペンで結構です。</span> Расписаться можно и шариковой ручкой.</span></p><aside class="side"></aside></div>
+    <div class="row"><p class="sense" style="margin: 0"><span class="cn">③</span><i>вежл.</i> <b>нет, спасибо</b>; не нужно.<span class="ex"><span class="kt">いえ、もう結構です。</span> Нет, спасибо, мне достаточно.</span></p><aside class="side">Murasaki: «В магазине почти всегда отказ. Ср. いいです — там всё решает интонация».</aside></div>
+    <div class="row"><h2 class="pos">наречие <span class="kt" style="font-size: 17px; font-weight: 700">副詞</span></h2><span></span></div>
+    <div class="row"><p class="sense" style="margin: 0"><span class="cn">①</span><i>разг., обычно каной</i> <b>довольно, вполне</b>; порядочно.<span class="ex"><span class="kt">この店、安いけど結構おいしい。</span> Здесь дёшево, но довольно вкусно.</span></p><aside class="side">Мягче, чем かなり. Правка от сегодня: kitsune_ru.</aside></div>
+    <div class="row"><h2 class="pos">существительное <span class="kt" style="font-size: 17px; font-weight: 700">名詞</span></h2><span></span></div>
+    <div class="row"><p class="sense" style="margin: 0"><span class="cn">①</span><i>книжн.</i> <b>структура, конструкция</b>; композиция; план.</p><aside class="side">Синонимы: <span class="kt">構造</span>, <span class="kt">構成</span>.</aside></div>
+
+    <section style="border-top: 3px double #221E19; padding-top: 14px">
+      <div role="tablist" style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px"><sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3"><button type="button" role="tab" class="chip" aria-selected="{{ t.on }}" onClick="{{ t.pick }}">{{ t.label }}</button></sc-for></div>
+      <sc-if value="{{ isHist }}" hint-placeholder-val="{{ true }}">
+        <div style="column-count: 2; column-gap: 32px; column-rule: 1px solid #221E19; font-size: 15px">
+          <p style="margin: 0 0 8px"><b>Изд. 14</b>, сегодня — kitsune_ru: «довольно-таки» заменено на «довольно, вполне; порядочно». <i>+18 −4</i></p>
+          <p style="margin: 0 0 8px"><b>Изд. 13</b>, 2 окт. — гость: добавлено значение ③. Принял Murasaki. <i>+41</i></p>
+          <p style="margin: 0 0 8px"><b>Изд. 12</b>, 14 сен. — Murasaki: значения ① и ② разделены. <i>+26 −11</i></p>
+          <p style="margin: 0"><b>Изд. 1</b>, 2019 — статья перенесена из ядра словаря.</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isSrc }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 15px">Конрад, т. 1, с. 482: けっこう【結構】 1. строение, конструкция… · Яркси: 1) отлично; 2) достаточно…</p></sc-if>
+      <sc-if value="{{ isDisc }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 15px">Murasaki: вынести 結構です в отдельную статью? — kitsune_ru: оставим здесь со ссылкой.</p></sc-if>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2500}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { len: 0, tab: 'hist' }; }
+  renderVals() {
+    const { len, tab } = this.state;
+    const H = [['結構', 'けっこう'], ['腕によりをかける', 'うでによりをかける'], ['鳴かぬなら殺してしまえホトトギス', 'なかぬならころしてしまえほととぎす']];
+    const [w, r] = H[len];
+    const n = Array.from(w).length;
+    const s = n <= 2 ? 120 : n <= 8 ? 84 : 62;
+    const hw = { w, r, cells: Array.from(w), sz: s + 'px', fs: Math.round(s * 0.72) + 'px', maxw: (s + 4) * 8 + 'px' };
+    const lens = ['2', '8', '16'].map((label, i) => ({ label, on: i === len, pick: () => this.setState({ len: i }) }));
+    const tabs = [['hist', 'Издания · 14'], ['src', 'Источники · 5'], ['disc', 'Обсуждение · 2']].map(([id, label]) => ({ label, on: tab === id, pick: () => this.setState({ tab: id }) }));
+    return { hw, lens, tabs, isHist: tab === 'hist', isSrc: tab === 'src', isDisc: tab === 'disc' };
+  }
+}
+</script>
+</body>
+</html>

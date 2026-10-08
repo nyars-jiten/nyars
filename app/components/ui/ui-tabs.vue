@@ -4,6 +4,7 @@ interface Tab {
   label?: string
   icon?: string
   disabled?: boolean
+  count?: number | string
 }
 
 interface Props {
@@ -26,42 +27,35 @@ const emit = defineEmits<{
 
 const { t } = useI18n()
 
-// Normalize tabs to consistent format
 const normalizedTabs = computed(() => {
   return props.tabs.map((tab) => {
     if (typeof tab === 'string') {
       return {
         id: tab,
         label: t(`components.uiKit.tabs.${tab}`),
-        icon: getDefaultIcon(tab),
         disabled: false,
+        count: undefined as number | string | undefined,
       }
     }
     return {
+      id: tab.id,
       label: tab.label || t(`components.uiKit.tabs.${tab.id}`),
-      icon: tab.icon || getDefaultIcon(tab.id),
       disabled: tab.disabled || false,
-      ...tab,
+      count: tab.count,
     }
   })
 })
 
-// Default icons for backward compatibility
-function getDefaultIcon(tabId: string): string {
-  const icons: Record<string, string> = {
-    edits: 'ic:baseline-plus-minus-alt',
-    satellites: 'ic:baseline-translate',
-    scans: 'material-symbols:scan-outline',
-    llm: 'mdi:sparkles-outline',
-  }
-  return icons[tabId] || ''
+function resolveInitialTab() {
+  if (props.modelValue)
+    return props.modelValue
+  if (props.defaultTab)
+    return props.defaultTab
+  return normalizedTabs.value[0]?.id || ''
 }
 
-// Local tab state management
-const internalActiveTab = ref('')
-
-// Track which tabs have been loaded (for lazy loading)
-const loadedTabs = ref(new Set<string>())
+const internalActiveTab = ref(resolveInitialTab())
+const loadedTabs = ref(new Set<string>(internalActiveTab.value ? [internalActiveTab.value] : []))
 
 const activeTab = computed({
   get: () => props.modelValue ?? internalActiveTab.value,
@@ -69,63 +63,62 @@ const activeTab = computed({
     internalActiveTab.value = value
     emit('update:modelValue', value)
     emit('change', value)
-    // Mark tab as loaded when it becomes active
     loadedTabs.value.add(value)
   },
 })
 
-const isActiveTab = (tabId: string) => activeTab.value === tabId
+watch(
+  () => normalizedTabs.value.map(t => t.id).join('|'),
+  () => {
+    if (!activeTab.value || !normalizedTabs.value.some(t => t.id === activeTab.value)) {
+      const next = resolveInitialTab()
+      if (next)
+        activeTab.value = next
+    }
+  },
+)
 
-// Check if tab has been loaded (for lazy loading)
+const isActiveTab = (tabId: string) => activeTab.value === tabId
 const isTabLoaded = (tabId: string) => loadedTabs.value.has(tabId)
 
 function setActiveTab(tabId: string) {
   const tab = normalizedTabs.value.find(t => t.id === tabId)
-  if (tab && !tab.disabled) {
+  if (tab && !tab.disabled)
     activeTab.value = tabId
-  }
 }
 
-// Initialize active tab
-onMounted(() => {
-  const firstTab = normalizedTabs.value[0]
-  if (!activeTab.value && firstTab) {
-    const initialTab = props.defaultTab || firstTab.id
-    activeTab.value = initialTab
-    // Mark initial tab as loaded
-    loadedTabs.value.add(initialTab)
-  }
-})
-
-// Provide functions to child components
 provide('isActiveTab', isActiveTab)
 provide('isTabLoaded', isTabLoaded)
 provide('tabsLazyMode', props.lazy)
 </script>
 
 <template>
-  <div>
-    <div class="inline-flex ml-2">
-      <div
+  <section class="hz-tabs-panel" aria-label="История, сателлиты, сканы">
+    <div
+      role="tablist"
+      class="flex flex-wrap gap-1"
+    >
+      <button
         v-for="tab in normalizedTabs"
         :key="tab.id"
-        class="inline-flex p-2 items-center border-b-2 justify-center cursor-pointer select-none text-lg uppercase font-extralight transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-        :class="{
-          'border-transparent': !isActiveTab(tab.id),
-          'opacity-50 cursor-not-allowed': tab.disabled,
-          'hover:border-gray-300': !isActiveTab(tab.id) && !tab.disabled,
-        }"
+        type="button"
+        role="tab"
+        class="hz-tab"
+        :class="{ 'hz-tab-on': isActiveTab(tab.id) }"
         :disabled="tab.disabled"
         :aria-selected="isActiveTab(tab.id)"
-        role="tab"
         @click="setActiveTab(tab.id)"
       >
-        <Icon v-if="tab.icon" :name="tab.icon" class="mx-1" size="1.3rem" />
         {{ tab.label }}
-      </div>
+        <span
+          v-if="tab.count !== undefined && tab.count !== null"
+          class="hz-tab-count"
+        >{{ tab.count }}</span>
+      </button>
     </div>
-    <UiBlock>
+
+    <div class="hz-tabs-panel-body">
       <slot :active-tab="activeTab" :is-active-tab="isActiveTab" />
-    </UiBlock>
-  </div>
+    </div>
+  </section>
 </template>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Имперская Япония — главная</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@500;700&amp;family=Forum&amp;family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#14213D;color:#F4ECD8;font-family:'PT Serif',Georgia,serif;font-size:16px;line-height:1.55}
+a{color:#E2C98A;text-decoration:none}a:hover{color:#fff}
+.kd{font-family:'Kaisei Decol',serif}
+.fo{font-family:'Forum',serif}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.gold{color:#D8B66A}
+.frame{border:2px solid #B8954A;outline:1px solid #B8954A;outline-offset:6px;position:relative}
+.corner{position:absolute;width:26px;height:26px;border:2px solid #B8954A}
+.stamp{background:#F4ECD8;color:#14213D;padding:14px;-webkit-mask:radial-gradient(circle 5px at 6px 6px,transparent 98%,#000) -6px -6px/12px 12px;mask:radial-gradient(circle 5px at 6px 6px,transparent 98%,#000) -6px -6px/12px 12px;text-decoration:none;display:block;transition:transform .2s}
+.stamp:hover{transform:rotate(-2deg) scale(1.03);color:#14213D}
+.stamp .in{border:1.5px solid #6B1E2A;padding:10px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:4px;align-items:center;text-align:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ros{animation:spin 120s linear infinite}
+@media (max-width:760px){.wrap{padding:0 16px}}
+</style>
+</helmet>
+<div>
+  <header class="wrap" style="display: flex; align-items: center; gap: 14px 28px; flex-wrap: wrap; padding-top: 18px; padding-bottom: 18px; border-bottom: 1px solid rgba(184,149,74,.5)">
+    <a href="#" style="display: flex; align-items: center; gap: 12px"><span class="kd" style="width: 42px; height: 42px; border: 2px solid #B8954A; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #D8B66A">辞</span><span class="fo" style="font-size: 26px; letter-spacing: .14em; color: #F4ECD8">NYARS</span></a>
+    <nav aria-label="Разделы" class="fo" style="display: flex; gap: 26px; flex: 1 1 auto; flex-wrap: wrap; font-size: 18px; letter-spacing: .06em"><a href="TeikokuSearch.dc.html">Словарь</a><a href="#">Кандзи</a><a href="#">Правки</a><a href="#">Скачать</a></nav>
+    <a href="#" class="fo" style="font-size: 18px">Войти</a>
+  </header>
+
+  <section class="wrap" style="padding-top: 48px; padding-bottom: 48px">
+    <div class="frame" style="padding: 52px 40px 44px; text-align: center; overflow: hidden; background: radial-gradient(ellipse at center, #1C2C50, #14213D 70%)">
+      <span class="corner" style="left: 10px; top: 10px; border-right: 0; border-bottom: 0"></span><span class="corner" style="right: 10px; top: 10px; border-left: 0; border-bottom: 0"></span><span class="corner" style="left: 10px; bottom: 10px; border-right: 0; border-top: 0"></span><span class="corner" style="right: 10px; bottom: 10px; border-left: 0; border-top: 0"></span>
+      <svg class="ros" aria-hidden="true" width="560" height="560" viewBox="-100 -100 200 200" style="position: absolute; left: 50%; top: 50%; margin: -280px 0 0 -280px; opacity: .22">
+        <sc-for list="{{ petals }}" as="p" hint-placeholder-count="36"><ellipse cx="0" cy="0" rx="92" ry="34" fill="none" stroke="#D8B66A" stroke-width=".5" transform="rotate({{ p }})"></ellipse></sc-for>
+        <sc-for list="{{ petals }}" as="p" hint-placeholder-count="36"><ellipse cx="0" cy="0" rx="58" ry="20" fill="none" stroke="#D8B66A" stroke-width=".4" transform="rotate({{ p }})"></ellipse></sc-for>
+      </svg>
+      <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px">
+        <p class="kd" lang="ja" style="margin: 0; font-size: 18px; letter-spacing: .6em; color: #D8B66A">日露辞典</p>
+        <h1 class="fo" style="margin: 0; font-size: clamp(42px, 5.4vw, 72px); font-weight: 400; line-height: 1.05; letter-spacing: .02em">Японско-русскій<br>словарь</h1>
+        <p style="margin: 0; font-style: italic; color: #CFC6B0">составляемый трудами читателей · основан въ 2019 году</p>
+        <form role="search" style="margin-top: 16px; width: min(620px, 100%); display: flex; border: 1.5px solid #B8954A; background: rgba(20,33,61,.85)">
+          <label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label>
+          <input id="q" type="search" placeholder="Слово, чтение или перевод" class="kd" style="flex: 1; min-width: 0; height: 56px; border: 0; background: transparent; color: #F4ECD8; padding: 0 18px; font-size: 21px; outline: none">
+          <button type="button" class="kd" aria-label="Ключи" style="width: 54px; border: 0; border-left: 1px solid #B8954A; background: transparent; color: #D8B66A; font-size: 20px; cursor: pointer">部</button>
+          <a href="TeikokuSearch.dc.html" class="fo" style="padding: 0 24px; display: flex; align-items: center; background: #B8954A; color: #14213D; font-size: 18px; letter-spacing: .1em">ИСКАТЬ</a>
+        </form>
+        <dl class="fo" style="margin: 22px 0 0; display: flex; gap: 0; flex-wrap: wrap; justify-content: center; border-top: 1px solid #B8954A; border-bottom: 1px solid #B8954A">
+          <div style="padding: 10px 26px"><dt style="font-size: 13px; letter-spacing: .14em; color: #CFC6B0">СТАТЕЙ</dt><dd style="margin: 0; font-size: 28px">№ 1 820 463</dd></div>
+          <div style="padding: 10px 26px; border-left: 1px solid #B8954A"><dt style="font-size: 13px; letter-spacing: .14em; color: #CFC6B0">ИЗЪЯТО ЗА НЕДЕЛЮ</dt><dd style="margin: 0; font-size: 28px; color: #E59A8E">8</dd></div>
+          <div style="padding: 10px 26px; border-left: 1px solid #B8954A"><dt style="font-size: 13px; letter-spacing: .14em; color: #CFC6B0">ПРАВОКЪ</dt><dd style="margin: 0; font-size: 28px">1 942</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #F4ECD8; color: #14213D; padding: 44px 0 64px">
+    <div class="wrap">
+      <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 22px; flex-wrap: wrap; transform: rotate(-8deg)"><h2 class="fo" style="margin: 0; font-size: 34px; font-weight: 400">Свежія марки</h2><span style="font-style: italic">каждая принятая правка — марка в альбоме словаря</span></div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(180px, 100%), 1fr)); gap: 18px">
+        <sc-for list="{{ feed }}" as="e" hint-placeholder-count="6">
+          <a href="TeikokuEntry.dc.html" class="stamp" style="background: {{ e.bg }}">
+            <span class="in">
+              <span class="fo" style="font-size: 12px; letter-spacing: .14em; color: #6B1E2A">NYARS · {{ e.t }}</span>
+              <span class="kd" lang="ja" style="font-size: {{ e.fs }}; font-weight: 700; line-height: 1.15; min-height: 64px; display: flex; align-items: center">{{ e.w }}</span>
+              <span style="font-size: 13px; line-height: 1.3">{{ e.what }}</span>
+              <span class="fo" style="font-size: 20px; color: #6B1E2A">{{ e.d }}</span>
+            </span>
+          </a>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 28px; margin-top: 44px">
+        <div style="flex: 1 1 380px">
+          <h2 class="fo" style="margin: 0 0 10px; font-size: 26px; font-weight: 400">Почётная грамота недели</h2>
+          <ol style="margin: 0; padding: 0; list-style: none">
+            <sc-for list="{{ top }}" as="t" hint-placeholder-count="5"><li style="display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 12px; align-items: baseline; padding: 9px 0; border-bottom: 1px dotted #8C7A55"><span class="fo" style="font-size: 20px; color: #6B1E2A">{{ t.r }}</span><span>{{ t.u }}</span><span style="font-style: italic">{{ t.n }} правок</span></li></sc-for>
+          </ol>
+        </div>
+        <div style="flex: 1 1 300px; border: 1.5px solid #14213D; outline: 1px solid #14213D; outline-offset: 4px; padding: 20px">
+          <h2 class="fo" style="margin: 0 0 6px; font-size: 22px; font-weight: 400">Ночное изданіе</h2>
+          <p style="margin: 0 0 12px; font-style: italic">Сборка 5 окт., 04:00 UTC · Yomitan · DSL · JSON</p>
+          <a href="#" class="fo" style="display: inline-flex; height: 44px; align-items: center; padding: 0 20px; background: #14213D; color: #F4ECD8; letter-spacing: .1em">ПОЛУЧИТЬ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const petals = Array.from({ length: 36 }, (_, i) => i * 5);
+    const BG = ['#F4ECD8', '#E9DCC0', '#EFE0D2', '#E3E2D0', '#F1E3C9', '#E8D9D3'];
+    const F = [['結構', 'уточнён перевод', '+18', '09:14'], ['推し活', 'новая статья', '+96', '09:07'], ['米', 'новый пример', '+31', '08:52'], ['仕舞う', 'сверка скана', '±3', '08:40'], ['腕によりをかける', 'новая идиома', '+64', '06:30'], ['取り敢えず', 'изъят дубль', '−214', '04:12']];
+    const feed = F.map(([w, what, d, t], i) => { const n = Array.from(w).length; return { w, what, d, t, bg: BG[i], fs: n <= 2 ? '44px' : n <= 4 ? '30px' : '20px' }; });
+    const top = [['Murasaki', 312], ['kitsune_ru', 268], ['yuki.p', 197], ['old_kanbun', 141], ['Tanuki42', 96]].map(([u, n], i) => ({ u, n, r: ['I', 'II', 'III', 'IV', 'V'][i] }));
+    return { petals, feed, top };
+  }
+}
+</script>
+</body>
+</html>

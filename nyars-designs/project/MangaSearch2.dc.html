@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Манга v2 — поиск かける</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&amp;family=Mochiy+Pop+One&amp;family=Unbounded:wght@500;700;900&amp;family=Rubik:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FAFAF7;color:#151515;font-family:'Rubik',system-ui,sans-serif;font-size:16px;line-height:1.5}
+a{color:#151515}a:hover{color:#C2185B}
+.jpd{font-family:'Dela Gothic One','Mochiy Pop One',sans-serif}
+.jpp{font-family:'Mochiy Pop One',sans-serif}
+.un{font-family:'Unbounded',sans-serif}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.panel{border:2px solid #151515;background:#fff;position:relative}
+.tone{background-image:radial-gradient(#151515 .9px,transparent 1.2px);background-size:6px 6px}
+.lbl{font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;border:1.5px solid #151515;font-size:12px;font-weight:500;background:#fff;white-space:nowrap}
+.tag.y{background:#FFE45C}.tag.p{background:#FFD3E2}.tag.b{background:#D6E4FF}
+.sfx{font-family:'Dela Gothic One',sans-serif;font-size:13px;color:#151515;background:#FFE45C;border:1.5px solid #151515;padding:1px 6px;transform:rotate(-4deg);display:inline-block}
+.res{display:grid;grid-template-columns:190px minmax(0,1fr);gap:8px 28px;padding:20px 24px}
+.res+.res{border-top:2px dashed #D2D2CC}
+.sl{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:24px minmax(0,1fr);gap:4px 6px}
+.n{font-family:'Unbounded',sans-serif;font-weight:700;font-size:12px;width:20px;height:20px;border:1.5px solid #151515;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.chip{height:38px;padding:0 14px;border:2px solid #151515;background:#fff;font:inherit;font-size:14px;font-weight:500;cursor:pointer;box-shadow:2px 2px 0 #151515}
+.chip[aria-pressed=true]{background:#151515;color:#FFE45C}
+.jump{display:flex;flex-direction:column;align-items:center;justify-content:center;height:62px;border:2px solid #151515;background:#fff;text-decoration:none;color:#151515;transition:transform .12s}
+.jump:hover{transform:translate(-2px,-2px);box-shadow:2px 2px 0 #151515;color:#151515}
+.fl{display:flex;align-items:center;gap:8px;font-size:14.5px;min-height:30px}
+.fl span{margin-left:auto;font-size:12.5px;color:#555}
+.say{background:#fff;border:2px solid #151515;border-radius:16px;padding:10px 14px;font-size:14px;position:relative}
+.say::after{content:'';position:absolute;left:22px;bottom:-14px;border:8px solid transparent;border-top:12px solid #151515}
+@media (max-width:860px){.wrap{padding:0 16px}.res{grid-template-columns:1fr}}
+</style>
+</helmet>
+<div>
+  <header style="background: #151515; color: #fff; border-bottom: 3px solid #FFE45C">
+    <div class="wrap" style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding-top: 10px; padding-bottom: 10px">
+      <a href="MangaHome.dc.html" style="display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none"><span class="jpd" style="background: #FFE45C; color: #151515; font-size: 20px; padding: 1px 8px; border: 2px solid #fff; transform: rotate(-3deg); display: inline-block">辞</span><span class="un" style="font-weight: 900; font-size: 20px">nyars!</span></a>
+      <form role="search" style="flex: 1 1 460px; display: flex"><label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label><input id="q" type="search" value="かける" class="jpp" style="flex: 1; min-width: 0; height: 42px; border: 2px solid #fff; padding: 0 12px; font-size: 17px; outline: none"><button type="button" aria-label="Нарисовать" style="width: 42px; border: 2px solid #fff; border-left: 0; background: #2A2A2A; color: #fff; font-size: 15px; cursor: pointer">✎</button><button type="button" aria-label="Ключи" class="jpp" style="width: 42px; border: 2px solid #fff; border-left: 0; background: #2A2A2A; color: #fff; cursor: pointer">部</button><a href="#" class="un" style="background: #FFE45C; color: #151515; padding: 0 16px; display: flex; align-items: center; font-weight: 900; text-decoration: none; border: 2px solid #fff; border-left: 0">GO!</a></form>
+      <nav aria-label="Разделы" class="un" style="display: flex; gap: 16px; font-size: 13px; font-weight: 700"><a href="#" style="color: #fff; text-decoration: none">Кандзи</a><a href="#" style="color: #fff; text-decoration: none">Правки</a><a href="#" style="color: #fff; text-decoration: none">Скачать</a></nav>
+    </div>
+  </header>
+
+  <div class="wrap" style="padding-top: 24px; padding-bottom: 72px">
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; margin-bottom: 16px">
+      <div>
+        <h1 style="margin: 0; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap"><span class="jpd" lang="ja" style="font-size: 40px; font-weight: 400">かける</span><span class="un" style="font-size: 15px; font-weight: 500">9 статей · 46 внутри слов</span></h1>
+        <p style="margin: 4px 0 0; font-size: 14px; color: #444">Ромадзи <i>kakeru</i> → かける. Похожие: <a href="#" class="jpp">かげる</a>, <a href="#" class="jpp">かけら</a></p>
+      </div>
+      <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap">
+        <label for="sort" class="lbl">Порядок</label>
+        <select id="sort" style="height: 38px; border: 2px solid #151515; background: #fff; font: inherit; font-size: 14px; padding: 0 8px"><option>по частотности</option><option>по совпадению</option></select>
+        <button type="button" class="chip" aria-pressed="{{ full }}" onClick="{{ toFull }}">Подробно</button>
+        <button type="button" class="chip" aria-pressed="{{ compact }}" onClick="{{ toCompact }}">Кратко</button>
+      </div>
+    </div>
+    <nav aria-label="Словари" style="display: flex; gap: 6px; overflow-x: auto; margin-bottom: 24px">
+      <a href="#" class="chip" style="display: flex; align-items: center; text-decoration: none; background: #151515; color: #FFE45C">Японско-русский · 55</a>
+      <a href="#" class="chip" style="display: flex; align-items: center; text-decoration: none">Кандзи · 8</a>
+      <a href="#" class="chip" style="display: flex; align-items: center; text-decoration: none">Спутники · 31</a>
+      <a href="#" class="chip" style="display: flex; align-items: center; text-decoration: none">Сканы · 17</a>
+      <span class="chip" style="display: flex; align-items: center; color: #777; box-shadow: none; border-color: #BBB">РЯС · 0</span>
+    </nav>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start">
+      <aside style="flex: 1 1 230px; max-width: 260px; display: flex; flex-direction: column; gap: 22px">
+        <div>
+          <p class="lbl" style="margin: 0 0 8px">Омонимы — быстрый переход</p>
+          <nav aria-label="Перейти к омониму" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px">
+            <sc-for list="{{ items }}" as="r" hint-placeholder-count="9"><a href="#{{ r.id }}" class="jump"><span class="jpd" lang="ja" style="font-size: 20px">{{ r.short }}</span><span style="font-size: 11px">{{ r.hint }}</span></a></sc-for>
+          </nav>
+        </div>
+        <div class="panel tone" style="padding: 14px; background-color: #F1F1EC; display: flex; gap: 10px; align-items: flex-end">
+          <svg width="56" height="60" viewBox="0 0 120 128" aria-hidden="true" style="flex: 0 0 auto"><path d="M60 6 C70 30 102 46 102 80 C102 106 84 120 60 120 C36 120 18 106 18 80 C18 46 50 30 60 6Z" fill="#151515"></path><ellipse cx="44" cy="78" rx="9" ry="11" fill="#fff"></ellipse><ellipse cx="76" cy="78" rx="9" ry="11" fill="#fff"></ellipse><circle cx="46" cy="80" r="5" fill="#151515"></circle><circle cx="74" cy="80" r="5" fill="#151515"></circle><ellipse cx="34" cy="96" rx="7" ry="4" fill="#FF6E9C"></ellipse><ellipse cx="86" cy="96" rx="7" ry="4" fill="#FF6E9C"></ellipse></svg>
+          <div class="say" style="margin-bottom: 48px">Различай по знаку: <b class="jpp">馬</b> в 駆ける — лошадь, <b class="jpp">貝</b> в 賭ける — деньги!</div>
+        </div>
+        <fieldset style="border: 0; margin: 0; padding: 0"><legend class="lbl" style="margin-bottom: 6px">Часть речи</legend><label class="fl"><input type="checkbox" checked=""> глагол <span>8</span></label><label class="fl"><input type="checkbox" checked=""> вспом. глагол <span>1</span></label></fieldset>
+        <fieldset style="border: 0; margin: 0; padding: 0"><legend class="lbl" style="margin-bottom: 6px">Уровень</legend><label class="fl"><input type="checkbox"> только частотные <span>5</span></label><label class="fl"><input type="checkbox"> без книжных <span>8</span></label><label class="fl"><input type="checkbox"> JLPT N5–N3 <span>3</span></label></fieldset>
+      </aside>
+
+      <main style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 32px">
+        <section class="panel" aria-label="Статьи с чтением かける" style="box-shadow: 5px 5px 0 #151515">
+          <sc-for list="{{ items }}" as="r" hint-placeholder-count="9">
+            <article class="res" id="{{ r.id }}">
+              <div style="display: flex; flex-direction: column; gap: 6px">
+                <div style="display: flex; align-items: flex-start; gap: 8px"><a href="MangaEntry2.dc.html" class="jpd" lang="ja" style="font-size: 38px; line-height: 1.1; text-decoration: none">{{ r.w }}</a><span class="sfx" aria-hidden="true">{{ r.sfx }}</span></div>
+                <span class="jpp" lang="ja" style="font-size: 14px; color: #444">かける</span>
+                <sc-if value="{{ r.alt }}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; color: #444">также <span class="jpp" lang="ja" style="color: #151515">{{ r.alt }}</span></span></sc-if>
+                <div style="display: flex; gap: 4px; flex-wrap: wrap">
+                  <sc-if value="{{ r.jlpt }}" hint-placeholder-val="{{ false }}"><span class="tag b">{{ r.jlpt }}</span></sc-if>
+                  <sc-if value="{{ r.common }}" hint-placeholder-val="{{ false }}"><span class="tag y">частое</span></sc-if>
+                  <sc-if value="{{ r.tag }}" hint-placeholder-val="{{ false }}"><span class="tag p">{{ r.tag }}</span></sc-if>
+                </div>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 10px; min-width: 0">
+                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px">
+                  <span class="lbl" style="background: #151515; color: #fff; padding: 3px 8px">{{ r.pos }}</span>
+                  <span style="font-size: 13px; color: #555">{{ r.n }} знач.</span>
+                  <sc-if value="{{ r.note }}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; color: #A3124A">{{ r.note }}</span></sc-if>
+                </div>
+                <ol class="sl">
+                  <sc-for list="{{ r.shown }}" as="s" hint-placeholder-count="3"><li style="display: contents"><span class="n">{{ s.n }}</span><span>{{ s.t }}</span></li></sc-for>
+                </ol>
+                <sc-if value="{{ r.showEx }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 15px; background: #F4F4EF; padding: 8px 12px; border-radius: 12px"><span class="jpp" lang="ja">{{ r.exJ }}</span> — {{ r.exR }}</p></sc-if>
+                <div style="display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 13.5px; color: #444">
+                  <span>{{ r.more }}</span><span>{{ r.src }}</span><span style="flex: 1"></span><a href="#">Править</a><a href="MangaEntry2.dc.html" style="font-weight: 700">Открыть →</a>
+                </div>
+              </div>
+            </article>
+          </sc-for>
+        </section>
+
+        <section aria-labelledby="ins">
+          <h2 id="ins" class="un" style="margin: 0 0 12px; font-size: 20px; font-weight: 900">Внутри слов <span style="font-weight: 500; font-size: 14px">· 46</span></h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); gap: 8px">
+            <sc-for list="{{ inside }}" as="m" hint-placeholder-count="10"><a href="#" class="panel" style="display: flex; gap: 10px; align-items: baseline; padding: 8px 12px; text-decoration: none"><span class="jpp" lang="ja" style="font-size: 18px; white-space: nowrap">{{ m.w }}</span><span style="font-size: 13.5px; color: #444">{{ m.g }}</span></a></sc-for>
+          </div>
+        </section>
+
+        <section style="display: flex; flex-wrap: wrap; gap: 24px">
+          <div style="flex: 1 1 380px">
+            <h2 class="un" style="margin: 0 0 12px; font-size: 20px; font-weight: 900">Кандзи <span style="font-weight: 500; font-size: 14px">· か-ける</span></h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <sc-for list="{{ kanji }}" as="k" hint-placeholder-count="8"><a href="#" class="panel" style="width: 72px; padding: 6px 2px; display: flex; flex-direction: column; align-items: center; text-decoration: none"><span class="jpd" lang="ja" style="font-size: 28px">{{ k.k }}</span><span style="font-size: 11.5px">{{ k.g }}</span></a></sc-for>
+            </div>
+          </div>
+          <div style="flex: 1 1 380px">
+            <h2 class="un" style="margin: 0 0 12px; font-size: 20px; font-weight: 900">Спутники и сканы <span style="font-weight: 500; font-size: 14px">· 48</span></h2>
+            <p style="margin: 0 0 8px; font-size: 14.5px"><span class="tag">Яркси</span> 掛ける — 1) вешать; 2) надевать; 3) тратить… <a href="#">ещё 30</a></p>
+            <p style="margin: 0; font-size: 14.5px"><span class="tag">скан · Конрад</span> かける【掛ける】 1. вешать, подвѣшивать… <a href="#">ещё 16</a></p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2100}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { compact: false }; }
+  renderVals() {
+    const compact = this.state.compact;
+    const R = [
+      { w: '掛ける', alt: '懸ける・架ける', jlpt: 'N4', common: true, pos: 'глагол · перех.', n: 15, hint: 'вешать', sfx: 'プルル', senses: ['вешать, подвешивать', 'надевать (очки); накрывать (одеялом)', 'тратить (время, деньги)', 'звонить (по телефону); включать'], ex: ['壁に絵を掛ける', 'повесить картину на стену'], src: 'Яркси · 2 скана' },
+      { w: '欠ける', jlpt: 'N3', common: true, pos: 'глагол · неперех.', n: 3, hint: 'нехватка', sfx: 'パキッ', senses: ['откалываться, отбиваться', 'недоставать, не хватать', 'убывать (о луне)'], ex: ['皿が欠けた', 'тарелка откололась'], src: 'Яркси · 1 скан' },
+      { w: '駆ける', alt: '駈ける', jlpt: 'N1', common: true, pos: 'глагол · неперех.', n: 2, hint: 'бег', sfx: 'ダッ', senses: ['бежать, мчаться', 'скакать (на лошади)'], ex: ['子供たちが駆けてくる', 'бегут дети'], src: 'Яркси' },
+      { w: '賭ける', alt: '懸ける', jlpt: 'N2', common: true, pos: 'глагол · перех.', n: 2, hint: 'ставка', sfx: 'ゴゴゴ', senses: ['ставить (на что-л.), держать пари', 'рисковать (жизнью, честью)'], ex: ['命を賭ける', 'рисковать жизнью'], src: 'Яркси · 1 скан' },
+      { w: '架ける', pos: 'глагол · перех.', n: 1, hint: 'мост', sfx: 'ガシッ', note: 'обычно пишется 掛ける', senses: ['перекидывать, наводить (мост); прокладывать (провод)'], src: 'только основной словарь' },
+      { w: '懸ける', pos: 'глагол · перех.', n: 2, hint: 'награда', sfx: 'キラッ', note: 'ср. 掛ける, 賭ける', senses: ['назначать (награду)', 'ставить на карту (честь)'], src: '1 скан' },
+      { w: '翔る', tag: 'книжн.', pos: 'глагол 5-го спр.', n: 2, hint: 'полёт', sfx: 'バサッ', senses: ['парить, высоко лететь', 'мчаться, нестись'], src: 'Яркси' },
+      { w: '書ける', jlpt: 'N5', common: true, pos: 'потенц. от 書く', n: 2, hint: 'письмо', sfx: 'カキ', senses: ['мочь писать, уметь написать', 'хорошо пишется (о ручке)'], src: 'только основной словарь' },
+      { w: '〜かける', pos: 'вспом. глагол', n: 3, hint: 'начать', sfx: 'ピタッ', note: 'после основы: 読みかける', senses: ['начинать (делать)', 'не доделать, бросить на полпути', 'обращать действие к кому-л.'], src: 'только основной словарь' }
+    ];
+    const items = R.map((r, i) => {
+      const lim = compact ? 2 : 4;
+      const rest = r.n - Math.min(lim, r.senses.length);
+      return { ...r, id: 'm' + i, short: r.w.replace('〜', '').slice(0, 1), alt: r.alt || '', jlpt: r.jlpt || '', common: !!r.common, tag: r.tag || '', note: r.note || '',
+        shown: r.senses.slice(0, lim).map((t, k) => ({ n: k + 1, t })),
+        showEx: !compact && !!r.ex, exJ: r.ex ? r.ex[0] : '', exR: r.ex ? r.ex[1] : '',
+        more: rest > 0 ? '+ ещё ' + rest + ' знач.' : 'все значения показаны' };
+    });
+    return { items, full: !compact, compact,
+      toFull: () => this.setState({ compact: false }), toCompact: () => this.setState({ compact: true }),
+      inside: [['出かける', 'выходить из дома'], ['見かける', 'случайно увидеть'], ['話しかける', 'заговорить'], ['追いかける', 'гнаться'], ['呼びかける', 'окликать; призывать'], ['腰掛ける', 'садиться'], ['問いかける', 'спрашивать'], ['押しかける', 'нагрянуть'], ['働きかける', 'воздействовать'], ['心掛ける', 'стараться']].map(([w, g]) => ({ w, g })),
+      kanji: [['掛', 'вешать'], ['欠', 'нехватка'], ['駆', 'мчаться'], ['賭', 'ставить'], ['架', 'мост'], ['懸', 'подвешивать'], ['翔', 'парить'], ['駈', 'вар. 駆']].map(([k, g]) => ({ k, g }))
+    };
+  }
+}
+</script>
+</body>
+</html>

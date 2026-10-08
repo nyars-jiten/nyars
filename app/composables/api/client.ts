@@ -32,21 +32,25 @@ export function useApiClient() {
         return await $apiFetch<T>(url, options)
       }
       catch (error: any) {
-        // Handle different error types
-        if (error.response) {
-          throw createError({
-            statusCode: error.response.status,
-            statusMessage: error.response.statusText,
-            data: error.response._data,
-          })
+        // Plain Error (not createError): callers catch these; createError trips Nuxt's
+        // fatal error overlay even when handled, and Nuxt 4.2 crashes on non-HTML bodies.
+        if (error?.response) {
+          const err = new Error(error.response.statusText || 'Request failed') as Error & {
+            statusCode?: number
+            data?: unknown
+          }
+          err.statusCode = error.response.status
+          err.data = error.response._data
+          throw err
         }
-        
-        // Network or other errors
-        throw createError({
-          statusCode: 500,
-          statusMessage: 'Network error',
-          data: { message: error.message },
-        })
+
+        const err = new Error(error?.message || 'Network error') as Error & {
+          statusCode?: number
+          data?: unknown
+        }
+        err.statusCode = 500
+        err.data = { message: error?.message }
+        throw err
       }
     },
     

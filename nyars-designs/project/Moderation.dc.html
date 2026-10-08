@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Очередь правок</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&amp;family=Shippori+Mincho:wght@500;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F4F0;color:#1A1C21;font-family:'Golos Text','Hiragino Sans','Noto Sans JP',system-ui,sans-serif;font-size:15px;line-height:1.5}
+a{color:#2B4A85;text-decoration:none}a:hover{color:#1A2F57;text-decoration:underline}
+.jp{font-family:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.wrap{max-width:1312px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.card{background:#FCFBF8;border:1px solid #DDDAD2;border-radius:6px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#61656E;font-weight:600;margin:0}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 7px;border-radius:4px;font-size:12px;font-weight:600;background:#E9E7E1;color:#474B54;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:6px;border:1px solid #DDDAD2;background:#FCFBF8;color:#1A1C21;font:inherit;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn.primary{background:#1A1C21;color:#fff;border-color:#1A1C21}
+.btn.out{border-color:#B33E27;color:#8A2D1B;background:#fff}
+.chip{height:34px;padding:0 12px;border:1px solid #DDDAD2;background:#fff;border-radius:17px;font:inherit;font-size:13px;cursor:pointer;white-space:nowrap}
+.chip[aria-pressed=true]{background:#1A1C21;border-color:#1A1C21;color:#fff}
+.in{box-sizing:border-box;height:40px;padding:0 12px;border:1px solid #CFCCC3;border-radius:6px;background:#fff;font:inherit;font-size:14px;color:#1A1C21}
+.tabs a{height:44px;display:flex;align-items:center;gap:8px;padding:0 2px;margin-right:22px;border-bottom:3px solid transparent;color:#474B54;white-space:nowrap}
+.tabs a:hover{text-decoration:none;color:#1A1C21}
+.cnt{font-size:12px;background:#E9E7E1;color:#474B54;padding:0 6px;border-radius:9px;font-weight:600}
+.row{display:grid;grid-template-columns:28px 92px minmax(120px,170px) minmax(0,1fr) 170px 84px 64px 36px;gap:14px;align-items:center;padding:12px 16px;border-bottom:1px solid #E9E7E1}
+.rowbtn{display:contents;cursor:pointer}
+.type{font-size:12px;font-weight:700;padding:2px 8px;border-radius:3px;text-align:center}
+.t-new{background:#DCE6F7;color:#1B3366}.t-edit{background:#E9E7E1;color:#33363D}.t-del{background:#F8DCD3;color:#7A2414}
+.ins{background:#DCE6F7;color:#1B3366;text-decoration:underline;text-decoration-color:#7F9AD0;text-underline-offset:3px;border-radius:2px;padding:0 2px}
+.del{background:#F8DCD3;color:#7A2414;text-decoration:line-through;border-radius:2px;padding:0 2px}
+.diff{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border:1px solid #DDDAD2;border-radius:6px;overflow:hidden;background:#fff}
+.dh{padding:8px 14px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#61656E;background:#F5F4F0;border-bottom:1px solid #DDDAD2}
+.dl{display:grid;grid-template-columns:34px minmax(0,1fr);font-size:14px;line-height:1.7}
+.dl .n{font-family:'JetBrains Mono',monospace;font-size:12px;color:#8C9099;text-align:right;padding-right:10px;user-select:none}
+.dl span.t{padding:2px 12px 2px 0;overflow-wrap:anywhere}
+.l-del{background:#FDF1EE}.l-ins{background:#F1F5FC}
+.kbd{font-family:'JetBrains Mono',monospace;font-size:12px;border:1px solid #CFCCC3;border-bottom-width:2px;border-radius:4px;padding:0 5px;background:#fff}
+@media (max-width:900px){.row{grid-template-columns:28px minmax(0,1fr) 36px;row-gap:4px}.row .hide-s{display:none}.row .wide{grid-column:2}.diff{grid-template-columns:1fr}}
+@media (max-width:640px){.wrap{padding:0 16px}.btn,.in,.chip{height:44px}}
+</style>
+</helmet>
+<div>
+  <dc-import name="Header" active="edits" initial-panel="none" hint-size="100%,72px"></dc-import>
+
+  <div class="wrap" style="padding-top: 28px; padding-bottom: 72px">
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+      <h1 style="margin: 0; font-size: 30px; font-weight: 700">Правки</h1>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 13px; color: #474B54">
+        <span><span class="kbd">J</span> <span class="kbd">K</span> по списку · <span class="kbd">A</span> принять · <span class="kbd">D</span> отклонить · <span class="kbd">E</span> поправить</span>
+        <button type="button" class="btn primary">Проверять подряд</button>
+      </div>
+    </div>
+
+    <nav class="tabs" aria-label="Статус правок" style="display: flex; overflow-x: auto; border-bottom: 1px solid #DDDAD2; margin-top: 18px">
+      <a href="#" aria-current="page" style="border-bottom-color: #B33E27; color: #1A1C21; font-weight: 600">Ожидают <span class="cnt" style="background: #B33E27; color: #fff">214</span></a>
+      <a href="#">Отложены <span class="cnt">9</span></a>
+      <a href="#">Спорные <span class="cnt">17</span></a>
+      <a href="#">Принятые</a>
+      <a href="#">Отклонённые</a>
+      <a href="#">Мои</a>
+    </nav>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 16px 0">
+      <label for="mq" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск по правкам</label>
+      <input id="mq" class="in" placeholder="Слово, автор или текст правки" style="flex: 1 1 260px; min-width: 0">
+      <label for="md" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Словарь</label>
+      <select id="md" class="in"><option>Все словари</option><option>Японско-русский</option><option>Кандзи</option><option>Русско-японский β</option><option>OCR-сверка</option></select>
+      <div role="group" aria-label="Тип правки" style="display: flex; gap: 6px; flex-wrap: wrap">
+        <button type="button" class="chip" aria-pressed="false">Новые</button>
+        <button type="button" class="chip" aria-pressed="true">Изменения</button>
+        <button type="button" class="chip" aria-pressed="false">Удаления</button>
+        <button type="button" class="chip" aria-pressed="false">От гостей</button>
+        <button type="button" class="chip" aria-pressed="false">С конфликтом</button>
+      </div>
+      <label for="ms" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Сортировка</label>
+      <select id="ms" class="in"><option>Сначала старые</option><option>Сначала новые</option><option>Крупные первыми</option><option>По рейтингу автора</option></select>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 10px 16px; background: #1A1C21; color: #F5F4F0; border-radius: 6px 6px 0 0; font-size: 14px">
+      <span><b>Выбрано: 2</b></span>
+      <button type="button" class="btn" style="height: 32px; background: transparent; color: #fff; border-color: #5A5E66">Принять</button>
+      <button type="button" class="btn" style="height: 32px; background: transparent; color: #fff; border-color: #5A5E66">Отклонить…</button>
+      <button type="button" class="btn" style="height: 32px; background: transparent; color: #fff; border-color: #5A5E66">Отложить</button>
+      <span style="flex: 1 1 auto"></span>
+      <span style="color: #B9BCC4">Показано 1–25 из 214</span>
+    </div>
+
+    <div class="card" role="list" style="border-radius: 0 0 6px 6px; border-top: 0">
+      <sc-for list="{{ rows }}" as="r" hint-placeholder-count="8">
+        <div role="listitem" style="background: {{ r.bg }}">
+          <div class="row">
+            <input type="checkbox" aria-label="Выбрать правку {{ r.word }}" checked="{{ r.chk }}" style="width: 18px; height: 18px">
+            <span class="type {{ r.tcls }} hide-s">{{ r.type }}</span>
+            <a href="Entry.dc.html" lang="ja" class="jp" style="font-size: 19px; font-weight: 700; color: #1A1C21; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{ r.word }}</a>
+            <span class="wide" style="min-width: 0; font-size: 14px; color: #33363D; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">
+              <sc-if value="{{ r.conflict }}" hint-placeholder-val="{{ false }}"><span class="tag" style="background: #FFF1D6; color: #7A4B00; margin-right: 6px">конфликт</span></sc-if>{{ r.sum }}
+            </span>
+            <span class="hide-s" style="font-size: 14px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap"><a href="User.dc.html" style="color: #1A1C21; font-weight: 500">{{ r.user }}</a> <span class="mono" style="font-size: 12px; color: #61656E">{{ r.rep }}</span></span>
+            <span class="mono hide-s" style="font-size: 12px; white-space: nowrap"><span style="color: #22396A">+{{ r.add }}</span> <span style="color: #8A2D1B">−{{ r.rem }}</span></span>
+            <span class="hide-s" style="font-size: 13px; color: #61656E; white-space: nowrap">{{ r.when }}</span>
+            <button type="button" onClick="{{ r.toggle }}" aria-expanded="{{ r.open }}" aria-label="Показать изменения" style="width: 36px; height: 36px; border: 1px solid #DDDAD2; border-radius: 6px; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #33363D">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: {{ r.rot }}"><path d="M6 9l6 6 6-6"></path></svg>
+            </button>
+          </div>
+
+          <sc-if value="{{ r.open }}" hint-placeholder-val="{{ false }}">
+            <div style="padding: 4px 16px 24px 58px; display: flex; flex-direction: column; gap: 16px; border-bottom: 1px solid #DDDAD2">
+              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 14px">
+                <span>«{{ r.sum }}»</span>
+                <span style="color: #61656E">Источник: 大辞林, 4-е изд.</span>
+                <span style="flex: 1 1 auto"></span>
+                <div role="group" aria-label="Вид сравнения" style="display: flex; gap: 6px"><button type="button" class="chip" aria-pressed="true">Рядом</button><button type="button" class="chip" aria-pressed="false">Одной колонкой</button><button type="button" class="chip" aria-pressed="false">Как на сайте</button></div>
+              </div>
+
+              <div class="diff" role="table" aria-label="Сравнение версий">
+                <div style="border-right: 1px solid #DDDAD2">
+                  <div class="dh">Было · v14</div>
+                  <div class="dl"><span class="n">12</span><span class="t">== adv ==</span></div>
+                  <div class="dl l-del"><span class="n">13</span><span class="t">1. {col} {uk} <span class="del">довольно-таки</span>, весьма</span></div>
+                  <div class="dl"><span class="n">14</span><span class="t">&gt; この店、安いけど結構おいしい。</span></div>
+                  <div class="dl"><span class="n">15</span><span class="t"> </span></div>
+                  <div class="dl"><span class="n">16</span><span class="t">== adj-na ==</span></div>
+                  <div class="dl"><span class="n">17</span><span class="t">2. {часто 〜です} достаточный…</span></div>
+                  <div class="dl"><span class="n"></span><span class="t"> </span></div>
+                </div>
+                <div>
+                  <div class="dh">Стало</div>
+                  <div class="dl"><span class="n">12</span><span class="t">== adv ==</span></div>
+                  <div class="dl l-ins"><span class="n">13</span><span class="t">1. {col} {uk} <span class="ins">довольно, вполне; порядочно</span>, весьма</span></div>
+                  <div class="dl"><span class="n">14</span><span class="t">&gt; この店、安いけど結構おいしい。</span></div>
+                  <div class="dl"><span class="n">15</span><span class="t"> </span></div>
+                  <div class="dl"><span class="n">16</span><span class="t">== adj-na ==</span></div>
+                  <div class="dl"><span class="n">17</span><span class="t">2. {часто 〜です} достаточный…</span></div>
+                  <div class="dl l-ins"><span class="n">18</span><span class="t"><span class="ins">&gt; サインはボールペンで結構です。 | Расписаться можно и шариковой ручкой.</span></span></div>
+                </div>
+              </div>
+
+              <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end">
+                <div style="flex: 1 1 360px; min-width: 0">
+                  <label for="mc" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px">Комментарий автору <span style="font-weight: 400; color: #61656E">— виден в истории</span></label>
+                  <input id="mc" class="in" style="width: 100%" placeholder="Необязательно при принятии">
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px">
+                  <button type="button" class="btn primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>Принять</button>
+                  <a href="Editor.dc.html" class="btn">Принять с правкой</a>
+                  <label for="rs" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Причина отказа</label>
+                  <select id="rs" class="in"><option>Причина отказа…</option><option>Нет источника</option><option>Неверный перевод</option><option>Дубль</option><option>Вандализм</option></select>
+                  <button type="button" class="btn out">Отклонить</button>
+                </div>
+              </div>
+              <p style="margin: 0; font-size: 13px; color: #474B54">kitsune_ru: принято 412 из 431 правки (96%) · в словаре с 2021 года · <a href="User.dc.html">профиль</a></p>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+<p style="margin: 0; position: absolute; left: 203px; top: 1431px">～にあずかるпользоваться любезностью
+ご～は決して忘れませんЯ никогда не забуду вашей любезности
+いろいろご～にあずかりありがとうございますЯ благодарен вам за вашу любезность</p></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1900}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { open: 0 }; }
+  renderVals() {
+    const T = { new: ['Новая', 't-new'], edit: ['Изменение', 't-edit'], del: ['Удаление', 't-del'] };
+    const data = [
+      { t: 'edit', word: '結構', sum: 'Уточнил перевод наречия, добавил пример к 形 2', user: 'kitsune_ru', rep: '1 920', add: 18, rem: 4, when: '4 мин', chk: true },
+      { t: 'new', word: '推し活', sum: 'Новая статья: поддержка любимого артиста', user: 'гость', rep: '—', add: 96, rem: 0, when: '11 мин', chk: true },
+      { t: 'edit', word: '気', sum: 'сущ. 4: расширил перевод', user: 'Murasaki', rep: '2 410', add: 22, rem: 0, when: '3 ч', chk: false, conflict: true },
+      { t: 'del', word: '取り敢えず', sum: 'Дубль статьи №1004517', user: 'Tanuki42', rep: '388', add: 0, rem: 214, when: '5 ч', chk: false },
+      { t: 'edit', word: '米', sum: 'Кандзи: пример к самост. 1', user: 'yuki.p', rep: '1 102', add: 31, rem: 0, when: '6 ч', chk: false },
+      { t: 'edit', word: 'やばい', sum: 'Добавлено значение «круто» (молодёжн.)', user: 'гость', rep: '—', add: 44, rem: 0, when: '8 ч', chk: false },
+      { t: 'edit', word: '仕舞う', sum: 'OCR: «спрягать» → «спрятать»', user: 'sakana_ya', rep: '640', add: 3, rem: 3, when: '9 ч', chk: false },
+      { t: 'new', word: 'ガチ勢', sum: 'Новая статья', user: 'new_user_77', rep: '12', add: 58, rem: 0, when: '1 д', chk: false }
+    ];
+    const open = this.state.open;
+    const rows = data.map((d, i) => ({ ...d, type: T[d.t][0], tcls: T[d.t][1], conflict: !!d.conflict,
+      open: open === i, rot: open === i ? 'rotate(180deg)' : 'none', bg: open === i ? '#FFFFFF' : 'transparent',
+      toggle: () => this.setState({ open: open === i ? -1 : i }) }));
+    return { rows };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Тушь — главная</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&amp;family=Zen+Old+Mincho:wght@400;700&amp;family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&amp;family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F2ECDF;color:#1C1A17;font-family:'PT Serif',Georgia,serif;font-size:16px;line-height:1.55}
+a{color:#1C1A17;text-decoration:underline;text-decoration-color:#B5321D;text-underline-offset:4px}a:hover{color:#B5321D}
+.paper{background-color:#F2ECDF;background-image:radial-gradient(ellipse at 12% 8%,rgba(156,122,60,.10),transparent 40%),radial-gradient(ellipse at 88% 30%,rgba(110,103,91,.08),transparent 45%),radial-gradient(ellipse at 40% 95%,rgba(156,122,60,.08),transparent 50%)}
+.brush{font-family:'Yuji Syuku','Zen Old Mincho',serif}
+.min{font-family:'Zen Old Mincho','Yu Mincho',serif}
+.disp{font-family:'Cormorant Garamond',Georgia,serif}
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px;box-sizing:border-box}
+.seal{display:inline-flex;align-items:center;justify-content:center;background:#B5321D;color:#F7EFE2;border-radius:3px;font-family:'Yuji Syuku',serif}
+.enso path{stroke-dasharray:1200;stroke-dashoffset:1200;animation:draw 1.8s cubic-bezier(.6,.05,.3,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.stone{display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer;color:#4A453D;font:inherit;font-size:13px}
+.stone span{width:52px;height:52px;border-radius:50%;background:#1C1A17;color:#F2ECDF;display:flex;align-items:center;justify-content:center;font-family:'Yuji Syuku',serif;font-size:24px;transition:transform .2s}
+.stone:hover span{transform:rotate(-8deg) scale(1.06);background:#B5321D}
+.tanzaku{flex:0 0 132px;min-height:360px;background:#FBF7EE;border:1px solid #D9CFBC;box-shadow:0 10px 18px -14px rgba(28,26,23,.5);padding:22px 14px 16px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;gap:14px;position:relative;text-decoration:none;color:#1C1A17;transition:transform .25s}
+.tanzaku:hover{transform:translateY(-6px) rotate(-1deg);color:#1C1A17}
+.tanzaku::before{content:'';position:absolute;top:-14px;left:50%;width:1px;height:14px;background:#9C7A3C}
+.vert{writing-mode:vertical-rl;text-orientation:upright}
+.bz{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:2px solid #1C1A17;background:#FBF7EE}
+.bz>div{border-left:1px solid #1C1A17;padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.bz>div:first-child{border-left:0}
+@media (max-width:700px){.wrap{padding:0 18px}.bz{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style>
+</helmet>
+<div class="paper" style="min-height: 100%">
+  <header class="wrap" style="display: flex; align-items: center; gap: 28px; padding-top: 22px; padding-bottom: 22px; flex-wrap: wrap">
+    <a href="#" style="display: flex; align-items: center; gap: 12px; text-decoration: none">
+      <span class="seal" style="width: 40px; height: 40px; font-size: 26px; transform: rotate(-4deg)">辞</span>
+      <span class="disp" style="font-size: 26px; font-weight: 700; letter-spacing: 0.04em">nyars</span>
+    </a>
+    <nav aria-label="Разделы" class="disp" style="display: flex; gap: 22px; font-size: 18px; font-weight: 600; flex: 1 1 auto; flex-wrap: wrap">
+      <a href="SumiSearch.dc.html" style="text-decoration: none">Словарь</a><a href="#" style="text-decoration: none">Кандзи</a><a href="#" style="text-decoration: none">Правки</a><a href="#" style="text-decoration: none">Скачать</a>
+    </nav>
+    <a href="#" class="disp" style="font-size: 18px; font-weight: 600">Войти</a>
+  </header>
+
+  <section class="wrap" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px; padding-top: 20px; padding-bottom: 40px; position: relative">
+    <div style="position: relative; width: min(560px, 100%); aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center">
+      <sc-if value="{{ even }}" hint-placeholder-val="{{ true }}">
+        <svg class="enso" viewBox="0 0 400 400" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%">
+          <path d="M214 46 C120 34 52 104 50 196 C48 292 122 356 210 352 C296 348 356 284 352 196 C349 128 312 78 248 58" fill="none" stroke="#1C1A17" stroke-width="22" stroke-linecap="round" style="filter: url(#rough)"></path>
+          <defs><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="3"></feTurbulence><feDisplacementMap in="SourceGraphic" scale="9"></feDisplacementMap></filter></defs>
+        </svg>
+      </sc-if>
+      <sc-if value="{{ odd }}" hint-placeholder-val="{{ false }}">
+        <svg class="enso" viewBox="0 0 400 400" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%">
+          <path d="M214 46 C120 34 52 104 50 196 C48 292 122 356 210 352 C296 348 356 284 352 196 C349 128 312 78 248 58" fill="none" stroke="#1C1A17" stroke-width="22" stroke-linecap="round" style="filter: url(#rough2)"></path>
+          <defs><filter id="rough2"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="7"></feTurbulence><feDisplacementMap in="SourceGraphic" scale="9"></feDisplacementMap></filter></defs>
+        </svg>
+      </sc-if>
+      <form role="search" style="position: relative; width: 66%; display: flex; flex-direction: column; align-items: center; gap: 18px">
+        <p class="brush" style="margin: 0; font-size: 34px; letter-spacing: 0.1em">言葉をさがす</p>
+        <label for="sq" class="disp" style="font-size: 17px; font-style: italic; color: #4A453D">Слово, чтение, перевод — или целый текст</label>
+        <input id="sq" type="search" class="min" style="width: 100%; box-sizing: border-box; height: 56px; border: 0; border-bottom: 3px solid #1C1A17; background: transparent; text-align: center; font-size: 24px; outline: none; color: #1C1A17" value="">
+        <div style="display: flex; gap: 22px">
+          <button type="button" class="stone"><span>筆</span>рисовать</button>
+          <button type="button" class="stone"><span>部</span>ключи</button>
+          <button type="button" class="stone"><span>篩</span>фильтры</button>
+        </div>
+      </form>
+      <button type="button" onClick="{{ redraw }}" aria-label="Нарисовать круг заново" class="disp" style="position: absolute; right: 2%; bottom: 6%; width: 44px; height: 44px; border-radius: 50%; border: 1px solid #1C1A17; background: transparent; font-size: 20px; cursor: pointer; color: #1C1A17">↻</button>
+    </div>
+    <aside aria-label="Статистика" style="display: flex; gap: 28px; align-items: flex-start">
+      <p class="brush vert" lang="ja" style="margin: 0; font-size: 30px; letter-spacing: 0.25em; color: #4A453D">ことばを、みんなで。</p>
+      <dl style="margin: 0; display: flex; flex-direction: column; gap: 22px">
+        <div><dt class="disp" style="font-size: 15px; font-style: italic; color: #4A453D">статей в словаре</dt><dd class="disp" style="margin: 0; font-size: 46px; font-weight: 700; line-height: 1">1 820 463</dd><dd style="margin: 4px 0 0; font-size: 14px"><span class="seal" style="padding: 0 6px; font-family: 'PT Serif'; font-size: 13px">−8</span> удалено за неделю</dd></div>
+        <div><dt class="disp" style="font-size: 15px; font-style: italic; color: #4A453D">правок за неделю</dt><dd class="disp" style="margin: 0; font-size: 34px; font-weight: 700; line-height: 1">1 942</dd></div>
+      </dl>
+    </aside>
+  </section>
+
+  <section class="wrap" aria-labelledby="fresh" style="padding-bottom: 48px">
+    <div style="display: flex; align-items: baseline; gap: 16px; border-top: 1px solid #1C1A17; padding-top: 14px; margin-bottom: 28px">
+      <h2 id="fresh" class="disp" style="margin: 0; font-size: 32px; font-weight: 700">Свежие правки</h2>
+      <span class="brush" lang="ja" style="font-size: 20px; color: #B5321D">新しい筆跡</span>
+      <span style="flex: 1"></span><a href="#">вся лента</a>
+    </div>
+    <div style="display: flex; gap: 22px; overflow-x: auto; padding: 18px 4px 20px">
+      <sc-for list="{{ feed }}" as="e" hint-placeholder-count="7">
+        <a href="SumiEntry.dc.html" class="tanzaku">
+          <span class="brush vert" lang="ja" style="font-size: 44px; line-height: 1.1">{{ e.w }}</span>
+          <span style="flex: 1"></span>
+          <span style="font-size: 13px; text-align: center; line-height: 1.35">{{ e.what }}</span>
+          <span class="disp" style="font-size: 14px; font-style: italic; color: #4A453D">{{ e.user }} · {{ e.t }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="bz" style="padding-bottom: 72px; display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+    <div style="flex: 1 1 300px">
+      <h2 id="bz" class="disp" style="margin: 0; font-size: 32px; font-weight: 700">Банзукэ недели</h2>
+      <p style="margin: 8px 0 0; color: #4A453D; max-width: 380px">Рейтинг участников оформлен как турнирная таблица сумо: титул зависит от числа принятых правок за неделю.</p>
+    </div>
+    <div class="bz" style="flex: 2 1 640px" role="list">
+      <sc-for list="{{ top }}" as="t" hint-placeholder-count="5">
+        <div role="listitem">
+          <span class="brush" lang="ja" style="font-size: 18px; color: #B5321D">{{ t.rank }}</span>
+          <span class="disp vert" style="font-size: 22px; font-weight: 700; text-orientation: mixed; min-height: 140px">{{ t.user }}</span>
+          <span class="disp" style="font-size: 20px; font-weight: 700">{{ t.n }}</span>
+          <span style="font-size: 12px; color: #4A453D">{{ t.ru }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { n: 0 }; }
+  renderVals() {
+    const n = this.state.n;
+    return {
+      even: n % 2 === 0, odd: n % 2 === 1,
+      redraw: () => this.setState({ n: n + 1 }),
+      feed: [
+        { w: '結構', what: 'уточнён перевод наречия', user: 'kitsune_ru', t: '4 мин' },
+        { w: '推し活', what: 'новая статья, ждёт проверки', user: 'гость', t: '11 мин' },
+        { w: '米', what: 'пример: 米を研ぐ', user: 'Murasaki', t: '26 мин' },
+        { w: '仕舞う', what: 'сверка скана, с. 1104', user: 'yuki.p', t: '38 мин' },
+        { w: '矢鱈', what: 'помета «атэдзи»', user: 'Tanuki42', t: '1 ч' },
+        { w: '気', what: 'расширено значение 4', user: 'Murasaki', t: '3 ч' },
+        { w: '之', what: 'старое значение для камбуна', user: 'old_kanbun', t: '5 ч' }
+      ],
+      top: [
+        { rank: '横綱', ru: 'ёкодзуна', user: 'Murasaki', n: 312 },
+        { rank: '大関', ru: 'одзэки', user: 'kitsune_ru', n: 268 },
+        { rank: '関脇', ru: 'сэкиваке', user: 'yuki.p', n: 197 },
+        { rank: '小結', ru: 'комусуби', user: 'old_kanbun', n: 141 },
+        { rank: '前頭', ru: 'маэгасира', user: 'Tanuki42', n: 96 }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Ретро-аниме — статья</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&amp;family=Russo+One&amp;family=Fira+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#1A1238;color:#F4EEFF;font-family:'Fira Sans',system-ui,sans-serif;font-size:17px;line-height:1.55}
+a{color:#58D3F7;text-decoration:none}a:hover{color:#FFE66D}
+.rr{font-family:'RocknRoll One',sans-serif}
+.ru{font-family:'Russo One',sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:4px;font-size:12px;font-weight:700;background:rgba(255,255,255,.12);white-space:nowrap;vertical-align:2px}
+.chip{height:36px;padding:0 14px;border:0;border-radius:18px;background:rgba(255,255,255,.08);color:#F4EEFF;font-family:'Russo One';font-size:13px;cursor:pointer}
+.chip[aria-pressed=true],.chip[aria-selected=true]{background:#E8467C}
+.scene{display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 18px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.sub{display:inline-block;margin-top:10px;background:rgba(0,0,0,.55);padding:6px 14px;border-radius:4px;text-align:center}
+.sub .ja{font-family:'RocknRoll One';color:#fff;font-size:18px;display:block}
+.sub .tr{color:#FFE66D;font-size:16px;font-weight:500;display:block;text-shadow:1px 1px 0 #000}
+@keyframes roll{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+.credits{animation:roll 18s linear infinite}
+.credits:hover{animation-play-state:paused}
+@media (max-width:860px){.wrap{padding:0 16px}.scene{grid-template-columns:1fr}}
+</style>
+</helmet>
+<div>
+  <header style="background: #120C29">
+    <div class="wrap" style="display: flex; align-items: center; gap: 14px 24px; flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px">
+      <a href="RetroHome.dc.html" class="ru" style="color: #fff; font-size: 24px; font-style: italic; text-shadow: 2px 2px 0 #E8467C">NYARS</a>
+      <form role="search" style="flex: 1 1 460px; display: flex; border: 2px solid #58D3F7; border-radius: 8px; overflow: hidden"><label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label><input id="q" type="search" value="結構" class="rr" style="flex: 1; min-width: 0; height: 44px; border: 0; background: transparent; padding: 0 12px; font-size: 19px; color: #fff; outline: none"><a href="RetroSearch.dc.html" class="ru" style="padding: 0 18px; display: flex; align-items: center; background: #58D3F7; color: #1A1238">PLAY</a></form>
+    </div>
+  </header>
+
+  <section aria-label="Заголовок статьи" style="background: #000; padding: 34px 0">
+    <div style="position: relative; overflow: hidden; background: linear-gradient(180deg, #2A1D57, #7A2C7E 55%, #E8467C 85%, #FF9F43); min-height: 360px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 30px 24px; box-sizing: border-box">
+      <div aria-hidden="true" style="position: absolute; inset: 0; background: repeating-conic-gradient(from 0deg at 50% 120%, rgba(255,255,255,.08) 0deg 2deg, transparent 2deg 9deg)"></div>
+      <div aria-hidden="true" style="position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, rgba(0,0,0,.16) 0 1px, transparent 1px 3px)"></div>
+      <div style="position: relative; max-width: 1100px">
+        <p class="ru" style="margin: 0 0 6px; font-size: 14px; letter-spacing: .3em; color: #FFE66D">ЭПИЗОД 1 284 · N3</p>
+        <h1 class="rr" lang="ja" style="margin: 0; font-size: {{ hw.fs }}; font-weight: 400; line-height: 1.12; color: #fff; text-shadow: 5px 5px 0 #1A1238, -1px -1px 0 #58D3F7; overflow-wrap: anywhere">{{ hw.w }}</h1>
+        <p class="rr" lang="ja" style="margin: 10px 0 0; font-size: 20px; letter-spacing: .25em; color: #FFE66D; overflow-wrap: anywhere">{{ hw.r }}</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap" style="padding-top: 22px; padding-bottom: 72px">
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px">
+      <button type="button" aria-label="Прослушать" style="width: 44px; height: 44px; border-radius: 50%; border: 0; background: #FFE66D; color: #1A1238; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5l12 7-12 7z"/></svg></button>
+      <span class="rr" style="font-size: 18px"><span style="border-top: 2px solid #FFE66D; border-right: 2px solid #FFE66D; padding: 0 2px">け</span>っこう</span><span style="color: #B8B0D9; font-size: 14px">[1]</span>
+      <span class="tag" style="background: #58D3F7; color: #1A1238">N3</span><span class="tag">частое</span><span class="tag">news1</span>
+      <span style="flex: 1"></span>
+      <span style="font-size: 13px; color: #B8B0D9">длина:</span><sc-for list="{{ lens }}" as="l" hint-placeholder-count="3"><button type="button" class="chip" aria-pressed="{{ l.on }}" onClick="{{ l.pick }}">{{ l.label }}</button></sc-for>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 12px 0 4px; border-top: 1px solid rgba(255,255,255,.1)">
+      <span class="ru" style="font-size: 13px; color: #B8B0D9">СУБТИТРЫ:</span>
+      <sc-for list="{{ subs }}" as="s" hint-placeholder-count="3"><button type="button" class="chip" aria-pressed="{{ s.on }}" onClick="{{ s.pick }}">{{ s.label }}</button></sc-for>
+      <span style="flex: 1"></span>
+      <a href="#" class="chip" style="display: inline-flex; align-items: center; background: #E8467C; color: #fff">✎ Править</a>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; padding-top: 10px">
+      <main style="flex: 999 1 600px; min-width: 0">
+        <h2 class="ru" style="margin: 16px 0 0; font-size: 22px; color: #FF9F43">АКТ I · на-прилагательное <span class="rr" style="font-size: 15px; color: #B8B0D9">形容動詞</span></h2>
+        <sc-for list="{{ adj }}" as="c" hint-placeholder-count="3">
+          <div class="scene"><span class="ru" style="font-size: 13px; color: #58D3F7; padding-top: 4px">СЦЕНА {{ c.n }}</span><div>
+            <sc-if value="{{ c.tag }}" hint-placeholder-val="{{ false }}"><span class="tag">{{ c.tag }}</span> </sc-if><b>{{ c.gl }}</b>
+            <div><span class="sub"><sc-if value="{{ showJa }}" hint-placeholder-val="{{ true }}"><span class="ja" lang="ja">{{ c.ja }}</span></sc-if><sc-if value="{{ showRu }}" hint-placeholder-val="{{ true }}"><span class="tr">{{ c.ru }}</span></sc-if></span></div>
+          </div></div>
+        </sc-for>
+        <h2 class="ru" style="margin: 26px 0 0; font-size: 22px; color: #FF9F43">АКТ II · наречие <span class="rr" style="font-size: 15px; color: #B8B0D9">副詞</span></h2>
+        <div class="scene"><span class="ru" style="font-size: 13px; color: #58D3F7; padding-top: 4px">СЦЕНА 1</span><div><span class="tag">разг.</span> <b>довольно, вполне</b>; порядочно<div><span class="sub"><sc-if value="{{ showJa }}" hint-placeholder-val="{{ true }}"><span class="ja" lang="ja">この店、安いけど結構おいしい。</span></sc-if><sc-if value="{{ showRu }}" hint-placeholder-val="{{ true }}"><span class="tr">Здесь дёшево, но довольно вкусно.</span></sc-if></span></div></div></div>
+        <h2 class="ru" style="margin: 26px 0 0; font-size: 22px; color: #FF9F43">АКТ III · существительное <span class="rr" style="font-size: 15px; color: #B8B0D9">名詞</span></h2>
+        <div class="scene"><span class="ru" style="font-size: 13px; color: #58D3F7; padding-top: 4px">СЦЕНА 1</span><div><span class="tag">книжн.</span> <b>структура, конструкция</b>; композиция, план</div></div>
+
+        <section style="margin-top: 28px; padding: 18px 20px; border-radius: 12px; background: rgba(255,255,255,.05)">
+          <h2 class="ru" style="margin: 0 0 6px; font-size: 16px; color: #FFE66D">ЗАМЕТКИ РЕЖИССЁРА</h2>
+          <p style="margin: 0; font-size: 15.5px">結構です — и «подойдёт», и «не нужно»; в магазине почти всегда отказ. Наречие мягче, чем かなり. Знаки: <a href="#" class="rr">結</a> завязывать · <a href="#" class="rr">構</a> строить.</p>
+        </section>
+      </main>
+
+      <aside style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 18px">
+        <section aria-label="Титры — история правок" style="border-radius: 12px; background: #000; padding: 16px 18px; height: 300px; overflow: hidden; position: relative">
+          <h2 class="ru" style="margin: 0 0 8px; font-size: 13px; color: #B8B0D9; letter-spacing: .15em">ТИТРЫ · 14 ПРАВОК</h2>
+          <div class="credits" style="text-align: center; display: flex; flex-direction: column; gap: 14px">
+            <sc-for list="{{ credits }}" as="c" hint-placeholder-count="10"><div><div style="font-size: 12px; color: #B8B0D9; text-transform: uppercase; letter-spacing: .1em">{{ c.role }}</div><div class="ru" style="font-size: 16px">{{ c.u }}</div></div></sc-for>
+          </div>
+          <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 60px; background: linear-gradient(transparent, #000)"></div>
+        </section>
+        <section style="border-radius: 12px; background: rgba(255,255,255,.05); padding: 16px 18px">
+          <h2 class="ru" style="margin: 0 0 8px; font-size: 13px; color: #B8B0D9; letter-spacing: .15em">ДРУГИЕ ИСТОЧНИКИ</h2>
+          <p style="margin: 0 0 6px; font-size: 14.5px"><b>Конрад, с. 482</b> — строение, конструкция; прекрасный…</p>
+          <p style="margin: 0; font-size: 14.5px"><b>Яркси</b> — отлично; достаточно; довольно…</p>
+        </section>
+        <section style="font-size: 14.5px; color: #B8B0D9">← <a href="#" class="rr">結局</a> · предыдущая серия<br>следующая серия · <a href="#" class="rr">結合</a> →</section>
+      </aside>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2500}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { len: 0, sub: 'both' }; }
+  renderVals() {
+    const { len, sub } = this.state;
+    const H = [['結構', 'けっこう'], ['腕によりをかける', 'うでによりをかける'], ['鳴かぬなら殺してしまえホトトギス', 'なかぬならころしてしまえほととぎす']];
+    const [w, r] = H[len];
+    const n = Array.from(w).length;
+    const hw = { w, r, fs: n <= 2 ? '150px' : n <= 8 ? '96px' : '60px' };
+    const lens = ['2', '8', '16'].map((label, i) => ({ label, on: i === len, pick: () => this.setState({ len: i }) }));
+    const subs = [['ja', 'JP'], ['ru', 'RU'], ['both', 'JP + RU']].map(([id, label]) => ({ label, on: sub === id, pick: () => this.setState({ sub: id }) }));
+    const adj = [
+      { gl: 'прекрасный, превосходный, отличный', ja: '結構なお土産をありがとうございます。', ru: 'Спасибо за чудесный подарок.' },
+      { gl: 'достаточный; (уже) хорошо, годится', tag: 'часто 〜です', ja: 'サインはボールペンで結構です。', ru: 'Расписаться можно и шариковой ручкой.' },
+      { gl: 'нет, спасибо; не нужно', tag: 'вежл.', ja: 'いえ、もう結構です。', ru: 'Нет, спасибо, мне достаточно.' }
+    ].map((c, i) => ({ ...c, n: i + 1, tag: c.tag || '' }));
+    const C = [['Перевод наречия', 'kitsune_ru'], ['Значение «нет, спасибо»', 'гость'], ['Разделение значений', 'Murasaki'], ['Помета N3', 'yuki.p'], ['Примеры', 'Tanuki42'], ['Проверка', 'Murasaki'], ['Исходная статья', 'ядро словаря, 2019']];
+    const credits = C.concat(C).map(([role, u]) => ({ role, u }));
+    return { hw, lens, subs, adj, credits, showJa: sub !== 'ru', showRu: sub !== 'ja' };
+  }
+}
+</script>
+</body>
+</html>

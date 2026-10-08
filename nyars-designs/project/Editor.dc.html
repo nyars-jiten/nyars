@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Правка статьи 結構</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&amp;family=Shippori+Mincho:wght@500;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F4F0;color:#1A1C21;font-family:'Golos Text','Hiragino Sans','Noto Sans JP',system-ui,sans-serif;font-size:15px;line-height:1.5}
+a{color:#2B4A85;text-decoration:none}a:hover{color:#1A2F57;text-decoration:underline}
+.jp{font-family:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.wrap{max-width:1312px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.card{background:#FCFBF8;border:1px solid #DDDAD2;border-radius:6px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#61656E;font-weight:600;margin:0}
+.tag{display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 4px 0 8px;border-radius:4px;font-size:12px;font-weight:600;background:#E9E7E1;color:#474B54;white-space:nowrap}
+.tag button{width:20px;height:20px;border:0;background:transparent;color:inherit;cursor:pointer;font-size:14px;line-height:1;padding:0}
+.tag.shu{background:#F7E2DB;color:#8A2D1B}.tag.ai{background:#E1E8F4;color:#22396A}
+.addtag{height:26px;padding:0 8px;border:1px dashed #B4B6BB;border-radius:4px;background:transparent;font:inherit;font-size:12px;color:#474B54;cursor:pointer}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:6px;border:1px solid #DDDAD2;background:#FCFBF8;color:#1A1C21;font:inherit;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none}
+.btn.primary{background:#1A1C21;color:#fff;border-color:#1A1C21}
+.btn.shu{background:#B33E27;color:#fff;border-color:#B33E27}
+.lbl{display:block;font-size:13px;font-weight:600;color:#33363D;margin-bottom:6px}
+.in{width:100%;box-sizing:border-box;height:42px;padding:0 12px;border:1px solid #CFCCC3;border-radius:6px;background:#fff;font:inherit;font-size:15px;color:#1A1C21}
+.in:focus,.ta:focus{outline:2px solid #2B4A85;outline-offset:-1px}
+.ta{width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid #CFCCC3;border-radius:6px;background:#fff;font:inherit;font-size:15px;resize:vertical;color:#1A1C21}
+.cols{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+.main{flex:999 1 640px;min-width:0}.side{flex:1 1 340px;min-width:0}
+.sense{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;padding:16px 0;border-top:1px solid #E9E7E1}
+.grip{width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:#8C9099;cursor:grab;border:0;background:transparent}
+.changed{position:relative;background:#F2F5FB;margin:0 -20px;padding:16px 20px;border-top:1px solid #C8D5EC}
+.flag{font-size:11px;font-weight:700;color:#22396A;background:#DCE6F7;padding:1px 6px;border-radius:3px}
+.ex{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 32px;gap:8px;align-items:center}
+.seg{display:flex;gap:2px;background:#E9E7E1;padding:3px;border-radius:8px}
+.seg button{height:34px;padding:0 14px;border:0;background:transparent;border-radius:6px;font:inherit;font-size:14px;color:#474B54;cursor:pointer}
+.seg button[aria-pressed=true]{background:#fff;color:#1A1C21;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.pop{position:absolute;z-index:3;left:38px;top:52px;width:300px;background:#fff;border:1px solid #CFCCC3;border-radius:8px;box-shadow:0 16px 32px -12px rgba(26,28,33,.3);padding:8px}
+.opt{display:flex;justify-content:space-between;align-items:center;height:36px;padding:0 10px;border-radius:4px;font-size:14px}
+.opt:hover{background:#F5F4F0}
+@media (max-width:640px){.wrap{padding:0 16px}.btn,.in{height:44px}.ex{grid-template-columns:1fr 32px}.ex .ru{grid-column:1}.changed{margin:0 -16px;padding:16px}}
+</style>
+</helmet>
+<div>
+  <dc-import name="Header" active="home" initial-panel="none" query="結構" hint-size="100%,72px"></dc-import>
+
+  <div style="background: #FFF8E8; border-bottom: 1px solid #EAD9AE">
+    <div class="wrap" style="padding-top: 12px; padding-bottom: 12px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 14px">
+      <span><b>Вы не вошли.</b> Правку можно отправить и так — она пройдёт проверку и будет подписана как «гость».</span>
+      <a href="User.dc.html" style="font-weight: 600">Войти, чтобы правка шла в рейтинг</a>
+    </div>
+  </div>
+
+  <div class="wrap" style="padding-top: 24px; padding-bottom: 72px">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px">
+      <div>
+        <p class="eyebrow">Правка · на основе v14</p>
+        <h1 style="margin: 4px 0 0; font-size: 28px; font-weight: 700">Статья <span lang="ja" class="jp">結構</span></h1>
+      </div>
+      <div class="seg" role="group" aria-label="Режим редактора">
+        <button type="button" aria-pressed="{{ isForm }}" onClick="{{ toForm }}">Структура</button>
+        <button type="button" aria-pressed="{{ isText }}" onClick="{{ toText }}">Разметка</button>
+        <button type="button" aria-pressed="false">Сравнить</button>
+      </div>
+    </div>
+
+    <div class="cols">
+      <main class="main">
+        <sc-if value="{{ isForm }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-direction: column; gap: 20px">
+            <section class="card" style="padding: 20px" aria-labelledby="hw">
+              <h2 id="hw" class="eyebrow" style="margin-bottom: 14px">Заголовок</h2>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 16px">
+                <div><label class="lbl" for="e-w">Написание</label><input id="e-w" class="in jp" lang="ja" value="結構" style="font-size: 20px; font-weight: 700"></div>
+                <div><label class="lbl" for="e-r">Чтение</label><input id="e-r" class="in jp" lang="ja" value="けっこう" style="font-size: 18px"></div>
+                <div><label class="lbl" for="e-p">Ударение</label><input id="e-p" class="in mono" value="1, 0"></div>
+              </div>
+              <div style="margin-top: 16px">
+                <span class="lbl">Теги заголовка</span>
+                <div style="display: flex; flex-wrap: wrap; gap: 6px">
+                  <span class="tag ai">N3<button type="button" aria-label="Убрать N3">×</button></span>
+                  <span class="tag">частое<button type="button" aria-label="Убрать «частое»">×</button></span>
+                  <span class="tag">news1<button type="button" aria-label="Убрать news1">×</button></span>
+                  <button type="button" class="addtag">+ тег</button>
+                  <button type="button" class="addtag">+ другое написание</button>
+                </div>
+              </div>
+            </section>
+
+            <section class="card" style="padding: 20px" aria-labelledby="p1">
+              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+                <button type="button" class="grip" aria-label="Перетащить часть речи"><svg width="14" height="18" viewBox="0 0 14 18" fill="currentColor" aria-hidden="true"><circle cx="4" cy="4" r="1.6"/><circle cx="10" cy="4" r="1.6"/><circle cx="4" cy="9" r="1.6"/><circle cx="10" cy="9" r="1.6"/><circle cx="4" cy="14" r="1.6"/><circle cx="10" cy="14" r="1.6"/></svg></button>
+                <label id="p1" for="pos1" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Часть речи</label>
+                <select id="pos1" class="in" style="width: auto; flex: 1 1 260px; font-weight: 600"><option>на-прилагательное · 形容動詞</option><option>наречие · 副詞</option><option>существительное · 名詞</option></select>
+                <span style="font-size: 13px; color: #61656E">3 значения</span>
+                <button type="button" class="btn" style="height: 36px; padding: 0 10px" aria-label="Удалить часть речи"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/></svg></button>
+              </div>
+
+              <div style="margin-top: 12px">
+                <div class="sense">
+                  <button type="button" class="grip" aria-label="Перетащить значение 1"><b style="color: #B33E27">1</b></button>
+                  <div style="display: flex; flex-direction: column; gap: 10px; min-width: 0">
+                    <div style="display: flex; flex-wrap: wrap; gap: 6px"><button type="button" class="addtag">+ помета</button></div>
+                    <label class="lbl" for="g1" style="margin: 0">Перевод</label>
+                    <textarea id="g1" class="ta" rows="1">прекрасный, превосходный, отличный; великолепный</textarea>
+                    <div class="ex"><input class="in jp" lang="ja" aria-label="Пример по-японски" value="結構なお土産をありがとうございます。"><input class="in ru" aria-label="Перевод примера" value="Спасибо за чудесный подарок."><button type="button" class="grip" aria-label="Удалить пример">×</button></div>
+                  </div>
+                </div>
+
+                <div class="sense changed" style="position: relative">
+                  <button type="button" class="grip" aria-label="Перетащить значение 2"><b style="color: #B33E27">2</b></button>
+                  <div style="display: flex; flex-direction: column; gap: 10px; min-width: 0">
+                    <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center">
+                      <span class="tag">часто 〜です<button type="button" aria-label="Убрать помету">×</button></span>
+                      <button type="button" class="addtag" aria-expanded="true" style="border-style: solid; border-color: #2B4A85; color: #22396A">+ помета</button>
+                      <span style="flex: 1 1 auto"></span>
+                      <span class="flag">изменено</span>
+                    </div>
+                    <div class="pop" role="listbox" aria-label="Пометы">
+                      <input class="in" aria-label="Найти помету" value="веж" style="height: 36px; margin-bottom: 6px">
+                      <div class="opt" role="option" style="background: #E1E8F4"><span><b>вежл.</b> — вежливое</span><span class="mono" style="font-size: 12px; color: #61656E">pol</span></div>
+                      <div class="opt" role="option"><span><b>почтит.</b> — сонкэйго</span><span class="mono" style="font-size: 12px; color: #61656E">hon</span></div>
+                      <div class="opt" role="option"><span><b>скромн.</b> — кэндзёго</span><span class="mono" style="font-size: 12px; color: #61656E">hum</span></div>
+                      <p style="margin: 6px 10px 2px; font-size: 12px; color: #61656E">Набор помет совместим с JMdict</p>
+                    </div>
+                    <label class="lbl" for="g2" style="margin: 0">Перевод</label>
+                    <textarea id="g2" class="ta" rows="2">достаточный, удовлетворительный; (уже) хорошо, годится</textarea>
+                    <div class="ex"><input class="in jp" lang="ja" aria-label="Пример по-японски" value="サインはボールペンで結構です。"><input class="in ru" aria-label="Перевод примера" value="Расписаться можно и шариковой ручкой."><button type="button" class="grip" aria-label="Удалить пример">×</button></div>
+                    <button type="button" class="addtag" style="align-self: flex-start; height: 32px">+ пример</button>
+                  </div>
+                </div>
+
+                <div class="sense">
+                  <button type="button" class="grip" aria-label="Перетащить значение 3"><b style="color: #B33E27">3</b></button>
+                  <div style="display: flex; flex-direction: column; gap: 10px; min-width: 0">
+                    <div style="display: flex; flex-wrap: wrap; gap: 6px"><span class="tag shu">вежл.<button type="button" aria-label="Убрать помету">×</button></span><span class="tag">как 結構です<button type="button" aria-label="Убрать помету">×</button></span><button type="button" class="addtag">+ помета</button></div>
+                    <label class="lbl" for="g3" style="margin: 0">Перевод</label>
+                    <textarea id="g3" class="ta" rows="1">нет, спасибо; не нужно (вежливый отказ)</textarea>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 8px">
+                      <div><label class="lbl" for="x3">Ссылка (см.)</label><input id="x3" class="in jp" lang="ja" value="いいです"></div>
+                      <div><label class="lbl" for="n3">Примечание</label><input id="n3" class="in" value="смысл задаёт интонация"></div>
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="btn" style="margin-top: 8px">+ Значение</button>
+              </div>
+            </section>
+
+            <section class="card" style="padding: 14px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+              <button type="button" class="grip" aria-label="Перетащить часть речи"><svg width="14" height="18" viewBox="0 0 14 18" fill="currentColor" aria-hidden="true"><circle cx="4" cy="4" r="1.6"/><circle cx="10" cy="4" r="1.6"/><circle cx="4" cy="9" r="1.6"/><circle cx="10" cy="9" r="1.6"/><circle cx="4" cy="14" r="1.6"/><circle cx="10" cy="14" r="1.6"/></svg></button>
+              <b>наречие</b><span style="color: #474B54; font-size: 14px; flex: 1 1 200px">1 значение · довольно, вполне…</span><span class="flag">изменено</span><button type="button" class="btn" style="height: 36px">Развернуть</button>
+            </section>
+            <section class="card" style="padding: 14px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+              <button type="button" class="grip" aria-label="Перетащить часть речи"><svg width="14" height="18" viewBox="0 0 14 18" fill="currentColor" aria-hidden="true"><circle cx="4" cy="4" r="1.6"/><circle cx="10" cy="4" r="1.6"/><circle cx="4" cy="9" r="1.6"/><circle cx="10" cy="9" r="1.6"/><circle cx="4" cy="14" r="1.6"/><circle cx="10" cy="14" r="1.6"/></svg></button>
+              <b>существительное</b><span style="color: #474B54; font-size: 14px; flex: 1 1 200px">1 значение · структура, конструкция…</span><button type="button" class="btn" style="height: 36px">Развернуть</button>
+            </section>
+            <button type="button" class="btn" style="align-self: flex-start; border-style: dashed">+ Часть речи</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isText }}" hint-placeholder-val="{{ false }}">
+          <div class="card" style="padding: 0; overflow: hidden">
+            <div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 16px; border-bottom: 1px solid #DDDAD2; font-size: 13px; color: #474B54; flex-wrap: wrap"><span>Разметка статьи — то же, что и форма, для быстрой правки</span><a href="#">Справка по синтаксису</a></div>
+            <label for="raw" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Текст статьи</label>
+            <textarea id="raw" class="mono" rows="22" style="width: 100%; box-sizing: border-box; border: 0; padding: 16px; font-size: 14px; line-height: 1.7; background: #fff; resize: vertical; color: #1A1C21">{{ raw }}</textarea>
+          </div>
+        </sc-if>
+      </main>
+
+      <aside class="side" style="display: flex; flex-direction: column; gap: 20px">
+        <section class="card" style="padding: 20px">
+          <h2 class="eyebrow" style="margin-bottom: 12px">Что изменится</h2>
+          <div style="font-size: 14px; display: flex; flex-direction: column; gap: 10px">
+            <div><b>形 2.</b> <span class="mono" style="font-size: 12px; color: #22396A">помета</span><br><span style="background: #DCE6F7; color: #1B3366; text-decoration: underline; padding: 0 2px; border-radius: 2px">+ пример «サインはボールペンで結構です。»</span></div>
+            <div><b>副 1.</b><br><span style="background: #F8DCD3; color: #7A2414; text-decoration: line-through; padding: 0 2px; border-radius: 2px">довольно-таки</span> <span style="background: #DCE6F7; color: #1B3366; text-decoration: underline; padding: 0 2px; border-radius: 2px">довольно, вполне; порядочно</span></div>
+          </div>
+          <p style="margin: 12px 0 0; font-size: 13px; color: #61656E"><span class="mono">+18 −4</span> символов · 2 значения</p>
+        </section>
+
+        <section class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 14px">
+          <div><label class="lbl" for="sum">Описание правки <span style="color: #8A2D1B">*</span></label><textarea id="sum" class="ta" rows="2" placeholder="Что и почему изменено">Уточнил перевод наречия, добавил пример к 形 2</textarea></div>
+          <div><label class="lbl" for="src">Источник <span style="font-weight: 400; color: #61656E">— необязательно</span></label><input id="src" class="in" placeholder="Словарь, корпус, ссылка" value="大辞林, 4-е изд."></div>
+          <div><label class="lbl" for="nick">Подпись <span style="font-weight: 400; color: #61656E">— для гостей</span></label><input id="nick" class="in" placeholder="гость"></div>
+          <div style="height: 64px; border: 1px dashed #B4B6BB; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #61656E">[ПРОВЕРКА «НЕ РОБОТ»]</div>
+          <button type="button" class="btn shu" style="height: 48px; font-size: 15px; font-weight: 600">Отправить на проверку</button>
+          <div style="display: flex; gap: 8px"><button type="button" class="btn" style="flex: 1">Черновик</button><a href="Entry.dc.html" class="btn" style="flex: 1">Отмена</a></div>
+          <p style="margin: 0; font-size: 13px; color: #474B54">Правку увидит модератор. Пока она ждёт, на странице статьи будет отметка «есть непроверенная правка».</p>
+        </section>
+      </aside>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2050}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { mode: 'form' }; }
+  renderVals() {
+    const m = this.state.mode;
+    const raw = [
+      '結構【けっこう】 [1,0] {N3} {common} {news1}',
+      '',
+      '== adj-na ==',
+      '1. прекрасный, превосходный, отличный; великолепный',
+      '   > 結構なお土産をありがとうございます。 | Спасибо за чудесный подарок.',
+      '2. {часто 〜です} достаточный, удовлетворительный; (уже) хорошо, годится',
+      '   > サインはボールペンで結構です。 | Расписаться можно и шариковой ручкой.',
+      '3. {pol} {как 結構です} нет, спасибо; не нужно (вежливый отказ)',
+      '   => いいです  // смысл задаёт интонация',
+      '',
+      '== adv ==',
+      '1. {col} {uk} довольно, вполне; порядочно, весьма',
+      '   > この店、安いけど結構おいしい。 | Здесь дёшево, но довольно вкусно.',
+      '',
+      '== n ==',
+      '1. {книжн.} структура, конструкция; композиция; план, замысел',
+      '   > 文章の結構を整える | выстроить композицию текста'
+    ].join('\n');
+    return {
+      isForm: m === 'form', isText: m === 'text', raw,
+      toForm: () => this.setState({ mode: 'form' }),
+      toText: () => this.setState({ mode: 'text' })
+    };
+  }
+}
+</script>
+</body>
+</html>

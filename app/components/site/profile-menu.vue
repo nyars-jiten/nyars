@@ -18,7 +18,7 @@ async function logout() {
 const styles = tv({
   variants: {
     entity: {
-      menuItem: 'text-center rounded-md p-2 hover:bg-zinc-800 hover:text-zinc-400 leading-none transition-colors',
+      menuItem: 'text-center rounded-md p-2 text-ink hover:bg-soft leading-none transition-colors',
     },
   },
 })
@@ -26,49 +26,68 @@ const styles = tv({
 
 <template>
   <div class="flex flex-wrap items-center justify-center gap-2 text-base">
-    <div v-if="user" class="group relative">
-      <button type="button" class="flex items-center gap-2 rounded-md p-1.5 hover:bg-zinc-800 hover:text-zinc-400 transition-colors">
-        <img
-          class="size-6 rounded-full object-center group-hover:rotate-12 transition-transform"
-          :src="avatar"
-          :alt="user.username"
-        >
-        <Icon size="1.5rem" name="ic:baseline-keyboard-arrow-down" class="group-hover:-rotate-180 duration-200 ease-out transition-[transform,opacity] group-hover:opacity-10" />
+    <div class="group relative">
+      <button
+        type="button"
+        class="flex items-center gap-2 rounded-md p-1.5 text-ink transition-colors hover:bg-soft"
+        :aria-label="user ? user.username : 'Меню'"
+      >
+        <template v-if="user">
+          <img
+            class="size-6 rounded-full object-center transition-transform group-hover:rotate-12"
+            :src="avatar"
+            :alt="user.username"
+          >
+        </template>
+        <Icon
+          v-else
+          size="1.5rem"
+          name="ic:baseline-palette"
+        />
+        <Icon
+          size="1.5rem"
+          name="ic:baseline-keyboard-arrow-down"
+          class="transition-[transform,opacity] duration-200 ease-out group-hover:-rotate-180 group-hover:opacity-10"
+        />
       </button>
 
-      <div class="absolute right-0 invisible top-full w-44 group-hover:visible">
-        <div class="flex flex-col gap-1 rounded-md mt-2 p-2 shadow outline-1 outline-neutral-800 bg-neutral-900">
-          <NuxtLink
-            :to="{ name: 'users-username', params: { username: user.username } }"
-            :class="styles({ entity: 'menuItem' })"
-          >
-            <span>{{ t('components.header.profileMenu.profile') }}</span>
-          </NuxtLink>
+      <div class="invisible absolute top-full right-0 w-52 group-hover:visible">
+        <div class="mt-2 flex flex-col gap-1 rounded-md bg-surf p-2 shadow outline-1 outline-line">
+          <template v-if="user">
+            <NuxtLink
+              :to="{ name: 'users-username', params: { username: user.username } }"
+              :class="styles({ entity: 'menuItem' })"
+            >
+              <span>{{ t('components.header.profileMenu.profile') }}</span>
+            </NuxtLink>
 
-          <!-- <NuxtLink
-            to="/settings"
-            :class="styles({ entity: 'menuItem' })"
-          >
-            <span>{{ t('components.header.profileMenu.settings') }}</span>
-          </NuxtLink> -->
+            <button
+              type="button"
+              :class="styles({ entity: 'menuItem' })"
+              @click="logout"
+            >
+              <span>{{ t('components.header.profileMenu.exit') }}</span>
+            </button>
 
-          <button
-            type="button"
-            :class="styles({ entity: 'menuItem' })"
-            @click="logout"
-          >
-            <span>{{ t('components.header.profileMenu.exit') }}</span>
-          </button>
+            <div class="border-t border-line pt-2">
+              <PaletteSwitcher />
+            </div>
+          </template>
 
-          <!-- <div class="border-t border-neutral-300 pt-2 dark:border-neutral-600">
-            <ThemeSwitcher class="w-full" />
-          </div> -->
+          <template v-else>
+            <NuxtLink
+              :to="{ name: 'users-login' }"
+              :class="styles({ entity: 'menuItem' })"
+            >
+              <span>{{ t('components.header.profileMenu.login') }}</span>
+            </NuxtLink>
+
+            <div class="border-t border-line pt-2">
+              <PaletteSwitcher />
+            </div>
+          </template>
         </div>
       </div>
     </div>
-
-    <NuxtLink v-else :to="{ name: 'users-login' }" type="button">
-      <UiButton :title="t('components.header.profileMenu.login')" icon="ic:baseline-account-circle" />
-    </NuxtLink>
   </div>
 </template>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Тетрадь — статья 結構</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&amp;family=Caveat:wght@500;700&amp;family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FDFBF3;color:#2D2D2D;font-family:'Nunito',system-ui,sans-serif;font-size:17px;line-height:1.6}
+a{color:#23408E}a:hover{color:#B92D23}
+.kl{font-family:'Klee One',serif}
+.hand{font-family:'Caveat',cursive}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px 0 72px;box-sizing:border-box}
+.ruled{background-color:#FDFBF3;background-image:linear-gradient(90deg,transparent 54px,#F2A7A0 54px,#F2A7A0 56px,transparent 56px),repeating-linear-gradient(180deg,transparent 0 31px,#D5E2F3 31px 32px)}
+.red{color:#B92D23}
+.hl{background:linear-gradient(transparent 45%,#FFF07A 45%,#FFF07A 88%,transparent 88%)}
+.hlp{background:linear-gradient(transparent 45%,#FFC2D6 45%,#FFC2D6 88%,transparent 88%)}
+.hlg{background:linear-gradient(transparent 45%,#C9E7D2 45%,#C9E7D2 88%,transparent 88%)}
+.gk{display:flex;border:2px solid #7FB08E;background:#fff;width:max-content}
+.gk .c{width:150px;height:150px;border-right:1px solid #B9D8C2;display:flex;align-items:center;justify-content:center;font-family:'Klee One',serif;font-weight:600;font-size:118px;line-height:1;color:#23408E}
+.gk .f{width:44px;display:flex;flex-direction:column;justify-content:space-around;align-items:center;font-family:'Klee One',serif;font-size:20px;color:#B92D23;border-right:1px solid #B9D8C2}
+.sense{display:grid;grid-template-columns:40px minmax(0,1fr) minmax(0,220px);gap:4px 18px;padding:10px 0;align-items:start}
+.n{font-family:'Caveat',cursive;font-size:30px;font-weight:700;color:#B92D23;line-height:1}
+.margin{font-family:'Caveat',cursive;font-size:21px;line-height:1.15;color:#23408E;transform:rotate(-2deg);position:relative;padding-left:14px}
+.margin::before{content:'';position:absolute;left:0;top:6px;width:8px;height:8px;border-radius:50%;background:#23408E}
+.tag{display:inline-block;font-size:12px;font-weight:800;padding:0 8px;border:2px solid #2D2D2D;border-radius:12px;margin-right:6px;vertical-align:2px}
+.pc{width:64px;height:64px;border:1px solid #B9D8C2;background:#fff;position:relative;cursor:pointer;font-family:'Klee One',serif;font-size:48px;font-weight:600;display:flex;align-items:center;justify-content:center;padding:0}
+.pc::before{content:'';position:absolute;inset:0;background:linear-gradient(#E3EFE6,#E3EFE6) center/1px 100% no-repeat,linear-gradient(#E3EFE6,#E3EFE6) center/100% 1px no-repeat}
+.pc span{position:relative}
+.chip{height:44px;padding:0 16px;border:2px solid #2D2D2D;background:#fff;border-radius:22px;font:inherit;font-weight:700;cursor:pointer}
+.chip[aria-selected=true]{background:#2D2D2D;color:#fff}
+@media (max-width:860px){.wrap{padding:0 16px 0 64px}.sense{grid-template-columns:40px minmax(0,1fr)}.margin{grid-column:2}}
+</style>
+</helmet>
+<div class="ruled">
+  <header class="wrap" style="display: flex; align-items: center; gap: 16px 28px; flex-wrap: wrap; padding-top: 18px; padding-bottom: 14px; border-bottom: 2px solid #2D2D2D">
+    <a href="NoteHome.dc.html" style="text-decoration: none; color: #2D2D2D"><span class="hand" style="font-size: 36px; font-weight: 700">nyars</span> <span class="kl red" style="font-size: 18px">じしょ</span></a>
+    <form role="search" style="flex: 1 1 440px; display: flex; gap: 8px; background: #fff; border: 2px solid #2D2D2D; border-radius: 10px; padding: 6px"><label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label><input id="q" type="search" value="結構" class="kl" style="flex: 1; min-width: 0; height: 44px; border: 0; padding: 0 10px; font-size: 22px; outline: none"></form>
+  </header>
+
+  <main class="wrap" style="padding-top: 36px; padding-bottom: 72px; display: flex; flex-direction: column; gap: 34px">
+    <section style="display: flex; flex-wrap: wrap; gap: 28px 44px; align-items: flex-start; position: relative">
+      <h1 class="gk" lang="ja" style="margin: 0; font-weight: 400" aria-label="結構, けっこう">
+        <span class="c">結</span><span class="f" aria-hidden="true"><span>け</span><span>っ</span></span><span class="c">構</span><span class="f" aria-hidden="true" style="border-right: 0"><span>こ</span><span>う</span></span>
+      </h1>
+      <div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; gap: 8px; flex-wrap: wrap"><span class="tag" style="background: #CFE0F7">N3</span><span class="tag" style="background: #FFF07A">частое</span><span class="tag">news1</span></div>
+        <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap">
+          <button type="button" aria-label="Прослушать" style="width: 52px; height: 52px; border-radius: 50%; border: 2px solid #2D2D2D; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 3px 3px 0 #2D2D2D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9v6h4l5 4V5L9 9H5z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg></button>
+          <span class="kl" lang="ja" style="font-size: 26px"><span style="border-top: 3px solid #B92D23; border-right: 3px solid #B92D23; padding: 0 2px">け</span>っこう</span>
+          <span class="hand red" style="font-size: 24px">← ударение на первом слоге!</span>
+        </div>
+        <p style="margin: 0; font-size: 15px">Частотность № 1 284 · <a href="#">история (14)</a> · <a href="#" style="font-weight: 800">✎ Править</a></p>
+      </div>
+      <div aria-label="Проверено модератором" style="position: absolute; right: 0; top: -6px; width: 104px; height: 104px; border: 4px double #D2372C; border-radius: 50%; color: #D2372C; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: rotate(12deg); opacity: .85">
+        <span class="kl" lang="ja" style="font-size: 26px; font-weight: 600; line-height: 1">検定済</span><span style="font-size: 11px; font-weight: 800">проверено</span>
+      </div>
+    </section>
+
+    <section style="background: rgba(255,255,255,.6); padding: 8px 0">
+      <h2 style="margin: 0 0 4px; font-size: 22px; font-weight: 800"><span class="hlp">на-прилагательное</span> <span class="kl" lang="ja" style="font-size: 16px; color: #555">形容動詞</span></h2>
+      <div class="sense"><span class="n">1</span><div><b class="hl">прекрасный, превосходный</b>, отличный<div class="kl" lang="ja" style="margin-top: 4px; font-size: 19px">結構なお土産をありがとうございます。</div><div style="font-size: 15px; color: #555">Спасибо за чудесный подарок.</div></div><span></span></div>
+      <div class="sense"><span class="n">2</span><div><span class="tag">〜です</span><b class="hl">достаточный</b>; (уже) хорошо, годится</div><span class="margin">в магазине: «結構です» = «ничего не нужно» — Murasaki</span></div>
+      <div class="sense"><span class="n">3</span><div><span class="tag" style="border-color: #B92D23; color: #B92D23">вежл.</span><b class="hl">нет, спасибо</b>; не нужно<div class="kl" lang="ja" style="margin-top: 4px; font-size: 19px">いえ、もう結構です。</div><div style="font-size: 15px; color: #555">Нет, спасибо, мне достаточно.</div></div><span class="margin">не путать с いいです — там всё решает интонация! — kitsune_ru</span></div>
+    </section>
+
+    <section>
+      <h2 style="margin: 0 0 4px; font-size: 22px; font-weight: 800"><span class="hlg">наречие</span> <span class="kl" lang="ja" style="font-size: 16px; color: #555">副詞</span></h2>
+      <div class="sense"><span class="n">1</span><div><span class="tag">разг.</span><b class="hl">довольно, вполне</b>; порядочно<div class="kl" lang="ja" style="margin-top: 4px; font-size: 19px">この店、安いけど結構おいしい。</div><div style="font-size: 15px; color: #555">Здесь дёшево, но довольно вкусно.</div></div><span class="margin">≈ かなり, но звучит мягче</span></div>
+    </section>
+
+    <section>
+      <h2 style="margin: 0 0 4px; font-size: 22px; font-weight: 800"><span class="hlp">существительное</span> <span class="kl" lang="ja" style="font-size: 16px; color: #555">名詞</span></h2>
+      <div class="sense"><span class="n">1</span><div><span class="tag">книжн.</span><b class="hl">структура, конструкция</b>; композиция</div><span></span></div>
+    </section>
+
+    <section aria-labelledby="pr" style="display: flex; flex-wrap: wrap; gap: 18px 36px; align-items: flex-start">
+      <div style="flex: 0 0 260px">
+        <h2 id="pr" style="margin: 0; font-size: 22px; font-weight: 800">Пропиши сам</h2>
+        <p class="hand red" style="margin: 4px 0 0; font-size: 22px">нажимай клетки — заполнено {{ filled }} из 12</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(6, 64px); gap: 0; border: 2px solid #7FB08E">
+        <sc-for list="{{ cells }}" as="c" hint-placeholder-count="12">
+          <button type="button" class="pc" onClick="{{ c.fill }}" aria-label="Клетка {{ c.ch }}" aria-pressed="{{ c.on }}"><span lang="ja" style="color: {{ c.col }}">{{ c.ch }}</span></button>
+        </sc-for>
+      </div>
+    </section>
+
+    <section aria-label="История и обсуждение">
+      <div role="tablist" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3"><button type="button" role="tab" class="chip" aria-selected="{{ t.on }}" onClick="{{ t.pick }}">{{ t.label }}</button></sc-for>
+      </div>
+      <sc-if value="{{ isHist }}" hint-placeholder-val="{{ true }}">
+        <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 22px">
+          <li style="padding-top: 18px"><span style="position: relative"><s style="text-decoration-color: #D2372C; text-decoration-thickness: 2px">довольно-таки, весьма</s><span class="hand red" style="position: absolute; left: 0; top: -26px; font-size: 24px; white-space: nowrap">довольно, вполне; порядочно</span></span> <span style="font-size: 14px; color: #555">— kitsune_ru, сегодня</span></li>
+          <li style="padding-top: 18px"><span class="hand red" style="font-size: 24px">+ 3. нет, спасибо; не нужно</span> <span style="font-size: 14px; color: #555">— гость, 2 окт. · принял Murasaki</span></li>
+        </ol>
+      </sc-if>
+      <sc-if value="{{ isSrc }}" hint-placeholder-val="{{ false }}"><p style="margin: 0">БЯРС Конрада, с. 482 (скан) · Яркси · JMdict-ru</p></sc-if>
+      <sc-if value="{{ isDisc }}" hint-placeholder-val="{{ false }}"><p class="hand" style="margin: 0; font-size: 24px; color: #23408E">Murasaki: может, вынести 結構です в отдельную статью?</p></sc-if>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2100}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { f: { 0: true, 1: true }, tab: 'hist' }; }
+  renderVals() {
+    const { f, tab } = this.state;
+    const cells = Array.from({ length: 12 }, (_, i) => ({ ch: i % 2 === 0 ? '結' : '構', on: !!f[i],
+      col: f[i] ? '#23408E' : '#E4E4DC', fill: () => this.setState({ f: { ...f, [i]: !f[i] } }) }));
+    const tabs = [['hist', 'Красная ручка · 14'], ['src', 'Источники · 5'], ['disc', 'Заметки · 3']].map(([id, label]) => ({ label, on: tab === id, pick: () => this.setState({ tab: id }) }));
+    return { cells, filled: Object.values(f).filter(Boolean).length, tabs, isHist: tab === 'hist', isSrc: tab === 'src', isDisc: tab === 'disc' };
+  }
+}
+</script>
+</body>
+</html>

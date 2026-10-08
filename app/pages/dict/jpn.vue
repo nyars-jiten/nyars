@@ -1,114 +1,210 @@
 <script setup lang="ts">
-const route = useRoute()
-// const request = computed(() => String(route.query.q ?? ''))
+definePageMeta({
+  layout: 'hz',
+  // Transitions + SSR mismatch leave this page's vnode tree stuck (spinner never clears).
+  pageTransition: false,
+})
 
+const route = useRoute()
 const { t } = useI18n()
 
 const { search } = useSearch()
 const { searchQuery, watchParam } = storeToRefs(useSearchStore())
 
-// there's no state on SSR
-if (searchQuery.value === '') {
+if (searchQuery.value === '')
   searchQuery.value = String(route.query.q ?? '')
-}
 
-const { data, status } = await useAsyncData(`search-request-${searchQuery.value}`, () => search(searchQuery.value, 0, 0), {
-  dedupe: 'defer',
-  server: false,
-})
+const srchResult = ref<JpnSearchResponse | null>(null)
+const loadStatus = ref<'idle' | 'pending' | 'success' | 'error'>('idle')
+const selectedToken = ref(-1)
+/** Phrase tokens from the last full-query parse (kept across token inline searches). */
+const phraseParsed = ref<Token[]>([])
 
-// const srchResult = ref<JpnSearchResponse>()
-// srchResult.value = data.value
-const srchResult = data
+let searchSeq = 0
 
-function updateEntry() {
-  if (!srchResult.value?.result || srchResult.value.result.length === 0) {
+async function runSearch(query: string, opts: { keepPhrase?: boolean } = {}) {
+  if (import.meta.server)
+    return
+
+  const q = query.trim()
+  if (!q) {
+    searchSeq += 1
+    srchResult.value = null
+    loadStatus.value = 'idle'
+    if (!opts.keepPhrase)
+      phraseParsed.value = []
     return
   }
-  const first = srchResult.value?.result[0]
-  if (first && route.name === 'dict-jpn' && searchQuery) {
-    navigateTo({ name: 'dict-jpn-wid', params: { wid: first.wid }, query: { q: searchQuery.value } }, { replace: true })
+
+  const seq = ++searchSeq
+  loadStatus.value = 'pending'
+  try {
+    const res = await search(q, 0, 0)
+    if (seq !== searchSeq)
+      return
+    if (opts.keepPhrase && phraseParsed.value.length) {
+      srchResult.value = { ...res, parsed: phraseParsed.value }
+    }
+    else {
+      srchResult.value = res
+      phraseParsed.value = res?.parsed ?? []
+    }
+    loadStatus.value = 'success'
+  }
+  catch (e) {
+    if (seq !== searchSeq)
+      return
+    console.error('[dict/jpn] search failed', e)
+    loadStatus.value = 'error'
   }
 }
 
 async function inlineSearch(req: string) {
-  const inlineSearchResult = await search(req, 0, 0)
-  srchResult.value = { ...inlineSearchResult, parsed: data.value?.parsed ?? [] }
-  updateEntry()
+  await runSearch(req, { keepPhrase: true })
 }
 
-const hasResult = computed(() => (searchQuery.value || route.query.q) && (srchResult.value?.result?.length ?? 0) > 0)
-const isSearchPage = computed(() => route.query.q)
-
-watch(watchParam, async () => {
-  status.value = 'pending'
-  srchResult.value = await search(searchQuery.value, 0, 0)
-  status.value = 'success'
-  updateEntry()
+const isEntryPage = computed(() => {
+  const name = String(route.name ?? '')
+  return name === 'dict-jpn-wid' || name === 'dict-jpn-wid-editor'
 })
-watch(data, updateEntry)
+const isSearchList = computed(() => !!route.query.q && !isEntryPage.value)
 
-onMounted(updateEntry)
+watch(selectedToken, (idx) => {
+  const token = phraseParsed.value[idx]
+  if (token?.base?.trim())
+    void inlineSearch(token.base)
+})
+
+watch(watchParam, () => {
+  selectedToken.value = -1
+  void runSearch(searchQuery.value)
+})
+
+watch(
+  () => String(route.query.q ?? ''),
+  (q) => {
+    if (q && q !== searchQuery.value)
+      searchQuery.value = q
+    if (!q) {
+      searchSeq += 1
+      srchResult.value = null
+      phraseParsed.value = []
+      loadStatus.value = 'idle'
+      return
+    }
+    void runSearch(q)
+  },
+  { immediate: import.meta.client },
+)
+
+onMounted(() => {
+  const q = String(route.query.q ?? '')
+  if (q && loadStatus.value === 'idle')
+    void runSearch(q)
+})
+
+const hasResult = computed(() => (srchResult.value?.result?.length ?? 0) > 0)
+
+const resultLabel = computed(() => {
+  if (selectedToken.value >= 0) {
+    const tok = phraseParsed.value[selectedToken.value]
+    return tok?.surface || tok?.base || searchQuery.value
+  }
+  return searchQuery.value || String(route.query.q ?? '')
+})
+
+const emptyQueryLabel = computed(() => {
+  const req = srchResult.value?.request
+  if (Array.isArray(req) && req.length)
+    return req.join(', ')
+  return resultLabel.value
+})
+
+const isBusy = computed(() => loadStatus.value === 'pending' || loadStatus.value === 'idle')
 </script>
 
 <template>
   <div id="jpn-search-layout">
-    <NuxtLayout name="default">
-      <!-- CONVERSIONS -->
-      <template v-if="isSearchPage">
-        <div v-if="data?.unitConversions && data?.unitConversions.length > 0" class="text-center">
-          <div class="text-xl">
-            <div v-for="(conv, ci) in data?.unitConversions" :key="ci">
-              {{ useFormatNumber(conv.srcValue, { precision: 3 }) }}<ruby>{{ conv.unit }}<rt>{{ conv.unitReading }}</rt></ruby> ≈ {{ useFormatNumber(conv.resValue, { precision: 3 }) }} {{ t(`pages.search.unit.${conv.metricUnit}`) }}
+    <div v-if="isSearchList">
+      <ClientOnly>
+        <div>
+          <div
+            v-if="(srchResult?.unitConversions?.length || srchResult?.eraConversions?.length)"
+            class="mb-3 rounded-2xl bg-surf px-4 py-3 text-center text-[15px]"
+          >
+            <div v-for="(conv, ci) in srchResult?.unitConversions" :key="`u-${ci}`">
+              {{ useFormatNumber(conv.srcValue, { precision: 3 }) }}<ruby>{{ conv.unit }}<rt>{{ conv.unitReading }}</rt></ruby>
+              ≈ {{ useFormatNumber(conv.resValue, { precision: 3 }) }} {{ t(`pages.search.unit.${conv.metricUnit}`) }}
             </div>
-          </div>
-        </div>
-
-        <div v-if="data?.eraConversions && data?.eraConversions.length > 0" class="text-center">
-          <div class="text-xl">
-            <div v-for="(conv, ci) in data?.eraConversions" :key="ci">
+            <div v-for="(conv, ci) in srchResult?.eraConversions" :key="`e-${ci}`">
               <ruby>{{ conv.srcEra }}<rt>{{ conv.eraReading }}</rt></ruby>{{ conv.srcYear }}年 = {{ conv.gregorianYear }}
             </div>
           </div>
-        </div>
 
-        <!-- PARSER -->
-        <div class="text-center">
-          <div class="text-xl leading-12">
-            <span v-for="(token, ti) in data?.parsed" :key="ti" class="border-b-2 pb-0.5 ml-2 cursor-pointer" @click="inlineSearch(token.base)">
-              <span v-for="(furigana, fi) in token.furigana" :key="`${ti}.${fi}`">
-                <ruby>{{ furigana.word }}<rt class="select-none">{{ furigana.kana }}</rt></ruby>
-              </span>
-            </span>
-          </div>
-        <!-- DEBUG INFO -->
-        <!-- <div v-if="data && data.timings && data.parsed" class="mb-2 p-2 bg-blue-900/20 border border-blue-400/30 text-xs">
-          {{ t('pages.search.searchInfo', [data.parsed.length || '', data.timings.tokenization || '', data.timings.search || '']) }}
-        </div> -->
-        </div>
+          <HzPhrasePanel
+            v-if="phraseParsed.length"
+            v-model="selectedToken"
+            class="mt-2"
+            :tokens="phraseParsed"
+          />
 
-        <div class="grid grow items-start gap-8 md:grid-cols-[1fr_2fr]">
-          <template v-if="isSearchPage">
-            <div v-if="hasResult && status === 'success'" class="space-y-4 top-18 sticky h-[calc(100dvh-var(--spacing)*18*2)] overflow-y-auto">
-              <SearchResult v-for="result of srchResult?.result" :key="result.wid" :article="result" class="px-1 block" />
-            </div>
-            <div v-else-if="status === 'success'">
-              <div class="text-center">
-                <span>{{ t('pages.search.foundNothing', [srchResult?.request]) }}</span>
+          <div class="mt-6.5 flex flex-wrap items-start gap-9">
+            <HzFilters />
+
+            <main class="min-w-0 flex-[999_1_640px]">
+              <div class="mb-3 flex flex-wrap items-baseline gap-x-3.5 gap-y-1.5">
+                <h1 class="m-0 text-[15px] font-semibold text-muted normal-case! tracking-normal!">
+                  Результаты для
+                  <span class="hz-jp text-[20px] font-bold text-ink" lang="ja">{{ resultLabel }}</span>
+                </h1>
               </div>
-            </div>
-            <div v-else-if="status === 'pending' || status === 'idle'" class="flex space-x-2 content-center">
-              <Icon class="animate-spin size-6" name="mdi:loading" />
-              <span>{{ t('pages.search.pendingRequest') }}</span>
-            </div>
-            <div v-else>
-              <span>{{ t('pages.search.errorRequest') }}</span>
-            </div>
-          </template>
-          <NuxtPage />
+
+              <HzDictTabs :count="srchResult?.result?.length ?? 0" />
+
+              <section aria-label="Статьи" class="mt-1">
+                <div v-if="isBusy" class="flex items-center gap-2 py-10 text-muted">
+                  <span class="inline-block size-5 animate-spin border-2 border-current border-r-transparent rounded-full" aria-hidden="true" />
+                  <span>{{ t('pages.search.pendingRequest') }}</span>
+                </div>
+                <div v-else-if="loadStatus === 'error'" class="py-10 text-center">
+                  <span>{{ t('pages.search.errorRequest') }}</span>
+                </div>
+                <div v-else-if="!hasResult" class="py-10 text-center text-muted">
+                  <span>{{ t('pages.search.foundNothing', [emptyQueryLabel]) }}</span>
+                </div>
+                <div v-else class="space-y-3">
+                  <HzResultCard
+                    v-for="result of srchResult?.result"
+                    :key="result.wid"
+                    :article="result"
+                  />
+                </div>
+              </section>
+            </main>
+          </div>
         </div>
-      </template>
-      <NuxtPage v-else />
-    </NuxtLayout>
+
+        <template #fallback>
+          <div class="flex items-center gap-2 py-10 text-muted">
+            <span class="inline-block size-5 animate-spin border-2 border-current border-r-transparent rounded-full" aria-hidden="true" />
+            <span>{{ t('pages.search.pendingRequest') }}</span>
+          </div>
+        </template>
+      </ClientOnly>
+    </div>
+
+    <div v-else-if="isEntryPage">
+      <div v-if="route.query.q" class="mb-4">
+        <NuxtLink
+          :to="{ name: 'dict-jpn', query: { q: String(route.query.q) } }"
+          class="text-[13.5px] font-semibold"
+        >
+          ← К результатам
+        </NuxtLink>
+      </div>
+      <NuxtPage />
+    </div>
+
+    <NuxtPage v-else />
   </div>
 </template>

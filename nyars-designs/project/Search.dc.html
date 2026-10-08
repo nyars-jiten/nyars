@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Поиск — разбор текста</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&amp;family=Shippori+Mincho:wght@500;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F4F0;color:#1A1C21;font-family:'Golos Text','Hiragino Sans','Noto Sans JP',system-ui,sans-serif;font-size:15px;line-height:1.5}
+a{color:#2B4A85;text-decoration:none}a:hover{color:#1A2F57;text-decoration:underline}
+.jp{font-family:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.wrap{max-width:1312px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.card{background:#FCFBF8;border:1px solid #DDDAD2;border-radius:6px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#61656E;font-weight:600;margin:0}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 7px;border-radius:4px;font-size:12px;font-weight:600;background:#E9E7E1;color:#474B54;white-space:nowrap}
+.tag.shu{background:#F7E2DB;color:#8A2D1B}.tag.ai{background:#E1E8F4;color:#22396A}
+.chip{height:34px;padding:0 12px;border:1px solid #DDDAD2;background:#fff;border-radius:17px;font:inherit;font-size:13px;cursor:pointer}
+.chip[aria-pressed=true]{background:#1A1C21;border-color:#1A1C21;color:#fff}
+.tok{display:inline-flex;flex-direction:column;align-items:center;gap:2px;padding:6px 6px 8px;border:0;border-bottom:2px solid #B4B6BB;background:transparent;border-radius:4px 4px 0 0;font:inherit;color:#1A1C21;cursor:pointer;min-width:28px}
+.tok:hover{background:#EFEDE7}
+.tok rt{font-size:12px;color:#474B54;font-family:'Golos Text',sans-serif}
+.facet{display:flex;justify-content:space-between;align-items:center;height:40px;padding:0 12px;border-radius:6px;color:#1A1C21;font-size:14px}
+.facet:hover{background:#EFEDE7;text-decoration:none}
+.sec-h{display:flex;align-items:baseline;gap:12px;margin:0 0 12px;padding-top:8px;border-top:2px solid #1A1C21}
+.cols{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+@media (max-width:640px){.wrap{padding:0 16px}.chip{height:44px}.facets{display:flex;overflow-x:auto;gap:4px}}
+</style>
+</helmet>
+<div>
+  <dc-import name="Header" active="home" initial-panel="none" query="今日は結構いい天気ですね。でも、明日はもっと寒くなるそうだ。" hint-size="100%,72px"></dc-import>
+
+  <div class="wrap" style="padding-top: 24px; padding-bottom: 64px; display: flex; flex-direction: column; gap: 28px">
+
+    <section class="card" aria-label="Разбор текста" style="padding: 20px 24px 24px">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-bottom: 18px">
+        <div role="tablist" style="display: flex; gap: 2px; background: #EFEDE7; padding: 3px; border-radius: 8px">
+          <button type="button" role="tab" aria-selected="false" style="height: 34px; padding: 0 14px; border: 0; background: transparent; border-radius: 6px; font: inherit; font-size: 14px; color: #474B54; cursor: pointer">Слово</button>
+          <button type="button" role="tab" aria-selected="true" style="height: 34px; padding: 0 14px; border: 0; background: #fff; border-radius: 6px; font: inherit; font-size: 14px; font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.08); cursor: pointer">Текст · 2 предложения, 17 токенов</button>
+        </div>
+        <span style="flex: 1 1 auto"></span>
+        <div role="group" aria-label="Отображение" style="display: flex; flex-wrap: wrap; gap: 6px">
+          <button type="button" class="chip" aria-pressed="{{ showRuby }}" onClick="{{ toggleRuby }}">Фуригана</button>
+          <button type="button" class="chip" aria-pressed="{{ showGloss }}" onClick="{{ toggleGloss }}">Подстрочник</button>
+          <button type="button" class="chip" aria-pressed="false">Скрыть частицы</button>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 4px 2px; row-gap: 14px" lang="ja">
+        <sc-for list="{{ tokens }}" as="t" hint-placeholder-count="17">
+          <sc-if value="{{ t.punct }}" hint-placeholder-val="{{ false }}"><span class="jp" style="font-size: 26px; padding: 0 2px 10px; color: #61656E">{{ t.w }}</span></sc-if>
+          <sc-if value="{{ t.isWord }}" hint-placeholder-val="{{ true }}">
+            <button type="button" class="tok" onClick="{{ t.pick }}" aria-pressed="{{ t.sel }}" style="background: {{ t.bg }}; border-bottom-color: {{ t.line }}">
+              <sc-if value="{{ showRuby }}" hint-placeholder-val="{{ true }}"><span style="font-size: 12px; color: #474B54; min-height: 18px">{{ t.r }}</span></sc-if>
+              <span class="jp" style="font-size: {{ t.size }}; font-weight: 700; line-height: 1.1">{{ t.w }}</span>
+              <sc-if value="{{ showGloss }}" hint-placeholder-val="{{ true }}"><span style="font-size: 12px; color: #474B54; max-width: 110px; text-align: center; line-height: 1.25; min-height: 15px">{{ t.g }}</span></sc-if>
+            </button>
+          </sc-if>
+        </sc-for>
+      </div>
+
+      <div style="margin-top: 20px; padding: 14px 16px; background: #F5F4F0; border-radius: 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px">
+        <span class="jp" lang="ja" style="font-size: 28px; font-weight: 700">{{ cur.base }}</span>
+        <span class="jp" lang="ja" style="font-size: 16px; color: #474B54">{{ cur.br }}</span>
+        <span class="tag ai">{{ cur.pos }}</span>
+        <sc-if value="{{ cur.inflected }}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; color: #474B54">в тексте: <span class="jp" lang="ja" style="font-weight: 700">{{ cur.w }}</span> — {{ cur.form }}</span></sc-if>
+        <span style="font-size: 15px; flex: 1 1 240px; min-width: 0">{{ cur.full }}</span>
+        <a href="Entry.dc.html" style="font-weight: 600; font-size: 14px">Открыть статью →</a>
+      </div>
+    </section>
+
+    <div class="cols" style="position: relative">
+      <nav aria-label="Словари в результатах" class="facets" style="flex: 1 1 220px; max-width: 260px; display: flex; flex-direction: column; gap: 2px">
+        <p class="eyebrow" style="padding: 0 12px 8px">結構 · по словарям</p>
+        <a href="#jr" class="facet" style="background: #fff; font-weight: 600">Японско-русский <span class="mono" style="font-size: 13px">4</span></a>
+        <a href="#kj" class="facet">Кандзи <span class="mono" style="font-size: 13px">2</span></a>
+        <a href="#rj" class="facet">Русско-японский β <span class="mono" style="font-size: 13px">3</span></a>
+        <a href="#sat" class="facet">Спутники <span class="mono" style="font-size: 13px">3</span></a>
+        <a href="#ocr" class="facet">Сканы словарей <span class="mono" style="font-size: 13px">2</span></a>
+      </nav>
+
+      <div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 36px">
+
+        <section id="jr" aria-labelledby="h-jr">
+          <h2 id="h-jr" class="sec-h"><span style="font-size: 20px; font-weight: 700">Японско-русский</span><span style="font-size: 14px; color: #61656E">4 статьи · точное совпадение первым</span></h2>
+          <article class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; gap: 12px 32px">
+            <div style="flex: 0 0 auto">
+              <a href="Entry.dc.html" lang="ja" class="jp" style="color: #1A1C21; font-size: 40px; font-weight: 800; line-height: 1.2; text-decoration: none"><ruby>結<rt style="font-size: 13px; font-weight: 500">けっ</rt>構<rt style="font-size: 13px; font-weight: 500">こう</rt></ruby></a>
+              <div style="display: flex; gap: 4px; margin-top: 8px"><span class="tag ai">N3</span><span class="tag">частое</span></div>
+            </div>
+            <div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+              <p style="margin: 0"><span class="tag" style="margin-right: 6px">на-прил.</span><b>1.</b> прекрасный, превосходный; <b>2.</b> достаточный; <i style="color: #474B54">〜です</i> спасибо, не нужно (вежливый отказ)</p>
+              <p style="margin: 0"><span class="tag" style="margin-right: 6px">нареч.</span>довольно, вполне; порядочно</p>
+              <p style="margin: 0"><span class="tag" style="margin-right: 6px">сущ.</span><span class="tag shu" style="margin-right: 6px">книжн.</span>структура, композиция, устройство</p>
+            </div>
+          </article>
+          <div style="display: flex; flex-direction: column; margin-top: 8px">
+            <sc-for list="{{ minor }}" as="m" hint-placeholder-count="3">
+              <a href="Entry.dc.html" style="display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: baseline; padding: 12px 24px; border-bottom: 1px solid #E9E7E1; color: #1A1C21; text-decoration: none">
+                <span lang="ja" class="jp" style="font-size: 20px; font-weight: 700; min-width: 120px">{{ m.w }}</span>
+                <span lang="ja" class="jp" style="font-size: 14px; color: #474B54; min-width: 120px">{{ m.r }}</span>
+                <span style="flex: 1 1 240px; font-size: 15px">{{ m.g }}</span>
+              </a>
+            </sc-for>
+          </div>
+        </section>
+
+        <section id="kj" aria-labelledby="h-kj">
+          <h2 id="h-kj" class="sec-h"><span style="font-size: 20px; font-weight: 700">Кандзи</span><span style="font-size: 14px; color: #61656E">знаки из запроса</span></h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; width: 999px; height: 150px">
+            <a href="Kanji.dc.html" class="card" style="padding: 16px 20px; display: flex; gap: 18px; align-items: center; color: #1A1C21; text-decoration: none">
+              <span lang="ja" class="jp" style="font-size: 56px; font-weight: 700; line-height: 1; width: 72px; height: 72px; display: flex; align-items: center; justify-content: center; border: 1px solid #DDDAD2; border-radius: 4px; background: #fff">結</span>
+              <span style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+                <span style="font-size: 13px; color: #474B54">он <span lang="ja" class="jp" style="font-weight: 700; color: #1A1C21">ケツ・ケチ</span> · кун <span lang="ja" class="jp" style="font-weight: 700; color: #1A1C21">むす-ぶ・ゆ-う</span></span>
+                <span>завязывать; связывать; заключать (договор); итог</span>
+                <span style="font-size: 12px; color: #61656E">12 черт · 4 класс · N3</span>
+              </span>
+            </a>
+            <a href="Kanji.dc.html" class="card" style="padding: 16px 20px; display: flex; gap: 18px; align-items: center; color: #1A1C21; text-decoration: none">
+              <span lang="ja" class="jp" style="font-size: 56px; font-weight: 700; line-height: 1; width: 72px; height: 72px; display: flex; align-items: center; justify-content: center; border: 1px solid #DDDAD2; border-radius: 4px; background: #fff">構</span>
+              <span style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+                <span style="font-size: 13px; color: #474B54">он <span lang="ja" class="jp" style="font-weight: 700; color: #1A1C21">コウ</span> · кун <span lang="ja" class="jp" style="font-weight: 700; color: #1A1C21">かま-える・かま-う</span></span>
+                <span>строить; устраивать; позиция, стойка; обращать внимание</span>
+                <span style="font-size: 12px; color: #61656E">14 черт · 5 класс · N3</span>
+              </span>
+            </a>
+          </div>
+        </section>
+
+        <section id="rj" aria-labelledby="h-rj">
+          <h2 id="h-rj" class="sec-h"><span style="font-size: 20px; font-weight: 700">Русско-японский <span class="tag shu" style="vertical-align: middle">β</span></span><span style="font-size: 14px; color: #61656E">статьи, где 結構 — перевод</span></h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 12px">
+            <div class="card" style="padding: 14px 18px"><b>довольно</b> <span style="color: #61656E; font-size: 13px">нареч.</span><div lang="ja" class="jp" style="margin-top: 4px; font-size: 17px">かなり; <mark style="background: #F7E2DB; color: inherit">結構</mark>; 割と</div></div>
+            <div class="card" style="padding: 14px 18px"><b>превосходный</b> <span style="color: #61656E; font-size: 13px">прил.</span><div lang="ja" class="jp" style="margin-top: 4px; font-size: 17px">素晴らしい; 見事な; <mark style="background: #F7E2DB; color: inherit">結構な</mark></div></div>
+            <div class="card" style="padding: 14px 18px"><b>нет, спасибо</b> <span style="color: #61656E; font-size: 13px">выраж.</span><div lang="ja" class="jp" style="margin-top: 4px; font-size: 17px"><mark style="background: #F7E2DB; color: inherit">結構</mark>です; いいです</div></div>
+          </div>
+        </section>
+
+        <section id="sat" aria-labelledby="h-sat">
+          <h2 id="h-sat" class="sec-h"><span style="font-size: 20px; font-weight: 700">Спутники</span><span style="font-size: 14px; color: #61656E">внешние словари, текст как есть</span></h2>
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <sc-for list="{{ sats }}" as="s" hint-placeholder-count="3">
+              <article style="border-left: 0; padding: 14px 18px; background: #FCFBF8; border: 1px dashed #C9C6BD; border-radius: 6px">
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 6px">
+                  <span class="tag">{{ s.src }}</span>
+                  <span style="font-size: 12px; color: #61656E">{{ s.meta }}</span>
+                  <span style="flex: 1 1 auto"></span>
+                  <a href="Editor.dc.html" style="font-size: 13px">Перенести в ЯРС</a>
+                </div>
+                <p class="mono" style="margin: 0; font-size: 13.5px; white-space: pre-wrap; color: #33363D; line-height: 1.6">{{ s.text }}</p>
+              </article>
+            </sc-for>
+          </div>
+        </section>
+
+        <section id="ocr" aria-labelledby="h-ocr">
+          <h2 id="h-ocr" class="sec-h"><span style="font-size: 20px; font-weight: 700">Сканы словарей</span><span style="font-size: 14px; color: #61656E">распознанный текст рядом со сканом</span></h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: 16px">
+            <sc-for list="{{ ocr }}" as="o" hint-placeholder-count="2">
+              <article class="card" style="padding: 14px; display: flex; gap: 14px">
+                <div aria-label="Фрагмент скана" role="img" style="flex: 0 0 120px; height: 150px; background: #EAE4D3; border-radius: 3px; position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 7px; padding: 12px 10px; box-sizing: border-box">
+                  <div style="height: 6px; width: 90%; background: #8F887A; opacity: 0.55"></div><div style="height: 6px; width: 70%; background: #8F887A; opacity: 0.55"></div>
+                  <div style="height: 22px; margin: 0 -4px; border: 2px solid #B33E27; background: rgba(179,62,39,0.08)"></div>
+                  <div style="height: 6px; width: 85%; background: #8F887A; opacity: 0.55"></div><div style="height: 6px; width: 60%; background: #8F887A; opacity: 0.55"></div><div style="height: 6px; width: 80%; background: #8F887A; opacity: 0.55"></div>
+                </div>
+                <div style="min-width: 0; display: flex; flex-direction: column; gap: 6px">
+                  <span style="font-size: 13px; font-weight: 600">{{ o.src }}</span>
+                  <p style="margin: 0; font-size: 14px; line-height: 1.55">{{ o.text }}</p>
+                  <span style="font-size: 12px; color: #61656E; margin-top: auto">{{ o.state }} · <a href="Entry.dc.html">открыть скан</a></span>
+                </div>
+              </article>
+            </sc-for>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1900}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { sel: 2, ruby: true, gloss: true }; }
+  renderVals() {
+    const T = [
+      ['今日', 'きょう', 'сегодня', 'сущ.'], ['は', '', 'тема', 'частица'], ['結構', 'けっこう', 'довольно', 'нареч.'],
+      ['いい', '', 'хороший', 'и-прил.'], ['天気', 'てんき', 'погода', 'сущ.'], ['です', '', 'связка', 'связка'],
+      ['ね', '', 'не так ли', 'частица'], ['。'], ['でも', '', 'но', 'союз'], ['、'],
+      ['明日', 'あした', 'завтра', 'сущ.'], ['は', '', 'тема', 'частица'], ['もっと', '', 'ещё более', 'нареч.'],
+      ['寒く', 'さむく', 'холодный', 'и-прил.', '寒い', 'さむい', 'наречная форма -く'], ['なる', '', 'становиться', 'глагол'],
+      ['そう', '', 'говорят', 'вспом.'], ['だ', '', 'связка', 'связка'], ['。']
+    ];
+    const full = { 2: 'довольно, вполне; порядочно — а также «прекрасный», «достаточный»', 13: 'холодный (о погоде, ощущении)', 4: 'погода; хорошая погода', 0: 'сегодня, нынешний день', 10: 'завтра' };
+    const sel = this.state.sel;
+    const tokens = T.map((t, i) => {
+      if (t.length === 1) return { w: t[0], punct: true, isWord: false };
+      const particle = t[3] === 'частица' || t[3] === 'связка' || t[3] === 'вспом.';
+      const s = i === sel;
+      return { w: t[0], r: t[1], g: t[2], punct: false, isWord: true, sel: s,
+        size: particle ? '22px' : '28px',
+        bg: s ? '#F7E2DB' : 'transparent', line: s ? '#B33E27' : (particle ? '#DDDAD2' : '#8C9099'),
+        pick: () => this.setState({ sel: i }) };
+    });
+    const t = T[sel];
+    const cur = { w: t[0], base: t[4] || t[0], br: t[5] || t[1], pos: t[3], inflected: !!t[4], form: t[6] || '', full: full[sel] || t[2] };
+    return {
+      tokens, cur,
+      showRuby: this.state.ruby, showGloss: this.state.gloss,
+      toggleRuby: () => this.setState({ ruby: !this.state.ruby }),
+      toggleGloss: () => this.setState({ gloss: !this.state.gloss }),
+      minor: [
+        { w: '結構ずくめ', r: 'けっこうずくめ', g: 'сплошь хорошее, одни удачи' },
+        { w: '結構人', r: 'けっこうじん', g: 'добряк; простак' },
+        { w: '不結構', r: 'ふけっこう', g: 'неудовлетворительный, неважный' }
+      ],
+      sats: [
+        { src: 'Яркси', meta: 'импорт 2026-09-28', text: '結構 [けっこう] 1) отлично, прекрасно; 2) достаточно (уже не надо); 3) довольно, весьма (нареч.); 4) книжн. структура, конструкция' },
+        { src: 'JMdict → рус. (машинный)', meta: 'ent_seq 1254820 · не проверено', text: 'けっこう【結構】\n(adj-na) великолепный; прекрасный\n(adj-na) достаточно; хорошо (уже не нужно)\n(adv) довольно; разумно; вполне' },
+        { src: 'Словарь Сатори', meta: 'импорт 2025-12-02', text: 'КЭККО: хорошо, ладно; кэкко дэсу — спасибо, не надо' }
+      ],
+      ocr: [
+        { src: 'БЯРС Конрада, т. 1, с. 482', text: 'けっこう【結構】1. строение, конструкция; композиция (литературного произведения)…', state: 'OCR сверен ✓' },
+        { src: 'Японско-русский словарь 1904 г., с. 211', text: 'Кекко, 結構 — хорошо, прекрасно; устройство, порядокъ…', state: 'OCR не сверен' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

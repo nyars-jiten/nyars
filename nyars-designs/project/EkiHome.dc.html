@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Станция — главная</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&amp;family=Onest:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF;color:#1B1E24;font-family:'Onest',system-ui,sans-serif;font-size:16px;line-height:1.5}
+a{color:#1F5FBF;text-decoration:none}a:hover{text-decoration:underline}
+.zk{font-family:'Zen Kaku Gothic New',sans-serif}
+.mono{font-family:'JetBrains Mono',monospace}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.badge{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:44px;height:44px;border:4px solid currentColor;border-radius:9px;background:#fff;font-weight:700;line-height:1;flex:0 0 auto}
+.badge b{font-size:11px;color:#1B1E24}.badge span{font-size:17px;color:#1B1E24}
+.line{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px 0 6px;border-radius:18px;background:#F4F5F7;font-size:14px;font-weight:600;color:#1B1E24;border:0;cursor:pointer;font-family:inherit}
+.line i{width:22px;height:22px;border-radius:50%;border:5px solid currentColor;box-sizing:border-box;background:#fff}
+.line[aria-pressed=true]{background:#1B1E24;color:#fff}
+.board{background:#15171C;color:#F4F5F7;border-radius:10px;overflow:hidden}
+.board th{font-size:12px;font-weight:600;color:#9AA1AD;text-align:left;padding:10px 16px;border-bottom:1px solid #2C3038}
+.board td{padding:12px 16px;border-bottom:1px solid #23262D;font-size:15px}
+.amber{color:#FFB547;font-family:'JetBrains Mono',monospace}
+@keyframes blink{50%{opacity:.25}}
+.soon{animation:blink 1.2s steps(1) infinite;color:#FF6B5A}
+.stat{border-left:0;padding:16px 0;border-top:3px solid #1B1E24}
+@media (max-width:760px){.wrap{padding:0 16px}.hide{display:none}}
+</style>
+</helmet>
+<div>
+  <header style="border-bottom: 1px solid #E3E5EA">
+    <div class="wrap" style="display: flex; align-items: center; gap: 14px 28px; flex-wrap: wrap; padding-top: 14px; padding-bottom: 14px">
+      <a href="#" style="display: flex; align-items: center; gap: 12px; color: #1B1E24; text-decoration: none"><span class="badge" style="color: #1E9A4B"><b>NY</b><span>01</span></span><span style="font-size: 22px; font-weight: 700; letter-spacing: -0.01em">nyars</span></a>
+      <nav aria-label="Разделы" style="display: flex; gap: 22px; flex: 1 1 auto; flex-wrap: wrap; font-weight: 500"><a href="EkiSearch.dc.html" style="color: #1B1E24">Словарь</a><a href="#" style="color: #1B1E24">Кандзи</a><a href="#" style="color: #1B1E24">Правки</a><a href="#" style="color: #1B1E24">Скачать</a></nav>
+      <a href="#" style="font-weight: 600">Войти</a>
+    </div>
+  </header>
+
+  <section class="wrap" style="padding-top: 56px; padding-bottom: 44px">
+    <div style="display: flex; flex-wrap: wrap; gap: 32px 64px; align-items: flex-end">
+      <div style="flex: 1 1 560px; min-width: 0">
+        <p class="zk" lang="ja" style="margin: 0; font-size: 16px; color: #5D6470; letter-spacing: 0.3em">ことば</p>
+        <h1 style="margin: 2px 0 0; font-size: clamp(36px, 4.6vw, 60px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05">Куда едем сегодня?</h1>
+        <form role="search" style="margin-top: 22px; display: flex; border: 2px solid #1B1E24; border-radius: 10px; overflow: hidden">
+          <label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label>
+          <input id="q" type="search" placeholder="Слово, чтение или перевод" class="zk" style="flex: 1; min-width: 0; height: 60px; border: 0; padding: 0 18px; font-size: 22px; outline: none">
+          <button type="button" aria-label="Рукописный ввод" style="width: 56px; border: 0; border-left: 1px solid #E3E5EA; background: #fff; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B1E24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4z"></path></svg></button>
+          <button type="button" aria-label="Ключи" class="zk" style="width: 56px; border: 0; border-left: 1px solid #E3E5EA; background: #fff; font-size: 18px; font-weight: 700; cursor: pointer">部</button>
+          <a href="EkiSearch.dc.html" style="width: 120px; display: flex; align-items: center; justify-content: center; background: #1E9A4B; color: #fff; font-weight: 700; text-decoration: none">Найти</a>
+        </form>
+        <div role="group" aria-label="Линии — словари" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px">
+          <sc-for list="{{ lines }}" as="l" hint-placeholder-count="5"><button type="button" class="line" aria-pressed="{{ l.on }}" onClick="{{ l.toggle }}" style="color: {{ l.c }}"><i></i><span style="color: {{ l.tc }}">{{ l.name }}</span></button></sc-for>
+        </div>
+      </div>
+      <dl style="margin: 0; flex: 1 1 360px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px">
+        <div class="stat"><dt style="font-size: 13px; color: #5D6470">Статей</dt><dd style="margin: 2px 0 0; font-size: 34px; font-weight: 700; letter-spacing: -0.02em">1 820 463</dd><dd style="margin: 0; font-size: 13px; color: #5D6470"><span style="color: #D2232A; font-weight: 600">−8</span> удалено · <span style="color: #1E9A4B; font-weight: 600">+412</span> за неделю</dd></div>
+        <div class="stat"><dt style="font-size: 13px; color: #5D6470">Правок за неделю</dt><dd style="margin: 2px 0 0; font-size: 34px; font-weight: 700">1 942</dd><dd style="margin: 0; font-size: 13px; color: #5D6470">ждут проверки: <a href="#">214</a></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="dep" style="padding-bottom: 40px">
+    <div class="board">
+      <div style="display: flex; align-items: baseline; gap: 14px; padding: 16px 18px 6px; flex-wrap: wrap">
+        <h2 id="dep" style="margin: 0; font-size: 20px; font-weight: 700">Табло правок</h2>
+        <span class="zk" lang="ja" style="color: #9AA1AD; font-size: 14px">発車案内</span>
+        <span style="flex: 1"></span>
+        <span class="amber" style="font-size: 14px">{{ clock }}</span>
+      </div>
+      <div style="overflow-x: auto">
+        <table style="width: 100%; border-collapse: collapse; min-width: 720px">
+          <thead><tr><th>Время</th><th>Тип</th><th>Статья</th><th>Линия</th><th>Автор</th><th>Статус</th></tr></thead>
+          <tbody>
+            <sc-for list="{{ board }}" as="b" hint-placeholder-count="6">
+              <tr>
+                <td class="amber">{{ b.t }}</td>
+                <td><span style="display: inline-block; padding: 1px 8px; border-radius: 3px; font-size: 13px; font-weight: 600; background: {{ b.tc }}; color: #fff">{{ b.type }}</span></td>
+                <td><a href="EkiEntry.dc.html" class="zk" lang="ja" style="color: #fff; font-size: 19px; font-weight: 700">{{ b.w }}</a> <span style="color: #9AA1AD; font-size: 14px">{{ b.g }}</span></td>
+                <td><span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 50%; background: {{ b.lc }}"></span>{{ b.line }}</span></td>
+                <td style="color: #C6CBD4">{{ b.u }}</td>
+                <td><span class="{{ b.cls }}">{{ b.st }}</span></td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="top" style="padding-bottom: 72px; display: flex; flex-wrap: wrap; gap: 32px">
+    <div style="flex: 1 1 520px">
+      <h2 id="top" style="margin: 0 0 14px; font-size: 20px; font-weight: 700">Самые активные за неделю</h2>
+      <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px">
+        <sc-for list="{{ top }}" as="t" hint-placeholder-count="5">
+          <li style="display: grid; grid-template-columns: 44px 140px minmax(0, 1fr) 48px; gap: 14px; align-items: center">
+            <span class="badge" style="color: {{ t.c }}; width: 40px; height: 40px"><b>NY</b><span style="font-size: 15px">{{ t.r }}</span></span>
+            <span style="font-weight: 600">{{ t.u }}</span>
+            <span style="height: 8px; border-radius: 4px; background: #EEF0F3"><span style="display: block; height: 8px; border-radius: 4px; width: {{ t.p }}; background: {{ t.c }}"></span></span>
+            <span class="mono" style="text-align: right; font-size: 14px">{{ t.n }}</span>
+          </li>
+        </sc-for>
+      </ol>
+    </div>
+    <div style="flex: 1 1 320px; background: #F4F5F7; border-radius: 10px; padding: 20px">
+      <h2 style="margin: 0 0 6px; font-size: 18px">Ночная сборка</h2>
+      <p style="margin: 0 0 14px; color: #5D6470; font-size: 15px">5 окт., 04:00 UTC · Yomitan, DSL, JSON</p>
+      <a href="#" style="display: inline-flex; align-items: center; height: 44px; padding: 0 18px; background: #1B1E24; color: #fff; border-radius: 8px; font-weight: 600; text-decoration: none">Скачать</a>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { off: {} }; }
+  renderVals() {
+    const off = this.state.off;
+    const L = [['Японско-русский', '#1E9A4B'], ['Кандзи', '#D2232A'], ['Русско-японский β', '#B85A06'], ['Спутники', '#1F5FBF'], ['Сканы', '#5D6470']];
+    const lines = L.map(([name, c], i) => ({ name, c, on: !off[i], tc: off[i] ? '#1B1E24' : '#fff', toggle: () => this.setState({ off: { ...off, [i]: !off[i] } }) }));
+    const T = { EDIT: ['Правка', '#1F5FBF'], NEW: ['Новая', '#1E9A4B'], OCR: ['OCR', '#5D6470'], DEL: ['Удаление', '#D2232A'] };
+    const board = [
+      ['09:14', 'EDIT', '結構', 'довольно, вполне', 'ЯРС', '#1E9A4B', 'kitsune_ru', 'принято', ''],
+      ['09:07', 'NEW', '推し活', 'поддержка артиста', 'ЯРС', '#1E9A4B', 'гость', 'на проверке', 'soon'],
+      ['08:52', 'EDIT', '米', 'пример: 米を研ぐ', 'Кандзи', '#D2232A', 'Murasaki', 'принято', ''],
+      ['08:40', 'OCR', '仕舞う', 'с. 1104', 'Сканы', '#5D6470', 'yuki.p', 'принято', ''],
+      ['08:18', 'EDIT', '矢鱈', 'помета «атэдзи»', 'ЯРС', '#1E9A4B', 'Tanuki42', 'на проверке', 'soon'],
+      ['06:30', 'DEL', '取り敢えず', 'дубль', 'ЯРС', '#1E9A4B', 'Tanuki42', 'принято', '']
+    ].map(b => ({ t: b[0], type: T[b[1]][0], tc: T[b[1]][1], w: b[2], g: b[3], line: b[4], lc: b[5], u: b[6], st: b[7], cls: b[8] }));
+    const top = [['Murasaki', 312], ['kitsune_ru', 268], ['yuki.p', 197], ['old_kanbun', 141], ['Tanuki42', 96]]
+      .map(([u, n], i) => ({ u, n, r: String(i + 1).padStart(2, '0'), p: Math.round(n / 312 * 100) + '%', c: ['#1E9A4B', '#1F5FBF', '#D2232A', '#B85A06', '#5D6470'][i] }));
+    return { lines, board, top, clock: '09:16' };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Ретро-аниме — главная</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&amp;family=Russo+One&amp;family=Fira+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#1A1238;color:#F4EEFF;font-family:'Fira Sans',system-ui,sans-serif;font-size:16px;line-height:1.5}
+a{color:#58D3F7;text-decoration:none}a:hover{color:#FFE66D}
+.rr{font-family:'RocknRoll One',sans-serif}
+.ru{font-family:'Russo One',sans-serif}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.grain{position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px);mix-blend-mode:multiply}
+.sun{position:absolute;width:420px;height:420px;border-radius:50%;background:linear-gradient(#FFE66D,#FF9F43 45%,#E8467C);-webkit-mask-image:linear-gradient(180deg,#000 52%,transparent 52%),repeating-linear-gradient(180deg,#000 0 16px,transparent 16px 26px);mask-image:linear-gradient(180deg,#000 52%,transparent 52%),repeating-linear-gradient(180deg,#000 0 16px,transparent 16px 26px)}
+.osd{font-family:'Russo One',sans-serif;letter-spacing:.06em;text-shadow:2px 2px 0 rgba(0,0,0,.4)}
+@keyframes blink{50%{opacity:0}}
+.rec{animation:blink 1.2s steps(1) infinite;color:#FF4D6D}
+.ep{display:grid;grid-template-columns:120px minmax(0,1fr);gap:14px;padding:12px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);text-decoration:none;color:#F4EEFF;transition:background .2s,transform .2s}
+.ep:hover{background:rgba(232,70,124,.14);transform:translateX(4px);color:#F4EEFF}
+.cel{aspect-ratio:4/3;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'RocknRoll One';color:#fff;text-shadow:3px 3px 0 rgba(0,0,0,.35);position:relative;overflow:hidden}
+.cel::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.15) 0 1px,transparent 1px 3px)}
+@media (max-width:760px){.wrap{padding:0 16px}.sun{width:260px;height:260px}}
+</style>
+</helmet>
+<div>
+  <section style="position: relative; overflow: hidden; background: linear-gradient(180deg, #2A1D57 0%, #5B2A7A 45%, #E8467C 78%, #FF9F43 100%); min-height: 600px">
+    <div class="sun" aria-hidden="true" style="left: 50%; bottom: -150px; transform: translateX(-50%)"></div>
+    <svg aria-hidden="true" viewBox="0 0 1440 220" preserveAspectRatio="none" style="position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 200px"><path d="M0 220 L0 150 L120 110 L260 150 L420 70 L560 140 L700 100 L860 150 L1020 80 L1200 140 L1440 100 L1440 220Z" fill="#1A1238"/><path d="M0 220 L0 190 L200 165 L420 185 L720 160 L1000 186 L1240 168 L1440 182 L1440 220Z" fill="#120C29"/></svg>
+    <div class="grain" aria-hidden="true"></div>
+    <header class="wrap" style="position: relative; display: flex; align-items: center; gap: 14px 28px; flex-wrap: wrap; padding-top: 18px; padding-bottom: 18px">
+      <span class="osd" style="font-size: 15px"><span class="rec">●</span> REC</span>
+      <a href="#" class="ru" style="color: #F4EEFF; font-size: 22px">nyars</a>
+      <nav aria-label="Разделы" style="display: flex; gap: 22px; flex: 1 1 auto; flex-wrap: wrap; font-weight: 500"><a href="RetroSearch.dc.html" style="color: #F4EEFF">Словарь</a><a href="#" style="color: #F4EEFF">Кандзи</a><a href="#" style="color: #F4EEFF">Правки</a><a href="#" style="color: #F4EEFF">Скачать</a></nav>
+      <span class="osd" style="font-size: 15px">SP ▸ 05.10.26</span>
+    </header>
+    <div class="wrap" style="position: relative; padding-top: 44px; padding-bottom: 170px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px">
+      <p class="rr" lang="ja" style="margin: 0; font-size: 22px; letter-spacing: .3em; color: #FFE66D">にゃーず辞典</p>
+      <h1 class="ru" style="margin: 0; font-size: clamp(56px, 9vw, 120px); line-height: .95; font-style: italic; letter-spacing: -0.01em; color: #fff; text-shadow: 4px 4px 0 #E8467C, 8px 8px 0 #2A1D57">NYARS</h1>
+      <p style="margin: 0; font-size: 19px; color: #F4EEFF">Японско-русский словарь. Новая серия — каждую ночь.</p>
+      <form role="search" style="margin-top: 18px; width: min(640px, 100%); display: flex; background: rgba(26,18,56,.82); border: 2px solid #58D3F7; border-radius: 8px; overflow: hidden; box-shadow: 0 0 0 4px rgba(88,211,247,.18)">
+        <label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label>
+        <span class="osd" aria-hidden="true" style="padding: 0 0 0 16px; display: flex; align-items: center; color: #58D3F7">▶</span>
+        <input id="q" type="search" placeholder="Слово, чтение или перевод" class="rr" style="flex: 1; min-width: 0; height: 56px; border: 0; background: transparent; padding: 0 12px; font-size: 20px; color: #fff; outline: none">
+        <a href="RetroSearch.dc.html" class="ru" style="padding: 0 22px; display: flex; align-items: center; background: #58D3F7; color: #1A1238">PLAY</a>
+      </form>
+    </div>
+  </section>
+
+  <div class="wrap" style="display: flex; flex-wrap: wrap; gap: 36px; padding-top: 30px; padding-bottom: 72px; align-items: flex-start">
+    <section aria-labelledby="eps" style="flex: 999 1 560px; min-width: 0">
+      <h2 id="eps" class="ru" style="margin: 0 0 14px; font-size: 24px; display: flex; align-items: baseline; gap: 12px">Серии этой недели <span class="rr" style="font-size: 14px; color: #B8B0D9">今週のエピソード</span></h2>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <sc-for list="{{ feed }}" as="e" hint-placeholder-count="6">
+          <a href="RetroEntry.dc.html" class="ep">
+            <span class="cel" lang="ja" style="background: {{ e.bg }}; font-size: {{ e.fs }}">{{ e.w }}</span>
+            <span style="min-width: 0; display: flex; flex-direction: column; gap: 2px">
+              <span class="osd" style="font-size: 12px; color: #FF9F43">EP.{{ e.n }} · {{ e.t }}</span>
+              <span style="font-size: 17px; font-weight: 700">«{{ e.title }}»</span>
+              <span style="font-size: 14px; color: #B8B0D9">{{ e.u }}</span>
+            </span>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+    <aside style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 22px">
+      <section style="border-radius: 12px; overflow: hidden; background: #2A1D57; position: relative">
+        <div style="padding: 18px 20px; background: linear-gradient(90deg, #E8467C, #FF9F43); color: #1A1238"><span class="rr" style="font-size: 20px">次回予告</span> <span class="ru" style="font-size: 14px">· следующая серия</span></div>
+        <div style="padding: 18px 20px"><span class="rr" lang="ja" style="font-size: 44px"><ruby>推<rt style="font-size: 13px">お</rt>し活<rt style="font-size: 13px">かつ</rt></ruby></span><p style="margin: 6px 0 0; color: #F4EEFF">Новое слово ждёт проверки. Успеют ли модераторы до полуночи?</p></div>
+      </section>
+      <section class="osd" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-family: 'Fira Sans'">
+        <div style="padding: 14px; border-radius: 10px; background: rgba(255,255,255,.05)"><div class="osd" style="font-size: 26px; color: #FFE66D">1820463</div><div style="font-size: 13px; color: #B8B0D9">статей · <span style="color: #FF4D6D">−8</span></div></div>
+        <div style="padding: 14px; border-radius: 10px; background: rgba(255,255,255,.05)"><div class="osd" style="font-size: 26px; color: #58D3F7">1942</div><div style="font-size: 13px; color: #B8B0D9">правок за неделю</div></div>
+      </section>
+      <section>
+        <h2 class="ru" style="margin: 0 0 10px; font-size: 18px">В ролях</h2>
+        <dl style="margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: 15px">
+          <sc-for list="{{ top }}" as="t" hint-placeholder-count="5"><dt style="color: #B8B0D9; text-align: right; font-style: italic">{{ t.role }}</dt><dd style="margin: 0; font-weight: 700">{{ t.u }} <span style="color: #B8B0D9; font-weight: 400">· {{ t.n }}</span></dd></sc-for>
+        </dl>
+      </section>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const BG = ['#E8467C', '#3E7BFA', '#FF9F43', '#7B4FE0', '#1FB5A0', '#C2367A'];
+    const F = [['結構', 'Наречие обретает смысл', 'kitsune_ru', '4 мин'], ['推し活', 'Новичок у ворот словаря', 'гость', '11 мин'], ['米', 'Рис и Америка', 'Murasaki', '26 мин'], ['仕舞う', 'Ошибка из прошлого века', 'yuki.p', '38 мин'], ['腕によりをかける', 'Всё мастерство', 'old_kanbun', '3 ч'], ['取り敢えず', 'Двойник исчезает', 'Tanuki42', '6 ч']];
+    const feed = F.map(([w, title, u, t], i) => { const n = Array.from(w).length; return { w, title, u, t, n: String(i + 1).padStart(2, '0'), bg: BG[i], fs: n <= 2 ? '36px' : n <= 4 ? '24px' : '15px' }; });
+    const top = [['Главная роль', 'Murasaki', 312], ['Соперник', 'kitsune_ru', 268], ['Сэмпай', 'yuki.p', 197], ['Мудрый учитель', 'old_kanbun', 141], ['Комик', 'Tanuki42', 96]].map(([role, u, n]) => ({ role, u, n }));
+    return { feed, top };
+  }
+}
+</script>
+</body>
+</html>

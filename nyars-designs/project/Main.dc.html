@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>nyars — главная</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&amp;family=Shippori+Mincho:wght@500;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F4F0;color:#1A1C21;font-family:'Golos Text','Hiragino Sans','Noto Sans JP',system-ui,sans-serif;font-size:15px;line-height:1.5}
+a{color:#2B4A85;text-decoration:none}a:hover{color:#1A2F57;text-decoration:underline}
+.jp{font-family:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.wrap{max-width:1312px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.card{background:#FCFBF8;border:1px solid #DDDAD2;border-radius:6px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#61656E;font-weight:600;margin:0}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 7px;border-radius:4px;font-size:12px;font-weight:600;background:#E9E7E1;color:#474B54;white-space:nowrap}
+.tag.shu{background:#F7E2DB;color:#8A2D1B}.tag.ai{background:#E1E8F4;color:#22396A}
+.ins{background:#DCE6F7;color:#1B3366;text-decoration:underline;text-decoration-color:#7F9AD0;text-underline-offset:3px;border-radius:2px;padding:0 2px}
+.del{background:#F8DCD3;color:#7A2414;text-decoration:line-through;border-radius:2px;padding:0 2px}
+.cols{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+.main{flex:999 1 620px;min-width:0}.side{flex:1 1 320px;min-width:0}
+.av{flex:0 0 auto;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700}
+.chip{height:34px;padding:0 12px;border:1px solid #DDDAD2;background:#fff;border-radius:17px;font:inherit;font-size:13px;cursor:pointer}
+.chip[aria-pressed=true]{background:#1A1C21;border-color:#1A1C21;color:#fff}
+@media (max-width:640px){.wrap{padding:0 16px}.chip{height:44px}}
+</style>
+</helmet>
+<div>
+  <dc-import name="Header" active="home" initial-panel="none" hint-size="100%,72px"></dc-import>
+
+  <section style="border-bottom: 1px solid #DDDAD2">
+    <div class="wrap" style="padding-top: 48px; padding-bottom: 40px; display: flex; flex-wrap: wrap; gap: 32px 64px; align-items: flex-end">
+      <div style="flex: 1 1 520px; min-width: 0">
+        <h1 style="margin: 0; font-size: clamp(32px, 4vw, 48px); line-height: 1.1; font-weight: 700; letter-spacing: -0.02em; text-wrap: balance">Японско-русский словарь, который пишут читатели</h1>
+        <p style="margin: 16px 0 0; font-size: 17px; color: #474B54; max-width: 560px; text-wrap: pretty">Исправить перевод может любой — даже без регистрации. Правки проверяют модераторы, а сборки для Yomitan и GoldenDict обновляются каждую ночь.</p>
+      </div>
+      <dl style="margin: 0; flex: 1 1 480px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 0; border-top: 2px solid #1A1C21">
+        <div style="padding: 14px 16px 0 0">
+          <dt class="eyebrow">Статей</dt>
+          <dd style="margin: 4px 0 0; font-size: 30px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -0.01em">1 820 463</dd>
+          <dd style="margin: 2px 0 0; font-size: 13px; color: #474B54"><span style="color: #22396A; font-weight: 600">+412</span> · <span style="color: #8A2D1B; font-weight: 600">−8</span> за неделю</dd>
+        </div>
+        <div style="padding: 14px 16px 0 0">
+          <dt class="eyebrow">Правок за неделю</dt>
+          <dd style="margin: 4px 0 0; font-size: 30px; font-weight: 700; font-variant-numeric: tabular-nums">1 942</dd>
+          <dd style="margin: 2px 0 0; font-size: 13px; color: #474B54">принято 87%</dd>
+        </div>
+        <div style="padding: 14px 0 0 0">
+          <dt class="eyebrow">Ждут проверки</dt>
+          <dd style="margin: 4px 0 0; font-size: 30px; font-weight: 700; font-variant-numeric: tabular-nums">214</dd>
+          <dd style="margin: 2px 0 0; font-size: 13px"><a href="Moderation.dc.html">открыть очередь →</a></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="wrap" style="padding-top: 32px; padding-bottom: 64px">
+    <div class="cols">
+      <main class="main">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px">
+          <h2 style="margin: 0; font-size: 22px; font-weight: 700">Последние правки</h2>
+          <div role="group" aria-label="Тип правок" style="display: flex; flex-wrap: wrap; gap: 6px">
+            <sc-for list="{{ filters }}" as="f" hint-placeholder-count="4">
+              <button type="button" class="chip" aria-pressed="{{ f.on }}" onClick="{{ f.pick }}">{{ f.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <ol class="card" style="list-style: none; margin: 0; padding: 0">
+          <sc-for list="{{ feed }}" as="e" hint-placeholder-count="8">
+            <li style="display: flex; gap: 14px; padding: 16px 20px; border-bottom: 1px solid #E9E7E1">
+              <span class="av" style="background: {{ e.color }}">{{ e.ini }}</span>
+              <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+                <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px">
+                  <a href="User.dc.html" style="font-weight: 600; color: #1A1C21">{{ e.user }}</a>
+                  <span style="color: #474B54; font-size: 14px">{{ e.verb }}</span>
+                  <a href="Entry.dc.html" class="jp" style="font-size: 20px; font-weight: 700; color: #1A1C21">{{ e.word }}</a>
+                  <span style="color: #474B54; font-size: 14px" class="jp">{{ e.kana }}</span>
+                  <span class="tag">{{ e.dict }}</span>
+                  <sc-if value="{{ e.pending }}" hint-placeholder-val="{{ false }}"><span class="tag shu">на проверке</span></sc-if>
+                </div>
+                <div style="font-size: 14px; color: #1A1C21; overflow-wrap: anywhere">
+                  <span style="color: #61656E">{{ e.ctx }}</span> <span class="del">{{ e.del }}</span> <span class="ins">{{ e.ins }}</span>
+                </div>
+              </div>
+              <time style="flex: 0 0 auto; font-size: 13px; color: #61656E; white-space: nowrap">{{ e.time }}</time>
+            </li>
+          </sc-for>
+        </ol>
+        <div style="display: flex; justify-content: center; padding-top: 16px"><a href="Moderation.dc.html" style="font-weight: 600">Вся лента правок →</a></div>
+      </main>
+
+      <aside class="side" style="display: flex; flex-direction: column; gap: 24px">
+        <section class="card" style="padding: 20px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px">
+            <h2 style="margin: 0; font-size: 17px; font-weight: 700">Активнее всех за неделю</h2>
+            <span style="font-size: 13px; color: #61656E">правок</span>
+          </div>
+          <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
+            <sc-for list="{{ top }}" as="t" hint-placeholder-count="6">
+              <li style="display: grid; grid-template-columns: 20px 1fr auto; gap: 10px; align-items: center">
+                <span class="mono" style="font-size: 13px; color: #61656E">{{ t.rank }}</span>
+                <div style="min-width: 0">
+                  <a href="User.dc.html" style="font-weight: 600; font-size: 14px; color: #1A1C21">{{ t.user }}</a>
+                  <div style="height: 6px; background: #E9E7E1; border-radius: 3px; margin-top: 4px"><div style="height: 6px; width: {{ t.pct }}; background: #2B4A85; border-radius: 3px"></div></div>
+                </div>
+                <span class="mono" style="font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums">{{ t.n }}</span>
+              </li>
+            </sc-for>
+          </ol>
+        </section>
+
+        <section class="card" style="padding: 20px">
+          <h2 style="margin: 0 0 4px; font-size: 17px; font-weight: 700">Нужна помощь</h2>
+          <p style="margin: 0 0 14px; font-size: 14px; color: #474B54">Небольшие задачи, с которых удобно начать.</p>
+          <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
+            <li style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid #E9E7E1"><a href="Search.dc.html">Статьи без перевода</a><span class="mono" style="font-size: 14px">1 204</span></li>
+            <li style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid #E9E7E1"><a href="Entry.dc.html">Сверить OCR со сканом</a><span class="mono" style="font-size: 14px">38 112</span></li>
+            <li style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid #E9E7E1"><a href="Search.dc.html">Нет примеров у частотных слов</a><span class="mono" style="font-size: 14px">2 870</span></li>
+            <li style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid #E9E7E1"><a href="Moderation.dc.html">Спорные правки (обсуждение)</a><span class="mono" style="font-size: 14px">17</span></li>
+          </ul>
+        </section>
+
+        <section style="padding: 20px; border-radius: 6px; background: #1A1C21; color: #F5F4F0; display: flex; flex-direction: column; gap: 10px">
+          <p class="eyebrow" style="color: #B9BCC4">Ночная сборка · 5 окт., 04:00 UTC</p>
+          <p style="margin: 0; font-size: 15px">Словарь для Yomitan, GoldenDict (DSL) и других программ.</p>
+          <a href="Downloads.dc.html" style="align-self: flex-start; height: 40px; padding: 0 16px; display: flex; align-items: center; gap: 8px; background: #B33E27; color: #fff; border-radius: 6px; font-weight: 600; font-size: 14px; text-decoration: none">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
+            Скачать словари
+          </a>
+        </section>
+      </aside>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1560}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { f: 'all' }; }
+  renderVals() {
+    const f = this.state.f;
+    const filters = [['all', 'Все'], ['new', 'Новые статьи'], ['edit', 'Изменения'], ['del', 'Удаления']]
+      .map(([id, label]) => ({ label, on: f === id, pick: () => this.setState({ f: id }) }));
+    const C = ['#2B4A85', '#B33E27', '#474B54', '#5B4B8A', '#2F6B5E', '#8A5A1E'];
+    const feed = [
+      { user: 'kitsune_ru', verb: 'изменил(а)', word: '結構', kana: 'けっこう', dict: 'ЯРС', ctx: '副 1.', del: 'довольно-таки', ins: 'довольно, вполне; порядочно', time: '4 мин' },
+      { user: 'гость 5.18.x.x', verb: 'предложил(а) статью', word: '推し活', kana: 'おしかつ', dict: 'ЯРС', ctx: 'сущ.', del: '', ins: 'поддержка любимого артиста (покупка мерча, посещение концертов)', time: '11 мин', pending: true },
+      { user: 'Murasaki', verb: 'добавил(а) пример', word: '米', kana: 'こめ', dict: 'Кандзи', ctx: 'самост. 1.', del: '', ins: '米を研ぐ — промывать рис', time: '26 мин' },
+      { user: 'yuki.p', verb: 'исправил(а) OCR', word: '仕舞う', kana: 'しまう', dict: 'Конрад · скан', ctx: 'с. 1104:', del: 'убрать, спрягать', ins: 'убрать, спрятать', time: '38 мин' },
+      { user: 'Tanuki42', verb: 'добавил(а) помету', word: '矢鱈', kana: 'やたら', dict: 'ЯРС', ctx: 'теги:', del: '', ins: 'атэдзи', time: '1 ч' },
+      { user: 'kitsune_ru', verb: 'удалил(а) дубль', word: '取り敢えず', kana: 'とりあえず', dict: 'ЯРС', ctx: '', del: 'дубль статьи №1004517', ins: '', time: '2 ч' },
+      { user: 'Murasaki', verb: 'изменил(а)', word: '気', kana: 'き', dict: 'ЯРС', ctx: 'сущ. 4.', del: 'настроение', ins: 'настроение, расположение духа', time: '3 ч' },
+      { user: 'old_kanbun', verb: 'добавил(а) старое значение', word: '之', kana: 'これ・の', dict: 'Кандзи', ctx: 'камбун:', del: '', ins: 'идти, направляться (之く)', time: '5 ч' }
+    ].map((e, i) => ({ ...e, ini: e.user.replace(/[^A-Za-zА-яё]/g, '').slice(0, 2).toUpperCase() || 'Г', color: e.user.startsWith('гость') ? '#8C9099' : C[i % C.length] }));
+    const top = [['Murasaki', 312], ['kitsune_ru', 268], ['yuki.p', 197], ['old_kanbun', 141], ['Tanuki42', 96], ['sakana_ya', 74]]
+      .map(([user, n], i) => ({ user, n, rank: i + 1, pct: Math.round(n / 312 * 100) + '%' }));
+    return { filters, feed, top };
+  }
+}
+</script>
+</body>
+</html>

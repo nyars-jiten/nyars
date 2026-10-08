@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Неон — главная</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&amp;family=Exo+2:wght@400;500;700;800&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0D17;color:#E6E9F5;font-family:'Exo 2',system-ui,sans-serif;font-size:16px;line-height:1.5}
+a{color:#3DF5E0;text-decoration:none}a:hover{color:#fff;text-shadow:0 0 8px #3DF5E0}
+.px{font-family:'DotGothic16',monospace}
+.mono{font-family:'JetBrains Mono',monospace}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.bg{background:radial-gradient(ellipse at 20% 0%,rgba(255,79,163,.18),transparent 50%),radial-gradient(ellipse at 90% 30%,rgba(61,245,224,.12),transparent 45%),#0B0D17}
+.scan{background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px)}
+.glow-c{color:#3DF5E0;text-shadow:0 0 6px rgba(61,245,224,.9),0 0 22px rgba(61,245,224,.5)}
+.glow-m{color:#FF4FA3;text-shadow:0 0 6px rgba(255,79,163,.9),0 0 22px rgba(255,79,163,.5)}
+.sign{writing-mode:vertical-rl;text-orientation:upright;font-family:'DotGothic16',monospace;font-size:44px;letter-spacing:.1em;padding:16px 8px;border:2px solid currentColor;border-radius:8px;box-shadow:0 0 18px currentColor,inset 0 0 12px currentColor}
+@keyframes flick{0%,19%,21%,62%,64%,100%{opacity:1}20%,63%{opacity:.35}}
+.flick{animation:flick 4s infinite}
+@keyframes blink{50%{opacity:0}}
+.caret{display:inline-block;width:11px;height:26px;background:#3DF5E0;animation:blink 1s steps(1) infinite;box-shadow:0 0 10px #3DF5E0;vertical-align:middle}
+@keyframes tick{to{transform:translateX(-50%)}}
+.ticker{display:flex;gap:48px;width:max-content;animation:tick 40s linear infinite}
+.ticker:hover{animation-play-state:paused}
+.box{border:1px solid #2A3050;background:rgba(20,24,41,.85);border-radius:6px}
+.chip{height:36px;padding:0 12px;border:1px solid #2A3050;background:#141829;color:#E6E9F5;font-family:'JetBrains Mono',monospace;font-size:13px;border-radius:4px;cursor:pointer}
+.chip:hover{border-color:#3DF5E0;box-shadow:0 0 10px rgba(61,245,224,.4)}
+table{border-collapse:collapse;width:100%}
+td,th{padding:10px 14px;text-align:left}
+th{font-family:'JetBrains Mono',monospace;font-size:12px;color:#9AA3C7;font-weight:500;border-bottom:1px solid #2A3050}
+tr.hs:hover td{background:rgba(61,245,224,.08)}
+@media (max-width:760px){.wrap{padding:0 16px}.sign{display:none}}
+</style>
+</helmet>
+<div class="bg scan">
+  <header class="wrap" style="display: flex; align-items: center; flex-wrap: wrap; gap: 14px 28px; padding-top: 20px; padding-bottom: 20px">
+    <a href="#" class="px glow-m flick" style="font-size: 32px; letter-spacing: 0.06em; text-decoration: none">nyars<span class="glow-c">.辞</span></a>
+    <nav aria-label="Разделы" class="mono" style="display: flex; gap: 22px; flex-wrap: wrap; font-size: 14px; flex: 1 1 auto">
+      <a href="NeonSearch.dc.html">/словарь</a><a href="#">/кандзи</a><a href="#">/правки<sup style="color: #FF4FA3">214</sup></a><a href="#">/скачать</a>
+    </nav>
+    <a href="#" class="mono" style="font-size: 14px; border: 1px solid #3DF5E0; padding: 10px 14px; border-radius: 4px">login</a>
+  </header>
+
+  <section class="wrap" style="display: flex; gap: 32px; align-items: stretch; padding-top: 30px; padding-bottom: 40px">
+    <div class="sign glow-m flick" lang="ja" aria-hidden="true" style="color: #FF4FA3; align-self: flex-start">ジショ</div>
+    <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+      <h1 style="margin: 0; font-size: clamp(34px, 4.4vw, 60px); font-weight: 800; line-height: 1.05; letter-spacing: -0.01em">Японский — <span class="glow-c">открытым кодом</span>.<br>Словарь, который правят все.</h1>
+      <form role="search" class="box" style="padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 0 0 1px rgba(61,245,224,.25), 0 0 40px -10px rgba(61,245,224,.5)">
+        <label for="q" class="mono" style="font-size: 13px; color: #9AA3C7">nyars:~$ search</label>
+        <div style="display: flex; align-items: center; gap: 10px">
+          <span class="mono glow-c" aria-hidden="true" style="font-size: 26px">›</span>
+          <input id="q" type="search" value="{{ query }}" class="px" style="flex: 1; min-width: 0; height: 48px; border: 0; background: transparent; color: #fff; font-size: 26px; outline: none">
+          <span class="caret" aria-hidden="true"></span>
+          <a href="NeonSearch.dc.html" class="mono" style="height: 48px; padding: 0 18px; display: flex; align-items: center; background: #3DF5E0; color: #0B0D17; border-radius: 4px; font-weight: 700">ENTER ⏎</a>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center">
+          <span class="mono" style="font-size: 12px; color: #9AA3C7">добавить флаг:</span>
+          <sc-for list="{{ flags }}" as="f" hint-placeholder-count="5"><button type="button" class="chip" onClick="{{ f.add }}">{{ f.f }}</button></sc-for>
+          <button type="button" class="chip" onClick="{{ reset }}" style="color: #FF4FA3">clear</button>
+          <span style="flex: 1"></span>
+          <button type="button" class="chip">✎ draw</button><button type="button" class="chip">部 radicals</button>
+        </div>
+      </form>
+    </div>
+    <dl class="box" style="margin: 0; flex: 0 0 300px; padding: 22px; display: flex; flex-direction: column; gap: 18px; justify-content: center">
+      <div><dt class="mono" style="font-size: 12px; color: #9AA3C7">ENTRIES</dt><dd class="mono glow-c" style="margin: 0; font-size: 40px; font-weight: 700; letter-spacing: 0.02em">1820463</dd><dd class="mono" style="margin: 0; font-size: 14px"><span class="glow-m">▼8</span> deleted · <span style="color: #3DF5E0">▲412</span> added · 7d</dd></div>
+      <div><dt class="mono" style="font-size: 12px; color: #9AA3C7">EDITS / 7D</dt><dd class="mono" style="margin: 0; font-size: 28px; font-weight: 700; color: #FFC857; text-shadow: 0 0 10px rgba(255,200,87,.6)">1942</dd></div>
+      <div><dt class="mono" style="font-size: 12px; color: #9AA3C7">QUEUE</dt><dd class="mono" style="margin: 0; font-size: 28px; font-weight: 700">214 <a href="#" style="font-size: 13px">→ review</a></dd></div>
+    </dl>
+  </section>
+
+  <div style="border-top: 1px solid #2A3050; border-bottom: 1px solid #2A3050; overflow: hidden; padding: 12px 0; background: rgba(255,79,163,.05)" aria-label="Лента правок">
+    <div class="ticker mono" style="font-size: 15px">
+      <sc-for list="{{ tick }}" as="t" hint-placeholder-count="12"><span style="white-space: nowrap"><span style="color: #9AA3C7">{{ t.t }}</span> <span class="glow-m">{{ t.u }}</span> → <span class="px" style="color: #fff; font-size: 18px">{{ t.w }}</span> <span style="color: #3DF5E0">{{ t.d }}</span></span></sc-for>
+    </div>
+  </div>
+
+  <section class="wrap" style="display: flex; flex-wrap: wrap; gap: 28px; padding-top: 40px; padding-bottom: 72px; align-items: flex-start">
+    <div class="box" style="flex: 999 1 560px; min-width: 0; padding: 0; overflow: hidden">
+      <div class="mono" style="display: flex; gap: 8px; align-items: center; padding: 10px 14px; border-bottom: 1px solid #2A3050; font-size: 13px; color: #9AA3C7"><span style="width: 10px; height: 10px; border-radius: 50%; background: #FF4FA3"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #FFC857"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #3DF5E0"></span><span style="margin-left: 8px">tail -f edits.log</span></div>
+      <ol class="mono" style="list-style: none; margin: 0; padding: 14px 18px; font-size: 14px; display: flex; flex-direction: column; gap: 8px">
+        <sc-for list="{{ log }}" as="l" hint-placeholder-count="7">
+          <li style="display: grid; grid-template-columns: 60px 64px 110px minmax(0, 1fr) 80px; gap: 12px; align-items: baseline">
+            <span style="color: #9AA3C7">{{ l.t }}</span><span style="color: {{ l.c }}">{{ l.op }}</span><span>{{ l.u }}</span><a href="NeonEntry.dc.html" class="px" style="font-size: 18px; color: #fff">{{ l.w }}</a><span style="text-align: right"><span style="color: #3DF5E0">+{{ l.a }}</span> <span style="color: #FF4FA3">−{{ l.r }}</span></span>
+          </li>
+        </sc-for>
+      </ol>
+    </div>
+    <div class="box" style="flex: 1 1 340px; padding: 18px 8px 10px">
+      <h2 class="px glow-c" style="margin: 0 0 10px 14px; font-size: 24px; font-weight: 400">HIGH SCORE · 7D</h2>
+      <table>
+        <thead><tr><th>RANK</th><th>SCORE</th><th>NAME</th></tr></thead>
+        <tbody class="mono">
+          <sc-for list="{{ top }}" as="t" hint-placeholder-count="5"><tr class="hs"><td style="color: {{ t.c }}">{{ t.r }}</td><td style="color: #FFC857">{{ t.n }}</td><td>{{ t.u }}</td></tr></sc-for>
+        </tbody>
+      </table>
+      <a href="#" class="px flick" style="display: block; text-align: center; margin-top: 12px; font-size: 18px; color: #FF4FA3">— INSERT EDIT TO PLAY —</a>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { q: 'かける' }; }
+  renderVals() {
+    const q = this.state.q;
+    const flags = ['jlpt:3', 'pos:v', 'common:yes', '-tag:arch', 'dict:kanji'].map(f => ({ f, add: () => this.setState({ q: (this.state.q + ' ' + f).trim() }) }));
+    const E = [['09:14', 'kitsune_ru', '結構', 'EDIT', 18, 4], ['09:07', 'guest', '推し活', 'NEW', 96, 0], ['08:52', 'Murasaki', '米', 'EDIT', 31, 0], ['08:40', 'yuki.p', '仕舞う', 'OCR', 3, 3], ['08:18', 'Tanuki42', '矢鱈', 'TAG', 6, 0], ['06:30', 'Tanuki42', '取り敢えず', 'DEL', 0, 214], ['04:00', 'cron', 'build', 'BUILD', 1942, 8]];
+    const col = { EDIT: '#3DF5E0', NEW: '#FFC857', OCR: '#B79CFF', TAG: '#3DF5E0', DEL: '#FF4FA3', BUILD: '#9AA3C7' };
+    const log = E.map(e => ({ t: e[0], u: e[1], w: e[2], op: e[3], a: e[4], r: e[5], c: col[e[3]] }));
+    const tick = E.concat(E).map(e => ({ t: e[0], u: e[1], w: e[2], d: e[3].toLowerCase() }));
+    const top = [['Murasaki', 312], ['kitsune_ru', 268], ['yuki.p', 197], ['old_kanbun', 141], ['Tanuki42', 96]]
+      .map(([u, n], i) => ({ u, n: String(n * 10).padStart(6, '0'), r: ['1ST', '2ND', '3RD', '4TH', '5TH'][i], c: i === 0 ? '#FFC857' : i < 3 ? '#3DF5E0' : '#9AA3C7' }));
+    return { query: q, flags, reset: () => this.setState({ q: '' }), log, tick, top };
+  }
+}
+</script>
+</body>
+</html>

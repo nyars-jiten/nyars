@@ -22,7 +22,7 @@ function actionOnSave() {
 }
 
 definePageMeta({
-  layout: false,
+  layout: 'hz',
 })
 </script>
 

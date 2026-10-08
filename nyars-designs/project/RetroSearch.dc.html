@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Ретро-аниме — поиск かける</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&amp;family=Russo+One&amp;family=Fira+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#1A1238;color:#F4EEFF;font-family:'Fira Sans',system-ui,sans-serif;font-size:16px;line-height:1.5}
+a{color:#58D3F7;text-decoration:none}a:hover{color:#FFE66D}
+.rr{font-family:'RocknRoll One',sans-serif}
+.ru{font-family:'Russo One',sans-serif}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.cel{border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'RocknRoll One';color:#fff;text-shadow:3px 3px 0 rgba(0,0,0,.35);position:relative;overflow:hidden;flex:0 0 auto}
+.cel::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.15) 0 1px,transparent 1px 3px)}
+.row{display:grid;grid-template-columns:44px 132px minmax(0,1fr) 28px;gap:16px;align-items:center;width:100%;padding:12px;border:0;border-radius:12px;background:rgba(255,255,255,.04);color:#F4EEFF;font:inherit;text-align:left;cursor:pointer;transition:background .2s}
+.row:hover{background:rgba(232,70,124,.14)}
+.row[aria-expanded=true]{background:rgba(88,211,247,.1);box-shadow:inset 0 0 0 1px rgba(88,211,247,.4)}
+.tab{height:40px;padding:0 16px;border:0;border-radius:20px;background:rgba(255,255,255,.08);color:#F4EEFF;font-family:'Russo One';font-size:14px;cursor:pointer}
+.tab[aria-selected=true]{background:#E8467C}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:4px;font-size:12px;font-weight:700;background:rgba(255,255,255,.1);white-space:nowrap}
+@keyframes vhs{0%{transform:translateX(0);filter:none}20%{transform:translateX(-6px) skewX(4deg);filter:hue-rotate(40deg) saturate(2)}40%{transform:translateX(5px)}60%{transform:translateX(-2px) skewX(-2deg)}100%{transform:none;filter:none}}
+.vhs{animation:vhs .45s steps(5)}
+@media (max-width:860px){.wrap{padding:0 16px}.row{grid-template-columns:96px minmax(0,1fr)}.row .hide{display:none}}
+</style>
+</helmet>
+<div>
+  <header style="background: #120C29; border-bottom: 2px solid #E8467C">
+    <div class="wrap" style="display: flex; align-items: center; gap: 14px 24px; flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px">
+      <a href="RetroHome.dc.html" class="ru" style="color: #fff; font-size: 24px; font-style: italic; text-shadow: 2px 2px 0 #E8467C">NYARS</a>
+      <form role="search" style="flex: 1 1 460px; display: flex; border: 2px solid #58D3F7; border-radius: 8px; overflow: hidden"><label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label><input id="q" type="search" value="かける" class="rr" style="flex: 1; min-width: 0; height: 44px; border: 0; background: transparent; padding: 0 12px; font-size: 19px; color: #fff; outline: none"><a href="#" class="ru" style="padding: 0 18px; display: flex; align-items: center; background: #58D3F7; color: #1A1238">PLAY</a></form>
+      <nav aria-label="Разделы" style="display: flex; gap: 18px"><a href="#" style="color: #F4EEFF">Кандзи</a><a href="#" style="color: #F4EEFF">Правки</a><a href="#" style="color: #F4EEFF">Скачать</a></nav>
+    </div>
+  </header>
+
+  <div class="wrap" style="padding-top: 26px; padding-bottom: 72px">
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 24px; margin-bottom: 18px">
+      <div style="flex: 1 1 auto">
+        <p class="ru" style="margin: 0; font-size: 13px; color: #FF9F43; letter-spacing: .1em">ВСЕ СЕРИИ ПО ЗАПРОСУ</p>
+        <h1 class="rr" lang="ja" style="margin: 2px 0 0; font-size: 44px; font-weight: 400">かける <span class="ru" style="font-size: 18px; color: #B8B0D9">9 серий · 8 спешлов · 46 камео</span></h1>
+      </div>
+      <div role="tablist" aria-label="Сезоны — словари" style="display: flex; gap: 6px; flex-wrap: wrap">
+        <sc-for list="{{ seasons }}" as="s" hint-placeholder-count="4"><button type="button" role="tab" class="tab" aria-selected="{{ s.on }}" onClick="{{ s.pick }}">{{ s.label }}</button></sc-for>
+      </div>
+    </div>
+
+    <sc-for list="{{ key }}" as="k" hint-placeholder-count="1">
+    <div class="vhs" style="display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start">
+      <article style="flex: 1 1 340px; max-width: 400px; border-radius: 16px; overflow: hidden; background: #2A1D57; position: sticky; top: 16px">
+        <div class="cel" lang="ja" style="height: 260px; border-radius: 0; background: linear-gradient(160deg, #E8467C, #FF9F43); font-size: 110px">掛ける</div>
+        <div style="padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 8px">
+          <span class="ru" style="font-size: 12px; color: #FFE66D; letter-spacing: .1em">ГЛАВНАЯ СЕРИЯ · EP.01</span>
+          <span class="rr" lang="ja" style="font-size: 30px">掛ける <span style="font-size: 16px; color: #B8B0D9">かける</span></span>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap"><span class="tag" style="background: #58D3F7; color: #1A1238">N4</span><span class="tag">частое</span><span class="tag">глагол</span><span class="tag">15 знач.</span></div>
+          <ol style="margin: 4px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 3px; font-size: 15px"><li>вешать, подвешивать</li><li>надевать (очки); накрывать</li><li>тратить (время, деньги)</li><li>звонить (по телефону)</li></ol>
+          <p style="margin: 6px 0 0; font-size: 14px; color: #B8B0D9">также пишется 懸ける, 架ける · Яркси · 2 скана</p>
+          <a href="RetroEntry.dc.html" class="ru" style="margin-top: 6px; height: 44px; display: flex; align-items: center; justify-content: center; background: #E8467C; color: #fff; border-radius: 8px">▶ СМОТРЕТЬ СТАТЬЮ</a>
+        </div>
+      </article>
+
+      <section aria-label="Остальные серии" style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+        <sc-for list="{{ eps }}" as="e" hint-placeholder-count="8">
+          <div>
+            <button type="button" class="row" aria-expanded="{{ e.open }}" onClick="{{ e.toggle }}">
+              <span class="ru hide" style="font-size: 20px; color: #FF9F43">{{ e.n }}</span>
+              <span class="cel" lang="ja" style="width: 132px; height: 84px; background: {{ e.bg }}; font-size: {{ e.fs }}">{{ e.w }}</span>
+              <span style="min-width: 0; display: flex; flex-direction: column; gap: 3px">
+                <span style="display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap"><span class="rr" lang="ja" style="font-size: 22px">{{ e.w }}</span><sc-if value="{{ e.jlpt }}" hint-placeholder-val="{{ false }}"><span class="tag" style="background: #58D3F7; color: #1A1238">{{ e.jlpt }}</span></sc-if><span class="tag">{{ e.pos }}</span></span>
+                <span style="font-size: 15px; color: #E5DEFF">{{ e.syn }}</span>
+                <sc-if value="{{ e.note }}" hint-placeholder-val="{{ false }}"><span style="font-size: 13.5px; color: #FFE66D">{{ e.note }}</span></sc-if>
+              </span>
+              <span class="hide" aria-hidden="true" style="font-size: 18px; color: #58D3F7">{{ e.arrow }}</span>
+            </button>
+            <sc-if value="{{ e.open }}" hint-placeholder-val="{{ false }}">
+              <div style="margin: 4px 0 6px 60px; padding: 12px 16px; border-left: 3px solid #58D3F7; font-size: 15px">
+                <ol style="margin: 0; padding-left: 20px"><sc-for list="{{ e.senses }}" as="s" hint-placeholder-count="2"><li>{{ s }}</li></sc-for></ol>
+                <p style="margin: 6px 0 0"><a href="RetroEntry.dc.html">Открыть статью →</a> · <a href="#">Править</a></p>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+
+        <h2 class="ru" style="margin: 22px 0 6px; font-size: 20px">Спешлы — выражения</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); gap: 8px">
+          <sc-for list="{{ idioms }}" as="m" hint-placeholder-count="8"><a href="#" style="display: flex; flex-direction: column; padding: 10px 14px; border-radius: 10px; background: rgba(255,255,255,.04); color: #F4EEFF"><span class="rr" lang="ja" style="font-size: 18px">{{ m.w }}</span><span style="font-size: 14px; color: #B8B0D9">{{ m.g }}</span></a></sc-for>
+        </div>
+        <p style="margin: 14px 0 0; font-size: 15px; color: #B8B0D9"><span class="ru" style="color: #F4EEFF">Камео:</span> <span class="rr">出かける · 見かける · 話しかける · 追いかける · 腰掛ける</span> <a href="#">и ещё 41</a></p>
+      </section>
+    </div>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2100}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { s: 0, open: { 1: true } }; }
+  renderVals() {
+    const { s, open } = this.state;
+    const seasons = ['ЯРС · 55', 'Кандзи · 8', 'Спутники · 31', 'Сканы · 17'].map((label, i) => ({ label, on: i === s, pick: () => this.setState({ s: i }) }));
+    const BG = ['#3E7BFA', '#FF9F43', '#7B4FE0', '#1FB5A0', '#C2367A', '#5B6BD6', '#E8467C', '#2C9CC9'];
+    const E = [
+      { w: '欠ける', jlpt: 'N3', pos: 'глагол', syn: 'откалываться; недоставать; убывать (о луне)', senses: ['откалываться, отбиваться', 'недоставать, не хватать', 'убывать (о луне)'] },
+      { w: '駆ける', jlpt: 'N1', pos: 'глагол', syn: 'бежать, мчаться; скакать', note: 'также 駈ける', senses: ['бежать, мчаться', 'скакать (на лошади)'] },
+      { w: '賭ける', jlpt: 'N2', pos: 'глагол', syn: 'ставить, держать пари; рисковать', senses: ['ставить, держать пари', 'рисковать (жизнью, честью)'] },
+      { w: '書ける', jlpt: 'N5', pos: 'глагол', syn: 'мочь писать; хорошо пишется', note: 'потенциальная форма 書く', senses: ['мочь писать', 'хорошо пишется (о ручке)'] },
+      { w: '架ける', pos: 'глагол', syn: 'наводить (мост)', note: 'обычно пишется 掛ける', senses: ['перекидывать, наводить (мост)'] },
+      { w: '懸ける', pos: 'глагол', syn: 'назначать (награду); ставить на карту', note: 'ср. 掛ける, 賭ける', senses: ['назначать (награду)', 'ставить на карту (честь)'] },
+      { w: '翔る', pos: 'книжн.', syn: 'парить, высоко лететь', senses: ['парить, высоко лететь', 'мчаться, нестись'] },
+      { w: '〜かける', pos: 'вспом.', syn: 'начать и не закончить', note: 'после основы: 読みかける', senses: ['начинать (делать)', 'не доделать', 'обращать действие к кому-л.'] }
+    ];
+    const eps = E.map((e, i) => { const n = Array.from(e.w).length; const o = !!open[i]; return { ...e, jlpt: e.jlpt || '', note: e.note || '', n: String(i + 2).padStart(2, '0'), bg: BG[i], fs: n <= 2 ? '40px' : n <= 3 ? '30px' : '22px', open: o, arrow: o ? '▾' : '▸', toggle: () => this.setState({ open: { ...open, [i]: !o } }) }; });
+    return { seasons, key: [s], eps,
+      idioms: [['腕によりをかける', 'показать всё мастерство'], ['天秤にかける', 'взвешивать варианты'], ['手塩にかける', 'растить с любовью'], ['拍車をかける', 'подстёгивать'], ['鎌をかける', 'выведывать хитростью'], ['輪をかける', 'ещё сильнее'], ['迷惑をかける', 'доставлять неудобства'], ['二股をかける', 'вести двойную игру']].map(([w, g]) => ({ w, g })) };
+  }
+}
+</script>
+</body>
+</html>

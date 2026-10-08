@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Поиск — горизонтальный</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700&amp;family=Zen+Maru+Gothic:wght@500;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+.root{min-height:100%;background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;font-size:15.5px;line-height:1.55}
+.root a{color:var(--strong);text-decoration:none}.root a:hover{text-decoration:underline;text-underline-offset:3px}
+.jp{font-family:'Zen Old Mincho','Yu Mincho',serif}
+.jm{font-family:'Zen Maru Gothic',sans-serif}
+.wrap{max-width:1320px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.proto{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:8px 32px;background:var(--surf);border-bottom:1px dashed var(--line);font-size:12.5px;color:var(--muted)}
+.pbtn{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border:1px solid var(--line);background:transparent;border-radius:14px;font:inherit;color:var(--ink);cursor:pointer}
+.pbtn[aria-pressed=true]{border-color:var(--strong);box-shadow:inset 0 0 0 1px var(--strong)}
+.sw{width:12px;height:12px;border-radius:50%;border:1px solid rgba(0,0,0,.15)}
+.seal{display:inline-flex;align-items:center;justify-content:center;background:var(--strong);color:var(--surf);border-radius:4px;font-family:'Zen Old Mincho',serif;font-weight:700}
+.ibtn{width:40px;height:40px;border:0;background:transparent;border-radius:8px;font-family:'Zen Old Mincho',serif;font-size:19px;color:var(--muted);cursor:pointer}
+.ibtn:hover{background:var(--soft);color:var(--strong)}
+.panel{background:var(--surf);border-radius:16px}
+.tok{display:inline-flex;flex-direction:column;align-items:center;gap:1px;padding:6px 8px 7px;border:0;background:transparent;border-radius:10px;font:inherit;color:var(--ink);cursor:pointer;position:relative}
+.tok:hover{background:var(--soft)}
+.tok[aria-pressed=true]{background:var(--acc);color:var(--onacc)}
+.tok[aria-pressed=true] .rt,.tok[aria-pressed=true] .bf{color:var(--onacc);opacity:.85}
+.tok .rt{font-family:'Zen Maru Gothic';font-size:11.5px;color:var(--muted);min-height:16px}
+.tok .bf{font-size:11px;color:var(--muted);min-height:15px}
+.tok.ph{cursor:default;color:var(--muted)}
+.tok.ph:hover{background:transparent}
+.tok.mwe::after{content:'';position:absolute;left:8px;right:8px;bottom:3px;height:3px;border-radius:2px;background:var(--strong);opacity:.55}
+.chip{display:inline-flex;align-items:center;height:32px;padding:0 12px;border:1px solid var(--line);background:var(--surf);border-radius:16px;font:inherit;font-size:13.5px;color:var(--ink);cursor:pointer;white-space:nowrap}
+.chip[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:var(--onacc);font-weight:600}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:11px;font-size:12px;font-weight:600;background:var(--soft);color:var(--strong);white-space:nowrap}
+.tag.sec{background:var(--secsoft);color:var(--sec)}
+.tag.ghost{background:transparent;box-shadow:inset 0 0 0 1px var(--line);color:var(--muted)}
+.cap{font-size:11.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.fgroup{padding:16px 0;border-top:1px solid var(--line)}
+.fl{display:flex;align-items:center;gap:10px;min-height:30px;font-size:14.5px}
+.fl span.n{margin-left:auto;font-size:12.5px;color:var(--muted)}
+.root input[type=checkbox],.root input[type=range]{accent-color:var(--strong)}
+.sel{height:38px;border:1px solid var(--line);border-radius:10px;background:var(--field);color:var(--ink);font:inherit;font-size:14px;padding:0 10px;width:100%}
+.tab{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:19px;color:var(--ink);font-weight:600;font-size:14.5px;white-space:nowrap}
+.tab .c{font-size:12px;font-weight:700;color:var(--muted)}
+.tab.on{background:var(--acc);color:var(--onacc)}.tab.on .c{color:var(--onacc)}
+.res{padding:22px 0;border-top:1px solid var(--line)}
+.res:first-child{border-top:0}
+.hw{font-family:'Zen Old Mincho',serif;font-weight:700;line-height:1.2;line-break:strict;overflow-wrap:anywhere;color:var(--ink)}
+.rd{font-family:'Zen Maru Gothic';color:var(--muted);overflow-wrap:anywhere}
+.sl{margin:10px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:22px minmax(0,1fr);gap:5px 6px}
+.sl .n{font-weight:800;color:var(--strong);font-size:13.5px;padding-top:1px}
+@media (max-width:900px){.wrap{padding:0 16px}.proto{padding:8px 16px}}
+</style>
+</helmet>
+<div class="root" style="--bg: {{ p.bg }}; --surf: {{ p.surf }}; --ink: {{ p.ink }}; --muted: {{ p.muted }}; --line: {{ p.line }}; --acc: {{ p.acc }}; --strong: {{ p.strong }}; --soft: {{ p.soft }}; --sec: {{ p.sec }}; --secsoft: {{ p.secsoft }}; --onacc: {{ p.onacc }}; --field: {{ p.field }}">
+  <div class="proto" role="group" aria-label="Прототип: выбор палитры">
+    <span style="font-weight: 700">Прототип · палитра:</span>
+    <sc-for list="{{ pals }}" as="o" hint-placeholder-count="4"><button type="button" class="pbtn" aria-pressed="{{ o.on }}" onClick="{{ o.pick }}"><span class="sw" style="background: {{ o.a }}"></span><span class="sw" style="background: {{ o.b }}"></span>{{ o.name }}</button></sc-for>
+  </div>
+
+  <header class="wrap" style="display: flex; align-items: center; gap: 14px 26px; flex-wrap: wrap; padding-top: 18px; padding-bottom: 14px">
+    <a href="#" style="display: flex; align-items: center; gap: 10px; color: var(--ink)"><span class="seal" style="width: 38px; height: 38px; font-size: 22px">辞</span><span style="font-size: 21px; font-weight: 800; letter-spacing: -0.01em">nyars</span></a>
+    <form role="search" style="flex: 1 1 520px; display: flex; align-items: center; gap: 4px; border-bottom: 2px solid var(--ink)">
+      <label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label>
+      <input id="q" type="search" value="医者に顔面筋疼痛機能不全症候群だと言われ、井蛙は以って海を語る可からずと思い知った。" class="jp" style="flex: 1; min-width: 0; height: 48px; border: 0; background: transparent; font-size: 19px; outline: none; color: var(--ink)">
+      <button type="button" class="ibtn" aria-label="Рукописный ввод" title="Рукописный ввод">筆</button>
+      <button type="button" class="ibtn" aria-label="Поиск по ключам" title="Ключи">部</button>
+      <button type="button" class="ibtn" aria-label="Расширенный поиск" title="Фильтры">篩</button>
+    </form>
+    <nav aria-label="Разделы" style="display: flex; gap: 20px; font-weight: 600"><a href="#">Кандзи</a><a href="#">Правки</a><a href="#">Скачать</a><a href="#">Войти</a></nav>
+  </header>
+
+  <div class="wrap" style="padding-bottom: 72px">
+    <section class="panel" aria-label="Разбор фразы" style="padding: 16px 20px 18px; margin-top: 8px">
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px">
+        <p class="cap" style="margin: 0">Разбор фразы · 11 токенов</p>
+        <span style="font-size: 12.5px; color: var(--muted); display: flex; align-items: center; gap: 6px"><span style="width: 16px; height: 3px; border-radius: 2px; background: var(--strong); opacity: .55"></span>устойчивое выражение / термин</span>
+        <span style="flex: 1"></span>
+        <button type="button" class="chip" aria-pressed="{{ ruby }}" onClick="{{ toggleRuby }}" style="height: 28px; font-size: 12.5px">Чтения</button>
+      </div>
+      <div lang="ja" style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 2px 0">
+        <sc-for list="{{ toks }}" as="t" hint-placeholder-count="11">
+          <button type="button" class="{{ t.cls }}" aria-pressed="{{ t.on }}" onClick="{{ t.pick }}" disabled="{{ t.ph }}">
+            <span class="rt">{{ t.rt }}</span>
+            <span class="jp" style="font-size: 23px; font-weight: 700; line-height: 1.15">{{ t.w }}</span>
+            <span class="bf">{{ t.bf }}</span>
+          </button>
+        </sc-for>
+      </div>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 36px; align-items: flex-start; margin-top: 26px">
+      <aside aria-label="Фильтры поиска" style="flex: 1 1 250px; max-width: 280px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px"><p class="cap" style="margin: 0">Фильтры</p><button type="button" style="border: 0; background: transparent; font: inherit; font-size: 13px; color: var(--strong); cursor: pointer">Сбросить</button></div>
+        <div class="fgroup">
+          <label class="cap" for="srt">Сортировка</label>
+          <select id="srt" class="sel"><option>По релевантности</option><option>По частотности</option><option>По длине заголовка</option><option>По алфавиту (годзюон)</option></select>
+        </div>
+        <div class="fgroup">
+          <p class="cap">Совпадение</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px"><button type="button" class="chip" aria-pressed="true">точное</button><button type="button" class="chip">начало</button><button type="button" class="chip">вхождение</button><button type="button" class="chip">шаблон</button></div>
+        </div>
+        <div class="fgroup">
+          <p class="cap">Часть речи</p>
+          <label class="fl"><input type="checkbox" checked> существительное <span class="n">3</span></label>
+          <label class="fl"><input type="checkbox" checked> выражение, пословица <span class="n">2</span></label>
+          <label class="fl"><input type="checkbox" checked> глагол <span class="n">0</span></label>
+          <label class="fl"><input type="checkbox" checked> прилагательное <span class="n">0</span></label>
+        </div>
+        <div class="fgroup">
+          <p class="cap">JLPT</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{ jlpt }}" as="j" hint-placeholder-count="6"><button type="button" class="chip" aria-pressed="{{ j.on }}" onClick="{{ j.toggle }}" style="min-width: 44px; justify-content: center">{{ j.l }}</button></sc-for></div>
+        </div>
+        <div class="fgroup">
+          <p class="cap">Частотность — ранг</p>
+          <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 600"><span>от № {{ fmin }}</span><span>до № {{ fmax }}</span></div>
+          <div style="position: relative; height: 8px; border-radius: 4px; background: var(--soft); margin: 10px 0 4px"><div style="position: absolute; top: 0; bottom: 0; left: {{ fl }}; right: {{ fr }}; border-radius: 4px; background: var(--acc)"></div></div>
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--muted)">от<input type="range" min="0" max="100" value="{{ a }}" onChange="{{ setA }}" style="flex: 1"></label>
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--muted)">до<input type="range" min="0" max="100" value="{{ b }}" onChange="{{ setB }}" style="flex: 1"></label>
+          <label class="fl" style="margin-top: 4px"><input type="checkbox"> включать слова без ранга</label>
+        </div>
+        <div class="fgroup">
+          <p class="cap">Пометы</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{ tags }}" as="g" hint-placeholder-count="8"><button type="button" class="chip" aria-pressed="{{ g.on }}" onClick="{{ g.toggle }}">{{ g.l }}</button></sc-for></div>
+        </div>
+        <div class="fgroup">
+          <p class="cap">Длина заголовка, знаков</p>
+          <div style="display: flex; gap: 8px; align-items: center"><select class="sel" aria-label="от"><option>1</option><option>2</option><option>4</option></select><span style="color: var(--muted)">—</span><select class="sel" aria-label="до"><option>16+</option><option>8</option><option>4</option></select></div>
+        </div>
+        <div class="fgroup">
+          <label class="fl"><input type="checkbox" checked> только с примерами</label>
+          <label class="fl"><input type="checkbox"> скрыть непроверенные</label>
+          <label class="fl"><input type="checkbox"> искать и в переводах</label>
+        </div>
+      </aside>
+
+      <main style="flex: 999 1 640px; min-width: 0">
+        <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-bottom: 12px">
+          <h1 style="margin: 0; font-size: 15px; font-weight: 600; color: var(--muted)">Результаты для <span class="jp" lang="ja" style="font-size: 20px; font-weight: 700; color: var(--ink); overflow-wrap: anywhere">{{ cur }}</span></h1>
+        </div>
+        <nav aria-label="Словари" style="display: flex; gap: 4px; overflow-x: auto; padding-bottom: 10px; border-bottom: 1px solid var(--line)">
+          <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="5"><a href="#" class="{{ t.cls }}" aria-current="{{ t.cur }}">{{ t.l }} <span class="c">{{ t.n }}</span></a></sc-for>
+        </nav>
+        <section aria-label="Статьи">
+          <sc-for list="{{ res }}" as="r" hint-placeholder-count="5">
+            <article class="res">
+              <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px">
+                <a href="HzEntry.dc.html" class="hw" lang="ja" style="font-size: {{ r.fs }}; text-decoration: none">{{ r.w }}</a>
+                <sc-if value="{{ r.alt }}" hint-placeholder-val="{{ false }}"><span style="font-size: 13.5px; color: var(--muted)">также <span class="jp" lang="ja" style="color: var(--ink); overflow-wrap: anywhere">{{ r.alt }}</span></span></sc-if>
+              </div>
+              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 4px">
+                <span class="rd" lang="ja" style="font-size: 14.5px">{{ r.r }}</span>
+                <sc-for list="{{ r.tags }}" as="g" hint-placeholder-count="2"><span class="{{ g.cls }}">{{ g.l }}</span></sc-for>
+              </div>
+              <ol class="sl"><sc-for list="{{ r.sn }}" as="s" hint-placeholder-count="2"><li style="display: contents"><span class="n">{{ s.n }}</span><span>{{ s.t }}</span></li></sc-for></ol>
+              <div style="display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 10px; font-size: 13px; color: var(--muted)"><span>{{ r.src }}</span><span style="flex: 1"></span><a href="#">Править</a><a href="HzEntry.dc.html" style="font-weight: 700">Открыть статью →</a></div>
+            </article>
+          </sc-for>
+        </section>
+      </main>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;palette&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Васи и туман&quot;,&quot;Холодная бумага&quot;,&quot;Сакура&quot;,&quot;Индиго-ночь&quot;],&quot;default&quot;:&quot;Холодная бумага&quot;},&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:2000}}">
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { pal: null, sel: 7, ruby: true, a: 0, b: 40, jl: { 'все': true }, tg: { 'пословица': true } }; }
+  renderVals() {
+    const PAL = {
+      'Васи и туман': { bg: '#F6F3EC', surf: '#FFFDF8', ink: '#1E2433', muted: '#5B6275', line: '#E3DDD0', acc: '#B7C7F7', strong: '#34478A', soft: '#E9EEFC', sec: '#A63F2A', secsoft: '#F7E3DC', onacc: '#1E2433', field: '#FFFDF8' },
+      'Холодная бумага': { bg: '#F3F5F9', surf: '#FFFFFF', ink: '#1B2030', muted: '#58607A', line: '#DEE3EE', acc: '#B7C7F7', strong: '#33458A', soft: '#EAF0FE', sec: '#7652A8', secsoft: '#EFE8F8', onacc: '#1B2030', field: '#FFFFFF' },
+      'Сакура': { bg: '#FAF6F4', surf: '#FFFFFF', ink: '#26202A', muted: '#665C68', line: '#EBE0E0', acc: '#B7C7F7', strong: '#3A4B8C', soft: '#ECF0FD', sec: '#A3445C', secsoft: '#F9E5EA', onacc: '#26202A', field: '#FFFFFF' },
+      'Индиго-ночь': { bg: '#131A2A', surf: '#1A2236', ink: '#E7EBF6', muted: '#A2ABC3', line: '#2B3550', acc: '#B7C7F7', strong: '#B7C7F7', soft: '#263252', sec: '#F0A28F', secsoft: '#3A2A30', onacc: '#131A2A', field: '#131A2A' }
+    };
+    const { sel, ruby, a, b, jl, tg } = this.state;
+    const pn = this.state.pal || this.props.palette || 'Васи и туман';
+    const p = PAL[pn] || PAL['Васи и туман'];
+    const pals = Object.keys(PAL).map(name => ({ name, a: PAL[name].bg, b: PAL[name].strong, on: name === pn, pick: () => this.setState({ pal: name }) }));
+    const T = [
+      ['医者', 'いしゃ', '', 'doc'], ['に'], ['顔面筋疼痛機能不全症候群', 'がんめんきんとうつうきのうふぜんしょうこうぐん', '', 'med', 1], ['だ'], ['と'], ['言われ', 'いわれ', '← 言う', 'say'], ['、'],
+      ['井蛙は以って海を語る可からず', 'せいあはもってうみをかたるべからず', '', 'prov', 1], ['と'], ['思い知った', 'おもいしった', '← 思い知る', 'know'], ['。']
+    ];
+    const toks = T.map((t, i) => {
+      const ph = !t[3];
+      return { w: t[0], rt: ruby ? (t[1] || '') : '', bf: t[2] || '', ph, on: i === sel,
+        cls: 'tok' + (ph ? ' ph' : '') + (t[4] ? ' mwe' : ''), pick: () => { if (!ph) this.setState({ sel: i }); } };
+    });
+    const D = {
+      prov: [
+        { w: '井蛙は以って海を語る可からず', alt: '井蛙は以て海を語るべからず', r: 'せいあはもってうみをかたるべからず', tags: [['пословица', ''], ['книжн.', 'sec']], s: ['ограниченному человеку не понять великого; букв. «лягушке из колодца не расскажешь о море»'], src: 'из «Чжуан-цзы» · Яркси · 1 скан' },
+        { w: '井の中の蛙大海を知らず', alt: '井の中の蛙', r: 'いのなかのかわずたいかいをしらず', tags: [['пословица', ''], ['частое', 'ghost']], s: ['лягушка в колодце не знает океана; о человеке с узким кругозором'], src: 'Яркси · 2 скана' },
+        { w: '井蛙の見', r: 'せいあのけん', tags: [['книжн.', 'sec']], s: ['узкий, ограниченный взгляд на вещи'], src: 'основной словарь' },
+        { w: '井蛙', r: 'せいあ', tags: [['сущ.', 'ghost']], s: ['лягушка в колодце', 'перен. человек с узким кругозором'], src: 'Яркси' },
+        { w: '蛙', alt: '蝦', r: 'かえる · かわず · かいる', tags: [['сущ.', 'ghost'], ['частое', 'ghost']], s: ['лягушка; жаба', 'поэт. (かわず) лягушка — сезонное слово весны'], src: 'Яркси · 3 скана' }
+      ],
+      med: [
+        { w: '顔面筋疼痛機能不全症候群', r: 'がんめんきんとうつうきのうふぜんしょうこうぐん', tags: [['мед.', 'sec'], ['сущ.', 'ghost']], s: ['синдром болевой дисфункции лицевых мышц'], src: 'спутник: мед. глоссарий · не проверено' },
+        { w: '筋膜性疼痛症候群', r: 'きんまくせいとうつうしょうこうぐん', tags: [['мед.', 'sec']], s: ['миофасциальный болевой синдром'], src: 'основной словарь' },
+        { w: '顎関節症', r: 'がくかんせつしょう', tags: [['мед.', 'sec']], s: ['дисфункция височно-нижнечелюстного сустава'], src: 'Яркси' },
+        { w: '機能不全', r: 'きのうふぜん', tags: [['сущ.', 'ghost']], s: ['дисфункция, нарушение функции'], src: 'Яркси' },
+        { w: '症候群', r: 'しょうこうぐん', tags: [['сущ.', 'ghost'], ['N1', '']], s: ['синдром'], src: 'Яркси · 1 скан' }
+      ],
+      doc: [
+        { w: '医者', r: 'いしゃ', tags: [['N5', ''], ['частое', 'ghost']], s: ['врач, доктор'], src: 'Яркси · 2 скана' },
+        { w: '医者の不養生', r: 'いしゃのふようじょう', tags: [['пословица', '']], s: ['сапожник без сапог; букв. «врач не бережёт своё здоровье»'], src: 'Яркси' }
+      ],
+      say: [
+        { w: '言う', alt: '云う, 謂う', r: 'いう · ゆう', tags: [['N5', ''], ['глагол', 'ghost']], s: ['говорить, сказать', 'называть'], src: 'Яркси · 3 скана' },
+        { w: '言われる', r: 'いわれる', tags: [['глагол', 'ghost']], s: ['страд. от 言う: (о ком-л.) говорят, считается'], src: 'основной словарь' }
+      ],
+      know: [{ w: '思い知る', r: 'おもいしる', tags: [['глагол', 'ghost']], s: ['осознать, понять на собственном опыте'], src: 'Яркси' }]
+    };
+    const key = T[sel][3];
+    const fsz = (w) => { const n = Array.from(w).length; return n <= 2 ? '36px' : n <= 4 ? '31px' : n <= 8 ? '26px' : n <= 12 ? '23px' : '21px'; };
+    const res = (D[key] || []).map(r => ({ ...r, alt: r.alt || '', fs: fsz(r.w),
+      tags: r.tags.map(([l, c]) => ({ l, cls: 'tag' + (c ? ' ' + c : '') })), sn: r.s.map((t, i) => ({ n: i + 1, t })) }));
+    const tabs = [['Японско-русский', res.length], ['Кандзи', key === 'med' ? 12 : key === 'prov' ? 6 : 2], ['Русско-японский β', 0], ['Спутники', 3], ['Сканы', 2]]
+      .map(([l, n], i) => ({ l, n, cls: 'tab' + (i === 0 ? ' on' : ''), cur: i === 0 ? 'page' : 'false' }));
+    const rank = (v) => Math.round(Math.pow(v / 100, 2) * 50000);
+    const lo = Math.min(a, b), hi = Math.max(a, b);
+    const J = ['все', 'N5', 'N4', 'N3', 'N2', 'N1', 'вне'];
+    const jlpt = J.map(l => ({ l, on: !!jl[l], toggle: () => this.setState({ jl: { ...jl, [l]: !jl[l] } }) }));
+    const G = ['пословица', 'ёдзидзюкуго', 'мед.', 'книжн.', 'разг.', 'вежл.', 'устар.', 'атэдзи'];
+    const tags = G.map(l => ({ l, on: !!tg[l], toggle: () => this.setState({ tg: { ...tg, [l]: !tg[l] } }) }));
+    return { p, pals, toks, ruby, toggleRuby: () => this.setState({ ruby: !ruby }), res, tabs, cur: T[sel][0], jlpt, tags,
+      a, b, fmin: rank(lo).toLocaleString('ru-RU'), fmax: (hi >= 100 ? '50 000+' : rank(hi).toLocaleString('ru-RU')), fl: lo + '%', fr: (100 - hi) + '%',
+      setA: (e) => this.setState({ a: +e.target.value }), setB: (e) => this.setState({ b: +e.target.value }) };
+  }
+}
+</script>
+</body>
+</html>

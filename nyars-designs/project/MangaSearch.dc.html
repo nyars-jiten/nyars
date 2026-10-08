@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Манга — поиск かける</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&amp;family=Mochiy+Pop+One&amp;family=Unbounded:wght@500;700;900&amp;family=Rubik:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFDF8;color:#111;font-family:'Rubik',system-ui,sans-serif;font-size:16px;line-height:1.5}
+a{color:#111}a:hover{color:#C2185B}
+.jpd{font-family:'Dela Gothic One','Mochiy Pop One',sans-serif}
+.jpp{font-family:'Mochiy Pop One',sans-serif}
+.un{font-family:'Unbounded',sans-serif}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.panel{border:4px solid #111;background:#fff;position:relative;overflow:hidden}
+.tone{background-image:radial-gradient(#111 1.1px,transparent 1.5px);background-size:7px 7px}
+.speed{background:repeating-conic-gradient(from 0deg at 50% 50%,#111 0deg 1.2deg,transparent 1.2deg 7deg)}
+.sfx{font-family:'Dela Gothic One',sans-serif;color:#FFD60A;-webkit-text-stroke:3px #111;paint-order:stroke fill;line-height:1}
+.cell{border:4px solid #111;background:#fff;position:relative;overflow:hidden;cursor:pointer;font:inherit;color:#111;text-align:left;padding:16px;min-height:180px;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;transition:transform .15s}
+.cell:hover{transform:scale(1.02) rotate(-0.6deg);z-index:2}
+.cell[aria-pressed=true]{background:#111;color:#fff}
+.cell[aria-pressed=true] .tag{background:#FFD60A;color:#111}
+.tag{font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;background:#111;color:#fff;padding:2px 7px;align-self:flex-start}
+.bubble{background:#fff;border:3px solid #111;border-radius:28px;padding:22px 28px;position:relative;color:#111}
+.bubble::before{content:'';position:absolute;left:-30px;top:40px;border:14px solid transparent;border-right:24px solid #111}
+.chip{height:40px;padding:0 14px;border:3px solid #111;background:#fff;font:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:3px 3px 0 #111}
+@media (max-width:760px){.wrap{padding:0 16px}.g{grid-template-columns:repeat(2,minmax(0,1fr)) !important}.g>*{grid-column:auto !important}.bubble::before{display:none}}
+</style>
+</helmet>
+<div>
+  <header style="background: #111; color: #fff; border-bottom: 4px solid #FFD60A">
+    <div class="wrap" style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding-top: 12px; padding-bottom: 12px">
+      <a href="MangaHome.dc.html" style="display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none"><span class="jpd" style="background: #FFD60A; color: #111; font-size: 24px; padding: 2px 10px; border: 3px solid #fff; transform: rotate(-3deg); display: inline-block">辞</span><span class="un" style="font-weight: 900; font-size: 22px">nyars!</span></a>
+      <form role="search" style="flex: 1 1 440px; display: flex; gap: 0"><label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label><input id="q" type="search" value="かける" class="jpp" style="flex: 1; min-width: 0; height: 46px; border: 3px solid #fff; padding: 0 14px; font-size: 18px; outline: none"><a href="#" class="un" style="background: #FFD60A; color: #111; padding: 0 18px; display: flex; align-items: center; font-weight: 900; text-decoration: none; border: 3px solid #fff; border-left: 0">GO!</a></form>
+      <a href="#" class="un" style="color: #fff; font-weight: 700; font-size: 14px">Войти</a>
+    </div>
+  </header>
+
+  <main class="wrap" style="padding-top: 28px; padding-bottom: 72px; display: flex; flex-direction: column; gap: 20px">
+    <section class="panel" aria-live="polite" style="padding: 0; min-height: 300px">
+      <div class="speed" style="position: absolute; inset: 0; opacity: 0.1"></div>
+      <span class="sfx" aria-hidden="true" style="position: absolute; right: 24px; top: 14px; font-size: 72px; transform: rotate(6deg)">{{ cur.sfx }}</span>
+      <div style="position: relative; display: flex; flex-wrap: wrap; gap: 24px 48px; padding: 30px 36px; align-items: center">
+        <div style="flex: 0 0 auto">
+          <p class="un" style="margin: 0; font-size: 13px; font-weight: 700">ЭПИЗОД {{ cur.ep }} ИЗ 9 · <span class="jpp">かける</span></p>
+          <h1 class="jpd" lang="ja" style="margin: 6px 0 0; font-size: 110px; line-height: 1; font-weight: 400">{{ cur.w }}</h1>
+          <p style="margin: 10px 0 0; display: flex; gap: 6px; flex-wrap: wrap"><span class="tag">{{ cur.pos }}</span><sc-if value="{{ cur.common }}" hint-placeholder-val="{{ false }}"><span class="tag" style="background: #FF3D7F">ЧАСТОЕ</span></sc-if></p>
+        </div>
+        <div class="bubble" style="flex: 1 1 420px">
+          <sc-if value="{{ cur.note }}" hint-placeholder-val="{{ false }}"><p style="margin: 0 0 8px; font-size: 14px; font-weight: 500; color: #C2185B">{{ cur.note }}</p></sc-if>
+          <ol style="margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; font-size: 18px">
+            <sc-for list="{{ cur.senses }}" as="s" hint-placeholder-count="4"><li>{{ s }}</li></sc-for>
+          </ol>
+          <p style="margin: 14px 0 0; display: flex; gap: 10px; flex-wrap: wrap"><a href="MangaEntry.dc.html" class="chip" style="display: inline-flex; align-items: center; text-decoration: none; background: #FFD60A">Открыть статью →</a><button type="button" class="chip">Править</button></p>
+        </div>
+      </div>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+      <h2 class="un" style="margin: 0 12px 0 0; font-size: 22px; font-weight: 900">Все омонимы <span class="jpp">かける</span></h2>
+      <button type="button" class="chip" aria-pressed="true" style="background: #111; color: #fff">По частотности</button>
+      <button type="button" class="chip">Только глаголы</button>
+      <button type="button" class="chip">Скрыть книжные</button>
+    </div>
+
+    <div class="g" role="group" aria-label="Омонимы" style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px">
+      <sc-for list="{{ items }}" as="r" hint-placeholder-count="9">
+        <button type="button" class="cell" aria-pressed="{{ r.on }}" onClick="{{ r.pick }}" style="grid-column: {{ r.span }}; clip-path: {{ r.clip }}">
+          <span class="sfx" aria-hidden="true" style="position: absolute; right: 10px; top: 8px; font-size: 26px; -webkit-text-stroke-width: 2px">{{ r.sfx }}</span>
+          <span class="jpd" lang="ja" style="font-size: 46px; line-height: 1.05">{{ r.w }}</span>
+          <span style="font-weight: 700; font-size: 15px">{{ r.hint }}</span>
+          <span class="tag">{{ r.pos }}</span>
+        </button>
+      </sc-for>
+    </div>
+
+    <section class="panel tone" aria-labelledby="ins" style="background-color: #FFF3B0; padding: 22px">
+      <h2 id="ins" class="un" style="margin: 0 0 14px; font-size: 20px; font-weight: 900; background: #fff; display: inline-block; padding: 4px 12px; border: 3px solid #111">Где ещё прячется <span class="jpp">かける</span> · 46</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px">
+        <sc-for list="{{ inside }}" as="m" hint-placeholder-count="10">
+          <a href="#" style="background: #fff; border: 3px solid #111; padding: 8px 14px; text-decoration: none; display: flex; flex-direction: column; box-shadow: 3px 3px 0 #111"><span class="jpp" lang="ja" style="font-size: 20px">{{ m.w }}</span><span style="font-size: 13px">{{ m.g }}</span></a>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1700}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { sel: 0 }; }
+  renderVals() {
+    const R = [
+      { w: '掛ける', hint: 'вешать, тратить, звонить', sfx: 'プルル', common: true, pos: 'ГЛАГОЛ', senses: ['вешать, подвешивать', 'надевать (очки); накрывать', 'тратить (время, деньги)', 'звонить (по телефону)', '…и ещё 11 значений'] },
+      { w: '欠ける', hint: 'откалываться, недоставать', sfx: 'パキッ', common: true, pos: 'ГЛАГОЛ', senses: ['откалываться, отбиваться', 'недоставать, не хватать', 'убывать (о луне)'] },
+      { w: '駆ける', hint: 'бежать, мчаться', sfx: 'ダッ', common: true, pos: 'ГЛАГОЛ', senses: ['бежать, мчаться', 'скакать (на лошади)'] },
+      { w: '賭ける', hint: 'ставить на кон', sfx: 'ゴゴゴ', common: true, pos: 'ГЛАГОЛ', senses: ['ставить, держать пари', 'рисковать (жизнью)'] },
+      { w: '架ける', hint: 'наводить мост', sfx: 'ガシッ', pos: 'ГЛАГОЛ', note: 'Часто пишется как 掛ける', senses: ['перекидывать, наводить (мост)'] },
+      { w: '懸ける', hint: 'назначать награду', sfx: 'キラッ', pos: 'ГЛАГОЛ', note: 'Ср. 掛ける и 賭ける', senses: ['назначать (награду)', 'ставить на карту (честь)'] },
+      { w: '翔る', hint: 'парить в небе', sfx: 'バサッ', pos: 'КНИЖН.', senses: ['парить, высоко лететь', 'мчаться, нестись'] },
+      { w: '書ける', hint: 'мочь писать', sfx: 'カキカキ', common: true, pos: 'ГЛАГОЛ', note: 'Это форма глагола 書く!', senses: ['мочь писать', 'хорошо пишется (о ручке)'] },
+      { w: '〜かける', hint: 'начать — и бросить', sfx: 'ピタッ', pos: 'СУФФИКС', note: 'После основы: 読みかける', senses: ['начинать (делать)', 'не доделать', 'обращать действие к кому-л.'] }
+    ];
+    const spans = ['1 / 3', '3 / 5', '5 / 7', '1 / 4', '4 / 7', '1 / 3', '3 / 5', '5 / 7', '1 / 7'];
+    const clips = ['polygon(0 0,100% 0,96% 100%,0 100%)', 'polygon(4% 0,100% 0,100% 100%,0 100%)', 'polygon(0 0,100% 0,100% 94%,0 100%)', 'polygon(0 4%,100% 0,98% 100%,0 100%)', 'polygon(2% 0,100% 0,100% 100%,0 96%)', 'polygon(0 0,97% 0,100% 100%,0 100%)', 'polygon(0 0,100% 6%,100% 100%,3% 100%)', 'polygon(0 0,100% 0,100% 100%,4% 100%)', 'polygon(0 0,100% 0,99% 100%,1% 100%)'];
+    const sel = this.state.sel;
+    const items = R.map((r, i) => ({ ...r, span: spans[i], clip: clips[i], on: i === sel, pick: () => this.setState({ sel: i }) }));
+    const c = R[sel];
+    return {
+      items, cur: { ...c, ep: sel + 1, common: !!c.common, note: c.note || '' },
+      inside: [{ w: '出かける', g: 'выходить из дома' }, { w: '見かける', g: 'случайно увидеть' }, { w: '話しかける', g: 'заговорить' }, { w: '追いかける', g: 'гнаться' }, { w: '呼びかける', g: 'окликать' }, { w: '腰掛ける', g: 'садиться' }, { w: '押しかける', g: 'нагрянуть' }, { w: '心掛ける', g: 'стараться' }]
+    };
+  }
+}
+</script>
+</body>
+</html>

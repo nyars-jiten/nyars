@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Манга — главная</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&amp;family=Mochiy+Pop+One&amp;family=Unbounded:wght@500;700;900&amp;family=Rubik:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFDF8;color:#111;font-family:'Rubik',system-ui,sans-serif;font-size:16px;line-height:1.5}
+a{color:#111}a:hover{color:#C2185B}
+.jpd{font-family:'Dela Gothic One','Mochiy Pop One',sans-serif}
+.jpp{font-family:'Mochiy Pop One',sans-serif}
+.un{font-family:'Unbounded',sans-serif}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.panel{border:4px solid #111;background:#fff;position:relative;overflow:hidden}
+.tone{background-image:radial-gradient(#111 1.1px,transparent 1.5px);background-size:7px 7px}
+.speed{background:repeating-conic-gradient(from 0deg at 30% 55%,#111 0deg 1.2deg,transparent 1.2deg 7deg)}
+.bubble{background:#fff;border:3px solid #111;border-radius:50% / 46%;padding:26px 34px;position:relative}
+.bubble::after{content:'';position:absolute;left:18%;bottom:-26px;border:14px solid transparent;border-top:24px solid #111}
+.sq{background:#fff;border:3px solid #111;border-radius:18px;padding:14px 18px;position:relative}
+.sfx{font-family:'Dela Gothic One',sans-serif;color:#FFD60A;-webkit-text-stroke:3px #111;paint-order:stroke fill;line-height:1;letter-spacing:-.02em}
+.burst{clip-path:polygon(50% 0,61% 30%,95% 18%,72% 45%,100% 62%,66% 66%,72% 100%,50% 76%,26% 100%,32% 66%,0 62%,28% 45%,6% 18%,40% 30%);background:#FF3D7F;color:#fff;display:flex;align-items:center;justify-content:center}
+.btn{height:48px;padding:0 20px;border:3px solid #111;background:#FFD60A;font:inherit;font-weight:700;cursor:pointer;box-shadow:4px 4px 0 #111;transition:transform .1s,box-shadow .1s}
+.btn:active{transform:translate(4px,4px);box-shadow:0 0 0 #111}
+.koma{flex:0 0 250px;display:flex;flex-direction:column;gap:10px;padding:14px;transition:transform .2s}
+.koma:hover{transform:rotate(-1.5deg) scale(1.02)}
+.bar{height:12px;border:2px solid #111;background:#fff}
+.bar>div{height:100%;background:#2D6CDF}
+@keyframes bob{50%{transform:translateY(-6px) rotate(-3deg)}}
+.mascot{animation:bob 2.4s ease-in-out infinite}
+@media (max-width:760px){.wrap{padding:0 16px}.grid{grid-template-columns:1fr !important}.grid>*{grid-column:auto !important;grid-row:auto !important}}
+</style>
+</helmet>
+<div>
+  <header style="background: #111; color: #fff; border-bottom: 4px solid #FFD60A">
+    <div class="wrap" style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding-top: 12px; padding-bottom: 12px">
+      <a href="#" style="display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none"><span class="jpd" style="background: #FFD60A; color: #111; font-size: 24px; padding: 2px 10px; border: 3px solid #fff; transform: rotate(-3deg); display: inline-block">辞</span><span class="un" style="font-weight: 900; font-size: 22px">nyars!</span></a>
+      <nav aria-label="Разделы" class="un" style="display: flex; gap: 6px; flex-wrap: wrap; font-size: 14px; font-weight: 700; flex: 1 1 auto">
+        <a href="MangaSearch.dc.html" style="color: #fff; padding: 10px 12px; text-decoration: none">Словарь</a><a href="#" style="color: #fff; padding: 10px 12px; text-decoration: none">Кандзи</a><a href="#" style="color: #fff; padding: 10px 12px; text-decoration: none">Правки <span style="background: #FF3D7F; padding: 1px 6px">214</span></a><a href="#" style="color: #fff; padding: 10px 12px; text-decoration: none">Скачать</a>
+      </nav>
+      <a href="#" class="un" style="color: #111; background: #fff; padding: 10px 16px; font-weight: 700; font-size: 14px; text-decoration: none; border: 3px solid #FFD60A">Войти</a>
+    </div>
+  </header>
+
+  <main class="wrap" style="padding-top: 28px; padding-bottom: 72px; display: flex; flex-direction: column; gap: 20px">
+    <div class="grid" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-rows: minmax(150px, auto); gap: 14px">
+      <section class="panel" style="grid-column: 1 / 9; grid-row: 1 / 4; clip-path: polygon(0 0, 100% 0, 97% 100%, 0 100%)">
+        <div class="speed" style="position: absolute; inset: 0; opacity: 0.12"></div>
+        <span class="sfx" aria-hidden="true" style="position: absolute; right: 7%; top: 6%; font-size: 64px; transform: rotate(8deg)">サーチ！</span>
+        <div style="position: relative; display: flex; align-items: flex-end; gap: 10px; padding: 40px 36px 28px; height: 100%; box-sizing: border-box; flex-wrap: wrap">
+          <button type="button" onClick="{{ poke }}" aria-label="Сумитян: нажмите, чтобы получить подсказку" style="border: 0; background: transparent; padding: 0; cursor: pointer; flex: 0 0 auto">
+            <svg class="mascot" width="150" height="160" viewBox="0 0 120 128" aria-hidden="true">
+              <path d="M60 6 C70 30 102 46 102 80 C102 106 84 120 60 120 C36 120 18 106 18 80 C18 46 50 30 60 6Z" fill="#111"></path>
+              <path d="M58 8 C54 2 48 0 44 2" stroke="#111" stroke-width="5" fill="none" stroke-linecap="round"></path>
+              <sc-if value="{{ happy }}" hint-placeholder-val="{{ true }}"><g><ellipse cx="44" cy="78" rx="9" ry="11" fill="#fff"></ellipse><ellipse cx="76" cy="78" rx="9" ry="11" fill="#fff"></ellipse><circle cx="46" cy="80" r="5" fill="#111"></circle><circle cx="74" cy="80" r="5" fill="#111"></circle><circle cx="48" cy="77" r="2" fill="#fff"></circle><circle cx="76" cy="77" r="2" fill="#fff"></circle><path d="M52 96 Q60 104 68 96" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"></path></g></sc-if>
+              <sc-if value="{{ wink }}" hint-placeholder-val="{{ false }}"><g><path d="M36 80 Q44 72 52 80" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"></path><ellipse cx="76" cy="78" rx="9" ry="11" fill="#fff"></ellipse><circle cx="74" cy="80" r="5" fill="#111"></circle><path d="M50 94 Q60 106 70 94 Z" fill="#FF3D7F"></path></g></sc-if>
+              <ellipse cx="34" cy="94" rx="7" ry="4" fill="#FF3D7F" opacity="0.8"></ellipse><ellipse cx="86" cy="94" rx="7" ry="4" fill="#FF3D7F" opacity="0.8"></ellipse>
+            </svg>
+          </button>
+          <div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 16px; margin-bottom: 70px">
+            <div class="bubble">
+              <p class="un" style="margin: 0 0 12px; font-weight: 700; font-size: 20px">{{ tip }}</p>
+              <form role="search" style="display: flex; gap: 8px">
+                <label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label>
+                <input id="q" type="search" placeholder="слово, よみ, перевод…" class="jpp" style="flex: 1; min-width: 0; height: 52px; border: 3px solid #111; padding: 0 14px; font-size: 18px; outline: none; background: #FFFDF8">
+                <a href="MangaSearch.dc.html" class="btn" style="display: flex; align-items: center; text-decoration: none; color: #111">ИСКАТЬ</a>
+              </form>
+              <div style="display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; font-size: 14px; font-weight: 500"><button type="button" class="btn" style="height: 40px; background: #fff; font-size: 14px">✎ нарисовать</button><button type="button" class="btn" style="height: 40px; background: #fff; font-size: 14px">部 ключи</button><button type="button" class="btn" style="height: 40px; background: #fff; font-size: 14px">фильтры</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel tone" style="grid-column: 9 / 13; grid-row: 1 / 3; background-color: #FFD60A; display: flex; flex-direction: column; justify-content: center; padding: 22px">
+        <span class="sfx" aria-hidden="true" style="position: absolute; left: 12px; top: 8px; font-size: 34px; color: #fff">ドドド</span>
+        <div style="background: #fff; border: 3px solid #111; padding: 16px; position: relative; margin-top: 24px">
+          <p class="un" style="margin: 0; font-size: 13px; font-weight: 700; text-transform: uppercase">Статей в словаре</p>
+          <p class="un" style="margin: 4px 0 0; font-size: 44px; font-weight: 900; line-height: 1">1 820 463</p>
+          <div class="burst un" style="position: absolute; right: -22px; top: -34px; width: 86px; height: 86px; font-weight: 900; font-size: 18px">−8</div>
+          <p style="margin: 8px 0 0; font-size: 14px">−8 удалено и +412 добавлено за неделю</p>
+        </div>
+      </section>
+
+      <section class="panel" style="grid-column: 9 / 13; grid-row: 3 / 4; padding: 18px; background: #111; color: #fff; clip-path: polygon(3% 0, 100% 0, 100% 100%, 0 100%)">
+        <p class="un" style="margin: 0 0 6px; font-size: 13px; font-weight: 700; color: #FFD60A">СЛОВО ДНЯ</p>
+        <a href="MangaEntry.dc.html" class="jpd" lang="ja" style="color: #fff; font-size: 40px; text-decoration: none"><ruby>推<rt style="font-size: 12px">お</rt>し活<rt style="font-size: 12px">かつ</rt></ruby></a>
+        <p style="margin: 4px 0 0; font-size: 15px">поддержка любимого артиста: мерч, концерты, лайки</p>
+      </section>
+    </div>
+
+    <section aria-labelledby="koma" style="margin-top: 18px">
+      <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 14px">
+        <h2 id="koma" class="un" style="margin: 0; font-size: 28px; font-weight: 900">Свежие правки</h2>
+        <span class="jpd" style="background: #FF3D7F; color: #fff; padding: 2px 10px; transform: rotate(-3deg)">NEW!</span>
+      </div>
+      <div style="display: flex; gap: 14px; overflow-x: auto; padding: 6px 4px 12px">
+        <sc-for list="{{ feed }}" as="e" hint-placeholder-count="6">
+          <a href="MangaEntry.dc.html" class="panel koma" style="text-decoration: none; color: #111">
+            <div style="display: flex; align-items: center; gap: 10px">
+              <span class="un" style="width: 40px; height: 40px; border: 3px solid #111; border-radius: 50%; background: {{ e.c }}; color: #fff; font-weight: 900; font-size: 13px; display: flex; align-items: center; justify-content: center">{{ e.ini }}</span>
+              <b style="font-size: 14px">{{ e.user }}</b>
+            </div>
+            <div class="sq" style="font-size: 14px">«{{ e.say }}»</div>
+            <span class="jpd" lang="ja" style="font-size: 34px; line-height: 1.1">{{ e.w }}</span>
+            <span style="font-size: 12px; color: #444">{{ e.t }}</span>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <section aria-labelledby="heroes">
+      <h2 id="heroes" class="un" style="margin: 10px 0 14px; font-size: 28px; font-weight: 900">Герои недели</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 14px">
+        <sc-for list="{{ top }}" as="t" hint-placeholder-count="4">
+          <article class="panel" style="padding: 16px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; align-items: center; justify-content: space-between">
+              <span class="un" style="font-size: 30px; font-weight: 900; color: #fff; -webkit-text-stroke: 2px #111; paint-order: stroke fill">#{{ t.rank }}</span>
+              <span class="jpd" style="font-size: 13px; background: #111; color: #FFD60A; padding: 2px 8px">{{ t.cls }}</span>
+            </div>
+            <b class="un" style="font-size: 18px">{{ t.user }}</b>
+            <div style="font-size: 13px; display: flex; justify-content: space-between"><span>Сила правок</span><b>{{ t.n }}</b></div>
+            <div class="bar"><div style="width: {{ t.pct }}"></div></div>
+            <div style="font-size: 13px; display: flex; justify-content: space-between"><span>Точность</span><b>{{ t.acc }}</b></div>
+            <div class="bar"><div style="width: {{ t.acc }}; background: #FF3D7F"></div></div>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { i: 0 }; }
+  renderVals() {
+    const tips = ['Что ищем сегодня? ✦', 'Пиши ромадзи — я сам переведу в кану!', 'Не знаешь чтение? Нарисуй знак!', 'Вставь целую фразу — разберу по словам!'];
+    const i = this.state.i;
+    const C = ['#2D6CDF', '#FF3D7F', '#111', '#7B3FE4', '#0E9F6E', '#E8590C'];
+    return {
+      tip: tips[i % tips.length], happy: i % 2 === 0, wink: i % 2 === 1,
+      poke: () => this.setState({ i: i + 1 }),
+      feed: [
+        { user: 'kitsune_ru', say: 'Уточнил наречие!', w: '結構', t: '4 мин назад' },
+        { user: 'гость', say: 'Новое слово, проверьте!', w: '推し活', t: '11 мин назад' },
+        { user: 'Murasaki', say: 'Пример про рис', w: '米', t: '26 мин назад' },
+        { user: 'yuki.p', say: 'OCR опять ошибся…', w: '仕舞う', t: '38 мин назад' },
+        { user: 'Tanuki42', say: 'Это атэдзи!', w: '矢鱈', t: '1 ч назад' },
+        { user: 'old_kanbun', say: 'Камбун не забыт', w: '之', t: '5 ч назад' }
+      ].map((e, k) => ({ ...e, ini: e.user.slice(0, 2).toUpperCase(), c: C[k % C.length] })),
+      top: [
+        { user: 'Murasaki', cls: '主人公', n: 312, acc: '97%' },
+        { user: 'kitsune_ru', cls: 'ライバル', n: 268, acc: '96%' },
+        { user: 'yuki.p', cls: '先輩', n: 197, acc: '92%' },
+        { user: 'old_kanbun', cls: '師匠', n: 141, acc: '99%' }
+      ].map((t, k) => ({ ...t, rank: k + 1, pct: Math.round(t.n / 312 * 100) + '%' }))
+    };
+  }
+}
+</script>
+</body>
+</html>

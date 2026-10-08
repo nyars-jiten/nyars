@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Мобильный поиск — рукописный ввод</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&amp;family=Shippori+Mincho:wght@500;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+.jp{font-family:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F5F4F0; color: #1A1C21; font-family: 'Golos Text', 'Hiragino Sans', system-ui, sans-serif; font-size: 15px; line-height: 1.5">
+  <div style="background: #1A1C21; padding: 12px 16px; display: flex; gap: 10px; align-items: center">
+    <a href="MobileEntry.dc.html" aria-label="Назад" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #F5F4F0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>
+    <label for="mq" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label>
+    <div style="flex: 1; height: 44px; background: #FCFBF8; border-radius: 6px; display: flex; align-items: center; padding: 0 12px; gap: 8px">
+      <input id="mq" value="米" class="jp" lang="ja" style="flex: 1; min-width: 0; border: 0; background: transparent; font-size: 20px; font-weight: 700; outline: none">
+      <button type="button" aria-label="Очистить" style="width: 32px; height: 32px; border: 0; background: #E9E7E1; border-radius: 50%; color: #474B54; font-size: 16px">×</button>
+    </div>
+  </div>
+
+  <div style="padding: 12px 16px; display: flex; flex-direction: column; gap: 0">
+    <p style="margin: 0 0 6px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #61656E; font-weight: 600">Японско-русский · 214</p>
+    <a href="MobileEntry.dc.html" style="display: flex; gap: 12px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid #E9E7E1; color: #1A1C21; text-decoration: none"><span class="jp" lang="ja" style="font-size: 22px; font-weight: 700">米</span><span class="jp" lang="ja" style="font-size: 14px; color: #474B54">こめ</span><span style="font-size: 15px">рис</span></a>
+    <a href="MobileEntry.dc.html" style="display: flex; gap: 12px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid #E9E7E1; color: #1A1C21; text-decoration: none"><span class="jp" lang="ja" style="font-size: 22px; font-weight: 700">米国</span><span class="jp" lang="ja" style="font-size: 14px; color: #474B54">べいこく</span><span style="font-size: 15px">США</span></a>
+  </div>
+
+  <section aria-label="Способ ввода" style="position: absolute; left: 0; right: 0; bottom: 0; background: #FCFBF8; border-radius: 16px 16px 0 0; box-shadow: 0 -12px 32px -8px rgba(26,28,33,0.25); padding: 8px 16px 24px; display: flex; flex-direction: column; gap: 12px">
+    <div style="width: 40px; height: 4px; border-radius: 2px; background: #CFCCC3; align-self: center"></div>
+    <div role="tablist" style="display: flex; gap: 2px; background: #E9E7E1; padding: 3px; border-radius: 8px">
+      <button type="button" role="tab" aria-selected="true" style="flex: 1; height: 38px; border: 0; background: #fff; border-radius: 6px; font: inherit; font-size: 14px; font-weight: 600">Рисовать</button>
+      <button type="button" role="tab" aria-selected="false" style="flex: 1; height: 38px; border: 0; background: transparent; border-radius: 6px; font: inherit; font-size: 14px; color: #474B54">Ключи</button>
+      <button type="button" role="tab" aria-selected="false" style="flex: 1; height: 38px; border: 0; background: transparent; border-radius: 6px; font: inherit; font-size: 14px; color: #474B54">Кана</button>
+    </div>
+    <div style="display: flex; gap: 6px; overflow-x: auto">
+      <button type="button" class="jp" style="flex: 0 0 auto; width: 52px; height: 52px; border: 2px solid #B33E27; background: #F7E2DB; border-radius: 6px; font-size: 28px; font-weight: 700">米</button>
+      <button type="button" class="jp" style="flex: 0 0 auto; width: 52px; height: 52px; border: 1px solid #DDDAD2; background: #fff; border-radius: 6px; font-size: 28px; font-weight: 700">来</button>
+      <button type="button" class="jp" style="flex: 0 0 auto; width: 52px; height: 52px; border: 1px solid #DDDAD2; background: #fff; border-radius: 6px; font-size: 28px; font-weight: 700">半</button>
+      <button type="button" class="jp" style="flex: 0 0 auto; width: 52px; height: 52px; border: 1px solid #DDDAD2; background: #fff; border-radius: 6px; font-size: 28px; font-weight: 700">未</button>
+      <button type="button" class="jp" style="flex: 0 0 auto; width: 52px; height: 52px; border: 1px solid #DDDAD2; background: #fff; border-radius: 6px; font-size: 28px; font-weight: 700">光</button>
+      <button type="button" class="jp" style="flex: 0 0 auto; width: 52px; height: 52px; border: 1px solid #DDDAD2; background: #fff; border-radius: 6px; font-size: 28px; font-weight: 700">平</button>
+    </div>
+    <div style="height: 300px; background: #fff; border: 1px solid #DDDAD2; border-radius: 8px; position: relative">
+      <svg width="356" height="298" viewBox="0 0 356 298" role="img" aria-label="Холст: нарисовано 6 черт">
+        <path d="M178 0V298M0 149H356" stroke="#E9E7E1" stroke-dasharray="6 6"/>
+        <g fill="none" stroke="#1A1C21" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M126 58 L146 96"/><path d="M232 54 L208 96"/><path d="M90 128 L268 124"/><path d="M178 36 L179 262"/><path d="M175 136 Q140 200 92 230"/><path d="M181 136 Q222 196 268 222"/>
+        </g>
+      </svg>
+    </div>
+    <div style="display: flex; gap: 8px">
+      <button type="button" style="flex: 1; height: 48px; border: 1px solid #DDDAD2; background: #fff; border-radius: 8px; font: inherit; font-size: 15px">Отменить черту</button>
+      <button type="button" style="flex: 1; height: 48px; border: 1px solid #DDDAD2; background: #fff; border-radius: 8px; font: inherit; font-size: 15px">Очистить</button>
+      <button type="button" style="flex: 1; height: 48px; border: 0; background: #1A1C21; color: #fff; border-radius: 8px; font: inherit; font-size: 15px; font-weight: 600">Готово</button>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

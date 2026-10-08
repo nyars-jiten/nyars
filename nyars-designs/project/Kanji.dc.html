@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>米 — словарь кандзи</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&amp;family=Shippori+Mincho:wght@500;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F4F0;color:#1A1C21;font-family:'Golos Text','Hiragino Sans','Noto Sans JP',system-ui,sans-serif;font-size:15px;line-height:1.5}
+a{color:#2B4A85;text-decoration:none}a:hover{color:#1A2F57;text-decoration:underline}
+.jp{font-family:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.wrap{max-width:1312px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.card{background:#FCFBF8;border:1px solid #DDDAD2;border-radius:6px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#61656E;font-weight:600;margin:0}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 7px;border-radius:4px;font-size:12px;font-weight:600;background:#E9E7E1;color:#474B54;white-space:nowrap}
+.tag.shu{background:#F7E2DB;color:#8A2D1B}.tag.ai{background:#E1E8F4;color:#22396A}
+.btn{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:6px;border:1px solid #DDDAD2;background:#FCFBF8;color:#1A1C21;font:inherit;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none}
+.btn.primary{background:#1A1C21;color:#fff;border-color:#1A1C21}
+.cols{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start}
+.main{flex:999 1 640px;min-width:0}.side{flex:1 1 300px;min-width:0}
+.rd{display:grid;grid-template-columns:minmax(64px,auto) 1fr 44px;gap:10px;align-items:center;padding:6px 0}
+.bar{height:8px;background:#E9E7E1;border-radius:4px;overflow:hidden}
+.mh{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;padding:10px 0 12px;border-bottom:2px solid #1A1C21;margin:0 0 4px}
+.m{display:grid;grid-template-columns:32px minmax(0,1fr);gap:4px 8px;padding:14px 0;border-bottom:1px solid #E9E7E1}
+.num{font-weight:700;color:#B33E27}
+.exs{grid-column:2;display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.exr{display:flex;flex-wrap:wrap;gap:2px 14px;align-items:baseline}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid #E9E7E1;font-size:14px}
+.kv dt{color:#474B54}.kv dd{margin:0;text-align:right}
+@media (max-width:640px){.wrap{padding:0 16px}.btn{height:44px}}
+</style>
+</helmet>
+<div>
+  <dc-import name="Header" active="kanji" initial-panel="none" query="米" hint-size="100%,72px"></dc-import>
+
+  <div class="wrap" style="padding-top: 20px; padding-bottom: 72px">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 24px">
+      <nav aria-label="Навигация" style="font-size: 14px; color: #61656E; display: flex; gap: 8px"><a href="Kanji.dc.html">Кандзи</a><span aria-hidden="true">/</span><span>6 черт</span><span aria-hidden="true">/</span><span lang="ja" class="jp" style="color: #1A1C21">米</span></nav>
+      <div style="display: flex; gap: 8px">
+        <a href="#" class="btn" aria-label="Предыдущий знак: 竹">← <span lang="ja" class="jp" style="font-size: 18px">竹</span></a>
+        <a href="#" class="btn" aria-label="Следующий знак: 糸"><span lang="ja" class="jp" style="font-size: 18px">糸</span> →</a>
+        <a href="Editor.dc.html" class="btn primary">Править</a>
+      </div>
+    </div>
+
+    <section style="display: flex; flex-wrap: wrap; gap: 32px 48px; padding-bottom: 32px; border-bottom: 1px solid #DDDAD2">
+      <div style="flex: 0 0 auto; display: flex; flex-direction: column; gap: 10px">
+        <div style="width: 232px; height: 232px; background: #fff; border: 2px solid #1A1C21; position: relative; box-sizing: border-box">
+          <svg width="228" height="228" viewBox="0 0 228 228" aria-hidden="true" style="position: absolute; inset: 0"><path d="M114 0V228M0 114H228" stroke="#E2C9C1" stroke-dasharray="5 5"></path><path d="M0 0L228 228M228 0L0 228" stroke="#F0E4E0" stroke-dasharray="3 6"></path></svg>
+          <sc-if value="{{ glyph }}" hint-placeholder-val="{{ true }}">
+            <span lang="ja" class="jp" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 184px; font-weight: 500; line-height: 1">米</span>
+          </sc-if>
+          <sc-if value="{{ strokes }}" hint-placeholder-val="{{ false }}">
+            <svg width="228" height="228" viewBox="0 0 200 200" role="img" aria-label="Порядок черт: 6 черт" style="position: absolute; inset: 0">
+              <g fill="none" stroke="#1A1C21" stroke-width="9" stroke-linecap="round"><path d="M62 42 L80 72"></path><path d="M140 40 L120 72"></path><path d="M28 94 L172 92"></path><path d="M100 20 L100 186"></path><path d="M97 102 Q72 148 30 172"></path><path d="M103 102 Q136 146 174 168"></path></g>
+              <g font-family="Golos Text, sans-serif" font-size="13" font-weight="700" fill="#B33E27"><text x="46" y="44">1</text><text x="146" y="40">2</text><text x="14" y="98">3</text><text x="108" y="24">4</text><text x="60" y="156">5</text><text x="150" y="140">6</text></g>
+            </svg>
+          </sc-if>
+        </div>
+        <div style="display: flex; gap: 6px">
+          <button type="button" class="btn" style="flex: 1; justify-content: center" aria-pressed="{{ strokes }}" onClick="{{ toggle }}">{{ toggleLabel }}</button>
+          <button type="button" class="btn" aria-label="Анимация написания" style="width: 40px; padding: 0; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5l12 7-12 7z"></path></svg></button>
+        </div>
+      </div>
+
+      <div style="flex: 1 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+        <div>
+          <p style="margin: 0; font-size: 28px; font-weight: 700; line-height: 1.25">рис; Америка; метр</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px">
+            <span class="tag">6 черт</span><span class="tag">ключ 119 <span lang="ja" class="jp" style="margin-left: 4px">米</span></span><span class="tag">2 класс (кёику)</span><span class="tag ai">N3</span><span class="tag">дзёё</span>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 20px 36px">
+          <div>
+            <h2 class="eyebrow" style="margin-bottom: 6px">Он · <span lang="ja" class="jp">音読み</span></h2>
+            <div class="rd"><span lang="ja" class="jp" style="font-size: 20px; font-weight: 700">ベイ</span><div class="bar"><div style="width: 52%; height: 8px; background: #2B4A85"></div></div><span class="mono" style="font-size: 13px; text-align: right">52%</span></div>
+            <div class="rd"><span lang="ja" class="jp" style="font-size: 20px; font-weight: 700">マイ</span><div class="bar"><div style="width: 21%; height: 8px; background: #2B4A85"></div></div><span class="mono" style="font-size: 13px; text-align: right">21%</span></div>
+            <div class="rd"><span lang="ja" class="jp" style="font-size: 20px; font-weight: 500; color: #61656E">メ</span><div class="bar"></div><span class="mono" style="font-size: 13px; text-align: right; color: #61656E">&lt;1%</span></div>
+          </div>
+          <div>
+            <h2 class="eyebrow" style="margin-bottom: 6px">Кун · <span lang="ja" class="jp">訓読み</span></h2>
+            <div class="rd"><span lang="ja" class="jp" style="font-size: 20px; font-weight: 700">こめ</span><div class="bar"><div style="width: 26%; height: 8px; background: #B33E27"></div></div><span class="mono" style="font-size: 13px; text-align: right">26%</span></div>
+            <div class="rd"><span lang="ja" class="jp" style="font-size: 20px; font-weight: 500; color: #61656E">よね</span><div class="bar"><div style="width: 1%; height: 8px; background: #B33E27"></div></div><span class="mono" style="font-size: 13px; text-align: right; color: #61656E">1%</span></div>
+          </div>
+          <div>
+            <h2 class="eyebrow" style="margin-bottom: 6px">Нанори · <span lang="ja" class="jp">名乗り</span></h2>
+            <div lang="ja" class="jp" style="display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 18px; font-weight: 700; padding-top: 6px"><span>よ</span><span>よな</span><span>め</span><span>くめ</span></div>
+            <p style="margin: 8px 0 0; font-size: 13px; color: #474B54">в именах: <span lang="ja" class="jp">米子</span> (Ёнаго), <span lang="ja" class="jp">久米</span> (Кумэ)</p>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 13px; color: #61656E">Доля — по словам с этим знаком в частотном корпусе, взвешенная по употреблению.</p>
+      </div>
+    </section>
+
+    <div class="cols" style="padding-top: 32px">
+      <main class="main" style="display: flex; flex-direction: column; gap: 40px">
+        <section aria-labelledby="m1">
+          <div class="mh"><h2 id="m1" style="margin: 0; font-size: 20px">Самостоятельные значения</h2><span style="font-size: 14px; color: #61656E">знак как отдельное слово</span></div>
+          <div class="m">
+            <span class="num">1.</span>
+            <div><b style="font-size: 17px">рис</b> (зерно, крупа); <span lang="ja" class="jp" style="font-weight: 700">こめ</span></div>
+            <div class="exs">
+              <div class="exr"><span lang="ja" class="jp" style="font-size: 17px; font-weight: 700">米を研ぐ</span><span lang="ja" class="jp" style="color: #474B54; font-size: 14px">こめをとぐ</span><span>промывать рис</span></div>
+              <div class="exr"><span lang="ja" class="jp" style="font-size: 17px; font-weight: 700">新米</span><span lang="ja" class="jp" style="color: #474B54; font-size: 14px">しんまい</span><span>рис нового урожая; <i>перен.</i> новичок</span></div>
+            </div>
+          </div>
+          <div class="m">
+            <span class="num">2.</span>
+            <div><span class="tag" style="margin-right: 6px">уст. запись</span><b style="font-size: 17px">метр</b> (единица длины); <span lang="ja" class="jp" style="font-weight: 700">メートル</span></div>
+            <div class="exs">
+              <div class="exr"><span lang="ja" class="jp" style="font-size: 17px; font-weight: 700">百米競走</span><span lang="ja" class="jp" style="color: #474B54; font-size: 14px">ひゃくメートルきょうそう</span><span>забег на сто метров</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="m2">
+          <div class="mh"><h2 id="m2" style="margin: 0; font-size: 20px">В составе слов</h2><span style="font-size: 14px; color: #61656E">значение, которое знак даёт сложному слову</span></div>
+          <div class="m">
+            <span class="num">1.</span>
+            <div><b style="font-size: 17px">Америка, американский</b> — сокр. от <span lang="ja" class="jp">亜米利加</span>; <span lang="ja" class="jp" style="font-weight: 700">ベイ</span></div>
+            <div class="exs">
+              <div class="exr"><span lang="ja" class="jp" style="font-size: 17px; font-weight: 700">米国</span><span lang="ja" class="jp" style="color: #474B54; font-size: 14px">べいこく</span><span>США</span></div>
+              <div class="exr"><span lang="ja" class="jp" style="font-size: 17px; font-weight: 700">日米関係</span><span lang="ja" class="jp" style="color: #474B54; font-size: 14px">にちべいかんけい</span><span>японо-американские отношения</span></div>
+              <div class="exr"><span lang="ja" class="jp" style="font-size: 17px; font-weight: 700">欧米</span><span lang="ja" class="jp" style="color: #474B54; font-size: 14px">おうべい</span><span>Европа и Америка, Запад</span></div>
+            </div>
+          </div>
+          <div class="m">
+            <span class="num">2.</span>
+            <div><b style="font-size: 17px">восемьдесят восемь</b> — знак раскладывается на 八・十・八</div>
+            <div class="exs">
+              <div class="exr"><span lang="ja" class="jp" style="font-size: 17px; font-weight: 700">米寿</span><span lang="ja" class="jp" style="color: #474B54; font-size: 14px">べいじゅ</span><span>88-летие</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="m3">
+          <div class="mh"><h2 id="m3" style="margin: 0; font-size: 20px">Старые значения</h2><span style="font-size: 14px; color: #61656E">для камбуна и кундоку</span></div>
+          <div class="m">
+            <span class="num">1.</span>
+            <div><b style="font-size: 17px">зерно, крупа вообще</b> (не только рис); очищенное зерно</div>
+            <div class="exs">
+              <div class="exr"><span lang="ja" class="jp" style="font-size: 17px; font-weight: 700">米塩</span><span lang="ja" class="jp" style="color: #474B54; font-size: 14px">べいえん</span><span>рис и соль; <i>перен.</i> мелочи быта, житейские расходы</span></div>
+              <div class="exr" style="padding: 8px 12px; background: #FCFBF8; border: 1px solid #E9E7E1; border-radius: 4px"><span lang="ja" class="jp" style="font-size: 17px; font-weight: 700">[ПРИМЕР ИЗ КАМБУНА]</span><span lang="ja" class="jp" style="color: #474B54; font-size: 14px">[кундоку]</span><span>[перевод и источник]</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="m4">
+          <div class="mh"><h2 id="m4" style="margin: 0; font-size: 20px">Слова с этим знаком</h2><a href="Search.dc.html" style="font-size: 14px">все 214 →</a></div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr)); gap: 0 24px">
+            <sc-for list="{{ words }}" as="w" hint-placeholder-count="8">
+              <a href="Entry.dc.html" style="display: flex; flex-direction: column; padding: 10px 0; border-bottom: 1px solid #E9E7E1; color: #1A1C21; text-decoration: none">
+                <span style="display: flex; gap: 8px; align-items: baseline"><span lang="ja" class="jp" style="font-size: 19px; font-weight: 700">{{ w.w }}</span><span lang="ja" class="jp" style="font-size: 13px; color: #474B54">{{ w.r }}</span></span>
+                <span style="font-size: 14px; color: #33363D">{{ w.g }}</span>
+              </a>
+            </sc-for>
+          </div>
+        </section>
+      </main>
+
+      <aside class="side" style="display: flex; flex-direction: column; gap: 20px">
+        <section class="card" style="padding: 18px 20px">
+          <h2 class="eyebrow" style="margin-bottom: 6px">Формы и варианты</h2>
+          <dl style="margin: 0">
+            <div class="kv"><dt>Синдзитай</dt><dd lang="ja" class="jp" style="font-size: 18px; font-weight: 700">米</dd></div>
+            <div class="kv"><dt>Кюдзитай <span lang="ja" class="jp">旧字体</span></dt><dd style="color: #61656E">совпадает</dd></div>
+            <div class="kv"><dt>Итайдзи <span lang="ja" class="jp">異体字</span></dt><dd>[ВАРИАНТЫ]</dd></div>
+            <div class="kv"><dt>Состав</dt><dd>сам является ключом</dd></div>
+          </dl>
+          <p class="eyebrow" style="margin: 14px 0 8px">Содержат <span lang="ja" class="jp">米</span></p>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px">
+            <sc-for list="{{ rel }}" as="k" hint-placeholder-count="8">
+              <a href="Kanji.dc.html" lang="ja" class="jp" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid #DDDAD2; border-radius: 4px; color: #1A1C21; font-size: 22px; font-weight: 700; text-decoration: none">{{ k }}</a>
+            </sc-for>
+          </div>
+        </section>
+
+        <section class="card" style="padding: 18px 20px">
+          <h2 class="eyebrow" style="margin-bottom: 6px">Коды</h2>
+          <dl style="margin: 0" class="mono">
+            <div class="kv"><dt>Unicode</dt><dd>U+7C73</dd></div>
+            <div class="kv"><dt>JIS X 0208</dt><dd>1-42-38</dd></div>
+            <div class="kv"><dt>Shift_JIS</dt><dd>95C4</dd></div>
+            <div class="kv"><dt>EUC-JP</dt><dd>CAC6</dd></div>
+            <div class="kv"><dt>SKIP</dt><dd>[—]</dd></div>
+            <div class="kv"><dt>Нельсон</dt><dd>[№]</dd></div>
+          </dl>
+          <button type="button" class="btn" style="margin-top: 12px; height: 34px; font-size: 13px">Скопировать всё</button>
+        </section>
+
+        <section style="padding: 0 4px; font-size: 14px; color: #474B54; display: flex; flex-direction: column; gap: 6px">
+          <h2 class="eyebrow">Также в</h2>
+          <a href="Search.dc.html">Яркси — статья <span lang="ja" class="jp">米</span></a>
+          <a href="Entry.dc.html">Скан: словарь кандзи, с. [№]</a>
+          <span>Правок: 23 · v9 · <a href="Entry.dc.html">история</a></span>
+        </section>
+      </aside>
+    </div>
+  </div>
+<p style="margin: 0; position: absolute; left: 73px; top: 779px">玉子
+    oik</p></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2300}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { strokes: false }; }
+  renderVals() {
+    const s = this.state.strokes;
+    return {
+      strokes: s, glyph: !s,
+      toggleLabel: s ? 'Знак' : 'Порядок черт',
+      toggle: () => this.setState({ strokes: !s }),
+      words: [
+        { w: '米', r: 'こめ', g: 'рис' }, { w: '米国', r: 'べいこく', g: 'США' },
+        { w: '欧米', r: 'おうべい', g: 'Запад' }, { w: '新米', r: 'しんまい', g: 'новый рис; новичок' },
+        { w: '白米', r: 'はくまい', g: 'шлифованный рис' }, { w: '玄米', r: 'げんまい', g: 'бурый рис' },
+        { w: '米軍', r: 'べいぐん', g: 'армия США' }, { w: '南米', r: 'なんべい', g: 'Южная Америка' }
+      ],
+      rel: ['粉', '料', '迷', '粒', '精', '糧', '断', '歯']
+    };
+  }
+}
+</script>
+</body>
+</html>

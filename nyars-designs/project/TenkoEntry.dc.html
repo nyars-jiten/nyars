@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Тэнкоку — статья</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&amp;family=Spectral:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F6F2EA;color:#2B2724;font-family:'Spectral',Georgia,serif;font-size:17px;line-height:1.6}
+a{color:#2B2724;text-decoration:underline;text-decoration-color:#C9A39C;text-underline-offset:4px}a:hover{color:#9C2522}
+.sm{font-family:'Shippori Mincho B1',serif}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.seal{background:#B8312F;color:#F6F2EA;display:grid;border-radius:6px;padding:8px;box-sizing:border-box;filter:url(#worn);font-family:'Shippori Mincho B1',serif;font-weight:800;flex:0 0 auto}
+.seal.yang{background:transparent;color:#B8312F;border:4px solid #B8312F}
+.seal span{display:flex;align-items:center;justify-content:center;line-height:1}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;border:1px solid #CDBFAE;border-radius:3px;font-size:12.5px;white-space:nowrap;vertical-align:2px}
+.tag.r{border-color:#B8312F;color:#9C2522}
+.chip{height:36px;padding:0 13px;border:1.5px solid #2B2724;background:transparent;border-radius:18px;font:inherit;font-size:14px;cursor:pointer;color:#2B2724}
+.chip[aria-pressed=true],.chip[aria-selected=true]{background:#2B2724;color:#F6F2EA}
+.pos{display:flex;align-items:center;gap:14px;margin:0 0 4px}
+.sense{display:grid;grid-template-columns:40px minmax(0,1fr);gap:4px 14px;padding:12px 0;border-bottom:1px solid #E7DFD2}
+.n{width:32px;height:32px;font-size:15px;place-items:center;padding:0;border-radius:50%}
+.ex{margin-top:6px;font-size:15.5px;color:#4E4741}
+.kv{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid #E7DFD2;font-size:14.5px}
+.kv dt{color:#6A625A}.kv dd{margin:0;text-align:right}
+@keyframes stamp{0%{transform:scale(1.5) rotate(-8deg);opacity:0}70%{transform:scale(.97) rotate(1deg);opacity:1}100%{transform:scale(1) rotate(-1.5deg)}}
+.stamped{animation:stamp .4s ease-out both}
+@media (max-width:860px){.wrap{padding:0 16px}.stick{position:static !important}}
+</style>
+</helmet>
+<div>
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true"><filter id="worn"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.5" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in" result="c"/><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="1" seed="2" result="w"/><feDisplacementMap in="c" in2="w" scale="2.5"/></filter></svg>
+
+  <header style="border-bottom: 1px solid #E2D9CB">
+    <div class="wrap" style="display: flex; align-items: center; gap: 14px 26px; flex-wrap: wrap; padding-top: 14px; padding-bottom: 14px">
+      <a href="TenkoHome.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none"><span class="seal" style="width: 40px; height: 40px; grid-template-columns: 1fr 1fr; font-size: 14px; padding: 3px"><span>書</span><span>辞</span></span><span style="font-size: 20px; font-weight: 700">nyars</span></a>
+      <form role="search" style="flex: 1 1 480px; display: flex; align-items: center; gap: 8px; border: 2px solid #B8312F; border-radius: 6px; padding: 0 6px 0 14px"><label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label><input id="q" type="search" value="結構" class="sm" style="flex: 1; min-width: 0; height: 46px; border: 0; background: transparent; font-size: 21px; outline: none"><a href="TenkoSearch.dc.html" style="height: 36px; padding: 0 16px; display: flex; align-items: center; background: #B8312F; color: #F6F2EA; border-radius: 4px; text-decoration: none; font-weight: 700">Найти</a></form>
+      <nav aria-label="Разделы" style="display: flex; gap: 18px"><a href="#" style="text-decoration: none">Кандзи</a><a href="#" style="text-decoration: none">Правки</a><a href="#" style="text-decoration: none">Скачать</a></nav>
+    </div>
+  </header>
+
+  <div class="wrap" style="padding-top: 30px; padding-bottom: 72px; display: flex; flex-wrap: wrap; gap: 36px 56px; align-items: flex-start">
+    <aside class="stick" style="flex: 1 1 300px; max-width: 340px; position: sticky; top: 16px; display: flex; flex-direction: column; gap: 20px; align-items: center; text-align: center">
+      <div role="group" aria-label="Тест длины заголовка" style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap; justify-content: center">
+        <span style="font-size: 13px; color: #6A625A">длина:</span>
+        <sc-for list="{{ lens }}" as="l" hint-placeholder-count="3"><button type="button" class="chip" aria-pressed="{{ l.on }}" onClick="{{ l.pick }}" style="height: 30px; font-size: 13px">{{ l.label }}</button></sc-for>
+      </div>
+      <sc-for list="{{ sealKey }}" as="k" hint-placeholder-count="1">
+        <div class="seal stamped" lang="ja" role="img" aria-label="{{ hw.w }}" style="width: 270px; height: 270px; grid-template-columns: {{ hw.gc }}; grid-template-rows: {{ hw.gr }}; font-size: {{ hw.fs }}; transform: rotate(-1.5deg)">
+          <sc-for list="{{ hw.cells }}" as="ch" hint-placeholder-count="2"><span>{{ ch }}</span></sc-for>
+        </div>
+      </sc-for>
+      <h1 class="sm" lang="ja" style="margin: 0; font-size: {{ hw.textSize }}; font-weight: 800; line-height: 1.25; max-width: 100%; overflow-wrap: anywhere">{{ hw.w }}</h1>
+      <p class="sm" lang="ja" style="margin: -10px 0 0; font-size: 17px; color: #6A625A; letter-spacing: 0.15em; overflow-wrap: anywhere">{{ hw.r }}</p>
+      <div style="display: flex; align-items: center; gap: 10px">
+        <button type="button" aria-label="Прослушать" style="width: 44px; height: 44px; border-radius: 50%; border: 0; background: #B8312F; color: #F6F2EA; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9v6h4l5 4V5L9 9H5z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg></button>
+        <span class="sm" lang="ja" style="font-size: 19px; display: inline-flex; align-items: flex-start"><span style="border-top: 2px solid #B8312F; border-right: 2px solid #B8312F; padding: 1px 2px 0">け</span><span style="padding-top: 7px">っこう</span></span>
+        <span style="font-size: 14px; color: #6A625A">[1]</span>
+      </div>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap; justify-content: center"><span class="tag r">N3</span><span class="tag">частое</span><span class="tag">news1</span><span class="tag">№ 1 284</span></div>
+      <dl style="margin: 0; width: 100%; text-align: left">
+        <div class="kv"><dt>Версия</dt><dd>v14 · проверена</dd></div><div class="kv"><dt>Изменена</dt><dd>сегодня</dd></div><div class="kv"><dt>Авторов</dt><dd>9</dd></div>
+      </dl>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center"><a href="#" class="chip" style="display: inline-flex; align-items: center; text-decoration: none; background: #B8312F; border-color: #B8312F; color: #F6F2EA">Править</a><a href="#" class="chip" style="display: inline-flex; align-items: center; text-decoration: none">Anki</a><a href="#" class="chip" style="display: inline-flex; align-items: center; text-decoration: none">Ссылка</a></div>
+    </aside>
+
+    <main style="flex: 999 1 620px; min-width: 0; display: flex; flex-direction: column; gap: 30px">
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 14px; color: #6A625A">
+        <span>← <a href="#" class="sm">結局</a></span><span style="flex: 1; text-align: center">3 части речи · 5 значений · 6 примеров</span><span><a href="#" class="sm">結合</a> →</span>
+      </div>
+
+      <section>
+        <h2 class="pos"><span class="seal" lang="ja" style="width: 34px; height: 34px; font-size: 18px; place-items: center; padding: 0">形</span><span style="font-size: 24px">на-прилагательное</span><span class="sm" style="font-size: 14px; color: #6A625A; font-weight: 600">〜な／〜に</span></h2>
+        <div class="sense"><span class="seal yang n">1</span><div><b>прекрасный, превосходный, отличный</b>; великолепный<div class="ex"><span class="sm" lang="ja">結構なお土産をありがとうございます。</span> — <i>Спасибо за чудесный подарок.</i></div></div></div>
+        <div class="sense"><span class="seal yang n">2</span><div><span class="tag">часто 〜です</span> <b>достаточный, удовлетворительный</b>; (уже) хорошо<div class="ex"><span class="sm" lang="ja">サインはボールペンで結構です。</span> — <i>Расписаться можно и шариковой ручкой.</i></div></div></div>
+        <div class="sense"><span class="seal yang n">3</span><div><span class="tag r">вежл.</span> <b>нет, спасибо</b>; не нужно<div class="ex"><span class="sm" lang="ja">いえ、もう結構です。</span> — <i>Нет, спасибо, мне достаточно.</i></div><p style="margin: 6px 0 0; font-size: 14.5px; color: #6A625A">См. также <a href="#" class="sm">いいです</a> — «да/нет» задаёт интонация.</p></div></div>
+      </section>
+      <section>
+        <h2 class="pos"><span class="seal" lang="ja" style="width: 34px; height: 34px; font-size: 18px; place-items: center; padding: 0">副</span><span style="font-size: 24px">наречие</span></h2>
+        <div class="sense"><span class="seal yang n">1</span><div><span class="tag">разг.</span> <span class="tag">обычно каной</span> <b>довольно, вполне</b>; порядочно<div class="ex"><span class="sm" lang="ja">この店、安いけど結構おいしい。</span> — <i>Здесь дёшево, но довольно вкусно.</i></div></div></div>
+      </section>
+      <section>
+        <h2 class="pos"><span class="seal" lang="ja" style="width: 34px; height: 34px; font-size: 18px; place-items: center; padding: 0">名</span><span style="font-size: 24px">существительное</span></h2>
+        <div class="sense"><span class="seal yang n">1</span><div><span class="tag">книжн.</span> <b>структура, конструкция</b>; композиция; план</div></div>
+      </section>
+
+      <section style="display: flex; flex-wrap: wrap; gap: 18px 36px; padding: 20px 24px; background: #FBF8F2; border: 1px solid #E2D9CB; border-radius: 6px">
+        <div style="flex: 1 1 280px"><h2 style="margin: 0 0 4px; font-size: 18px">Употребление</h2><p style="margin: 0; font-size: 15px">結構です — и «подойдёт», и «не нужно»; в магазине почти всегда отказ.</p></div>
+        <div style="flex: 1 1 220px"><h2 style="margin: 0 0 4px; font-size: 18px">Знаки</h2><p style="margin: 0; font-size: 15px"><a href="#" class="sm" style="font-size: 20px">結</a> завязывать · <a href="#" class="sm" style="font-size: 20px">構</a> строить</p></div>
+      </section>
+
+      <section aria-label="История, источники, обсуждение">
+        <div role="tablist" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px"><sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3"><button type="button" role="tab" class="chip" aria-selected="{{ t.on }}" onClick="{{ t.pick }}">{{ t.label }}</button></sc-for></div>
+        <sc-if value="{{ isHist }}" hint-placeholder-val="{{ true }}">
+          <sc-for list="{{ hist }}" as="h" hint-placeholder-count="3"><div style="display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 9px 0; border-bottom: 1px solid #E7DFD2; font-size: 15px"><span class="seal" style="width: 32px; height: 32px; font-size: 13px; padding: 2px; grid-template-columns: 1fr 1fr; font-family: Spectral"><span>{{ h.a }}</span><span>{{ h.b }}</span></span><span><b>{{ h.u }}</b> — {{ h.s }} <span style="color: #6A625A; font-size: 13.5px">· {{ h.t }}</span></span><span style="font-size: 13px"><span style="color: #2D5A8A">+{{ h.add }}</span> <span style="color: #9C2522">−{{ h.rem }}</span></span></div></sc-for>
+        </sc-if>
+        <sc-if value="{{ isSrc }}" hint-placeholder-val="{{ false }}"><p style="margin: 0"><span class="tag">скан · БЯРС Конрада, с. 482</span> けっこう【結構】 1. строение… 2. прекрасный… · <span class="tag">Яркси</span> 1) отлично; 2) достаточно…</p></sc-if>
+        <sc-if value="{{ isDisc }}" hint-placeholder-val="{{ false }}"><p style="margin: 0"><b>Murasaki</b>: вынести 結構です в отдельную статью? — <b>kitsune_ru</b>: оставим со ссылкой.</p></sc-if>
+      </section>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2500}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { len: 0, tab: 'hist' }; }
+  renderVals() {
+    const { len, tab } = this.state;
+    const H = [['結構', 'けっこう'], ['腕によりをかける', 'うでによりをかける'], ['鳴かぬなら殺してしまえホトトギス', 'なかぬならころしてしまえほととぎす']];
+    const [w, r] = H[len];
+    const ch = Array.from(w), n = ch.length;
+    const cols = n <= 2 ? 1 : n <= 4 ? 2 : n <= 9 ? 3 : 4, rows = Math.ceil(n / cols);
+    const cells = []; for (let i = 0; i < rows; i++) for (let c = 0; c < cols; c++) cells.push(ch[(cols - 1 - c) * rows + i] || '');
+    const k = Math.max(cols, rows);
+    const hw = { w, r, cells, gc: 'repeat(' + cols + ', 1fr)', gr: 'repeat(' + rows + ', 1fr)', fs: Math.floor(250 / k * 0.8) + 'px', textSize: n <= 4 ? '40px' : n <= 8 ? '30px' : '22px' };
+    const lens = ['2 знака', '8', '16'].map((label, i) => ({ label, on: i === len, pick: () => this.setState({ len: i }) }));
+    const tabs = [['hist', 'История · 14'], ['src', 'Источники · 5'], ['disc', 'Обсуждение · 2']].map(([id, label]) => ({ label, on: tab === id, pick: () => this.setState({ tab: id }) }));
+    const hist = [['kitsune_ru', 'уточнил перевод наречия', 'сегодня', 18, 4], ['гость', 'добавил «нет, спасибо»', '2 окт.', 41, 0], ['Murasaki', 'разделил значения', '14 сен.', 26, 11]]
+      .map(([u, s, t, add, rem]) => ({ u, s, t, add, rem, a: u[0].toUpperCase(), b: (u[1] || '').toUpperCase() }));
+    return { hw, lens, sealKey: [len], tabs, hist, isHist: tab === 'hist', isSrc: tab === 'src', isDisc: tab === 'disc' };
+  }
+}
+</script>
+</body>
+</html>

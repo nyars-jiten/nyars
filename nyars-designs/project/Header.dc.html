@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Шапка сайта</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&amp;family=Shippori+Mincho:wght@500;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<header style="font-family: 'Golos Text', 'Hiragino Sans', 'Noto Sans JP', system-ui, sans-serif; color: #1A1C21; font-size: 15px; line-height: 1.5">
+  <div style="background: #1A1C21; color: #F5F4F0">
+    <div style="max-width: 1376px; margin: 0 auto; padding: 14px 32px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px">
+      <a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; color: #F5F4F0; text-decoration: none; flex: 0 0 auto">
+        <span style="width: 36px; height: 36px; border-radius: 4px; background: #B33E27; color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 22px; line-height: 1">辞</span>
+        <span style="display: flex; flex-direction: column; line-height: 1.1">
+          <span style="font-weight: 700; font-size: 20px; letter-spacing: -0.01em">nyars</span>
+          <span style="font-size: 11px; color: #B9BCC4; letter-spacing: 0.04em">японско-русский</span>
+        </span>
+      </a>
+
+      <form role="search" style="flex: 1 1 520px; min-width: 0; display: flex; align-items: stretch; height: 44px; background: #FCFBF8; border-radius: 6px; overflow: hidden">
+        <label for="hdr-scope" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Где искать</label>
+        <select id="hdr-scope" style="border: 0; border-right: 1px solid #DDDAD2; background: #EFEDE7; color: #1A1C21; font: inherit; font-size: 13px; font-weight: 600; padding: 0 10px; flex: 0 0 auto">
+          <option>Все словари</option>
+          <option>Японско-русский</option>
+          <option>Русско-японский β</option>
+          <option>Кандзи</option>
+          <option>Спутники и сканы</option>
+        </select>
+        <label for="hdr-q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label>
+        <input id="hdr-q" type="search" value="{{ query }}" placeholder="Слово, чтение, перевод — или вставьте целый текст" style="flex: 1 1 auto; min-width: 0; border: 0; background: transparent; padding: 0 12px; font: inherit; font-size: 16px; color: #1A1C21; outline: none">
+        <button type="button" aria-label="Ромадзи → кана" title="Ромадзи → кана (Alt+K)" style="flex: 0 0 auto; width: 40px; border: 0; background: transparent; color: #474B54; font-family: 'Shippori Mincho', serif; font-weight: 700; font-size: 17px; cursor: pointer">あ</button>
+        <button type="button" onClick="{{ toggleDraw }}" aria-label="Рукописный ввод" aria-pressed="{{ isDraw }}" title="Рукописный ввод" style="flex: 0 0 auto; width: 40px; border: 0; background: {{ drawBg }}; color: #474B54; cursor: pointer; display: flex; align-items: center; justify-content: center">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4z"/><path d="M14 6l3 3"/></svg>
+        </button>
+        <button type="button" onClick="{{ toggleRad }}" aria-label="Поиск по ключам и компонентам" aria-pressed="{{ isRad }}" title="Ключи и компоненты" style="flex: 0 0 auto; width: 40px; border: 0; background: {{ radBg }}; color: #474B54; cursor: pointer; font-family: 'Shippori Mincho', serif; font-weight: 700; font-size: 17px">部</button>
+        <button type="button" onClick="{{ toggleFilt }}" aria-label="Расширенный поиск" aria-pressed="{{ isFilt }}" title="Фильтры" style="flex: 0 0 auto; width: 40px; border: 0; background: {{ filtBg }}; color: #474B54; cursor: pointer; display: flex; align-items: center; justify-content: center">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+        </button>
+        <a href="Search.dc.html" aria-label="Искать" style="flex: 0 0 auto; width: 48px; background: #B33E27; color: #fff; display: flex; align-items: center; justify-content: center">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        </a>
+      </form>
+
+      <nav aria-label="Разделы" style="display: flex; align-items: center; gap: 4px; flex: 0 1 auto; overflow-x: auto">
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+          <a href="{{ n.href }}" style="display: flex; align-items: center; gap: 6px; height: 44px; padding: 0 12px; border-radius: 6px; color: {{ n.color }}; background: {{ n.bg }}; font-size: 14px; font-weight: 500; white-space: nowrap; text-decoration: none">
+            {{ n.label }}
+            <sc-if value="{{ n.badge }}" hint-placeholder-val="{{ false }}"><span style="background: #B33E27; color: #fff; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 9px">{{ n.badge }}</span></sc-if>
+          </a>
+        </sc-for>
+      </nav>
+
+      <a href="User.dc.html" aria-label="Мой профиль: kitsune_ru" style="flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: #2B4A85; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; text-decoration: none">KR</a>
+    </div>
+  </div>
+
+  <sc-if value="{{ isDraw }}" hint-placeholder-val="{{ false }}">
+    <section aria-label="Рукописный ввод" style="background: #FCFBF8; border-bottom: 1px solid #DDDAD2; box-shadow: 0 12px 24px -16px rgba(26,28,33,0.25)">
+      <div style="max-width: 1376px; margin: 0 auto; padding: 24px 32px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <div style="width: 280px; height: 280px; border: 1px solid #DDDAD2; border-radius: 6px; background: #fff; position: relative">
+            <svg width="280" height="280" viewBox="0 0 280 280" aria-label="Холст: нарисованы 4 черты" role="img">
+              <path d="M140 0V280M0 140H280" stroke="#E9E7E1" stroke-dasharray="6 6"/>
+              <g fill="none" stroke="#1A1C21" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M92 62 L112 98"/><path d="M190 58 L168 98"/><path d="M60 128 L222 124"/><path d="M140 44 L141 238"/>
+              </g>
+            </svg>
+            <span style="position: absolute; left: 10px; bottom: 8px; font-size: 12px; color: #61656E">черт: 4</span>
+          </div>
+          <div style="display: flex; gap: 8px">
+            <button type="button" style="height: 40px; padding: 0 14px; border: 1px solid #DDDAD2; background: #FCFBF8; border-radius: 6px; font: inherit; font-size: 14px; cursor: pointer">Отменить черту</button>
+            <button type="button" style="height: 40px; padding: 0 14px; border: 1px solid #DDDAD2; background: #FCFBF8; border-radius: 6px; font: inherit; font-size: 14px; cursor: pointer">Очистить</button>
+          </div>
+        </div>
+        <div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+          <div style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #61656E; font-weight: 600">Варианты — порядок черт не важен</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px">
+            <sc-for list="{{ candidates }}" as="c" hint-placeholder-count="10">
+              <button type="button" style="width: 56px; height: 56px; border: 1px solid #DDDAD2; background: #fff; border-radius: 6px; font-family: 'Shippori Mincho', serif; font-weight: 700; font-size: 30px; color: #1A1C21; cursor: pointer">{{ c }}</button>
+            </sc-for>
+          </div>
+          <p style="margin: 0; font-size: 14px; color: #474B54; max-width: 520px">Выбранный знак добавляется в строку поиска — можно нарисовать слово по знаку. Колёсико мыши или <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; background: #EFEDE7; padding: 1px 5px; border-radius: 3px">1–9</span> — быстрый выбор.</p>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isRad }}" hint-placeholder-val="{{ false }}">
+    <section aria-label="Поиск по ключам" style="background: #FCFBF8; border-bottom: 1px solid #DDDAD2; box-shadow: 0 12px 24px -16px rgba(26,28,33,0.25)">
+      <div style="max-width: 1376px; margin: 0 auto; padding: 20px 32px 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+          <span style="font-size: 14px; color: #474B54">Выбрано:</span>
+          <span style="display: flex; gap: 6px"><span style="height: 36px; min-width: 36px; padding: 0 8px; display: flex; align-items: center; justify-content: center; background: #1A1C21; color: #fff; border-radius: 4px; font-family: 'Shippori Mincho', serif; font-size: 20px; font-weight: 700">糸</span><span style="height: 36px; min-width: 36px; padding: 0 8px; display: flex; align-items: center; justify-content: center; background: #1A1C21; color: #fff; border-radius: 4px; font-family: 'Shippori Mincho', serif; font-size: 20px; font-weight: 700">口</span></span>
+          <span style="font-size: 14px; color: #474B54">→ 6 знаков</span>
+          <span style="display: flex; flex-wrap: wrap; gap: 6px">
+            <sc-for list="{{ radResults }}" as="k" hint-placeholder-count="6">
+              <a href="Kanji.dc.html" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: #F7E2DB; color: #1A1C21; border-radius: 4px; font-family: 'Shippori Mincho', serif; font-size: 24px; font-weight: 700; text-decoration: none">{{ k }}</a>
+            </sc-for>
+          </span>
+          <span style="flex: 1 1 auto"></span>
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #474B54"><input type="checkbox" checked> Показывать варианты (氵→水)</label>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <sc-for list="{{ radGroups }}" as="g" hint-placeholder-count="6">
+            <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap">
+              <span style="width: 28px; height: 32px; display: flex; align-items: center; justify-content: center; background: #474B54; color: #fff; border-radius: 3px; font-size: 13px; font-weight: 700; font-family: 'JetBrains Mono', monospace">{{ g.n }}</span>
+              <sc-for list="{{ g.items }}" as="r" hint-placeholder-count="12">
+                <sc-if value="{{ r.sel }}" hint-placeholder-val="{{ false }}"><button type="button" aria-pressed="true" style="width: 32px; height: 32px; border: 0; background: #1A1C21; color: #fff; border-radius: 3px; font-family: 'Shippori Mincho', serif; font-size: 18px; font-weight: 700; cursor: pointer">{{ r.ch }}</button></sc-if>
+                <sc-if value="{{ r.dim }}" hint-placeholder-val="{{ false }}"><button type="button" disabled style="width: 32px; height: 32px; border: 0; background: transparent; color: #B4B6BB; border-radius: 3px; font-family: 'Shippori Mincho', serif; font-size: 18px">{{ r.ch }}</button></sc-if>
+                <sc-if value="{{ r.norm }}" hint-placeholder-val="{{ true }}"><button type="button" style="width: 32px; height: 32px; border: 1px solid #E9E7E1; background: #fff; color: #1A1C21; border-radius: 3px; font-family: 'Shippori Mincho', serif; font-size: 18px; cursor: pointer">{{ r.ch }}</button></sc-if>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin: 0; font-size: 13px; color: #61656E">Серые ключи не дают результатов вместе с выбранными. Можно искать и по составным компонентам: например, 咅 или 莫.</p>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isFilt }}" hint-placeholder-val="{{ false }}">
+    <section aria-label="Расширенный поиск" style="background: #FCFBF8; border-bottom: 1px solid #DDDAD2; box-shadow: 0 12px 24px -16px rgba(26,28,33,0.25)">
+      <div style="max-width: 1376px; margin: 0 auto; padding: 24px 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 24px 32px">
+          <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+            <legend style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #61656E; font-weight: 600; margin-bottom: 8px">Словари</legend>
+            <label style="display: flex; gap: 8px; align-items: center; font-size: 14px"><input type="checkbox" checked> Японско-русский</label>
+            <label style="display: flex; gap: 8px; align-items: center; font-size: 14px"><input type="checkbox" checked> Кандзи</label>
+            <label style="display: flex; gap: 8px; align-items: center; font-size: 14px"><input type="checkbox" checked> Русско-японский <span style="font-size: 11px; font-weight: 700; color: #8A2D1B; background: #F7E2DB; padding: 0 5px; border-radius: 3px">β</span></label>
+            <label style="display: flex; gap: 8px; align-items: center; font-size: 14px"><input type="checkbox" checked> Спутники</label>
+            <label style="display: flex; gap: 8px; align-items: center; font-size: 14px"><input type="checkbox"> Сканы (OCR)</label>
+          </fieldset>
+          <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+            <legend style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #61656E; font-weight: 600; margin-bottom: 8px">Совпадение</legend>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <button type="button" aria-pressed="true" style="height: 34px; padding: 0 12px; border: 1px solid #1A1C21; background: #1A1C21; color: #fff; border-radius: 17px; font: inherit; font-size: 13px">Точное</button>
+              <button type="button" style="height: 34px; padding: 0 12px; border: 1px solid #DDDAD2; background: #fff; border-radius: 17px; font: inherit; font-size: 13px">Начало</button>
+              <button type="button" style="height: 34px; padding: 0 12px; border: 1px solid #DDDAD2; background: #fff; border-radius: 17px; font: inherit; font-size: 13px">Конец</button>
+              <button type="button" style="height: 34px; padding: 0 12px; border: 1px solid #DDDAD2; background: #fff; border-radius: 17px; font: inherit; font-size: 13px">Вхождение</button>
+              <button type="button" style="height: 34px; padding: 0 12px; border: 1px solid #DDDAD2; background: #fff; border-radius: 17px; font: inherit; font-size: 13px">Шаблон * ?</button>
+            </div>
+            <div style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #61656E; font-weight: 600; margin-top: 10px">Искать в</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 14px">
+              <label style="display: flex; gap: 6px; align-items: center"><input type="checkbox" checked> написании</label>
+              <label style="display: flex; gap: 6px; align-items: center"><input type="checkbox" checked> чтении</label>
+              <label style="display: flex; gap: 6px; align-items: center"><input type="checkbox" checked> переводе</label>
+              <label style="display: flex; gap: 6px; align-items: center"><input type="checkbox"> примерах</label>
+            </div>
+          </fieldset>
+          <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+            <legend style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #61656E; font-weight: 600; margin-bottom: 8px">Грамматика и уровень</legend>
+            <label for="f-pos" style="font-size: 13px; color: #474B54">Часть речи</label>
+            <select id="f-pos" style="height: 40px; border: 1px solid #DDDAD2; border-radius: 6px; background: #fff; font: inherit; font-size: 14px; padding: 0 8px">
+              <option>Любая</option><option>Сущ. (名)</option><option>Глагол (動)</option><option>Прил. на -i (形)</option><option>Прил. на -na (形動)</option><option>Наречие (副)</option>
+            </select>
+            <div style="font-size: 13px; color: #474B54; margin-top: 4px">JLPT</div>
+            <div style="display: flex; gap: 4px">
+              <button type="button" style="flex: 1; height: 34px; border: 1px solid #DDDAD2; background: #fff; border-radius: 4px; font: inherit; font-size: 13px">N5</button>
+              <button type="button" style="flex: 1; height: 34px; border: 1px solid #DDDAD2; background: #fff; border-radius: 4px; font: inherit; font-size: 13px">N4</button>
+              <button type="button" aria-pressed="true" style="flex: 1; height: 34px; border: 1px solid #2B4A85; background: #E1E8F4; color: #22396A; border-radius: 4px; font: inherit; font-size: 13px; font-weight: 600">N3</button>
+              <button type="button" style="flex: 1; height: 34px; border: 1px solid #DDDAD2; background: #fff; border-radius: 4px; font: inherit; font-size: 13px">N2</button>
+              <button type="button" style="flex: 1; height: 34px; border: 1px solid #DDDAD2; background: #fff; border-radius: 4px; font: inherit; font-size: 13px">N1</button>
+            </div>
+          </fieldset>
+          <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+            <legend style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #61656E; font-weight: 600; margin-bottom: 8px">Пометы</legend>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <button type="button" style="height: 30px; padding: 0 10px; border: 1px dashed #B4B6BB; background: transparent; border-radius: 4px; font: inherit; font-size: 13px">разг.</button>
+              <button type="button" style="height: 30px; padding: 0 10px; border: 1px dashed #B4B6BB; background: transparent; border-radius: 4px; font: inherit; font-size: 13px">вежл.</button>
+              <button type="button" style="height: 30px; padding: 0 10px; border: 1px solid #8A2D1B; background: #F7E2DB; color: #8A2D1B; border-radius: 4px; font: inherit; font-size: 13px; text-decoration: line-through">уст.</button>
+              <button type="button" style="height: 30px; padding: 0 10px; border: 1px dashed #B4B6BB; background: transparent; border-radius: 4px; font: inherit; font-size: 13px">редк.</button>
+              <button type="button" style="height: 30px; padding: 0 10px; border: 1px dashed #B4B6BB; background: transparent; border-radius: 4px; font: inherit; font-size: 13px">атэдзи</button>
+              <button type="button" style="height: 30px; padding: 0 10px; border: 1px dashed #B4B6BB; background: transparent; border-radius: 4px; font: inherit; font-size: 13px">кансайск.</button>
+            </div>
+            <p style="margin: 0; font-size: 12px; color: #61656E">Клик — включить, второй клик — исключить.</p>
+            <label style="display: flex; gap: 8px; align-items: center; font-size: 14px; margin-top: 4px"><input type="checkbox" checked> Только частотные слова</label>
+          </fieldset>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; border-top: 1px solid #E9E7E1; padding-top: 16px">
+          <span style="font-size: 13px; color: #61656E">Запрос:</span>
+          <code style="font-family: 'JetBrains Mono', monospace; font-size: 13px; background: #EFEDE7; padding: 6px 10px; border-radius: 4px; color: #1A1C21">結構 jlpt:3 -tag:arch common:yes</code>
+          <span style="font-size: 13px; color: #61656E">— фильтры пишутся прямо в строку, их можно набирать вручную</span>
+          <span style="flex: 1 1 auto"></span>
+          <button type="button" style="height: 40px; padding: 0 16px; border: 1px solid #DDDAD2; background: #fff; border-radius: 6px; font: inherit; font-size: 14px; cursor: pointer">Сбросить</button>
+          <a href="Search.dc.html" style="height: 40px; padding: 0 18px; background: #1A1C21; color: #fff; border-radius: 6px; font-size: 14px; font-weight: 600; display: flex; align-items: center; text-decoration: none">Применить</a>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+</header>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"active":{"editor":"enum","options":["home","kanji","edits","downloads","about"],"default":"home"},"initialPanel":{"editor":"enum","options":["none","draw","radicals","filters"],"default":"filters"},"query":{"editor":null,"default":""},"$preview":{"width":1440,"height":600}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { panel: null }; }
+  renderVals() {
+    const panel = this.state.panel ?? (this.props.initialPanel ?? 'filters');
+    const toggle = (k) => () => this.setState({ panel: panel === k ? 'none' : k });
+    const active = this.props.active ?? 'home';
+    const nav = [
+      { id: 'home', label: 'Словарь', href: 'Main.dc.html' },
+      { id: 'kanji', label: 'Кандзи', href: 'Kanji.dc.html' },
+      { id: 'edits', label: 'Правки', href: 'Moderation.dc.html', badge: '214' },
+      { id: 'downloads', label: 'Скачать', href: 'Downloads.dc.html' },
+      { id: 'about', label: 'О проекте', href: 'Main.dc.html' }
+    ].map(n => ({ ...n, bg: n.id === active ? '#33363D' : 'transparent', color: n.id === active ? '#FFFFFF' : '#C9CBD1' }));
+    const sel = ['糸', '口'];
+    const dead = ['乙', '亅', '儿', '冫', '凵', '匕', '卩', '厶', '夂', '尢', '巛', '支', '殳', '毛', '爪', '瓜', '瓦', '疋', '缶', '臣', '舟'];
+    const groups = {
+      '1': '一丨丶丿乙亅', '2': '二亠人儿入八冂冖冫几凵刀力勹匕十卜卩厂厶又',
+      '3': '口囗土士夂夕大女子宀寸小尢尸山川工己巾干广弓彡彳',
+      '4': '心戈戸手支文斗斤方日月木欠止歹殳比毛氏水火爪父牛犬',
+      '5': '玉瓜瓦甘生用田疋疒白皮皿目矛矢石示禾穴立',
+      '6': '竹米糸缶羊羽老耳肉臣自至舌舟色艸虫血行衣西'
+    };
+    const radGroups = Object.keys(groups).map(n => ({ n, items: Array.from(groups[n]).map(ch => {
+      const s = sel.includes(ch), d = !s && dead.includes(ch);
+      return { ch, sel: s, dim: d, norm: !s && !d };
+    }) }));
+    const bg = (k) => panel === k ? '#E1E8F4' : 'transparent';
+    return {
+      query: this.props.query ?? '結構',
+      nav, radGroups,
+      radResults: ['結', '給', '絡', '紹', '絹', '縞'],
+      candidates: ['米', '来', '半', '未', '光', '釆', '平', '求', '粉', '迷'],
+      isDraw: panel === 'draw', isRad: panel === 'radicals', isFilt: panel === 'filters',
+      drawBg: bg('draw'), radBg: bg('radicals'), filtBg: bg('filters'),
+      toggleDraw: toggle('draw'), toggleRad: toggle('radicals'), toggleFilt: toggle('filters')
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Станция — поиск かける</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&amp;family=Onest:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF;color:#1B1E24;font-family:'Onest',system-ui,sans-serif;font-size:16px;line-height:1.5}
+a{color:#1F5FBF;text-decoration:none}a:hover{text-decoration:underline}
+.zk{font-family:'Zen Kaku Gothic New',sans-serif}
+.mono{font-family:'JetBrains Mono',monospace}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.badge{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:40px;height:40px;border:4px solid currentColor;border-radius:8px;background:#fff;font-weight:700;line-height:1;flex:0 0 auto}
+.badge b{font-size:10px;color:#1B1E24}.badge span{font-size:15px;color:#1B1E24}
+.route{position:relative;display:grid;grid-template-columns:repeat(9,minmax(0,1fr));padding-top:8px}
+.route::before{content:'';position:absolute;left:5%;right:5%;top:30px;height:8px;border-radius:4px;background:#1E9A4B}
+.st{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer;font:inherit;color:#1B1E24;padding:0 2px}
+.dot{width:28px;height:28px;border-radius:50%;background:#fff;border:6px solid #1E9A4B;box-sizing:border-box;transition:transform .15s}
+.st:hover .dot{transform:scale(1.2)}
+.st[aria-pressed=true] .dot{background:#1B1E24;border-color:#1B1E24;transform:scale(1.35)}
+.res{display:grid;grid-template-columns:52px 180px minmax(0,1fr);gap:8px 22px;padding:20px 22px;border-bottom:1px solid #E3E5EA}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:11px;font-size:12px;font-weight:600;background:#EEF0F3;color:#3D434D;white-space:nowrap}
+.sl{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:22px minmax(0,1fr);gap:4px 6px}
+.chip{height:36px;padding:0 14px;border:1px solid #CDD1D8;background:#fff;border-radius:18px;font:inherit;font-size:14px;font-weight:500;cursor:pointer}
+.chip[aria-pressed=true]{background:#1B1E24;color:#fff;border-color:#1B1E24}
+.fl{display:flex;align-items:center;gap:8px;font-size:14.5px;min-height:30px}
+.fl span{margin-left:auto;font-size:12.5px;color:#5D6470}
+@media (max-width:860px){.wrap{padding:0 16px}.res{grid-template-columns:44px minmax(0,1fr)}.res>.body{grid-column:1/-1}.route{overflow-x:auto;grid-template-columns:repeat(9,90px)}}
+</style>
+</helmet>
+<div>
+  <header style="border-bottom: 1px solid #E3E5EA">
+    <div class="wrap" style="display: flex; align-items: center; gap: 14px 24px; flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px">
+      <a href="EkiHome.dc.html" style="display: flex; align-items: center; gap: 10px; color: #1B1E24; text-decoration: none"><span class="badge" style="color: #1E9A4B"><b>NY</b><span>01</span></span><span style="font-size: 20px; font-weight: 700">nyars</span></a>
+      <form role="search" style="flex: 1 1 460px; display: flex; border: 2px solid #1B1E24; border-radius: 8px; overflow: hidden"><label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label><input id="q" type="search" value="かける" class="zk" style="flex: 1; min-width: 0; height: 46px; border: 0; padding: 0 14px; font-size: 20px; outline: none"><button type="button" aria-label="Ключи" class="zk" style="width: 48px; border: 0; border-left: 1px solid #E3E5EA; background: #fff; font-weight: 700; cursor: pointer">部</button><a href="#" style="width: 90px; display: flex; align-items: center; justify-content: center; background: #1E9A4B; color: #fff; font-weight: 700; text-decoration: none">Найти</a></form>
+      <nav aria-label="Разделы" style="display: flex; gap: 18px; font-weight: 500"><a href="#" style="color: #1B1E24">Кандзи</a><a href="#" style="color: #1B1E24">Правки</a><a href="#" style="color: #1B1E24">Скачать</a></nav>
+    </div>
+  </header>
+
+  <div class="wrap" style="padding-top: 28px; padding-bottom: 72px">
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px">
+      <div>
+        <p style="margin: 0; font-size: 14px; color: #5D6470">Линия «かける» · 9 станций</p>
+        <h1 style="margin: 2px 0 0; font-size: 34px; font-weight: 700"><span class="zk" lang="ja">かける</span> <span style="font-size: 18px; font-weight: 500; color: #5D6470">— 9 статей с этим чтением, 46 внутри слов</span></h1>
+      </div>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap"><button type="button" class="chip" aria-pressed="{{ full }}" onClick="{{ toFull }}">Подробно</button><button type="button" class="chip" aria-pressed="{{ compact }}" onClick="{{ toCompact }}">Кратко</button></div>
+    </div>
+
+    <section aria-label="Карта омонимов" style="margin: 26px 0 30px; padding: 18px 10px 20px; border: 1px solid #E3E5EA; border-radius: 12px">
+      <div class="route" role="group" aria-label="Станции">
+        <sc-for list="{{ items }}" as="r" hint-placeholder-count="9">
+          <button type="button" class="st" aria-pressed="{{ r.on }}" onClick="{{ r.pick }}">
+            <span class="dot" style="border-color: {{ r.c }}"></span>
+            <span class="zk" lang="ja" style="font-size: 20px; font-weight: 700">{{ r.w }}</span>
+            <span style="font-size: 12.5px; color: #5D6470">{{ r.hint }}</span>
+            <span class="mono" style="font-size: 11px; color: #5D6470">KK{{ r.code }}</span>
+          </button>
+        </sc-for>
+      </div>
+      <p style="margin: 14px 12px 0; font-size: 13.5px; color: #5D6470; display: flex; gap: 18px; flex-wrap: wrap"><span><span style="color: #1E9A4B">●</span> частое</span><span><span style="color: #8C93A0">●</span> редкое / книжное</span><span><span style="color: #B85A06">●</span> вспомогательное</span><span style="flex: 1"></span><span>Выбрана: <b class="zk">{{ cur }}</b> — подсвечена в списке</span></p>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+      <main style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 34px">
+        <section aria-label="Статьи" style="border-top: 3px solid #1B1E24">
+          <sc-for list="{{ items }}" as="r" hint-placeholder-count="9">
+            <article class="res" style="background: {{ r.bg }}">
+              <span class="badge" style="color: {{ r.c }}"><b>KK</b><span>{{ r.code }}</span></span>
+              <div style="display: flex; flex-direction: column; gap: 4px">
+                <span class="zk" lang="ja" style="font-size: 13px; color: #5D6470; letter-spacing: .15em">かける</span>
+                <a href="EkiEntry.dc.html" class="zk" lang="ja" style="font-size: 34px; font-weight: 900; color: #1B1E24; line-height: 1.1">{{ r.w }}</a>
+                <sc-if value="{{ r.alt }}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; color: #5D6470">также <span class="zk" style="color: #1B1E24">{{ r.alt }}</span></span></sc-if>
+                <div style="display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px">
+                  <sc-if value="{{ r.jlpt }}" hint-placeholder-val="{{ false }}"><span class="tag" style="background: #E3EEFB; color: #174A93">{{ r.jlpt }}</span></sc-if>
+                  <sc-if value="{{ r.common }}" hint-placeholder-val="{{ false }}"><span class="tag" style="background: #E2F3E8; color: #146B34">частое</span></sc-if>
+                  <sc-if value="{{ r.tag }}" hint-placeholder-val="{{ false }}"><span class="tag">{{ r.tag }}</span></sc-if>
+                </div>
+              </div>
+              <div class="body" style="display: flex; flex-direction: column; gap: 8px; min-width: 0">
+                <div style="display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline"><span style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em">{{ r.pos }}</span><span style="font-size: 13px; color: #5D6470">{{ r.n }} знач.</span><sc-if value="{{ r.note }}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; color: #B85A06">{{ r.note }}</span></sc-if></div>
+                <ol class="sl"><sc-for list="{{ r.shown }}" as="s" hint-placeholder-count="3"><li style="display: contents"><span class="mono" style="font-size: 13px; color: {{ r.c }}; padding-top: 2px">{{ s.n }}</span><span>{{ s.t }}</span></li></sc-for></ol>
+                <sc-if value="{{ r.showEx }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 15px; color: #3D434D"><span class="zk" lang="ja">{{ r.exJ }}</span> — {{ r.exR }}</p></sc-if>
+                <div style="display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 13.5px; color: #5D6470"><span>{{ r.more }}</span><span>{{ r.src }}</span><span style="flex: 1"></span><a href="#">Править</a><a href="EkiEntry.dc.html" style="font-weight: 600">Открыть →</a></div>
+              </div>
+            </article>
+          </sc-for>
+        </section>
+
+        <section aria-labelledby="ins">
+          <h2 id="ins" style="margin: 0 0 10px; font-size: 20px">Соседние станции — <span class="zk">かける</span> внутри слов · 46</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); gap: 0 26px">
+            <sc-for list="{{ inside }}" as="m" hint-placeholder-count="10"><a href="#" style="display: flex; gap: 12px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid #E3E5EA; color: #1B1E24; text-decoration: none"><span class="zk" lang="ja" style="font-size: 18px; font-weight: 700; white-space: nowrap">{{ m.w }}</span><span style="font-size: 14px; color: #5D6470">{{ m.g }}</span></a></sc-for>
+          </div>
+        </section>
+      </main>
+
+      <aside style="flex: 1 1 260px; max-width: 300px; display: flex; flex-direction: column; gap: 24px">
+        <nav aria-label="Словари" style="display: flex; flex-direction: column; gap: 2px">
+          <p style="margin: 0 0 6px; font-size: 13px; font-weight: 600; color: #5D6470; text-transform: uppercase; letter-spacing: .05em">Линии</p>
+          <a href="#" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; background: #F4F5F7; color: #1B1E24; font-weight: 600"><span style="width: 12px; height: 12px; border-radius: 50%; background: #1E9A4B"></span>Японско-русский<span style="margin-left: auto" class="mono">55</span></a>
+          <a href="#" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: #1B1E24"><span style="width: 12px; height: 12px; border-radius: 50%; background: #D2232A"></span>Кандзи<span style="margin-left: auto" class="mono">8</span></a>
+          <a href="#" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: #1B1E24"><span style="width: 12px; height: 12px; border-radius: 50%; background: #1F5FBF"></span>Спутники<span style="margin-left: auto" class="mono">31</span></a>
+          <a href="#" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: #1B1E24"><span style="width: 12px; height: 12px; border-radius: 50%; background: #5D6470"></span>Сканы<span style="margin-left: auto" class="mono">17</span></a>
+        </nav>
+        <fieldset style="border: 0; margin: 0; padding: 0"><legend style="font-size: 13px; font-weight: 600; color: #5D6470; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px">Фильтры</legend><label class="fl"><input type="checkbox"> только частотные <span>5</span></label><label class="fl"><input type="checkbox"> без книжных <span>8</span></label><label class="fl"><input type="checkbox"> JLPT N5–N3 <span>3</span></label><label class="fl"><input type="checkbox" checked=""> внутри слов <span>46</span></label></fieldset>
+        <div>
+          <p style="margin: 0 0 8px; font-size: 13px; font-weight: 600; color: #5D6470; text-transform: uppercase; letter-spacing: .05em">Пересадки — кандзи</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px">
+            <sc-for list="{{ kanji }}" as="k" hint-placeholder-count="8"><a href="#" title="{{ k.g }}" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border: 2px solid #D2232A; border-radius: 8px; color: #1B1E24; font-size: 24px; font-weight: 700" class="zk" lang="ja">{{ k.k }}</a></sc-for>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1900}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { sel: 0, compact: false }; }
+  renderVals() {
+    const { sel, compact } = this.state;
+    const G = '#1E9A4B', R = '#8C93A0', O = '#B85A06';
+    const D = [
+      { w: '掛ける', alt: '懸ける・架ける', jlpt: 'N4', common: true, pos: 'глагол · перех.', n: 15, hint: 'вешать', c: G, senses: ['вешать, подвешивать', 'надевать (очки); накрывать', 'тратить (время, деньги)', 'звонить (по телефону)'], ex: ['壁に絵を掛ける', 'повесить картину на стену'], src: 'Яркси · 2 скана' },
+      { w: '欠ける', jlpt: 'N3', common: true, pos: 'глагол · неперех.', n: 3, hint: 'нехватка', c: G, senses: ['откалываться, отбиваться', 'недоставать, не хватать', 'убывать (о луне)'], ex: ['皿が欠けた', 'тарелка откололась'], src: 'Яркси · 1 скан' },
+      { w: '駆ける', alt: '駈ける', jlpt: 'N1', common: true, pos: 'глагол · неперех.', n: 2, hint: 'бег', c: G, senses: ['бежать, мчаться', 'скакать (на лошади)'], ex: ['子供たちが駆けてくる', 'бегут дети'], src: 'Яркси' },
+      { w: '賭ける', alt: '懸ける', jlpt: 'N2', common: true, pos: 'глагол · перех.', n: 2, hint: 'ставка', c: G, senses: ['ставить, держать пари', 'рисковать (жизнью, честью)'], ex: ['命を賭ける', 'рисковать жизнью'], src: 'Яркси · 1 скан' },
+      { w: '書ける', jlpt: 'N5', common: true, pos: 'потенц. форма 書く', n: 2, hint: 'письмо', c: G, senses: ['мочь писать, уметь написать', 'хорошо пишется (о ручке)'], src: 'только основной словарь' },
+      { w: '架ける', pos: 'глагол · перех.', n: 1, hint: 'мост', c: R, note: 'обычно пишется 掛ける', senses: ['перекидывать, наводить (мост)'], src: 'только основной словарь' },
+      { w: '懸ける', pos: 'глагол · перех.', n: 2, hint: 'награда', c: R, note: 'ср. 掛ける, 賭ける', senses: ['назначать (награду)', 'ставить на карту (честь)'], src: '1 скан' },
+      { w: '翔る', tag: 'книжн.', pos: 'глагол 5-го спр.', n: 2, hint: 'полёт', c: R, senses: ['парить, высоко лететь', 'мчаться, нестись'], src: 'Яркси' },
+      { w: '〜かける', pos: 'вспом. глагол', n: 3, hint: 'начать', c: O, note: 'после основы: 読みかける', senses: ['начинать (делать)', 'не доделать', 'обращать действие к кому-л.'], src: 'только основной словарь' }
+    ];
+    const items = D.map((r, i) => {
+      const lim = compact ? 2 : 4;
+      const rest = r.n - Math.min(lim, r.senses.length);
+      return { ...r, code: String(i + 1).padStart(2, '0'), on: i === sel, bg: i === sel ? '#F2F8F4' : 'transparent', pick: () => this.setState({ sel: i }),
+        alt: r.alt || '', jlpt: r.jlpt || '', common: !!r.common, tag: r.tag || '', note: r.note || '',
+        shown: r.senses.slice(0, lim).map((t, k) => ({ n: String(k + 1).padStart(2, '0'), t })),
+        showEx: !compact && !!r.ex, exJ: r.ex ? r.ex[0] : '', exR: r.ex ? r.ex[1] : '',
+        more: rest > 0 ? '+ ещё ' + rest + ' знач.' : 'все значения показаны' };
+    });
+    return { items, cur: D[sel].w, full: !compact, compact,
+      toFull: () => this.setState({ compact: false }), toCompact: () => this.setState({ compact: true }),
+      inside: [['出かける', 'выходить из дома'], ['見かける', 'случайно увидеть'], ['話しかける', 'заговорить'], ['追いかける', 'гнаться'], ['呼びかける', 'окликать'], ['腰掛ける', 'садиться'], ['問いかける', 'спрашивать'], ['押しかける', 'нагрянуть'], ['働きかける', 'воздействовать'], ['心掛ける', 'стараться']].map(([w, g]) => ({ w, g })),
+      kanji: [['掛', 'вешать'], ['欠', 'нехватка'], ['駆', 'мчаться'], ['賭', 'ставить'], ['架', 'мост'], ['懸', 'подвешивать'], ['翔', 'парить'], ['駈', 'вар. 駆']].map(([k, g]) => ({ k, g }))
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Модернизм — главная</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@500;700;800;900&amp;family=Geologica:wght@300;400;600;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FAFAF7;color:#111;font-family:'Geologica',system-ui,sans-serif;font-size:16px;line-height:1.5}
+a{color:#111;text-decoration:none;border-bottom:2px solid #111}a:hover{color:#C41A12;border-color:#C41A12}
+.mp{font-family:'M PLUS 1p',sans-serif}
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px;box-sizing:border-box}
+.g{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:0 24px}
+.lab{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.shape{display:inline-block;width:14px;height:14px;background:#111;flex:0 0 auto}
+.c{border-radius:50%}.t{clip-path:polygon(50% 0,100% 100%,0 100%)}.d{transform:rotate(45deg) scale(.8)}
+.row{display:grid;grid-template-columns:70px 20px minmax(120px,240px) minmax(0,1fr) 80px;gap:16px;align-items:baseline;padding:14px 0;border-top:1px solid #111}
+@media (max-width:900px){.wrap{padding:0 16px}.g{grid-template-columns:1fr}.g>*{grid-column:auto !important}.row{grid-template-columns:20px minmax(0,1fr)}.row .hide{display:none}}
+</style>
+</helmet>
+<div>
+  <header class="wrap" style="display: flex; align-items: center; gap: 16px 32px; flex-wrap: wrap; padding-top: 22px; padding-bottom: 22px">
+    <a href="#" style="border: 0; display: flex; align-items: center; gap: 10px"><span style="width: 26px; height: 26px; border-radius: 50%; background: #E2231A"></span><span style="font-size: 22px; font-weight: 900; letter-spacing: -0.02em">nyars</span></a>
+    <nav aria-label="Разделы" style="display: flex; gap: 28px; flex: 1 1 auto; flex-wrap: wrap; font-weight: 600"><a href="ModernSearch.dc.html" style="border: 0">Словарь</a><a href="#" style="border: 0">Кандзи</a><a href="#" style="border: 0">Правки</a><a href="#" style="border: 0">Скачать</a></nav>
+    <a href="#" style="font-weight: 800">Войти</a>
+  </header>
+
+  <section class="wrap" style="position: relative; padding-top: 30px; padding-bottom: 50px; overflow: hidden">
+    <div aria-hidden="true" style="position: absolute; right: -60px; top: -20px; width: 520px; height: 520px; border-radius: 50%; background: #E2231A"></div>
+    <div class="g" style="position: relative">
+      <div style="grid-column: 1 / 9">
+        <p class="lab" style="margin: 0">Японско-русский словарь · с 2019 · открытая редакция</p>
+        <h1 style="margin: 12px 0 0; font-size: clamp(64px, 10vw, 150px); font-weight: 900; line-height: .86; letter-spacing: -0.05em">Слово<br>за&nbsp;словом.</h1>
+        <form role="search" style="margin-top: 36px; display: flex; background: #111; max-width: 760px">
+          <label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label>
+          <input id="q" type="search" placeholder="Слово, чтение или перевод" class="mp" style="flex: 1; min-width: 0; height: 68px; border: 0; background: #111; color: #FAFAF7; padding: 0 22px; font-size: 24px; outline: none">
+          <button type="button" class="mp" aria-label="Ключи" style="width: 64px; border: 0; border-left: 1px solid #444; background: #111; color: #FAFAF7; font-size: 22px; font-weight: 800; cursor: pointer">部</button>
+          <a href="ModernSearch.dc.html" style="width: 68px; display: flex; align-items: center; justify-content: center; background: #E2231A; color: #fff; border: 0; font-size: 28px; font-weight: 900">→</a>
+        </form>
+      </div>
+      <div class="mp" lang="ja" aria-hidden="true" style="grid-column: 10 / 13; writing-mode: vertical-rl; font-size: 120px; font-weight: 900; line-height: 1; color: #FAFAF7; justify-self: center; padding-top: 70px">言葉</div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-label="Статистика" style="padding-bottom: 50px">
+    <div class="g" style="border-top: 8px solid #111; padding-top: 16px">
+      <div style="grid-column: span 5"><p class="lab" style="margin: 0">Статей</p><p style="margin: 0; font-size: 84px; font-weight: 900; letter-spacing: -0.04em; line-height: 1">1 820 463</p></div>
+      <div style="grid-column: span 2"><p class="lab" style="margin: 0">Удалено, 7 д.</p><p style="margin: 0; font-size: 84px; font-weight: 900; line-height: 1; color: #C41A12">−8</p></div>
+      <div style="grid-column: span 3"><p class="lab" style="margin: 0">Правок, 7 д.</p><p style="margin: 0; font-size: 84px; font-weight: 300; line-height: 1">1 942</p></div>
+      <div style="grid-column: span 2"><p class="lab" style="margin: 0">На проверке</p><p style="margin: 0; font-size: 84px; font-weight: 300; line-height: 1"><a href="#" style="border-width: 4px">214</a></p></div>
+    </div>
+  </section>
+
+  <div class="wrap g" style="padding-bottom: 72px">
+    <section aria-labelledby="fresh" style="grid-column: 1 / 9">
+      <div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 8px; flex-wrap: wrap"><h2 id="fresh" style="margin: 0; font-size: 34px; font-weight: 900; letter-spacing: -0.02em">Правки</h2><span style="display: flex; gap: 14px; font-size: 13px; align-items: center"><span style="display: flex; gap: 6px; align-items: center"><span class="shape c"></span>глагол</span><span style="display: flex; gap: 6px; align-items: center"><span class="shape"></span>сущ.</span><span style="display: flex; gap: 6px; align-items: center"><span class="shape t"></span>нареч.</span><span style="display: flex; gap: 6px; align-items: center"><span class="shape d"></span>прил.</span></span></div>
+      <sc-for list="{{ feed }}" as="e" hint-placeholder-count="7">
+        <div class="row">
+          <span class="hide" style="font-size: 13px; font-weight: 600">{{ e.t }}</span>
+          <span class="shape {{ e.sh }}" style="background: {{ e.col }}"></span>
+          <a href="ModernEntry.dc.html" class="mp" lang="ja" style="border: 0; font-size: 24px; font-weight: 800; overflow-wrap: anywhere">{{ e.w }}</a>
+          <span style="font-size: 15px">{{ e.what }}</span>
+          <span class="hide" style="font-size: 13px; text-align: right">{{ e.u }}</span>
+        </div>
+      </sc-for>
+    </section>
+    <aside style="grid-column: 10 / 13">
+      <h2 style="margin: 0 0 12px; font-size: 34px; font-weight: 900; letter-spacing: -0.02em">Люди</h2>
+      <sc-for list="{{ top }}" as="t" hint-placeholder-count="5">
+        <div style="padding: 8px 0; border-top: 1px solid #111">
+          <div style="display: flex; justify-content: space-between; font-weight: 600"><span>{{ t.u }}</span><span>{{ t.n }}</span></div>
+          <div style="height: 10px; margin-top: 6px; background: #E8E6DF"><div style="height: 10px; width: {{ t.p }}; background: {{ t.c }}"></div></div>
+        </div>
+      </sc-for>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const F = [['09:14', '結構', 'd', 'уточнён перевод наречия', 'kitsune_ru'], ['09:07', '推し活', '', 'новая статья · на проверке', 'гость'], ['08:52', '米', '', 'пример: 米を研ぐ', 'Murasaki'], ['08:40', '仕舞う', 'c', 'сверка скана, с. 1104', 'yuki.p'], ['08:18', '矢鱈', 't', 'помета «атэдзи»', 'Tanuki42'], ['06:30', '腕によりをかける', 'c', 'новая идиома', 'old_kanbun'], ['04:00', '取り敢えず', 't', 'удалён дубль', 'Tanuki42']];
+    const feed = F.map(([t, w, sh, what, u], i) => ({ t, w, sh, what, u, col: i === 0 ? '#E2231A' : '#111' }));
+    const top = [['Murasaki', 312], ['kitsune_ru', 268], ['yuki.p', 197], ['old_kanbun', 141], ['Tanuki42', 96]].map(([u, n], i) => ({ u, n, p: Math.round(n / 312 * 100) + '%', c: i === 0 ? '#E2231A' : '#111' }));
+    return { feed, top };
+  }
+}
+</script>
+</body>
+</html>

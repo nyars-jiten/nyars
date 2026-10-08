@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Палитры вокруг #B7C7F7</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700&amp;family=Zen+Maru+Gothic:wght@500;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+.jp{font-family:'Zen Old Mincho',serif}
+.jm{font-family:'Zen Maru Gothic',sans-serif}
+.col{border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:16px}
+.sw{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:13px}
+.sw i{width:34px;height:26px;border-radius:7px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.cr{display:flex;justify-content:space-between;font-size:13px;padding:3px 0}
+</style>
+</helmet>
+<div style="background: #ECE9E2; font-family: 'Manrope', system-ui, sans-serif; color: #1E2433; padding: 36px 40px 44px; min-height: 100%; box-sizing: border-box">
+  <h1 style="margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.01em">Палитры вокруг серо-голубого <span style="display: inline-block; width: 26px; height: 26px; border-radius: 6px; background: #B7C7F7; vertical-align: -4px"></span> #B7C7F7</h1>
+  <p style="margin: 8px 0 0; max-width: 880px; font-size: 15px; color: #4A5163">#B7C7F7 светлый (контраст с белым 1,7:1), поэтому это цвет <b>заливок</b>: выбранная вкладка, токен, чип, полоса частотности. Для текста и ссылок рядом стоит его тёмный «двойник» — <b>strong</b>. Второй акцент нужен для помет и предупреждений (книжн., мед., «не проверено»). Все пары ниже проходят WCAG AA 4,5:1.</p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 18px; margin-top: 26px">
+    <sc-for list="{{ pals }}" as="p" hint-placeholder-count="4">
+      <section class="col" style="background: {{ p.bg }}; color: {{ p.ink }}">
+        <div><h2 style="margin: 0; font-size: 20px; font-weight: 800">{{ p.name }}</h2><p style="margin: 2px 0 0; font-size: 13.5px; color: {{ p.muted }}">{{ p.desc }}</p></div>
+        <div style="display: flex; flex-direction: column; gap: 7px">
+          <sc-for list="{{ p.tokens }}" as="t" hint-placeholder-count="11"><div class="sw"><i style="background: {{ t.c }}"></i><span><b>{{ t.k }}</b> <span style="color: {{ p.muted }}">· {{ t.role }}</span></span><code style="font-size: 12px">{{ t.c }}</code></div></sc-for>
+        </div>
+        <div style="background: {{ p.surf }}; border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; gap: 4px; flex-wrap: wrap"><span style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 16px; background: {{ p.acc }}; color: {{ p.onacc }}; font-weight: 700; font-size: 13.5px">Японско-русский 5</span><span style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; font-weight: 600; font-size: 13.5px">Кандзи 6</span></div>
+          <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap"><span class="jp" lang="ja" style="font-size: 22px; font-weight: 700">井蛙の見</span><span class="jm" lang="ja" style="font-size: 13px; color: {{ p.muted }}">せいあのけん</span><span style="display: inline-flex; height: 22px; align-items: center; padding: 0 8px; border-radius: 11px; font-size: 12px; font-weight: 600; background: {{ p.soft }}; color: {{ p.strong }}">N1</span><span style="display: inline-flex; height: 22px; align-items: center; padding: 0 8px; border-radius: 11px; font-size: 12px; font-weight: 600; background: {{ p.secsoft }}; color: {{ p.sec }}">книжн.</span></div>
+          <p style="margin: 0; font-size: 14px"><b style="color: {{ p.strong }}">1</b> узкий, ограниченный взгляд — <span style="color: {{ p.strong }}; font-weight: 700">Открыть статью →</span></p>
+          <div style="height: 8px; border-radius: 4px; background: {{ p.soft }}; position: relative"><div style="position: absolute; left: 18%; right: 40%; top: 0; bottom: 0; border-radius: 4px; background: {{ p.acc }}"></div></div>
+        </div>
+        <div>
+          <p style="margin: 0 0 4px; font-size: 11.5px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; color: {{ p.muted }}">Контраст</p>
+          <sc-for list="{{ p.cr }}" as="c" hint-placeholder-count="6"><div class="cr"><span>{{ c.l }}</span><b>{{ c.v }}</b></div></sc-for>
+        </div>
+      </section>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1150}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const D = [
+      ['Васи и туман', 'тёплая бумага из A2 + холодный акцент; самый «японский»', { bg: '#F6F3EC', surf: '#FFFDF8', ink: '#1E2433', muted: '#5B6275', line: '#E3DDD0', acc: '#B7C7F7', strong: '#34478A', soft: '#E9EEFC', sec: '#A63F2A', secsoft: '#F7E3DC', onacc: '#1E2433' }, [14.0, 6.0, 8.6, 9.2, 7.5, 5.0]],
+      ['Холодная бумага', 'нейтрально-холодная, второй акцент — глициния', { bg: '#F3F5F9', surf: '#FFFFFF', ink: '#1B2030', muted: '#58607A', line: '#DEE3EE', acc: '#B7C7F7', strong: '#33458A', soft: '#EAF0FE', sec: '#7652A8', secsoft: '#EFE8F8', onacc: '#1B2030' }, [14.8, 6.2, 8.9, 9.7, 7.8, 5.0]],
+      ['Сакура', 'тёпло-розовый фон, второй акцент — приглушённая сакура', { bg: '#FAF6F4', surf: '#FFFFFF', ink: '#26202A', muted: '#665C68', line: '#EBE0E0', acc: '#B7C7F7', strong: '#3A4B8C', soft: '#ECF0FD', sec: '#A3445C', secsoft: '#F9E5EA', onacc: '#26202A' }, [14.8, 6.4, 8.2, 9.5, 7.2, 4.9]],
+      ['Индиго-ночь', 'тёмная тема: #B7C7F7 становится и акцентом, и цветом ссылок', { bg: '#131A2A', surf: '#1A2236', ink: '#E7EBF6', muted: '#A2ABC3', line: '#2B3550', acc: '#B7C7F7', strong: '#B7C7F7', soft: '#263252', sec: '#F0A28F', secsoft: '#3A2A30', onacc: '#131A2A' }, [14.6, 6.9, 9.4, 10.4, 7.5, 6.6]]
+    ];
+    const roles = [['bg', 'фон страницы'], ['surf', 'панели, поля'], ['ink', 'основной текст'], ['muted', 'вторичный текст'], ['line', 'разделители'], ['acc', 'акцент-заливка'], ['onacc', 'текст на акценте'], ['strong', 'ссылки, номера'], ['soft', 'фон тегов, трек'], ['sec', 'второй акцент'], ['secsoft', 'фон помет']];
+    const crl = ['текст / фон', 'вторичный / панель', 'ссылка / панель', 'текст на акценте', 'тег: strong / soft', 'помета: sec / secsoft'];
+    const pals = D.map(([name, desc, t, c]) => ({ name, desc, ...t, tokens: roles.map(([k, role]) => ({ k, role, c: t[k] })), cr: crl.map((l, i) => ({ l, v: c[i].toString().replace('.', ',') + ' : 1' })) }));
+    return { pals };
+  }
+}
+</script>
+</body>
+</html>

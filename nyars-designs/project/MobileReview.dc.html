@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Мобильная проверка правки</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&amp;family=Shippori+Mincho:wght@500;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+.jp{font-family:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif}
+.ins{background:#DCE6F7;color:#1B3366;text-decoration:underline;text-decoration-color:#7F9AD0;text-underline-offset:3px;border-radius:2px;padding:0 2px}
+.del{background:#F8DCD3;color:#7A2414;text-decoration:line-through;border-radius:2px;padding:0 2px}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F5F4F0; color: #1A1C21; font-family: 'Golos Text', 'Hiragino Sans', system-ui, sans-serif; font-size: 15px; line-height: 1.5; display: flex; flex-direction: column">
+  <div style="background: #1A1C21; color: #F5F4F0; padding: 12px 8px 12px 8px; display: flex; align-items: center; gap: 4px">
+    <a href="Moderation.dc.html" aria-label="К списку" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #F5F4F0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>
+    <div style="flex: 1"><div style="font-weight: 600">Проверка правок</div><div style="font-size: 12px; color: #B9BCC4">1 из 214 · изменения</div></div>
+    <button type="button" aria-label="Фильтры" style="width: 44px; height: 44px; border: 0; background: transparent; color: #F5F4F0; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg></button>
+  </div>
+  <div style="height: 3px; background: #DDDAD2"><div style="width: 6%; height: 3px; background: #B33E27"></div></div>
+
+  <article style="flex: 1; margin: 16px; background: #FCFBF8; border: 1px solid #DDDAD2; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 14px; overflow: hidden">
+    <div style="display: flex; align-items: baseline; gap: 10px">
+      <span class="jp" lang="ja" style="font-size: 34px; font-weight: 800; line-height: 1.1">結構</span>
+      <span class="jp" lang="ja" style="color: #474B54">けっこう</span>
+      <span style="flex: 1"></span>
+      <span style="font-size: 12px; font-weight: 700; background: #E9E7E1; color: #33363D; padding: 2px 8px; border-radius: 3px">Изменение</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px; font-size: 14px">
+      <span style="width: 28px; height: 28px; border-radius: 50%; background: #2B4A85; color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center">KR</span>
+      <span><b>kitsune_ru</b> · 96% принято · 4 мин</span>
+    </div>
+    <p style="margin: 0; font-size: 14px; color: #33363D; padding: 10px 12px; background: #F5F4F0; border-radius: 6px">«Уточнил перевод наречия, добавил пример к 形 2»</p>
+    <div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px">
+      <div>
+        <div style="font-size: 12px; font-weight: 700; color: #61656E; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px">наречие · 1</div>
+        <span class="del">довольно-таки</span> <span class="ins">довольно, вполне; порядочно</span>, весьма
+      </div>
+      <div>
+        <div style="font-size: 12px; font-weight: 700; color: #61656E; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px">на-прил. · 2 · пример</div>
+        <span class="ins"><span class="jp" lang="ja">サインはボールペンで結構です。</span> — Расписаться можно и шариковой ручкой.</span>
+      </div>
+    </div>
+    <a href="Entry.dc.html" style="font-size: 14px; color: #2B4A85; margin-top: auto">Открыть статью целиком</a>
+  </article>
+
+  <p style="margin: 0 0 10px; text-align: center; font-size: 12px; color: #61656E">свайп ← отклонить · принять →</p>
+  <div style="display: flex; gap: 8px; padding: 0 16px 24px">
+    <button type="button" style="flex: 1; height: 52px; border: 1px solid #B33E27; background: #fff; color: #8A2D1B; border-radius: 10px; font: inherit; font-size: 15px; font-weight: 600">Отклонить</button>
+    <button type="button" style="flex: 0 0 72px; height: 52px; border: 1px solid #DDDAD2; background: #fff; border-radius: 10px; font: inherit; font-size: 14px">Позже</button>
+    <button type="button" style="flex: 1; height: 52px; border: 0; background: #1A1C21; color: #fff; border-radius: 10px; font: inherit; font-size: 15px; font-weight: 600">Принять</button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

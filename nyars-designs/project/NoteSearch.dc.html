@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Тетрадь — поиск かける</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&amp;family=Caveat:wght@500;700&amp;family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FDFBF3;color:#2D2D2D;font-family:'Nunito',system-ui,sans-serif;font-size:16px;line-height:1.5}
+a{color:#23408E}a:hover{color:#B92D23}
+.kl{font-family:'Klee One',serif}
+.hand{font-family:'Caveat',cursive}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px 0 72px;box-sizing:border-box}
+.ruled{background-color:#FDFBF3;background-image:linear-gradient(90deg,transparent 54px,#F2A7A0 54px,#F2A7A0 56px,transparent 56px),repeating-linear-gradient(180deg,transparent 0 31px,#D5E2F3 31px 32px)}
+.red{color:#B92D23}
+.hl{background:linear-gradient(transparent 45%,#FFF07A 45%,#FFF07A 88%,transparent 88%)}
+.idx{background-color:#fff;background-image:linear-gradient(180deg,transparent 46px,#E9A7A0 46px,#E9A7A0 48px,transparent 48px),repeating-linear-gradient(180deg,transparent 0 27px,#DCE7F5 27px 28px);background-position:0 0,0 20px;border:1px solid #DED9C6;box-shadow:0 10px 16px -12px rgba(0,0,0,.35);padding:10px 18px 16px;display:flex;flex-direction:column;gap:6px;min-height:230px;position:relative;transition:transform .2s}
+.idx:hover{transform:translateY(-3px) rotate(-.5deg)}
+.star{position:absolute;right:10px;top:8px;width:40px;height:40px;border:0;background:transparent;cursor:pointer;color:#B9B9B9;font-size:24px}
+.star[aria-pressed=true]{color:#E0A800}
+.rev{border:2px dashed #23408E;background:#F4F7FD;color:#23408E;border-radius:6px;font:inherit;font-weight:700;height:44px;cursor:pointer;margin-top:auto}
+.chip{height:44px;padding:0 16px;border:2px solid #2D2D2D;background:#fff;border-radius:22px;font:inherit;font-weight:700;cursor:pointer}
+.chip[aria-pressed=true]{background:#2D2D2D;color:#fff}
+.tape{position:absolute;width:70px;height:20px;background:repeating-linear-gradient(45deg,rgba(150,200,170,.75) 0 7px,rgba(200,230,210,.75) 7px 14px);top:-10px;left:22px;transform:rotate(-4deg)}
+@media (max-width:760px){.wrap{padding:0 16px 0 64px}}
+</style>
+</helmet>
+<div class="ruled" style="min-height: 100%">
+  <header class="wrap" style="display: flex; align-items: center; gap: 16px 28px; flex-wrap: wrap; padding-top: 18px; padding-bottom: 14px; border-bottom: 2px solid #2D2D2D">
+    <a href="NoteHome.dc.html" style="text-decoration: none; color: #2D2D2D"><span class="hand" style="font-size: 36px; font-weight: 700">nyars</span> <span class="kl red" style="font-size: 18px">じしょ</span></a>
+    <form role="search" style="flex: 1 1 440px; display: flex; gap: 8px; background: #fff; border: 2px solid #2D2D2D; border-radius: 10px; padding: 6px"><label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label><input id="q" type="search" value="かける" class="kl" style="flex: 1; min-width: 0; height: 44px; border: 0; padding: 0 10px; font-size: 22px; outline: none"><a href="#" style="height: 44px; padding: 0 16px; display: flex; align-items: center; background: #23408E; color: #fff; border-radius: 6px; font-weight: 800; text-decoration: none">Найти</a></form>
+  </header>
+
+  <main class="wrap" style="padding-top: 32px; padding-bottom: 72px">
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 28px; margin-bottom: 30px">
+      <div style="flex: 1 1 520px">
+        <h1 style="margin: 0; font-size: 36px; font-weight: 800"><span class="kl">かける</span> — <span class="hl">9 слов</span> с одним чтением</h1>
+        <p class="hand red" style="margin: 4px 0 0; font-size: 26px; transform: rotate(-1deg)">совет: включите «проверь себя», чтобы угадать значение по знаку!</p>
+      </div>
+      <div role="group" aria-label="Режим" style="display: flex; gap: 8px; flex-wrap: wrap">
+        <button type="button" class="chip" aria-pressed="{{ notQuiz }}" onClick="{{ toRead }}">Читать</button>
+        <button type="button" class="chip" aria-pressed="{{ quiz }}" onClick="{{ toQuiz }}">Проверь себя</button>
+        <button type="button" class="chip" aria-pressed="false">★ В мою колоду ({{ starred }})</button>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); gap: 26px 22px">
+      <sc-for list="{{ cards }}" as="c" hint-placeholder-count="9">
+        <article class="idx" style="transform: rotate({{ c.rot }})">
+          <sc-if value="{{ c.taped }}" hint-placeholder-val="{{ false }}"><span class="tape" aria-hidden="true"></span></sc-if>
+          <button type="button" class="star" aria-label="Добавить {{ c.w }} в мою колоду" aria-pressed="{{ c.st }}" onClick="{{ c.toggleStar }}">★</button>
+          <div style="display: flex; align-items: baseline; gap: 10px; height: 38px">
+            <span class="kl" lang="ja" style="font-size: 30px; font-weight: 600">{{ c.w }}</span>
+            <span class="kl" lang="ja" style="font-size: 14px; color: #555">かける</span>
+          </div>
+          <span style="font-size: 12px; font-weight: 700; color: #555; margin-top: 6px; text-transform: uppercase; letter-spacing: .05em">{{ c.pos }}</span>
+          <sc-if value="{{ c.show }}" hint-placeholder-val="{{ true }}">
+            <ol style="margin: 0; padding-left: 20px; font-size: 15px; line-height: 28px">
+              <sc-for list="{{ c.senses }}" as="s" hint-placeholder-count="3"><li>{{ s }}</li></sc-for>
+            </ol>
+            <sc-if value="{{ c.note }}" hint-placeholder-val="{{ false }}"><span class="hand red" style="font-size: 21px; line-height: 1.1">{{ c.note }}</span></sc-if>
+          </sc-if>
+          <sc-if value="{{ c.hide }}" hint-placeholder-val="{{ false }}">
+            <p class="hand" style="margin: 6px 0 0; font-size: 22px; color: #777">подсказка: {{ c.hint }}…?</p>
+            <button type="button" class="rev" onClick="{{ c.reveal }}">Показать значение</button>
+          </sc-if>
+          <a href="NoteEntry.dc.html" style="font-size: 14px; font-weight: 700; margin-top: auto">открыть статью →</a>
+        </article>
+      </sc-for>
+    </div>
+
+    <section aria-labelledby="ins" style="margin-top: 52px">
+      <h2 id="ins" style="margin: 0 0 14px; font-size: 24px; font-weight: 800">Тоже с <span class="kl hl">かける</span> внутри · 46</h2>
+      <p class="kl" lang="ja" style="margin: 0; font-size: 22px; line-height: 2.2; display: flex; flex-wrap: wrap; gap: 4px 22px">
+        <a href="#">出かける</a><a href="#">見かける</a><a href="#">話しかける</a><a href="#">追いかける</a><a href="#">呼びかける</a><a href="#">腰掛ける</a><a href="#">押しかける</a><a href="#">心掛ける</a><span class="hand" style="font-size: 22px">+38 ещё</span>
+      </p>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1700}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { quiz: false, rev: {}, star: { 0: true, 3: true } }; }
+  renderVals() {
+    const { quiz, rev, star } = this.state;
+    const R = [
+      { w: '掛ける', hint: 'вешать', pos: 'глагол · 15 значений', senses: ['вешать, подвешивать', 'тратить (время, деньги)', 'звонить (по телефону)'], note: 'самое частое!' },
+      { w: '欠ける', hint: 'недостаёт', pos: 'глагол', senses: ['откалываться', 'недоставать', 'убывать (о луне)'] },
+      { w: '駆ける', hint: 'бег', pos: 'глагол', senses: ['бежать, мчаться', 'скакать (на лошади)'], note: '馬 в знаке = лошадь' },
+      { w: '賭ける', hint: 'азарт', pos: 'глагол', senses: ['ставить, держать пари', 'рисковать (жизнью)'], note: '貝 = деньги (раковины)' },
+      { w: '架ける', hint: 'мост', pos: 'глагол', senses: ['наводить (мост)'], note: 'чаще пишут 掛ける' },
+      { w: '懸ける', hint: 'награда', pos: 'глагол', senses: ['назначать (награду)', 'ставить на карту'] },
+      { w: '翔る', hint: 'крылья', pos: 'глагол · книжн.', senses: ['парить, высоко лететь', 'мчаться'], note: '羽 = перья' },
+      { w: '書ける', hint: 'письмо', pos: 'форма от 書く', senses: ['мочь писать', 'хорошо пишется'] },
+      { w: '〜かける', hint: 'начало', pos: 'вспом. глагол', senses: ['начинать (делать)', 'не доделать', 'обращаться к кому-л.'], note: 'читать-かける = начать читать' }
+    ];
+    const rots = ['-1deg', '0.6deg', '-0.4deg', '1deg', '-1.2deg', '0.4deg', '-0.6deg', '1.1deg', '-0.8deg'];
+    const cards = R.map((r, i) => {
+      const show = !quiz || !!rev[i];
+      return { ...r, note: r.note || '', rot: rots[i], taped: i % 3 === 0, show, hide: !show, st: !!star[i],
+        toggleStar: () => this.setState({ star: { ...star, [i]: !star[i] } }),
+        reveal: () => this.setState({ rev: { ...rev, [i]: true } }) };
+    });
+    return { cards, quiz, notQuiz: !quiz, starred: Object.values(star).filter(Boolean).length,
+      toQuiz: () => this.setState({ quiz: true, rev: {} }), toRead: () => this.setState({ quiz: false }) };
+  }
+}
+</script>
+</body>
+</html>

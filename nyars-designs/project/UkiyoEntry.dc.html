@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Гравюра — статья 結構</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Antique&amp;family=Shippori+Antique+B1&amp;family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&amp;family=Literata:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F1E6CF;color:#1E1C1A;font-family:'Literata',Georgia,serif;font-size:17px;line-height:1.6}
+a{color:#1F3B6E}a:hover{color:#C4472F}
+.za{font-family:'Zen Antique','Shippori Antique B1',serif}
+.os{font-family:'Old Standard TT',Georgia,serif}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.sei{background-color:#1F3B6E;background-image:radial-gradient(circle at 100% 150%,#1F3B6E 24%,#2D5290 24%,#2D5290 28%,#1F3B6E 28%,#1F3B6E 36%,#2D5290 36%,#2D5290 40%,transparent 40%,transparent),radial-gradient(circle at 0 150%,#1F3B6E 24%,#2D5290 24%,#2D5290 28%,#1F3B6E 28%,#1F3B6E 36%,#2D5290 36%,#2D5290 40%,transparent 40%,transparent),radial-gradient(circle at 50% 100%,#2D5290 10%,#1F3B6E 10%,#1F3B6E 23%,#2D5290 23%,#2D5290 30%,#1F3B6E 30%,#1F3B6E 43%,#2D5290 43%,#2D5290 50%,#1F3B6E 50%,#1F3B6E 63%,#2D5290 63%,#2D5290 71%,transparent 71%,transparent);background-size:60px 30px}
+.frame{border:3px solid #1E1C1A;outline:1px solid #1E1C1A;outline-offset:4px;background:#F7EEDB}
+.mist{height:24px;border-radius:12px;background:#E9DDBF;border:2px solid #C9B78F;flex:1}
+.seal{flex:0 0 auto;width:40px;height:40px;background:#C4472F;color:#F7EEDB;display:flex;align-items:center;justify-content:center;font-family:'Zen Antique',serif;font-size:20px}
+.sense{display:grid;grid-template-columns:40px minmax(0,1fr);gap:6px 16px;padding:14px 0}
+.ex{grid-column:2;background:#F7EEDB;border:2px solid #1E1C1A;padding:10px 14px}
+.lbl{font-family:'Old Standard TT',serif;font-style:italic;color:#A3361F;margin-right:6px}
+.chip{height:44px;padding:0 16px;border:2px solid #1E1C1A;background:#F7EEDB;font-family:'Old Standard TT',serif;font-size:16px;cursor:pointer}
+.chip[aria-selected=true],.chip[aria-pressed=true]{background:#1F3B6E;color:#F7EEDB}
+@media (max-width:760px){.wrap{padding:0 16px}}
+</style>
+</helmet>
+<div>
+  <div class="sei" style="height: 22px" aria-hidden="true"></div>
+  <header class="wrap" style="display: flex; align-items: center; gap: 16px 28px; flex-wrap: wrap; padding-top: 16px; padding-bottom: 16px; border-bottom: 3px solid #1E1C1A">
+    <a href="UkiyoHome.dc.html" style="display: flex; align-items: center; gap: 14px; text-decoration: none; color: #1E1C1A"><span class="za" style="background: #E9C46A; border: 3px double #1E1C1A; font-size: 20px; padding: 2px 10px">辞書</span><span class="os" style="font-size: 28px; font-weight: 700">nyars</span></a>
+    <form role="search" style="flex: 1 1 440px; display: flex; background: #F7EEDB; border: 3px solid #1E1C1A"><label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label><input id="q" type="search" value="結構" class="za" style="flex: 1; min-width: 0; height: 50px; border: 0; background: transparent; padding: 0 16px; font-size: 22px; outline: none"></form>
+  </header>
+
+  <main class="wrap" style="padding-top: 36px; padding-bottom: 72px; display: flex; flex-wrap: wrap-reverse; gap: 40px 56px; align-items: flex-start">
+    <div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+      <div class="frame" style="padding: 20px 24px; display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center">
+        <button type="button" aria-label="Прослушать" style="width: 56px; height: 56px; border-radius: 50%; border: 3px solid #1E1C1A; background: #C4472F; color: #F7EEDB; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9v6h4l5 4V5L9 9H5z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg></button>
+        <svg width="200" height="60" viewBox="0 0 200 60" role="img" aria-label="Ударение: высокий тон на け"><path d="M10 20 C30 4 50 4 60 20 C80 48 110 46 190 46" fill="none" stroke="#1F3B6E" stroke-width="5" stroke-linecap="round"/><path d="M10 26 C30 10 50 10 60 26 C80 54 110 52 190 52" fill="none" stroke="#1F3B6E" stroke-width="2" opacity=".5"/><g class="za" font-size="18" fill="#1E1C1A"><text x="26" y="16" style="font-family: 'Zen Antique'">け</text><text x="90" y="38" style="font-family: 'Zen Antique'">っ</text><text x="124" y="38" style="font-family: 'Zen Antique'">こ</text><text x="158" y="38" style="font-family: 'Zen Antique'">う</text></g></svg>
+        <div class="os" style="font-size: 16px; font-style: italic">атамадака [1] · частотность № 1 284</div>
+        <span style="flex: 1"></span>
+        <button type="button" class="chip" aria-pressed="{{ exOn }}" onClick="{{ toggleEx }}">{{ exLabel }}</button>
+        <a href="#" class="chip" style="display: inline-flex; align-items: center; text-decoration: none; color: #1E1C1A; background: #E9C46A">Править</a>
+      </div>
+
+      <section>
+        <div style="display: flex; align-items: center; gap: 16px"><h2 class="os" style="margin: 0; font-size: 28px">на-прилагательное <span class="za" lang="ja" style="font-size: 18px; color: #4A4238">形容動詞</span></h2><div class="mist"></div></div>
+        <div class="sense"><span class="seal" lang="ja">壱</span><span><b>прекрасный, превосходный, отличный</b>; великолепный</span><sc-if value="{{ exOn }}" hint-placeholder-val="{{ true }}"><div class="ex"><span class="za" lang="ja" style="font-size: 19px">結構なお土産をありがとうございます。</span><br><i>Спасибо за чудесный подарок.</i></div></sc-if></div>
+        <div class="sense"><span class="seal" lang="ja">弐</span><span><span class="lbl">часто 〜です</span><b>достаточный</b>; (уже) хорошо, годится</span><sc-if value="{{ exOn }}" hint-placeholder-val="{{ true }}"><div class="ex"><span class="za" lang="ja" style="font-size: 19px">サインはボールペンで結構です。</span><br><i>Расписаться можно и шариковой ручкой.</i></div></sc-if></div>
+        <div class="sense"><span class="seal" lang="ja">参</span><span><span class="lbl">вежл.</span><b>нет, спасибо</b>; не нужно</span><sc-if value="{{ exOn }}" hint-placeholder-val="{{ true }}"><div class="ex"><span class="za" lang="ja" style="font-size: 19px">いえ、もう結構です。</span><br><i>Нет, спасибо, мне достаточно.</i></div></sc-if></div>
+      </section>
+      <section>
+        <div style="display: flex; align-items: center; gap: 16px"><h2 class="os" style="margin: 0; font-size: 28px">наречие <span class="za" lang="ja" style="font-size: 18px; color: #4A4238">副詞</span></h2><div class="mist"></div></div>
+        <div class="sense"><span class="seal" lang="ja" style="background: #1F3B6E">壱</span><span><span class="lbl">разг.</span><b>довольно, вполне</b>; порядочно</span><sc-if value="{{ exOn }}" hint-placeholder-val="{{ true }}"><div class="ex"><span class="za" lang="ja" style="font-size: 19px">この店、安いけど結構おいしい。</span><br><i>Здесь дёшево, но довольно вкусно.</i></div></sc-if></div>
+      </section>
+      <section>
+        <div style="display: flex; align-items: center; gap: 16px"><h2 class="os" style="margin: 0; font-size: 28px">существительное <span class="za" lang="ja" style="font-size: 18px; color: #4A4238">名詞</span></h2><div class="mist"></div></div>
+        <div class="sense"><span class="seal" lang="ja" style="background: #6E7F6A">壱</span><span><span class="lbl">книжн.</span><b>структура, конструкция</b>; композиция</span></div>
+      </section>
+
+      <section aria-label="История и источники" class="frame" style="padding: 22px 24px">
+        <div role="tablist" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px">
+          <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3"><button type="button" role="tab" class="chip" aria-selected="{{ t.on }}" onClick="{{ t.pick }}">{{ t.label }}</button></sc-for>
+        </div>
+        <sc-if value="{{ isHist }}" hint-placeholder-val="{{ true }}">
+          <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px">
+            <li style="display: flex; gap: 12px; align-items: center"><span class="seal" style="width: 30px; height: 30px; font-size: 15px">改</span><span><b>kitsune_ru</b> — уточнил перевод наречия · сегодня</span></li>
+            <li style="display: flex; gap: 12px; align-items: center"><span class="seal" style="width: 30px; height: 30px; font-size: 15px">加</span><span><b>гость</b> — добавил «нет, спасибо» · 2 окт.</span></li>
+            <li style="display: flex; gap: 12px; align-items: center"><span class="seal" style="width: 30px; height: 30px; font-size: 15px; background: #1E1C1A">版</span><span>первое издание статьи · 2019</span></li>
+          </ol>
+        </sc-if>
+        <sc-if value="{{ isSrc }}" hint-placeholder-val="{{ false }}"><p style="margin: 0">БЯРС Конрада, с. 482 (скан) · Яркси · JMdict-ru</p></sc-if>
+        <sc-if value="{{ isDisc }}" hint-placeholder-val="{{ false }}"><p style="margin: 0"><b>Murasaki:</b> вынести 結構です в отдельную статью?</p></sc-if>
+      </section>
+    </div>
+
+    <aside style="flex: 1 1 260px; display: flex; justify-content: center">
+      <div style="display: flex; gap: 14px; align-items: flex-start">
+        <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 6px">
+          <span class="seal" style="width: 48px; height: 48px; font-family: 'Old Standard TT'; font-weight: 700; font-size: 18px; background: #1F3B6E">N3</span>
+          <span class="seal" style="width: 48px; height: 48px">常</span>
+        </div>
+        <div style="background: #E9C46A; border: 3px double #1E1C1A; box-shadow: 8px 8px 0 #1E1C1A; padding: 22px 16px; display: flex; gap: 10px">
+          <span class="za" lang="ja" style="writing-mode: vertical-rl; font-size: 26px; letter-spacing: 0.3em; color: #4A4238">けっこう</span>
+          <h1 class="za" lang="ja" style="margin: 0; writing-mode: vertical-rl; font-size: 120px; line-height: 1; font-weight: 400">結構</h1>
+        </div>
+      </div>
+    </aside>
+  </main>
+  <div class="sei" style="height: 40px" aria-hidden="true"></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2000}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { ex: true, tab: 'hist' }; }
+  renderVals() {
+    const { ex, tab } = this.state;
+    const tabs = [['hist', 'Издания · 14'], ['src', 'Источники · 5'], ['disc', 'Обсуждение · 2']].map(([id, label]) => ({ label, on: tab === id, pick: () => this.setState({ tab: id }) }));
+    return { exOn: ex, exLabel: ex ? 'Скрыть примеры' : 'Показать примеры', toggleEx: () => this.setState({ ex: !ex }),
+      tabs, isHist: tab === 'hist', isSrc: tab === 'src', isDisc: tab === 'disc' };
+  }
+}
+</script>
+</body>
+</html>

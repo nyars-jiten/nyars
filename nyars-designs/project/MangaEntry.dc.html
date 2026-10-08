@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Манга — статья 結構</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&amp;family=Mochiy+Pop+One&amp;family=Unbounded:wght@500;700;900&amp;family=Rubik:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFDF8;color:#111;font-family:'Rubik',system-ui,sans-serif;font-size:16px;line-height:1.5}
+a{color:#111}a:hover{color:#C2185B}
+.jpd{font-family:'Dela Gothic One','Mochiy Pop One',sans-serif}
+.jpp{font-family:'Mochiy Pop One',sans-serif}
+.un{font-family:'Unbounded',sans-serif}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.panel{border:4px solid #111;background:#fff;position:relative;overflow:hidden}
+.tone{background-image:radial-gradient(#111 1.1px,transparent 1.5px);background-size:7px 7px}
+.speed{background:repeating-conic-gradient(from 0deg at 22% 50%,#111 0deg 1deg,transparent 1deg 6deg)}
+.sfx{font-family:'Dela Gothic One',sans-serif;color:#FFD60A;-webkit-text-stroke:3px #111;paint-order:stroke fill;line-height:1}
+.sticker{font-family:'Unbounded',sans-serif;font-weight:900;font-size:14px;padding:4px 10px;border:3px solid #111;box-shadow:3px 3px 0 #111;display:inline-block}
+.pos{font-family:'Unbounded',sans-serif;font-weight:900;font-size:22px;background:#111;color:#fff;padding:6px 14px;display:inline-flex;gap:10px;align-items:baseline;transform:skewX(-8deg)}
+.n{font-family:'Unbounded',sans-serif;font-weight:900;font-size:22px;width:44px;height:44px;border:3px solid #111;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#FFD60A;flex:0 0 auto}
+.dlg{display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;align-items:start}
+.dlg.r{grid-template-columns:minmax(0,1fr) 64px}
+.say{background:#fff;border:3px solid #111;border-radius:22px;padding:12px 18px;cursor:pointer;font:inherit;text-align:left;color:#111;position:relative}
+.say:hover{background:#FFF8D6}
+.chip{height:44px;padding:0 16px;border:3px solid #111;background:#fff;font:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:3px 3px 0 #111}
+.chip[aria-selected=true],.chip[aria-pressed=true]{background:#111;color:#FFD60A}
+@media (max-width:760px){.wrap{padding:0 16px}}
+</style>
+</helmet>
+<div>
+  <header style="background: #111; color: #fff; border-bottom: 4px solid #FFD60A">
+    <div class="wrap" style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding-top: 12px; padding-bottom: 12px">
+      <a href="MangaHome.dc.html" style="display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none"><span class="jpd" style="background: #FFD60A; color: #111; font-size: 24px; padding: 2px 10px; border: 3px solid #fff; transform: rotate(-3deg); display: inline-block">辞</span><span class="un" style="font-weight: 900; font-size: 22px">nyars!</span></a>
+      <form role="search" style="flex: 1 1 440px; display: flex"><label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label><input id="q" type="search" value="結構" class="jpp" style="flex: 1; min-width: 0; height: 46px; border: 3px solid #fff; padding: 0 14px; font-size: 18px; outline: none"><a href="MangaSearch.dc.html" class="un" style="background: #FFD60A; color: #111; padding: 0 18px; display: flex; align-items: center; font-weight: 900; text-decoration: none; border: 3px solid #fff; border-left: 0">GO!</a></form>
+    </div>
+  </header>
+
+  <main class="wrap" style="padding-top: 28px; padding-bottom: 72px; display: flex; flex-direction: column; gap: 28px">
+    <section class="panel" style="padding: 36px 40px; min-height: 280px">
+      <div class="speed" style="position: absolute; inset: 0; opacity: 0.13"></div>
+      <span class="sfx" aria-hidden="true" style="position: absolute; right: 30px; bottom: 18px; font-size: 80px; transform: rotate(-6deg)">ケッコー！</span>
+      <div style="position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 24px 48px">
+        <h1 class="jpd" lang="ja" style="margin: 0; font-size: 150px; line-height: 1; font-weight: 400; background: #fff; padding: 8px 18px; border: 4px solid #111; box-shadow: 8px 8px 0 #111"><ruby>結<rt class="jpp" style="font-size: 26px">けっ</rt>構<rt class="jpp" style="font-size: 26px">こう</rt></ruby></h1>
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; gap: 10px; flex-wrap: wrap"><span class="sticker" style="background: #2D6CDF; color: #fff; transform: rotate(-4deg)">N3</span><span class="sticker" style="background: #FFD60A; transform: rotate(3deg)">ЧАСТОЕ</span><span class="sticker" style="background: #fff; transform: rotate(-2deg)">3 части речи</span></div>
+          <div style="display: flex; align-items: center; gap: 14px; background: #fff; border: 3px solid #111; padding: 10px 14px">
+            <button type="button" aria-label="Прослушать" style="width: 52px; height: 52px; border-radius: 50%; border: 3px solid #111; background: #FF3D7F; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9v6h4l5 4V5L9 9H5z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg></button>
+            <svg width="170" height="50" viewBox="0 0 170 50" role="img" aria-label="Ударение: высоко на け, затем вниз"><path d="M6 12 L40 12 L52 36 L164 36" fill="none" stroke="#111" stroke-width="4" stroke-linejoin="round"/><circle cx="22" cy="12" r="6" fill="#FF3D7F" stroke="#111" stroke-width="2"/><circle cx="70" cy="36" r="6" fill="#fff" stroke="#111" stroke-width="2"/><circle cx="110" cy="36" r="6" fill="#fff" stroke="#111" stroke-width="2"/><circle cx="150" cy="36" r="6" fill="#fff" stroke="#111" stroke-width="2"/></svg>
+            <a href="#" class="un" style="font-weight: 700; font-size: 14px; background: #FFD60A; border: 3px solid #111; padding: 8px 14px; text-decoration: none">✎ ПРАВИТЬ</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+      <span class="un" style="font-weight: 700">Перевод в репликах:</span>
+      <button type="button" class="chip" aria-pressed="{{ allOn }}" onClick="{{ showAll }}">Показать все</button>
+      <button type="button" class="chip" aria-pressed="{{ allOff }}" onClick="{{ hideAll }}">Скрыть — проверю себя</button>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(560px, 100%), 1fr)); gap: 20px">
+      <section class="panel" style="padding: 24px; display: flex; flex-direction: column; gap: 18px">
+        <span class="pos"><span>НА-ПРИЛ.</span><span class="jpp" style="font-size: 15px">形容動詞</span></span>
+        <sc-for list="{{ adj }}" as="s" hint-placeholder-count="3">
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <div style="display: flex; gap: 12px; align-items: flex-start"><span class="n">{{ s.n }}</span><p style="margin: 6px 0 0; font-size: 18px"><sc-if value="{{ s.tag }}" hint-placeholder-val="{{ false }}"><span class="sticker" style="font-size: 11px; padding: 1px 6px; box-shadow: none; background: #FFE0EC; margin-right: 6px">{{ s.tag }}</span></sc-if><b>{{ s.gl }}</b></p></div>
+            <sc-if value="{{ s.hasEx }}" hint-placeholder-val="{{ true }}">
+              <div class="dlg" style="margin-left: 56px">
+                <svg width="64" height="64" viewBox="0 0 120 128" aria-hidden="true"><path d="M60 6 C70 30 102 46 102 80 C102 106 84 120 60 120 C36 120 18 106 18 80 C18 46 50 30 60 6Z" fill="#111"/><ellipse cx="44" cy="78" rx="9" ry="11" fill="#fff"/><ellipse cx="76" cy="78" rx="9" ry="11" fill="#fff"/><circle cx="46" cy="80" r="5" fill="#111"/><circle cx="74" cy="80" r="5" fill="#111"/><ellipse cx="34" cy="96" rx="7" ry="4" fill="#FF3D7F"/><ellipse cx="86" cy="96" rx="7" ry="4" fill="#FF3D7F"/></svg>
+                <button type="button" class="say" onClick="{{ s.flip }}" aria-expanded="{{ s.open }}">
+                  <span class="jpp" lang="ja" style="font-size: 19px">{{ s.ex }}</span>
+                  <sc-if value="{{ s.open }}" hint-placeholder-val="{{ true }}"><span style="display: block; margin-top: 6px; padding-top: 6px; border-top: 2px dashed #111; font-size: 15px">{{ s.tr }}</span></sc-if>
+                  <sc-if value="{{ s.closed }}" hint-placeholder-val="{{ false }}"><span style="display: block; margin-top: 6px; font-size: 13px; color: #C2185B; font-weight: 700">нажмите — покажу перевод</span></sc-if>
+                </button>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </section>
+
+      <div style="display: flex; flex-direction: column; gap: 20px">
+        <section class="panel" style="padding: 24px; display: flex; flex-direction: column; gap: 16px; clip-path: polygon(0 0, 100% 0, 100% 100%, 2% 100%)">
+          <span class="pos"><span>НАРЕЧИЕ</span><span class="jpp" style="font-size: 15px">副詞</span></span>
+          <div style="display: flex; gap: 12px; align-items: flex-start"><span class="n">1</span><p style="margin: 6px 0 0; font-size: 18px"><span class="sticker" style="font-size: 11px; padding: 1px 6px; box-shadow: none; background: #E0ECFF; margin-right: 6px">разг.</span><b>довольно, вполне</b>; порядочно</p></div>
+          <div class="dlg r">
+            <button type="button" class="say" onClick="{{ advFlip }}" style="background: #FFF8D6"><span class="jpp" lang="ja" style="font-size: 19px">この店、安いけど結構おいしい！</span><sc-if value="{{ advOpen }}" hint-placeholder-val="{{ true }}"><span style="display: block; margin-top: 6px; padding-top: 6px; border-top: 2px dashed #111; font-size: 15px">Здесь дёшево, но довольно вкусно!</span></sc-if></button>
+            <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="34" r="26" fill="#FFE9D6" stroke="#111" stroke-width="3"/><path d="M8 30 C10 8 54 6 56 30 C48 18 20 18 8 30Z" fill="#111"/><circle cx="23" cy="36" r="6" fill="none" stroke="#111" stroke-width="2.5"/><circle cx="41" cy="36" r="6" fill="none" stroke="#111" stroke-width="2.5"/><path d="M29 36h6" stroke="#111" stroke-width="2.5"/><path d="M26 48 Q32 52 38 48" stroke="#111" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+          </div>
+        </section>
+        <section class="panel tone" style="padding: 24px; background-color: #EDEDED; display: flex; flex-direction: column; gap: 14px">
+          <span class="pos" style="background: #fff; color: #111; border: 3px solid #111"><span>СУЩ.</span><span class="jpp" style="font-size: 15px">名詞</span></span>
+          <div style="display: flex; gap: 12px; align-items: flex-start; background: #fff; border: 3px solid #111; padding: 12px"><span class="n" style="background: #fff">1</span><p style="margin: 6px 0 0; font-size: 18px"><span class="sticker" style="font-size: 11px; padding: 1px 6px; box-shadow: none; margin-right: 6px">книжн.</span><b>структура, конструкция</b>; композиция</p></div>
+        </section>
+      </div>
+    </div>
+
+    <section aria-label="История и источники">
+      <div role="tablist" style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3"><button type="button" role="tab" class="chip" aria-selected="{{ t.on }}" onClick="{{ t.pick }}">{{ t.label }}</button></sc-for>
+      </div>
+      <sc-if value="{{ isHist }}" hint-placeholder-val="{{ true }}">
+        <ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 12px">
+          <li class="panel" style="padding: 14px"><span class="un" style="font-weight: 900">Глава 14</span><br>kitsune_ru уточнил наречие<br><small>сегодня · +18 −4</small></li>
+          <li class="panel" style="padding: 14px"><span class="un" style="font-weight: 900">Глава 13</span><br>Гость добавил «нет, спасибо»<br><small>2 окт. · +41</small></li>
+          <li class="panel" style="padding: 14px"><span class="un" style="font-weight: 900">Глава 1</span><br>Пролог: статья из ядра словаря<br><small>2019</small></li>
+        </ol>
+      </sc-if>
+      <sc-if value="{{ isSrc }}" hint-placeholder-val="{{ false }}"><p class="panel" style="margin: 0; padding: 16px"><b>БЯРС Конрада, с. 482</b> · Яркси · JMdict (машинный) — 5 источников</p></sc-if>
+      <sc-if value="{{ isDisc }}" hint-placeholder-val="{{ false }}"><p class="panel" style="margin: 0; padding: 16px"><b>Murasaki:</b> вынести 結構です в отдельную статью?</p></sc-if>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2000}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { open: { 0: true }, adv: true, tab: 'hist' }; }
+  renderVals() {
+    const { open, adv, tab } = this.state;
+    const A = [
+      { gl: 'прекрасный, превосходный, отличный', ex: '結構なお土産をありがとう！', tr: 'Спасибо за чудесный подарок!' },
+      { gl: 'достаточный; (уже) хорошо, годится', tag: '〜です', ex: 'サインはボールペンで結構です。', tr: 'Расписаться можно и шариковой ручкой.' },
+      { gl: 'нет, спасибо; не нужно', tag: 'вежл.', ex: 'いえ、もう結構です…', tr: 'Нет-нет, мне уже достаточно…' }
+    ];
+    const adj = A.map((s, i) => ({ ...s, n: i + 1, tag: s.tag || '', hasEx: true, open: !!open[i], closed: !open[i],
+      flip: () => this.setState({ open: { ...open, [i]: !open[i] } }) }));
+    const all = adj.every(s => s.open) && adv, none = adj.every(s => !s.open) && !adv;
+    const tabs = [['hist', 'Главы · 14'], ['src', 'Источники · 5'], ['disc', 'Обсуждение · 2']].map(([id, label]) => ({ label, on: tab === id, pick: () => this.setState({ tab: id }) }));
+    return { adj, advOpen: adv, advFlip: () => this.setState({ adv: !adv }),
+      allOn: all, allOff: none,
+      showAll: () => this.setState({ open: { 0: true, 1: true, 2: true }, adv: true }),
+      hideAll: () => this.setState({ open: {}, adv: false }),
+      tabs, isHist: tab === 'hist', isSrc: tab === 'src', isDisc: tab === 'disc' };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Статья — кошачьи мотивы</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700&amp;family=Zen+Maru+Gothic:wght@500;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+.root{min-height:100%;background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;font-size:16px;line-height:1.6}
+.root a{color:var(--strong);text-decoration:none}.root a:hover{text-decoration:underline;text-underline-offset:3px}
+.jp{font-family:'Zen Old Mincho','Yu Mincho',serif}
+.jm{font-family:'Zen Maru Gothic',sans-serif}
+.wrap{max-width:1320px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.proto{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:8px 32px;background:var(--surf);border-bottom:1px dashed var(--line);font-size:12.5px;color:var(--muted)}
+.pbtn{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border:1px solid var(--line);background:transparent;border-radius:14px;font:inherit;color:var(--ink);cursor:pointer}
+.pbtn[aria-pressed=true]{border-color:var(--strong);box-shadow:inset 0 0 0 1px var(--strong)}
+.sw{width:12px;height:12px;border-radius:50%;border:1px solid rgba(0,0,0,.15)}
+.seal{display:inline-flex;align-items:center;justify-content:center;background:var(--strong);color:var(--surf);border-radius:4px;font-family:'Zen Old Mincho',serif;font-weight:700}
+.ibtn{width:40px;height:40px;border:0;background:transparent;border-radius:8px;font-family:'Zen Old Mincho',serif;font-size:19px;color:var(--muted);cursor:pointer}
+.ibtn:hover{background:var(--soft);color:var(--strong)}
+.panel{background:var(--surf);border-radius:16px}
+.cap{font-size:11.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:11px;font-size:12px;font-weight:600;background:var(--soft);color:var(--strong);white-space:nowrap;vertical-align:2px}
+.tag.sec{background:var(--secsoft);color:var(--sec)}
+.tag.ghost{background:transparent;box-shadow:inset 0 0 0 1px var(--line);color:var(--muted)}
+.mrow{padding:14px 0;border-top:1px solid var(--line)}
+.mrow:first-child{border-top:0;padding-top:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:20px;border:1px solid var(--line);background:var(--surf);color:var(--ink);font:inherit;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none}
+.btn.pri{background:var(--acc);border-color:var(--acc);color:var(--onacc)}
+.chip{display:inline-flex;align-items:baseline;gap:8px;padding:6px 12px;border-radius:12px;background:var(--surf);font-size:14px}
+.hw{font-family:'Zen Old Mincho',serif;font-weight:700;line-height:1.18;line-break:strict;overflow-wrap:anywhere;margin:0}
+.sense{display:grid;grid-template-columns:30px minmax(0,1fr);gap:4px 10px;padding:12px 0}
+.sense .n{font-weight:800;color:var(--strong)}
+.ex{margin-top:6px;padding:8px 12px;border-radius:10px;background:var(--surf);font-size:15px}
+.kc{display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:14px;background:var(--surf);text-decoration:none;color:var(--ink)}
+.kc:hover{box-shadow:inset 0 0 0 2px var(--acc)}
+.tab{height:38px;padding:0 14px;border:0;border-radius:19px;background:transparent;color:var(--ink);font:inherit;font-weight:600;font-size:14.5px;cursor:pointer}
+.tab[aria-selected=true]{background:var(--acc);color:var(--onacc)}
+.kv{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:3px 0}
+.kv dt{color:var(--muted)}.kv dd{margin:0;text-align:right}
+.root input[type=range]{-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;background:var(--soft);outline-offset:4px}
+.root input[type=checkbox]{-webkit-appearance:none;appearance:none;width:18px;height:18px;margin:0;border:1.5px solid var(--muted);background:var(--field);flex:0 0 auto;cursor:pointer}
+.root input[type=checkbox]{border-radius:6px}
+.root input[type=checkbox]:checked{border-color:var(--acc);background-color:var(--acc);background-image:radial-gradient(circle at 50% 66%,var(--onacc) 3.2px,transparent 3.7px),radial-gradient(circle at 24% 40%,var(--onacc) 1.7px,transparent 2.1px),radial-gradient(circle at 41% 25%,var(--onacc) 1.7px,transparent 2.1px),radial-gradient(circle at 59% 25%,var(--onacc) 1.7px,transparent 2.1px),radial-gradient(circle at 76% 40%,var(--onacc) 1.7px,transparent 2.1px)}
+.root input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;border:2px solid var(--strong);background-color:var(--surf);background-image:radial-gradient(circle at 50% 64%,var(--strong) 3.4px,transparent 3.9px),radial-gradient(circle at 26% 40%,var(--strong) 1.8px,transparent 2.2px),radial-gradient(circle at 42% 26%,var(--strong) 1.8px,transparent 2.2px),radial-gradient(circle at 58% 26%,var(--strong) 1.8px,transparent 2.2px),radial-gradient(circle at 74% 40%,var(--strong) 1.8px,transparent 2.2px);cursor:pointer}
+.root input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;border:2px solid var(--strong);background:var(--surf)}
+.ears{position:relative}.ears::before,.ears::after{content:'';position:absolute;top:-7px;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:9px solid var(--acc);pointer-events:none}
+.ears::before{left:9px}.ears::after{right:9px}
+.sealc{position:relative}.sealc::before,.sealc::after{content:'';position:absolute;top:-7px;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:9px solid var(--strong)}
+.sealc::before{left:2px}.sealc::after{right:2px}
+.paws{border-top:0 !important;position:relative}.paws::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;background:var(--line)}
+.tab[aria-selected=true]{position:relative}.tab[aria-selected=true]::before,.tab[aria-selected=true]::after{content:"";position:absolute;top:-7px;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:9px solid var(--acc)}.tab[aria-selected=true]::before{left:9px}.tab[aria-selected=true]::after{right:9px}
+@media (max-width:900px){.wrap{padding:0 16px}.proto{padding:8px 16px}.meta{position:static !important;max-width:none !important}}
+</style>
+</helmet>
+<div class="root" style="--bg: {{ p.bg }}; --surf: {{ p.surf }}; --ink: {{ p.ink }}; --muted: {{ p.muted }}; --line: {{ p.line }}; --acc: {{ p.acc }}; --strong: {{ p.strong }}; --soft: {{ p.soft }}; --sec: {{ p.sec }}; --secsoft: {{ p.secsoft }}; --onacc: {{ p.onacc }}; --field: {{ p.field }}">
+  <div class="proto" role="group" aria-label="Прототип">
+    <span style="font-weight: 700">Прототип · палитра:</span>
+    <sc-for list="{{ pals }}" as="o" hint-placeholder-count="4"><button type="button" class="pbtn" aria-pressed="{{ o.on }}" onClick="{{ o.pick }}"><span class="sw" style="background: {{ o.a }}"></span><span class="sw" style="background: {{ o.b }}"></span>{{ o.name }}</button></sc-for>
+    <span style="font-weight: 700; margin-left: 12px">статья:</span>
+    <sc-for list="{{ ents }}" as="o" hint-placeholder-count="3"><button type="button" class="pbtn jp" aria-pressed="{{ o.on }}" onClick="{{ o.pick }}" lang="ja">{{ o.l }}</button></sc-for>
+  </div>
+
+  <header class="wrap" style="display: flex; align-items: center; gap: 14px 26px; flex-wrap: wrap; padding-top: 18px; padding-bottom: 14px">
+    <a href="#" style="display: flex; align-items: center; gap: 10px; color: var(--ink)"><span class="seal sealc" style="width: 38px; height: 38px; font-size: 22px">辞</span><span style="font-size: 21px; font-weight: 800">nya<span style="color: var(--strong)">rs</span></span></a>
+    <form role="search" style="flex: 1 1 520px; display: flex; align-items: center; gap: 4px; border-bottom: 2px solid var(--ink)">
+      <label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Поиск</label>
+      <input id="q" type="search" value="{{ e.main }}" class="jp" style="flex: 1; min-width: 0; height: 48px; border: 0; background: transparent; font-size: 19px; outline: none; color: var(--ink)">
+      <button type="button" class="ibtn" aria-label="Рукописный ввод">筆</button><button type="button" class="ibtn" aria-label="Поиск по ключам">部</button><button type="button" class="ibtn" aria-label="Расширенный поиск">篩</button>
+    </form>
+    <nav aria-label="Разделы" style="display: flex; gap: 20px; font-weight: 600"><a href="#">Кандзи</a><a href="#">Правки</a><a href="#">Скачать</a><a href="#">Войти</a></nav>
+  </header>
+
+  <div class="wrap" style="padding-top: 18px; padding-bottom: 72px; display: flex; flex-wrap: wrap; gap: 32px 48px; align-items: flex-start">
+    <aside class="meta panel" aria-label="Сведения о статье" style="flex: 1 1 280px; max-width: 310px; position: sticky; top: 40px; padding: 20px 22px; margin-top: 30px">
+      <span style="position: absolute; right: 22px; top: -42px"><svg width="74" height="44" viewBox="0 0 74 44" aria-hidden="true"><path d="M9 44 L11 5 L27 17 Q37 13 47 17 L63 5 L65 44 Z" style="fill: var(--surf); stroke: var(--strong)" stroke-width="2" stroke-linejoin="round"/><path d="M15 13 L16 21 L22 17 Z" style="fill: var(--acc)"/><path d="M59 13 L58 21 L52 17 Z" style="fill: var(--acc)"/><path d="M24 31 q4 -5 8 0" fill="none" style="stroke: var(--strong)" stroke-width="2" stroke-linecap="round"/><path d="M42 31 q4 -5 8 0" fill="none" style="stroke: var(--strong)" stroke-width="2" stroke-linecap="round"/><path d="M35 36 l2 2 l2 -2" fill="none" style="stroke: var(--strong)" stroke-width="1.6" stroke-linecap="round"/><path d="M5 34 h12 M5 39 h12 M57 34 h12 M57 39 h12" style="stroke: var(--muted)" stroke-width="1.2" stroke-linecap="round"/></svg></span>
+      <div class="mrow">
+        <p class="cap">Произношение</p>
+        <sc-for list="{{ e.pitch }}" as="x" hint-placeholder-count="2">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px">
+            <button type="button" aria-label="Прослушать {{ x.r }}" style="flex: 0 0 auto; width: 36px; height: 36px; border-radius: 50%; border: 0; background: var(--acc); color: var(--onacc); cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5l12 7-12 7z"/></svg></button>
+            <div style="min-width: 0">
+              <sc-if value="{{ x.has }}" hint-placeholder-val="{{ true }}"><svg width="{{ x.w }}" height="30" viewBox="0 0 {{ x.w }} 30" role="img" aria-label="Ударение {{ x.acc }}"><polyline points="{{ x.pts }}" style="fill: none; stroke: var(--strong); stroke-width: 2"/><sc-for list="{{ x.dots }}" as="d" hint-placeholder-count="3"><circle cx="{{ d.x }}" cy="{{ d.y }}" r="4" style="fill: {{ d.f }}; stroke: var(--strong); stroke-width: 1.5"/></sc-for></svg></sc-if>
+              <div style="display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap"><span class="jm" lang="ja" style="font-size: 15px; overflow-wrap: anywhere">{{ x.r }}</span><span style="font-size: 12.5px; color: var(--muted)">{{ x.acc }}</span></div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div class="mrow"><p class="cap">Метки</p><div style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{ e.tags }}" as="g" hint-placeholder-count="3"><span class="{{ g.cls }}">{{ g.l }}</span></sc-for></div></div>
+      <div class="mrow"><p class="cap">Частотность</p><div style="display: flex; align-items: center; gap: 10px"><span style="font-weight: 700">{{ e.freq }}</span><span aria-hidden="true" style="display: flex; gap: 3px"><sc-for list="{{ e.fbar }}" as="f" hint-placeholder-count="5"><span style="width: 14px; height: 6px; border-radius: 3px; background: {{ f }}"></span></sc-for></span></div></div>
+      <div class="mrow"><p class="cap">Статус</p><span class="{{ e.stCls }}" style="height: 26px">{{ e.status }}</span><sc-if value="{{ e.pending }}" hint-placeholder-val="{{ false }}"><div style="font-size: 13.5px; margin-top: 6px"><a href="#">Посмотреть правку →</a></div></sc-if></div>
+      <div class="mrow">
+        <p class="cap">История</p>
+        <dl style="margin: 0"><div class="kv"><dt>Изменена</dt><dd>{{ e.last }}</dd></div><div class="kv"><dt>Версия</dt><dd>{{ e.ver }}</dd></div><div class="kv"><dt>Авторов</dt><dd>{{ e.authors }}</dd></div><div class="kv"><dt>ID</dt><dd style="font-family: ui-monospace, monospace; font-size: 13px">{{ e.id }}</dd></div></dl>
+      </div>
+      <div class="mrow" style="display: flex; flex-direction: column; gap: 8px">
+        <a href="#" class="btn pri ears">Править статью</a>
+        <div style="display: flex; gap: 6px"><button type="button" class="btn" style="flex: 1; padding: 0 8px">★ Избранное</button><button type="button" class="btn" style="flex: 1; padding: 0 8px">Anki</button></div>
+        <div style="display: flex; justify-content: space-between; font-size: 13.5px"><a href="#">Ссылка</a><a href="#">Сообщить об ошибке</a></div>
+      </div>
+    </aside>
+
+    <main style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+      <header>
+        <h1 class="hw" lang="ja" style="font-size: {{ e.fs }}">{{ e.main }}</h1>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 14px">
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center"><span class="cap" style="margin: 0 6px 0 0; min-width: 84px">Написания</span><sc-for list="{{ e.writ }}" as="w" hint-placeholder-count="2"><span class="chip"><span class="jp" lang="ja" style="font-size: 18px; font-weight: 700; overflow-wrap: anywhere">{{ w.w }}</span><sc-if value="{{ w.note }}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: var(--muted)">{{ w.note }}</span></sc-if></span></sc-for></div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center"><span class="cap" style="margin: 0 6px 0 0; min-width: 84px">Чтения</span><sc-for list="{{ e.read }}" as="w" hint-placeholder-count="2"><span class="chip"><span class="jm" lang="ja" style="font-size: 16px; overflow-wrap: anywhere">{{ w.r }}</span><sc-if value="{{ w.note }}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: var(--muted)">{{ w.note }}</span></sc-if></span></sc-for></div>
+        </div>
+      </header>
+
+      <sc-for list="{{ e.groups }}" as="g" hint-placeholder-count="1">
+        <section>
+          <h2 style="margin: 0; font-size: 18px; font-weight: 800; display: flex; gap: 10px; align-items: baseline">{{ g.pos }} <span class="jp" lang="ja" style="font-size: 14px; color: var(--muted); font-weight: 400">{{ g.jp }}</span></h2>
+          <sc-for list="{{ g.senses }}" as="s" hint-placeholder-count="2">
+            <div class="sense"><span class="n">{{ s.n }}</span><div>
+              <sc-for list="{{ s.tags }}" as="t" hint-placeholder-count="1"><span class="tag sec" style="margin-right: 6px">{{ t }}</span></sc-for><b>{{ s.t }}</b>
+              <sc-if value="{{ s.note }}" hint-placeholder-val="{{ false }}"><div style="font-size: 14.5px; color: var(--muted); margin-top: 2px">{{ s.note }}</div></sc-if>
+              <sc-for list="{{ s.ex }}" as="x" hint-placeholder-count="1"><div class="ex"><span class="jp" lang="ja" style="font-size: 17px">{{ x.j }}</span><br><span style="color: var(--muted)">{{ x.r }}</span></div></sc-for>
+            </div></div>
+          </sc-for>
+        </section>
+      </sc-for>
+
+      <section><p class="cap">Связанные статьи</p><div style="display: flex; flex-wrap: wrap; gap: 8px 22px"><sc-for list="{{ e.rel }}" as="r" hint-placeholder-count="2"><span><a href="#" class="jp" lang="ja" style="font-size: 17px; font-weight: 700">{{ r.w }}</a> <span style="color: var(--muted); font-size: 14px">— {{ r.g }}</span></span></sc-for></div></section>
+
+      <section aria-labelledby="kj">
+        <p id="kj" class="cap">Кандзи в записи · {{ e.kn }}</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(168px, 100%), 1fr)); gap: 10px">
+          <sc-for list="{{ e.kanji }}" as="k" hint-placeholder-count="6">
+            <a href="#" class="kc">
+              <div style="display: flex; align-items: center; gap: 10px"><span class="jp" lang="ja" style="font-size: 40px; font-weight: 700; line-height: 1">{{ k.k }}</span><span style="display: flex; flex-direction: column; gap: 3px"><span class="tag" style="height: 20px; font-size: 11px">漢検 {{ k.kk }}</span><span class="tag ghost" style="height: 20px; font-size: 11px">JLPT {{ k.jl }}</span></span></div>
+              <span style="font-size: 14px; font-weight: 600">{{ k.m }}</span>
+              <span class="jm" lang="ja" style="font-size: 12.5px; color: var(--muted)">{{ k.on }} · {{ k.kun }}</span>
+            </a>
+          </sc-for>
+        </div>
+      </section>
+
+      <section aria-label="История, обсуждение, сателлиты, сканы">
+        <div role="tablist" style="display: flex; gap: 4px; flex-wrap: wrap; padding-bottom: 10px; border-bottom: 1px solid var(--line)"><sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4"><button type="button" role="tab" class="tab" aria-selected="{{ t.on }}" onClick="{{ t.pick }}">{{ t.l }} <span style="opacity: .7; font-size: 12px">{{ t.n }}</span></button></sc-for></div>
+        <div style="padding-top: 14px">
+          <sc-if value="{{ isHist }}" hint-placeholder-val="{{ true }}">
+            <sc-for list="{{ hist }}" as="h" hint-placeholder-count="3"><div style="display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 14.5px"><span style="font-weight: 700; color: var(--muted)">{{ h.v }}</span><span><b>{{ h.u }}</b> — {{ h.s }} <span style="color: var(--muted)">· {{ h.t }}</span></span><span style="font-size: 13px"><span style="color: var(--strong); font-weight: 700">+{{ h.a }}</span> <span style="color: var(--sec); font-weight: 700">−{{ h.r }}</span></span></div></sc-for>
+          </sc-if>
+          <sc-if value="{{ isDisc }}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px"><p style="margin: 0"><b>Murasaki</b> · 2 дня назад<br>Стоит ли давать буквальный перевод отдельной строкой?</p><p style="margin: 0 0 0 24px"><b>kitsune_ru</b> · вчера<br>Да, и пометить источник.</p><textarea rows="2" aria-label="Комментарий" placeholder="Комментарий…" style="font: inherit; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--field); color: var(--ink)"></textarea></div></sc-if>
+          <sc-if value="{{ isSat }}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 10px"><div class="ex" style="margin: 0"><span class="tag ghost">Яркси</span><div style="font-family: ui-monospace, monospace; font-size: 13.5px; white-space: pre-wrap; margin-top: 6px">{{ e.sat1 }}</div></div><div class="ex" style="margin: 0"><span class="tag ghost">JMdict → рус. (машинный)</span><div style="font-family: ui-monospace, monospace; font-size: 13.5px; white-space: pre-wrap; margin-top: 6px">{{ e.sat2 }}</div></div></div></sc-if>
+          <sc-if value="{{ isScan }}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-wrap: wrap; gap: 18px"><div role="img" aria-label="Скан страницы" style="flex: 0 0 220px; height: 260px; border-radius: 6px; background: #E9E1CF; padding: 18px; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px"><div style="height: 6px; background: #8F887A; opacity: .5"></div><div style="height: 6px; width: 80%; background: #8F887A; opacity: .5"></div><div style="height: 28px; border: 2px solid var(--strong)"></div><div style="height: 6px; background: #8F887A; opacity: .5"></div><div style="height: 6px; width: 70%; background: #8F887A; opacity: .5"></div></div><div style="flex: 1 1 280px; font-size: 15px"><span class="tag ghost">Конрад, т. 1</span><p style="margin: 8px 0 0">{{ e.scan }}</p><p style="margin: 10px 0 0; font-size: 13.5px"><a href="#">Исправить распознавание</a></p></div></div></sc-if>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"palette":{"editor":"enum","options":["Васи и туман","Холодная бумага","Сакура","Индиго-ночь"],"default":"Васи и туман"},"$preview":{"width":1440,"height":2300}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { pal: null, ent: 0, tab: 'hist' }; }
+  renderVals() {
+    const PAL = {
+      'Васи и туман': { bg: '#F6F3EC', surf: '#FFFDF8', ink: '#1E2433', muted: '#5B6275', line: '#E3DDD0', acc: '#B7C7F7', strong: '#34478A', soft: '#E9EEFC', sec: '#A63F2A', secsoft: '#F7E3DC', onacc: '#1E2433', field: '#FFFDF8' },
+      'Холодная бумага': { bg: '#F3F5F9', surf: '#FFFFFF', ink: '#1B2030', muted: '#58607A', line: '#DEE3EE', acc: '#B7C7F7', strong: '#33458A', soft: '#EAF0FE', sec: '#7652A8', secsoft: '#EFE8F8', onacc: '#1B2030', field: '#FFFFFF' },
+      'Сакура': { bg: '#FAF6F4', surf: '#FFFFFF', ink: '#26202A', muted: '#665C68', line: '#EBE0E0', acc: '#B7C7F7', strong: '#3A4B8C', soft: '#ECF0FD', sec: '#A3445C', secsoft: '#F9E5EA', onacc: '#26202A', field: '#FFFFFF' },
+      'Индиго-ночь': { bg: '#131A2A', surf: '#1A2236', ink: '#E7EBF6', muted: '#A2ABC3', line: '#2B3550', acc: '#B7C7F7', strong: '#B7C7F7', soft: '#263252', sec: '#F0A28F', secsoft: '#3A2A30', onacc: '#131A2A', field: '#131A2A' }
+    };
+    const { ent, tab } = this.state;
+    const pn = this.state.pal || this.props.palette || 'Васи и туман';
+    const p = PAL[pn] || PAL['Васи и туман'];
+    const pals = Object.keys(PAL).map(name => ({ name, a: PAL[name].bg, b: PAL[name].strong, on: name === pn, pick: () => this.setState({ pal: name }) }));
+    const K = {
+      '蛙': ['лягушка', 'ア', 'かえる, かわず', '準1級', '—'], '井': ['колодец', 'セイ, ショウ', 'い', '7級', 'N1'], '以': ['посредством; с', 'イ', 'もっ-て', '7級', 'N3'], '海': ['море', 'カイ', 'うみ', '9級', 'N4'], '語': ['слово; рассказывать', 'ゴ', 'かた-る', '9級', 'N5'], '可': ['можно; допустимо', 'カ', 'べ-し', '6級', 'N2'],
+      '顔': ['лицо', 'ガン', 'かお', '9級', 'N3'], '面': ['поверхность; маска', 'メン', 'おも, つら', '8級', 'N3'], '筋': ['мышца; жила', 'キン', 'すじ', '5級', 'N1'], '疼': ['ноющая боль', 'トウ', 'うず-く', '1級', '—'], '痛': ['боль', 'ツウ', 'いた-い', '4級', 'N3'], '機': ['механизм; случай', 'キ', 'はた', '7級', 'N3'],
+      '能': ['способность', 'ノウ', '—', '6級', 'N3'], '不': ['не-, без-', 'フ, ブ', '—', '7級', 'N4'], '全': ['весь, целый', 'ゼン', 'まった-く', '8級', 'N3'], '症': ['симптом, болезнь', 'ショウ', '—', '4級', 'N1'], '候': ['признак; сезон', 'コウ', 'そうろう', '7級', 'N2'], '群': ['группа, стая', 'グン', 'む-れ', '7級', 'N1']
+    };
+    const E = [
+      { l: '蛙', main: '蛙', writ: [['蛙', ''], ['蝦', 'редк.'], ['かえる', 'кана']], read: [['かえる', ''], ['かわず', 'поэт.'], ['かいる', 'устар., диал.']], pitch: [['かえる', 0], ['かわず', 0]],
+        tags: [['частое', ''], ['сущ.', 'ghost']], freq: '№ 6 210', lvl: 3, status: 'Проверена', pending: false, last: 'сегодня, Murasaki', ver: 'v7', authors: 4, id: 'jr:1577460',
+        groups: [{ pos: 'существительное', jp: '名詞', senses: [{ t: 'лягушка; жаба', note: 'общее название бесхвостых земноводных', ex: [['田んぼで蛙が鳴いている。', 'В рисовом поле квакают лягушки.']] }, { t: 'лягушка (в поэзии; сезонное слово весны)', tags: ['поэт.', 'чтение かわず'], ex: [['古池や蛙飛びこむ水の音', 'Старый пруд — прыгнула лягушка, всплеск воды. (Басё)']] }] }],
+        rel: [['蛙の子は蛙', 'яблоко от яблони недалеко падает'], ['井の中の蛙', 'лягушка в колодце'], ['雨蛙', 'квакша']], kanji: '蛙',
+        sat1: '蛙 [かえる] лягушка; かわず — поэт.', sat2: '(n) frog → лягушка', scan: 'かえる【蛙】 лягушка; ～の子は～ погов. яблоко от яблони…' },
+      { l: '井蛙は以って海を…', main: '井蛙は以って海を語る可からず', writ: [['井蛙は以って海を語る可からず', ''], ['井蛙は以て海を語るべからず', 'вариант'], ['井蛙は以て海を語る可からず', 'вариант']], read: [['せいあはもってうみをかたるべからず', '']], pitch: [['せいあはもってうみをかたるべからず', -1]],
+        tags: [['пословица', ''], ['книжн.', 'sec']], freq: 'вне списка', lvl: 0, status: 'Есть непроверенная правка', pending: true, last: '2 окт., гость', ver: 'v3', authors: 2, id: 'jr:2830115',
+        groups: [{ pos: 'выражение, пословица', jp: '諺', senses: [{ t: 'ограниченному человеку не понять великого', note: 'букв. «лягушке из колодца не расскажешь о море»; из «Чжуан-цзы»', ex: [['彼に宇宙の話をしても無駄だ。井蛙は以って海を語る可からずだ。', 'Рассказывать ему о космосе бесполезно: лягушке из колодца не объяснишь, что такое море.']] }] }],
+        rel: [['井の中の蛙大海を知らず', 'лягушка в колодце не знает океана'], ['井蛙の見', 'узкий взгляд']], kanji: '井蛙以海語可',
+        sat1: '井蛙は以て海を語る可からず — ограниченному человеку не понять великого', sat2: '(exp) one cannot discuss the ocean with a well frog', scan: 'Скан не найден — статьи нет в словаре Конрада.' },
+      { l: '顔面筋疼痛…', main: '顔面筋疼痛機能不全症候群', writ: [['顔面筋疼痛機能不全症候群', '']], read: [['がんめんきんとうつうきのうふぜんしょうこうぐん', '']], pitch: [['がんめんきんとうつうきのうふぜんしょうこうぐん', -1]],
+        tags: [['мед.', 'sec'], ['сущ.', 'ghost']], freq: 'вне списка', lvl: 0, status: 'Из спутника, не проверена', pending: true, last: '29 сен., импорт', ver: 'v1', authors: 1, id: 'jr:3104772',
+        groups: [{ pos: 'существительное', jp: '名詞', senses: [{ t: 'синдром болевой дисфункции лицевых мышц', tags: ['мед.'], note: 'миофасциальный болевой синдром лица; ср. 顎関節症', ex: [] }] }],
+        rel: [['顎関節症', 'дисфункция ВНЧС'], ['筋膜性疼痛症候群', 'миофасциальный болевой синдром']], kanji: '顔面筋疼痛機能不全症候群',
+        sat1: '—', sat2: '(n) myofascial pain-dysfunction syndrome → синдром болевой дисфункции', scan: 'Скан не найден.' }
+    ];
+    const r = E[ent];
+    const n = Array.from(r.main).length;
+    const fs = n <= 2 ? '78px' : n <= 4 ? '60px' : n <= 8 ? '46px' : n <= 12 ? '38px' : '34px';
+    const mora = (s) => { const out = []; for (const ch of s) { if ('ゃゅょぁぃぅぇぉャュョ'.includes(ch) && out.length) out[out.length - 1] += ch; else out.push(ch); } return out; };
+    const pitch = r.pitch.map(([rd, acc]) => {
+      if (acc < 0) return { r: rd, acc: 'ударение не размечено', has: false, w: 10, pts: '', dots: [] };
+      const m = mora(rd); const N = m.length + 1;
+      const hi = (i) => acc === 0 ? i > 0 : acc === 1 ? i === 0 : (i > 0 && i < acc);
+      const dots = Array.from({ length: N }, (_, i) => ({ x: 8 + i * 18, y: hi(i) ? 7 : 23, f: i === N - 1 ? 'transparent' : 'var(--surf)' }));
+      return { r: rd, acc: '[' + acc + '] ' + (acc === 0 ? 'хэйбан' : acc === 1 ? 'атамадака' : 'накадака'), has: true, w: 16 + (N - 1) * 18, pts: dots.map(d => d.x + ',' + d.y).join(' '), dots };
+    });
+    const fb = [1, 2, 3, 4, 5].map(i => i <= r.lvl ? p.strong : p.soft);
+    const kanji = Array.from(new Set(Array.from(r.kanji))).map(k => { const d = K[k] || ['', '', '', '', '']; return { k, m: d[0], on: d[1], kun: d[2], kk: d[3], jl: d[4] }; });
+    let c = 0;
+    const e = { ...r, fs, pitch, fbar: fb, kanji, kn: kanji.length,
+      writ: r.writ.map(([w, note]) => ({ w, note })), read: r.read.map(([x, note]) => ({ r: x, note })),
+      tags: r.tags.map(([l, cl]) => ({ l, cls: 'tag' + (cl ? ' ' + cl : '') })), stCls: r.pending ? 'tag sec' : 'tag',
+      groups: r.groups.map(g => ({ ...g, senses: g.senses.map(s => ({ ...s, n: ++c, tags: s.tags || [], note: s.note || '', ex: s.ex.map(([j, x]) => ({ j, r: x })) })) })),
+      rel: r.rel.map(([w, g]) => ({ w, g })) };
+    const ents = E.map((x, i) => ({ l: x.l, on: i === ent, pick: () => this.setState({ ent: i }) }));
+    const tabs = [['hist', 'История', 14], ['disc', 'Обсуждение', 2], ['sat', 'Сателлиты', 2], ['scan', 'Сканы', 1]].map(([id, l, nn]) => ({ l, n: nn, on: tab === id, pick: () => this.setState({ tab: id }) }));
+    const hist = [['v7', 'Murasaki', 'пример к значению 2', 'сегодня', 34, 0], ['v6', 'kitsune_ru', 'добавлено чтение かいる', '3 окт.', 12, 2], ['v1', 'импорт', 'исходная статья', '2019', 140, 0]].map(([v, u, s, t, a, rr]) => ({ v, u, s, t, a, r: rr }));
+    return { p, pals, ents, e, tabs, hist, isHist: tab === 'hist', isDisc: tab === 'disc', isSat: tab === 'sat', isScan: tab === 'scan' };
+  }
+}
+</script>
+</body>
+</html>

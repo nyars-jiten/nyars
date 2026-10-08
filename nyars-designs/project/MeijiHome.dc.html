@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Мэйдзи-типография — главная</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Kaisei+Tokumin:wght@500;700;800&amp;family=Playfair+Display:ital,wght@0,600;0,800;0,900;1,600&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EEE6D3;color:#221E19;font-family:'Lora',Georgia,serif;font-size:16px;line-height:1.5}
+a{color:#221E19;text-decoration:underline;text-underline-offset:3px}a:hover{color:#9E2B25}
+.kt{font-family:'Kaisei Tokumin','Yu Mincho',serif}
+.pf{font-family:'Playfair Display',Georgia,serif}
+.ink{text-shadow:0 0 .6px rgba(34,30,25,.55),.3px .3px 0 rgba(34,30,25,.18)}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.dbl{border-top:4px double #221E19}
+.rule{border-top:1px solid #221E19}
+.cols{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:0}
+.col{padding:14px 18px;border-left:1px solid #221E19}
+.col:first-child{border-left:0;padding-left:0}
+.kicker{font-family:'Playfair Display',serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800}
+.brief{padding:10px 0;border-bottom:1px dotted #6E6457}
+.brief:last-child{border-bottom:0}
+.drop::first-letter{font-family:'Playfair Display',serif;font-weight:900;float:left;font-size:58px;line-height:.85;padding:4px 8px 0 0;color:#9E2B25}
+@media (max-width:900px){.wrap{padding:0 16px}.cols{grid-template-columns:1fr}.col{grid-column:auto !important;border-left:0;padding-left:0;border-top:1px solid #221E19}}
+</style>
+</helmet>
+<div class="ink">
+  <header class="wrap" style="padding-top: 18px">
+    <div style="display: flex; justify-content: space-between; font-size: 13px; gap: 12px; flex-wrap: wrap">
+      <span>№ 2 482 · выпуск ежедневный</span>
+      <nav aria-label="Разделы" style="display: flex; gap: 18px"><a href="MeijiSearch.dc.html">Словарь</a><a href="#">Кандзи</a><a href="#">Правки</a><a href="#">Скачать</a><a href="#">Войти</a></nav>
+    </div>
+    <div class="dbl" style="margin-top: 8px"></div>
+    <div style="display: flex; align-items: center; justify-content: center; gap: 22px; padding: 14px 0 8px; flex-wrap: wrap">
+      <span class="kt" lang="ja" style="font-size: 30px; font-weight: 800; writing-mode: vertical-rl; letter-spacing: .1em">辞書</span>
+      <h1 class="pf" style="margin: 0; font-size: clamp(54px, 8vw, 104px); font-weight: 900; line-height: .95; letter-spacing: -0.02em">nyars <span class="kt" lang="ja" style="font-weight: 800">新報</span></h1>
+      <span class="kt" lang="ja" style="font-size: 30px; font-weight: 800; writing-mode: vertical-rl; letter-spacing: .1em">日刊</span>
+    </div>
+    <div class="rule"></div>
+    <div style="display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; font-size: 13.5px; font-style: italic; flex-wrap: wrap">
+      <span>Японско-русскій словарь, набираемый читателями</span>
+      <span class="kt" lang="ja" style="font-style: normal">令和八年十月五日 月曜日</span>
+      <span>Ночная сборка · 04:00</span>
+    </div>
+    <div class="dbl"></div>
+  </header>
+
+  <main class="wrap" style="padding-bottom: 64px">
+    <div class="cols">
+      <section class="col" style="grid-column: span 8">
+        <p class="kicker" style="margin: 0 0 6px; color: #9E2B25">Справочное бюро</p>
+        <form role="search" style="border: 2px solid #221E19; padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; background: #F4EEDF">
+          <label for="q" class="pf" style="font-size: 20px; font-weight: 800; flex: 0 0 auto">Найти слово:</label>
+          <input id="q" type="search" placeholder="знаки, чтение или перевод" class="kt" style="flex: 1 1 260px; min-width: 0; height: 48px; border: 0; border-bottom: 1.5px solid #221E19; background: transparent; font-size: 22px; outline: none; color: #221E19">
+          <a href="MeijiSearch.dc.html" class="pf" style="height: 46px; padding: 0 22px; display: flex; align-items: center; background: #221E19; color: #EEE6D3; text-decoration: none; font-weight: 800; letter-spacing: .06em">ИСКАТЬ</a>
+          <span style="flex-basis: 100%; font-size: 13.5px; font-style: italic">Также: начертать знакъ от руки · искать по ключамъ · расширенный поиск</span>
+        </form>
+        <article style="margin-top: 22px">
+          <p class="kicker" style="margin: 0">Слово недели</p>
+          <h2 class="kt" lang="ja" style="margin: 4px 0 0; font-size: 64px; font-weight: 800; line-height: 1.1"><ruby>推<rt style="font-size: 16px">お</rt>し活<rt style="font-size: 16px">かつ</rt></ruby></h2>
+          <p class="pf" style="margin: 6px 0 12px; font-size: 24px; font-style: italic; font-weight: 600">Новое слово набрано и ждёт корректуры</p>
+          <div style="column-count: 2; column-gap: 28px; column-rule: 1px solid #221E19; text-align: justify; hyphens: auto">
+            <p class="drop" style="margin: 0 0 10px">Анонимный читатель прислал статью <span class="kt">推し活</span> — «поддержка любимого артиста: покупка мерча, походы на концерты, лайки». Модераторы спорят, нужна ли помета «разг.» и куда отнести значение «хобби вообще».</p>
+            <p style="margin: 0 0 10px">По данным корпуса, слово вошло в широкий оборот в начале 2020-х. Редакция просит знатоков прислать примеры употребления и предложить перевод короче.</p>
+            <p style="margin: 0"><a href="#">Прочесть статью и обсуждение →</a></p>
+          </div>
+        </article>
+      </section>
+
+      <aside class="col" style="grid-column: span 4">
+        <p class="kicker" style="margin: 0 0 8px">Сводка за неделю</p>
+        <dl style="margin: 0">
+          <div class="brief" style="display: flex; justify-content: space-between; gap: 10px"><dt>Статей въ словаре</dt><dd class="pf" style="margin: 0; font-weight: 800; font-size: 20px">1 820 463</dd></div>
+          <div class="brief" style="display: flex; justify-content: space-between; gap: 10px"><dt>Удалено</dt><dd class="pf" style="margin: 0; font-weight: 800; font-size: 20px; color: #9E2B25">−8</dd></div>
+          <div class="brief" style="display: flex; justify-content: space-between; gap: 10px"><dt>Принято правокъ</dt><dd class="pf" style="margin: 0; font-weight: 800; font-size: 20px">1 942</dd></div>
+          <div class="brief" style="display: flex; justify-content: space-between; gap: 10px"><dt>Ждутъ корректуры</dt><dd class="pf" style="margin: 0; font-weight: 800; font-size: 20px"><a href="#">214</a></dd></div>
+        </dl>
+        <p class="kicker" style="margin: 22px 0 8px">Почётный список</p>
+        <ol style="margin: 0; padding: 0; list-style: none">
+          <sc-for list="{{ top }}" as="t" hint-placeholder-count="5"><li class="brief" style="display: flex; gap: 10px; align-items: baseline"><span class="pf" style="font-weight: 900; font-size: 18px; width: 24px">{{ t.r }}</span><span style="flex: 1">{{ t.u }}</span><span style="font-style: italic">{{ t.n }}</span></li></sc-for>
+        </ol>
+      </aside>
+    </div>
+    <div class="dbl"></div>
+    <section aria-labelledby="news">
+      <p id="news" class="kicker" style="margin: 12px 0 0">Последние известия из наборной</p>
+      <div class="cols">
+        <sc-for list="{{ feed }}" as="e" hint-placeholder-count="4">
+          <article class="col" style="grid-column: span 3">
+            <h3 class="kt" lang="ja" style="margin: 0; font-size: 30px; font-weight: 800">{{ e.w }}</h3>
+            <p class="pf" style="margin: 2px 0 6px; font-size: 17px; font-style: italic; font-weight: 600">{{ e.head }}</p>
+            <p style="margin: 0; text-align: justify; font-size: 15px">{{ e.body }}</p>
+            <p style="margin: 6px 0 0; font-size: 13px">— {{ e.u }}, {{ e.t }}</p>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      top: [['Murasaki', 312], ['kitsune_ru', 268], ['yuki.p', 197], ['old_kanbun', 141], ['Tanuki42', 96]].map(([u, n], i) => ({ u, n, r: ['I', 'II', 'III', 'IV', 'V'][i] })),
+      feed: [
+        { w: '結構', head: 'Наречие уточнено', body: 'Вместо «довольно-таки» теперь «довольно, вполне; порядочно». Добавлен пример к значению 2.', u: 'kitsune_ru', t: '4 мин' },
+        { w: '仕舞う', head: 'Опечатка в скане исправлена', body: 'Распознанное «спрягать» заменено на «спрятать» по странице 1104 словаря Конрада.', u: 'yuki.p', t: '38 мин' },
+        { w: '矢鱈', head: 'Атэдзи отмечено', body: 'Статья получила помету «атэдзи» и указание «обычно пишется каной».', u: 'Tanuki42', t: '1 ч' },
+        { w: '取り敢えず', head: 'Дубль упразднён', body: 'Две статьи слиты в одну; примеры перенесены, история сохранена.', u: 'Tanuki42', t: '6 ч' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

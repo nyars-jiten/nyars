@@ -23,7 +23,10 @@ export function useUserData() {
    * Uses useFetch to properly forward cookies during SSR
    */
   const getCurrentUser = () => {
-    return useFetch<ExtendedUser>('/_api/me', {
+    return useFetch<ExtendedUser | null>('/_api/me', {
+      // Empty/204 bodies become undefined; coerce so Nuxt does not warn/dupe
+      transform: data => data ?? null,
+      default: () => null,
       onResponseError() {
         return null
       },

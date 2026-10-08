@@ -11,33 +11,46 @@ const { data: ocrPages } = searchPagesByWid(props.wid)
 </script>
 
 <template>
-  <div v-if="ocrPages && ocrPages.length > 0">
+  <div v-if="ocrPages && ocrPages.length > 0" class="flex flex-col gap-5">
     <div
       v-for="page in ocrPages"
       :key="page.id"
-      class="group py-2 border-b border-neutral-800"
+      class="flex flex-wrap gap-[18px]"
     >
-      <div class="flex items-center gap-2">
-        <div class="text-blue-300">
-          [{{ page.prefix }}] {{ page.title }}
-        </div>
-        <UiButton v-if="userAccess.hasAccessOcr" icon="ic:baseline-edit" color="edit" class="w-min opacity-0 group-hover:opacity-100 transition-opacity" :outline="false" @click="navigateTo(`/ocr/${page.id}`)" />
-      </div>
       <img
         v-if="page.file"
         :src="ocrImageUrl(page.prefix, page.file).href"
-        alt="page image"
-        class="w-md mt-2 mb-2"
+        alt="Скан страницы"
+        class="h-[260px] w-[220px] flex-none rounded-md object-cover object-top"
       >
-      <div>
-        {{ page.word }} {{ page.meaningRu }} {{ page.meaningEn }}
-      </div>
-      <div class="text-gray-400 italic">
-        {{ page.rawLine }}
+
+      <div class="min-w-[280px] flex-1 text-[15px]">
+        <span class="hz-tag hz-tag-ghost inline-flex h-5! text-[11px]!">
+          [{{ page.prefix }}] {{ page.title }}
+        </span>
+
+        <p class="mt-2 mb-0">
+          <template v-if="page.word">{{ page.word }} </template>
+          <template v-if="page.meaningRu">{{ page.meaningRu }} </template>
+          <template v-if="page.meaningEn">{{ page.meaningEn }}</template>
+        </p>
+
+        <p v-if="page.rawLine" class="mt-2.5 mb-0 text-[13.5px] text-muted">
+          {{ page.rawLine }}
+        </p>
+
+        <p v-if="userAccess.hasAccessOcr" class="mt-2.5 mb-0 text-[13.5px]">
+          <NuxtLink
+            :to="`/ocr/${page.id}`"
+            class="font-semibold text-strong underline-offset-2 hover:underline"
+          >
+            Исправить распознавание
+          </NuxtLink>
+        </p>
       </div>
     </div>
   </div>
-  <div v-else class="italic font-extralight">
+  <div v-else class="py-2 text-[14.5px] text-muted italic">
     {{ t('components.uiKit.noData') }}
   </div>
 </template>

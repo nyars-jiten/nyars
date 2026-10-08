@@ -28,16 +28,15 @@ useHead({
   noscript: [{ value: 'This app requires javascript to work' }],
   htmlAttrs: {
     lang: 'ru',
-    class: 'dark',
   },
   bodyAttrs: {
-    class: 'min-h-dvh bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-gray-300 font-display',
+    class: 'min-h-dvh bg-bg text-ink font-display',
   },
 })
 </script>
 
 <template>
-  <NuxtLoadingIndicator color="#8ec5ff" :height="2" :throttle="0" />
+  <NuxtLoadingIndicator color="#B7C7F7" :height="2" :throttle="0" />
 
   <NuxtLayout>
     <NuxtPage />
