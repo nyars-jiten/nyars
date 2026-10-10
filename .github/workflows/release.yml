@@ -26,5 +26,7 @@ jobs:
         with:
           push: true
           file: ./bun.Dockerfile
+          build-args: |
+            GIT_SHA=${{ github.sha }}
           platforms: linux/amd64
           tags: ghcr.io/nyars-jiten/nyars:latest

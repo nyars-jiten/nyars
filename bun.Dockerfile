@@ -21,6 +21,9 @@ COPY --from=install /temp/dev/node_modules node_modules
 COPY . .
 RUN cp example.env .env
 
+# хэш коммита для подвала сайта (в контейнере нет git): docker build --build-arg GIT_SHA=$(git rev-parse HEAD)
+ARG GIT_SHA=""
+ENV GIT_SHA=$GIT_SHA
 ENV NODE_ENV=production
 RUN bun run build
 

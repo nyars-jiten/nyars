@@ -1,5 +1,20 @@
+import { execSync } from 'node:child_process'
 import process from 'node:process'
 import tailwindcss from '@tailwindcss/vite'
+
+// Сведения о сборке для подвала: хэш коммита и время сборки.
+// В Docker/CI git может быть недоступен — тогда хэш берётся из GIT_SHA (build-arg) или GITHUB_SHA.
+function gitSha() {
+  const fromEnv = process.env.GIT_SHA || process.env.GITHUB_SHA
+  if (fromEnv)
+    return fromEnv
+  try {
+    return execSync('git rev-parse HEAD', { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim()
+  }
+  catch {
+    return ''
+  }
+}
 
 export default defineNuxtConfig({
   devtools: { enabled: process.env.NODE_ENV !== 'production' },
@@ -18,6 +33,20 @@ export default defineNuxtConfig({
       strictPort: true,
     },
   },
+  nitro: {
+    // Локальная разработка: браузер ходит в API через dev-сервер (тот же origin),
+    // без CORS и без обращений к другому порту. Включается переменной NUXT_DEV_API_PROXY:
+    //   NUXT_DEV_API_PROXY=http://127.0.0.1:3000
+    //   NUXT_PUBLIC_API_URL=http://localhost:8080/_dev-api
+    //   NUXT_PUBLIC_IMAGE_URL=http://localhost:8080   (картинки и аудио — /static/*)
+    // Префиксы не /api, чтобы не перехватывать служебные маршруты Nuxt (/api/_nuxt_icon).
+    devProxy: process.env.NUXT_DEV_API_PROXY
+      ? {
+          '/_dev-api': { target: `${process.env.NUXT_DEV_API_PROXY}/api`, changeOrigin: true },
+          '/static': { target: `${process.env.NUXT_DEV_API_PROXY}/static`, changeOrigin: true },
+        }
+      : {},
+  },
   routeRules: {
     '/**': { isr: false },
   },
@@ -34,6 +63,8 @@ export default defineNuxtConfig({
       baseUrl: '',
       imageUrl: '',
       discordUrl: '',
+      buildSha: gitSha(),
+      buildTime: new Date().toISOString(),
     },
   },
   imports: {
@@ -104,6 +135,17 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     'nuxt-typed-router',
     'v-lazy-show/nuxt',
+    // /ui-kit — витрина для разработки: в сборку (nuxt build) не попадает,
+    // кроме случая NUXT_UI_KIT=1 — например, для тестового стенда
+    (_, nuxt) => {
+      if (nuxt.options.dev || process.env.NUXT_UI_KIT === '1')
+        return
+      nuxt.hook('pages:extend', (pages) => {
+        const index = pages.findIndex(page => page.path === '/ui-kit')
+        if (index !== -1)
+          pages.splice(index, 1)
+      })
+    },
   ],
   eslint: {
     config: {

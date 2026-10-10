@@ -10,5 +10,15 @@ export default defineEventHandler(async (event) => {
     return null
   }
 
-  return await proxyApiRequest(event, '/users/me')
+  try {
+    return await proxyApiRequest(event, '/users/me')
+  }
+  catch (error: any) {
+    // Cookies can be present without a session (e.g. the palette cookie) or with an expired one:
+    // that is "not logged in", not an error. Deletion cookies are already forwarded by the proxy.
+    if (error?.statusCode === 401 || error?.statusCode === 403) {
+      return null
+    }
+    throw error
+  }
 })
