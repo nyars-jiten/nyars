@@ -1,26 +1,47 @@
 <script setup lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import { tv } from 'tailwind-variants'
 
-defineProps<Props>()
-
-const styles = tv({
-  base: 'inline rounded-sm p-0.5 px-1 uppercase leading-none',
-  variants: {
-    kind: {
-      meaning: 'bg-lime-900 text-xs',
-      sense: 'bg-green-900 text-xs',
-    },
-  },
+withDefaults(defineProps<{
+  tone?: 'accent' | 'danger' | 'neutral'
+  /** контур вместо заливки */
+  outline?: boolean
+  /** sm 24 · md 26 */
+  size?: 'sm' | 'md'
+  icon?: string
+}>(), {
+  tone: 'accent',
+  outline: false,
+  size: 'sm',
 })
 
-interface Props {
-  kind: VariantProps<typeof styles>['kind']
-}
+const tag = tv({
+  base: 'inline-flex items-center gap-[5px] rounded-tag px-[9px] text-[12.5px] leading-none whitespace-nowrap',
+  variants: {
+    tone: {
+      accent: 'text-strong',
+      danger: 'text-danger',
+      neutral: 'text-ink',
+    },
+    outline: {
+      true: 'bg-transparent shadow-[inset_0_0_0_1px_currentColor]',
+    },
+    size: {
+      sm: 'h-6 font-semibold',
+      md: 'h-[26px] font-bold',
+    },
+  },
+  compoundVariants: [
+    { outline: false, tone: 'accent', class: 'bg-soft' },
+    { outline: false, tone: 'danger', class: 'bg-danger-soft' },
+    { outline: false, tone: 'neutral', class: 'bg-line/60' },
+    { outline: true, tone: 'neutral', class: 'shadow-[inset_0_0_0_1px_var(--line)]' },
+  ],
+})
 </script>
 
 <template>
-  <section :class="styles({ kind })">
+  <span :class="tag({ tone, outline, size })">
+    <Icon v-if="icon" :name="icon" size="13px" class="shrink-0" />
     <slot />
-  </section>
+  </span>
 </template>

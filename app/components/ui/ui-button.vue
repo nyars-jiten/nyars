@@ -1,74 +1,74 @@
-<script lang="ts" setup>
-import type { VariantProps } from 'tailwind-variants'
-
+<script setup lang="ts">
+import type { RouteLocationRaw } from 'vue-router'
 import { tv } from 'tailwind-variants'
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<{
+  variant?: 'default' | 'primary' | 'danger' | 'link'
+  /** sm 34 · md 40 · lg 44 */
+  size?: 'sm' | 'md' | 'lg'
+  /** иконка слева (Iconify), например tabler:plus */
+  icon?: string
+  /** счётчик справа, например число активных фильтров */
+  count?: number
+  /** если задан — кнопка рендерится ссылкой */
+  to?: RouteLocationRaw
+  external?: boolean
+  target?: string
+  type?: 'button' | 'submit' | 'reset'
+  disabled?: boolean
+}>(), {
+  variant: 'default',
+  size: 'md',
   type: 'button',
   disabled: false,
-  outline: true,
-  loose: false,
 })
 
-const slots = defineSlots<{
-  default: () => VNode[]
+defineSlots<{
+  default?: () => VNode[]
+  /** своя иконка вместо icon, например иероглиф */
+  icon?: () => VNode[]
 }>()
 
 const button = tv({
-  base: 'inline-flex items-center gap-2 rounded-md px-2 py-1.5 leading-none transition-all cursor-pointer',
+  base: [
+    'inline-flex items-center justify-center gap-2 rounded-ctl border font-semibold whitespace-nowrap',
+    'no-underline select-none cursor-pointer transition-[color,background-color,border-color,filter]',
+    'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-strong',
+    'disabled:pointer-events-none disabled:opacity-50',
+  ],
   variants: {
-    color: {
-      discord: 'text-discord',
-      lime: 'text-lime-300',
-      amber: 'text-amber-300',
-      delete: 'text-rose-400',
-      edit: 'text-indigo-300/80',
-      cancel: 'text-orange-300/80',
-      save: 'text-lime-300/80',
-      sky: 'text-sky-300',
+    variant: {
+      default: 'border-line bg-surf text-ink hover:border-strong',
+      primary: 'border-acc bg-acc text-onacc hover:brightness-[.96]',
+      danger: 'border-line bg-surf text-danger hover:border-danger',
+      link: 'border-transparent bg-transparent text-strong hover:bg-soft',
     },
-
-    iconOnly: {
-      true: 'justify-center',
-    },
-
-    outline: {
-      true: 'shadow outline-1 outline-zinc-800',
-      false: '',
-    },
-
-    active: {
-      true: 'bg-zinc-900 text-zinc-800 outline-zinc-800',
-    },
-
-    disabled: {
-      true: 'cursor-not-allowed text-zinc-700',
-      false: 'hover:bg-zinc-800 hover:text-zinc-400 hover:outline-transparent',
-    },
-
-    loose: {
-      true: 'opacity-20 hover:opacity-100',
+    size: {
+      sm: 'h-[34px] px-3 text-sm',
+      md: 'h-10 px-4 text-sm',
+      lg: 'h-11 px-[18px] text-[15px] font-bold',
     },
   },
+  compoundVariants: [
+    { variant: 'link', class: 'px-2' },
+  ],
 })
 
-type V = VariantProps<typeof button>
-
-interface Props {
-  type?: 'button' | 'submit'
-  icon?: string
-  color?: V['color']
-  active?: V['active']
-  title?: string
-  disabled?: V['disabled']
-  outline?: V['outline']
-  loose?: V['loose']
-}
+const NuxtLink = resolveComponent('NuxtLink')
 </script>
 
 <template>
-  <button :type="type" :class="button({ color, active, disabled, outline, iconOnly: !!slots.default, loose })" :title="title" :disabled="disabled">
-    <Icon v-if="icon" :name="icon" size="1.5rem" />
+  <component
+    :is="props.to ? NuxtLink : 'button'"
+    :class="button({ variant, size })"
+    v-bind="props.to ? { to: props.to, external: props.external, target: props.target } : { type: props.type, disabled: props.disabled }"
+  >
+    <slot name="icon">
+      <Icon v-if="icon" :name="icon" size="15px" class="shrink-0" />
+    </slot>
+
     <slot />
-  </button>
+
+    <UiCount v-if="count !== undefined" :value="count" pill />
+  </component>
 </template>
