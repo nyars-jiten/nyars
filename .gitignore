@@ -25,3 +25,4 @@ logs
 !.env.dev
 
 heap-snapshots
+references

@@ -58,6 +58,35 @@ export default defineNuxtConfig({
         name: 'Exo 2',
         subsets: ['latin', 'latin-ext', 'cyrillic', 'cyrillic-ext'],
       },
+      // шрифты нового дизайна (UI kit)
+      {
+        name: 'Manrope',
+        subsets: ['latin', 'cyrillic'],
+        weights: [400, 500, 600, 700, 800],
+        styles: ['normal'],
+        global: true,
+      },
+      {
+        name: 'Zen Kaku Gothic New',
+        subsets: ['japanese', 'latin', 'cyrillic'],
+        weights: [400, 500, 700],
+        styles: ['normal'],
+        global: true,
+      },
+      {
+        name: 'Zen Maru Gothic',
+        subsets: ['japanese', 'latin'],
+        weights: [500, 700],
+        styles: ['normal'],
+        global: true,
+      },
+      {
+        name: 'Noto Serif',
+        subsets: ['latin', 'cyrillic'],
+        weights: [600],
+        styles: ['normal'],
+        global: true,
+      },
     ],
     defaults: {
       subsets: [],
