@@ -1,0 +1,102 @@
+/*
+ * Палитры НЯРС.
+ *
+ * Тема задаётся атрибутом data-theme на <html> (см. usePalette), но работает
+ * и на любом вложенном элементе: так строятся превью палитр в переключателе.
+ * В компонентах используются только эти переменные — напрямую или через
+ * Tailwind-цвета из tailwind.css (bg-bg, bg-surf, text-ink, border-line, ...).
+ *
+ *   --bg       фон страницы             --acc     заливка активного (кнопки, чипы)
+ *   --surf     поверхности, карточки    --onacc   текст на --acc
+ *   --field    фон полей ввода          --strong  акцентный текст, ссылки, рамки
+ *   --ink      основной текст           --soft    мягкий акцентный фон
+ *   --muted    второстепенный текст     --danger / --ok / --warn / --dial (+ -soft)
+ *   --line     линии и рамки
+ */
+
+/* Суми — тёмная (по умолчанию) */
+:root,
+[data-theme="sumi"] {
+  color-scheme: dark;
+
+  --bg: #121212;
+  --surf: #1c1c1e;
+  --field: #121212;
+  --ink: #eceae6;
+  --muted: #a6a4a0;
+  --line: #2e2e30;
+  --acc: #b7c7f7;
+  --onacc: #121212;
+  --strong: #b7c7f7;
+  --soft: #262b38;
+  --danger: #e9a28c;
+  --danger-soft: #3a2822;
+  --ok: #8fd3a3;
+  --ok-soft: #1e3528;
+  --warn: #f2c46b;
+  --warn-soft: #3a3220;
+  --dial: #d3a6f5;
+  --dial-soft: #33284a;
+}
+
+/* Рисовая бумага — светлая */
+[data-theme="rice"] {
+  color-scheme: light;
+
+  --bg: #f7f6f3;
+  --surf: #ffffff;
+  --field: #ffffff;
+  --ink: #1f2128;
+  --muted: #5a5d68;
+  --line: #e4e2dc;
+  --acc: #b7c7f7;
+  --onacc: #1f2128;
+  --strong: #33458a;
+  --soft: #e2e3f5;
+  --danger: #a3445c;
+  --danger-soft: #f7e5ea;
+  --ok: #2b6b42;
+  --ok-soft: #e2f1e6;
+  --warn: #8a5a00;
+  --warn-soft: #fbf0d9;
+  --dial: #7a3fa8;
+  --dial-soft: #f1e8f8;
+}
+
+/* Kanagawa Dragon — тёмная, тёплая */
+[data-theme="kanagawa"] {
+  color-scheme: dark;
+
+  --bg: #181616;
+  --surf: #282727;
+  --field: #181616;
+  --ink: #c5c9c5;
+  --muted: #a6a69c;
+  --line: #393836;
+  --acc: #8ba4b0;
+  --onacc: #181616;
+  --strong: #8ea4a2;
+  --soft: #25303a;
+  --danger: #d58b85;
+  --danger-soft: #3a2826;
+  --ok: #98bb6c;
+  --ok-soft: #262e22;
+  --warn: #c4b28a;
+  --warn-soft: #3a352a;
+  --dial: #a292a3;
+  --dial-soft: #2f2830;
+}
+
+/*
+ * Производные токены. Объявлены на том же элементе, что и палитра,
+ * поэтому пересчитываются и внутри вложенного [data-theme].
+ */
+:root,
+[data-theme] {
+  /* тепловая карта активности: от пустой клетки до --strong */
+  --heat-0: color-mix(in srgb, var(--line) 70%, var(--surf));
+  --heat-1: color-mix(in srgb, var(--strong) 28%, var(--surf));
+  --heat-2: color-mix(in srgb, var(--strong) 50%, var(--surf));
+  --heat-3: color-mix(in srgb, var(--strong) 75%, var(--surf));
+  --heat-4: var(--strong);
+}

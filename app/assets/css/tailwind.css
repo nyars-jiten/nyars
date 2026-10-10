@@ -1,76 +1,144 @@
 @import "tailwindcss";
+@import "./palettes.css";
 
 @theme {
-  --color-discord: #8c9eff;  
-  
+  --color-discord: #8c9eff;
+
   --font-exo: "Exo 2";
   --font-noto: "Noto Sans JP";
   --font-sans: var(--font-exo), var(--font-noto);
+
+  /* шрифты нового дизайна */
+  --font-ui: "Manrope", "Zen Kaku Gothic New", system-ui, sans-serif;
+  --font-jp: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --font-jm: "Zen Maru Gothic", "Zen Kaku Gothic New", sans-serif;
+  --font-serif: "Noto Serif", serif;
+
+  /* скругления: элементы управления, метки, панели */
+  --radius-ctl: 6px;
+  --radius-tag: 4px;
+  --radius-panel: 10px;
 }
 
+/* цвета палитры: bg-bg, bg-surf, text-ink, text-muted, border-line, bg-acc, text-strong, ... */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surf: var(--surf);
+  --color-field: var(--field);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-acc: var(--acc);
+  --color-onacc: var(--onacc);
+  --color-strong: var(--strong);
+  --color-soft: var(--soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-dial: var(--dial);
+  --color-dial-soft: var(--dial-soft);
+  --color-heat-0: var(--heat-0);
+  --color-heat-1: var(--heat-1);
+  --color-heat-2: var(--heat-2);
+  --color-heat-3: var(--heat-3);
+  --color-heat-4: var(--heat-4);
+}
+
+/* класс .dark ставится на <html> для тёмных палитр — старые dark:-стили продолжают работать */
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
   h1 {
     @apply text-6xl font-extralight uppercase
   }
-  
-  html.dark ::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background-color: var(--color-neutral-800);
+
+  html {
+    scrollbar-color: var(--line) var(--bg);
   }
-  
-  html.dark ::-webkit-scrollbar {
+
+  ::-webkit-scrollbar {
     width: 12px;
-    background-color: var(--color-neutral-800);
+    height: 12px;
+    background-color: var(--bg);
   }
-  
-  html.dark ::-webkit-scrollbar-thumb {
+
+  ::-webkit-scrollbar-track {
     border-radius: 10px;
-    background-color: var(--color-neutral-700);
+    background-color: var(--bg);
   }
-  
-  html.dark ::-webkit-scrollbar-thumb:hover {
+
+  ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: #39393F;
+    background-color: var(--line);
   }
-  
-  html.light ::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background-color: white;
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--muted);
   }
-  
-  html.light ::-webkit-scrollbar {
-    width: 12px;
-    background-color: white;
+
+  ::-webkit-scrollbar-corner {
+    background-color: var(--bg);
   }
-  
-  html.light ::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #C1C1C1;
-  }
-  
-  html.light ::-webkit-scrollbar-thumb:hover {
-    border-radius: 10px;
-    background-color: #A8A8A8;
-  }
-  
-  html.light ::-webkit-scrollbar-corner {
-    background-color: white;
-  }
-  
-  html.dark ::-webkit-scrollbar-corner {
-    background-color: var(--neutral-800);
-  }
-  
+
   ::selection {
-    background: #6aa3ab;
-    color: white;
+    background: var(--acc);
+    color: var(--onacc);
   }
 }
 
 @layer components {
   .btn-generic {
     @apply inline-flex items-center gap-2 whitespace-nowrap rounded border border-neutral-300 bg-white px-2 py-1 text-xs font-medium uppercase shadow hover:bg-neutral-300 focus:outline-none dark:border-neutral-600 dark:bg-neutral-700 hover:dark:bg-neutral-600;
+  }
+
+  /* заглавное слово статьи; фуригана — через <ruby><rt> */
+  .hw {
+    font-family: var(--font-jp);
+    font-weight: 700;
+    line-height: 1.2;
+    line-break: strict;
+    overflow-wrap: anywhere;
+    color: var(--ink);
+  }
+
+  .hw ruby {
+    ruby-position: over;
+  }
+
+  .hw rt {
+    font-family: var(--font-jm);
+    font-size: max(0.4em, 10.5px);
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  /* вертикальное слово: иероглиф + чтение столбиком справа */
+  .vhw {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 5px;
+    align-items: center;
+    justify-content: start;
+  }
+
+  .vhw .k {
+    font-family: var(--font-jp);
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.12;
+  }
+
+  .vhw .r {
+    writing-mode: vertical-rl;
+    font-family: var(--font-jm);
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.08em;
+    color: var(--muted);
   }
 }
