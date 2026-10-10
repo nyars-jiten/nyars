@@ -27,10 +27,10 @@ function copy() {
   <section v-if="article" class="space-y-4">
     <section class="flex gap-4">
       <!-- todo copied -->
-      <UiButton icon="ic:baseline-content-copy" :active="isPending" @click="copy" />
+      <LegacyButton icon="ic:baseline-content-copy" :active="isPending" @click="copy" />
 
       <!-- TODO: new block with caption -->
-      <UiButton class="grow justify-center truncate" :active="isPending" @click="copy">
+      <LegacyButton class="grow justify-center truncate" :active="isPending" @click="copy">
         <template v-if="isPending">
           copied!
         </template>
@@ -38,12 +38,12 @@ function copy() {
         <template v-else>
           {{ url }}
         </template>
-      </UiButton>
+      </LegacyButton>
 
       <NuxtLink :to="{ name: 'dict-jpn-wid-editor', query: { wid: article.wid } }">
-        <UiButton icon="ic:baseline-edit">
+        <LegacyButton icon="ic:baseline-edit">
           <!-- edit -->
-        </UiButton>
+        </LegacyButton>
       </NuxtLink>
     </section>
 

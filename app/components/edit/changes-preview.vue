@@ -51,34 +51,34 @@ function showEntryRef(edit: EditResponse): boolean {
 
     <div class="inline-flex gap-2 flex-wrap flex-row-reverse">
       <!-- <NuxtLink :to="{ name: 'edits-id', params: { id: edit.id } }">
-        <UiButton class="text-gray-500" icon="ic:outline-info" title="Инфо">
+        <LegacyButton class="text-gray-500" icon="ic:outline-info" title="Инфо">
           Инфо
-        </UiButton>
+        </LegacyButton>
       </NuxtLink> -->
 
       <NuxtLink v-if="showEntryRef(edit)" :to="{ name: 'dict-jpn-wid', params: { wid: edit.wid } }" prefetch>
-        <UiButton class="text-gray-500" icon="ic:outline-open-in-new" title="Открыть статью">
+        <LegacyButton class="text-gray-500" icon="ic:outline-open-in-new" title="Открыть статью">
           <!-- Открыть статью -->
-        </UiButton>
+        </LegacyButton>
       </NuxtLink>
 
-      <UiButton v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))" class="text-red-500" icon="ic:baseline-close" title="Отклонить" @click="reject()">
+      <LegacyButton v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))" class="text-red-500" icon="ic:baseline-close" title="Отклонить" @click="reject()">
         <!-- Отклонить -->
-      </UiButton>
+      </LegacyButton>
 
-      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-green-500" icon="ic:baseline-done-all" title="Принять как отредактированную" @click="approveAsReviewed()">
+      <LegacyButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-green-500" icon="ic:baseline-done-all" title="Принять как отредактированную" @click="approveAsReviewed()">
         <!-- Принять как отредактированную -->
-      </UiButton>
+      </LegacyButton>
 
-      <UiButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-yellow-500" icon="ic:baseline-done" title="Принять как неотредактированную" @click="approveAsUnreviewed()">
+      <LegacyButton v-if="edit.status === EditStatus.New && userAccess.hasAccessEdits" class="text-yellow-500" icon="ic:baseline-done" title="Принять как неотредактированную" @click="approveAsUnreviewed()">
         <!-- Принять как неотредактированную -->
-      </UiButton>
+      </LegacyButton>
 
       <template v-if="edit.status === EditStatus.New && (userAccess.hasAccessEdits || (user && user.id === edit.author?.id))">
         <NuxtLink :to="{ name: 'edits-id-editor', params: { id: edit.id } }">
-          <UiButton class="text-blue-500" icon="ic:baseline-edit" title="Отредактировать">
+          <LegacyButton class="text-blue-500" icon="ic:baseline-edit" title="Отредактировать">
             <!-- Отредактировать -->
-          </UiButton>
+          </LegacyButton>
         </NuxtLink>
       </template>
     </div>

@@ -172,16 +172,16 @@ function _handleMouseUp(_event: MouseEvent) {
             </div>
 
             <div class="flex gap-2">
-              <UiButton
+              <LegacyButton
                 color="edit"
                 :disabled="isUploading"
                 @click="fileInput?.click()"
               >
                 <Icon name="ic:baseline-upload" />
                 Загрузить
-              </UiButton>
+              </LegacyButton>
 
-              <UiButton
+              <LegacyButton
                 v-if="user?.avatar"
                 color="delete"
                 :disabled="isUploading"
@@ -189,7 +189,7 @@ function _handleMouseUp(_event: MouseEvent) {
               >
                 <Icon name="ic:baseline-delete" />
                 Удалить
-              </UiButton>
+              </LegacyButton>
             </div>
           </div>
 
@@ -275,20 +275,20 @@ function _handleMouseUp(_event: MouseEvent) {
 
             <!-- Actions -->
             <div class="flex gap-2 justify-end">
-              <UiButton
+              <LegacyButton
                 color="cancel"
                 @click="showCropModal = false"
               >
                 Отмена
-              </UiButton>
-              <UiButton
+              </LegacyButton>
+              <LegacyButton
                 color="save"
                 :disabled="isUploading"
                 @click="handleCrop"
               >
                 <Icon name="ic:baseline-crop" />
                 Обрезать и загрузить
-              </UiButton>
+              </LegacyButton>
             </div>
           </div>
         </div>

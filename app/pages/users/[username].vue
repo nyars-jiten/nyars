@@ -148,10 +148,10 @@ async function handleUnban() {
       Пользователь с именем "{{ username }}" не существует или был удален.
     </p>
 
-    <UiButton @click="navigateTo('/')">
+    <LegacyButton @click="navigateTo('/')">
       <Icon name="ic:baseline-home" />
       На главную
-    </UiButton>
+    </LegacyButton>
   </div>
 
   <div v-else class="space-y-8">

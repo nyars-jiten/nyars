@@ -111,7 +111,7 @@ const hasChanges = computed(() => {
             <label class="block text-sm font-medium text-white mb-2">
               Новое визуальное имя
             </label>
-            <UiInput
+            <LegacyInput
               v-model="username"
               v-bind="usernameAttrs"
               placeholder="Введите новое визуальное имя"
@@ -128,7 +128,7 @@ const hasChanges = computed(() => {
 
           <!-- Submit Button -->
           <div class="flex justify-end">
-            <UiButton
+            <LegacyButton
               type="submit"
               color="save"
               :disabled="isChanging || !hasChanges"
@@ -136,7 +136,7 @@ const hasChanges = computed(() => {
               <Icon v-if="isChanging" name="ic:baseline-hourglass-empty" class="animate-spin" />
               <Icon v-else name="ic:baseline-person" />
               {{ isChanging ? 'Изменение...' : 'Изменить визуальное имя' }}
-            </UiButton>
+            </LegacyButton>
           </div>
         </form>
 

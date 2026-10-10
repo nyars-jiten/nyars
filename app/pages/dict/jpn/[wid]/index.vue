@@ -56,10 +56,10 @@ useHead({ title: jpnEntry.value?.title })
     <template v-if="jpnEntry">
       <section class="flex gap-4">
         <!-- todo copied -->
-        <UiButton icon="mdi:link-variant" :active="isPending" @click="copy" />
+        <LegacyButton icon="mdi:link-variant" :active="isPending" @click="copy" />
 
         <!-- TODO: new block with caption -->
-        <UiButton class="grow justify-center truncate" :active="isPending" @click="copy">
+        <LegacyButton class="grow justify-center truncate" :active="isPending" @click="copy">
           <template v-if="isPending">
             copied!
           </template>
@@ -67,18 +67,18 @@ useHead({ title: jpnEntry.value?.title })
           <template v-else>
             {{ url }}
           </template>
-        </UiButton>
+        </LegacyButton>
 
-        <UiButton icon="mdi:card-bulleted-outline" @click="showLemmas = !showLemmas">
+        <LegacyButton icon="mdi:card-bulleted-outline" @click="showLemmas = !showLemmas">
         <!-- lemma-mode -->
-        </UiButton>
-        <UiButton icon="mdi:furigana-horizontal" @click="switchFurigana">
+        </LegacyButton>
+        <LegacyButton icon="mdi:furigana-horizontal" @click="switchFurigana">
         <!-- furigana -->
-        </UiButton>
+        </LegacyButton>
         <NuxtLink :to="{ name: 'dict-jpn-wid-editor', params: { wid: String(jpnEntry?.wid) } }">
-          <UiButton icon="ic:baseline-edit" color="edit">
+          <LegacyButton icon="ic:baseline-edit" color="edit">
           <!-- edit -->
-          </UiButton>
+          </LegacyButton>
         </NuxtLink>
       </section>
       <div v-if="jpnEntry.status.isDeleted" class="text-rose-400 pl-4">

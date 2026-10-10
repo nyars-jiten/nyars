@@ -9,10 +9,15 @@ export const useSuggestionsStore = defineStore('suggestions', () => {
   const listType = ref(0)
 
   const addToHistory = (value: string) => {
-    history.value = [value, ...history.value]
-    if (history.value.length > 10) {
-      history.value = history.value.slice(0, 10)
+    if (!value) {
+      return
     }
+    // без повторов: свежий запрос поднимается наверх
+    history.value = [value, ...history.value.filter(item => item !== value)].slice(0, 10)
+  }
+
+  const removeFromHistory = (value: string) => {
+    history.value = history.value.filter(item => item !== value)
   }
 
   const suggestionsCache = ref(history.value)
@@ -37,5 +42,5 @@ export const useSuggestionsStore = defineStore('suggestions', () => {
     return refresh()
   }, { debounce: 250 })
 
-  return { suggestions, refresh, addToHistory, listType }
+  return { suggestions, refresh, addToHistory, removeFromHistory, listType }
 })

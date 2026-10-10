@@ -102,7 +102,7 @@ async function handleUsernameChange(newUsername: string) {
         </h2>
 
         <div class="space-y-4">
-          <UiInput
+          <LegacyInput
             v-model="query"
             placeholder="Search for entries..."
             @keyup.enter="handleSearch"
@@ -117,15 +117,15 @@ async function handleUsernameChange(newUsername: string) {
               Found {{ searchResults.data.entries?.length || 0 }} results
             </p>
             <div class="flex gap-2">
-              <UiButton :disabled="!searchResults.data.hasMore" @click="prevPage">
+              <LegacyButton :disabled="!searchResults.data.hasMore" @click="prevPage">
                 Previous
-              </UiButton>
-              <UiButton :disabled="!searchResults.data.hasMore" @click="nextPage">
+              </LegacyButton>
+              <LegacyButton :disabled="!searchResults.data.hasMore" @click="nextPage">
                 Next
-              </UiButton>
-              <UiButton @click="resetSearch">
+              </LegacyButton>
+              <LegacyButton @click="resetSearch">
                 Reset
-              </UiButton>
+              </LegacyButton>
             </div>
           </div>
         </div>
@@ -145,9 +145,9 @@ async function handleUsernameChange(newUsername: string) {
             Admin: {{ isAdmin ? 'Yes' : 'No' }}
           </p>
 
-          <UiButton v-if="isAuthenticated" color="delete" @click="logout">
+          <LegacyButton v-if="isAuthenticated" color="delete" @click="logout">
             Logout
-          </UiButton>
+          </LegacyButton>
         </div>
       </div>
 

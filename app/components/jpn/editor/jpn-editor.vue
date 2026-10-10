@@ -343,64 +343,64 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
         <section class="flex items-start justify-between gap-4 max-sm:flex-col bg-neutral-900/95">
           <div class="inline-flex flex-wrap gap-x-8 gap-y-2">
             <span v-for="group, index in buttons()" :key="index" class="gap-2 grid" :style="{ gridTemplateColumns: `repeat(${group.length}, 1fr)` }">
-              <UiButton v-for="{ name, icon, title, click } in group" :key="title" type="button" :icon="icon" :title="t(`pages.editor.button.${title}`)" :disabled="disabled" class="inline-flex justify-center" @click="insert.apply(null, click)">
+              <LegacyButton v-for="{ name, icon, title, click } in group" :key="title" type="button" :icon="icon" :title="t(`pages.editor.button.${title}`)" :disabled="disabled" class="inline-flex justify-center" @click="insert.apply(null, click)">
                 {{ name }}
-              </UiButton>
+              </LegacyButton>
             </span>
             <span class="gap-2 grid">
-              <UiButton type="button" icon="mdi:arrow-expand-down" :title="t(`pages.editor.button.addition`)" :disabled="disabled" class="inline-flex justify-center" @click="toggleSupButtons()">
+              <LegacyButton type="button" icon="mdi:arrow-expand-down" :title="t(`pages.editor.button.addition`)" :disabled="disabled" class="inline-flex justify-center" @click="toggleSupButtons()">
                 <!-- -->
-              </UiButton>
+              </LegacyButton>
             </span>
           </div>
 
           <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
-            <UiButton class="max-sm:w-full" type="button" icon="mdi:hashtag-box-outline" color="amber" :disabled="disabled" :active="stateTagSearch" :title="t('pages.editor.tags')" @click="toggleTagSearch(); toggleEditorHelp(false)">
+            <LegacyButton class="max-sm:w-full" type="button" icon="mdi:hashtag-box-outline" color="amber" :disabled="disabled" :active="stateTagSearch" :title="t('pages.editor.tags')" @click="toggleTagSearch(); toggleEditorHelp(false)">
               <!-- теги -->
-            </UiButton>
-            <UiButton class="max-sm:w-full" type="button" icon="ic:baseline-help-outline" color="sky" :disabled="disabled" :active="stateEditorHelp" :title="t('pages.editor.guide')" @click="toggleEditorHelp(); toggleTagSearch(false)">
+            </LegacyButton>
+            <LegacyButton class="max-sm:w-full" type="button" icon="ic:baseline-help-outline" color="sky" :disabled="disabled" :active="stateEditorHelp" :title="t('pages.editor.guide')" @click="toggleEditorHelp(); toggleTagSearch(false)">
               <!-- справка -->
-            </UiButton>
+            </LegacyButton>
 
-            <!-- <UiButton class="items-start justify-center text-center max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="save">
+            <!-- <LegacyButton class="items-start justify-center text-center max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="save">
               {{ t('pages.editor.save') }}
-            </UiButton> -->
+            </LegacyButton> -->
           </div>
         </section>
 
         <section v-if="stateSupButtons" class="flex items-start justify-left gap-x-8 gap-y-2 max-sm:flex-col bg-neutral-900/95">
           <span v-for="group, index in supButtons()" :key="index" class="gap-2 grid" :style="{ gridTemplateColumns: `repeat(${group.length}, 1fr)` }">
-            <UiButton v-for="{ name, icon, title, click } in group" :key="title" type="button" :icon="icon" :title="t(`pages.editor.button.${title}`)" :disabled="disabled" class="inline-flex justify-center" @click="insert.apply(null, click)">
+            <LegacyButton v-for="{ name, icon, title, click } in group" :key="title" type="button" :icon="icon" :title="t(`pages.editor.button.${title}`)" :disabled="disabled" class="inline-flex justify-center" @click="insert.apply(null, click)">
               {{ name }}
-            </UiButton>
+            </LegacyButton>
           </span>
         </section>
 
         <section class="flex grow gap-8 max-md:flex-col" :class="{ 'md:grid md:grid-cols-2': stateEditorHelp || stateTagSearch }">
           <div class="flex shrink grow flex-col gap-4">
-            <UiInput ref="spellingRef" v-model="entry.spelling" :multiline="true" :rows="spellingRows" :disabled="disabled" :placeholder="isNew ? t('pages.editor.placeholder.spelling') : ''">
+            <LegacyInput ref="spellingRef" v-model="entry.spelling" :multiline="true" :rows="spellingRows" :disabled="disabled" :placeholder="isNew ? t('pages.editor.placeholder.spelling') : ''">
               <template #hint>
                 {{ t('pages.editor.spelling') }}
               </template>
               <template #description>
                 {{ t('pages.editor.hint.spelling') }}
               </template>
-            </UiInput>
+            </LegacyInput>
 
-            <UiInput ref="readingRef" v-model="entry.reading" :multiline="true" :rows="readingRows" :disabled="disabled" :placeholder="isNew ? t('pages.editor.placeholder.reading') : ''">
+            <LegacyInput ref="readingRef" v-model="entry.reading" :multiline="true" :rows="readingRows" :disabled="disabled" :placeholder="isNew ? t('pages.editor.placeholder.reading') : ''">
               <template #hint>
                 {{ t('pages.editor.reading') }}
               </template>
               <template #description>
                 {{ t('pages.editor.hint.reading') }}
               </template>
-            </UiInput>
+            </LegacyInput>
 
-            <UiInput ref="bodyRef" v-model="entry.body" :multiline="true" class="grow flex items-stretch" :disabled="disabled">
+            <LegacyInput ref="bodyRef" v-model="entry.body" :multiline="true" class="grow flex items-stretch" :disabled="disabled">
               <template #hint>
                 {{ t('pages.editor.body') }}
               </template>
-            </UiInput>
+            </LegacyInput>
           </div>
 
           <EditorGuide v-if="stateEditorHelp" class="mt-2.5 max-md:hidden" @click-insert="(text) => insert(text[0], text[1])" />
@@ -410,13 +410,13 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
 
       <div class="space-y-8 max-xl:hidden flex flex-col">
         <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
-          <UiButton v-if="!isNew && !isEdit" class="max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :title="t('pages.editor.delete')" :disabled="disabled" @click="showConfimationWindow = 'delete'">
+          <LegacyButton v-if="!isNew && !isEdit" class="max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :title="t('pages.editor.delete')" :disabled="disabled" @click="showConfimationWindow = 'delete'">
             {{ t('pages.editor.delete') }}
-          </UiButton>
+          </LegacyButton>
 
-          <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="showConfimationWindow = 'edit'">
+          <LegacyButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="showConfimationWindow = 'edit'">
             {{ t('pages.editor.save') }}
-          </UiButton>
+          </LegacyButton>
         </div>
 
         <div class="grow flex flex-col h-0 overflow-y-auto">
@@ -447,13 +447,13 @@ const [stateSupButtons, toggleSupButtons] = useToggle()
         </h1>
 
         <div class="max-sm:grid max-sm:w-full max-sm:grid-cols-2 max-sm:gap-4 sm:space-x-2">
-          <UiButton class="max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :title="t('pages.editor.delete')" :disabled="disabled" @click="showConfimationWindow = 'delete'">
+          <LegacyButton class="max-sm:w-full" type="button" icon="material-symbols:delete" color="delete" :title="t('pages.editor.delete')" :disabled="disabled" @click="showConfimationWindow = 'delete'">
             {{ t('pages.editor.delete') }}
-          </UiButton>
+          </LegacyButton>
 
-          <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="showConfimationWindow = 'edit'">
+          <LegacyButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" :disabled="disabled" @click="showConfimationWindow = 'edit'">
             {{ t('pages.editor.save') }}
-          </UiButton>
+          </LegacyButton>
         </div>
 
         <UiBlock>

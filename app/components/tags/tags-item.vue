@@ -37,7 +37,7 @@ function cancelTag() {
 <template>
   <tr class="group odd:bg-neutral-800/50">
     <td v-for="key in tagKeys" :key="key" class="p-2">
-      <UiInput v-if="isEditing && key !== 'count'" v-model="editable[key]" class="w-full" :disabled="loading" />
+      <LegacyInput v-if="isEditing && key !== 'count'" v-model="editable[key]" class="w-full" :disabled="loading" />
       <template v-else>
         <NuxtLink
           v-if="key === 'rusShort' || key === 'engShort'"
@@ -56,10 +56,10 @@ function cancelTag() {
 
     <td class="opacity-0 group-hover:opacity-100 transition-opacity p-2">
       <section v-if="userAccess.hasAccessTagEdit" class="flex gap-2">
-        <UiButton v-if="!isEditing" icon="ic:baseline-edit" color="edit" class="w-min" :outline="false" :disabled="loading" @click="toggleEditing()" />
+        <LegacyButton v-if="!isEditing" icon="ic:baseline-edit" color="edit" class="w-min" :outline="false" :disabled="loading" @click="toggleEditing()" />
         <template v-else>
-          <UiButton icon="ic:baseline-cancel" color="cancel" class="w-min" :outline="false" :disabled="loading" @click="cancelTag()" />
-          <UiButton icon="ic:baseline-save" color="save" class="w-min" :outline="false" :disabled="loading" @click="saveTag()" />
+          <LegacyButton icon="ic:baseline-cancel" color="cancel" class="w-min" :outline="false" :disabled="loading" @click="cancelTag()" />
+          <LegacyButton icon="ic:baseline-save" color="save" class="w-min" :outline="false" :disabled="loading" @click="saveTag()" />
         </template>
       </section>
     </td>

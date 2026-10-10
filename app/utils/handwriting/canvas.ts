@@ -72,7 +72,8 @@ export class Canvas implements Handwriting {
     this.context.moveTo(this.pos.x, this.pos.y)
 
     this.context.lineCap = 'round'
-    this.context.strokeStyle = 'rgb(113, 113, 122)'
+    // цвет штриха — основной цвет текста текущей палитры
+    this.context.strokeStyle = getComputedStyle(this.canvas).getPropertyValue('--ink').trim() || 'rgb(113, 113, 122)'
 
     this.pushNext()
   }

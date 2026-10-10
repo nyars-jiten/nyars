@@ -44,11 +44,11 @@ watchDebounced(query, updateTags, { debounce: 350 })
         Теги
       </h1>
 
-      <UiInput v-model="query" type="text">
+      <LegacyInput v-model="query" type="text">
         <template #hint>
           Поиск
         </template>
-      </UiInput>
+      </LegacyInput>
 
       <div class="flex flex-col gap-2">
         <div v-for="(tagscat, category) in tags" :key="category">

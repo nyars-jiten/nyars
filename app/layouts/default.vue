@@ -1,57 +1,18 @@
-<script lang="ts" setup>
-import { version } from '~~/package.json'
-
-const { menuState } = storeToRefs(useUserStore())
-const headerStore = useHeaderStore()
-
-onMounted(() => {
-  if (import.meta.client) {
-    if (window.innerWidth < 1280) {
-      menuState.value = false
-    }
-  }
-})
-</script>
-
 <template>
-  <div class="grid min-h-dvh grid-cols-[auto_1fr] max-sm:grid-cols-1 gap-4 px-4">
-    <section class="space-y-4 sticky h-[calc(100dvh-var(--spacing)*8)] top-4 bg-neutral-900 max-sm:hidden">
-      <UiButton :outline="false" type="button" @click="menuState = !menuState">
-        <Icon v-if="menuState" size="1.5rem" name="ic:baseline-close" />
-        <Icon v-else size="1.5rem" name="ic:baseline-menu" />
-      </UiButton>
+  <div class="flex min-h-dvh flex-col bg-bg font-ui text-[15.5px] leading-[1.55] text-ink">
+    <a
+      href="#content"
+      class="sr-only rounded-ctl bg-acc px-3 py-2 font-semibold text-onacc focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50"
+    >
+      К содержимому
+    </a>
 
-      <LayoutMenu class="inset-y-24" />
-    </section>
+    <AppHeader />
 
-    <LayoutMenu class="inset-y-24 z-50 pt-4" secondary />
-
-    <div class="space-y-4 flex flex-col">
-      <div class="sticky top-0 py-4 z-40 flex items-center justify-between gap-x-4 bg-neutral-900/95">
-        <NuxtLink
-          to="/"
-          class="flex items-center gap-x-2"
-          @click="headerStore.closeHamburgerMenu"
-        >
-          <div class="size-9 mt-1 rounded-full bg-cover invert" style="background-image: url('/favicon-logo.svg');" />
-
-          <span class="text-xl leading-snug">
-            <span class="text-neutral-500 dark:text-white">Н</span>
-            <span class="text-[#6aa3ab]">Я</span>
-            <span class="text-neutral-500 dark:text-white">РС</span>
-
-            <small class="text-xs align-top">
-              v{{ version }}
-            </small>
-          </span>
-        </NuxtLink>
-
-        <Search class="w-1/2 max-xl:w-3/5 max-lg:w-3/4" />
-
-        <ProfileMenu />
-      </div>
-
+    <main id="content" class="mx-auto box-border w-full max-w-[1320px] flex-1 px-8 pt-2 max-[900px]:px-4">
       <slot />
-    </div>
+    </main>
+
+    <AppFooter />
   </div>
 </template>

@@ -218,8 +218,8 @@ function getSourceName(sourceId: number): string {
   </div>
 
   <div v-if="!llmData || llmData.status === LLMStatus.FAILED || llmData.status === LLMStatus.COMPLETED" class="text-center">
-    <UiButton class="mt-4 text-blue-300" icon="ic:outline-cloud-sync" @click="handleLLMRequest">
+    <LegacyButton class="mt-4 text-blue-300" icon="ic:outline-cloud-sync" @click="handleLLMRequest">
       {{ t('components.llmEntry.requestLLMData') }}
-    </UiButton>
+    </LegacyButton>
   </div>
 </template>

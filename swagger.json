@@ -1,0 +1,3685 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "NYARS (Japanese-Russian Dictionary) API",
+        "title": "NYARS API",
+        "contact": {},
+        "version": "2.0"
+    },
+    "host": "nyars.moe",
+    "basePath": "/api",
+    "paths": {
+        "/admin/users/{id}/access": {
+            "get": {
+                "description": "Retrieves the access rights for a specific user. Requires admin access.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Get user access rights",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.UserAccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid user ID",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden - admin access required",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Adds an access flag to the user's access rights. Requires admin access.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Update user access rights",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Access flag to add",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.UpdateUserAccessRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.UserAccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid user ID or request",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden - admin access required",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/users/{id}/ban": {
+            "post": {
+                "description": "Bans a user with an optional reason. Requires admin access.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Ban a user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Ban request with reason",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.BanUserRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid user ID or request",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden - admin access required",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/users/{id}/unban": {
+            "post": {
+                "description": "Removes a ban from a user. Requires admin access.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Unban a user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid user ID",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden - admin access required",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/discord": {
+            "get": {
+                "description": "Handles Discord OAuth flow - redirects to Discord if no code, otherwise processes the OAuth callback",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Discord OAuth authentication",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "OAuth authorization code",
+                        "name": "code",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Redirect to home page or Discord OAuth",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "description": "Authenticates a user with login and password",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "User login",
+                "parameters": [
+                    {
+                        "description": "Login credentials",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.LoginRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.CurrentUserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request body",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid credentials",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "description": "Logs out the current user by removing authentication cookies and session",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "User logout",
+                "responses": {
+                    "200": {
+                        "description": "Successfully logged out",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "description": "Creates a new user account with login and password",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register a new user",
+                "parameters": [
+                    {
+                        "description": "Registration credentials",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.RegisterRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.CurrentUserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request body",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "409": {
+                        "description": "User already exists",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/edits": {
+            "get": {
+                "description": "Retrieves a list of edits with optional filtering by status, dictionary, type, and word ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Edits"
+                ],
+                "summary": "List edits",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Limit (number of results)",
+                        "name": "n",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Offset (pagination)",
+                        "name": "o",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Status filter (new, accepted, declined)",
+                        "name": "s",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Dictionary filter",
+                        "name": "d",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Edit type filter (create, edit, remove)",
+                        "name": "t",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Word ID filter",
+                        "name": "wid",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Start date filter (YYYY-MM-DD)",
+                        "name": "from",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "End date filter (YYYY-MM-DD)",
+                        "name": "to",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "User ID filter (UUID)",
+                        "name": "userId",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/dto.EditResponse"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/edits/{id}": {
+            "get": {
+                "description": "Retrieves detailed information about a specific edit",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Edits"
+                ],
+                "summary": "Get edit by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Edit ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.EditResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid edit ID",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Edit not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Updates the content of a pending edit (author or editors with proper access only)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Edits"
+                ],
+                "summary": "Update an edit",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Edit ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Updated edit content",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.EditorRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully updated",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request or edit ID",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Access denied",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Edit not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "409": {
+                        "description": "Edit is not pending",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/edits/{id}/approve": {
+            "post": {
+                "description": "Approves a pending edit and applies it to the dictionary (requires edit access)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Edits"
+                ],
+                "summary": "Approve an edit",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Edit ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "Mark as unreviewed after approval",
+                        "name": "isUnreviewed",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully approved",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid edit ID",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Access denied",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Edit not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "409": {
+                        "description": "Edit is not pending",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/edits/{id}/decline": {
+            "post": {
+                "description": "Declines a pending edit (author or editors with proper access only)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Edits"
+                ],
+                "summary": "Decline an edit",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Edit ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully declined",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid edit ID",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Access denied",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Edit not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "409": {
+                        "description": "Edit is not pending",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/edits/{id}/txt": {
+            "get": {
+                "description": "Retrieves the edit content in text format for editing",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Edits"
+                ],
+                "summary": "Get edit as text representation",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Edit ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Text type",
+                        "name": "type",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.EditorRequest"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid edit ID",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Edit not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/jp/check-duplicates": {
+            "post": {
+                "description": "Checks if similar entries exist in the dictionary",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jp-Ru Utils"
+                ],
+                "summary": "Check for duplicate entries",
+                "parameters": [
+                    {
+                        "description": "Entry to check",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.EditorRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/dto.EntryJp"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/jp/entries": {
+            "post": {
+                "description": "Creates a new Japanese-Russian dictionary entry (requires login)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jp-Ru Entry"
+                ],
+                "summary": "Create new entry",
+                "parameters": [
+                    {
+                        "description": "Entry content",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.EditorRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Entry edit ID",
+                        "schema": {
+                            "$ref": "#/definitions/utils.UuidResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/jp/entries/{wid}": {
+            "get": {
+                "description": "Retrieves a Japanese-Russian dictionary entry by its word ID (WID)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jp-Ru Entry"
+                ],
+                "summary": "Get entry by word ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Word ID (WID)",
+                        "name": "wid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.EntryJp"
+                        }
+                    },
+                    "404": {
+                        "description": "Entry not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Creates an edit proposal for an existing entry (requires login)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jp-Ru Entry"
+                ],
+                "summary": "Edit entry",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Word ID (WID)",
+                        "name": "wid",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Updated entry content",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.EditorRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Entry edit ID",
+                        "schema": {
+                            "$ref": "#/definitions/utils.UuidResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Entry not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "409": {
+                        "description": "Entry is deleted",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Creates a deletion proposal for an existing entry (requires login)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jp-Ru Entry"
+                ],
+                "summary": "Delete entry",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Word ID (WID)",
+                        "name": "wid",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Deletion comment",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.EditorRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Entry edit ID",
+                        "schema": {
+                            "$ref": "#/definitions/utils.UuidResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Entry not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "409": {
+                        "description": "Entry is deleted",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/jp/entries/{wid}/llm": {
+            "get": {
+                "description": "Retrieve the stored LLM processing result for a dictionary entry",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jp-Ru Entry"
+                ],
+                "summary": "Get LLM response for entry",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Word ID",
+                        "name": "wid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.LLMStoredResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Request LLM processing for a dictionary entry using satellite data",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jp-Ru Entry"
+                ],
+                "summary": "Process entry with LLM",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.LLMStoredResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/jp/entries/{wid}/satellites": {
+            "get": {
+                "description": "Retrieves satellite dictionary entries for a given word ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Satellites"
+                ],
+                "summary": "Get satellite entries",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Word ID (WID)",
+                        "name": "wid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/dto.SatelliteEntry"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Entry not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/jp/entries/{wid}/txt": {
+            "get": {
+                "description": "Retrieves a Japanese-Russian dictionary entry in text format for editing",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jp-Ru Entry"
+                ],
+                "summary": "Get entry as text for editing",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Word ID (WID)",
+                        "name": "wid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.EditorRequest"
+                        }
+                    },
+                    "404": {
+                        "description": "Entry not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/jp/legacy": {
+            "post": {
+                "description": "Imports an entry from legacy format (admin only)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jp-Ru Utils"
+                ],
+                "summary": "Add legacy entry",
+                "parameters": [
+                    {
+                        "description": "Legacy format entry",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/old.LegacyEntry"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/jp/txt-to-entry": {
+            "post": {
+                "description": "Converts text format entry to JSON format for preview (utility endpoint)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Jp-Ru Utils"
+                ],
+                "summary": "Render entry from text",
+                "parameters": [
+                    {
+                        "description": "Text format entry",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.EditorRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.EntryJp"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/kanji/components": {
+            "get": {
+                "description": "Returns the curated list of kanji components with their stroke counts",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Kanji"
+                ],
+                "summary": "List kanji components",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Minimum stroke count filter",
+                        "name": "min_strokes",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Maximum stroke count filter",
+                        "name": "max_strokes",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/dto.KanjiComponent"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kanji/search": {
+            "post": {
+                "description": "Returns kanji that contain all of the specified components, grouped by stroke count",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Kanji"
+                ],
+                "summary": "Search kanji by components",
+                "parameters": [
+                    {
+                        "description": "Components to search for",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.KanjiSearchRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.KanjiSearchResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/ocr/books": {
+            "get": {
+                "description": "Retrieves a list of all available OCR books (requires OCR access)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "OCR"
+                ],
+                "summary": "List OCR books",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/entities.OCRBook"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden - requires OCR access",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/ocr/pages/{id}": {
+            "get": {
+                "description": "Retrieves a specific OCR page with book information (requires OCR access)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "OCR"
+                ],
+                "summary": "Get OCR page by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Page ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entities.OCRPageWithBook"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid page ID",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden - requires OCR access",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Page not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Updates the content of an OCR page (requires OCR access)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "OCR"
+                ],
+                "summary": "Update OCR page",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Page ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Updated page data",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entities.OCRPage"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entities.OCRPageWithBook"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden - requires OCR access",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Page not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/ocr/pages/{id}/next": {
+            "get": {
+                "description": "Retrieves the next OCR page based on navigation type (requires OCR access)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "OCR"
+                ],
+                "summary": "Get next OCR page",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Current page ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Book ID",
+                        "name": "bookId",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Current page index",
+                        "name": "innerIndex",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Navigation type (0=next, 1=prev, etc.)",
+                        "name": "type",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns next page ID",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid parameters",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden - requires OCR access",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Page not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/ocr/search": {
+            "get": {
+                "description": "Searches OCR pages by query text (public with optional auth)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "OCR"
+                ],
+                "summary": "Search OCR pages",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Search query",
+                        "name": "q",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/entities.OCRPageWithBook"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid query",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/ocr/search-wid": {
+            "get": {
+                "description": "Searches OCR pages containing a specific dictionary entry (public with optional auth)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "OCR"
+                ],
+                "summary": "Search OCR pages by word ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Word ID (WID)",
+                        "name": "wid",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/entities.OCRPageWithBook"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid word ID",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Entry not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/tags": {
+            "get": {
+                "description": "Retrieves a list of available tags, optionally filtered by query",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "List tags",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Search query for filtering tags",
+                        "name": "q",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/dto.Tag"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Creates a new tag for dictionary entries (admin only)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Create tag",
+                "parameters": [
+                    {
+                        "description": "Tag data",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.FullTag"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.FullTag"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/tags/{id}": {
+            "put": {
+                "description": "Updates an existing tag (admin only)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Update tag",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Tag ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Updated tag data",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.FullTag"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.FullTag"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Tag not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/me": {
+            "get": {
+                "description": "Retrieves the authenticated user's profile with full details including access and settings",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get current user profile",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.CurrentUserResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/profile/{username}": {
+            "get": {
+                "description": "Retrieves a user's public profile including statistics",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user profile by username",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Username",
+                        "name": "username",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.UserProfile"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/weekly-stats": {
+            "get": {
+                "description": "Retrieves weekly contribution statistics for all users and site-wide totals",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get weekly statistics",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.WeeklyStats"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}/heatmap": {
+            "get": {
+                "description": "Retrieves a user's contribution activity heatmap data",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user activity heatmap",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Start date filter (YYYY-MM-DD)",
+                        "name": "from",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "End date filter (YYYY-MM-DD)",
+                        "name": "to",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/entities.UserHeatmap"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid user ID",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ApiError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "dto.BanUserRequest": {
+            "type": "object",
+            "properties": {
+                "reason": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.Content": {
+            "type": "object",
+            "properties": {
+                "c": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entities.Content"
+                    }
+                },
+                "p": {
+                    "type": "string"
+                },
+                "t": {
+                    "type": "string"
+                },
+                "v": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.CurrentUserResponse": {
+            "type": "object",
+            "properties": {
+                "access": {
+                    "type": "integer"
+                },
+                "avatar": {
+                    "type": "string"
+                },
+                "banned": {
+                    "type": "boolean"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "isAdmin": {
+                    "type": "boolean"
+                },
+                "isBot": {
+                    "type": "boolean"
+                },
+                "lastOnline": {
+                    "type": "string"
+                },
+                "login": {
+                    "type": "string"
+                },
+                "settings": {
+                    "type": "string"
+                },
+                "stats": {
+                    "description": "Stats",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/dto.StatsUserResponse"
+                        }
+                    ]
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.EditDiff": {
+            "type": "object",
+            "properties": {
+                "c": {
+                    "type": "string"
+                },
+                "d": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "dto.EditResponse": {
+            "type": "object",
+            "properties": {
+                "approver": {
+                    "$ref": "#/definitions/dto.UserShortResponse"
+                },
+                "author": {
+                    "$ref": "#/definitions/dto.UserShortResponse"
+                },
+                "comment": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "dictionary": {
+                    "$ref": "#/definitions/entities.DictionaryType"
+                },
+                "diffDst": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.EditDiff"
+                    }
+                },
+                "diffRawDst": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.EditDiff"
+                    }
+                },
+                "diffRawSrc": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.EditDiff"
+                    }
+                },
+                "diffSrc": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.EditDiff"
+                    }
+                },
+                "id": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/entities.EditStatus"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/definitions/entities.EditType"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "wid": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.EditorRequest": {
+            "type": "object",
+            "properties": {
+                "body": {
+                    "type": "string"
+                },
+                "comment": {
+                    "type": "string",
+                    "maxLength": 1000
+                },
+                "reading": {
+                    "type": "string"
+                },
+                "spelling": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/entities.Status"
+                }
+            }
+        },
+        "dto.EntryJp": {
+            "type": "object",
+            "properties": {
+                "externalEntry": {
+                    "type": "string"
+                },
+                "frequency": {
+                    "type": "integer"
+                },
+                "furigana": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Furigana"
+                    }
+                },
+                "hideRare": {
+                    "type": "boolean"
+                },
+                "meanings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Meaning"
+                    }
+                },
+                "preferFurigana": {
+                    "type": "boolean"
+                },
+                "status": {
+                    "$ref": "#/definitions/entities.Status"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Tag"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                },
+                "wid": {
+                    "type": "string"
+                },
+                "words": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Word"
+                    }
+                }
+            }
+        },
+        "dto.Example": {
+            "type": "object",
+            "properties": {
+                "sentence": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Content"
+                    }
+                },
+                "translation": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Content"
+                    }
+                }
+            }
+        },
+        "dto.ExternalReference": {
+            "type": "object",
+            "properties": {
+                "target": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.FullTag": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "eng": {
+                    "type": "string"
+                },
+                "engShort": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "priority": {
+                    "type": "integer"
+                },
+                "rus": {
+                    "type": "string"
+                },
+                "rusShort": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.Furigana": {
+            "type": "object",
+            "properties": {
+                "freq": {
+                    "type": "integer"
+                },
+                "isMarked": {
+                    "type": "boolean"
+                },
+                "pairs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/jp.FuriganaPair"
+                    }
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Tag"
+                    }
+                },
+                "transcription": {
+                    "$ref": "#/definitions/dto.Transcription"
+                }
+            }
+        },
+        "dto.InternalReference": {
+            "type": "object",
+            "properties": {
+                "preview": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Content"
+                    }
+                },
+                "referenceType": {
+                    "type": "integer"
+                },
+                "target": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.KanjiComponent": {
+            "type": "object",
+            "properties": {
+                "component": {
+                    "type": "string"
+                },
+                "strokes": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.KanjiSearchRequest": {
+            "type": "object",
+            "required": [
+                "components"
+            ],
+            "properties": {
+                "components": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "limit": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.KanjiSearchResponse": {
+            "type": "object",
+            "properties": {
+                "components": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "result": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "dto.LLMConflict": {
+            "type": "object",
+            "properties": {
+                "issue": {
+                    "type": "string"
+                },
+                "recommendation": {
+                    "type": "string"
+                },
+                "sources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "dto.LLMEntry": {
+            "type": "object",
+            "properties": {
+                "conflicts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.LLMConflict"
+                    }
+                },
+                "model": {
+                    "type": "string"
+                },
+                "pos_hint": {
+                    "type": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.LLMValue"
+                    }
+                },
+                "word": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.LLMExample": {
+            "type": "object",
+            "properties": {
+                "ja": {
+                    "type": "string"
+                },
+                "ru": {
+                    "type": "string"
+                },
+                "source_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.LLMSource": {
+            "type": "object",
+            "properties": {
+                "fragment": {
+                    "type": "string"
+                },
+                "source_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.LLMStoredResponse": {
+            "type": "object",
+            "properties": {
+                "body": {
+                    "$ref": "#/definitions/dto.LLMEntry"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "model": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                },
+                "requested_by": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/entities.LLMStatus"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "wid": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.LLMValue": {
+            "type": "object",
+            "properties": {
+                "canonical_translation": {
+                    "type": "string"
+                },
+                "collocations": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "confidence": {
+                    "type": "number"
+                },
+                "domain_register": {
+                    "type": "string"
+                },
+                "examples": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.LLMExample"
+                    }
+                },
+                "gloss": {
+                    "type": "string"
+                },
+                "grammatical_notes": {
+                    "type": "string"
+                },
+                "japanese_forms": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "raw_evidence": {
+                    "type": "string"
+                },
+                "sources": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.LLMSource"
+                    }
+                }
+            }
+        },
+        "dto.LoanSource": {
+            "type": "object",
+            "properties": {
+                "lang": {
+                    "type": "string"
+                },
+                "word": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.LoginRequest": {
+            "type": "object",
+            "required": [
+                "login",
+                "password"
+            ],
+            "properties": {
+                "login": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 3
+                },
+                "password": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 3
+                }
+            }
+        },
+        "dto.Meaning": {
+            "type": "object",
+            "properties": {
+                "note": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Content"
+                    }
+                },
+                "senses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Sense"
+                    }
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Tag"
+                    }
+                }
+            }
+        },
+        "dto.Pitch": {
+            "type": "object",
+            "properties": {
+                "audio": {
+                    "type": "string"
+                },
+                "diagram": {
+                    "description": "PitchMap []PitchPair `json:\"pitchMap\"`",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/jp.PitchPair"
+                    }
+                },
+                "pitchNum": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.Reading": {
+            "type": "object",
+            "properties": {
+                "isMarked": {
+                    "type": "boolean"
+                },
+                "pitch": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Pitch"
+                    }
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Tag"
+                    }
+                },
+                "transcription": {
+                    "$ref": "#/definitions/dto.Transcription"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.RegisterRequest": {
+            "type": "object",
+            "required": [
+                "login",
+                "password"
+            ],
+            "properties": {
+                "login": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 3
+                },
+                "password": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 3
+                }
+            }
+        },
+        "dto.SatelliteBody": {
+            "type": "object",
+            "properties": {
+                "lines": {
+                    "type": "integer"
+                },
+                "text": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.SatelliteEntry": {
+            "type": "object",
+            "properties": {
+                "body": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.SatelliteBody"
+                    }
+                },
+                "id": {
+                    "type": "string"
+                },
+                "priority": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.Sense": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Content"
+                    }
+                },
+                "dialectTags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Tag"
+                    }
+                },
+                "examples": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Example"
+                    }
+                },
+                "extRefs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.ExternalReference"
+                    }
+                },
+                "fieldTags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Tag"
+                    }
+                },
+                "intRefs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.InternalReference"
+                    }
+                },
+                "isRare": {
+                    "type": "boolean"
+                },
+                "ix": {
+                    "type": "string"
+                },
+                "lemmaContent": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Content"
+                    }
+                },
+                "loanSources": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.LoanSource"
+                    }
+                },
+                "metaTags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Tag"
+                    }
+                },
+                "subSenses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Sense"
+                    }
+                }
+            }
+        },
+        "dto.Spelling": {
+            "type": "object",
+            "properties": {
+                "isMarked": {
+                    "type": "boolean"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Tag"
+                    }
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.StatsSiteResponse": {
+            "type": "object",
+            "properties": {
+                "jpn": {
+                    "type": "integer"
+                },
+                "jpnPrev": {
+                    "type": "integer"
+                },
+                "jpnRev": {
+                    "type": "integer"
+                },
+                "jpnRevPrev": {
+                    "type": "integer"
+                },
+                "kanji": {
+                    "type": "integer"
+                },
+                "kanjiPrev": {
+                    "type": "integer"
+                },
+                "kanjiRev": {
+                    "type": "integer"
+                },
+                "kanjiRevPrev": {
+                    "type": "integer"
+                },
+                "rus": {
+                    "type": "integer"
+                },
+                "rusPrev": {
+                    "type": "integer"
+                },
+                "rusRev": {
+                    "type": "integer"
+                },
+                "rusRevPrev": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.StatsUserResponse": {
+            "type": "object",
+            "properties": {
+                "autoEdit": {
+                    "type": "integer"
+                },
+                "autoNew": {
+                    "type": "integer"
+                },
+                "edits": {
+                    "type": "integer"
+                },
+                "jpnEdit": {
+                    "type": "integer"
+                },
+                "jpnNew": {
+                    "type": "integer"
+                },
+                "kanjiEdit": {
+                    "type": "integer"
+                },
+                "kanjiNew": {
+                    "type": "integer"
+                },
+                "rating": {
+                    "type": "integer"
+                },
+                "reviews": {
+                    "type": "integer"
+                },
+                "rusEdit": {
+                    "type": "integer"
+                },
+                "rusNew": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.StatsWithUserResponse": {
+            "type": "object",
+            "properties": {
+                "stats": {
+                    "$ref": "#/definitions/dto.StatsUserResponse"
+                },
+                "user": {
+                    "$ref": "#/definitions/dto.UserShortResponse"
+                }
+            }
+        },
+        "dto.Tag": {
+            "type": "object",
+            "properties": {
+                "eng": {
+                    "type": "string"
+                },
+                "engShort": {
+                    "type": "string"
+                },
+                "rus": {
+                    "type": "string"
+                },
+                "rusShort": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.Transcription": {
+            "type": "object",
+            "properties": {
+                "kana": {
+                    "type": "string"
+                },
+                "rus": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.UpdateUserAccessRequest": {
+            "type": "object",
+            "properties": {
+                "access": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.UserAccessResponse": {
+            "type": "object",
+            "properties": {
+                "access": {
+                    "type": "integer"
+                },
+                "isAdmin": {
+                    "type": "boolean"
+                },
+                "userId": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.UserProfile": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "banned": {
+                    "type": "boolean"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "isAdmin": {
+                    "type": "boolean"
+                },
+                "isBot": {
+                    "type": "boolean"
+                },
+                "lastOnline": {
+                    "type": "string"
+                },
+                "login": {
+                    "type": "string"
+                },
+                "stats": {
+                    "description": "Stats",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/dto.StatsUserResponse"
+                        }
+                    ]
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.UserShortResponse": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.WeeklyStats": {
+            "type": "object",
+            "properties": {
+                "site": {
+                    "$ref": "#/definitions/dto.StatsSiteResponse"
+                },
+                "stats": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.StatsWithUserResponse"
+                    }
+                }
+            }
+        },
+        "dto.Word": {
+            "type": "object",
+            "properties": {
+                "readings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Reading"
+                    }
+                },
+                "spellings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Spelling"
+                    }
+                }
+            }
+        },
+        "entities.Content": {
+            "type": "object",
+            "properties": {
+                "c": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entities.Content"
+                    }
+                },
+                "p": {
+                    "type": "string"
+                },
+                "t": {
+                    "type": "string"
+                },
+                "v": {
+                    "type": "string"
+                }
+            }
+        },
+        "entities.DictionaryType": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "x-enum-varnames": [
+                "DictionaryTypeJp",
+                "DictionaryTypeRus",
+                "DictionaryTypeKanji",
+                "DictionaryTypeName",
+                "DictionaryTypeJapAuto",
+                "DictionaryTypeExample"
+            ]
+        },
+        "entities.EditStatus": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "x-enum-varnames": [
+                "EditStatusNone",
+                "EditStatusNew",
+                "EditStatusDeclined",
+                "EditStatusAccepted",
+                "EditStatusAutoAccepted",
+                "EditStatusReverted"
+            ]
+        },
+        "entities.EditType": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "x-enum-varnames": [
+                "EditTypeNone",
+                "EditTypeCreate",
+                "EditTypeEdit",
+                "EditTypeRemove",
+                "EditTypeTransfer",
+                "EditTypeRevert"
+            ]
+        },
+        "entities.LLMStatus": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "x-enum-varnames": [
+                "LLMStatusPending",
+                "LLMStatusProcessing",
+                "LLMStatusCompleted",
+                "LLMStatusFailed"
+            ]
+        },
+        "entities.OCRBook": {
+            "type": "object",
+            "properties": {
+                "completedPages": {
+                    "type": "integer"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "prefix": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "totalPages": {
+                    "type": "integer"
+                }
+            }
+        },
+        "entities.OCRPage": {
+            "type": "object",
+            "properties": {
+                "bookId": {
+                    "type": "integer"
+                },
+                "file": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "innerIndex": {
+                    "type": "integer"
+                },
+                "meaningEn": {
+                    "type": "string"
+                },
+                "meaningRu": {
+                    "type": "string"
+                },
+                "rawLine": {
+                    "type": "string"
+                },
+                "reading": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/entities.PageStatus"
+                },
+                "word": {
+                    "type": "string"
+                }
+            }
+        },
+        "entities.OCRPageWithBook": {
+            "type": "object",
+            "properties": {
+                "bookId": {
+                    "type": "integer"
+                },
+                "description": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entities.Content"
+                    }
+                },
+                "file": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "innerIndex": {
+                    "type": "integer"
+                },
+                "meaningEn": {
+                    "type": "string"
+                },
+                "meaningRu": {
+                    "type": "string"
+                },
+                "prefix": {
+                    "type": "string"
+                },
+                "rawLine": {
+                    "type": "string"
+                },
+                "reading": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/entities.PageStatus"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "word": {
+                    "type": "string"
+                }
+            }
+        },
+        "entities.PageStatus": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "x-enum-varnames": [
+                "PageStatusNew",
+                "PageStatusWorking",
+                "PageStatusCompleted",
+                "PageStatusSkipped"
+            ]
+        },
+        "entities.Status": {
+            "type": "object",
+            "properties": {
+                "isArchaic": {
+                    "type": "boolean"
+                },
+                "isDeleted": {
+                    "type": "boolean"
+                },
+                "isDialect": {
+                    "type": "boolean"
+                },
+                "isProper": {
+                    "type": "boolean"
+                },
+                "isUnconfirmed": {
+                    "type": "boolean"
+                },
+                "isUnreviewed": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "entities.UserHeatmap": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            }
+        },
+        "jp.FuriganaPair": {
+            "type": "object",
+            "properties": {
+                "kana": {
+                    "type": "string"
+                },
+                "word": {
+                    "type": "string"
+                }
+            }
+        },
+        "jp.PitchPair": {
+            "type": "object",
+            "properties": {
+                "m": {
+                    "type": "string"
+                },
+                "n": {
+                    "type": "boolean"
+                },
+                "s": {
+                    "type": "integer"
+                },
+                "sl": {
+                    "type": "boolean"
+                },
+                "sp": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "old.DictEntry": {
+            "type": "object",
+            "properties": {
+                "externalEntry": {
+                    "type": "string"
+                },
+                "meanings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/old.Meaning"
+                    }
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "words": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/old.Word"
+                    }
+                }
+            }
+        },
+        "old.Example": {
+            "type": "object",
+            "properties": {
+                "translation": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "old.LangMeaning": {
+            "type": "object",
+            "properties": {
+                "lang": {
+                    "type": "string"
+                },
+                "note": {
+                    "type": "string"
+                },
+                "senses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/old.Sense"
+                    }
+                }
+            }
+        },
+        "old.LegacyEntry": {
+            "type": "object",
+            "properties": {
+                "entry": {
+                    "$ref": "#/definitions/old.DictEntry"
+                },
+                "externalEntry": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "isArchaic": {
+                    "type": "boolean"
+                },
+                "isReviewed": {
+                    "type": "boolean"
+                },
+                "isUnconfirmed": {
+                    "type": "boolean"
+                },
+                "needUpdate": {
+                    "type": "boolean"
+                },
+                "wid": {
+                    "type": "string"
+                }
+            }
+        },
+        "old.LoanSource": {
+            "type": "object",
+            "properties": {
+                "lang": {
+                    "type": "string"
+                },
+                "word": {
+                    "type": "string"
+                }
+            }
+        },
+        "old.Meaning": {
+            "type": "object",
+            "properties": {
+                "langMeanings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/old.LangMeaning"
+                    }
+                },
+                "pos": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "old.PitchAccent": {
+            "type": "object"
+        },
+        "old.Reading": {
+            "type": "object",
+            "properties": {
+                "pitch": {
+                    "type": "string"
+                },
+                "pitchedReading": {
+                    "$ref": "#/definitions/old.PitchAccent"
+                },
+                "tag": {
+                    "$ref": "#/definitions/old.Tag"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "old.Reference": {
+            "type": "object",
+            "properties": {
+                "referenceType": {
+                    "type": "integer"
+                },
+                "target": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "old.Sense": {
+            "type": "object",
+            "properties": {
+                "examples": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/old.Example"
+                    }
+                },
+                "isRare": {
+                    "type": "boolean"
+                },
+                "loanSources": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/old.LoanSource"
+                    }
+                },
+                "references": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/old.Reference"
+                    }
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/old.Tag"
+                    }
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "old.Tag": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "old.Word": {
+            "type": "object",
+            "properties": {
+                "readings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/old.Reading"
+                    }
+                },
+                "writings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/old.Writing"
+                    }
+                }
+            }
+        },
+        "old.Writing": {
+            "type": "object",
+            "properties": {
+                "tag": {
+                    "$ref": "#/definitions/old.Tag"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "utils.ApiError": {
+            "type": "object",
+            "properties": {
+                "details": {
+                    "description": "optional structured details (e.g. validation)"
+                },
+                "message": {
+                    "description": "human readable message",
+                    "type": "string"
+                }
+            }
+        },
+        "utils.UuidResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "CookieAuth": {
+            "description": "JWT access token stored in HTTP-only cookie. Automatically managed by login/logout endpoints. Refresh token (refresh_token cookie) is used for automatic token renewal.",
+            "type": "apiKey",
+            "name": "access_token",
+            "in": "cookie"
+        }
+    }
+}

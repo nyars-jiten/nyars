@@ -103,7 +103,7 @@ function togglePasswordVisibility(field: 'current' | 'new' | 'confirm') {
               Текущий пароль
             </label>
             <div class="relative">
-              <UiInput
+              <LegacyInput
                 v-model="currentPassword"
                 v-bind="currentPasswordAttrs"
                 :type="showCurrentPassword ? 'text' : 'password'"
@@ -132,7 +132,7 @@ function togglePasswordVisibility(field: 'current' | 'new' | 'confirm') {
               Новый пароль
             </label>
             <div class="relative">
-              <UiInput
+              <LegacyInput
                 v-model="newPassword"
                 v-bind="newPasswordAttrs"
                 :type="showNewPassword ? 'text' : 'password'"
@@ -164,7 +164,7 @@ function togglePasswordVisibility(field: 'current' | 'new' | 'confirm') {
               Подтверждение пароля
             </label>
             <div class="relative">
-              <UiInput
+              <LegacyInput
                 v-model="confirmPassword"
                 v-bind="confirmPasswordAttrs"
                 :type="showConfirmPassword ? 'text' : 'password'"
@@ -189,7 +189,7 @@ function togglePasswordVisibility(field: 'current' | 'new' | 'confirm') {
 
           <!-- Submit Button -->
           <div class="flex justify-end">
-            <UiButton
+            <LegacyButton
               type="submit"
               color="save"
               :disabled="isChanging"
@@ -197,7 +197,7 @@ function togglePasswordVisibility(field: 'current' | 'new' | 'confirm') {
               <Icon v-if="isChanging" name="ic:baseline-hourglass-empty" class="animate-spin" />
               <Icon v-else name="ic:baseline-lock" />
               {{ isChanging ? 'Изменение...' : 'Изменить пароль' }}
-            </UiButton>
+            </LegacyButton>
           </div>
         </form>
       </div>

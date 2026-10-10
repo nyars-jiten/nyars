@@ -70,9 +70,9 @@ const password = useField('password')
           to="/api/auth/discord"
           external
         >
-          <UiButton icon="ic:baseline-discord" color="discord">
+          <LegacyButton icon="ic:baseline-discord" color="discord">
             <span>{{ t('pages.login.discordOAuth') }}</span>
-          </UiButton>
+          </LegacyButton>
         </NuxtLink>
 
         <div>
@@ -83,11 +83,11 @@ const password = useField('password')
           <form class="space-y-8" @submit="submit">
             <section class="space-y-4">
               <div>
-                <UiInput v-model="login.value.value" type="text" autocomplete="username">
+                <LegacyInput v-model="login.value.value" type="text" autocomplete="username">
                   <template #hint>
                     {{ t('pages.login.login') }}
                   </template>
-                </UiInput>
+                </LegacyInput>
 
                 <div class="text-start px-2 text-rose-300">
                   {{ errors.login }}
@@ -95,11 +95,11 @@ const password = useField('password')
               </div>
 
               <div>
-                <UiInput v-model="password.value.value" type="password" autocomplete="current-password">
+                <LegacyInput v-model="password.value.value" type="password" autocomplete="current-password">
                   <template #hint>
                     {{ t('pages.login.password') }}
                   </template>
-                </UiInput>
+                </LegacyInput>
 
                 <div class="text-start px-2 text-rose-300">
                   {{ errors.password }}
@@ -108,9 +108,9 @@ const password = useField('password')
             </section>
 
             <section class="flex justify-between items-center gap-4">
-              <UiButton type="submit" :disabled="Object.keys(errors).length > 0">
+              <LegacyButton type="submit" :disabled="Object.keys(errors).length > 0">
                 {{ t(isRegister ? 'pages.login.titleRegister' : 'pages.login.titleLogin') }}
-              </UiButton>
+              </LegacyButton>
 
               <div class="flex gap-4 items-center">
                 <span v-show="!isRegister">

@@ -42,23 +42,23 @@ function handleUnban() {
   <div class="space-y-4">
     <!-- Ban/Unban Actions -->
     <div class="flex gap-2">
-      <UiButton
+      <LegacyButton
         v-if="!isBanned"
         icon="ic:baseline-block"
         color="delete"
         @click="handleStartBan"
       >
         Заблокировать
-      </UiButton>
+      </LegacyButton>
 
-      <UiButton
+      <LegacyButton
         v-else
         icon="ic:baseline-check-circle"
         color="save"
         @click="handleUnban"
       >
         Разблокировать
-      </UiButton>
+      </LegacyButton>
     </div>
 
     <!-- Ban Reason Input -->
@@ -67,7 +67,7 @@ function handleUnban() {
         Причина блокировки:
       </label>
 
-      <UiInput
+      <LegacyInput
         v-model="banReasonInput"
         placeholder="Введите причину блокировки..."
         class="w-full"
@@ -75,19 +75,19 @@ function handleUnban() {
       />
 
       <div class="flex gap-2">
-        <UiButton
+        <LegacyButton
           color="delete"
           :disabled="!banReasonInput.trim()"
           @click="handleConfirmBan"
         >
           Подтвердить блокировку
-        </UiButton>
-        <UiButton
+        </LegacyButton>
+        <LegacyButton
           color="cancel"
           @click="handleCancelBan"
         >
           Отмена
-        </UiButton>
+        </LegacyButton>
       </div>
     </div>
   </div>

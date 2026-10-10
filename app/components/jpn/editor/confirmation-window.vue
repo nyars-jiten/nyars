@@ -24,11 +24,11 @@ const emptyIsUnconfirmed = { isUnconfirmed: true } as EntryStatus
         <div>
           {{ t(`pages.editor.confirmation.comment.${type}`) }}
         </div>
-        <UiInput v-model="entry.comment" class="mt-2" :multiline="true">
+        <LegacyInput v-model="entry.comment" class="mt-2" :multiline="true">
           <!-- <template #hint>
             Обоснование
           </template> -->
-        </UiInput>
+        </LegacyInput>
       </section>
       <section v-if="type === 'edit'" class="space-y-2">
         <div>Статус:</div>
@@ -44,15 +44,15 @@ const emptyIsUnconfirmed = { isUnconfirmed: true } as EntryStatus
         </div>
       </section>
       <section class="inline-flex gap-2">
-        <UiButton class="text-slate-400" icon="ic:baseline-replay" :title="t('pages.editor.confirmation.return')" @click="emit('return')">
+        <LegacyButton class="text-slate-400" icon="ic:baseline-replay" :title="t('pages.editor.confirmation.return')" @click="emit('return')">
           {{ t('pages.editor.confirmation.return') }}
-        </UiButton>
-        <UiButton v-if="type === 'edit'" class="text-lime-300" icon="ic:baseline-check" :title="t('pages.editor.confirmation.send')" @click="emit('send')">
+        </LegacyButton>
+        <LegacyButton v-if="type === 'edit'" class="text-lime-300" icon="ic:baseline-check" :title="t('pages.editor.confirmation.send')" @click="emit('send')">
           {{ t('pages.editor.confirmation.send') }}
-        </UiButton>
-        <UiButton v-else-if="type === 'delete'" class="text-rose-400" icon="ic:baseline-check" :title="t('pages.editor.confirmation.delete')" @click="emit('delete')">
+        </LegacyButton>
+        <LegacyButton v-else-if="type === 'delete'" class="text-rose-400" icon="ic:baseline-check" :title="t('pages.editor.confirmation.delete')" @click="emit('delete')">
           {{ t('pages.editor.confirmation.delete') }}
-        </UiButton>
+        </LegacyButton>
       </section>
     </div>
   </UiBlock>

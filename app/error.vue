@@ -11,21 +11,21 @@ const config = useRuntimeConfig()
 </script>
 
 <template>
-  <NuxtLayout class="dark">
-    <div class="flex text-gray-300 bg-neutral-900 min-h-full select-text flex-col items-center justify-center gap-4">
+  <NuxtLayout>
+    <div class="flex min-h-full select-text flex-col items-center justify-center gap-4 py-10">
       <span class="text-4xl font-extralight">{{ error?.statusCode }}: Error occured</span>
       <!-- <span>{{ t('pages.development.text') }}</span> -->
-      <button class="cursor-pointer underline" @click="handleError">
+      <button class="cursor-pointer text-strong underline" @click="handleError">
         Return to the main page
       </button>
       <div>
         <h2 class="text-xl font-semibold mt-4">
           Please report this issue:
         </h2>
-        <ul class="list-disc list-inside text-gray-400">
+        <ul class="list-disc list-inside text-muted">
           <li>
             Open an issue on our
-            <a href="https://github.com/nyars-jiten/nyars/issues" target="_blank" class="text-sky-600 font-bold hover:underline">GitHub Issue Tracker</a>
+            <a href="https://github.com/nyars-jiten/nyars/issues" target="_blank" class="text-strong font-bold hover:underline">GitHub Issue Tracker</a>
           </li>
           <li>
             Send a report in our
@@ -34,7 +34,7 @@ const config = useRuntimeConfig()
         </ul>
       </div>
       <pre>{{ error?.message }}</pre>
-      <pre class="bg-gray-900 text-rose-600 p-4 rounded-md mt-4 overflow-auto max-w-full break-all whitespace-pre-wrap">{{ error?.stack }}</pre>
+      <pre class="bg-surf border border-line text-danger p-4 rounded-panel mt-4 overflow-auto max-w-full break-all whitespace-pre-wrap">{{ error?.stack }}</pre>
       <img
         src="@/assets/img/under-construction-1000.png"
         alt="under-dev-image"

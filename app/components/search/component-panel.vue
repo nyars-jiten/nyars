@@ -102,60 +102,56 @@ function clear() {
 
 function componentClass(c: string) {
   if (selected.value.includes(c)) {
-    return 'bg-zinc-700 text-zinc-100 outline-1 outline-zinc-600'
+    return 'bg-acc text-onacc font-bold'
   }
   const available = availableComponents.value.length === 0 || availableComponents.value.includes(c)
   return available
-    ? 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
-    : 'text-zinc-700 hover:text-zinc-600'
+    ? 'text-ink hover:bg-soft hover:text-strong'
+    : 'text-muted/40 hover:text-muted'
 }
 </script>
 
 <template>
-  <section class="flex max-h-128 flex-col gap-3 rounded-md bg-neutral-900 p-4 shadow outline-1 outline-neutral-800">
-    <!-- Results -->
-    <div class="min-h-9 shrink-0 py-1 leading-loose">
-      <UiButton type="button" icon="mdi:restart" title="сбросить" class="mr-2 align-middle rounded-full" loose @click="clear" />
-      <Icon v-if="searchPending" class="size-4 animate-spin align-middle text-zinc-500" name="mdi:loading" />
-      <span v-else-if="!flatResults.length" class="align-middle text-sm text-zinc-600">
-        {{ selected.length ? 'ничего не найдено' : 'выберите компоненты для поиска' }}
+  <section class="flex max-h-[min(32rem,70dvh)] flex-col gap-3 rounded-panel border border-line bg-surf p-3.5 shadow-lg">
+    <!-- найденные кандзи -->
+    <div class="flex min-h-11 shrink-0 flex-wrap items-center gap-1 border-b border-line pb-3">
+      <UiIconButton icon="tabler:restore" label="Сбросить ключи" size="sm" class="mr-1" :disabled="!selected.length" @click="clear" />
+
+      <Icon v-if="searchPending" class="size-4 animate-spin text-muted" name="tabler:loader-2" />
+      <span v-else-if="!flatResults.length" class="text-sm text-muted">
+        {{ selected.length ? 'Ничего не найдено' : 'Выберите ключи — здесь появятся кандзи, в которые они входят' }}
       </span>
       <template v-else>
         <template v-for="(token, i) of flatResults" :key="i">
-          <span v-if="token.type === 'count'" class="mr-1 inline-block rounded bg-zinc-800 px-1 align-middle text-sm text-zinc-300">{{ token.value }}</span>
+          <UiCount v-if="token.type === 'count'" :value="token.value" pill class="mx-0.5" :title="`черт: ${token.value}`" />
           <button
             v-else
             type="button"
-            class="mr-1 inline-block cursor-pointer align-middle text-2xl text-zinc-300 transition-colors hover:text-zinc-100"
+            lang="ja"
+            class="flex size-9 cursor-pointer items-center justify-center rounded-ctl font-jp text-2xl text-ink transition-colors hover:bg-soft hover:text-strong focus-visible:outline-2 focus-visible:outline-strong"
             @click="onSelect(token.value)"
           >
             {{ token.value }}
           </button>
         </template>
-        <span v-if="hasMore" class="inline-block align-middle text-lg text-zinc-500">…</span>
+        <span v-if="hasMore" class="text-lg text-muted">…</span>
       </template>
     </div>
 
-    <!-- Controls -->
-    <!-- <div class="flex shrink-0 items-center gap-3"> -->
-    <!-- <label class="flex cursor-pointer items-center gap-1.5 text-xs leading-none text-zinc-400">
-        <input v-model="searchNonJp" type="checkbox" class="m-0 size-3.5 shrink-0 cursor-pointer accent-zinc-400">
-        <span>искать не японские иероглифы</span>
-      </label> -->
-    <!-- </div> -->
-
-    <!-- Components list (scrollable) -->
-    <div class="flex min-h-0 flex-col gap-2 overflow-y-auto">
-      <div v-if="componentsPending" class="flex items-center gap-2 text-sm text-zinc-500">
-        <Icon class="size-4 animate-spin" name="mdi:loading" />
+    <!-- ключи по числу черт -->
+    <div class="flex min-h-0 flex-col gap-1.5 overflow-y-auto pr-1">
+      <div v-if="componentsPending" class="flex items-center gap-2 text-sm text-muted">
+        <Icon class="size-4 animate-spin" name="tabler:loader-2" />
       </div>
       <div v-for="[strokes, chars] of grouped" :key="strokes" class="flex flex-wrap items-center gap-1">
-        <span class="flex h-8 w-8 items-center justify-center rounded-md bg-zinc-800 text-sm text-zinc-300">{{ strokes }}</span>
+        <span class="flex size-8 items-center justify-center rounded-ctl bg-soft text-xs font-extrabold text-strong tabular-nums" :title="`черт: ${strokes}`">{{ strokes }}</span>
         <button
           v-for="c of chars"
           :key="c"
           type="button"
-          class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-md text-lg leading-none transition-colors"
+          lang="ja"
+          :aria-pressed="selected.includes(c)"
+          class="flex size-8 cursor-pointer items-center justify-center rounded-ctl font-jp text-lg leading-none transition-colors focus-visible:outline-2 focus-visible:outline-strong"
           :class="componentClass(c)"
           @click="toggle(c)"
         >

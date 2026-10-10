@@ -282,16 +282,16 @@ const statusStyles = tv({
       <!-- <hr class="border-neutral-200 dark:border-neutral-800 my-8"> -->
 
       <div class="flex gap-4 items-center px-4">
-        <UiButton
+        <LegacyButton
           type="button"
           icon="material-symbols:arrow-back"
           variant="outline"
           @click="navigatePage(NextPage.Prev)"
         >
           Previous
-        </UiButton>
+        </LegacyButton>
 
-        <UiButton
+        <LegacyButton
           type="button"
           icon="material-symbols:shuffle"
           color="sky"
@@ -299,16 +299,16 @@ const statusStyles = tv({
           @click="navigatePage(NextPage.Random)"
         >
           Random
-        </UiButton>
+        </LegacyButton>
 
-        <UiButton
+        <LegacyButton
           type="button"
           icon="material-symbols:arrow-forward"
           variant="outline"
           @click="navigatePage(NextPage.Next)"
         >
           Next
-        </UiButton>
+        </LegacyButton>
       </div>
 
       <hr class="border-neutral-200 dark:border-neutral-800 my-8">
@@ -320,31 +320,31 @@ const statusStyles = tv({
           alt="page image"
         >
 
-        <UiInput v-if="page" v-model="page.rawLine" :disabled="true" :selectable="true" class="w-full" />
+        <LegacyInput v-if="page" v-model="page.rawLine" :disabled="true" :selectable="true" class="w-full" />
       </div>
 
       <hr class="border-neutral-200 dark:border-neutral-800 my-8">
 
       <section class="space-y-4 px-4">
         <div v-if="page" class="grid grid-cols-2 gap-4">
-          <UiInput v-model="page.word" class="w-full">
+          <LegacyInput v-model="page.word" class="w-full">
             <template #hint>
               word
             </template>
-          </UiInput>
+          </LegacyInput>
 
-          <UiInput v-model="page.reading" class="w-full">
+          <LegacyInput v-model="page.reading" class="w-full">
             <template #hint>
               reading
             </template>
-          </UiInput>
+          </LegacyInput>
 
           <div class="space-y-2">
-            <UiInput v-model="page.meaningRu" class="w-full" :multiline="true">
+            <LegacyInput v-model="page.meaningRu" class="w-full" :multiline="true">
               <template #hint>
                 meaningRu
               </template>
-            </UiInput>
+            </LegacyInput>
             <div class="flex gap-1 flex-wrap">
               <button type="button" class="px-2 py-1 text-xs bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 rounded" @click="transformBrackets('meaningRu')">
                 () ↔ []
@@ -356,11 +356,11 @@ const statusStyles = tv({
           </div>
 
           <div class="space-y-2">
-            <UiInput v-model="page.meaningEn" class="w-full" :multiline="true">
+            <LegacyInput v-model="page.meaningEn" class="w-full" :multiline="true">
               <template #hint>
                 meaningEn
               </template>
-            </UiInput>
+            </LegacyInput>
             <div class="flex gap-1 flex-wrap">
               <button type="button" class="px-2 py-1 text-xs bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 rounded" @click="transformBrackets('meaningEn')">
                 () ↔ []
@@ -376,9 +376,9 @@ const statusStyles = tv({
           Сомнительные символы: <span class="bg-rose-500">{{ unexpectedChars }}</span>
         </div>
 
-        <UiButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" @click="invokeUpdatePage">
+        <LegacyButton class="max-sm:w-full" type="button" icon="material-symbols:save" color="lime" :title="t('pages.editor.save')" @click="invokeUpdatePage">
           {{ t('pages.editor.save') }}
-        </UiButton>
+        </LegacyButton>
       </section>
 
       <hr class="border-neutral-200 dark:border-neutral-800 my-8">
@@ -387,13 +387,13 @@ const statusStyles = tv({
         <div class="grid grid-cols-[auto_1fr] gap-4 items-start">
           <template v-for="result of srchResult.result" :key="result.wid">
             <div class="flex flex-col gap-2">
-              <UiButton type="button" icon="mdi:source-branch-plus" color="sky" :title="t('pages.editor.save')" @click="mergeEntry(result.wid)">
+              <LegacyButton type="button" icon="mdi:source-branch-plus" color="sky" :title="t('pages.editor.save')" @click="mergeEntry(result.wid)">
                 Объединить
-              </UiButton>
+              </LegacyButton>
 
-              <UiButton type="button" icon="mdi:swap-horizontal" color="amber" title="Заменить" @click="replaceEntry(result.wid)">
+              <LegacyButton type="button" icon="mdi:swap-horizontal" color="amber" title="Заменить" @click="replaceEntry(result.wid)">
                 Заменить
-              </UiButton>
+              </LegacyButton>
             </div>
 
             <SearchResult :article="result" />
@@ -404,9 +404,9 @@ const statusStyles = tv({
       <section ref="editorSection">
         <hr class="border-neutral-200 dark:border-neutral-800 my-8">
 
-        <UiButton type="button" icon="ic:baseline-add" color="lime" :title="t('pages.editor.save')" @click="createNewEntry()">
+        <LegacyButton type="button" icon="ic:baseline-add" color="lime" :title="t('pages.editor.save')" @click="createNewEntry()">
           Создать новую статью
-        </UiButton>
+        </LegacyButton>
 
         <hr class="border-neutral-200 dark:border-neutral-800 my-8">
 

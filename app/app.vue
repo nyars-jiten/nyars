@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { palette, current } = usePalette()
+
 useHead({
   titleTemplate: (pageTitle) => {
     return pageTitle ? `НЯРС — ${pageTitle}` : 'НЯРС'
@@ -27,11 +29,13 @@ useHead({
   ],
   noscript: [{ value: 'This app requires javascript to work' }],
   htmlAttrs: {
-    lang: 'ru',
-    class: 'dark',
+    'lang': 'ru',
+    'data-theme': palette,
+    // .dark нужен старым компонентам со стилями dark:
+    'class': computed(() => current.value.dark ? 'dark' : 'light'),
   },
   bodyAttrs: {
-    class: 'min-h-dvh bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-gray-300 font-display',
+    class: 'min-h-dvh bg-bg text-ink font-display',
   },
 })
 </script>

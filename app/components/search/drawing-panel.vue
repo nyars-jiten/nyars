@@ -63,11 +63,14 @@ watchEffect(() => {
 </script>
 
 <template>
-  <section class="bg-neutral-900 p-4 outline-1 outline-neutral-800 shadow rounded-md flex gap-4">
-    <div class="flex flex-col gap-4">
+  <section class="flex max-w-full flex-wrap gap-4 rounded-panel border border-line bg-surf p-3.5 shadow-lg">
+    <div class="flex flex-col gap-3">
       <canvas
         ref="canvas"
-        class="h-80 w-80 cursor-crosshair bg-neutral-800 rounded-md"
+        width="320"
+        height="320"
+        class="size-80 max-w-full cursor-crosshair touch-none rounded-ctl border border-line bg-field"
+        aria-label="Поле для рукописного ввода"
         @mousemove="hw.onDraw"
         @mousedown="hw.onStart"
         @touchmove="hw.onDraw"
@@ -77,34 +80,43 @@ watchEffect(() => {
         @touchend="onEnd"
       />
 
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-1">
         <input
           v-show="hw.maxLineWidth > 0"
           v-model="lineWidth"
-          class="h-2 w-full appearance-none rounded bg-white dark:bg-gray-600"
+          class="mr-2 w-full accent-strong"
           type="range"
+          aria-label="Толщина линии"
           :step="hw.step"
           :min="hw.minLineWidth"
           :max="hw.maxLineWidth"
         >
 
-        <UiButton type="button" icon="mdi:eraser-variant" @click="clear" />
-        <UiButton type="button" icon="mdi:undo-variant" @click="undo" />
+        <UiIconButton icon="tabler:arrow-back-up" label="Отменить штрих (Ctrl+Z)" @click="undo" />
+        <UiIconButton icon="tabler:eraser" label="Очистить (Ctrl+C)" @click="clear" />
       </div>
     </div>
 
-    <div
-      v-show="proposals.length"
-      class="grid grid-cols-2 content-start gap-2"
-    >
-      <UiButton
-        v-for="proposal of proposals"
-        :key="proposal"
-        type="button"
-        @click="onSelect(proposal)"
-      >
-        {{ proposal }}
-      </UiButton>
+    <div class="flex w-28 flex-col gap-2">
+      <UiCaption class="mb-0">
+        Варианты
+      </UiCaption>
+
+      <p v-if="!proposals.length" class="m-0 text-[13px] text-muted">
+        Нарисуйте иероглиф — здесь появятся варианты.
+      </p>
+
+      <div v-else class="grid grid-cols-2 content-start gap-1.5">
+        <button
+          v-for="proposal of proposals"
+          :key="proposal"
+          type="button"
+          class="flex h-11 cursor-pointer items-center justify-center rounded-ctl border border-line bg-bg font-jp text-xl text-ink transition-colors hover:border-strong hover:text-strong focus-visible:outline-2 focus-visible:outline-strong"
+          @click="onSelect(proposal)"
+        >
+          {{ proposal }}
+        </button>
+      </div>
     </div>
   </section>
 </template>
