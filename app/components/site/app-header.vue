@@ -3,6 +3,9 @@
 // На узких экранах строка поиска уходит на вторую строку, разделы — в меню «☰».
 const { t } = useI18n()
 const { user } = storeToRefs(useUserStore())
+// на главной своя крупная строка поиска
+const route = useRoute()
+const isHome = computed(() => route.name === 'Home')
 
 const link = 'text-strong no-underline hover:underline hover:underline-offset-[3px] aria-[current=page]:underline aria-[current=page]:underline-offset-[5px] aria-[current=page]:decoration-2'
 </script>
@@ -13,7 +16,8 @@ const link = 'text-strong no-underline hover:underline hover:underline-offset-[3
       <AppLogo />
     </NuxtLink>
 
-    <SearchBar class="min-w-0 flex-[1_1_480px] max-md:order-last max-md:basis-full" />
+    <SearchBar v-if="!isHome" class="min-w-0 flex-[1_1_480px] max-md:order-last max-md:basis-full" />
+    <span v-else class="flex-1" />
 
     <nav aria-label="Разделы" class="flex items-center gap-5 font-semibold max-md:ml-auto max-md:gap-1">
       <NuxtLink :to="{ name: 'edits' }" :class="link" class="max-md:hidden">

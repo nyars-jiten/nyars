@@ -206,8 +206,7 @@ export function useEditsList() {
     lastPageSize.value = PAGE
   })
 
-  /** правки, изменённые на странице (действия модератора) — поверх ответа сервера */
-  const patched = ref<Record<string, EditResponse>>({})
+  const { patched, act } = useEditModeration()
 
   const loaded = computed(() => [...(firstPage.value ?? []), ...morePages.value].map(edit => patched.value[edit.id] ?? edit))
   const hasMore = computed(() => Boolean(params.value) && (morePages.value.length ? lastPageSize.value : firstPage.value?.length ?? 0) === PAGE)
@@ -284,23 +283,6 @@ export function useEditsList() {
       names.add(filters.value.reviewer)
     return [...names].sort((a, b) => a.localeCompare(b, 'ru'))
   })
-
-  /* ---------- действия ---------- */
-
-  const { approveEditAsReviewed, approveEditAsUnreviewed, declineEdit } = useEditActions()
-
-  async function act(edit: EditResponse, action: 'approve' | 'approve-unreviewed' | 'decline') {
-    const run = action === 'approve'
-      ? approveEditAsReviewed
-      : action === 'approve-unreviewed' ? approveEditAsUnreviewed : declineEdit
-    const updated = await run(edit.id)
-    // сервер может ответить без тела — тогда меняем статус сами
-    const fallback = action === 'decline' ? EditStatus.Declined : EditStatus.Accepted
-    patched.value = {
-      ...patched.value,
-      [edit.id]: updated?.id ? updated : { ...edit, status: fallback, approver: user.value ?? edit.approver, updatedAt: new Date() },
-    }
-  }
 
   return {
     filters,

@@ -1,8 +1,16 @@
 <script setup lang="ts">
 // Строка поиска нового дизайна: поле с подчёркиванием, подсказки и история (combobox),
 // рукописный ввод (筆) и поиск кандзи по ключам (部).
+const props = withDefaults(defineProps<{
+  /** header — поле с подчёркиванием в шапке; hero — крупная карточка с кнопкой «Найти» на главной */
+  variant?: 'header' | 'hero'
+}>(), {
+  variant: 'header',
+})
+
 const { t } = useI18n()
 
+const hero = computed(() => props.variant === 'hero')
 const route = useRoute()
 const { open: filtersOpen } = useSearchFilters()
 // кнопка фильтров — только на странице поиска
@@ -126,7 +134,10 @@ onKeyStroke('/', (event) => {
   <div ref="root" class="relative" @focusout="onFocusOut">
     <form
       role="search"
-      class="flex items-center gap-1 border-b-2 border-ink transition-colors focus-within:border-strong"
+      class="flex items-center transition-colors focus-within:border-strong"
+      :class="hero
+        ? 'gap-1.5 rounded-[14px] border-[1.5px] border-line bg-surf py-1.5 pr-1.5 pl-5 shadow-[0_6px_24px_rgba(0,0,0,.05)] max-sm:pl-3.5'
+        : 'gap-1 border-b-2 border-ink'"
       @submit.prevent="search()"
     >
       <label :for="inputId" class="sr-only">Поиск по словарю</label>
@@ -147,10 +158,11 @@ onKeyStroke('/', (event) => {
         spellcheck="false"
         enterkeyhint="search"
         class="
-          h-12 min-w-0 flex-1 border-0 bg-transparent font-jp text-[19px] text-ink outline-none
-          placeholder:font-ui placeholder:text-[15px] placeholder:text-muted
+          min-w-0 flex-1 border-0 bg-transparent font-jp text-ink outline-none
+          placeholder:font-ui placeholder:text-muted
           [&::-webkit-search-cancel-button]:hidden
         "
+        :class="hero ? 'h-[52px] text-[21px] placeholder:text-base' : 'h-12 text-[19px] placeholder:text-[15px]'"
         @focus="onFocus"
         @keydown="onKeydown"
       >
@@ -158,7 +170,10 @@ onKeyStroke('/', (event) => {
       <UiIconButton v-if="searchQuery" icon="tabler:x" label="Очистить" size="sm" class="mr-1" @click="clear" />
       <UiIconButton glyph="筆" label="Рукописный ввод" :pressed="panel === 'draw'" @click="togglePanel('draw')" />
       <UiIconButton glyph="部" label="Поиск кандзи по ключам" :pressed="panel === 'radicals'" @click="togglePanel('radicals')" />
-      <UiIconButton v-if="isSearchPage" glyph="篩" label="Фильтры" :pressed="filtersOpen" aria-controls="search-filters" @click="filtersOpen = !filtersOpen" />
+      <UiButton v-if="hero" type="submit" variant="primary" size="lg" class="ml-1 px-[22px]">
+        Найти
+      </UiButton>
+      <UiIconButton v-if="isSearchPage && !hero" glyph="篩" label="Фильтры" :pressed="filtersOpen" aria-controls="search-filters" @click="filtersOpen = !filtersOpen" />
     </form>
 
     <!-- история и подсказки -->
@@ -190,7 +205,7 @@ onKeyStroke('/', (event) => {
             tabindex="-1"
             class="inline-flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-ctl text-muted opacity-0 transition-opacity group-hover:opacity-100 group-aria-selected:opacity-100 hover:bg-bg hover:text-danger"
             :aria-label="`Удалить «${value}» из истории`"
-            :title="`Удалить из истории`"
+            title="Удалить из истории"
             @mousedown.prevent
             @click.stop="suggestionsStore.removeFromHistory(value)"
           >

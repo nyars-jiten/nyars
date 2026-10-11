@@ -75,9 +75,8 @@ const clipboard = useClipboard({ copiedDuring: 1500 })
         </li>
       </ul>
       <p v-if="pendingEdit" class="m-0 mt-1.5 text-[13.5px]">
-        <span class="text-muted">Есть правка на проверке. </span>
         <NuxtLink :to="{ name: 'edits-id', params: { id: pendingEdit.id } }" class="text-strong no-underline hover:underline hover:underline-offset-[3px]">
-          Посмотреть правку →
+          Есть правка на проверке →
         </NuxtLink>
       </p>
     </section>

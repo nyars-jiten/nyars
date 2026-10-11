@@ -1,7 +1,7 @@
 export const PALETTES = [
-  { id: 'rice', label: 'Рисовая бумага', dark: false },
+  { id: 'rice', label: 'Васи', dark: false },
   { id: 'sumi', label: 'Суми', dark: true },
-  { id: 'kanagawa', label: 'Kanagawa', dark: true },
+  { id: 'kanagawa', label: 'Канагава', dark: true },
 ] as const
 
 export type Palette = typeof PALETTES[number]

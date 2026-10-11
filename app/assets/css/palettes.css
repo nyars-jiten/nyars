@@ -39,7 +39,7 @@
   --dial-soft: #33284a;
 }
 
-/* Рисовая бумага — светлая */
+/* Васи — светлая */
 [data-theme="rice"] {
   color-scheme: light;
 
@@ -63,7 +63,7 @@
   --dial-soft: #f1e8f8;
 }
 
-/* Kanagawa Dragon — тёмная, тёплая */
+/* Канагава — тёмная, тёплая */
 [data-theme="kanagawa"] {
   color-scheme: dark;
 

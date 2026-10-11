@@ -53,13 +53,15 @@ const comment = ref('')
 const rankRange = ref<[number, number]>([0, 40])
 const phraseToken = ref<number | null>(2)
 
-const tok = (surface: string, kana: string, base = surface, children = 0): Token => ({
-  surface,
-  furigana: [{ word: surface, kana }],
-  base,
-  deinflect: [],
-  children: Array.from({ length: children }, () => ({ surface: '', furigana: [], base: '', deinflect: [], children: [] })),
-})
+function tok(surface: string, kana: string, base = surface, children = 0): Token {
+  return {
+    surface,
+    furigana: [{ word: surface, kana }],
+    base,
+    deinflect: [],
+    children: Array.from({ length: children }, () => ({ surface: '', furigana: [], base: '', deinflect: [], children: [] })),
+  }
+}
 const phraseTokens: Token[] = [
   tok('医者', 'いしゃ'),
   tok('に', '', ''),
@@ -164,7 +166,7 @@ const heatClass = ['bg-heat-0', 'bg-heat-1', 'bg-heat-2', 'bg-heat-3', 'bg-heat-
         </p>
         <p class="mt-2 mb-0 max-w-[820px] text-muted">
           Компоненты, из которых собираются страницы нового дизайна. Справа от названия — имя компонента
-          и его параметры. Три палитры: Рисовая бумага, Суми и Kanagawa Dragon; скругления — «слегка скруглённые».
+          и его параметры. Три палитры: Васи, Суми и Канагава; скругления — «слегка скруглённые».
         </p>
       </header>
 
