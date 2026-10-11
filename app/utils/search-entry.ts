@@ -8,10 +8,12 @@ export interface HeadwordForm {
   pairs: FuriganaPair[]
   /** написание без чтения: 言う */
   text: string
+  /** пометы формы: поэт., устар. */
+  tags: Tag[]
 }
 
-const KATAKANA_ONLY = /^[゠-ヿー]+$/
-const HAS_KANJI = /[㐀-鿿豈-﫿]/
+const KATAKANA_ONLY = /^[\u30A0-\u30FF]+$/
+const HAS_KANJI = /[\u3400-\u9FFF\uF900-\uFAFF]/
 
 /**
  * Формы заголовка: первая — основная, остальные — варианты написания и чтения.
@@ -30,7 +32,7 @@ export function headwordForms(entry: EntryJp): HeadwordForm[] {
     if (seen.has(key))
       continue
     seen.add(key)
-    forms.push({ pairs: furigana.pairs, text })
+    forms.push({ pairs: furigana.pairs, text, tags: furigana.tags ?? [] })
   }
 
   if (forms.length > 0)
@@ -40,14 +42,14 @@ export function headwordForms(entry: EntryJp): HeadwordForm[] {
   for (const word of entry.words ?? []) {
     const reading = word.readings[0]?.transcription?.kana ?? ''
     for (const spelling of word.spellings) {
-      forms.push({ pairs: [{ word: spelling.value, kana: reading }], text: spelling.value })
+      forms.push({ pairs: [{ word: spelling.value, kana: reading }], text: spelling.value, tags: spelling.tags ?? [] })
     }
     if (!word.spellings.length && reading)
-      forms.push({ pairs: [{ word: reading, kana: '' }], text: reading })
+      forms.push({ pairs: [{ word: reading, kana: '' }], text: reading, tags: [] })
   }
 
   if (!forms.length)
-    forms.push({ pairs: [{ word: entry.title, kana: '' }], text: entry.title })
+    forms.push({ pairs: [{ word: entry.title, kana: '' }], text: entry.title, tags: [] })
 
   return forms
 }

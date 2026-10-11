@@ -23,3 +23,15 @@ export interface UiSideNavItem {
   /** подсказка при наведении, например почему пункт недоступен */
   hint?: string
 }
+
+/** Вкладка UiTabBar */
+export interface UiTabItem {
+  id: string
+  label: string
+  /** число рядом с названием */
+  count?: number
+  /** недоступна: приглушена, не выбирается */
+  disabled?: boolean
+  /** подсказка при наведении, например почему вкладка недоступна */
+  hint?: string
+}

@@ -30,6 +30,9 @@ export function useJpnEntries() {
     return useAsyncData(`entry-${wid}`, () => client.get<EntryJp>(`${path}/entries/${wid}`), options)
   }
 
+  /** Статья без useAsyncData — для страниц, которые сами управляют ключом и загрузкой */
+  const getEntryData = (wid: EntryJp['wid']) => client.get<EntryJp>(`${path}/entries/${wid}`)
+
   const getEntrySource = (wid: EntryJp['wid']) => {
     return useAsyncData(`entry-source-${wid}`, () =>
       client.get<EditorTxtEntryJp>(`${path}/entries/${wid}/txt`))
@@ -71,6 +74,7 @@ export function useJpnEntries() {
 
   return {
     getEntry,
+    getEntryData,
     getEntrySource,
     getSatellites,
     editEntry,

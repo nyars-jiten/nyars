@@ -103,6 +103,14 @@ const statusItems: UiSideNavItem[] = [
   { id: 'rej', label: 'Отклонена', count: 1, status: 'rej' },
 ]
 
+const tab = ref('hist')
+const tabItems: UiTabItem[] = [
+  { id: 'hist', label: 'История', count: 14 },
+  { id: 'sat', label: 'Сателлиты', count: 2 },
+  { id: 'scan', label: 'Сканы', count: 0 },
+  { id: 'disc', label: 'Обсуждение', disabled: true, hint: 'Появится позже' },
+]
+
 const diffModeOptions = [
   { value: 'unified' as const, label: 'Построчно' },
   { value: 'split' as const, label: 'Рядом' },
@@ -414,11 +422,19 @@ const heatClass = ['bg-heat-0', 'bg-heat-1', 'bg-heat-2', 'bg-heat-3', 'bg-heat-
       </KitSection>
 
       <!-- Навигация -->
-      <KitSection id="nav" title="Навигация" code="UiSideNav · UiCount · ThemeSwitch · UiDropdown">
+      <KitSection id="nav" title="Навигация" code="UiSideNav · UiTabBar · UiCount · ThemeSwitch · UiDropdown">
         <KitRow label="Боковое меню" code="ссылки или кнопки · точка статуса — по желанию">
           <div class="flex flex-wrap items-start gap-2.5">
             <UiSideNav v-model="dict" :items="dictItems" label="Словари" class="w-[260px]" />
             <UiSideNav v-model="statusFilter" :items="statusItems" label="Статус" class="w-[260px]" />
+          </div>
+        </KitRow>
+        <KitRow label="Вкладки" code="UiTabBar · счётчик и недоступная вкладка — по желанию · ←/→ Home End">
+          <div class="w-full max-w-[560px]">
+            <UiTabBar v-model="tab" :items="tabItems" label="Разделы статьи" id-base="kit-tabs" />
+            <div :id="`kit-tabs-panel-${tab}`" role="tabpanel" :aria-labelledby="`kit-tabs-tab-${tab}`" class="pt-3 text-sm text-muted">
+              Панель вкладки «{{ tabItems.find(item => item.id === tab)?.label }}»
+            </div>
           </div>
         </KitRow>
         <KitRow label="Счётчик" code="UiCount · текст · pill">
