@@ -1,34 +1,80 @@
 <script setup lang="ts">
-// История правок статьи: версия (или статус для непринятых), автор, комментарий, дата, объём.
-// Сначала пять последних, остальные — по кнопке.
+// История правок статьи: строка на правку — статус, пометка «новая статья» / «удаление», дата, автор, кто принял или отклонил,
+// справа «+N −M» строк. Строка раскрывается: сравнение «Было | Стало» и ссылка на правку.
+// По умолчанию все свёрнуты. Сначала шесть последних, остальные — по кнопке.
 const props = defineProps<{
   summary: EntryEditSummary
   pending?: boolean
 }>()
 
-const VISIBLE = 5
+const VISIBLE = 6
+
+const { getUserAvatarUrl } = useUserProfile()
 
 const all = ref(false)
 const shown = computed(() => all.value ? props.summary.list : props.summary.list.slice(0, VISIBLE))
 const hidden = computed(() => props.summary.list.length - VISIBLE)
 
-const rows = computed(() => shown.value.map(edit => ({
-  edit,
-  version: props.summary.versions.get(edit.id),
-  status: editStatusKind(edit.status),
-  text: edit.comment?.trim() || editTypeLabel(edit.type),
-  date: shortDate(edit.createdAt),
-  full: fullDate(edit.createdAt),
-  stat: editDiffStat(edit),
-})))
+const STATUS_LABEL: Record<UiStatusKind, string> = {
+  pend: 'не проверено',
+  ok: 'принята',
+  work: 'доработка',
+  rej: 'отклонена',
+}
+const REVIEW_VERB: Partial<Record<UiStatusKind, string>> = {
+  ok: 'принял',
+  rej: 'отклонил',
+  work: 'вернул',
+}
+
+// пометка типа правки после статуса — как в UI kit (UiTag outline)
+const EDIT_KIND: Partial<Record<EditType, { label: string, tone: 'neutral' | 'danger' }>> = {
+  [EditType.Create]: { label: 'новая статья', tone: 'neutral' },
+  [EditType.Delete]: { label: 'удаление', tone: 'danger' },
+}
+
+const avatar = (user: ShortUser | null) => user?.avatar ? getUserAvatarUrl(user.avatar).href : undefined
+
+const rows = computed(() => shown.value.map((edit) => {
+  const status = editStatusKind(edit.status)
+  // автопринятые правки и правки на проверке без проверяющего
+  const reviewer = edit.status !== EditStatus.AutoAccepted && edit.status !== EditStatus.New ? edit.approver : null
+  return {
+    edit,
+    status,
+    label: STATUS_LABEL[status],
+    date: shortDateTime(edit.createdAt),
+    full: fullDate(edit.createdAt),
+    author: edit.author?.username ?? 'гость',
+    authorAvatar: avatar(edit.author),
+    reviewer: reviewer?.username,
+    reviewerAvatar: avatar(reviewer),
+    verb: REVIEW_VERB[status] ?? '',
+    title: [editTypeLabel(edit.type), edit.comment?.trim()].filter(Boolean).join(': '),
+    diff: editLineDiff(edit),
+    kind: EDIT_KIND[edit.type],
+  }
+}))
+
+// раскрытые строки по id правки; по умолчанию все свёрнуты
+const open = ref<Record<string, boolean>>({})
+
+function toggle(id: string) {
+  open.value = { ...open.value, [id]: !open.value[id] }
+}
+
+const baseId = useId()
+
+const item = 'before:mx-2.5 before:text-muted before:content-[\'·\']'
 </script>
 
 <template>
   <div>
     <div v-if="pending" aria-hidden="true">
-      <div v-for="i in 3" :key="i" class="flex animate-pulse gap-3 border-b border-line py-3">
-        <div class="h-4 w-10 rounded-tag bg-soft" />
-        <div class="h-4 w-72 max-w-full rounded-tag bg-soft" />
+      <div v-for="i in 3" :key="i" class="flex animate-pulse items-center gap-3 border-b border-line px-1.5 py-3">
+        <div class="size-4 rounded-tag bg-soft" />
+        <div class="h-[22px] w-24 rounded-tag bg-soft" />
+        <div class="h-4 w-64 max-w-full rounded-tag bg-soft" />
       </div>
     </div>
 
@@ -37,32 +83,64 @@ const rows = computed(() => shown.value.map(edit => ({
     </p>
 
     <template v-else>
-      <ol class="m-0 list-none p-0">
-        <li
-          v-for="row in rows"
-          :key="row.edit.id"
-          class="grid grid-cols-[52px_minmax(0,1fr)_auto] items-baseline gap-3 border-b border-line py-[9px] text-[14.5px]"
-        >
-          <span v-if="row.version" class="font-bold text-muted tabular-nums">v{{ row.version }}</span>
-          <span v-else class="self-center"><UiStatus :status="row.status" variant="dot" /></span>
+      <ol class="m-0 flex list-none flex-col p-0">
+        <li v-for="(row, r) in rows" :key="row.edit.id" class="border-b border-line">
+          <button
+            type="button"
+            class="flex w-full cursor-pointer flex-wrap items-center gap-y-1 py-2.5 pr-1.5 pl-0.5 text-left text-[14.5px] text-ink transition-colors hover:bg-soft/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-strong"
+            :aria-expanded="!!open[row.edit.id]"
+            :aria-controls="`${baseId}-${r}`"
+            :title="row.title"
+            @click="toggle(row.edit.id)"
+          >
+            <Icon
+              name="tabler:chevron-right"
+              size="16px"
+              class="mr-2 shrink-0 text-muted transition-transform duration-150"
+              :class="{ 'rotate-90': open[row.edit.id] }"
+            />
+            <UiStatus :status="row.status" size="sm">
+              {{ row.label }}
+            </UiStatus>
+            <UiTag v-if="row.kind" outline :tone="row.kind.tone" size="xs" class="ml-1.5">
+              {{ row.kind.label }}
+            </UiTag>
+            <time
+              :datetime="new Date(row.edit.createdAt).toISOString()"
+              :title="row.full"
+              class="text-[13.5px] whitespace-nowrap text-muted tabular-nums"
+              :class="item"
+            >{{ row.date }}</time>
+            <span class="inline-flex min-w-0 items-center gap-1.5 whitespace-nowrap" :class="item">
+              <UiAvatar :name="row.author" :src="row.authorAvatar" size="sm" />
+              <b class="truncate font-semibold">{{ row.author }}</b>
+            </span>
+            <span v-if="row.reviewer" class="inline-flex min-w-0 items-center gap-1.5 whitespace-nowrap text-muted" :class="item">
+              {{ row.verb }}
+              <UiAvatar :name="row.reviewer" :src="row.reviewerAvatar" size="sm" />
+              <b class="truncate font-semibold text-ink">{{ row.reviewer }}</b>
+            </span>
+            <span
+              v-if="row.diff.plus || row.diff.minus"
+              class="ml-auto pl-3.5 text-[13px] whitespace-nowrap tabular-nums"
+              title="Строк добавлено / удалено"
+            >
+              <DiffStat :plus="row.diff.plus" :minus="row.diff.minus" />
+            </span>
+          </button>
 
-          <span class="min-w-0">
+          <div v-if="open[row.edit.id]" :id="`${baseId}-${r}`" class="pb-3.5 pl-[26px]">
+            <EntryEditDiff v-if="row.diff.lines.length" :lines="row.diff.lines" />
+            <p v-else class="m-0 text-sm text-muted">
+              Текст статьи не изменился.
+            </p>
             <NuxtLink
-              v-if="row.edit.author"
-              :to="{ name: 'users-username', params: { username: row.edit.author.username } }"
-              class="font-bold text-ink no-underline hover:text-strong hover:underline"
-            >{{ row.edit.author.username }}</NuxtLink>
-            <b v-else>гость</b>
-            —
-            <NuxtLink :to="{ name: 'edits-id', params: { id: row.edit.id } }" class="text-ink no-underline hover:text-strong hover:underline hover:underline-offset-[3px]">
-              {{ row.text }}
+              :to="{ name: 'edits-id', params: { id: row.edit.id } }"
+              class="mt-2 inline-block text-[13.5px] text-strong no-underline hover:underline hover:underline-offset-[3px]"
+            >
+              Открыть правку →
             </NuxtLink>
-            <span class="text-muted"> · <time :datetime="new Date(row.edit.createdAt).toISOString()" :title="row.full">{{ row.date }}</time></span>
-            <span v-if="!row.version" class="sr-only">, {{ row.status === 'pend' ? 'ждёт проверки' : 'отклонена' }}</span>
-          </span>
-
-          <DiffStat v-if="row.stat" :plus="row.stat.plus" :minus="row.stat.minus" class="text-[13px]" />
-          <span v-else />
+          </div>
         </li>
       </ol>
 

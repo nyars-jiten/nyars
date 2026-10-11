@@ -21,9 +21,9 @@ const groups = computed(() => {
 <template>
   <div class="flex flex-col gap-7">
     <section v-for="(group, g) in groups" :key="g" :aria-label="group.heading || undefined">
-      <h2 v-if="group.heading" class="m-0 flex flex-wrap items-baseline gap-x-2.5 text-lg leading-snug font-extrabold">
+      <h2 v-if="group.heading" class="m-0 mb-2 flex flex-wrap items-baseline gap-x-2 text-xs leading-snug font-bold tracking-[.08em] text-muted uppercase">
         {{ group.heading }}
-        <span v-if="group.ja" lang="ja" class="font-jp text-sm font-normal text-muted">{{ group.ja }}</span>
+        <span v-if="group.ja" lang="ja" class="font-jp text-[12.5px] font-normal tracking-[.04em] normal-case opacity-85">{{ group.ja }}</span>
       </h2>
 
       <EntrySense

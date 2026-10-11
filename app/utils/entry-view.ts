@@ -17,6 +17,35 @@ export function headwordSize(text: string): number {
   return 32
 }
 
+/**
+ * Пометы, по которым форма считается редкой и уходит из основного заголовка в строку ниже:
+ * редкие/нестандартные/устаревшие/поисковые написания (Kinf) и чтения (Rinf), «редк.», «мал.изв.».
+ */
+const RARE_FORM_TAGS = new Set(['rare', 'obsc', 'iK', 'oK', 'sK', 'mK', 'io', 'rk', 'ok', 'sk', 'rm', 'oik'])
+/** Служебные теги формы, которые в заголовке не показываются (частотность и JLPT — в боковой колонке) */
+const HIDDEN_FORM_TAGS = /^(?:common|jlpt-n\d)$/i
+
+export function isRareForm(form: HeadwordForm) {
+  return form.tags.some(tag => RARE_FORM_TAGS.has(tag.engShort))
+}
+
+export interface HeadwordGroups {
+  /** обычные формы — в основном заголовке */
+  main: HeadwordForm[]
+  /** редкие формы — строкой ниже, мельче */
+  rare: HeadwordForm[]
+}
+
+/** Делит формы заголовка на обычные и редкие; если обычных нет, первая редкая становится основной */
+export function splitHeadwordForms(forms: HeadwordForm[]): HeadwordGroups {
+  const clean = forms.map(form => ({ ...form, tags: form.tags.filter(tag => !HIDDEN_FORM_TAGS.test(tag.engShort)) }))
+  const main = clean.filter(form => !isRareForm(form))
+  const rare = clean.filter(form => isRareForm(form))
+  if (!main.length && rare.length)
+    main.push(rare.shift()!)
+  return { main, rare }
+}
+
 /* ---------- части речи ---------- */
 
 const POS_JA: [RegExp, string][] = [
@@ -63,7 +92,9 @@ export interface PitchMora {
   high: boolean
   /** падение тона после моры: засечка справа */
   drop: boolean
-  /** оглушённая гласная */
+  /** исходная мора, если text заменён (носовой が → か) */
+  source?: string
+  /** гласный не произносится (редукция) */
   silent: boolean
   /** носовой звук (бидакуон) */
   nasal: boolean
@@ -82,6 +113,20 @@ export interface Pronunciation {
 }
 
 const KATAKANA = /^[\u30A0-\u30FF]+$/
+const NASAL_BASE: Record<string, string> = { が: 'か', ぎ: 'き', ぐ: 'く', げ: 'け', ご: 'こ', ガ: 'カ', ギ: 'キ', グ: 'ク', ゲ: 'ケ', ゴ: 'コ' }
+
+/** が → か: первая кана моры без дакутэна */
+function nasalBase(mora: string) {
+  const first = mora.charAt(0)
+  return (NASAL_BASE[first] ?? first) + mora.slice(1)
+}
+
+/** Есть ли в чтениях редукция или носовые — тогда под произношением нужна подсказка */
+export function pronunciationMarks(items: Pronunciation[]) {
+  const mora = items.flatMap(item => item.mora)
+  return { silent: mora.some(m => m.silent), nasal: mora.some(m => m.nasal) }
+}
+
 const KANA_SMALL = 'ゃゅょぁぃぅぇぉゎャュョァィゥェォヮ'
 
 /** Разбивка чтения на моры: きゃ, く */
@@ -142,7 +187,9 @@ export function entryPronunciations(entry: EntryJp): Pronunciation[] {
         seen.add(key)
         seen.add(kana)
         const mora = pitch.diagram.map(pair => ({
-          text: pair.m,
+          // носовой が пишется как か с кружком (бидакуон)
+          text: pair.n ? nasalBase(pair.m) : pair.m,
+          source: pair.m,
           high: pair.s === 1 || pair.s === 3,
           drop: pair.s === 2 || pair.s === 3,
           silent: pair.sl,
@@ -150,7 +197,7 @@ export function entryPronunciations(entry: EntryJp): Pronunciation[] {
           split: pair.sp,
         }))
         result.push({
-          reading: mora.map(m => m.text).join('') || kana,
+          reading: mora.map(m => m.source).join('') || kana,
           accent: pitch.pitchNum,
           type: pitchType(pitch.pitchNum, mora.length),
           mora,

@@ -28,6 +28,8 @@ const { edits, satellites, scans } = useEntryExtras(rawWid)
 
 const forms = computed(() => entry.value ? headwordForms(entry.value) : [])
 const headword = computed(() => forms.value[0]?.text ?? entry.value?.title ?? '')
+/** все обычные написания подряд — из них берутся «Кандзи в записи» */
+const mainText = computed(() => splitHeadwordForms(forms.value).main.map(form => form.text).join(''))
 const flags = computed(() => entry.value ? entryStatusFlags(entry.value.status) : [])
 const summary = computed(() => summarizeEdits(edits.data.value))
 
@@ -149,7 +151,7 @@ const flagText: Record<EntryStatusFlag['kind'], string> = {
         <EntryAside
           v-model:lemmas="showLemmas"
           :entry="entry"
-          :headword="headword"
+          :kanji-text="mainText"
           :edits="summary"
           :edits-pending="edits.status.value === 'pending' || edits.status.value === 'idle'"
           @history="openHistory"

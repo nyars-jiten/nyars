@@ -33,8 +33,6 @@ export function useEntryExtras(wid: MaybeRefOrGetter<string>) {
 export interface EntryEditSummary {
   /** все правки, новые сверху */
   list: EditResponse[]
-  /** номер версии для принятых правок: v1 — самая старая */
-  versions: Map<string, number>
   /** последняя принятая правка */
   last: EditResponse | null
   /** правки, ждущие проверки */
@@ -42,15 +40,13 @@ export interface EntryEditSummary {
   authors: number
 }
 
-/** Сводка по правкам статьи: версии, последняя правка, авторы, ожидающие проверки */
+/** Сводка по правкам статьи: последняя принятая правка, авторы, ожидающие проверки */
 export function summarizeEdits(edits: EditResponse[] | null | undefined): EntryEditSummary {
   const list = [...(edits ?? [])].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
   const applied = list.filter(isEditApplied)
-  const versions = new Map(applied.map((edit, i) => [edit.id, applied.length - i]))
   const authors = new Set(applied.map(edit => edit.author?.id ?? 'anon'))
   return {
     list,
-    versions,
     last: applied[0] ?? null,
     pending: list.filter(edit => edit.status === EditStatus.New),
     authors: authors.size,

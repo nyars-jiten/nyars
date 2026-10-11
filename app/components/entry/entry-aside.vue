@@ -2,8 +2,8 @@
 // Боковая колонка статьи: статус, произношение, кандзи, частотность, история и действия.
 const props = defineProps<{
   entry: EntryJp
-  /** основное написание */
-  headword: string
+  /** текст, из которого берутся кандзи: все обычные написания */
+  kanjiText: string
   edits: EntryEditSummary
   editsPending: boolean
 }>()
@@ -20,7 +20,7 @@ const { userAccess } = storeToRefs(useUserStore())
 
 const flags = computed(() => entryStatusFlags(props.entry.status))
 const pronunciations = computed(() => entryPronunciations(props.entry))
-const kanji = computed(() => entryKanji(props.headword))
+const kanji = computed(() => entryKanji(props.kanjiText))
 const frequency = computed(() => entryFrequency(props.entry))
 const jlpt = computed(() => entryJlpt(props.entry))
 
