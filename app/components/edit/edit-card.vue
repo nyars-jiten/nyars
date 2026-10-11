@@ -8,6 +8,8 @@ const props = defineProps<{
   status: UiStatusKind
   /** заглавное слово статьи */
   headword: string
+  /** язык заглавного слова: ja — японский шрифт, ru — шрифт интерфейса */
+  lang?: 'ja' | 'ru'
   /** ссылка на статью */
   to?: RouteLocationRaw
   /** дата для показа: «сегодня, 14:20» */
@@ -17,6 +19,8 @@ const props = defineProps<{
 }>()
 
 defineSlots<{
+  /** пометки между статусом и словом: «новая статья», «удаление» */
+  tags?: () => VNode[]
   meta?: () => VNode[]
   default?: () => VNode[]
 }>()
@@ -29,6 +33,12 @@ const STRIPE: Record<UiStatusKind, string> = {
   work: 'var(--warn)',
   rej: 'var(--danger)',
 }
+
+// длинные слова и выражения — мельче, как в макете
+const headwordSize = computed(() => {
+  const length = Array.from(props.headword).length
+  return length <= 2 ? 'text-[30px]' : length <= 6 ? 'text-[25px]' : length <= 12 ? 'text-[21px]' : 'text-[19px]'
+})
 
 const contentId = useId()
 
@@ -57,11 +67,14 @@ const NuxtLink = resolveComponent('NuxtLink')
         <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
           <UiStatus :status="status" />
 
+          <slot name="tags" />
+
           <component
             :is="to ? NuxtLink : 'span'"
             :to="to"
-            lang="ja"
-            class="hw text-2xl no-underline hover:text-strong"
+            :lang="lang ?? 'ja'"
+            class="hw no-underline hover:text-strong"
+            :class="[headwordSize, lang === 'ru' && 'font-ui']"
           >
             {{ headword }}
           </component>

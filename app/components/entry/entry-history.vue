@@ -27,12 +27,6 @@ const REVIEW_VERB: Partial<Record<UiStatusKind, string>> = {
   work: 'вернул',
 }
 
-// пометка типа правки после статуса — как в UI kit (UiTag outline)
-const EDIT_KIND: Partial<Record<EditType, { label: string, tone: 'neutral' | 'danger' }>> = {
-  [EditType.Create]: { label: 'новая статья', tone: 'neutral' },
-  [EditType.Delete]: { label: 'удаление', tone: 'danger' },
-}
-
 const avatar = (user: ShortUser | null) => user?.avatar ? getUserAvatarUrl(user.avatar).href : undefined
 
 const rows = computed(() => shown.value.map((edit) => {
@@ -52,7 +46,7 @@ const rows = computed(() => shown.value.map((edit) => {
     verb: REVIEW_VERB[status] ?? '',
     title: [editTypeLabel(edit.type), edit.comment?.trim()].filter(Boolean).join(': '),
     diff: editLineDiff(edit),
-    kind: EDIT_KIND[edit.type],
+    kind: EDIT_KIND_TAG[edit.type],
   }
 }))
 

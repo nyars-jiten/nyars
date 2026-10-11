@@ -32,26 +32,27 @@ function segments(text: DiffRow['text']): DiffSegment[] {
   return typeof text === 'string' ? [{ text }] : text
 }
 
-const ln = 'select-none py-0.5 pr-2 text-right font-mono text-[11.5px] leading-[1.95] text-muted'
+const ln = 'select-none bg-bg py-0.5 pr-2 text-right font-mono text-[11.5px] leading-[1.95] text-muted'
 const tx = 'min-w-0 px-3 py-0.5 [overflow-wrap:anywhere] whitespace-pre-wrap'
-const none = 'bg-[repeating-linear-gradient(135deg,transparent_0_6px,var(--line)_6px_7px)]'
+// штриховка — общий фон всех строк, а не каждой ячейки: так полосы стыкуются между строками разной высоты
+const hatch = 'bg-bg bg-[repeating-linear-gradient(135deg,transparent_0_6px,var(--line)_6px_7px)]'
 </script>
 
 <template>
-  <div class="overflow-x-auto rounded-tag shadow-[inset_0_0_0_1px_var(--line)]">
-    <div class="min-w-[440px] font-ui text-sm leading-[1.6]">
-      <div class="grid grid-cols-2 border-b border-line text-[11px] font-extrabold tracking-[.08em] text-muted uppercase">
+  <div class="overflow-x-auto rounded-tag border border-line">
+    <div class="min-w-[440px] font-ui text-sm leading-[1.6]" :class="hatch">
+      <div class="grid grid-cols-2 border-b border-line bg-bg text-[11px] font-extrabold tracking-[.08em] text-muted uppercase">
         <span class="py-1.5 pr-3 pl-[52px]">Было</span>
         <span class="border-l border-line py-1.5 pr-3 pl-[52px]">Стало</span>
       </div>
 
       <template v-for="(pair, p) in pairs" :key="p">
-        <div v-if="pair.gap" class="border-y border-line/60 py-0.5 text-center text-xs leading-4 text-muted" aria-label="Строки без изменений">
+        <div v-if="pair.gap" class="border-y border-line/60 bg-bg py-0.5 text-center text-xs leading-4 text-muted" aria-label="Строки без изменений">
           ⋯
         </div>
         <div v-else class="grid grid-cols-[40px_minmax(0,1fr)_40px_minmax(0,1fr)]">
           <span :class="ln">{{ pair.del?.old }}</span>
-          <span v-if="!pair.del" :class="[tx, none]" />
+          <span v-if="!pair.del" :class="tx" />
           <span v-else :class="tx" class="bg-danger-soft">
             <span class="inline-block w-4 font-extrabold text-danger" aria-hidden="true">−</span>
             <span class="sr-only">удалено:</span>
@@ -62,7 +63,7 @@ const none = 'bg-[repeating-linear-gradient(135deg,transparent_0_6px,var(--line)
           </span>
 
           <span :class="ln" class="border-l border-line">{{ pair.add?.new }}</span>
-          <span v-if="!pair.add" :class="[tx, none]" />
+          <span v-if="!pair.add" :class="tx" />
           <span v-else :class="tx" class="bg-soft">
             <span class="inline-block w-4 font-extrabold text-strong" aria-hidden="true">+</span>
             <span class="sr-only">добавлено:</span>

@@ -1,7 +1,7 @@
-import type { ShortUser } from '../user/user.js'
-import type { DictionaryType } from './dictionaryType.js'
-import type { EditStatus } from './editStatus.js'
-import type { EditType } from './editType.js'
+import type { ShortUser } from '../user/user'
+import type { DictionaryType } from './dictionary-type'
+import type { EditStatus } from './edit-status'
+import type { EditType } from './edit-type'
 
 export interface EditResponse {
   id: string

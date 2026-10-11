@@ -17,6 +17,13 @@ const props = withDefaults(defineProps<{
 const failed = ref(false)
 watch(() => props.src, () => failed.value = false)
 
+// картинка из SSR могла не загрузиться ещё до гидрации — тогда событие error уже пропущено
+const img = useTemplateRef('img')
+onMounted(() => {
+  if (img.value?.complete && !img.value.naturalWidth)
+    failed.value = true
+})
+
 const letter = computed(() => props.text ?? props.name?.trim().charAt(0).toUpperCase() ?? '?')
 const empty = computed(() => !props.text && !props.name && !props.src)
 
@@ -38,7 +45,7 @@ const avatar = tv({
 
 <template>
   <span :class="avatar({ size, empty })" :title="name">
-    <img v-if="src && !failed" :src="src" :alt="name ?? ''" class="size-full object-cover" @error="failed = true">
+    <img v-if="src && !failed" ref="img" :src="src" :alt="name ?? ''" class="size-full object-cover" @error="failed = true">
     <span v-else :aria-hidden="name ? 'true' : undefined">{{ letter }}</span>
   </span>
 </template>

@@ -47,6 +47,7 @@ const dateTo = ref('2026-10-09')
 const dict = ref('jr')
 const statusFilter = ref('all')
 const cardOpen = ref(true)
+const switchOn = ref(false)
 const diffMode = ref<'unified' | 'split'>('unified')
 const comment = ref('')
 const rankRange = ref<[number, number]>([0, 40])
@@ -386,6 +387,14 @@ const heatClass = ['bg-heat-0', 'bg-heat-1', 'bg-heat-2', 'bg-heat-3', 'bg-heat-
             </UiCheckbox>
           </div>
         </KitRow>
+        <KitRow label="Вкл/выкл — настройка вида" code="UiSwitch · применяется сразу">
+          <UiSwitch v-model="switchOn">
+            Показывать строки без изменений
+          </UiSwitch>
+          <UiSwitch :model-value="true" disabled>
+            Недоступно
+          </UiSwitch>
+        </KitRow>
         <KitRow label="Совпадение 2×2" code="UiRadioTiles">
           <UiRadioTiles v-model="match" :options="matchOptions" legend="Совпадение" class="w-[280px]" />
         </KitRow>
@@ -478,6 +487,7 @@ const heatClass = ['bg-heat-0', 'bg-heat-1', 'bg-heat-2', 'bg-heat-3', 'bg-heat-
           <UiMeta>
             <UiPerson name="yuki_s" avatar />
             <UiPerson name="kitsune_ru" action="принял" />
+            <UiPerson name="Murasaki" action="принял" avatar />
           </UiMeta>
         </KitRow>
         <KitRow label="Активные участники" code="список">
