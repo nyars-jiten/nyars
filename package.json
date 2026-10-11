@@ -1,7 +1,7 @@
 {
   "name": "nyars",
   "type": "module",
-  "version": "2.3.1",
+  "version": "2.4-β",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
