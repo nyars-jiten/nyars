@@ -49,6 +49,26 @@ const statusFilter = ref('all')
 const cardOpen = ref(true)
 const diffMode = ref<'unified' | 'split'>('unified')
 const comment = ref('')
+const rankRange = ref<[number, number]>([0, 40])
+const phraseToken = ref<number | null>(2)
+
+const tok = (surface: string, kana: string, base = surface, children = 0): Token => ({
+  surface,
+  furigana: [{ word: surface, kana }],
+  base,
+  deinflect: [],
+  children: Array.from({ length: children }, () => ({ surface: '', furigana: [], base: '', deinflect: [], children: [] })),
+})
+const phraseTokens: Token[] = [
+  tok('医者', 'いしゃ'),
+  tok('に', '', ''),
+  tok('言われ', 'いわれ', '言う'),
+  tok('、', '', ''),
+  tok('井蛙は以って海を語る可からず', 'せいあはもってうみをかたるべからず', '井蛙は以って海を語る可からず', 2),
+  tok('と', '', ''),
+  tok('思い知った', 'おもいしった', '思い知る'),
+  tok('。', '', ''),
+]
 
 const periodOptions = [
   { value: 'today', label: 'сегодня' },
@@ -377,6 +397,15 @@ const heatClass = ['bg-heat-0', 'bg-heat-1', 'bg-heat-2', 'bg-heat-3', 'bg-heat-
         <KitRow label="Период" code="UiDateRange">
           <UiDateRange v-model:from="dateFrom" v-model:to="dateTo" class="w-[280px]" />
         </KitRow>
+        <KitRow label="Диапазон" code="UiRangeSlider · v-model: [от, до]">
+          <div class="w-[280px]">
+            <div class="flex justify-between text-sm font-semibold tabular-nums">
+              <span>от {{ rankRange[0] }}</span>
+              <span>до {{ rankRange[1] }}</span>
+            </div>
+            <UiRangeSlider v-model="rankRange" />
+          </div>
+        </KitRow>
         <KitRow label="Группа фильтра" code="UiFilterGroup">
           <UiFilterGroup title="Проверяющий" class="w-[280px]">
             <UiSelect v-model="reviewer" :options="reviewerOptions" />
@@ -506,6 +535,14 @@ const heatClass = ['bg-heat-0', 'bg-heat-1', 'bg-heat-2', 'bg-heat-3', 'bg-heat-
 
       <!-- Прочее -->
       <KitSection id="misc" title="Состояния и прочее">
+        <KitRow label="Разбор фразы" code="SearchPhrase · токены с бэкенда (parsed)">
+          <SearchPhrase v-model="phraseToken" :tokens="phraseTokens" class="w-full" />
+        </KitRow>
+        <KitRow label="Частотность" code="SearchFrequency · ранг → 5 точек">
+          <SearchFrequency :info="{ rank: 45, level: 5, short: '45', label: 'основное' }" />
+          <SearchFrequency :info="{ rank: 2600, level: 4, short: '3k', label: 'очень частое' }" />
+          <SearchFrequency :info="{ rank: 24300, level: 1, short: '24k', label: 'редкое' }" />
+        </KitRow>
         <KitRow label="Пустой поиск" code="UiEmptyState">
           <UiEmptyState class="max-w-[760px]">
             <template #title>

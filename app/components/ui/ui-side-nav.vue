@@ -39,16 +39,19 @@ const item = [
       <button
         v-else
         type="button"
-        :class="item"
+        :class="[item, entry.disabled && 'cursor-not-allowed opacity-50 hover:text-muted']"
         :data-active="model === entry.id || undefined"
         :aria-current="model === entry.id ? 'true' : undefined"
-        @click="model = entry.id"
+        :aria-disabled="entry.disabled || undefined"
+        :title="entry.hint"
+        @click="!entry.disabled && (model = entry.id)"
       >
         <span class="inline-flex min-w-0 items-center gap-2">
           <UiStatus v-if="entry.status" :status="entry.status" variant="dot" />
           <span class="truncate">{{ entry.label }}</span>
         </span>
         <UiCount v-if="entry.count !== undefined" :value="entry.count" class="group-data-active:text-strong" />
+        <span v-else-if="entry.disabled" class="text-[12.5px] text-muted" aria-hidden="true">—</span>
       </button>
     </template>
   </nav>

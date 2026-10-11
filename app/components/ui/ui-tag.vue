@@ -5,8 +5,8 @@ withDefaults(defineProps<{
   tone?: 'accent' | 'danger' | 'neutral'
   /** контур вместо заливки */
   outline?: boolean
-  /** sm 24 · md 26 */
-  size?: 'sm' | 'md'
+  /** xs 22 · sm 24 · md 26 */
+  size?: 'xs' | 'sm' | 'md'
   icon?: string
 }>(), {
   tone: 'accent',
@@ -26,6 +26,7 @@ const tag = tv({
       true: 'bg-transparent shadow-[inset_0_0_0_1px_currentColor]',
     },
     size: {
+      xs: 'h-[22px] px-2 text-xs font-semibold',
       sm: 'h-6 font-semibold',
       md: 'h-[26px] font-bold',
     },

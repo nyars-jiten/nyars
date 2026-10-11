@@ -34,8 +34,8 @@ export function useSearch() {
    * @param limit - Limit number of results
    * @param offset - Offset for pagination
    */
-  const search = async (query: string, limit: number, offset: number) => {
-    return await client.post<JpnSearchResponse>('search', { query, limit, offset })
+  const search = async (query: string, limit: number, offset: number, extra?: Record<string, unknown>) => {
+    return await client.post<JpnSearchResponse>('search', { query, limit, offset, ...extra })
   }
 
   return {

@@ -14,11 +14,12 @@ withDefaults(defineProps<Props>(), {
 const style = tv({
   variants: {
     t: {
-      i: 'italic text-gray-500 text-sm',
+      i: 'italic text-muted text-sm',
       p: 'italic',
-      comp: 'bg-gray-300/10 px-1 py-0.5 rounded text-sm whitespace-nowrap', // bg-fuchsia-300/10
+      comp: 'bg-soft px-1 py-0.5 rounded-tag text-sm whitespace-nowrap',
       hide: 'hidden',
-      lat: 'decoration-violet-400 underline', // text-violet-300
+      hw: 'font-bold text-strong', // заглавное слово в примере
+      lat: 'italic', // латинские названия
     } as Record<string, string>,
   },
 })
@@ -34,13 +35,13 @@ const style = tv({
       <sub v-else-if="t === 'sub'">{{ v }}</sub>
 
       <template v-else-if="t === 'ref'">
-        <NuxtLink v-if="allowExternal && p" :to="p" external target="_blank" class="text-indigo-300">
+        <NuxtLink v-if="allowExternal && p" :to="p" external target="_blank" class="text-strong no-underline hover:underline">
           {{ v }}
         </NuxtLink>
-        <NuxtLink v-else :to="{ name: 'dict-jpn', query: { q: v } }" class="text-indigo-300">
+        <NuxtLink v-else :to="{ name: 'dict-jpn', query: { q: v } }" class="text-strong no-underline hover:underline">
           {{ v }}
         </NuxtLink>
-        <!-- <span class="text-indigo-300">
+        <!-- <span class="text-strong no-underline hover:underline">
           {{ v }}
         </span> -->
       </template>

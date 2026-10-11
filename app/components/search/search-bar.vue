@@ -3,6 +3,11 @@
 // рукописный ввод (筆) и поиск кандзи по ключам (部).
 const { t } = useI18n()
 
+const route = useRoute()
+const { open: filtersOpen } = useSearchFilters()
+// кнопка фильтров — только на странице поиска
+const isSearchPage = computed(() => route.name === 'dict-jpn')
+
 const searchStore = useSearchStore()
 const { searchQuery } = storeToRefs(searchStore)
 const suggestionsStore = useSuggestionsStore()
@@ -153,6 +158,7 @@ onKeyStroke('/', (event) => {
       <UiIconButton v-if="searchQuery" icon="tabler:x" label="Очистить" size="sm" class="mr-1" @click="clear" />
       <UiIconButton glyph="筆" label="Рукописный ввод" :pressed="panel === 'draw'" @click="togglePanel('draw')" />
       <UiIconButton glyph="部" label="Поиск кандзи по ключам" :pressed="panel === 'radicals'" @click="togglePanel('radicals')" />
+      <UiIconButton v-if="isSearchPage" glyph="篩" label="Фильтры" :pressed="filtersOpen" aria-controls="search-filters" @click="filtersOpen = !filtersOpen" />
     </form>
 
     <!-- история и подсказки -->
