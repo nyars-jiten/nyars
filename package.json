@@ -9,7 +9,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "lint.fix": "eslint . --fix"
+    "lint.fix": "eslint . --fix",
+    "api:types": "bun scripts/gen-api-types.mjs"
   },
   "dependencies": {
     "@vee-validate/yup": "^4.15.1",
@@ -45,6 +46,7 @@
     "@vueuse/nuxt": "^14.0.0",
     "eslint": "^9.39.1",
     "nuxt": "^4.2.1",
+    "openapi-typescript": "7.4.4",
     "pinia": "^3.0.4",
     "playwright": "1.48.2",
     "tailwind-merge": "^3.3.1",

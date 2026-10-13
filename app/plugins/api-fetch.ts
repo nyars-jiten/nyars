@@ -4,7 +4,10 @@ export default defineNuxtPlugin(() => {
     baseURL: config.public.apiUrl,
     credentials: 'include',
     retry: false, // Disable automatic retry to handle auth errors properly
-    onRequestError({ error }) {
+    onRequestError({ error, options }) {
+      // запрос отменили намеренно (новый поиск вместо старого, «Отменить») — это не ошибка
+      if (options.signal?.aborted || error?.name === 'AbortError')
+        return
       console.error('[API Fetch] Request error:', error)
     },
     onResponseError({ request, response }) {

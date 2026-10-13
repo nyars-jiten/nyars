@@ -3,18 +3,18 @@
 
 /* ---------- заголовок ---------- */
 
-/** Размер заглавного слова по числу знаков: 2 → 72px, 12+ → 32px */
+/** Размер заглавного слова по числу знаков: 2 → 56px, 12+ → 28px */
 export function headwordSize(text: string): number {
   const n = Array.from(text).length
   if (n <= 2)
-    return 72
-  if (n <= 4)
     return 56
+  if (n <= 4)
+    return 48
   if (n <= 8)
-    return 44
+    return 40
   if (n <= 12)
-    return 36
-  return 32
+    return 32
+  return 28
 }
 
 /**
@@ -81,7 +81,7 @@ export function posJapanese(tags: Tag[]): string {
 
 /** Заголовок группы значений: «существительное», «глагол годан, переходный» */
 export function posHeading(tags: Tag[]): string {
-  return tags.map(tag => tag.rus || tag.rusShort).filter(Boolean).join(', ')
+  return tags.map(tag => tag.rusShort || tag.rus).filter(Boolean).join(', ')
 }
 
 /* ---------- произношение ---------- */

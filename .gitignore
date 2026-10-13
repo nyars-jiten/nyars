@@ -26,3 +26,6 @@ logs
 
 heap-snapshots
 references
+
+# скриншоты scripts/shoot.mjs
+.shots

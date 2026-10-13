@@ -1,71 +1,67 @@
 <script setup lang="ts">
-// Панель фильтров выдачи. Значения и счётчики берутся из полученной выдачи (facets).
-const props = defineProps<{
-  facets: SearchFacets
-  /** текущий запрос — для образцов в «Совпадении» */
-  query: string
+// Панель фильтров выдачи. Фильтрация выполняется на сервере; состояние — useSearchFilters (синхронизируется с URL).
+defineProps<{
+  /** в режиме отдельного слова бэкенд фильтры не применяет */
+  disabled?: boolean
 }>()
 
 const { filters, open, reset, activeCount } = useSearchFilters()
+const { data: allTags } = useSearchTags()
 
-const matchTiles = computed(() => matchOptions(props.query))
+const JLPT_RE = /^jlpt-n([1-5])$/i
 
-const posOptions = computed(() => props.facets.pos)
+const jlptTags = computed(() => allTags.value
+  .filter(tag => JLPT_RE.test(tag.engShort))
+  .sort((a, b) => b.engShort.localeCompare(a.engShort)))
+const posTags = computed(() => allTags.value.filter(tag => tag.category === 'Pos'))
+const otherTags = computed(() => allTags.value.filter(tag => tag.category !== 'Pos' && !JLPT_RE.test(tag.engShort)))
 
-function togglePos(id: string, checked: boolean) {
-  const excluded = new Set(filters.value.posExcluded)
-  if (checked)
-    excluded.delete(id)
+function jlptLabel(tag: SearchTag) {
+  return `N${JLPT_RE.exec(tag.engShort)?.[1]}`
+}
+
+function setJlpt(id: number, value: TriState | undefined) {
+  const next = { ...filters.value.tags }
+  if (value)
+    next[id] = value
   else
-    excluded.add(id)
-  filters.value.posExcluded = [...excluded]
+    delete next[id]
+  filters.value.tags = next
 }
 
-const JLPT_CHIPS: { value: JlptFilter | 'all', label: string }[] = [
-  { value: 'all', label: 'все' },
-  ...JLPT_LEVELS.map(level => ({ value: level, label: level })),
-  { value: 'none', label: 'вне' },
-]
-
-function jlptPressed(value: JlptFilter | 'all') {
-  return value === 'all' ? filters.value.jlpt.length === 0 : filters.value.jlpt.includes(value)
-}
-
-function toggleJlpt(value: JlptFilter | 'all') {
-  if (value === 'all') {
-    filters.value.jlpt = []
-    return
-  }
-  const set = new Set(filters.value.jlpt)
-  if (set.has(value))
-    set.delete(value)
-  else
-    set.add(value)
-  filters.value.jlpt = [...set]
-}
-
-function toggleLabel(label: string) {
-  const set = new Set(filters.value.labels)
-  if (set.has(label))
-    set.delete(label)
-  else
-    set.add(label)
-  filters.value.labels = [...set]
-}
-
-const rankFrom = computed(() => sliderToRank(filters.value.rank[0]).toLocaleString('ru-RU'))
-const rankTo = computed(() => filters.value.rank[1] >= 100 ? `${RANK_MAX.toLocaleString('ru-RU')}+` : sliderToRank(filters.value.rank[1]).toLocaleString('ru-RU'))
-
-const LENGTH_FROM = [{ value: 0, label: 'от 1' }, ...[2, 3, 4, 6, 8].map(n => ({ value: n, label: `от ${n}` }))]
-const LENGTH_TO = [{ value: 0, label: 'до ∞' }, ...[1, 2, 3, 4, 6, 8, 12].map(n => ({ value: n, label: `до ${n}` }))]
-const lengthMin = computed({
-  get: () => filters.value.lengthMin ?? 0,
-  set: (value: number) => { filters.value.lengthMin = value || null },
+const defLang = computed({
+  get: () => filters.value.defLang ?? '',
+  set: (value: DefLang | '') => { filters.value.defLang = value || null },
 })
-const lengthMax = computed({
-  get: () => filters.value.lengthMax ?? 0,
-  set: (value: number) => { filters.value.lengthMax = value || null },
+
+// ползунок и поля «от/до» правят одни и те же границы ранга
+const rankSlider = computed<[number, number]>({
+  get: (): [number, number] => [
+    filters.value.rankMin === null ? 0 : rankToSlider(filters.value.rankMin),
+    filters.value.rankMax === null ? RANK_SLIDER_MAX : rankToSlider(filters.value.rankMax),
+  ],
+  set: ([lo, hi]: [number, number]) => {
+    const [curLo, curHi] = rankSlider.value
+    if (lo !== curLo)
+      filters.value.rankMin = lo <= 0 ? null : sliderToRank(lo)
+    if (hi !== curHi)
+      filters.value.rankMax = hi >= RANK_SLIDER_MAX ? null : sliderToRank(hi)
+  },
 })
+
+function numberModel(key: 'lenMin' | 'lenMax' | 'rankMin' | 'rankMax') {
+  return computed({
+    get: () => filters.value[key] === null ? '' : String(filters.value[key]),
+    set: (value: string) => {
+      const n = Number.parseInt(value, 10)
+      filters.value[key] = Number.isFinite(n) && n > 0 ? n : null
+    },
+  })
+}
+const lenMin = numberModel('lenMin')
+const lenMax = numberModel('lenMax')
+const rankMin = numberModel('rankMin')
+const rankMax = numberModel('rankMax')
 
 const panelId = 'search-filters'
 </script>
@@ -100,95 +96,102 @@ const panelId = 'search-filters'
         </button>
       </div>
 
-      <UiFilterGroup title="Сортировка">
-        <UiSelect v-model="filters.sort" :options="SORT_OPTIONS" aria-label="Сортировка" />
-      </UiFilterGroup>
+      <p v-if="disabled" class="m-0 mb-2 text-sm text-muted">
+        Для отдельного слова фильтры не применяются.
+      </p>
 
-      <UiFilterGroup title="Совпадение">
-        <UiRadioTiles v-model="filters.match" :options="matchTiles" legend="Тип совпадения" />
-        <p v-if="filters.match" class="m-0 mt-1.5 text-xs text-muted">
-          Запрос: <code class="font-jp">{{ applyMatch(query, filters.match) }}</code>
-          <button type="button" class="ml-1 cursor-pointer text-strong hover:underline" @click="filters.match = null">
-            как ввели
-          </button>
-        </p>
-      </UiFilterGroup>
+      <fieldset :disabled="disabled" class="m-0 min-w-0 border-0 p-0" :class="{ 'opacity-50': disabled }">
+        <UiFilterGroup title="Сортировка">
+          <div class="flex items-center gap-2">
+            <UiSelect v-model="filters.sort" :options="SORT_OPTIONS" aria-label="Сортировка" />
+            <UiIconButton
+              :icon="filters.desc ? 'tabler:sort-descending' : 'tabler:sort-ascending'"
+              :pressed="filters.desc"
+              :label="filters.desc ? 'Обратный порядок' : 'Прямой порядок'"
+              @click="filters.desc = !filters.desc"
+            />
+          </div>
+        </UiFilterGroup>
 
-      <UiFilterGroup v-if="posOptions.length" title="Часть речи">
-        <UiCheckbox
-          v-for="pos in posOptions"
-          :key="pos.id"
-          :model-value="!filters.posExcluded.includes(pos.id)"
-          :count="pos.count"
-          @update:model-value="togglePos(pos.id, Boolean($event))"
-        >
-          {{ pos.label }}
-        </UiCheckbox>
-      </UiFilterGroup>
+        <UiFilterGroup v-if="jlptTags.length" title="JLPT">
+          <div class="flex flex-wrap gap-1.5">
+            <UiTriChip
+              v-for="tag in jlptTags"
+              :key="tag.id"
+              :model-value="filters.tags[tag.id]"
+              class="min-w-11 justify-center"
+              @update:model-value="setJlpt(tag.id, $event)"
+            >
+              {{ jlptLabel(tag) }}
+            </UiTriChip>
+          </div>
+        </UiFilterGroup>
 
-      <UiFilterGroup title="JLPT">
-        <div class="flex flex-wrap gap-1.5">
-          <UiChip
-            v-for="chip in JLPT_CHIPS"
-            :key="chip.value"
-            :pressed="jlptPressed(chip.value)"
-            class="min-w-11 justify-center"
-            :title="chip.value !== 'all' ? `${facets.jlpt[chip.value]} в выдаче` : undefined"
-            @click="toggleJlpt(chip.value)"
-          >
-            {{ chip.label }}
-          </UiChip>
-        </div>
-      </UiFilterGroup>
+        <UiFilterGroup v-if="posTags.length" title="Часть речи">
+          <SearchTagPicker v-model="filters.tags" :tags="posTags" placeholder="Найти часть речи" />
+        </UiFilterGroup>
 
-      <UiFilterGroup title="Частотность — ранг">
-        <div class="flex justify-between text-sm font-semibold tabular-nums">
-          <span>от № {{ rankFrom }}</span>
-          <span>до № {{ rankTo }}</span>
-        </div>
-        <UiRangeSlider v-model="filters.rank" label-from="Частотность: от ранга" label-to="Частотность: до ранга" />
-        <div class="flex justify-between text-[11.5px] text-muted">
-          <span>частые</span>
-          <span>редкие</span>
-        </div>
-        <UiCheckbox v-model="filters.includeUnranked" class="mt-1">
-          включать слова без ранга
-        </UiCheckbox>
-      </UiFilterGroup>
+        <UiFilterGroup v-if="otherTags.length" title="Теги">
+          <SearchTagPicker v-model="filters.tags" :tags="otherTags" />
+        </UiFilterGroup>
 
-      <UiFilterGroup v-if="facets.labels.length" title="Пометы">
-        <div class="flex flex-wrap gap-1.5">
-          <UiChip
-            v-for="item in facets.labels"
-            :key="item.label"
-            :pressed="filters.labels.includes(item.label)"
-            :title="`${item.count} в выдаче`"
-            @click="toggleLabel(item.label)"
-          >
-            {{ item.label }}
-          </UiChip>
-        </div>
-      </UiFilterGroup>
+        <UiFilterGroup title="Статус">
+          <div class="flex flex-wrap gap-1.5">
+            <UiTriChip
+              v-for="mark in MARK_OPTIONS"
+              :key="mark.value"
+              :model-value="filters.marks[mark.value]"
+              @update:model-value="filters.marks = { ...filters.marks, [mark.value]: $event }"
+            >
+              {{ mark.label }}
+            </UiTriChip>
+          </div>
+        </UiFilterGroup>
 
-      <UiFilterGroup title="Длина заголовка, знаков">
-        <div class="flex items-center gap-2">
-          <UiSelect v-model="lengthMin" :options="LENGTH_FROM" aria-label="Длина заголовка: от" />
-          <span class="text-muted">—</span>
-          <UiSelect v-model="lengthMax" :options="LENGTH_TO" aria-label="Длина заголовка: до" />
-        </div>
-      </UiFilterGroup>
+        <UiFilterGroup title="Язык определения">
+          <UiSelect v-model="defLang" :options="DEF_LANG_OPTIONS" aria-label="Язык определения" />
+        </UiFilterGroup>
 
-      <section class="border-t border-line py-4">
-        <UiCheckbox v-model="filters.withExamples">
-          только с примерами
-        </UiCheckbox>
-        <UiCheckbox v-model="filters.hideUnreviewed">
-          скрыть непроверенные
-        </UiCheckbox>
-        <UiCheckbox v-model="filters.inTranslations">
-          искать и в переводах
-        </UiCheckbox>
-      </section>
+        <UiFilterGroup title="Частотность — ранг">
+          <div class="flex items-center gap-2">
+            <label class="flex min-w-0 flex-1 items-center gap-2 text-sm text-muted">
+              от
+              <UiInput v-model="rankMin" type="number" placeholder="1" aria-label="Частотность: от ранга" />
+            </label>
+            <label class="flex min-w-0 flex-1 items-center gap-2 text-sm text-muted">
+              до
+              <UiInput v-model="rankMax" type="number" :placeholder="String(RANK_MAX)" aria-label="Частотность: до ранга" />
+            </label>
+          </div>
+          <UiRangeSlider v-model="rankSlider" label-from="Частотность: от ранга" label-to="Частотность: до ранга" />
+          <div class="flex justify-between text-[11.5px] text-muted">
+            <span>частые</span>
+            <span>редкие</span>
+          </div>
+          <UiCheckbox v-model="filters.includeUnranked" class="mt-1">
+            включать слова без ранга
+          </UiCheckbox>
+        </UiFilterGroup>
+
+        <UiFilterGroup title="Длина заголовка, знаков">
+          <div class="flex items-center gap-2">
+            <label class="flex min-w-0 flex-1 items-center gap-2 text-sm text-muted">
+              от
+              <UiInput v-model="lenMin" type="number" aria-label="Длина заголовка: от" />
+            </label>
+            <label class="flex min-w-0 flex-1 items-center gap-2 text-sm text-muted">
+              до
+              <UiInput v-model="lenMax" type="number" aria-label="Длина заголовка: до" />
+            </label>
+          </div>
+        </UiFilterGroup>
+
+        <section class="border-t border-line py-4">
+          <UiCheckbox v-model="filters.inTranslations">
+            искать и в переводах
+          </UiCheckbox>
+        </section>
+      </fieldset>
     </section>
   </div>
 </template>

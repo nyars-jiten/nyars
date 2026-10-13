@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-  value: number
+  value: number | string
   /** в капсуле — для кнопок и меню */
   pill?: boolean
 }>(), {
@@ -8,7 +8,7 @@ const props = withDefaults(defineProps<{
 })
 
 const formatter = new Intl.NumberFormat('ru-RU')
-const text = computed(() => formatter.format(props.value))
+const text = computed(() => typeof props.value === 'number' ? formatter.format(props.value) : props.value)
 </script>
 
 <template>

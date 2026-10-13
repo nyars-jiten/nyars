@@ -52,22 +52,23 @@ const diffMode = ref<'unified' | 'split'>('unified')
 const comment = ref('')
 const rankRange = ref<[number, number]>([0, 40])
 const phraseToken = ref<number | null>(2)
+const tri = reactive<Record<string, TriState | undefined>>({ archaic: 'include', dialect: 'exclude' })
 
-function tok(surface: string, kana: string, base = surface, children = 0): Token {
+function tok(surface: string, kana: string, base = surface, found = true): SearchToken {
   return {
     surface,
     furigana: [{ word: surface, kana }],
     base,
-    deinflect: [],
-    children: Array.from({ length: children }, () => ({ surface: '', furigana: [], base: '', deinflect: [], children: [] })),
+    searchable: base !== '',
+    found,
   }
 }
-const phraseTokens: Token[] = [
+const phraseTokens: SearchToken[] = [
   tok('医者', 'いしゃ'),
   tok('に', '', ''),
   tok('言われ', 'いわれ', '言う'),
   tok('、', '', ''),
-  tok('井蛙は以って海を語る可からず', 'せいあはもってうみをかたるべからず', '井蛙は以って海を語る可からず', 2),
+  tok('井蛙は以って海を語る可からず', 'せいあはもってうみをかたるべからず', '井蛙は以って海を語る可からず', false),
   tok('と', '', ''),
   tok('思い知った', 'おもいしった', '思い知る'),
   tok('。', '', ''),
@@ -359,7 +360,7 @@ const heatClass = ['bg-heat-0', 'bg-heat-1', 'bg-heat-2', 'bg-heat-3', 'bg-heat-
       </KitSection>
 
       <!-- Выбор -->
-      <KitSection id="choice" title="Выбор" code="UiSegmented · UiChip · UiCheckbox · UiRadioTiles" note="Правило: один из нескольких — сегменты; несколько из 2–4 коротких — чипы; несколько из длинного списка или со счётчиками — флажки.">
+      <KitSection id="choice" title="Выбор" code="UiSegmented · UiChip · UiTriChip · UiCheckbox · UiRadioTiles" note="Правило: один из нескольких — сегменты; несколько из 2–4 коротких — чипы; несколько из длинного списка или со счётчиками — флажки.">
         <KitRow label="Один из нескольких" code="UiSegmented">
           <UiSegmented v-model="period" :options="periodOptions" label="Период" />
         </KitRow>
@@ -374,6 +375,16 @@ const heatClass = ['bg-heat-0', 'bg-heat-1', 'bg-heat-2', 'bg-heat-3', 'bg-heat-
             <UiChip v-model:pressed="chips.deleted">
               удаление
             </UiChip>
+          </div>
+        </KitRow>
+        <KitRow label="Да / нет / без разницы" code="UiTriChip · v-model: 'include' | 'exclude' | undefined">
+          <div class="flex flex-wrap gap-1.5">
+            <UiTriChip v-model="tri.archaic">
+              устаревшее
+            </UiTriChip>
+            <UiTriChip v-model="tri.dialect">
+              диалектное
+            </UiTriChip>
           </div>
         </KitRow>
         <KitRow label="Несколько — список" code="UiCheckbox · 5+ или со счётчиками">

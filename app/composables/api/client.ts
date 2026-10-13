@@ -32,6 +32,10 @@ export function useApiClient() {
         return await $apiFetch<T>(url, options)
       }
       catch (error: any) {
+        // отменённый запрос — не ошибка сети: вызывающий код проверяет signal сам
+        if (options?.signal?.aborted)
+          throw error
+
         // Handle different error types
         if (error.response) {
           throw createError({
@@ -63,11 +67,12 @@ export function useApiClient() {
     /**
      * POST request helper
      */
-    async post<T>(url: string, body?: any, params?: Record<string, any>): Promise<T> {
+    async post<T>(url: string, body?: any, params?: Record<string, any>, signal?: AbortSignal): Promise<T> {
       return await this.request<T>(url, {
         method: 'POST',
         body,
         params,
+        signal,
       })
     },
     

@@ -142,3 +142,21 @@
     color: var(--muted);
   }
 }
+
+@keyframes ui-progress-run {
+  from { left: -33%; }
+  to { left: 100%; }
+}
+
+.ui-progress-run {
+  animation: ui-progress-run 1.1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-progress-run {
+    animation: none;
+    left: 0;
+    width: 100%;
+    opacity: 0.5;
+  }
+}

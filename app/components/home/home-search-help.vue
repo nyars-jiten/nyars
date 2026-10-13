@@ -10,7 +10,7 @@ const items: { title: string, examples: { q: string, ja?: boolean }[] }[] = [
   { title: 'Чтение кириллицей по Поливанову', examples: [{ q: 'сэйка' }, { q: 'ёсида' }] },
   { title: 'Японские эпохи и числа с переводом в годы', examples: [{ q: '昭和58', ja: true }, { q: '令和3年', ja: true }] },
   { title: 'Шаблон: «?» заменяет любой один знак', examples: [{ q: '事?所', ja: true }, { q: '?口', ja: true }] },
-  { title: 'Теги: отбор статей по свойствам', examples: [{ q: '#freq20k #!ed #rnd' }, { q: '#мед.' }] },
+  { title: 'Шаблон по началу или концу слова: «*» заменяет любое число знаков', examples: [{ q: '*犬*', ja: true }, { q: '犬*', ja: true }] },
 ]
 </script>
 

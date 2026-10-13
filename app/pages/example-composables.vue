@@ -17,9 +17,6 @@ const { data: entry, pending: entryPending } = await useJpnEntries().getEntry('1
 // Edits with pagination
 const { data: edits, pending: editsPending } = await useEditsData().getEdits(25, 0, '')
 
-// Search with reactive parameters
-const { query, searchResults, nextPage, prevPage, resetSearch } = useReactiveSearch()
-
 // OCR data
 const { data: ocrBooks } = await useOcrData().getBooks()
 
@@ -38,14 +35,6 @@ async function handleEditEntry(wid: string, data: EditorTxtEntryJp) {
   }
   catch (error) {
     console.error('Failed to edit entry:', error)
-  }
-}
-
-// Example of using search
-async function handleSearch() {
-  if (query.value.trim()) {
-    // searchResults is automatically reactive
-    console.log('Searching for:', query.value)
   }
 }
 
@@ -92,42 +81,6 @@ async function handleUsernameChange(newUsername: string) {
           <p class="text-white">
             Admin: {{ user.isAdmin ? 'Yes' : 'No' }}
           </p>
-        </div>
-      </div>
-
-      <!-- Search Example -->
-      <div class="bg-neutral-800 rounded-lg p-6">
-        <h2 class="text-xl font-semibold text-white mb-4">
-          Reactive Search
-        </h2>
-
-        <div class="space-y-4">
-          <LegacyInput
-            v-model="query"
-            placeholder="Search for entries..."
-            @keyup.enter="handleSearch"
-          />
-
-          <div v-if="searchResults?.pending" class="text-neutral-400">
-            Searching...
-          </div>
-
-          <div v-else-if="searchResults?.data" class="space-y-2">
-            <p class="text-white">
-              Found {{ searchResults.data.entries?.length || 0 }} results
-            </p>
-            <div class="flex gap-2">
-              <LegacyButton :disabled="!searchResults.data.hasMore" @click="prevPage">
-                Previous
-              </LegacyButton>
-              <LegacyButton :disabled="!searchResults.data.hasMore" @click="nextPage">
-                Next
-              </LegacyButton>
-              <LegacyButton @click="resetSearch">
-                Reset
-              </LegacyButton>
-            </div>
-          </div>
         </div>
       </div>
 

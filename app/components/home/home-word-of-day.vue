@@ -52,17 +52,20 @@ const to = computed(() => entry.value
           </UiTag>
         </div>
 
-        <ol class="m-0 mt-1.5 list-decimal pl-5 text-base">
-          <li v-for="(sense, i) in senses" :key="i" class="mb-1">
-            <Content :data="sense.content" :break-line="false" />
-          </li>
-        </ol>
+        <div class="mt-2 flex flex-col gap-[5px]">
+          <EntrySense
+            v-for="(sense, i) in senses"
+            :key="i"
+            :sense="sense"
+            :number="String(i + 1)"
+            :headword="main.text"
+            :numbered="senses.length > 1"
+            compact
+            :show-examples="false"
+          />
+        </div>
 
-        <p v-if="example" class="m-0 mt-3 border-l-2 border-acc pl-3 text-[15px]">
-          <span lang="ja" class="font-jp text-[17px]"><Content :data="example.sentence" :break-line="false" /></span>
-          <br>
-          <span class="text-muted"><Content :data="example.translation" :break-line="false" /></span>
-        </p>
+        <EntryExample v-if="example" :sentence="example.sentence" :translation="example.translation" class="mt-3" />
 
         <NuxtLink v-if="to" :to="to" class="mt-3.5 inline-flex text-sm font-bold text-strong no-underline hover:underline hover:underline-offset-[3px]">
           Открыть статью →

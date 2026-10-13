@@ -16,10 +16,11 @@ const style = tv({
     t: {
       i: 'italic text-muted text-sm',
       p: 'italic',
-      comp: 'bg-soft px-1 py-0.5 rounded-tag text-sm whitespace-nowrap',
+      // comp: 'bg-soft px-1 py-0.5 rounded-tag text-sm whitespace-nowrap',
+      comp: 'font-bold text-strong',
       hide: 'hidden',
       hw: 'font-bold text-strong', // заглавное слово в примере
-      lat: 'italic', // латинские названия
+      lat: 'italic text-dial', // латинские названия
     } as Record<string, string>,
   },
 })

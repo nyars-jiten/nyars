@@ -29,67 +29,38 @@ export function useSearch() {
   }
 
   /**
-   * Perform a search
-   * @param query - Search query
-   * @param limit - Limit number of results
-   * @param offset - Offset for pagination
+   * Perform a search (filters, cursor pagination, tokens, other dictionaries)
    */
-  const search = async (query: string, limit: number, offset: number, extra?: Record<string, unknown>) => {
-    return await client.post<JpnSearchResponse>('search', { query, limit, offset, ...extra })
+  const search = async (body: SearchRequest, signal?: AbortSignal) => {
+    return await client.post<JpnSearchResponse>(path, body, undefined, signal)
+  }
+
+  /**
+   * 25 random entries for the query and filters
+   */
+  const random = async (body: RandomRequest, signal?: AbortSignal) => {
+    return await client.post<RandomResponse>(`${path}/random`, body, undefined, signal)
   }
 
   return {
     getSuggestions,
     search,
+    random,
   }
 }
 
 /**
- * Reactive search composable
- * Provides reactive search state and pagination
+ * Tags for the search filter. GET /jp/tags returns a map by category (Pos, Fld, Dial, ...);
+ * it is flattened here. A flat list (swagger GET /tags) is accepted too.
  */
-export function useReactiveSearch() {
-  const query = ref('')
-  const limit = ref(25)
-  const offset = ref(0)
+export function useSearchTags() {
+  const { client } = useSearchApi()
 
-  const { search } = useSearch()
-
-  const searchResults = computed(() => {
-    if (!query.value.trim())
-      return null
-    return search(query.value, limit.value, offset.value)
-  })
-
-  /**
-   * Navigate to next page
-   */
-  const nextPage = () => {
-    offset.value += limit.value
-  }
-
-  /**
-   * Navigate to previous page
-   */
-  const prevPage = () => {
-    offset.value = Math.max(0, offset.value - limit.value)
-  }
-
-  /**
-   * Reset search state
-   */
-  const resetSearch = () => {
-    query.value = ''
-    offset.value = 0
-  }
-
-  return {
-    query,
-    limit,
-    offset,
-    searchResults,
-    nextPage,
-    prevPage,
-    resetSearch,
-  }
+  return useAsyncData('search-tags', async () => {
+    const raw = await client.get<Tag[] | Record<string, Tag[]>>('/jp/tags')
+    const list = Array.isArray(raw)
+      ? raw
+      : Object.entries(raw ?? {}).flatMap(([category, tags]) => tags.map(tag => ({ ...tag, category: (tag as SearchTag).category ?? category })))
+    return list.filter(tag => typeof tag.id === 'number') as SearchTag[]
+  }, { server: false, default: () => [] as SearchTag[] })
 }

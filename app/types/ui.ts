@@ -13,7 +13,7 @@ export interface UiOption<T extends string | number = string> {
 export interface UiSideNavItem {
   id: string
   label: string
-  count?: number
+  count?: number | string
   /** цветная точка статуса слева от названия */
   status?: UiStatusKind | 'all'
   /** если задан — пункт рендерится ссылкой, активность определяет роутер */
@@ -35,3 +35,6 @@ export interface UiTabItem {
   /** подсказка при наведении, например почему вкладка недоступна */
   hint?: string
 }
+
+/** Значение трёхпозиционного фильтра: нет значения — «без разницы» */
+export type TriState = 'include' | 'exclude'

@@ -33,9 +33,10 @@ const groups = computed(() => {
         :number="item.number"
         :headword="headword"
         :show-lemmas="showLemmas"
+        class="py-2"
       />
 
-      <p v-if="group.note.length" class="m-0 grid grid-cols-[30px_minmax(0,1fr)] gap-x-2.5 text-[14.5px] text-muted">
+      <p v-if="group.note.length" class="m-0 grid grid-cols-[22px_minmax(0,1fr)] gap-x-1.5 text-[14.5px] text-muted">
         <span aria-hidden="true">※</span>
         <span><Content :data="group.note" /></span>
       </p>

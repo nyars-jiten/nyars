@@ -26,12 +26,6 @@ const shown = computed(() => open.value ? senses.value : senses.value.slice(0, V
 const examples = computed(() => entryExampleCount(props.entry))
 const hiddenSenses = computed(() => Math.max(0, senses.value.length - VISIBLE_SENSES))
 
-// примеры с выделенным заглавным словом: computed вычисляется лениво — при первом раскрытии
-// карточки — и кешируется, так что перерисовки не пересоздают данные для <Content>
-const markedExamples = computed(() => senses.value.map(sense =>
-  sense.examples.map(example => markHeadword(example.sentence, main.value.text)),
-))
-
 const moreLabel = computed(() => {
   if (open.value)
     return 'Свернуть'
@@ -116,29 +110,21 @@ const bodyId = useId()
     <!-- значения -->
     <ol
       :id="bodyId"
-      class="m-0 mt-2.5 grid list-none gap-x-1.5 gap-y-[5px] p-0"
+      class="m-0 mt-2.5 grid list-none items-baseline gap-x-1.5 gap-y-[5px] p-0"
       :class="senses.length > 1 ? 'grid-cols-[22px_minmax(0,1fr)]' : 'grid-cols-[minmax(0,1fr)]'"
     >
       <li v-for="(sense, s) in shown" :key="s" class="contents">
-        <span v-if="senses.length > 1" class="pt-px text-[13.5px] font-extrabold text-strong tabular-nums">{{ s + 1 }}</span>
-        <div class="min-w-0">
-          <span v-if="sense.fieldTags.length || sense.dialectTags.length" class="mr-1.5 text-sm text-muted italic">
-            {{ [...sense.fieldTags, ...sense.dialectTags].map(tag => tag.rusShort).join(', ') }}
-          </span>
-          <Content :data="sense.content" :break-line="false" />
-
-          <template v-if="open">
-            <p
-              v-for="(example, e) in sense.examples"
-              :key="e"
-              class="my-1 mb-1.5 border-l-2 border-acc pl-2.5 text-sm leading-normal"
-            >
-              <span lang="ja" class="font-jp text-lg"><Content :data="markedExamples[s]?.[e] ?? example.sentence" :break-line="false" /></span>
-              <br>
-              <span class="text-muted"><Content :data="example.translation" :break-line="false" /></span>
-            </p>
-          </template>
-        </div>
+        <span v-if="senses.length > 1" class="text-[13.5px] font-extrabold text-strong tabular-nums">{{ s + 1 }}</span>
+        <EntrySense
+          :sense="sense"
+          :number="String(s + 1)"
+          :headword="main.text"
+          :numbered="false"
+          compact
+          :show-examples="open"
+          :example-limit="Infinity"
+          class="min-w-0"
+        />
       </li>
     </ol>
 

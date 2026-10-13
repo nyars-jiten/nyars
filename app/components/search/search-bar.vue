@@ -62,12 +62,12 @@ function escape(value: string) {
 }
 
 function search(value?: string) {
+  // пустой запрос — просмотр словаря (с главной) или сброс запроса на странице поиска
   const query = (value ?? searchQuery.value).trim()
-  if (!query)
-    return
 
   searchStore.push(query)
-  suggestionsStore.addToHistory(query)
+  if (query)
+    suggestionsStore.addToHistory(query)
   closeAll()
   input.value?.blur()
 }

@@ -144,3 +144,8 @@ export enum ReferenceType {
   Confer,
   Abbreviation,
 }
+
+/** Тег в фильтре поиска: category приходит, если API отдаёт теги по категориям */
+export interface SearchTag extends Tag {
+  category?: string
+}

@@ -2,7 +2,7 @@
 import { tv } from 'tailwind-variants'
 
 withDefaults(defineProps<{
-  tone?: 'accent' | 'danger' | 'neutral'
+  tone?: 'accent' | 'danger' | 'dial' | 'neutral'
   /** контур вместо заливки */
   outline?: boolean
   /** xs 22 · sm 24 · md 26 */
@@ -20,6 +20,7 @@ const tag = tv({
     tone: {
       accent: 'text-strong',
       danger: 'text-danger',
+      dial: 'text-dial',
       neutral: 'text-ink',
     },
     outline: {
@@ -34,6 +35,7 @@ const tag = tv({
   compoundVariants: [
     { outline: false, tone: 'accent', class: 'bg-soft' },
     { outline: false, tone: 'danger', class: 'bg-danger-soft' },
+    { outline: false, tone: 'dial', class: 'bg-dial-soft' },
     { outline: false, tone: 'neutral', class: 'bg-line/60' },
     { outline: true, tone: 'neutral', class: 'shadow-[inset_0_0_0_1px_var(--line)]' },
   ],

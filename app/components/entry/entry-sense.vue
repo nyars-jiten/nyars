@@ -1,21 +1,28 @@
 <script setup lang="ts">
-// Значение статьи: номер, пометы, перевод, пояснения, ссылки, примеры и подзначения.
-// Примеры: первые три, остальные — по кнопке «Ещё N примеров».
-const props = defineProps<{
+// Значение статьи: номер, область, перевод, диалект и стилистика, пояснения, ссылки, примеры и подзначения.
+// Общий для страницы статьи и выдачи поиска. Примеры: первые exampleLimit, остальные — по кнопке «Ещё N примеров».
+const props = withDefaults(defineProps<{
   sense: Sense
   /** номер, если у значения нет своего ix */
   number: string
   /** основное написание — выделяется в примерах */
   headword: string
   showLemmas?: boolean
-}>()
-
-const VISIBLE_EXAMPLES = 3
+  /** колонка с номером; у единственного значения не нужна */
+  numbered?: boolean
+  /** без пояснений, ссылок, лемм и подзначений — для выдачи */
+  compact?: boolean
+  showExamples?: boolean
+  /** сколько примеров видно без раскрытия */
+  exampleLimit?: number
+}>(), {
+  numbered: true,
+  showExamples: true,
+  exampleLimit: 3,
+})
 
 const { t } = useI18n()
 const { searchQuery } = storeToRefs(useSearchStore())
-
-const tags = computed(() => [...props.sense.fieldTags, ...props.sense.dialectTags, ...props.sense.metaTags])
 
 const note = computed(() => props.sense.loanSources.map(source => `${source.lang}. ${source.word}`).join(', '))
 
@@ -24,8 +31,8 @@ const examples = computed(() => props.sense.examples.map(example => ({
   translation: example.translation,
 })))
 const open = ref(false)
-const shownExamples = computed(() => open.value ? examples.value : examples.value.slice(0, VISIBLE_EXAMPLES))
-const hiddenExamples = computed(() => examples.value.length - VISIBLE_EXAMPLES)
+const shownExamples = computed(() => open.value ? examples.value : examples.value.slice(0, props.exampleLimit))
+const hiddenExamples = computed(() => examples.value.length - props.exampleLimit)
 const moreLabel = computed(() => open.value
   ? 'Свернуть примеры'
   : `Ещё ${hiddenExamples.value} ${pluralRu(hiddenExamples.value, 'пример', 'примера', 'примеров')}`)
@@ -44,30 +51,55 @@ function isUrl(value: string) {
 </script>
 
 <template>
-  <div class="grid grid-cols-[30px_minmax(0,1fr)] gap-x-2.5 gap-y-1 py-3.5">
-    <span class="font-extrabold text-strong tabular-nums">{{ sense.ix || number }}</span>
+  <div
+    class="grid items-baseline gap-x-1.5 gap-y-[5px]"
+    :class="numbered ? 'grid-cols-[22px_minmax(0,1fr)]' : 'grid-cols-[minmax(0,1fr)]'"
+  >
+    <span v-if="numbered" class="text-[13.5px] font-extrabold opacity-75 text-strong tabular-nums">{{ sense.ix || number }}</span>
 
     <div class="min-w-0">
       <UiTag
-        v-for="tag in tags"
+        v-for="tag in sense.fieldTags"
         :key="tag.id"
-        tone="danger"
         size="xs"
         class="mr-1.5 cursor-help align-[2px]"
         :title="tag.rus"
       >
         {{ tag.rusShort }}
       </UiTag>
-      <b class="font-bold"><Content :data="sense.content" :break-line="false" /></b>
-      <UiTag v-if="sense.isRare" tone="neutral" outline size="xs" class="ml-1.5 align-[2px]">
-        редк.
+      <Content :data="sense.content" :break-line="false" />
+      <!-- <span v-if="sense.dialectTags.length || sense.metaTags.length" class="ml-1.5 text-muted italic">(<template v-for="(tag, i) in [...sense.dialectTags, ...sense.metaTags]" :key="tag.id"><template v-if="i">, </template><span class="cursor-help opacity-85" :class="i < sense.dialectTags.length ? 'text-dial' : 'text-danger'" :title="tag.rus">{{ tag.rus }}</span></template>)</span> -->
+      <!-- прежний вид: плашки -->
+      <UiTag
+        v-for="tag in sense.dialectTags"
+        :key="tag.id"
+        tone="dial"
+        size="xs"
+        class="ml-1.5 cursor-help opacity-85 align-[2px]"
+        :title="tag.rus"
+      >
+        {{ tag.rus }}
+      </UiTag>
+      <UiTag
+        v-for="tag in sense.metaTags"
+        :key="tag.id"
+        tone="danger"
+        size="xs"
+        class="ml-1.5 cursor-help opacity-85 align-[2px]"
+        :title="tag.rus"
+      >
+        {{ tag.rus }}
       </UiTag>
 
-      <p v-if="note" class="m-0 mt-0.5 text-[14.5px] text-muted">
+      <!-- <UiTag v-if="sense.isRare" tone="neutral" outline size="xs" class="ml-1.5 align-[2px]">
+        редк.
+      </UiTag> -->
+
+      <p v-if="note && !compact" class="m-0 mt-0.5 text-[14.5px] text-muted">
         {{ note }}
       </p>
 
-      <p v-if="sense.extRefs.length" class="m-0 mt-0.5 text-[14.5px] text-muted">
+      <p v-if="sense.extRefs.length && !compact" class="m-0 mt-0.5 text-[14.5px] text-muted">
         <template v-for="(extRef, i) in sense.extRefs" :key="i">
           <template v-if="i > 0">
             ;
@@ -79,7 +111,7 @@ function isUrl(value: string) {
         </template>
       </p>
 
-      <ul v-if="sense.intRefs.length" class="m-0 mt-1 list-none p-0 text-[14.5px]">
+      <ul v-if="sense.intRefs.length && !compact" class="m-0 mt-1 list-none p-0 text-[14.5px]">
         <li v-for="(reference, i) in sense.intRefs" :key="i">
           <span class="text-muted" aria-hidden="true">⇒ </span>
           <span class="text-muted italic">{{ t(`models.jpnEntry.referenceType.${reference.referenceType}`) }}</span>
@@ -100,7 +132,7 @@ function isUrl(value: string) {
         </li>
       </ul>
 
-      <div v-if="showLemmas && sense.lemmaContent.length" class="mt-1.5 flex flex-wrap items-center gap-1">
+      <div v-if="showLemmas && !compact && sense.lemmaContent.length" class="mt-1.5 flex flex-wrap items-center gap-1">
         <UiCaption as="span" class="mr-1 mb-0">
           Леммы
         </UiCaption>
@@ -110,18 +142,10 @@ function isUrl(value: string) {
       </div>
 
       <div
-        v-if="examples.length"
+        v-if="showExamples && examples.length"
         :id="examplesId"
-        class="mt-2.5 flex flex-col gap-2.5 border-l-2 border-acc pl-3.5"
       >
-        <div v-for="(example, i) in shownExamples" :key="i" class="text-[15px] leading-normal">
-          <div lang="ja" class="font-jp text-[17px] leading-[1.6]">
-            <Content :data="example.sentence" :break-line="false" />
-          </div>
-          <div class="text-muted">
-            <Content :data="example.translation" :break-line="false" />
-          </div>
-        </div>
+        <EntryExample v-for="(example, i) in shownExamples" :key="i" :sentence="example.sentence" :translation="example.translation" />
         <button
           v-if="hiddenExamples > 0"
           type="button"
@@ -136,13 +160,15 @@ function isUrl(value: string) {
       </div>
 
       <EntrySense
-        v-for="(sub, i) in sense.subSenses"
+        v-for="(sub, i) in compact ? [] : sense.subSenses"
         :key="i"
         :sense="sub"
         :number="`${sense.ix || number}.${i + 1}`"
         :headword="headword"
         :show-lemmas="showLemmas"
-        class="pb-0"
+        :show-examples="showExamples"
+        :example-limit="exampleLimit"
+        class="mt-2"
       />
     </div>
   </div>
