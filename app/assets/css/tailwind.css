@@ -133,6 +133,8 @@
   }
 
   .vhw .k {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
     font-family: var(--font-jp);
     font-size: 64px;
     font-weight: 700;

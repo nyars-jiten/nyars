@@ -9,6 +9,11 @@ export type PaletteId = Palette['id']
 
 export const DEFAULT_PALETTE: PaletteId = 'sumi'
 
+/** Палитра по системной теме: светлая — «Васи», тёмная — по умолчанию */
+export function systemPalette(light: boolean): PaletteId {
+  return light ? 'rice' : DEFAULT_PALETTE
+}
+
 export function isPaletteId(value: unknown): value is PaletteId {
   return PALETTES.some(palette => palette.id === value)
 }

@@ -69,35 +69,46 @@ const rankMin = numberModel('rankMin')
 const rankMax = numberModel('rankMax')
 
 const panelId = 'search-filters'
+
+// текстовые кнопки в строке заголовка: одинаковые у «Сбросить», «Скрыть» и «Показать»
+const headBtn = 'inline-flex h-7 cursor-pointer items-center gap-[3px] rounded-ctl px-2 text-[13px] font-semibold text-muted hover:bg-soft hover:text-strong disabled:cursor-default disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-muted'
 </script>
 
 <template>
   <div>
-    <UiButton v-if="!open" :count="activeCount || undefined" :aria-controls="panelId" aria-expanded="false" @click="open = true">
-      <template #icon>
-        <span class="font-jp text-base" aria-hidden="true">篩</span>
-      </template>
-      Фильтры
-    </UiButton>
+    <!-- свёрнутая панель: та же строка-заголовок, что и у раскрытой -->
+    <div v-if="!open" class="flex items-center gap-2.5 border-y border-line py-1.5">
+      <UiCaption class="m-0">
+        Фильтры
+      </UiCaption>
+      <UiCount v-if="activeCount" :value="activeCount" pill />
+      <span class="flex-1" />
+      <button type="button" :class="headBtn" :aria-controls="panelId" aria-expanded="false" @click="open = true">
+        Показать
+        <Icon name="tabler:chevron-right" size="14px" />
+      </button>
+    </div>
 
     <section v-else :id="panelId" aria-label="Фильтры">
-      <div class="mb-1.5 flex items-center gap-2.5">
-        <UiCaption class="m-0 flex-1">
+      <div class="mb-1.5 flex items-center gap-2.5 border-b border-line pb-1.5">
+        <UiCaption class="m-0">
           Фильтры
         </UiCaption>
-        <button type="button" class="cursor-pointer text-[13px] text-strong hover:underline disabled:cursor-default disabled:text-muted disabled:no-underline" :disabled="!activeCount" @click="reset">
+        <UiCount v-if="activeCount" :value="activeCount" pill />
+        <span class="flex-1" />
+        <button type="button" :class="headBtn" :disabled="!activeCount" @click="reset">
           Сбросить
         </button>
         <button
           type="button"
-          class="inline-flex h-7 cursor-pointer items-center gap-[3px] rounded-ctl pr-2 pl-1 text-[13px] font-semibold text-muted hover:bg-soft hover:text-strong"
+          :class="headBtn"
           aria-expanded="true"
           :aria-controls="panelId"
           title="Скрыть фильтры"
           @click="open = false"
         >
-          <Icon name="tabler:chevron-left" size="14px" />
           Скрыть
+          <Icon name="tabler:chevron-left" size="14px" />
         </button>
       </div>
 

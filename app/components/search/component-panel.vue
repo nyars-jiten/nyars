@@ -143,20 +143,22 @@ function componentClass(c: string) {
       <div v-if="componentsPending" class="flex items-center gap-2 text-sm text-muted">
         <Icon class="size-4 animate-spin" name="tabler:loader-2" />
       </div>
-      <div v-for="[strokes, chars] of grouped" :key="strokes" class="flex flex-wrap items-center gap-1">
-        <span class="flex size-8 items-center justify-center rounded-ctl bg-soft text-xs font-extrabold text-strong tabular-nums" :title="`черт: ${strokes}`">{{ strokes }}</span>
-        <button
-          v-for="c of chars"
-          :key="c"
-          type="button"
-          lang="ja"
-          :aria-pressed="selected.includes(c)"
-          class="flex size-8 cursor-pointer items-center justify-center rounded-ctl font-jp text-lg leading-none transition-colors focus-visible:outline-2 focus-visible:outline-strong"
-          :class="componentClass(c)"
-          @click="toggle(c)"
-        >
-          {{ c }}
-        </button>
+      <div class="flex flex-wrap items-center gap-1">
+        <template v-for="[strokes, chars] of grouped" :key="strokes">
+          <span class="ml-1 flex size-8 items-center justify-center rounded-ctl bg-soft text-xs font-extrabold text-strong tabular-nums first:ml-0" :title="`черт: ${strokes}`">{{ strokes }}</span>
+          <button
+            v-for="c of chars"
+            :key="c"
+            type="button"
+            lang="ja"
+            :aria-pressed="selected.includes(c)"
+            class="flex size-8 cursor-pointer items-center justify-center rounded-ctl font-jp text-lg leading-none transition-colors focus-visible:outline-2 focus-visible:outline-strong"
+            :class="componentClass(c)"
+            @click="toggle(c)"
+          >
+            {{ c }}
+          </button>
+        </template>
       </div>
     </div>
   </section>

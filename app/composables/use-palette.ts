@@ -10,7 +10,13 @@ export function usePalette() {
   })
 
   // общее состояние, чтобы все переключатели на странице были синхронны
-  const state = useState<PaletteId>('palette', () => isPaletteId(cookie.value) ? cookie.value : DEFAULT_PALETTE)
+  // без cookie (пользователь не выбирал) — по системной теме: на сервере из подсказки клиента, дальше plugins/palette.client.ts
+  const state = useState<PaletteId>('palette', () => {
+    if (isPaletteId(cookie.value))
+      return cookie.value
+    const hint = import.meta.server ? useRequestHeader('sec-ch-prefers-color-scheme') : undefined
+    return systemPalette(hint === 'light')
+  })
 
   const palette = computed<PaletteId>({
     get: () => state.value,

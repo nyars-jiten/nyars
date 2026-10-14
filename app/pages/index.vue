@@ -34,6 +34,7 @@ useSeoMeta({
         <!-- <HomeDictionaries /> -->
         <HomeActiveUsers />
         <HomeHelp />
+        <HomeDiscord />
       </div>
     </div>
   </div>

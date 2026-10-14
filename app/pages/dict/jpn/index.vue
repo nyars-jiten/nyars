@@ -49,7 +49,7 @@ function commitFilters() {
   if (canonical(next) !== canonical(urlState.value))
     router.replace({ query: serializeSearchQuery(next) })
 }
-const commitFiltersLater = useDebounceFn(commitFilters, 400)
+const commitFiltersLater = useDebounceFn(commitFilters, 1000)
 
 // чипы, селекты и флажки применяются сразу; числовые поля и ползунок — после паузы, чтобы не слать запрос на каждый знак
 const typedKey = (f: SearchFiltersState) => JSON.stringify({ ...f, rankMin: 0, rankMax: 0, lenMin: 0, lenMax: 0 })
@@ -191,6 +191,17 @@ const dictModel = computed({
 
 /* ---------- подсказки ---------- */
 
+// запрос понят как транскрипция в кану (мука → むか): можно искать его как слово из перевода
+const transcribed = computed(() => {
+  const i = first.value?.interpretation
+  return !tokenMode.value && i?.transcribed && i.query ? i : null
+})
+
+function setInTranslations(value: boolean) {
+  filters.value = { ...filters.value, inTranslations: value }
+  commitFilters()
+}
+
 const interpretation = computed(() => {
   const i = first.value?.interpretation
   if (!i || tokenMode.value)
@@ -226,10 +237,10 @@ const similarTitle = computed(() => similar.value?.kind === 'contains' ? `Сло
       <!-- словари и фильтры -->
       <aside aria-label="Словари и фильтры" class="max-w-[280px] flex-[0_0_250px] max-md:max-w-none max-md:flex-[1_1_100%]">
         <UiSideNav v-if="query" v-model="dictModel" :items="dictItems" label="Словари" class="mb-6 transition-opacity" :class="{ 'opacity-60': showStale }" />
-        <UiButton v-if="isJp" icon="tabler:dice-3" class="mb-3 w-full" @click="showRandom()">
+        <SearchFiltersPanel v-show="isJp" :disabled="tokenMode" />
+        <UiButton v-if="isJp" icon="tabler:dice-3" class="mt-3 w-full" @click="showRandom()">
           Случайные статьи
         </UiButton>
-        <SearchFiltersPanel v-show="isJp" :disabled="tokenMode" />
       </aside>
 
       <!-- выдача -->
@@ -273,8 +284,17 @@ const similarTitle = computed(() => similar.value?.kind === 'contains' ? `Сло
           <div class="transition-opacity" :class="{ 'pointer-events-none opacity-50 select-none': showStale }" :aria-busy="showStale">
             <SearchConversions v-if="first" :data="first" class="mb-4" />
 
-            <p v-if="interpretation" class="m-0 mb-3 text-sm text-muted">
+            <p v-if="interpretation" class="m-0 mb-3 flex flex-wrap items-center gap-x-3 text-sm text-muted">
               {{ interpretation }}
+              <UiButton v-if="transcribed" variant="link" size="sm" @click="setInTranslations(true)">
+                Искать «{{ query }}» в переводах
+              </UiButton>
+            </p>
+            <p v-else-if="filters.inTranslations && query && !/[぀-ヿ一-鿿]/.test(query)" class="m-0 mb-3 flex flex-wrap items-center gap-x-3 text-sm text-muted">
+              Поиск в переводах
+              <UiButton variant="link" size="sm" @click="setInTranslations(false)">
+                Искать как японское слово
+              </UiButton>
             </p>
 
             <template v-if="(status === 'pending' || settling || status === 'idle') && !items.length">

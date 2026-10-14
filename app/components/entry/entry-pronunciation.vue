@@ -32,6 +32,17 @@ function play(index: number) {
 
 onBeforeUnmount(() => audio?.pause())
 
+// слово переносится только по «・»: части не рвутся, а перенесённые строки сдвинуты вправо
+function segments(item: Pronunciation) {
+  const result: { mora: PitchMora, split: boolean }[][] = [[]]
+  for (const mora of item.mora) {
+    result.at(-1)!.push({ mora, split: mora.split })
+    if (mora.split)
+      result.push([])
+  }
+  return result.filter(part => part.length)
+}
+
 function describe(item: Pronunciation) {
   const parts = [item.reading, item.accent === null ? 'ударение не размечено' : `ударение ${item.accent}, ${item.type}`]
   for (const mora of item.mora) {
@@ -80,21 +91,23 @@ function badgeTitle(item: Pronunciation) {
         </button>
         <span v-else-if="hasAudio" class="size-[34px] shrink-0" aria-hidden="true" />
 
-        <span lang="ja" class="flex min-w-0 flex-wrap items-end font-jm text-[19px] leading-none" :aria-label="describe(item)" role="img">
-          <template v-for="(mora, m) in item.mora" :key="m">
-            <span
-              aria-hidden="true"
-              class="relative inline-block border-t-2 px-px pt-[5px] pb-0.5"
-              :title="moraTitle(mora)"
-              :class="[
-                mora.high ? 'border-strong' : 'border-transparent',
-                mora.drop && 'after:absolute after:-top-0.5 after:-right-px after:h-2.5 after:border-r-2 after:border-strong after:content-[\'\']',
-                mora.silent && silentMark,
-                mora.nasal && nasalMark,
-              ]"
-            >{{ mora.text }}</span>
-            <span v-if="mora.split" aria-hidden="true" class="inline-block pt-[5px] pb-0.5 text-line">・</span>
-          </template>
+        <span lang="ja" class="flex min-w-0 flex-wrap items-end pl-4 font-jm text-[19px] leading-none" :aria-label="describe(item)" role="img">
+          <span v-for="(part, p) in segments(item)" :key="p" class="inline-flex items-end whitespace-nowrap" :class="p === 0 && '-ml-4'">
+            <template v-for="({ mora, split }, m) in part" :key="m">
+              <span
+                aria-hidden="true"
+                class="relative inline-block border-t-2 px-px pt-[5px] pb-0.5"
+                :title="moraTitle(mora)"
+                :class="[
+                  mora.high ? 'border-strong' : 'border-transparent',
+                  mora.drop && 'after:absolute after:-top-0.5 after:-right-px after:h-2.5 after:border-r-2 after:border-strong after:content-[\'\']',
+                  mora.silent && silentMark,
+                  mora.nasal && nasalMark,
+                ]"
+              >{{ mora.text }}</span>
+              <span v-if="split" aria-hidden="true" class="inline-block pt-[5px] pb-0.5 text-line">・</span>
+            </template>
+          </span>
         </span>
 
         <span

@@ -50,7 +50,7 @@ const NuxtLink = resolveComponent('NuxtLink')
     :aria-label="`Правка: ${headword}`"
     class="rounded-panel transition-shadow"
     :class="open
-      ? 'shadow-[inset_3px_0_0_var(--sc),inset_0_0_0_1.5px_var(--strong)]'
+      ? 'shadow-[inset_3px_0_0_var(--sc),inset_0_0_0_1.5px_var(--sc)]'
       : 'shadow-[inset_3px_0_0_var(--sc),inset_0_0_0_1px_var(--line)]'"
     :style="{ '--sc': STRIPE[props.status] }"
   >

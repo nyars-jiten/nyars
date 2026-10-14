@@ -4,8 +4,8 @@
 </script>
 
 <template>
-  <!-- корень — элемент: <Transition> страниц не умеет анимировать компонент-корень (NuxtLayout) -->
   <div>
+    <!-- корень — элемент: <Transition> страниц не умеет анимировать компонент-корень (NuxtLayout) -->
     <NuxtLayout name="default">
       <NuxtPage />
     </NuxtLayout>
