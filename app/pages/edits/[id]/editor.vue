@@ -9,7 +9,7 @@ const edit = getEdit(routeId)
 const srcData = getEditTxt(routeId)
 
 function actionOnSave() {
-  useNotificationStore().createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
+  useToast().ok(t('pages.editor.notification.success'))
   useRouter().back()
 }
 

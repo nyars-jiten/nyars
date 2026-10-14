@@ -21,6 +21,7 @@ const sections = [
   { id: 'nav', title: 'Навигация' },
   { id: 'people', title: 'Участники' },
   { id: 'card', title: 'Правка' },
+  { id: 'notify', title: 'Уведомления' },
   { id: 'misc', title: 'Прочее' },
 ]
 
@@ -53,6 +54,48 @@ const comment = ref('')
 const rankRange = ref<[number, number]>([0, 40])
 const phraseToken = ref<number | null>(2)
 const tri = reactive<Record<string, TriState | undefined>>({ archaic: 'include', dialect: 'exclude' })
+
+// уведомления
+const toast = useToast()
+const toneButtons: { tone: UiToastTone, label: string }[] = [
+  { tone: 'ok', label: 'Готово' },
+  { tone: 'danger', label: 'Ошибка' },
+  { tone: 'warn', label: 'Внимание' },
+  { tone: 'info', label: 'Сведения' },
+  { tone: 'loading', label: 'Ожидание' },
+]
+const demoToast: UiToast = { uid: 0, key: 'demo', tone: 'ok', title: 'Правка принята', duration: Infinity, count: 1, epoch: 0 }
+
+function toastSaved() {
+  toast.ok('Правка принята', { description: '猫 · версия 7 опубликована' })
+}
+
+function toastFailed() {
+  toast.error('Не удалось отклонить правку', {
+    description: 'Сервер не ответил. Проверьте соединение.',
+    action: { label: 'Повторить', run: () => toast.ok('Правка отклонена') },
+  })
+}
+
+function toastRepeat() {
+  toast.info('Ссылка на статью скопирована')
+}
+
+function toastPromise() {
+  toast.promise(new Promise(resolve => setTimeout(resolve, 1500)), {
+    loading: 'Сохраняем правку…',
+    ok: { title: 'Правка отправлена на проверку', description: 'Модератор посмотрит её в ближайшие дни.' },
+    error: 'Не удалось сохранить правку',
+  })
+}
+
+function toastMany() {
+  toast.ok('Правка принята', { description: '犬 · версия 4', id: 'many-1' })
+  toast.warn('Статья останется непроверенной', { id: 'many-2' })
+  toast.error('Не удалось отклонить правку', { id: 'many-3' })
+  toast.info('Пятая правка ждёт проверки', { id: 'many-4' })
+  toast.ok('Правка принята', { description: '鳥 · версия 12', id: 'many-5' })
+}
 
 function tok(surface: string, kana: string, base = surface, found = true): SearchToken {
   return {
@@ -309,7 +352,7 @@ const heatClass = ['bg-heat-0', 'bg-heat-1', 'bg-heat-2', 'bg-heat-3', 'bg-heat-
       </KitSection>
 
       <!-- Метки и статусы -->
-      <KitSection id="tags" title="Метки и статусы" code="UiTag · UiStatus" note=".kt, .modtag и .tag.ghost стали вариантами UiTag; .st, .sb и .sd — одним UiStatus в двух видах и двух размерах.">
+      <KitSection id="tags" title="Метки и статусы" code="UiTag · UiJlpt · UiStatus" note=".kt, .modtag и .tag.ghost стали вариантами UiTag; .st, .sb и .sd — одним UiStatus в двух видах и двух размерах.">
         <KitRow label="Заливка" code="tone: accent · danger · neutral">
           <UiTag>N2</UiTag>
           <UiTag tone="danger">
@@ -318,6 +361,17 @@ const heatClass = ['bg-heat-0', 'bg-heat-1', 'bg-heat-2', 'bg-heat-3', 'bg-heat-
           <UiTag tone="neutral">
             сущ.
           </UiTag>
+        </KitRow>
+        <KitRow label="JLPT, цвета палитры" code="UiJlpt · size sup">
+          <UiJlpt v-for="n in ['N5', 'N4', 'N3', 'N2', 'N1']" :key="n" :level="n" />
+        </KitRow>
+        <KitRow label="JLPT, отдельная метка" code="size tag">
+          <UiJlpt v-for="n in ['N5', 'N4', 'N3', 'N2', 'N1']" :key="n" :level="n" size="tag" />
+        </KitRow>
+        <KitRow label="JLPT, другие виды" code="variant: bright · accent · outline (будущая настройка)">
+          <UiJlpt v-for="n in ['N5', 'N4', 'N3', 'N2', 'N1']" :key="`b${n}`" :level="n" variant="bright" />
+          <UiJlpt v-for="n in ['N5', 'N4', 'N3', 'N2', 'N1']" :key="`a${n}`" :level="n" variant="accent" />
+          <UiJlpt v-for="n in ['N5', 'N4', 'N3', 'N2', 'N1']" :key="`o${n}`" :level="n" variant="outline" />
         </KitRow>
         <KitRow label="Контур" code="outline · size md · icon">
           <UiTag outline tone="neutral" size="md">
@@ -568,6 +622,79 @@ const heatClass = ['bg-heat-0', 'bg-heat-1', 'bg-heat-2', 'bg-heat-3', 'bg-heat-
                 </UiButton>
               </div>
             </EditCard>
+          </div>
+        </KitRow>
+      </KitSection>
+
+      <!-- Уведомления -->
+      <KitSection id="notify" title="Уведомления и объявления" code="useToast · UiToast · UiSeal · UiAlert" note="Всплывающие уведомления справа снизу: пауза при наведении и фокусе, повтор склеивается в ×N, показано не больше трёх, остальные ждут. Alt+T переводит фокус на область.">
+        <KitRow label="Печать" code="UiSeal · tone">
+          <UiSeal v-for="b of toneButtons" :key="b.tone" :tone="b.tone" />
+          <UiSeal v-for="b of toneButtons" :key="`sm-${b.tone}`" :tone="b.tone" size="sm" />
+        </KitRow>
+        <KitRow label="Карточка" code="UiToast">
+          <div class="grid w-full max-w-[740px] grid-cols-2 items-start gap-3 max-[760px]:grid-cols-1">
+            <UiToast :toast="{ ...demoToast, tone: 'ok', description: '猫 · версия 7 опубликована' }" :paused="true" />
+            <UiToast :toast="{ ...demoToast, tone: 'danger', title: 'Не удалось отклонить правку', description: 'Сервер не ответил. Проверьте соединение.', action: { label: 'Повторить', run: () => {} } }" :paused="true" />
+            <UiToast :toast="{ ...demoToast, tone: 'warn', title: 'Статья останется непроверенной' }" :paused="true" />
+            <UiToast :toast="{ ...demoToast, tone: 'info', title: 'Ссылка скопирована', count: 3 }" :paused="true" />
+            <UiToast :toast="{ ...demoToast, tone: 'loading', title: 'Сохраняем правку…' }" :paused="true" />
+          </div>
+        </KitRow>
+        <KitRow label="Показать" code="useToast().ok / error / warn / info / loading">
+          <UiButton v-for="b of toneButtons" :key="b.tone" data-kit-toast @click="toast.push({ tone: b.tone, title: `${b.label}: заголовок уведомления`, description: 'Короткое пояснение к уведомлению.' })">
+            {{ b.label }}
+          </UiButton>
+        </KitRow>
+        <KitRow label="Сценарии" code="action · повтор · promise · очередь">
+          <UiButton data-kit-toast @click="toastSaved">
+            Успех
+          </UiButton>
+          <UiButton data-kit-toast @click="toastFailed">
+            Ошибка с повтором
+          </UiButton>
+          <UiButton data-kit-toast @click="toastRepeat">
+            Тот же текст ещё раз
+          </UiButton>
+          <UiButton data-kit-toast @click="toastPromise">
+            Сохранение → готово
+          </UiButton>
+          <UiButton data-kit-toast @click="toastMany">
+            Пять сразу
+          </UiButton>
+          <UiButton variant="link" @click="toast.dismiss()">
+            Закрыть все
+          </UiButton>
+        </KitRow>
+        <KitRow label="Объявление" code="UiAlert variant=banner · лента под шапкой">
+          <div class="w-full overflow-hidden rounded-panel border border-line">
+            <UiAlert variant="banner" tone="info" title="Новые правила оформления примеров." dismissible dismiss-label="Скрыть объявление">
+              Подробности в справке.
+              <template #actions>
+                <UiButton variant="link" size="sm">
+                  Читать
+                </UiButton>
+              </template>
+            </UiAlert>
+            <UiAlert variant="banner" tone="warn" title="20 октября с 02:00 до 04:00 МСК сайт будет закрыт на профилактику." dismissible dismiss-label="Скрыть объявление">
+              Правки на это время недоступны.
+            </UiAlert>
+            <UiAlert variant="banner" tone="danger" title="Через час сайт закроется." class="border-b-0">
+              Сохраните начатые правки. Это объявление нельзя скрыть.
+            </UiAlert>
+          </div>
+        </KitRow>
+        <KitRow label="В странице" code="UiAlert variant=inline">
+          <div class="grid w-full max-w-[740px] gap-3">
+            <UiAlert tone="danger" title="Не удалось войти." role="alert">
+              Проверьте логин и пароль.
+            </UiAlert>
+            <UiAlert tone="warn" title="Статья не проверена.">
+              Значения могли быть изменены без подтверждения.
+            </UiAlert>
+            <UiAlert tone="ok" title="Правка отправлена." dismissible>
+              Модератор посмотрит её в ближайшие дни.
+            </UiAlert>
           </div>
         </KitRow>
       </KitSection>

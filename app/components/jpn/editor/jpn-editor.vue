@@ -87,7 +87,6 @@ async function save() {
     await editEntry(props.wid, entry.value)
   }
 
-  // notificationStore.createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
   // useRouter().back()
   emit('save')
 }
@@ -95,7 +94,6 @@ async function save() {
 async function remove() {
   // body is still required, so we can save meta data
   await removeEntry(`${props.wid}`, entry.value)
-  // notificationStore.createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
   // useRouter().back()
   emit('remove')
 }

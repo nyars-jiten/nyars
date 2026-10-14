@@ -24,7 +24,8 @@ export default defineNuxtConfig({
   },
   css: ['~/assets/css/tailwind.css'],
   devServer: {
-    host: '127.0.0.1',
+    // localhost, а не 127.0.0.1: cookie сессии привязаны к хосту, фронт и API-прокси должны быть на одном
+    host: 'localhost',
     port: 8080,
   },
   vite: {
@@ -36,7 +37,7 @@ export default defineNuxtConfig({
   nitro: {
     // Локальная разработка: браузер ходит в API через dev-сервер (тот же origin),
     // без CORS и без обращений к другому порту. Включается переменной NUXT_DEV_API_PROXY:
-    //   NUXT_DEV_API_PROXY=http://127.0.0.1:3000
+    //   NUXT_DEV_API_PROXY=http://localhost:3000
     //   NUXT_PUBLIC_API_URL=http://localhost:8080/_dev-api
     //   NUXT_PUBLIC_IMAGE_URL=http://localhost:8080   (картинки и аудио — /static/*)
     // Префиксы не /api, чтобы не перехватывать служебные маршруты Nuxt (/api/_nuxt_icon).
@@ -58,6 +59,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // Private keys are only available on the server
     apiUrl: '', // Server-side API URL for proxying
+    // JSON-массив объявлений для ленты под шапкой, пока их нет на бэкенде (NUXT_ANNOUNCEMENTS)
+    announcements: '',
     public: {
       apiUrl: '', // Client-side API URL
       baseUrl: '',

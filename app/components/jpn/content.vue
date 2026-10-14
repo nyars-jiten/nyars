@@ -16,18 +16,18 @@ const style = tv({
     t: {
       i: 'italic text-muted text-sm',
       p: 'italic',
-      // comp: 'bg-soft px-1 py-0.5 rounded-tag text-sm whitespace-nowrap',
-      comp: 'font-bold text-strong',
+      comp: 'bg-soft px-1 py-0.5 rounded-tag text-sm whitespace-nowrap',
+      // comp: 'font-bold text-strong',
       hide: 'hidden',
       hw: 'font-bold text-strong', // заглавное слово в примере
-      lat: 'italic text-dial', // латинские названия
+      lat: 'text-dial', // italic ? латинские названия
     } as Record<string, string>,
   },
 })
 </script>
 
 <template>
-  <span class="leading-none">
+  <span class="leading-none" :class="{ 'whitespace-pre-line': breakLine }">
     <template v-for="({ t, v, c, p }, i) in data" :key="i">
       <Content v-if="c && t !== 'ruby'" :data="c" :class="style({ t })" :break-line="breakLine" />
 

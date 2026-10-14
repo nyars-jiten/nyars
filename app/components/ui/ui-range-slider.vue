@@ -17,20 +17,34 @@ const props = withDefaults(defineProps<{
 
 const model = defineModel<[number, number]>({ required: true })
 
+// при перетаскивании двигается только черновик; в модель значение уходит, когда ползунок отпущен
+const draft = ref<[number, number]>([...model.value])
+watch(model, (value) => {
+  draft.value = [...value]
+})
+
 const percent = (value: number) => ((value - props.min) / (props.max - props.min)) * 100
-const lo = computed(() => Math.min(...model.value))
-const hi = computed(() => Math.max(...model.value))
+const lo = computed(() => Math.min(...draft.value))
+const hi = computed(() => Math.max(...draft.value))
+
+function commit() {
+  if (draft.value[0] !== model.value[0] || draft.value[1] !== model.value[1])
+    model.value = [...draft.value]
+}
 
 function update(index: 0 | 1, event: Event) {
-  const value = Number((event.target as HTMLInputElement).value)
-  const next: [number, number] = [...model.value]
+  const target = event.target as HTMLInputElement
+  const value = Number(target.value)
+  const next: [number, number] = [...draft.value]
   next[index] = value
   // ползунки не перескакивают друг через друга
   if (index === 0 && value > next[1])
     next[0] = next[1]
   if (index === 1 && value < next[0])
     next[1] = next[0]
-  model.value = next
+  draft.value = next
+  // ползунок, упёршийся в соседний, возвращаем на место
+  target.value = String(next[index])
 }
 
 const thumb = [
@@ -58,20 +72,22 @@ const thumb = [
       :min="min"
       :max="max"
       :step="step"
-      :value="model[0]"
+      :value="draft[0]"
       :aria-label="labelFrom"
       :class="thumb"
       @input="update(0, $event)"
+      @change="commit"
     >
     <input
       type="range"
       :min="min"
       :max="max"
       :step="step"
-      :value="model[1]"
+      :value="draft[1]"
       :aria-label="labelTo"
       :class="thumb"
       @input="update(1, $event)"
+      @change="commit"
     >
   </div>
 </template>

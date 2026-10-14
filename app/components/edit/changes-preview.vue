@@ -9,7 +9,7 @@ const props = defineProps<Props>()
 
 const { userAccess, user } = storeToRefs(useUserStore())
 const { approveEditAsReviewed, approveEditAsUnreviewed, declineEdit } = useEditActions()
-const notificationStore = useNotificationStore()
+const toast = useToast()
 
 const { t } = useI18n()
 
@@ -21,17 +21,17 @@ const preview = tv({
 
 function approveAsReviewed() {
   approveEditAsReviewed(props.edit.id)
-  notificationStore.createNotification(t('models.edit.actions.approved'), NyarsNotificationType.Success)
+  toast.ok(t('models.edit.actions.approved'))
 }
 
 function reject() {
   declineEdit(props.edit.id)
-  notificationStore.createNotification(t('models.edit.actions.rejected'), NyarsNotificationType.Warning)
+  toast.ok(t('models.edit.actions.rejected'))
 }
 
 function approveAsUnreviewed() {
   approveEditAsUnreviewed(props.edit.id)
-  notificationStore.createNotification(t('models.edit.actions.approved'), NyarsNotificationType.Success)
+  toast.ok(t('models.edit.actions.approved'))
 }
 
 const showRaw = ref(false)

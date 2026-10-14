@@ -12,7 +12,7 @@ const open = defineModel<boolean>('open', { default: false })
 
 const { user, userAccess } = storeToRefs(useUserStore())
 const { getUserAvatarUrl } = useUserProfile()
-const notifications = useNotificationStore()
+const toast = useToast()
 
 const REVIEW_VERB: Partial<Record<UiStatusKind, string>> = { ok: 'принял', rej: 'отклонил', work: 'вернул' }
 const REVIEW_LINE: Partial<Record<UiStatusKind, string>> = { ok: 'принята', rej: 'отклонена', work: 'возвращена' }
@@ -58,13 +58,13 @@ async function run(action: 'approve' | 'approve-unreviewed' | 'decline') {
   try {
     await props.act(props.edit, action)
     rejectOpen.value = false
-    notifications.createNotification(
-      action === 'decline' ? 'Правка отклонена' : 'Правка принята',
-      action === 'decline' ? NyarsNotificationType.Warning : NyarsNotificationType.Success,
-    )
+    toast.ok(action === 'decline' ? 'Правка отклонена' : 'Правка принята')
   }
-  catch {
-    notifications.createNotification('Не удалось выполнить действие', NyarsNotificationType.Error)
+  catch (error) {
+    toast.error('Не удалось выполнить действие', {
+      description: apiErrorText(error),
+      action: { label: 'Повторить', run: () => run(action) },
+    })
   }
   finally {
     busy.value = false
