@@ -20,13 +20,18 @@ export const useSuggestionsStore = defineStore('suggestions', () => {
     history.value = history.value.filter(item => item !== value)
   }
 
-  const suggestionsCache = ref(history.value)
+  const suggestionsCache = ref<string[]>([])
+  let requestId = 0
 
   const refresh = async () => {
-    const response = await getSuggestions(searchQuery.value)
-    if (response) {
+    const query = searchQuery.value
+    if (!query)
+      return
+    const id = ++requestId
+    const response = await getSuggestions(query)
+    // ответ на более ранний запрос не должен перезаписать свежий
+    if (response && id === requestId)
       suggestionsCache.value = response
-    }
   }
 
   const suggestions = computed<string[]>(() => {
@@ -35,6 +40,7 @@ export const useSuggestionsStore = defineStore('suggestions', () => {
       return history.value
     }
     listType.value = 1
+    // пока не пришли подсказки для нового текста, остаются прежние — список не мигает
     return suggestionsCache.value
   })
 

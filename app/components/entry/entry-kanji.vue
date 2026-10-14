@@ -39,7 +39,7 @@ const listId = useId()
             <span class="text-[14.5px] leading-[1.3] font-bold group-hover:text-strong">{{ item.meaning }}</span>
             <span v-if="item.readings" lang="ja" class="font-jm text-[12.5px] leading-[1.4] [overflow-wrap:anywhere] text-muted">{{ item.readings }}</span>
             <span v-if="item.jlpt || item.kanken" class="mt-[3px] flex flex-wrap gap-1">
-              <UiTag v-if="item.jlpt" size="xs" class="h-[18px] px-1.5 text-[11px]">JLPT {{ item.jlpt }}</UiTag>
+              <UiJlpt v-if="item.jlpt" :level="item.jlpt" size="tag" />
               <UiTag v-if="item.kanken" tone="neutral" outline size="xs" class="h-[18px] px-1.5 text-[11px] text-muted">漢検 {{ item.kanken }}</UiTag>
             </span>
           </span>

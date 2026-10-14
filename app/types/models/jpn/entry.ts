@@ -58,7 +58,8 @@ export interface Reading {
 }
 
 export interface Pitch {
-  pitchNum: number
+  /** номер ударения; API отдаёт строкой */
+  pitchNum: number | string
   diagram: PitchPair[]
   audio: string
 }

@@ -1,9 +1,11 @@
+import type { $Fetch } from 'nitropack'
+
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig()
-  const apiFetch = $fetch.create({
+  const baseFetch = $fetch.create({
     baseURL: config.public.apiUrl,
     credentials: 'include',
-    retry: false, // Disable automatic retry to handle auth errors properly
+    retry: false, // повторы делаем сами: после refresh и только для 401
     onRequestError({ error, options }) {
       // запрос отменили намеренно (новый поиск вместо старого, «Отменить») — это не ошибка
       if (options.signal?.aborted || error?.name === 'AbortError')
@@ -11,15 +13,9 @@ export default defineNuxtPlugin(() => {
       console.error('[API Fetch] Request error:', error)
     },
     onResponseError({ request, response }) {
-      // Handle different error status codes
       switch (response.status) {
         case 401:
           console.warn('[API Fetch] Unauthorized request:', request)
-          // Clear any cached user data on 401
-          if (import.meta.client) {
-            const { user } = storeToRefs(useUserStore())
-            user.value = null
-          }
           break
         case 403:
           console.warn('[API Fetch] Forbidden request:', request)
@@ -35,6 +31,34 @@ export default defineNuxtPlugin(() => {
       }
     },
   })
+
+  // 401 на обычном запросе → один refresh → повтор запроса.
+  // Разлогин происходит только внутри refreshSession (401 от /auth/refresh).
+  const apiFetch = (async (request: any, options?: any) => {
+    try {
+      return await baseFetch(request, options)
+    }
+    catch (error: any) {
+      // стор берём лениво и только на клиенте: на сервере создавать его в плагине незачем
+      const userStore = import.meta.client ? useUserStore() : null
+      const isAuthCall = typeof request === 'string' && request.startsWith('/auth/')
+      if (
+        !import.meta.client
+        || error?.response?.status !== 401
+        || isAuthCall
+        || options?.signal?.aborted
+        || !userStore
+        || (!userStore.user && !userStore.authUnknown) // гость: обновлять нечего
+      ) {
+        throw error
+      }
+      if (await refreshSession() === 'ok')
+        return baseFetch(request, options)
+      throw error
+    }
+  }) as $Fetch
+  apiFetch.raw = baseFetch.raw
+  apiFetch.create = baseFetch.create
 
   return {
     provide: {

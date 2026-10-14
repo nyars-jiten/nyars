@@ -13,6 +13,8 @@ const props = withDefaults(defineProps<{
   /** без пояснений, ссылок, лемм и подзначений — для выдачи */
   compact?: boolean
   showExamples?: boolean
+  /** переносы строк из текста значения (на странице статьи; в выдаче — компактно) */
+  breakLine?: boolean
   /** сколько примеров видно без раскрытия */
   exampleLimit?: number
 }>(), {
@@ -67,7 +69,7 @@ function isUrl(value: string) {
       >
         {{ tag.rusShort }}
       </UiTag>
-      <Content :data="sense.content" :break-line="false" />
+      <Content :data="sense.content" :break-line="breakLine" />
       <!-- <span v-if="sense.dialectTags.length || sense.metaTags.length" class="ml-1.5 text-muted italic">(<template v-for="(tag, i) in [...sense.dialectTags, ...sense.metaTags]" :key="tag.id"><template v-if="i">, </template><span class="cursor-help opacity-85" :class="i < sense.dialectTags.length ? 'text-dial' : 'text-danger'" :title="tag.rus">{{ tag.rus }}</span></template>)</span> -->
       <!-- прежний вид: плашки -->
       <UiTag
@@ -168,6 +170,7 @@ function isUrl(value: string) {
         :show-lemmas="showLemmas"
         :show-examples="showExamples"
         :example-limit="exampleLimit"
+        :break-line="breakLine"
         class="mt-2"
       />
     </div>

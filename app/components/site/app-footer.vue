@@ -39,7 +39,7 @@ const builtAtText = computed(() => {
           Открытый японско-русский словарь. Статьи пишут и проверяют участники сообщества.
         </p>
         <p class="mt-3.5 mb-0 inline-flex flex-wrap items-center gap-x-2 text-[12.5px] tabular-nums" aria-label="Сведения о сборке">
-          <a :href="`${repo}/releases/tag/v${version}`" target="_blank" :class="link" :title="`Список изменений версии ${version}`">v{{ version }}</a>
+          <NuxtLink :to="{ path: '/changelog', hash: `#v${version}` }" :class="link" :title="`Список изменений версии ${version}`">v{{ version }}</NuxtLink>
           <template v-if="sha">
             <span class="text-line" aria-hidden="true">·</span>
             <a :href="`${repo}/commit/${sha}`" target="_blank" class="font-mono text-xs" :class="link" :title="`Коммит ${sha.slice(0, 7)} на GitHub`">{{ sha.slice(0, 7) }}</a>

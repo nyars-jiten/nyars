@@ -17,7 +17,7 @@ const newEntry = {
 } satisfies EditorTxtEntryJp
 
 function actionOnSave() {
-  useNotificationStore().createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
+  useToast().ok(t('pages.editor.notification.success'))
   useRouter().back()
 }
 

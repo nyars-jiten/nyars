@@ -44,8 +44,11 @@ const rankSlider = computed<[number, number]>({
     const [curLo, curHi] = rankSlider.value
     if (lo !== curLo)
       filters.value.rankMin = lo <= 0 ? null : sliderToRank(lo)
-    if (hi !== curHi)
+    if (hi !== curHi) {
       filters.value.rankMax = hi >= RANK_SLIDER_MAX ? null : sliderToRank(hi)
+      // верхняя граница ниже максимума — слова без ранга не подходят, и наоборот
+      filters.value.includeUnranked = hi >= RANK_SLIDER_MAX
+    }
   },
 })
 
@@ -55,6 +58,8 @@ function numberModel(key: 'lenMin' | 'lenMax' | 'rankMin' | 'rankMax') {
     set: (value: string) => {
       const n = Number.parseInt(value, 10)
       filters.value[key] = Number.isFinite(n) && n > 0 ? n : null
+      if (key === 'rankMax')
+        filters.value.includeUnranked = filters.value.rankMax === null
     },
   })
 }

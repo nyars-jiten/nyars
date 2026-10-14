@@ -8,7 +8,7 @@ const { t } = useI18n()
 const { getPage, getNextPage } = useOcrData()
 const { updatePage } = useOcrActions()
 const { ocrImageUrl } = useOcrUtils()
-const { createNotification } = useNotificationStore()
+const toast = useToast()
 
 if (bookId) {
   try {
@@ -154,12 +154,12 @@ async function invokeUpdatePage() {
     if (!page.value)
       return
     page.value = await updatePage(page.value.id, page.value)
-    createNotification(t('pages.ocr.update-success'), NyarsNotificationType.Success)
+    toast.ok(t('pages.ocr.update-success'))
     await updateSearch()
   }
   catch (e) {
     console.error(e)
-    createNotification(t('pages.ocr.update-error'), NyarsNotificationType.Error)
+    toast.error(t('pages.ocr.update-error'))
   }
 }
 
@@ -175,12 +175,12 @@ async function navigatePage(nextType: NextPage) {
   }
   catch (e) {
     console.error(e)
-    createNotification('pages.ocr.no-more-pages', NyarsNotificationType.Warning)
+    toast.warn(t('pages.ocr.no-more-pages'))
   }
 }
 
 async function actionOnEditorSave() {
-  createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
+  toast.ok(t('pages.editor.notification.success'))
   showEditor.value = false
   await updateSearch()
 }

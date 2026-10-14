@@ -44,9 +44,7 @@ const to = computed(() => entry.value
 
       <div class="min-w-0">
         <div class="mt-2 flex flex-wrap gap-1.5">
-          <UiTag v-if="jlpt">
-            {{ jlpt }}
-          </UiTag>
+          <UiJlpt v-if="jlpt" :level="jlpt" size="tag" />
           <UiTag v-if="pos" tone="neutral" outline>
             {{ pos }}
           </UiTag>

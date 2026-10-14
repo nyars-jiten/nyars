@@ -5,7 +5,7 @@ const [isEditing, toggleEditing] = useToggle(false)
 const tag = defineModel<Tag>({ required: true })
 const editable = ref({ ...tag.value })
 
-const notificationStore = useNotificationStore()
+const toast = useToast()
 const { userAccess } = storeToRefs(useUserStore())
 
 const { updateTag } = useJpnTags()
@@ -16,11 +16,11 @@ async function saveTag() {
   try {
     await updateTag(tag.value.id, editable.value)
     tag.value = editable.value
-    notificationStore.createNotification($t('models.tag.actions.update-success'), NyarsNotificationType.Success)
+    toast.ok($t('models.tag.actions.update-success'))
   }
   catch {
     editable.value = { ...tag.value }
-    notificationStore.createNotification($t('models.tag.actions.update-error'), NyarsNotificationType.Error)
+    toast.error($t('models.tag.actions.update-error'))
   }
   finally {
     isEditing.value = false

@@ -9,6 +9,8 @@
 
     <AppHeader />
 
+    <SiteAnnouncements />
+
     <main id="content" class="mx-auto box-border w-full max-w-[1320px] flex-1 px-8 pt-2 max-[900px]:px-4">
       <slot />
     </main>

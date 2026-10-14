@@ -47,7 +47,7 @@ useHead({
     <NuxtPage />
   </NuxtLayout>
 
-  <LazyNotifications />
+  <UiToaster />
 </template>
 
 <style>

@@ -1,10 +1,12 @@
 export const useUserStore = defineStore('user-store', () => {
   const { getCurrentUser } = useUserData()
-  const { data: user, refresh: $refresh } = getCurrentUser()
-  const updTime = ref(Date.now())
+  const { data: user, error, refresh: $refresh } = getCurrentUser()
+  // когда истечёт access-токен (мс); известно после первого refresh
+  const accessExpiresAt = ref<number | null>(null)
+  // SSR не смог выяснить, залогинен ли пользователь (ошибка сети/сервера) — это не «гость»
+  const authUnknown = computed(() => !user.value && !!error.value)
 
   const checkAccess = (access: Access) => {
-    checkAuth()
     return user?.value && (user.value.isAdmin || ((user.value.access & access) === access))
   }
 
@@ -18,19 +20,24 @@ export const useUserStore = defineStore('user-store', () => {
     hasAccessOcr: checkAccess(Access.Ocr),
   } as UserRights))
 
-  watch(user, (current) => {
-    if (current) {
-      updTime.value = Date.now()
-    }
-  }, { immediate: true })
+  function setUser(value: ExtendedUser | null, expiresAt?: number | null) {
+    user.value = value
+    if (expiresAt !== undefined)
+      accessExpiresAt.value = expiresAt
+  }
 
-  async function checkAuth() {
-    if (Date.now() - updTime.value > (1 * 60 * 1000)) { // every 15 min
-      $refresh()
-    }
+  function setLoggedOut() {
+    user.value = null
+    accessExpiresAt.value = null
+    error.value = undefined
+  }
+
+  /** Освежить сессию перед важным действием, если access скоро истечёт */
+  function checkAuth() {
+    ensureFreshSession()
   }
 
   const menuState = ref(true)
 
-  return { user, userAccess, menuState, checkAuth, $refresh }
+  return { user, userAccess, menuState, accessExpiresAt, authUnknown, setUser, setLoggedOut, checkAuth, $refresh }
 })

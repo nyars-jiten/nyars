@@ -33,6 +33,7 @@ const groups = computed(() => {
         :number="item.number"
         :headword="headword"
         :show-lemmas="showLemmas"
+        break-line
         class="py-2"
       />
 

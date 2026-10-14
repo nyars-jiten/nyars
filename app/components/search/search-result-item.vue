@@ -18,7 +18,6 @@ const alts = computed(() => forms.value.slice(1, MAX_FORMS))
 const moreForms = computed(() => Math.max(0, forms.value.length - MAX_FORMS))
 
 const frequency = computed(() => entryFrequency(props.entry))
-const jlpt = computed(() => entryJlpt(props.entry))
 const flag = computed(() => entryFlag(props.entry))
 
 const senses = computed(() => entrySenses(props.entry))
@@ -58,21 +57,10 @@ const bodyId = useId()
 
 <template>
   <article
-    class="relative border-t border-line py-[22px] pr-9 pl-[18px] first:border-t-0"
+    class="relative border-t border-line py-[22px] pr-[18px] pl-[18px] first:border-t-0"
     :class="[flag && stripe[flag.kind], entry.status.isDeleted && 'opacity-50']"
     :aria-label="main.text"
   >
-    <span
-      v-if="flag"
-      class="absolute top-6 right-1 flex"
-      :class="flagColor[flag.kind]"
-      role="img"
-      :aria-label="flag.label"
-      :title="flag.label"
-    >
-      <Icon :name="flagIcon[flag.kind]!" size="17px" />
-    </span>
-
     <!-- заглавное слово -->
     <NuxtLink
       :to="to"
@@ -80,22 +68,22 @@ const bodyId = useId()
       class="hw inline text-[28px] font-medium text-ink no-underline hover:text-strong hover:underline hover:decoration-2 hover:underline-offset-4"
     >
       <ruby v-for="(pair, i) in main.pairs" :key="`m${i}`">{{ pair.word }}<rt>{{ pair.kana !== pair.word ? pair.kana : '' }}</rt></ruby>
+      <span v-if="main.jlpt" class="relative -top-[.45em] ml-[5px]"><UiJlpt :level="main.jlpt" /></span>
       <span v-for="(form, f) in alts" :key="f" class="whitespace-nowrap">
-        <span class="mx-1 text-muted" aria-hidden="true">・</span>
+        <span class="mx-[.45em] inline-block h-[.7em] w-px bg-line align-[-.05em]" aria-hidden="true" />
+        <span class="sr-only">, </span>
         <ruby v-for="(pair, i) in form.pairs" :key="i">{{ pair.word }}<rt>{{ pair.kana !== pair.word ? pair.kana : '' }}</rt></ruby>
+        <span v-if="form.jlpt" class="relative -top-[.45em] ml-[5px]"><UiJlpt :level="form.jlpt" /></span>
       </span>
       <span v-if="moreForms" class="ml-2 align-middle font-ui text-[13px] font-semibold text-muted">+{{ moreForms }}</span>
     </NuxtLink>
 
     <!-- частотность и метки -->
     <div
-      v-if="frequency || jlpt || entry.status.isArchaic || entry.status.isProper || entry.status.isDeleted"
+      v-if="frequency || flag || entry.status.isArchaic || entry.status.isProper || entry.status.isDeleted"
       class="mt-1 flex flex-wrap items-center gap-x-2.5 gap-y-1.5"
     >
       <SearchFrequency v-if="frequency" :info="frequency" />
-      <UiTag v-if="jlpt" size="xs">
-        {{ jlpt }}
-      </UiTag>
       <UiTag v-if="entry.status.isArchaic" tone="neutral" outline size="xs">
         устар.
       </UiTag>
@@ -105,6 +93,16 @@ const bodyId = useId()
       <UiTag v-if="entry.status.isDeleted" tone="danger" size="xs">
         статья удалена
       </UiTag>
+      <span
+        v-if="flag"
+        class="flex"
+        :class="flagColor[flag.kind]"
+        role="img"
+        :aria-label="flag.label"
+        :title="flag.label"
+      >
+        <Icon :name="flagIcon[flag.kind]!" size="16px" />
+      </span>
     </div>
 
     <!-- значения -->

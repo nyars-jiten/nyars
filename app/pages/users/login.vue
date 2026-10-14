@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { object, string } from 'yup'
 
-const notificationStore = useNotificationStore()
+const toast = useToast()
 
 const isRegister = ref(false)
 
@@ -16,36 +16,17 @@ const { handleSubmit, errors } = useForm({
 
 const submit = handleSubmit(async ({ login, password }) => {
   const auth = useAuth()
-  const user = useUserStore()
 
-  // const user: User | null = null
-  const authError: AuthError | null = null
+  // login/register сами кладут пользователя в стор и запускают сессию
+  const { error } = isRegister.value
+    ? await auth.register({ login, password })
+    : await auth.login({ login, password })
 
-  try {
-    if (isRegister.value) {
-    /* const { data, error } = */ await auth.register({ login, password })
-    // user = data
-    // authError = error
-    }
-
-    else {
-    /* const { data, error } = */await auth.login({ login, password })
-      // user = data
-      // authError = error
-    }
-
-    if (authError !== null) {
-    // notificationStore.createNotification(authError.text)
-    // return
-    }
-  }
-  catch {
-    notificationStore.createNotification('An error occurred', NyarsNotificationType.Error)
+  if (error) {
+    toast.error(error.message || 'Не удалось войти')
     return
   }
 
-  // userStore.user.value = user
-  await user.$refresh()
   await navigateTo('/')
 })
 

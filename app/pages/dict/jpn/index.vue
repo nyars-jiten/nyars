@@ -202,6 +202,12 @@ const interpretation = computed(() => {
   return null
 })
 
+// поиск по переводам: статьи с таким написанием не ищутся, создавать статью по русскому слову незачем
+const translationSearch = computed(() => {
+  const lang = first.value?.interpretation?.lang
+  return (!!lang && lang !== 'jp') || filters.value.inTranslations
+})
+
 const similar = computed(() => !randomMode.value && !tokenMode.value ? first.value?.similar : undefined)
 // слово, по которому реально искали (транскрипция в кану и т.п.), а не введённое
 const searchedQuery = computed(() => first.value?.interpretation?.query || query.value)
@@ -326,6 +332,10 @@ const similarTitle = computed(() => similar.value?.kind === 'contains' ? `Сло
 
             <UiEmptyState v-else-if="!query" title="Ничего не найдено">
               В словаре пока нет статей.
+            </UiEmptyState>
+
+            <UiEmptyState v-else-if="translationSearch" title="По переводам ничего не найдено">
+              Проверьте написание или попробуйте другое слово.
             </UiEmptyState>
 
             <UiEmptyState v-else>

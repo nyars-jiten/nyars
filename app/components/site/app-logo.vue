@@ -6,7 +6,7 @@ withDefaults(defineProps<{
   /** показывать надпись «НЯРС» */
   wordmark?: boolean
 }>(), {
-  size: 38,
+  size: 52,
   wordmark: true,
 })
 

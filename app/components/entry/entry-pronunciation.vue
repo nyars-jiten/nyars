@@ -44,6 +44,8 @@ function describe(item: Pronunciation) {
 }
 
 function moraTitle(mora: PitchMora) {
+  if (mora.long)
+    return `долгий гласный (${mora.source})`
   if (mora.nasal)
     return 'носовое [ŋ]'
   if (mora.silent)
@@ -98,7 +100,7 @@ function badgeTitle(item: Pronunciation) {
         <span
           aria-hidden="true"
           :title="badgeTitle(item)"
-          class="inline-flex h-5 min-w-5 shrink-0 cursor-help items-center justify-center rounded-full border-[1.5px] px-[5px] text-[11.5px] leading-none font-extrabold"
+          class="inline-flex h-5 min-w-5 shrink-0 translate-y-0.5 cursor-help items-center justify-center rounded-full border-[1.5px] px-[5px] text-[11.5px] leading-none font-extrabold"
           :class="item.accent === null ? 'border-dashed border-muted text-muted' : 'border-strong text-strong'"
         >{{ item.accent ?? '?' }}</span>
       </li>

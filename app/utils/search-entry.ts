@@ -10,6 +10,21 @@ export interface HeadwordForm {
   text: string
   /** пометы формы: поэт., устар. */
   tags: Tag[]
+  /** уровень JLPT именно этого написания+чтения */
+  jlpt: JlptLevel | null
+}
+
+const JLPT_TAG = /^jlpt-n([1-5])$/i
+
+/** Самый лёгкий уровень JLPT среди тегов */
+export function tagsJlpt(tags: Tag[] | undefined): JlptLevel | null {
+  const levels = new Set<string>()
+  for (const tag of tags ?? []) {
+    const match = JLPT_TAG.exec(tag.engShort)
+    if (match)
+      levels.add(`N${match[1]}`)
+  }
+  return JLPT_LEVELS.find(level => levels.has(level)) ?? null
 }
 
 const KATAKANA_ONLY = /^[\u30A0-\u30FF]+$/
@@ -32,7 +47,7 @@ export function headwordForms(entry: EntryJp): HeadwordForm[] {
     if (seen.has(key))
       continue
     seen.add(key)
-    forms.push({ pairs: furigana.pairs, text, tags: furigana.tags ?? [] })
+    forms.push({ pairs: furigana.pairs, text, tags: furigana.tags ?? [], jlpt: tagsJlpt(furigana.tags) })
   }
 
   if (forms.length > 0)
@@ -42,14 +57,14 @@ export function headwordForms(entry: EntryJp): HeadwordForm[] {
   for (const word of entry.words ?? []) {
     const reading = word.readings[0]?.transcription?.kana ?? ''
     for (const spelling of word.spellings) {
-      forms.push({ pairs: [{ word: spelling.value, kana: reading }], text: spelling.value, tags: spelling.tags ?? [] })
+      forms.push({ pairs: [{ word: spelling.value, kana: reading }], text: spelling.value, tags: spelling.tags ?? [], jlpt: tagsJlpt(spelling.tags) })
     }
     if (!word.spellings.length && reading)
-      forms.push({ pairs: [{ word: reading, kana: '' }], text: reading, tags: [] })
+      forms.push({ pairs: [{ word: reading, kana: '' }], text: reading, tags: [], jlpt: null })
   }
 
   if (!forms.length)
-    forms.push({ pairs: [{ word: entry.title, kana: '' }], text: entry.title, tags: [] })
+    forms.push({ pairs: [{ word: entry.title, kana: '' }], text: entry.title, tags: [], jlpt: null })
 
   return forms
 }

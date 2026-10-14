@@ -12,7 +12,7 @@ const disabled = computed(() => {
 })
 
 function actionOnSave() {
-  useNotificationStore().createNotification(t('pages.editor.notification.success'), NyarsNotificationType.Success)
+  useToast().ok(t('pages.editor.notification.success'))
   useRouter().back()
 }
 

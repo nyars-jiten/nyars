@@ -45,6 +45,7 @@ if (!user.value) {
               </h2>
             </div>
             <password-changer />
+            <settings-sessions />
           </div>
 
           <!-- Preferences Section -->

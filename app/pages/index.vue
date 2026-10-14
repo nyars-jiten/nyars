@@ -30,9 +30,10 @@ useSeoMeta({
       </div>
       <div class="grid grid-cols-[minmax(0,1fr)] content-start gap-6">
         <HomeStats />
-        <HomeDictionaries />
-        <HomeHelp />
+        <!-- Скрыто пока что, не удалять -->
+        <!-- <HomeDictionaries /> -->
         <HomeActiveUsers />
+        <HomeHelp />
       </div>
     </div>
   </div>

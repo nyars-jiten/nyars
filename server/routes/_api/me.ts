@@ -5,8 +5,8 @@ export default defineEventHandler(async (event) => {
   // Get the cookie header from the incoming request
   const cookieHeader = getRequestHeader(event, 'cookie')
 
-  if (!cookieHeader) {
-    // Return null if no cookie is present (user not logged in)
+  // Нет сессионных cookie (например, только cookie палитры) — гость, к API не ходим
+  if (!cookieHeader || !/(?:^|;\s*)(?:access_token|refresh_token)=/.test(cookieHeader)) {
     return null
   }
 
@@ -19,6 +19,7 @@ export default defineEventHandler(async (event) => {
     if (error?.statusCode === 401 || error?.statusCode === 403) {
       return null
     }
-    throw error
+    // Сеть/5xx — это «неизвестно», а не «гость»: клиент не должен считать пользователя вышедшим
+    throw createError({ statusCode: 503, statusMessage: 'Auth check failed' })
   }
 })

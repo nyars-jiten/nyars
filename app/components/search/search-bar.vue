@@ -11,10 +11,6 @@ const props = withDefaults(defineProps<{
 const { t } = useI18n()
 
 const hero = computed(() => props.variant === 'hero')
-const route = useRoute()
-const { open: filtersOpen } = useSearchFilters()
-// кнопка фильтров — только на странице поиска
-const isSearchPage = computed(() => route.name === 'dict-jpn')
 
 const searchStore = useSearchStore()
 const { searchQuery } = storeToRefs(searchStore)
@@ -78,7 +74,17 @@ function pick(index: number) {
     search(escape(value))
 }
 
+// любой ввод сбрасывает выбор стрелками: Enter ищет набранный текст, а не пункт, выбранный до правки
+function onInput() {
+  active.value = -1
+  listOpen.value = true
+}
+
 function onKeydown(event: KeyboardEvent) {
+  // Enter и стрелки при выборе кандзи в IME — не наши
+  if (event.isComposing || event.keyCode === 229)
+    return
+
   const count = suggestions.value.length
 
   switch (event.key) {
@@ -102,10 +108,18 @@ function onKeydown(event: KeyboardEvent) {
         search()
       break
     case 'Escape':
-      if (panel.value || showList.value) {
+      if (showList.value && active.value >= 0) {
+        // первый Esc снимает выбор стрелками, второй закрывает список
+        event.preventDefault()
+        active.value = -1
+      }
+      else if (panel.value || showList.value) {
         event.preventDefault()
         closeAll()
       }
+      break
+    case 'Tab':
+      listOpen.value = false
       break
   }
 }
@@ -164,6 +178,7 @@ onKeyStroke('/', (event) => {
         "
         :class="hero ? 'h-[52px] text-[21px] placeholder:text-base' : 'h-12 text-[19px] placeholder:text-[15px]'"
         @focus="onFocus"
+        @input="onInput"
         @keydown="onKeydown"
       >
 
@@ -173,7 +188,6 @@ onKeyStroke('/', (event) => {
       <UiButton v-if="hero" type="submit" variant="primary" size="lg" class="ml-1 px-[22px]">
         Найти
       </UiButton>
-      <UiIconButton v-if="isSearchPage && !hero" glyph="篩" label="Фильтры" :pressed="filtersOpen" aria-controls="search-filters" @click="filtersOpen = !filtersOpen" />
     </form>
 
     <!-- история и подсказки -->
@@ -181,10 +195,6 @@ onKeyStroke('/', (event) => {
       v-if="showList"
       class="absolute inset-x-0 top-full z-40 mt-2 rounded-panel border border-line bg-surf p-1.5 shadow-lg"
     >
-      <UiCaption class="mb-1 px-2.5 pt-1.5">
-        {{ isHistory ? 'Недавние запросы' : 'Подсказки' }}
-      </UiCaption>
-
       <ul :id="listId" role="listbox" :aria-label="isHistory ? 'Недавние запросы' : 'Подсказки'" class="m-0 list-none p-0">
         <li
           v-for="(value, index) of suggestions"
@@ -192,9 +202,8 @@ onKeyStroke('/', (event) => {
           :key="`${index}-${value}`"
           role="option"
           :aria-selected="index === active"
-          class="group flex h-10 cursor-pointer items-center gap-2.5 rounded-ctl pr-1 pl-2.5 text-ink aria-selected:bg-soft aria-selected:text-strong"
+          class="group flex h-10 cursor-pointer items-center gap-2.5 rounded-ctl pr-1 pl-2.5 text-ink hover:bg-soft aria-selected:bg-soft aria-selected:text-strong"
           @mousedown.prevent
-          @mousemove="active = index"
           @click="pick(index)"
         >
           <Icon :name="isHistory ? 'tabler:history' : 'tabler:search'" size="16px" class="shrink-0 text-muted" />

@@ -22,7 +22,6 @@ const flags = computed(() => entryStatusFlags(props.entry.status))
 const pronunciations = computed(() => entryPronunciations(props.entry))
 const kanji = computed(() => entryKanji(props.kanjiText))
 const frequency = computed(() => entryFrequency(props.entry))
-const jlpt = computed(() => entryJlpt(props.entry))
 
 const flagClass: Record<EntryStatusFlag['kind'], string> = {
   warn: 'bg-warn-soft text-warn',
@@ -106,9 +105,6 @@ const clipboard = useClipboard({ copiedDuring: 1500 })
           <i v-for="i in 5" :key="i" class="block h-1.5 w-3.5 rounded-[3px]" :class="i <= (frequency?.level ?? 0) ? 'bg-strong' : 'bg-soft'" />
         </span>
         <span v-if="frequency" class="sr-only">, {{ frequency.label }}</span>
-        <UiTag v-if="jlpt" size="xs">
-          JLPT {{ jlpt }}
-        </UiTag>
       </div>
     </section>
 

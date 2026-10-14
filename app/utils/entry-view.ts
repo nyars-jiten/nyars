@@ -100,6 +100,8 @@ export interface PitchMora {
   nasal: boolean
   /** граница слов после моры */
   split: boolean
+  /** удлинение гласного: мора записана как ー, source — исходная кана */
+  long?: boolean
 }
 
 export interface Pronunciation {
@@ -141,6 +143,48 @@ export function splitMora(reading: string): string[] {
   return out
 }
 
+const VOWEL_KANA = /^[あいうえおアイウエオー]$/
+
+/**
+ * Долгота по ромадзи чтения (to:kyo: — двоеточие после гласного): удлиняющая мора
+ * записывается как ー — とうきょう → とーきょー. Если моры и гласные не сходятся, моры остаются как есть.
+ */
+export function markLongVowels(mora: PitchMora[], romaji: string | undefined): PitchMora[] {
+  if (!romaji?.includes(':'))
+    return mora
+  const nuclei: boolean[] = []
+  const chars = Array.from(romaji.toLowerCase())
+  chars.forEach((ch, i) => {
+    if ('aeiou'.includes(ch))
+      nuclei.push(chars[i + 1] === ':')
+  })
+
+  const result = mora.map(m => ({ ...m }))
+  let n = 0
+  let i = 0
+  while (i < result.length) {
+    const source = result[i]!.source ?? result[i]!.text
+    if (/^[っッんンー]/.test(source)) {
+      i++
+      continue
+    }
+    if (n >= nuclei.length)
+      return mora
+    const next = result[i + 1]
+    const nextSource = next ? next.source ?? next.text : ''
+    if (nuclei[n++] && next && VOWEL_KANA.test(nextSource)) {
+      next.text = 'ー'
+      next.source = nextSource
+      next.long = true
+      i += 2
+    }
+    else {
+      i++
+    }
+  }
+  return n === nuclei.length ? result : mora
+}
+
 /** Тип ударения по номеру и числу мор */
 export function pitchType(accent: number, moraCount: number): string {
   if (accent === 0)
@@ -174,19 +218,22 @@ export function entryPronunciations(entry: EntryJp): Pronunciation[] {
           reading: kana,
           accent: null,
           type: '',
-          mora: splitMora(kana).map(text => ({ text, high: false, drop: false, silent: false, nasal: false, split: false })),
+          mora: markLongVowels(splitMora(kana).map(text => ({ text, source: text, high: false, drop: false, silent: false, nasal: false, split: false })), reading.value),
           audio: '',
         })
         continue
       }
 
       for (const pitch of reading.pitch) {
-        const key = `${kana}|${pitch.pitchNum}`
+        // API отдаёт номер ударения строкой
+        const accent = Number.parseInt(String(pitch.pitchNum), 10)
+        const pitchNum = Number.isFinite(accent) ? accent : null
+        const key = `${kana}|${pitchNum}`
         if (seen.has(key))
           continue
         seen.add(key)
         seen.add(kana)
-        const mora = pitch.diagram.map(pair => ({
+        const mora = markLongVowels(pitch.diagram.map(pair => ({
           // носовой が пишется как か с кружком (бидакуон)
           text: pair.n ? nasalBase(pair.m) : pair.m,
           source: pair.m,
@@ -195,11 +242,11 @@ export function entryPronunciations(entry: EntryJp): Pronunciation[] {
           silent: pair.sl,
           nasal: pair.n,
           split: pair.sp,
-        }))
+        })), reading.value)
         result.push({
           reading: mora.map(m => m.source).join('') || kana,
-          accent: pitch.pitchNum,
-          type: pitchType(pitch.pitchNum, mora.length),
+          accent: pitchNum,
+          type: pitchNum === null ? '' : pitchType(pitchNum, mora.length),
           mora,
           audio: pitch.audio,
         })

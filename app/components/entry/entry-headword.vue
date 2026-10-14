@@ -28,7 +28,10 @@ const tagTitle = (tag: Tag) => tag.rus || tag.rusShort
   <header v-if="groups.main.length">
     <h1 lang="ja" class="hw m-0 normal-case" :style="{ fontSize: size }">
       <template v-for="(form, f) in groups.main" :key="f">
-        <span v-if="f > 0" class="font-normal text-line" aria-hidden="true">・</span>
+        <template v-if="f > 0">
+          <span class="mx-[.45em] inline-block h-[.7em] w-px bg-line align-[-.05em]" aria-hidden="true" />
+          <span class="sr-only">, </span>
+        </template>
         <span class="whitespace-nowrap">
           <ruby v-for="(pair, i) in form.pairs" :key="i">{{ pair.word }}<rt>{{ rt(pair) }}</rt></ruby>
           <abbr
@@ -38,6 +41,7 @@ const tagTitle = (tag: Tag) => tag.rus || tag.rusShort
             :title="tagTitle(tag)"
             class="ml-[3px] inline-block align-super font-ui text-[11px] leading-none font-extrabold whitespace-nowrap text-danger no-underline"
           >{{ tag.rusShort }}</abbr>
+          <span v-if="form.jlpt" class="relative -top-[.45em] ml-[3px]"><UiJlpt :level="form.jlpt" /></span>
         </span>
         <wbr>
       </template>
@@ -51,7 +55,10 @@ const tagTitle = (tag: Tag) => tag.rus || tag.rusShort
     >
       <span class="sr-only" lang="ru">Редкие формы: </span>
       <span v-for="(form, f) in groups.rare" :key="f" class="inline-flex flex-wrap items-baseline">
-        <span v-if="f > 0" class="px-1.5 font-normal text-line" aria-hidden="true">・</span>
+        <template v-if="f > 0">
+          <span class="mx-[.6em] inline-block h-[.7em] w-px self-center bg-line" aria-hidden="true" />
+          <span class="sr-only">, </span>
+        </template>
         <span><ruby v-for="(pair, i) in form.pairs" :key="i">{{ pair.word }}<rt>{{ rt(pair) }}</rt></ruby></span>
         <abbr
           v-for="tag in form.tags"
@@ -60,6 +67,7 @@ const tagTitle = (tag: Tag) => tag.rus || tag.rusShort
           :title="tagTitle(tag)"
           class="ml-[3px] inline-block align-super font-ui text-[11px] leading-none font-extrabold whitespace-nowrap text-danger no-underline"
         >{{ tag.rusShort }}</abbr>
+        <span v-if="form.jlpt" class="relative -top-[.45em] ml-[3px]"><UiJlpt :level="form.jlpt" /></span>
       </span>
     </p>
   </header>

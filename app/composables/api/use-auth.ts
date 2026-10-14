@@ -1,5 +1,12 @@
 import { useApiClient } from './client'
 
+/** Пользователь вошёл: кладём в стор, сообщаем другим вкладкам, узнаём срок access */
+function startSession(user: ExtendedUser) {
+  useUserStore().setUser(user)
+  postAuthMessage('login')
+  refreshSession()
+}
+
 /**
  * Authentication API client
  */
@@ -13,7 +20,8 @@ export function useAuth() {
    */
   const login = async (credentials: { login: string, password: string }) => {
     try {
-      const data = await client.post<User>(`${path}/login`, credentials)
+      const data = await client.post<ExtendedUser>(`${path}/login`, credentials)
+      startSession(data)
       return { data, error: null }
     }
     catch (error: any) {
@@ -27,7 +35,8 @@ export function useAuth() {
    */
   const register = async (credentials: { login: string, password: string }) => {
     try {
-      const data = await client.post<User>(`${path}/register`, credentials)
+      const data = await client.post<ExtendedUser>(`${path}/register`, credentials)
+      startSession(data)
       return { data, error: null }
     }
     catch (error: any) {
@@ -41,6 +50,19 @@ export function useAuth() {
   const logout = async () => {
     try {
       await client.post(`${path}/logout`)
+      return { error: null, status: 200 }
+    }
+    catch (error: any) {
+      return { error: error.data as ApiError, status: error.statusCode as number | undefined }
+    }
+  }
+
+  /**
+   * Logout from every device except the current one
+   */
+  const logoutOthers = async () => {
+    try {
+      await client.post(`${path}/logout-others`)
       return { error: null }
     }
     catch (error: any) {
@@ -52,6 +74,7 @@ export function useAuth() {
     login,
     register,
     logout,
+    logoutOthers,
   }
 }
 
@@ -63,6 +86,7 @@ export function useAuthState() {
   const { user } = storeToRefs(useUserStore())
   const { getCurrentUser } = useUserData()
   const { logout: apiLogout } = useAuth()
+  const store = useUserStore()
 
   const isAuthenticated = computed(() => !!user.value)
   const isAdmin = computed(() => user.value?.isAdmin ?? false)
@@ -83,8 +107,16 @@ export function useAuthState() {
    * Logout current user
    */
   const logout = async () => {
-    await apiLogout()
-    user.value = undefined
+    const { error, status } = await apiLogout()
+    // 401 — сессии уже нет, это тоже выход; сеть/5xx — состояние не трогаем,
+    // иначе после перезагрузки пользователь «воскреснет»
+    if (error && status !== 401) {
+      useToast().error('Не удалось выйти', { description: 'Попробуйте ещё раз.' })
+      return false
+    }
+    store.setLoggedOut()
+    postAuthMessage('logout')
+    return true
   }
 
   return {
