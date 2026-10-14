@@ -57,6 +57,8 @@
 
   html {
     scrollbar-color: var(--line) var(--bg);
+    /* Manrope склеивает пары знаков в лигатуры */
+    font-variant-ligatures: none;
   }
 
   ::-webkit-scrollbar {
@@ -81,6 +83,11 @@
 
   ::-webkit-scrollbar-corner {
     background-color: var(--bg);
+  }
+
+  /* фуригана не выделяется и не попадает в буфер обмена */
+  rt {
+    user-select: none;
   }
 
   ::selection {
@@ -158,5 +165,23 @@
     left: 0;
     width: 100%;
     opacity: 0.5;
+  }
+}
+
+/* полоска таймера уведомления: убывает слева направо */
+@keyframes ui-toast-timer {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+
+.ui-toast-timer {
+  animation-name: ui-toast-timer;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-toast-timer {
+    animation: none;
   }
 }

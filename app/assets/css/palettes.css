@@ -99,4 +99,16 @@
   --heat-2: color-mix(in srgb, var(--strong) 50%, var(--surf));
   --heat-3: color-mix(in srgb, var(--strong) 75%, var(--surf));
   --heat-4: var(--strong);
+
+  /* плашки JLPT: светофор ok → warn → danger, N4 и N2 — промежуточные */
+  --jlpt-5-bg: var(--ok-soft);
+  --jlpt-5-fg: var(--ok);
+  --jlpt-4-bg: color-mix(in srgb, var(--ok-soft) 50%, var(--warn-soft));
+  --jlpt-4-fg: color-mix(in srgb, var(--ok) 50%, var(--warn));
+  --jlpt-3-bg: var(--warn-soft);
+  --jlpt-3-fg: var(--warn);
+  --jlpt-2-bg: color-mix(in srgb, var(--warn-soft) 50%, var(--danger-soft));
+  --jlpt-2-fg: color-mix(in srgb, var(--warn) 45%, var(--danger));
+  --jlpt-1-bg: var(--danger-soft);
+  --jlpt-1-fg: var(--danger);
 }
